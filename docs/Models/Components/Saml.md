@@ -1,0 +1,13 @@
+# Saml
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Status`                                                                        | [SAMLVerificationStatus](../../Models/Components/SAMLVerificationStatus.md)     | :heavy_check_mark:                                                              | N/A                                                                             |
+| `Strategy`                                                                      | [SAMLVerificationStrategy](../../Models/Components/SAMLVerificationStrategy.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `ExternalVerificationRedirectUrl`                                               | *string*                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `Error`                                                                         | [VerificationError](../../Models/Components/VerificationError.md)               | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `ExpireAt`                                                                      | *long*                                                                          | :heavy_check_mark:                                                              | N/A                                                                             |
+| `Attempts`                                                                      | *long*                                                                          | :heavy_minus_sign:                                                              | N/A                                                                             |

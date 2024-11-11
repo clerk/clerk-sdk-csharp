@@ -1,0 +1,18 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    clerk-backend-api-OAS:
+        inputs:
+            - location: https://raw.githubusercontent.com/clerk/openapi-specs/refs/heads/main/bapi/2024-10-01.yml
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/loganinc/loganinc/clerk-backend-api-oas
+targets:
+    clerk-backend-api:
+        target: csharp
+        source: clerk-backend-api-OAS
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/loganinc/loganinc/clerk-backend-api-oas-code-samples
+            blocking: false

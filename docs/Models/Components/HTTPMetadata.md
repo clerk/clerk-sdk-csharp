@@ -1,0 +1,9 @@
+# HTTPMetadata
+
+
+## Fields
+
+| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `Response`                                                                                                           | [HttpResponseMessage](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpresponsemessage?view=net-5.0) | :heavy_check_mark:                                                                                                   | Raw HTTP response; suitable for custom response parsing                                                              |
+| `Request`                                                                                                            | *HttpRequestMessage*                                                                                                 | :heavy_check_mark:                                                                                                   | Raw HTTP request; suitable for debugging                                                                             |

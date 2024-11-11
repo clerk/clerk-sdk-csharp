@@ -1,0 +1,11 @@
+# OrganizationInvitationsWithPublicOrganizationData
+
+A list of organization invitations with public organization data
+
+
+## Fields
+
+| Field                                                                                                                                 | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `Data`                                                                                                                                | List<[OrganizationInvitationWithPublicOrganizationData](../../Models/Components/OrganizationInvitationWithPublicOrganizationData.md)> | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `TotalCount`                                                                                                                          | *long*                                                                                                                                | :heavy_check_mark:                                                                                                                    | Total number of organization invitations<br/>                                                                                         |

@@ -1,0 +1,2190 @@
+lockVersion: 2.0.0
+id: 248c4615-4118-44e3-9280-c0978ea11cf6
+management:
+  docChecksum: eb6e7384f735200207a87b6ff47523a1
+  docVersion: v1
+  speakeasyVersion: 1.437.0
+  generationVersion: 2.456.0
+  releaseVersion: 0.1.2
+  configChecksum: 95381ceda700f0e8e4344fa0db66fbf0
+features:
+  csharp:
+    additionalDependencies: 0.1.0
+    additionalProperties: 0.0.1
+    constsAndDefaults: 0.0.1
+    core: 3.10.4
+    deprecations: 2.81.2
+    flattening: 2.81.3
+    globalSecurity: 2.83.6
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.82.3
+    groups: 2.81.2
+    intellisenseMarkdownSupport: 0.1.0
+    methodArguments: 0.1.0
+    nameOverrides: 2.81.2
+    nullables: 0.1.0
+    responseFormat: 0.0.4
+    sdkHooks: 0.1.0
+    unions: 0.2.2
+generatedFiles:
+  - .gitattributes
+  - CONTRIBUTING.md
+  - OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.sln
+  - USAGE.md
+  - docs/Models/Components/Actor.md
+  - docs/Models/Components/ActorToken.md
+  - docs/Models/Components/ActorTokenActor.md
+  - docs/Models/Components/ActorTokenObject.md
+  - docs/Models/Components/ActorTokenStatus.md
+  - docs/Models/Components/Admin.md
+  - docs/Models/Components/AdminVerificationPhoneNumberStatus.md
+  - docs/Models/Components/AdminVerificationStatus.md
+  - docs/Models/Components/AdminVerificationStrategy.md
+  - docs/Models/Components/AdminVerificationWeb3WalletStatus.md
+  - docs/Models/Components/AdminVerificationWeb3WalletStrategy.md
+  - docs/Models/Components/AllowlistIdentifier.md
+  - docs/Models/Components/AllowlistIdentifierObject.md
+  - docs/Models/Components/AttributeMapping.md
+  - docs/Models/Components/BlocklistIdentifier.md
+  - docs/Models/Components/BlocklistIdentifierIdentifierType.md
+  - docs/Models/Components/BlocklistIdentifierObject.md
+  - docs/Models/Components/BlocklistIdentifiers.md
+  - docs/Models/Components/CNameTarget.md
+  - docs/Models/Components/Claims.md
+  - docs/Models/Components/ClerkError.md
+  - docs/Models/Components/ClerkErrorErrorMeta.md
+  - docs/Models/Components/Client.md
+  - docs/Models/Components/DeletedObject.md
+  - docs/Models/Components/Domain.md
+  - docs/Models/Components/DomainObject.md
+  - docs/Models/Components/Domains.md
+  - docs/Models/Components/DomainsEnrollmentModes.md
+  - docs/Models/Components/EmailAddress.md
+  - docs/Models/Components/EmailAddressObject.md
+  - docs/Models/Components/EnrollmentMode.md
+  - docs/Models/Components/Error.md
+  - docs/Models/Components/ErrorClerkError.md
+  - docs/Models/Components/ErrorMeta.md
+  - docs/Models/Components/ExternalAccount.md
+  - docs/Models/Components/ExternalAccounts.md
+  - docs/Models/Components/HTTPMetadata.md
+  - docs/Models/Components/IdentificationLink.md
+  - docs/Models/Components/IdentifierType.md
+  - docs/Models/Components/InstanceRestrictions.md
+  - docs/Models/Components/InstanceRestrictionsObject.md
+  - docs/Models/Components/InstanceSettings.md
+  - docs/Models/Components/InstanceSettingsObject.md
+  - docs/Models/Components/Invitation.md
+  - docs/Models/Components/InvitationObject.md
+  - docs/Models/Components/InvitationPublicMetadata.md
+  - docs/Models/Components/InvitationRevoked.md
+  - docs/Models/Components/InvitationRevokedObject.md
+  - docs/Models/Components/InvitationRevokedPublicMetadata.md
+  - docs/Models/Components/InvitationRevokedStatus.md
+  - docs/Models/Components/InvitationStatus.md
+  - docs/Models/Components/JWTTemplate.md
+  - docs/Models/Components/JWTTemplateObject.md
+  - docs/Models/Components/Keys.md
+  - docs/Models/Components/LatestActivity.md
+  - docs/Models/Components/Meta.md
+  - docs/Models/Components/Nonce.md
+  - docs/Models/Components/OAuthApplication.md
+  - docs/Models/Components/OAuthApplicationObject.md
+  - docs/Models/Components/OAuthApplicationWithSecret.md
+  - docs/Models/Components/OAuthApplicationWithSecretObject.md
+  - docs/Models/Components/OAuthApplications.md
+  - docs/Models/Components/OTPVerificationStatus.md
+  - docs/Models/Components/OTPVerificationStrategy.md
+  - docs/Models/Components/Oauth.md
+  - docs/Models/Components/OauthVerificationStatus.md
+  - docs/Models/Components/OauthVerificationStrategy.md
+  - docs/Models/Components/Object.md
+  - docs/Models/Components/Organization.md
+  - docs/Models/Components/OrganizationDomain.md
+  - docs/Models/Components/OrganizationDomainObject.md
+  - docs/Models/Components/OrganizationDomainStatus.md
+  - docs/Models/Components/OrganizationDomainVerification.md
+  - docs/Models/Components/OrganizationDomains.md
+  - docs/Models/Components/OrganizationInvitation.md
+  - docs/Models/Components/OrganizationInvitationObject.md
+  - docs/Models/Components/OrganizationInvitationPrivateMetadata.md
+  - docs/Models/Components/OrganizationInvitationPublicMetadata.md
+  - docs/Models/Components/OrganizationInvitationWithPublicOrganizationData.md
+  - docs/Models/Components/OrganizationInvitationWithPublicOrganizationDataObject.md
+  - docs/Models/Components/OrganizationInvitationWithPublicOrganizationDataPrivateMetadata.md
+  - docs/Models/Components/OrganizationInvitationWithPublicOrganizationDataPublicMetadata.md
+  - docs/Models/Components/OrganizationInvitations.md
+  - docs/Models/Components/OrganizationInvitationsWithPublicOrganizationData.md
+  - docs/Models/Components/OrganizationMembership.md
+  - docs/Models/Components/OrganizationMembershipObject.md
+  - docs/Models/Components/OrganizationMembershipOrganization.md
+  - docs/Models/Components/OrganizationMembershipOrganizationObject.md
+  - docs/Models/Components/OrganizationMembershipOrganizationPrivateMetadata.md
+  - docs/Models/Components/OrganizationMembershipOrganizationPublicMetadata.md
+  - docs/Models/Components/OrganizationMembershipPrivateMetadata.md
+  - docs/Models/Components/OrganizationMembershipPublicMetadata.md
+  - docs/Models/Components/OrganizationMemberships.md
+  - docs/Models/Components/OrganizationObject.md
+  - docs/Models/Components/OrganizationPrivateMetadata.md
+  - docs/Models/Components/OrganizationPublicMetadata.md
+  - docs/Models/Components/OrganizationSettings.md
+  - docs/Models/Components/OrganizationSettingsObject.md
+  - docs/Models/Components/OrganizationWithLogo.md
+  - docs/Models/Components/OrganizationWithLogoObject.md
+  - docs/Models/Components/OrganizationWithLogoPrivateMetadata.md
+  - docs/Models/Components/OrganizationWithLogoPublicMetadata.md
+  - docs/Models/Components/Organizations.md
+  - docs/Models/Components/Otp.md
+  - docs/Models/Components/Passkey.md
+  - docs/Models/Components/PasskeyVerificationStatus.md
+  - docs/Models/Components/PasskeyVerificationStrategy.md
+  - docs/Models/Components/PhoneNumber.md
+  - docs/Models/Components/PhoneNumberObject.md
+  - docs/Models/Components/PhoneNumberVerification.md
+  - docs/Models/Components/PrivateMetadata.md
+  - docs/Models/Components/ProxyCheck.md
+  - docs/Models/Components/ProxyCheckObject.md
+  - docs/Models/Components/PublicMetadata.md
+  - docs/Models/Components/PublicOrganizationData.md
+  - docs/Models/Components/PublicUserData.md
+  - docs/Models/Components/RedirectURL.md
+  - docs/Models/Components/RedirectURLObject.md
+  - docs/Models/Components/SAMLAccount.md
+  - docs/Models/Components/SAMLAccountObject.md
+  - docs/Models/Components/SAMLAccountPublicMetadata.md
+  - docs/Models/Components/SAMLAccountVerification.md
+  - docs/Models/Components/SAMLConnectionSAMLConnection.md
+  - docs/Models/Components/SAMLConnections.md
+  - docs/Models/Components/SAMLErrorClerkError.md
+  - docs/Models/Components/SAMLVerificationStatus.md
+  - docs/Models/Components/SAMLVerificationStrategy.md
+  - docs/Models/Components/Saml.md
+  - docs/Models/Components/SamlConnection.md
+  - docs/Models/Components/SchemasPasskey.md
+  - docs/Models/Components/SchemasPasskeyObject.md
+  - docs/Models/Components/SchemasPasskeyVerification.md
+  - docs/Models/Components/SchemasSAMLConnection.md
+  - docs/Models/Components/SchemasSAMLConnectionObject.md
+  - docs/Models/Components/Security.md
+  - docs/Models/Components/Session.md
+  - docs/Models/Components/SessionObject.md
+  - docs/Models/Components/SignInToken.md
+  - docs/Models/Components/SignInTokenObject.md
+  - docs/Models/Components/SignInTokenStatus.md
+  - docs/Models/Components/SignUp.md
+  - docs/Models/Components/SignUpObject.md
+  - docs/Models/Components/SignUpPublicMetadata.md
+  - docs/Models/Components/SignUpStatus.md
+  - docs/Models/Components/SignUpUnsafeMetadata.md
+  - docs/Models/Components/Status.md
+  - docs/Models/Components/Strategy.md
+  - docs/Models/Components/SvixURL.md
+  - docs/Models/Components/Template.md
+  - docs/Models/Components/TemplateObject.md
+  - docs/Models/Components/TestingToken.md
+  - docs/Models/Components/TestingTokenObject.md
+  - docs/Models/Components/Ticket.md
+  - docs/Models/Components/TicketVerificationStatus.md
+  - docs/Models/Components/TicketVerificationStrategy.md
+  - docs/Models/Components/TotalCount.md
+  - docs/Models/Components/TotalCountObject.md
+  - docs/Models/Components/Totp.md
+  - docs/Models/Components/Type.md
+  - docs/Models/Components/UnsafeMetadata.md
+  - docs/Models/Components/User.md
+  - docs/Models/Components/UserObject.md
+  - docs/Models/Components/Verification.md
+  - docs/Models/Components/VerificationAdmin.md
+  - docs/Models/Components/VerificationError.md
+  - docs/Models/Components/VerificationOTP.md
+  - docs/Models/Components/VerificationStatus.md
+  - docs/Models/Components/VerificationStrategy.md
+  - docs/Models/Components/Verifications.md
+  - docs/Models/Components/Web3Signature.md
+  - docs/Models/Components/Web3SignatureVerificationStatus.md
+  - docs/Models/Components/Web3SignatureVerificationStrategy.md
+  - docs/Models/Components/Web3Wallet.md
+  - docs/Models/Components/Web3WalletObject.md
+  - docs/Models/Components/Web3WalletVerification.md
+  - docs/Models/Components/Web3WalletVerificationAdmin.md
+  - docs/Models/Components/WellKnownJWKS.md
+  - docs/Models/Errors/ClerkErrors.md
+  - docs/Models/Errors/Meta.md
+  - docs/Models/Requests/Actor.md
+  - docs/Models/Requests/AddDomainRequestBody.md
+  - docs/Models/Requests/AddDomainResponse.md
+  - docs/Models/Requests/AttributeMapping.md
+  - docs/Models/Requests/BanUserRequest.md
+  - docs/Models/Requests/BanUserResponse.md
+  - docs/Models/Requests/ChangeProductionInstanceDomainRequestBody.md
+  - docs/Models/Requests/ChangeProductionInstanceDomainResponse.md
+  - docs/Models/Requests/Claims.md
+  - docs/Models/Requests/CodeType.md
+  - docs/Models/Requests/CreateActorTokenRequestBody.md
+  - docs/Models/Requests/CreateActorTokenResponse.md
+  - docs/Models/Requests/CreateAllowlistIdentifierRequestBody.md
+  - docs/Models/Requests/CreateAllowlistIdentifierResponse.md
+  - docs/Models/Requests/CreateBlocklistIdentifierRequestBody.md
+  - docs/Models/Requests/CreateBlocklistIdentifierResponse.md
+  - docs/Models/Requests/CreateEmailAddressRequestBody.md
+  - docs/Models/Requests/CreateEmailAddressResponse.md
+  - docs/Models/Requests/CreateInvitationPublicMetadata.md
+  - docs/Models/Requests/CreateInvitationRequestBody.md
+  - docs/Models/Requests/CreateInvitationResponse.md
+  - docs/Models/Requests/CreateJWTTemplateRequestBody.md
+  - docs/Models/Requests/CreateJWTTemplateResponse.md
+  - docs/Models/Requests/CreateOAuthApplicationRequestBody.md
+  - docs/Models/Requests/CreateOAuthApplicationResponse.md
+  - docs/Models/Requests/CreateOrganizationDomainRequest.md
+  - docs/Models/Requests/CreateOrganizationDomainRequestBody.md
+  - docs/Models/Requests/CreateOrganizationDomainResponse.md
+  - docs/Models/Requests/CreateOrganizationInvitationBulkPrivateMetadata.md
+  - docs/Models/Requests/CreateOrganizationInvitationBulkPublicMetadata.md
+  - docs/Models/Requests/CreateOrganizationInvitationBulkRequest.md
+  - docs/Models/Requests/CreateOrganizationInvitationBulkResponse.md
+  - docs/Models/Requests/CreateOrganizationInvitationPrivateMetadata.md
+  - docs/Models/Requests/CreateOrganizationInvitationPublicMetadata.md
+  - docs/Models/Requests/CreateOrganizationInvitationRequest.md
+  - docs/Models/Requests/CreateOrganizationInvitationRequestBody.md
+  - docs/Models/Requests/CreateOrganizationInvitationResponse.md
+  - docs/Models/Requests/CreateOrganizationMembershipRequest.md
+  - docs/Models/Requests/CreateOrganizationMembershipRequestBody.md
+  - docs/Models/Requests/CreateOrganizationMembershipResponse.md
+  - docs/Models/Requests/CreateOrganizationPrivateMetadata.md
+  - docs/Models/Requests/CreateOrganizationPublicMetadata.md
+  - docs/Models/Requests/CreateOrganizationRequestBody.md
+  - docs/Models/Requests/CreateOrganizationResponse.md
+  - docs/Models/Requests/CreatePhoneNumberRequestBody.md
+  - docs/Models/Requests/CreatePhoneNumberResponse.md
+  - docs/Models/Requests/CreateRedirectURLRequestBody.md
+  - docs/Models/Requests/CreateRedirectURLResponse.md
+  - docs/Models/Requests/CreateSAMLConnectionRequestBody.md
+  - docs/Models/Requests/CreateSAMLConnectionResponse.md
+  - docs/Models/Requests/CreateSessionTokenFromTemplateRequest.md
+  - docs/Models/Requests/CreateSessionTokenFromTemplateResponse.md
+  - docs/Models/Requests/CreateSessionTokenFromTemplateResponseBody.md
+  - docs/Models/Requests/CreateSignInTokenRequestBody.md
+  - docs/Models/Requests/CreateSignInTokenResponse.md
+  - docs/Models/Requests/CreateSvixAppResponse.md
+  - docs/Models/Requests/CreateTestingTokenResponse.md
+  - docs/Models/Requests/CreateUserRequestBody.md
+  - docs/Models/Requests/CreateUserResponse.md
+  - docs/Models/Requests/CreateUserTOTPRequest.md
+  - docs/Models/Requests/CreateUserTOTPResponse.md
+  - docs/Models/Requests/DeleteAllowlistIdentifierRequest.md
+  - docs/Models/Requests/DeleteAllowlistIdentifierResponse.md
+  - docs/Models/Requests/DeleteBackupCodeRequest.md
+  - docs/Models/Requests/DeleteBackupCodeResponse.md
+  - docs/Models/Requests/DeleteBackupCodeResponseBody.md
+  - docs/Models/Requests/DeleteBlocklistIdentifierRequest.md
+  - docs/Models/Requests/DeleteBlocklistIdentifierResponse.md
+  - docs/Models/Requests/DeleteDomainRequest.md
+  - docs/Models/Requests/DeleteDomainResponse.md
+  - docs/Models/Requests/DeleteEmailAddressRequest.md
+  - docs/Models/Requests/DeleteEmailAddressResponse.md
+  - docs/Models/Requests/DeleteExternalAccountRequest.md
+  - docs/Models/Requests/DeleteExternalAccountResponse.md
+  - docs/Models/Requests/DeleteJWTTemplateRequest.md
+  - docs/Models/Requests/DeleteJWTTemplateResponse.md
+  - docs/Models/Requests/DeleteOAuthApplicationRequest.md
+  - docs/Models/Requests/DeleteOAuthApplicationResponse.md
+  - docs/Models/Requests/DeleteOrganizationDomainRequest.md
+  - docs/Models/Requests/DeleteOrganizationDomainResponse.md
+  - docs/Models/Requests/DeleteOrganizationLogoRequest.md
+  - docs/Models/Requests/DeleteOrganizationLogoResponse.md
+  - docs/Models/Requests/DeleteOrganizationMembershipRequest.md
+  - docs/Models/Requests/DeleteOrganizationMembershipResponse.md
+  - docs/Models/Requests/DeleteOrganizationRequest.md
+  - docs/Models/Requests/DeleteOrganizationResponse.md
+  - docs/Models/Requests/DeletePhoneNumberRequest.md
+  - docs/Models/Requests/DeletePhoneNumberResponse.md
+  - docs/Models/Requests/DeleteRedirectURLRequest.md
+  - docs/Models/Requests/DeleteRedirectURLResponse.md
+  - docs/Models/Requests/DeleteSAMLConnectionRequest.md
+  - docs/Models/Requests/DeleteSAMLConnectionResponse.md
+  - docs/Models/Requests/DeleteSvixAppResponse.md
+  - docs/Models/Requests/DeleteTOTPRequest.md
+  - docs/Models/Requests/DeleteTOTPResponse.md
+  - docs/Models/Requests/DeleteTOTPResponseBody.md
+  - docs/Models/Requests/DeleteUserProfileImageRequest.md
+  - docs/Models/Requests/DeleteUserProfileImageResponse.md
+  - docs/Models/Requests/DeleteUserRequest.md
+  - docs/Models/Requests/DeleteUserResponse.md
+  - docs/Models/Requests/DisableMFARequest.md
+  - docs/Models/Requests/DisableMFAResponse.md
+  - docs/Models/Requests/DisableMFAResponseBody.md
+  - docs/Models/Requests/File.md
+  - docs/Models/Requests/GenerateSvixAuthURLResponse.md
+  - docs/Models/Requests/GetClientListRequest.md
+  - docs/Models/Requests/GetClientListResponse.md
+  - docs/Models/Requests/GetClientRequest.md
+  - docs/Models/Requests/GetClientResponse.md
+  - docs/Models/Requests/GetEmailAddressRequest.md
+  - docs/Models/Requests/GetEmailAddressResponse.md
+  - docs/Models/Requests/GetJWKSResponse.md
+  - docs/Models/Requests/GetJWTTemplateRequest.md
+  - docs/Models/Requests/GetJWTTemplateResponse.md
+  - docs/Models/Requests/GetOAuthAccessTokenPublicMetadata.md
+  - docs/Models/Requests/GetOAuthAccessTokenRequest.md
+  - docs/Models/Requests/GetOAuthAccessTokenResponse.md
+  - docs/Models/Requests/GetOAuthApplicationRequest.md
+  - docs/Models/Requests/GetOAuthApplicationResponse.md
+  - docs/Models/Requests/GetOrganizationInvitationRequest.md
+  - docs/Models/Requests/GetOrganizationInvitationResponse.md
+  - docs/Models/Requests/GetOrganizationRequest.md
+  - docs/Models/Requests/GetOrganizationResponse.md
+  - docs/Models/Requests/GetPhoneNumberRequest.md
+  - docs/Models/Requests/GetPhoneNumberResponse.md
+  - docs/Models/Requests/GetPublicInterstitialRequest.md
+  - docs/Models/Requests/GetPublicInterstitialResponse.md
+  - docs/Models/Requests/GetRedirectURLRequest.md
+  - docs/Models/Requests/GetRedirectURLResponse.md
+  - docs/Models/Requests/GetSAMLConnectionRequest.md
+  - docs/Models/Requests/GetSAMLConnectionResponse.md
+  - docs/Models/Requests/GetSessionListRequest.md
+  - docs/Models/Requests/GetSessionListResponse.md
+  - docs/Models/Requests/GetSessionRequest.md
+  - docs/Models/Requests/GetSessionResponse.md
+  - docs/Models/Requests/GetTemplateListRequest.md
+  - docs/Models/Requests/GetTemplateListResponse.md
+  - docs/Models/Requests/GetTemplateRequest.md
+  - docs/Models/Requests/GetTemplateResponse.md
+  - docs/Models/Requests/GetUserListRequest.md
+  - docs/Models/Requests/GetUserListResponse.md
+  - docs/Models/Requests/GetUserRequest.md
+  - docs/Models/Requests/GetUserResponse.md
+  - docs/Models/Requests/GetUsersCountRequest.md
+  - docs/Models/Requests/GetUsersCountResponse.md
+  - docs/Models/Requests/InstanceGetOrganizationMembershipsRequest.md
+  - docs/Models/Requests/InstanceGetOrganizationMembershipsResponse.md
+  - docs/Models/Requests/ListAllowlistIdentifiersResponse.md
+  - docs/Models/Requests/ListBlocklistIdentifiersResponse.md
+  - docs/Models/Requests/ListDomainsResponse.md
+  - docs/Models/Requests/ListInstanceOrganizationInvitationsQueryParamStatus.md
+  - docs/Models/Requests/ListInstanceOrganizationInvitationsRequest.md
+  - docs/Models/Requests/ListInstanceOrganizationInvitationsResponse.md
+  - docs/Models/Requests/ListInvitationsQueryParamStatus.md
+  - docs/Models/Requests/ListInvitationsRequest.md
+  - docs/Models/Requests/ListInvitationsResponse.md
+  - docs/Models/Requests/ListJWTTemplatesResponse.md
+  - docs/Models/Requests/ListOAuthApplicationsRequest.md
+  - docs/Models/Requests/ListOAuthApplicationsResponse.md
+  - docs/Models/Requests/ListOrganizationDomainsRequest.md
+  - docs/Models/Requests/ListOrganizationDomainsResponse.md
+  - docs/Models/Requests/ListOrganizationInvitationsQueryParamStatus.md
+  - docs/Models/Requests/ListOrganizationInvitationsRequest.md
+  - docs/Models/Requests/ListOrganizationInvitationsResponse.md
+  - docs/Models/Requests/ListOrganizationMembershipsRequest.md
+  - docs/Models/Requests/ListOrganizationMembershipsResponse.md
+  - docs/Models/Requests/ListOrganizationsRequest.md
+  - docs/Models/Requests/ListOrganizationsResponse.md
+  - docs/Models/Requests/ListPendingOrganizationInvitationsRequest.md
+  - docs/Models/Requests/ListPendingOrganizationInvitationsResponse.md
+  - docs/Models/Requests/ListRedirectURLsResponse.md
+  - docs/Models/Requests/ListSAMLConnectionsRequest.md
+  - docs/Models/Requests/ListSAMLConnectionsResponse.md
+  - docs/Models/Requests/LockUserRequest.md
+  - docs/Models/Requests/LockUserResponse.md
+  - docs/Models/Requests/MergeOrganizationMetadataPrivateMetadata.md
+  - docs/Models/Requests/MergeOrganizationMetadataPublicMetadata.md
+  - docs/Models/Requests/MergeOrganizationMetadataRequest.md
+  - docs/Models/Requests/MergeOrganizationMetadataRequestBody.md
+  - docs/Models/Requests/MergeOrganizationMetadataResponse.md
+  - docs/Models/Requests/Object.md
+  - docs/Models/Requests/PathParamTemplateType.md
+  - docs/Models/Requests/PreviewTemplateRequest.md
+  - docs/Models/Requests/PreviewTemplateRequestBody.md
+  - docs/Models/Requests/PreviewTemplateResponse.md
+  - docs/Models/Requests/PreviewTemplateResponseBody.md
+  - docs/Models/Requests/PrivateMetadata.md
+  - docs/Models/Requests/Provider.md
+  - docs/Models/Requests/PublicMetadata.md
+  - docs/Models/Requests/QueryParamStatus.md
+  - docs/Models/Requests/RequestBody.md
+  - docs/Models/Requests/ResponseBody.md
+  - docs/Models/Requests/RevertTemplatePathParamTemplateType.md
+  - docs/Models/Requests/RevertTemplateRequest.md
+  - docs/Models/Requests/RevertTemplateResponse.md
+  - docs/Models/Requests/RevokeActorTokenRequest.md
+  - docs/Models/Requests/RevokeActorTokenResponse.md
+  - docs/Models/Requests/RevokeInvitationRequest.md
+  - docs/Models/Requests/RevokeInvitationResponse.md
+  - docs/Models/Requests/RevokeOrganizationInvitationRequest.md
+  - docs/Models/Requests/RevokeOrganizationInvitationRequestBody.md
+  - docs/Models/Requests/RevokeOrganizationInvitationResponse.md
+  - docs/Models/Requests/RevokeSessionRequest.md
+  - docs/Models/Requests/RevokeSessionResponse.md
+  - docs/Models/Requests/RevokeSignInTokenRequest.md
+  - docs/Models/Requests/RevokeSignInTokenResponse.md
+  - docs/Models/Requests/RotateOAuthApplicationSecretRequest.md
+  - docs/Models/Requests/RotateOAuthApplicationSecretResponse.md
+  - docs/Models/Requests/SetUserProfileImageRequest.md
+  - docs/Models/Requests/SetUserProfileImageRequestBody.md
+  - docs/Models/Requests/SetUserProfileImageResponse.md
+  - docs/Models/Requests/Status.md
+  - docs/Models/Requests/TemplateType.md
+  - docs/Models/Requests/ToggleTemplateDeliveryPathParamTemplateType.md
+  - docs/Models/Requests/ToggleTemplateDeliveryRequest.md
+  - docs/Models/Requests/ToggleTemplateDeliveryRequestBody.md
+  - docs/Models/Requests/ToggleTemplateDeliveryResponse.md
+  - docs/Models/Requests/UnbanUserRequest.md
+  - docs/Models/Requests/UnbanUserResponse.md
+  - docs/Models/Requests/UnlockUserRequest.md
+  - docs/Models/Requests/UnlockUserResponse.md
+  - docs/Models/Requests/UnsafeMetadata.md
+  - docs/Models/Requests/UpdateDomainRequest.md
+  - docs/Models/Requests/UpdateDomainRequestBody.md
+  - docs/Models/Requests/UpdateDomainResponse.md
+  - docs/Models/Requests/UpdateEmailAddressRequest.md
+  - docs/Models/Requests/UpdateEmailAddressRequestBody.md
+  - docs/Models/Requests/UpdateEmailAddressResponse.md
+  - docs/Models/Requests/UpdateInstanceAuthConfigRequestBody.md
+  - docs/Models/Requests/UpdateInstanceAuthConfigResponse.md
+  - docs/Models/Requests/UpdateInstanceOrganizationSettingsRequestBody.md
+  - docs/Models/Requests/UpdateInstanceOrganizationSettingsResponse.md
+  - docs/Models/Requests/UpdateInstanceRequestBody.md
+  - docs/Models/Requests/UpdateInstanceResponse.md
+  - docs/Models/Requests/UpdateInstanceRestrictionsRequestBody.md
+  - docs/Models/Requests/UpdateInstanceRestrictionsResponse.md
+  - docs/Models/Requests/UpdateJWTTemplateClaims.md
+  - docs/Models/Requests/UpdateJWTTemplateRequest.md
+  - docs/Models/Requests/UpdateJWTTemplateRequestBody.md
+  - docs/Models/Requests/UpdateJWTTemplateResponse.md
+  - docs/Models/Requests/UpdateOAuthApplicationRequest.md
+  - docs/Models/Requests/UpdateOAuthApplicationRequestBody.md
+  - docs/Models/Requests/UpdateOAuthApplicationResponse.md
+  - docs/Models/Requests/UpdateOrganizationDomainRequest.md
+  - docs/Models/Requests/UpdateOrganizationDomainRequestBody.md
+  - docs/Models/Requests/UpdateOrganizationDomainResponse.md
+  - docs/Models/Requests/UpdateOrganizationMembershipMetadataPrivateMetadata.md
+  - docs/Models/Requests/UpdateOrganizationMembershipMetadataPublicMetadata.md
+  - docs/Models/Requests/UpdateOrganizationMembershipMetadataRequest.md
+  - docs/Models/Requests/UpdateOrganizationMembershipMetadataRequestBody.md
+  - docs/Models/Requests/UpdateOrganizationMembershipMetadataResponse.md
+  - docs/Models/Requests/UpdateOrganizationMembershipRequest.md
+  - docs/Models/Requests/UpdateOrganizationMembershipRequestBody.md
+  - docs/Models/Requests/UpdateOrganizationMembershipResponse.md
+  - docs/Models/Requests/UpdateOrganizationPrivateMetadata.md
+  - docs/Models/Requests/UpdateOrganizationPublicMetadata.md
+  - docs/Models/Requests/UpdateOrganizationRequest.md
+  - docs/Models/Requests/UpdateOrganizationRequestBody.md
+  - docs/Models/Requests/UpdateOrganizationResponse.md
+  - docs/Models/Requests/UpdatePhoneNumberRequest.md
+  - docs/Models/Requests/UpdatePhoneNumberRequestBody.md
+  - docs/Models/Requests/UpdatePhoneNumberResponse.md
+  - docs/Models/Requests/UpdateProductionInstanceDomainRequestBody.md
+  - docs/Models/Requests/UpdateProductionInstanceDomainResponse.md
+  - docs/Models/Requests/UpdateSAMLConnectionAttributeMapping.md
+  - docs/Models/Requests/UpdateSAMLConnectionRequest.md
+  - docs/Models/Requests/UpdateSAMLConnectionRequestBody.md
+  - docs/Models/Requests/UpdateSAMLConnectionResponse.md
+  - docs/Models/Requests/UpdateSignUpRequest.md
+  - docs/Models/Requests/UpdateSignUpRequestBody.md
+  - docs/Models/Requests/UpdateSignUpResponse.md
+  - docs/Models/Requests/UpdateUserMetadataRequest.md
+  - docs/Models/Requests/UpdateUserMetadataRequestBody.md
+  - docs/Models/Requests/UpdateUserMetadataResponse.md
+  - docs/Models/Requests/UpdateUserPrivateMetadata.md
+  - docs/Models/Requests/UpdateUserPublicMetadata.md
+  - docs/Models/Requests/UpdateUserRequest.md
+  - docs/Models/Requests/UpdateUserRequestBody.md
+  - docs/Models/Requests/UpdateUserResponse.md
+  - docs/Models/Requests/UpdateUserUnsafeMetadata.md
+  - docs/Models/Requests/UploadOrganizationLogoFile.md
+  - docs/Models/Requests/UploadOrganizationLogoRequest.md
+  - docs/Models/Requests/UploadOrganizationLogoRequestBody.md
+  - docs/Models/Requests/UploadOrganizationLogoResponse.md
+  - docs/Models/Requests/UpsertTemplatePathParamTemplateType.md
+  - docs/Models/Requests/UpsertTemplateRequest.md
+  - docs/Models/Requests/UpsertTemplateRequestBody.md
+  - docs/Models/Requests/UpsertTemplateResponse.md
+  - docs/Models/Requests/UserPasskeyDeleteRequest.md
+  - docs/Models/Requests/UserPasskeyDeleteResponse.md
+  - docs/Models/Requests/UserWeb3WalletDeleteRequest.md
+  - docs/Models/Requests/UserWeb3WalletDeleteResponse.md
+  - docs/Models/Requests/UsersGetOrganizationInvitationsRequest.md
+  - docs/Models/Requests/UsersGetOrganizationInvitationsResponse.md
+  - docs/Models/Requests/UsersGetOrganizationMembershipsRequest.md
+  - docs/Models/Requests/UsersGetOrganizationMembershipsResponse.md
+  - docs/Models/Requests/VerifyClientRequestBody.md
+  - docs/Models/Requests/VerifyClientResponse.md
+  - docs/Models/Requests/VerifyDomainProxyRequestBody.md
+  - docs/Models/Requests/VerifyDomainProxyResponse.md
+  - docs/Models/Requests/VerifyPasswordRequest.md
+  - docs/Models/Requests/VerifyPasswordRequestBody.md
+  - docs/Models/Requests/VerifyPasswordResponse.md
+  - docs/Models/Requests/VerifyPasswordResponseBody.md
+  - docs/Models/Requests/VerifySessionRequest.md
+  - docs/Models/Requests/VerifySessionRequestBody.md
+  - docs/Models/Requests/VerifySessionResponse.md
+  - docs/Models/Requests/VerifyTOTPRequest.md
+  - docs/Models/Requests/VerifyTOTPRequestBody.md
+  - docs/Models/Requests/VerifyTOTPResponse.md
+  - docs/Models/Requests/VerifyTOTPResponseBody.md
+  - docs/sdks/actortokens/README.md
+  - docs/sdks/allowblocklist/README.md
+  - docs/sdks/allowlistblocklist/README.md
+  - docs/sdks/allowlistidentifiers/README.md
+  - docs/sdks/betafeatures/README.md
+  - docs/sdks/blocklistidentifiers/README.md
+  - docs/sdks/clerkbackendapi/README.md
+  - docs/sdks/clients/README.md
+  - docs/sdks/domains/README.md
+  - docs/sdks/emailaddresses/README.md
+  - docs/sdks/emailandsmstemplates/README.md
+  - docs/sdks/emailsmstemplates/README.md
+  - docs/sdks/instancesettings/README.md
+  - docs/sdks/invitations/README.md
+  - docs/sdks/jwks/README.md
+  - docs/sdks/jwttemplates/README.md
+  - docs/sdks/miscellaneous/README.md
+  - docs/sdks/oauthapplications/README.md
+  - docs/sdks/organizationdomain/README.md
+  - docs/sdks/organizationdomains/README.md
+  - docs/sdks/organizationinvitations/README.md
+  - docs/sdks/organizationmemberships/README.md
+  - docs/sdks/organizations/README.md
+  - docs/sdks/phonenumbers/README.md
+  - docs/sdks/proxychecks/README.md
+  - docs/sdks/redirecturls/README.md
+  - docs/sdks/samlconnections/README.md
+  - docs/sdks/sessions/README.md
+  - docs/sdks/signintokens/README.md
+  - docs/sdks/signups/README.md
+  - docs/sdks/testingtokens/README.md
+  - docs/sdks/users/README.md
+  - docs/sdks/userweb3wallets/README.md
+  - docs/sdks/webhooks/README.md
+  - global.json
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/ActorTokens.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/AllowBlockList.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/AllowListBlockList.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/AllowlistIdentifiers.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/BetaFeatures.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/BlocklistIdentifiers.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/ClerkBackendApi.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Clients.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Domains.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/EmailAddresses.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/EmailAndSmsTemplates.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/EmailSmsTemplates.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Hooks/HookTypes.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Hooks/SDKHooks.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/InstanceSettings.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Invitations.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Jwks.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/JwtTemplates.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Miscellaneous.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Actor.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ActorToken.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ActorTokenActor.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ActorTokenObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ActorTokenStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Admin.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/AdminVerificationPhoneNumberStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/AdminVerificationStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/AdminVerificationStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/AdminVerificationWeb3WalletStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/AdminVerificationWeb3WalletStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/AllowlistIdentifier.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/AllowlistIdentifierObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/AttributeMapping.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/BlocklistIdentifier.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/BlocklistIdentifierIdentifierType.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/BlocklistIdentifierObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/BlocklistIdentifiers.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/CNameTarget.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Claims.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ClerkError.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ClerkErrorErrorMeta.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Client.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/DeletedObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Domain.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/DomainObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Domains.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/DomainsEnrollmentModes.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/EmailAddress.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/EmailAddressObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/EnrollmentMode.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Error.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ErrorClerkError.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ErrorMeta.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ExternalAccount.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ExternalAccounts.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/HTTPMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/IdentificationLink.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/IdentifierType.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InstanceRestrictions.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InstanceRestrictionsObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InstanceSettings.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InstanceSettingsObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Invitation.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InvitationObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InvitationPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InvitationRevoked.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InvitationRevokedObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InvitationRevokedPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InvitationRevokedStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/InvitationStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/JWTTemplate.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/JWTTemplateObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Keys.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/LatestActivity.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Meta.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Nonce.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OAuthApplication.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OAuthApplicationObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OAuthApplicationWithSecret.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OAuthApplicationWithSecretObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OAuthApplications.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OTPVerificationStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OTPVerificationStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Oauth.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OauthVerificationStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OauthVerificationStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Object.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Organization.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationDomain.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationDomainObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationDomainStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationDomainVerification.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationDomains.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitation.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitationObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitationPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitationPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitationWithPublicOrganizationData.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitationWithPublicOrganizationDataObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitationWithPublicOrganizationDataPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitationWithPublicOrganizationDataPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitations.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationInvitationsWithPublicOrganizationData.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationMembership.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationMembershipObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationMembershipOrganization.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationMembershipOrganizationObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationMembershipOrganizationPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationMembershipOrganizationPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationMembershipPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationMembershipPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationMemberships.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationSettings.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationSettingsObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationWithLogo.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationWithLogoObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationWithLogoPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/OrganizationWithLogoPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Organizations.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Otp.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Passkey.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/PasskeyVerificationStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/PasskeyVerificationStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/PhoneNumber.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/PhoneNumberObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/PhoneNumberVerification.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/PrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ProxyCheck.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/ProxyCheckObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/PublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/PublicOrganizationData.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/PublicUserData.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/RedirectURL.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/RedirectURLObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SAMLAccount.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SAMLAccountObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SAMLAccountPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SAMLAccountVerification.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SAMLConnectionSAMLConnection.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SAMLConnections.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SAMLErrorClerkError.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SAMLVerificationStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SAMLVerificationStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Saml.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SamlConnection.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SchemasPasskey.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SchemasPasskeyObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SchemasPasskeyVerification.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SchemasSAMLConnection.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SchemasSAMLConnectionObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Security.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Session.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SessionObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SignInToken.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SignInTokenObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SignInTokenStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SignUp.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SignUpObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SignUpPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SignUpStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SignUpUnsafeMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Status.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Strategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/SvixURL.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Template.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/TemplateObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/TestingToken.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/TestingTokenObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Ticket.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/TicketVerificationStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/TicketVerificationStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/TotalCount.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/TotalCountObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Totp.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Type.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/UnsafeMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/User.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/UserObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Verification.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/VerificationAdmin.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/VerificationError.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/VerificationOTP.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/VerificationStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/VerificationStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Verifications.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Web3Signature.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Web3SignatureVerificationStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Web3SignatureVerificationStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Web3Wallet.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Web3WalletObject.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Web3WalletVerification.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/Web3WalletVerificationAdmin.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Components/WellKnownJWKS.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Errors/APIException.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Errors/ClerkErrors.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Errors/Meta.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/Actor.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/AddDomainRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/AddDomainResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/AttributeMapping.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/BanUserRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/BanUserResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ChangeProductionInstanceDomainRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ChangeProductionInstanceDomainResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/Claims.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CodeType.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateActorTokenRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateActorTokenResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateAllowlistIdentifierRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateAllowlistIdentifierResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateBlocklistIdentifierRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateBlocklistIdentifierResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateEmailAddressRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateEmailAddressResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateInvitationPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateInvitationRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateInvitationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateJWTTemplateRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateJWTTemplateResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOAuthApplicationRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOAuthApplicationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationDomainRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationDomainRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationDomainResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationInvitationBulkPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationInvitationBulkPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationInvitationBulkRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationInvitationBulkResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationInvitationPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationInvitationPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationInvitationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationInvitationRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationInvitationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationMembershipRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationMembershipRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationMembershipResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateOrganizationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreatePhoneNumberRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreatePhoneNumberResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateRedirectURLRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateRedirectURLResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateSAMLConnectionRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateSAMLConnectionResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateSessionTokenFromTemplateRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateSessionTokenFromTemplateResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateSessionTokenFromTemplateResponseBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateSignInTokenRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateSignInTokenResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateSvixAppResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateTestingTokenResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateUserRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateUserResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateUserTOTPRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/CreateUserTOTPResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteAllowlistIdentifierRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteAllowlistIdentifierResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteBackupCodeRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteBackupCodeResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteBackupCodeResponseBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteBlocklistIdentifierRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteBlocklistIdentifierResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteDomainRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteDomainResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteEmailAddressRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteEmailAddressResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteExternalAccountRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteExternalAccountResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteJWTTemplateRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteJWTTemplateResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOAuthApplicationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOAuthApplicationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOrganizationDomainRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOrganizationDomainResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOrganizationLogoRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOrganizationLogoResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOrganizationMembershipRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOrganizationMembershipResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOrganizationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteOrganizationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeletePhoneNumberRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeletePhoneNumberResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteRedirectURLRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteRedirectURLResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteSAMLConnectionRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteSAMLConnectionResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteSvixAppResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteTOTPRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteTOTPResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteTOTPResponseBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteUserProfileImageRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteUserProfileImageResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteUserRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DeleteUserResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DisableMFARequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DisableMFAResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/DisableMFAResponseBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/File.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GenerateSvixAuthURLResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetClientListRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetClientListResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetClientRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetClientResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetEmailAddressRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetEmailAddressResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetJWKSResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetJWTTemplateRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetJWTTemplateResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetOAuthAccessTokenPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetOAuthAccessTokenRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetOAuthAccessTokenResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetOAuthApplicationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetOAuthApplicationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetOrganizationInvitationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetOrganizationInvitationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetOrganizationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetOrganizationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetPhoneNumberRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetPhoneNumberResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetPublicInterstitialRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetPublicInterstitialResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetRedirectURLRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetRedirectURLResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetSAMLConnectionRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetSAMLConnectionResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetSessionListRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetSessionListResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetSessionRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetSessionResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetTemplateListRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetTemplateListResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetTemplateRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetTemplateResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetUserListRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetUserListResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetUserRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetUserResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetUsersCountRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/GetUsersCountResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/InstanceGetOrganizationMembershipsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/InstanceGetOrganizationMembershipsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListAllowlistIdentifiersResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListBlocklistIdentifiersResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListDomainsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListInstanceOrganizationInvitationsQueryParamStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListInstanceOrganizationInvitationsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListInstanceOrganizationInvitationsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListInvitationsQueryParamStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListInvitationsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListInvitationsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListJWTTemplatesResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOAuthApplicationsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOAuthApplicationsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOrganizationDomainsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOrganizationDomainsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOrganizationInvitationsQueryParamStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOrganizationInvitationsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOrganizationInvitationsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOrganizationMembershipsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOrganizationMembershipsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOrganizationsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListOrganizationsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListPendingOrganizationInvitationsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListPendingOrganizationInvitationsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListRedirectURLsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListSAMLConnectionsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ListSAMLConnectionsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/LockUserRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/LockUserResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/MergeOrganizationMetadataPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/MergeOrganizationMetadataPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/MergeOrganizationMetadataRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/MergeOrganizationMetadataRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/MergeOrganizationMetadataResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/Object.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/PathParamTemplateType.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/PreviewTemplateRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/PreviewTemplateRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/PreviewTemplateResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/PreviewTemplateResponseBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/PrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/Provider.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/PublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/QueryParamStatus.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ResponseBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevertTemplatePathParamTemplateType.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevertTemplateRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevertTemplateResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeActorTokenRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeActorTokenResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeInvitationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeInvitationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeOrganizationInvitationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeOrganizationInvitationRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeOrganizationInvitationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeSessionRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeSessionResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeSignInTokenRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RevokeSignInTokenResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RotateOAuthApplicationSecretRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/RotateOAuthApplicationSecretResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/SetUserProfileImageRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/SetUserProfileImageRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/SetUserProfileImageResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/Status.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/TemplateType.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ToggleTemplateDeliveryPathParamTemplateType.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ToggleTemplateDeliveryRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ToggleTemplateDeliveryRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/ToggleTemplateDeliveryResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UnbanUserRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UnbanUserResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UnlockUserRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UnlockUserResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UnsafeMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateDomainRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateDomainRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateDomainResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateEmailAddressRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateEmailAddressRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateEmailAddressResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateInstanceAuthConfigRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateInstanceAuthConfigResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateInstanceOrganizationSettingsRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateInstanceOrganizationSettingsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateInstanceRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateInstanceResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateInstanceRestrictionsRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateInstanceRestrictionsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateJWTTemplateClaims.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateJWTTemplateRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateJWTTemplateRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateJWTTemplateResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOAuthApplicationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOAuthApplicationRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOAuthApplicationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationDomainRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationDomainRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationDomainResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationMembershipMetadataPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationMembershipMetadataPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationMembershipMetadataRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationMembershipMetadataRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationMembershipMetadataResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationMembershipRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationMembershipRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationMembershipResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateOrganizationResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdatePhoneNumberRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdatePhoneNumberRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdatePhoneNumberResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateProductionInstanceDomainRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateProductionInstanceDomainResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateSAMLConnectionAttributeMapping.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateSAMLConnectionRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateSAMLConnectionRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateSAMLConnectionResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateSignUpRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateSignUpRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateSignUpResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateUserMetadataRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateUserMetadataRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateUserMetadataResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateUserPrivateMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateUserPublicMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateUserRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateUserRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateUserResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpdateUserUnsafeMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UploadOrganizationLogoFile.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UploadOrganizationLogoRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UploadOrganizationLogoRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UploadOrganizationLogoResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpsertTemplatePathParamTemplateType.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpsertTemplateRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpsertTemplateRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UpsertTemplateResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UserPasskeyDeleteRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UserPasskeyDeleteResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UserWeb3WalletDeleteRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UserWeb3WalletDeleteResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UsersGetOrganizationInvitationsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UsersGetOrganizationInvitationsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UsersGetOrganizationMembershipsRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/UsersGetOrganizationMembershipsResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyClientRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyClientResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyDomainProxyRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyDomainProxyResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyPasswordRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyPasswordRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyPasswordResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyPasswordResponseBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifySessionRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifySessionRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifySessionResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyTOTPRequest.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyTOTPRequestBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyTOTPResponse.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Models/Requests/VerifyTOTPResponseBody.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/OauthApplications.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.csproj
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/OrganizationDomain.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/OrganizationDomains.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/OrganizationInvitations.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/OrganizationMemberships.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Organizations.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/PhoneNumbers.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/ProxyChecks.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/RedirectUrls.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/SamlConnections.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Sessions.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/SignInTokens.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/SignUps.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/TestingTokens.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/UserWeb3Wallets.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Users.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/AnyDeserializer.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/BigIntStrConverter.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/DecimalStrConverter.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/EnumConverter.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/FlexibleObjectDeserializer.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/HeaderSerializer.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/IsoDateTimeSerializer.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/RequestBodySerializer.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/ResponseBodyDeserializer.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/Retries/BackoffStrategy.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/Retries/Retries.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/Retries/RetryConfig.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/SecurityMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/SpeakeasyHttpClient.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/SpeakeasyMetadata.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/URLBuilder.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Utils/Utilities.cs
+  - src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Webhooks.cs
+examples:
+  GetPublicInterstitial: {}
+  GetJWKS: {}
+  GetClientList:
+    speakeasy-default-get-client-list:
+      responses:
+        "200":
+          application/json: [{"object": "client", "id": "<id>", "session_ids": ["<value>", "<value>"], "sessions": [{"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "revoked", "last_active_at": 369689, "expire_at": 605632, "abandon_at": 547026, "updated_at": 806011, "created_at": 224015}, {"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "revoked", "last_active_at": 918329, "expire_at": 780842, "abandon_at": 846708, "updated_at": 112136, "created_at": 125739}, {"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "revoked", "last_active_at": 919605, "expire_at": 428479, "abandon_at": 441584, "updated_at": 841363, "created_at": 680972}], "sign_in_id": "<id>", "sign_up_id": "<id>", "last_active_session_id": "<id>", "updated_at": 498482, "created_at": 363277}]
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  VerifyClient:
+    speakeasy-default-verify-client:
+      responses:
+        "200":
+          application/json: {"object": "client", "id": "<id>", "session_ids": ["<value>"], "sessions": [{"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "abandoned", "last_active_at": 511587, "expire_at": 353892, "abandon_at": 801727, "updated_at": 290122, "created_at": 399279}], "sign_in_id": "<id>", "sign_up_id": "<id>", "last_active_session_id": "<id>", "updated_at": 976190, "created_at": 532477}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetClient:
+    speakeasy-default-get-client:
+      parameters:
+        path:
+          client_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "client", "id": "<id>", "session_ids": ["<value>", "<value>"], "sessions": [{"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "active", "last_active_at": 292602, "expire_at": 137177, "abandon_at": 725328, "updated_at": 332373, "created_at": 479925}, {"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "ended", "last_active_at": 124999, "expire_at": 27972, "abandon_at": 733533, "updated_at": 813550, "created_at": 246886}, {"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "removed", "last_active_at": 548406, "expire_at": 656470, "abandon_at": 633323, "updated_at": 440170, "created_at": 140103}], "sign_in_id": "<id>", "sign_up_id": "<id>", "last_active_session_id": "<id>", "updated_at": 551906, "created_at": 194180}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateEmailAddress:
+    speakeasy-default-create-email-address:
+      responses:
+        "200":
+          application/json: {"object": "email_address", "email_address": "Kailyn.Goldner69@hotmail.com", "reserved": true, "verification": {"status": "expired", "strategy": "reset_password_email_code", "attempts": 31600, "expire_at": 659787}, "linked_to": [{"type": "oauth_google", "id": "<id>"}, {"type": "oauth_microsoft", "id": "<id>"}, {"type": "saml", "id": "<id>"}], "created_at": 931634, "updated_at": 748439}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetEmailAddress:
+    speakeasy-default-get-email-address:
+      parameters:
+        path:
+          email_address_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "email_address", "email_address": "May_Hyatt60@hotmail.com", "reserved": true, "verification": {"status": "expired", "strategy": "oauth_mock", "expire_at": 69052}, "linked_to": [{"type": "saml", "id": "<id>"}, {"type": "oauth_mock", "id": "<id>"}], "created_at": 252787, "updated_at": 529707}
+        "400":
+          application/json: {"errors": []}
+  DeleteEmailAddress:
+    speakeasy-default-delete-email-address:
+      parameters:
+        path:
+          email_address_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": false}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateEmailAddress:
+    speakeasy-default-update-email-address:
+      parameters:
+        path:
+          email_address_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "email_address", "email_address": "Dangelo70@yahoo.com", "reserved": true, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_mock", "id": "<id>"}], "created_at": 401219, "updated_at": 904537}
+        "400":
+          application/json: {"errors": []}
+  CreatePhoneNumber:
+    speakeasy-default-create-phone-number:
+      responses:
+        "200":
+          application/json: {"object": "phone_number", "phone_number": "449.414.8771 x1919", "reserved": false, "verification": {"status": "failed", "strategy": "phone_code", "attempts": 874746, "expire_at": 904277}, "linked_to": [{"type": "oauth_google", "id": "<id>"}, {"type": "saml", "id": "<id>"}, {"type": "oauth_mock", "id": "<id>"}], "created_at": 231321, "updated_at": 922733}
+        "400":
+          application/json: {"errors": []}
+  GetPhoneNumber:
+    speakeasy-default-get-phone-number:
+      parameters:
+        path:
+          phone_number_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "phone_number", "phone_number": "1-925-515-7637 x08884", "reserved": false, "verification": {"status": "expired", "strategy": "reset_password_email_code", "attempts": 262295, "expire_at": 785257}, "linked_to": [{"type": "oauth_microsoft", "id": "<id>"}, {"type": "saml", "id": "<id>"}], "created_at": 56664, "updated_at": 572237}
+        "400":
+          application/json: {"errors": []}
+  DeletePhoneNumber:
+    speakeasy-default-delete-phone-number:
+      parameters:
+        path:
+          phone_number_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": true}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdatePhoneNumber:
+    speakeasy-default-update-phone-number:
+      parameters:
+        path:
+          phone_number_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "phone_number", "phone_number": "1-528-907-8707 x40619", "reserved": true, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "email_link", "id": "<id>"}], "created_at": 435172, "updated_at": 139647}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetSessionList:
+    speakeasy-default-get-session-list:
+      responses:
+        "200":
+          application/json: [{"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "revoked", "last_active_at": 579292, "expire_at": 723393, "abandon_at": 861281, "updated_at": 820280, "created_at": 772828}, {"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "ended", "last_active_at": 733747, "expire_at": 867562, "abandon_at": 495330, "updated_at": 919256, "created_at": 573911}]
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetSession:
+    speakeasy-default-get-session:
+      parameters:
+        path:
+          session_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "replaced", "last_active_at": 818503, "expire_at": 720226, "abandon_at": 954599, "updated_at": 943025, "created_at": 690915}
+        "400":
+          application/json: {"errors": []}
+  RevokeSession:
+    speakeasy-default-revoke-session:
+      parameters:
+        path:
+          session_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "active", "last_active_at": 923791, "expire_at": 446837, "abandon_at": 136893, "updated_at": 983684, "created_at": 922872}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  VerifySession:
+    speakeasy-default-verify-session:
+      parameters:
+        path:
+          session_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "session", "id": "<id>", "user_id": "<id>", "client_id": "<id>", "status": "expired", "last_active_at": 758399, "expire_at": 951650, "abandon_at": 106106, "updated_at": 707871, "created_at": 836837}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateSessionTokenFromTemplate:
+    speakeasy-default-create-session-token-from-template:
+      parameters:
+        path:
+          session_id: "<id>"
+          template_name: "<value>"
+      responses:
+        "401":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  GetTemplateList:
+    speakeasy-default-get-template-list:
+      parameters:
+        path:
+          template_type: "sms"
+      responses:
+        "400":
+          application/json: {"errors": []}
+        "200": {}
+  GetTemplate:
+    speakeasy-default-get-template:
+      parameters:
+        path:
+          template_type: "email"
+          slug: "<value>"
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  UpsertTemplate:
+    speakeasy-default-upsert-template:
+      parameters:
+        path:
+          template_type: "email"
+          slug: "<value>"
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  RevertTemplate:
+    speakeasy-default-revert-template:
+      parameters:
+        path:
+          template_type: "sms"
+          slug: "<value>"
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  PreviewTemplate:
+    speakeasy-default-preview-template:
+      parameters:
+        path:
+          template_type: "<value>"
+          slug: "<value>"
+      responses:
+        "400":
+          application/json: {"errors": []}
+        "200": {}
+  ToggleTemplateDelivery:
+    speakeasy-default-toggle-template-delivery:
+      parameters:
+        path:
+          template_type: "sms"
+          slug: "<value>"
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  GetUserList:
+    "":
+      parameters:
+        query:
+          last_active_at_since: 1700690400000
+      responses:
+        "200":
+          application/json: [{"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}]
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateUser:
+    speakeasy-default-create-user:
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetUsersCount:
+    speakeasy-default-get-users-count:
+      responses:
+        "200":
+          application/json: {"object": "total_count", "total_count": 869435}
+        "422":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetUser:
+    speakeasy-default-get-user:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "400":
+          application/json: {"errors": []}
+  UpdateUser:
+    speakeasy-default-update-user:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteUser:
+    speakeasy-default-delete-user:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": false}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  BanUser:
+    speakeasy-default-ban-user:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "402":
+          application/json: {"errors": []}
+  UnbanUser:
+    speakeasy-default-unban-user:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "402":
+          application/json: {"errors": []}
+  LockUser:
+    speakeasy-default-lock-user:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "403":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UnlockUser:
+    speakeasy-default-unlock-user:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "403":
+          application/json: {"errors": []}
+  SetUserProfileImage:
+    speakeasy-default-set-user-profile-image:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteUserProfileImage:
+    speakeasy-default-delete-user-profile-image:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "404":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateUserMetadata:
+    speakeasy-default-update-user-metadata:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetOAuthAccessToken:
+    speakeasy-default-get-O-auth-access-token:
+      parameters:
+        path:
+          user_id: "<id>"
+          provider: "<value>"
+      responses:
+        "400":
+          application/json: {"errors": []}
+        "200": {}
+  UsersGetOrganizationMemberships:
+    speakeasy-default-users-get-organization-memberships:
+      parameters:
+        path:
+          user_id: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"total_count": 492159}
+        "403":
+          application/json: {"errors": []}
+  UsersGetOrganizationInvitations:
+    speakeasy-default-users-get-organization-invitations:
+      parameters:
+        path:
+          user_id: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"data": [], "total_count": 939995}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  VerifyPassword:
+    speakeasy-default-verify-password:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "500":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  VerifyTOTP:
+    speakeasy-default-verify-TOTP:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "500":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  DisableMFA:
+    speakeasy-default-disable-MFA:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "404":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  DeleteBackupCode:
+    speakeasy-default-delete-backup-code:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "404":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  UserPasskeyDelete:
+    speakeasy-default-user-passkey-delete:
+      parameters:
+        path:
+          user_id: "<id>"
+          passkey_identification_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": false}
+        "403":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UserWeb3WalletDelete:
+    speakeasy-default-user-web3-wallet-delete:
+      parameters:
+        path:
+          user_id: "<id>"
+          web3_wallet_identification_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": true}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateUserTOTP:
+    speakeasy-default-create-user-TOTP:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "id": "<id>", "secret": "<value>", "uri": "https://watery-humidity.org", "verified": true, "key": "<value>"}
+        "403":
+          application/json: {"errors": []}
+  DeleteTOTP:
+    speakeasy-default-delete-TOTP:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "404":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  DeleteExternalAccount:
+    speakeasy-default-delete-external-account:
+      parameters:
+        path:
+          user_id: "<id>"
+          external_account_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": false}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateInvitation:
+    speakeasy-default-create-invitation:
+      responses:
+        "200":
+          application/json: {"object": "invitation", "id": "<id>", "email_address": "Al.Grady1@hotmail.com", "revoked": false, "status": "pending", "created_at": 176200, "updated_at": 39817}
+        "400":
+          application/json: {"errors": []}
+  ListInvitations:
+    speakeasy-default-list-invitations:
+      responses:
+        "200":
+          application/json: [{"object": "invitation", "id": "<id>", "email_address": "Keyon_Krajcik@yahoo.com", "revoked": false, "status": "pending", "created_at": 270930, "updated_at": 663562}, {"object": "invitation", "id": "<id>", "email_address": "Mark59@gmail.com", "revoked": false, "status": "pending", "created_at": 744866, "updated_at": 961713}]
+  RevokeInvitation:
+    speakeasy-default-revoke-invitation:
+      parameters:
+        path:
+          invitation_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "invitation", "id": "<id>", "email_address": "Jaren_Langworth98@yahoo.com", "revoked": true, "status": "revoked", "created_at": 513767, "updated_at": 316334}
+        "400":
+          application/json: {"errors": []}
+  ListInstanceOrganizationInvitations:
+    speakeasy-default-list-instance-organization-invitations:
+      responses:
+        "200":
+          application/json: {"data": [], "total_count": 5142}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateOrganizationInvitation:
+    speakeasy-default-create-organization-invitation:
+      parameters:
+        path:
+          organization_id: "<id>"
+      requestBody:
+        application/json: {"email_address": "Jensen_Ankunding@hotmail.com", "role": "<value>"}
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  ListOrganizationInvitations:
+    speakeasy-default-list-organization-invitations:
+      parameters:
+        path:
+          organization_id: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"total_count": 146396}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateOrganizationInvitationBulk:
+    speakeasy-default-create-organization-invitation-bulk:
+      parameters:
+        path:
+          organization_id: "<id>"
+      requestBody:
+        application/json: []
+      responses:
+        "200":
+          application/json: {"total_count": 637338}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  ListPendingOrganizationInvitations:
+    speakeasy-default-list-pending-organization-invitations:
+      parameters:
+        path:
+          organization_id: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"data": [], "total_count": 910782}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetOrganizationInvitation:
+    speakeasy-default-get-organization-invitation:
+      parameters:
+        path:
+          organization_id: "<id>"
+          invitation_id: "<id>"
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  RevokeOrganizationInvitation:
+    speakeasy-default-revoke-organization-invitation:
+      parameters:
+        path:
+          organization_id: "<id>"
+          invitation_id: "<id>"
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  ListAllowlistIdentifiers:
+    speakeasy-default-list-allowlist-identifiers:
+      responses:
+        "401":
+          application/json: {"errors": []}
+        "200": {}
+  CreateAllowlistIdentifier:
+    speakeasy-default-create-allowlist-identifier:
+      responses:
+        "400":
+          application/json: {"errors": []}
+        "200": {}
+  DeleteAllowlistIdentifier:
+    speakeasy-default-delete-allowlist-identifier:
+      parameters:
+        path:
+          identifier_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": true}
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  ListBlocklistIdentifiers:
+    speakeasy-default-list-blocklist-identifiers:
+      responses:
+        "200":
+          application/json: {"total_count": 935502}
+        "401":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateBlocklistIdentifier:
+    speakeasy-default-create-blocklist-identifier:
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  DeleteBlocklistIdentifier:
+    speakeasy-default-delete-blocklist-identifier:
+      parameters:
+        path:
+          identifier_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": false}
+        "402":
+          application/json: {"errors": []}
+  UpdateInstanceAuthConfig:
+    speakeasy-default-update-instance-auth-config:
+      responses:
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  UpdateProductionInstanceDomain:
+    speakeasy-default-update-production-instance-domain:
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  ChangeProductionInstanceDomain:
+    speakeasy-default-change-production-instance-domain:
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateActorToken:
+    speakeasy-default-create-actor-token:
+      requestBody:
+        application/json: {"user_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"object": "actor_token", "id": "<id>", "status": "pending", "user_id": "<id>", "created_at": 664688, "updated_at": 62962}
+        "400":
+          application/json: {"errors": []}
+  RevokeActorToken:
+    speakeasy-default-revoke-actor-token:
+      parameters:
+        path:
+          actor_token_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "actor_token", "id": "<id>", "status": "pending", "user_id": "<id>", "created_at": 114905, "updated_at": 8992}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  ListDomains:
+    speakeasy-default-list-domains:
+      responses:
+        "200":
+          application/json: {"data": [{"object": "domain", "id": "<id>", "name": "<value>", "is_satellite": false, "frontend_api_url": "https://glorious-gastropod.org/", "development_origin": "<value>"}, {"object": "domain", "id": "<id>", "name": "<value>", "is_satellite": false, "frontend_api_url": "https://lost-steeple.info", "development_origin": "<value>"}, {"object": "domain", "id": "<id>", "name": "<value>", "is_satellite": true, "frontend_api_url": "https://scientific-teriyaki.biz/", "development_origin": "<value>"}], "total_count": 897222}
+  AddDomain:
+    speakeasy-default-add-domain:
+      responses:
+        "200":
+          application/json: {"object": "domain", "id": "<id>", "name": "<value>", "is_satellite": true, "frontend_api_url": "https://necessary-charm.biz/", "development_origin": "<value>"}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteDomain:
+    speakeasy-default-delete-domain:
+      parameters:
+        path:
+          domain_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": false}
+        "403":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateDomain:
+    speakeasy-default-update-domain:
+      parameters:
+        path:
+          domain_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "domain", "id": "<id>", "name": "<value>", "is_satellite": false, "frontend_api_url": "https://nifty-joy.net/", "development_origin": "<value>"}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateInstance:
+    speakeasy-default-update-instance:
+      responses:
+        "422":
+          application/json: {"errors": []}
+  UpdateInstanceRestrictions:
+    speakeasy-default-update-instance-restrictions:
+      responses:
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  UpdateInstanceOrganizationSettings:
+    speakeasy-default-update-instance-organization-settings:
+      responses:
+        "200":
+          application/json: {"object": "organization_settings", "enabled": true, "max_allowed_memberships": 549115, "creator_role": "<value>", "admin_delete_enabled": true, "domains_enabled": true, "domains_enrollment_modes": ["automatic_suggestion", "automatic_suggestion", "automatic_invitation"], "domains_default_role": "<value>"}
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateSvixApp:
+    speakeasy-default-create-svix-app:
+      responses:
+        "200":
+          application/json: {"svix_url": "https://fussy-fit.info/"}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteSvixApp:
+    speakeasy-default-delete-svix-app:
+      responses:
+        "400":
+          application/json: {"errors": []}
+  GenerateSvixAuthURL:
+    speakeasy-default-generate-svix-auth-URL:
+      responses:
+        "200":
+          application/json: {"svix_url": "https://late-gymnast.org"}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  ListJWTTemplates:
+    speakeasy-default-list-JWT-templates:
+      responses:
+        "200":
+          application/json: [{"object": "jwt_template", "id": "<id>", "name": "<value>", "lifetime": 333725, "allowed_clock_skew": 732880, "created_at": 409143, "updated_at": 212242}, {"object": "jwt_template", "id": "<id>", "name": "<value>", "lifetime": 490314, "allowed_clock_skew": 125836, "created_at": 67512, "updated_at": 999787}, {"object": "jwt_template", "id": "<id>", "name": "<value>", "lifetime": 499997, "allowed_clock_skew": 230615, "created_at": 312845, "updated_at": 535888}]
+  CreateJWTTemplate:
+    speakeasy-default-create-JWT-template:
+      responses:
+        "200":
+          application/json: {"object": "jwt_template", "id": "<id>", "name": "<value>", "lifetime": 636196, "allowed_clock_skew": 687004, "created_at": 273048, "updated_at": 891395}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetJWTTemplate:
+    speakeasy-default-get-JWT-template:
+      parameters:
+        path:
+          template_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "jwt_template", "id": "<id>", "name": "<value>", "lifetime": 962772, "allowed_clock_skew": 674175, "created_at": 21361, "updated_at": 274270}
+        "404":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateJWTTemplate:
+    speakeasy-default-update-JWT-template:
+      parameters:
+        path:
+          template_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "jwt_template", "id": "<id>", "name": "<value>", "lifetime": 570419, "allowed_clock_skew": 725258, "created_at": 759751, "updated_at": 883134}
+        "400":
+          application/json: {"errors": []}
+  DeleteJWTTemplate:
+    speakeasy-default-delete-JWT-template:
+      parameters:
+        path:
+          template_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": true}
+        "403":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  ListOrganizations:
+    speakeasy-default-list-organizations:
+      responses:
+        "200":
+          application/json: {"data": [{"object": "organization", "id": "<id>", "name": "<value>", "slug": "<value>", "max_allowed_memberships": 783175, "created_at": 821525, "updated_at": 670307}, {"object": "organization", "id": "<id>", "name": "<value>", "slug": "<value>", "max_allowed_memberships": 50684, "created_at": 111065, "updated_at": 133947}], "total_count": 288738}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateOrganization:
+    speakeasy-default-create-organization:
+      responses:
+        "200":
+          application/json: {"object": "organization", "id": "<id>", "name": "<value>", "slug": "<value>", "max_allowed_memberships": 57077, "created_at": 323854, "updated_at": 798540}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetOrganization:
+    speakeasy-default-get-organization:
+      parameters:
+        path:
+          organization_id: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"object": "organization", "id": "<id>", "name": "<value>", "slug": "<value>", "max_allowed_memberships": 754735, "created_at": 750923, "updated_at": 871877}
+        "403":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateOrganization:
+    speakeasy-default-update-organization:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "organization", "id": "<id>", "name": "<value>", "slug": "<value>", "max_allowed_memberships": 524231, "created_at": 565012, "updated_at": 59099}
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteOrganization:
+    speakeasy-default-delete-organization:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": false}
+        "404":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  MergeOrganizationMetadata:
+    speakeasy-default-merge-organization-metadata:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "organization", "id": "<id>", "name": "<value>", "slug": "<value>", "max_allowed_memberships": 253408, "created_at": 598734, "updated_at": 850278}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UploadOrganizationLogo:
+    speakeasy-default-upload-organization-logo:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "organization", "id": "<id>", "name": "<value>", "slug": "<value>", "max_allowed_memberships": 602729, "created_at": 452162, "updated_at": 416390, "image_url": "https://remarkable-replacement.name"}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteOrganizationLogo:
+    speakeasy-default-delete-organization-logo:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "organization", "id": "<id>", "name": "<value>", "slug": "<value>", "max_allowed_memberships": 514604, "created_at": 703303, "updated_at": 542013}
+        "404":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateOrganizationMembership:
+    speakeasy-default-create-organization-membership:
+      parameters:
+        path:
+          organization_id: "<id>"
+      requestBody:
+        application/json: {"user_id": "<id>", "role": "<value>"}
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  ListOrganizationMemberships:
+    speakeasy-default-list-organization-memberships:
+      parameters:
+        path:
+          organization_id: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"total_count": 506931}
+        "401":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateOrganizationMembership:
+    speakeasy-default-update-organization-membership:
+      parameters:
+        path:
+          organization_id: "<id>"
+          user_id: "<id>"
+      requestBody:
+        application/json: {"role": "<value>"}
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  DeleteOrganizationMembership:
+    speakeasy-default-delete-organization-membership:
+      parameters:
+        path:
+          organization_id: "<id>"
+          user_id: "<id>"
+      responses:
+        "400":
+          application/json: {"errors": []}
+        "200": {}
+  UpdateOrganizationMembershipMetadata:
+    speakeasy-default-update-organization-membership-metadata:
+      parameters:
+        path:
+          organization_id: "<id>"
+          user_id: "<id>"
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  InstanceGetOrganizationMemberships:
+    speakeasy-default-instance-get-organization-memberships:
+      responses:
+        "200":
+          application/json: {"data": [], "total_count": 137620}
+        "400":
+          application/json: {"errors": []}
+  CreateOrganizationDomain:
+    speakeasy-default-create-organization-domain:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "400":
+          application/json: {"errors": []}
+        "200": {}
+  ListOrganizationDomains:
+    speakeasy-default-list-organization-domains:
+      parameters:
+        path:
+          organization_id: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"total_count": 605114}
+        "401":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteOrganizationDomain:
+    speakeasy-default-delete-organization-domain:
+      parameters:
+        path:
+          organization_id: "<id>"
+          domain_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": true}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateOrganizationDomain:
+    speakeasy-default-update-organization-domain:
+      parameters:
+        path:
+          organization_id: "<id>"
+          domain_id: "<id>"
+      responses:
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+        "200": {}
+  VerifyDomainProxy:
+    speakeasy-default-verify-domain-proxy:
+      responses:
+        "200":
+          application/json: {"object": "proxy_check", "id": "<id>", "domain_id": "<id>", "last_run_at": 36600, "proxy_url": "https://sardonic-masterpiece.net", "successful": false, "created_at": 38838, "updated_at": 767005}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  ListRedirectURLs:
+    speakeasy-default-list-redirect-UR-ls:
+      responses:
+        "200":
+          application/json: [{"object": "redirect_url", "id": "<id>", "url": "https://political-jungle.net/", "created_at": 319733, "updated_at": 755781}, {"object": "redirect_url", "id": "<id>", "url": "https://noxious-bidet.biz/", "created_at": 643098, "updated_at": 595843}, {"object": "redirect_url", "id": "<id>", "url": "https://nippy-slide.com/", "created_at": 432371, "updated_at": 913204}]
+  CreateRedirectURL:
+    speakeasy-default-create-redirect-URL:
+      responses:
+        "200":
+          application/json: {"object": "redirect_url", "id": "<id>", "url": "https://aggressive-bench.name", "created_at": 286417, "updated_at": 827124}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetRedirectURL:
+    speakeasy-default-get-redirect-URL:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "redirect_url", "id": "<id>", "url": "https://affectionate-corporation.net/", "created_at": 890911, "updated_at": 351603}
+        "404":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteRedirectURL:
+    speakeasy-default-delete-redirect-URL:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": true}
+        "404":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateSignInToken:
+    speakeasy-default-create-sign-in-token:
+      responses:
+        "200":
+          application/json: {"object": "sign_in_token", "id": "<id>", "status": "accepted", "user_id": "<id>", "created_at": 713289, "updated_at": 77941}
+        "404":
+          application/json: {"errors": []}
+  RevokeSignInToken:
+    speakeasy-default-revoke-sign-in-token:
+      parameters:
+        path:
+          sign_in_token_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "sign_in_token", "id": "<id>", "status": "revoked", "user_id": "<id>", "created_at": 634519, "updated_at": 69667}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateSignUp:
+    speakeasy-default-update-sign-up:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "sign_up_attempt", "id": "<id>", "status": "abandoned", "password_enabled": false, "custom_action": false, "abandon_at": 694671}
+        "403":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  ListOAuthApplications:
+    speakeasy-default-list-O-auth-applications:
+      responses:
+        "200":
+          application/json: {"data": [{"object": "oauth_application", "id": "<id>", "instance_id": "<id>", "name": "<value>", "client_id": "<id>", "public": true, "scopes": "<value>", "callback_url": "https://wide-valley.info", "authorize_url": "https://ripe-battle.com", "token_fetch_url": "https://sleepy-litter.biz/", "user_info_url": "https://square-schedule.org/", "created_at": 253611, "updated_at": 110984}, {"object": "oauth_application", "id": "<id>", "instance_id": "<id>", "name": "<value>", "client_id": "<id>", "public": true, "scopes": "<value>", "callback_url": "https://acidic-bar.info/", "authorize_url": "https://uncommon-tectonics.com/", "token_fetch_url": "https://acclaimed-tenement.name", "user_info_url": "https://teeming-characterization.net", "created_at": 803812, "updated_at": 994366}, {"object": "oauth_application", "id": "<id>", "instance_id": "<id>", "name": "<value>", "client_id": "<id>", "public": false, "scopes": "<value>", "callback_url": "https://puny-lifestyle.name/", "authorize_url": "https://lovable-underneath.org/", "token_fetch_url": "https://rapid-spear.info/", "user_info_url": "https://unhappy-monster.net", "created_at": 718909, "updated_at": 772406}], "total_count": 13767}
+        "400":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateOAuthApplication:
+    speakeasy-default-create-O-auth-application:
+      requestBody:
+        application/json: {"name": "<value>", "callback_url": "https://silent-hyena.name", "scopes": "profile email public_metadata"}
+      responses:
+        "200":
+          application/json: {"object": "oauth_application", "id": "<id>", "instance_id": "<id>", "name": "<value>", "client_id": "<id>", "public": false, "scopes": "<value>", "callback_url": "https://ironclad-brush.org/", "authorize_url": "https://thorny-gray.info/", "token_fetch_url": "https://pricey-manner.net", "user_info_url": "https://whirlwind-poppy.name", "created_at": 218311, "updated_at": 746543}
+        "400":
+          application/json: {"errors": []}
+  GetOAuthApplication:
+    speakeasy-default-get-O-auth-application:
+      parameters:
+        path:
+          oauth_application_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "oauth_application", "id": "<id>", "instance_id": "<id>", "name": "<value>", "client_id": "<id>", "public": true, "scopes": "<value>", "callback_url": "https://utter-ravioli.net/", "authorize_url": "https://productive-poppy.org/", "token_fetch_url": "https://trustworthy-innovation.net", "user_info_url": "https://creamy-minister.com/", "created_at": 126484, "updated_at": 253761}
+        "403":
+          application/json: {"errors": []}
+  UpdateOAuthApplication:
+    speakeasy-default-update-O-auth-application:
+      parameters:
+        path:
+          oauth_application_id: "<id>"
+      requestBody:
+        application/json: {"scopes": "profile email public_metadata private_metadata"}
+      responses:
+        "200":
+          application/json: {"object": "oauth_application", "id": "<id>", "instance_id": "<id>", "name": "<value>", "client_id": "<id>", "public": true, "scopes": "<value>", "callback_url": "https://bare-hose.biz/", "authorize_url": "https://cultivated-sonar.com", "token_fetch_url": "https://tattered-piglet.net", "user_info_url": "https://fatal-parade.biz/", "created_at": 773881, "updated_at": 695151}
+        "403":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteOAuthApplication:
+    speakeasy-default-delete-O-auth-application:
+      parameters:
+        path:
+          oauth_application_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": false}
+        "403":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  RotateOAuthApplicationSecret:
+    speakeasy-default-rotate-O-auth-application-secret:
+      parameters:
+        path:
+          oauth_application_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "oauth_application", "id": "<id>", "instance_id": "<id>", "name": "<value>", "client_id": "<id>", "public": true, "scopes": "<value>", "callback_url": "https://everlasting-attraction.name", "authorize_url": "https://illiterate-step-mother.com", "token_fetch_url": "https://decent-teriyaki.net", "user_info_url": "https://evil-celsius.org/", "created_at": 132670, "updated_at": 883895}
+        "403":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  ListSAMLConnections:
+    speakeasy-default-list-SAML-connections:
+      responses:
+        "200":
+          application/json: {"data": [{"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "soft-integer.com", "idp_entity_id": "<id>", "idp_sso_url": "https://baggy-conservative.biz/", "idp_certificate": "<value>", "acs_url": "https://impartial-epic.com/", "sp_entity_id": "<id>", "sp_metadata_url": "https://lavish-order.biz/", "active": false, "provider": "<value>", "user_count": 160633, "sync_user_attributes": false, "created_at": 521364, "updated_at": 469208}, {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "rusty-summary.name", "idp_entity_id": "<id>", "idp_sso_url": "https://winding-heating.com", "idp_certificate": "<value>", "acs_url": "https://enlightened-space.net/", "sp_entity_id": "<id>", "sp_metadata_url": "https://favorable-heartbeat.net/", "active": false, "provider": "<value>", "user_count": 15207, "sync_user_attributes": true, "created_at": 532002, "updated_at": 785391}], "total_count": 921814}
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateSAMLConnection:
+    speakeasy-default-create-SAML-connection:
+      responses:
+        "200":
+          application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "stingy-necklace.name", "idp_entity_id": "<id>", "idp_sso_url": "https://descriptive-skyscraper.net", "idp_certificate": "<value>", "acs_url": "https://junior-meatloaf.org", "sp_entity_id": "<id>", "sp_metadata_url": "https://glorious-discourse.name/", "active": false, "provider": "<value>", "user_count": 373144, "sync_user_attributes": false, "created_at": 67442, "updated_at": 70153}
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  GetSAMLConnection:
+    speakeasy-default-get-SAML-connection:
+      parameters:
+        path:
+          saml_connection_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "whopping-offset.org", "idp_entity_id": "<id>", "idp_sso_url": "https://hospitable-eyeliner.net/", "idp_certificate": "<value>", "acs_url": "https://focused-marimba.org/", "sp_entity_id": "<id>", "sp_metadata_url": "https://athletic-wriggler.name", "active": false, "provider": "<value>", "user_count": 660557, "sync_user_attributes": false, "created_at": 503710, "updated_at": 338454}
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  UpdateSAMLConnection:
+    speakeasy-default-update-SAML-connection:
+      parameters:
+        path:
+          saml_connection_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "bitter-cheetah.biz", "idp_entity_id": "<id>", "idp_sso_url": "https://dual-pomelo.org", "idp_certificate": "<value>", "acs_url": "https://paltry-middle.net", "sp_entity_id": "<id>", "sp_metadata_url": "https://immediate-tune-up.info/", "active": true, "provider": "<value>", "user_count": 910631, "sync_user_attributes": true, "created_at": 347299, "updated_at": 414806}
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  DeleteSAMLConnection:
+    speakeasy-default-delete-SAML-connection:
+      parameters:
+        path:
+          saml_connection_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "deleted": true}
+        "402":
+          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}, {"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
+  CreateTestingToken:
+    speakeasy-default-create-testing-token:
+      responses:
+        "200":
+          application/json: {"object": "testing_token", "token": "1713877200-c_2J2MvPu9PnXcuhbPZNao0LOXqK9A7YrnBn0HmIWxy", "expires_at": 1713880800}

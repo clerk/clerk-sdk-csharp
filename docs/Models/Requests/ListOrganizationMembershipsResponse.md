@@ -1,0 +1,9 @@
+# ListOrganizationMembershipsResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                      | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                         | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `OrganizationMemberships`                                                                       | [Models.Components.OrganizationMemberships](../../Models/Components/OrganizationMemberships.md) | :heavy_minus_sign:                                                                              | A list of organization memberships                                                              |

@@ -1,0 +1,15 @@
+# InstanceSettings
+
+InstanceSettings Server API
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Object`                                                                              | [InstanceSettingsObject](../../Models/Components/InstanceSettingsObject.md)           | :heavy_minus_sign:                                                                    | String representing the object's type. Objects of the same type share the same value. |
+| `Id`                                                                                  | *string*                                                                              | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `RestrictedToAllowlist`                                                               | *bool*                                                                                | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `FromEmailAddress`                                                                    | *string*                                                                              | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `ProgressiveSignUp`                                                                   | *bool*                                                                                | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `EnhancedEmailDeliverability`                                                         | *bool*                                                                                | :heavy_minus_sign:                                                                    | N/A                                                                                   |

@@ -1,0 +1,9 @@
+# GetOrganizationRequest
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                   | *string*                                                                                           | :heavy_check_mark:                                                                                 | The ID or slug of the organization                                                                 |
+| `IncludeMembersCount`                                                                              | *bool*                                                                                             | :heavy_minus_sign:                                                                                 | Flag to denote whether or not the organization's members count should be included in the response. |

@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas</PackageId>
+    <Version>0.1.2</Version>
+    <TargetFramework>net8.0</TargetFramework>
+    <Authors>Speakeasy</Authors>
+    <Copyright>Copyright (c) Speakeasy 2024</Copyright>
+    <PackageProjectUrl>https://clerk.com/docs</PackageProjectUrl>
+    <Description>Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend<br/>
+servers.<br/>
+<br/>
+### Versions<br/>
+<br/>
+When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
+Each version is identified by its release date, e.g. `2021-02-05`. For more information, please see <a href="https://clerk.com/docs/backend-requests/versioning/overview">Clerk API Versions</a>.<br/>
+<br/>
+<br/>
+Please see https://clerk.com/docs for more information.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\..\..\..\..\..\docs\**\*" Pack="true" PackagePath="\docs"  CopyToOutputDirectory="PreserveNewest"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="newtonsoft.json" Version="13.0.3" />
+    <PackageReference Include="nodatime" Version="3.1.9" />
+  </ItemGroup>
+
+</Project>

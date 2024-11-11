@@ -1,0 +1,11 @@
+# Ticket
+
+
+## Fields
+
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `Status`                                                                            | [TicketVerificationStatus](../../Models/Components/TicketVerificationStatus.md)     | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `Strategy`                                                                          | [TicketVerificationStrategy](../../Models/Components/TicketVerificationStrategy.md) | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `Attempts`                                                                          | *long*                                                                              | :heavy_minus_sign:                                                                  | N/A                                                                                 |
+| `ExpireAt`                                                                          | *long*                                                                              | :heavy_minus_sign:                                                                  | N/A                                                                                 |

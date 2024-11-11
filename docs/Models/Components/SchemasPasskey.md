@@ -1,0 +1,12 @@
+# SchemasPasskey
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Id`                                                                                   | *string*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `Object`                                                                               | [SchemasPasskeyObject](../../Models/Components/SchemasPasskeyObject.md)                | :heavy_check_mark:                                                                     | String representing the object's type. Objects of the same type share the same value.<br/> |
+| `Name`                                                                                 | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `LastUsedAt`                                                                           | *long*                                                                                 | :heavy_check_mark:                                                                     | Unix timestamp of when the passkey was last used.<br/>                                 |
+| `Verification`                                                                         | [SchemasPasskeyVerification](../../Models/Components/SchemasPasskeyVerification.md)    | :heavy_check_mark:                                                                     | N/A                                                                                    |

@@ -1,0 +1,13 @@
+# Oauth
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `Status`                                                                          | [OauthVerificationStatus](../../Models/Components/OauthVerificationStatus.md)     | :heavy_check_mark:                                                                | N/A                                                                               |
+| `Strategy`                                                                        | [OauthVerificationStrategy](../../Models/Components/OauthVerificationStrategy.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `ExternalVerificationRedirectUrl`                                                 | *string*                                                                          | :heavy_minus_sign:                                                                | N/A                                                                               |
+| `Error`                                                                           | [Error](../../Models/Components/Error.md)                                         | :heavy_minus_sign:                                                                | N/A                                                                               |
+| `ExpireAt`                                                                        | *long*                                                                            | :heavy_check_mark:                                                                | N/A                                                                               |
+| `Attempts`                                                                        | *long*                                                                            | :heavy_minus_sign:                                                                | N/A                                                                               |

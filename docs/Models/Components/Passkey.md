@@ -1,0 +1,12 @@
+# Passkey
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Status`                                                                              | [PasskeyVerificationStatus](../../Models/Components/PasskeyVerificationStatus.md)     | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `Strategy`                                                                            | [PasskeyVerificationStrategy](../../Models/Components/PasskeyVerificationStrategy.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `Nonce`                                                                               | [Nonce](../../Models/Components/Nonce.md)                                             | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `Attempts`                                                                            | *long*                                                                                | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `ExpireAt`                                                                            | *long*                                                                                | :heavy_minus_sign:                                                                    | N/A                                                                                   |
