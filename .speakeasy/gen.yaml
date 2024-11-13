@@ -13,11 +13,11 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 csharp:
-  version: 0.1.2
+  version: 0.1.0
   additionalDependencies: []
-  author: Speakeasy
+  author: Clerk
   clientServerStatusCodesAsErrors: true
-  defaultErrorName: APIException
+  defaultErrorName: SDKError
   disableNamespacePascalCasingApr2024: true
   dotnetVersion: net8.0
   enableSourceLink: false
@@ -28,7 +28,7 @@ csharp:
     paths:
       callbacks: Models/Callbacks
       errors: Models/Errors
-      operations: Models/Requests
+      operations: Models/Operations
       shared: Models/Components
       webhooks: Models/Webhooks
   includeDebugSymbols: false
@@ -36,7 +36,7 @@ csharp:
   maxMethodParams: 4
   methodArguments: infer-optional-args
   outputModelSuffix: output
-  packageName: OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas
-  packageTags: ""
+  packageName: Clerk.BackendAPI
+  packageTags: "Clerk SDK"
   responseFormat: envelope-http
   sourceDirectory: src
