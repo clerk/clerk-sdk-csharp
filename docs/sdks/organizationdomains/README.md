@@ -16,9 +16,9 @@ Creates a new organization domain. By default the domain is verified, but can be
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -32,21 +32,21 @@ var res = await sdk.OrganizationDomains.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                    | *string*                                                                                            | :heavy_check_mark:                                                                                  | The ID of the organization where the new domain will be created.                                    |
-| `RequestBody`                                                                                       | [CreateOrganizationDomainRequestBody](../../Models/Requests/CreateOrganizationDomainRequestBody.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                      | *string*                                                                                              | :heavy_check_mark:                                                                                    | The ID of the organization where the new domain will be created.                                      |
+| `RequestBody`                                                                                         | [CreateOrganizationDomainRequestBody](../../Models/Operations/CreateOrganizationDomainRequestBody.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
 
 ### Response
 
-**[CreateOrganizationDomainResponse](../../Models/Requests/CreateOrganizationDomainResponse.md)**
+**[CreateOrganizationDomainResponse](../../Models/Operations/CreateOrganizationDomainResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 403, 404, 422                                                            | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## List
 
@@ -55,9 +55,9 @@ Get a list of all domains of an organization.
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -72,20 +72,20 @@ var res = await sdk.OrganizationDomains.ListAsync(req);
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `request`                                                                                 | [ListOrganizationDomainsRequest](../../Models/Requests/ListOrganizationDomainsRequest.md) | :heavy_check_mark:                                                                        | The request object to use for the request.                                                |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `request`                                                                                   | [ListOrganizationDomainsRequest](../../Models/Operations/ListOrganizationDomainsRequest.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
 
 ### Response
 
-**[ListOrganizationDomainsResponse](../../Models/Requests/ListOrganizationDomainsResponse.md)**
+**[ListOrganizationDomainsResponse](../../Models/Operations/ListOrganizationDomainsResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 401, 422                                                                      | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Delete
 
@@ -94,9 +94,9 @@ Removes the given domain from the organization.
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -117,11 +117,11 @@ var res = await sdk.OrganizationDomains.DeleteAsync(
 
 ### Response
 
-**[DeleteOrganizationDomainResponse](../../Models/Requests/DeleteOrganizationDomainResponse.md)**
+**[DeleteOrganizationDomainResponse](../../Models/Operations/DeleteOrganizationDomainResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 401, 404                                                                 | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

@@ -1,0 +1,14 @@
+# UpdateJWTTemplateRequestBody
+
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `Name`                                                                        | *string*                                                                      | :heavy_minus_sign:                                                            | JWT template name                                                             |
+| `Claims`                                                                      | [UpdateJWTTemplateClaims](../../Models/Operations/UpdateJWTTemplateClaims.md) | :heavy_minus_sign:                                                            | JWT template claims in JSON format                                            |
+| `Lifetime`                                                                    | *double*                                                                      | :heavy_minus_sign:                                                            | JWT token lifetime                                                            |
+| `AllowedClockSkew`                                                            | *double*                                                                      | :heavy_minus_sign:                                                            | JWT token allowed clock skew                                                  |
+| `CustomSigningKey`                                                            | *bool*                                                                        | :heavy_minus_sign:                                                            | Whether a custom signing key/algorithm is also provided for this template     |
+| `SigningAlgorithm`                                                            | *string*                                                                      | :heavy_minus_sign:                                                            | The custom signing algorithm to use when minting JWTs                         |
+| `SigningKey`                                                                  | *string*                                                                      | :heavy_minus_sign:                                                            | The custom signing private key to use when minting JWTs                       |

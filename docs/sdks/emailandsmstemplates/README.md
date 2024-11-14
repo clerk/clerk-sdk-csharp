@@ -18,14 +18,14 @@ Updates the existing template of the given type and slug
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailAndSmsTemplates.UpsertAsync(
-    templateType: OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests.UpsertTemplatePathParamTemplateType.Sms,
+    templateType: Clerk.BackendAPI.Models.Operations.UpsertTemplatePathParamTemplateType.Sms,
     slug: "<value>",
     requestBody: new UpsertTemplateRequestBody() {}
 );
@@ -35,22 +35,22 @@ var res = await sdk.EmailAndSmsTemplates.UpsertAsync(
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `TemplateType`                                                                                      | [UpsertTemplatePathParamTemplateType](../../Models/Requests/UpsertTemplatePathParamTemplateType.md) | :heavy_check_mark:                                                                                  | The type of template to update                                                                      |
-| `Slug`                                                                                              | *string*                                                                                            | :heavy_check_mark:                                                                                  | The slug of the template to update                                                                  |
-| `RequestBody`                                                                                       | [UpsertTemplateRequestBody](../../Models/Requests/UpsertTemplateRequestBody.md)                     | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `TemplateType`                                                                                        | [UpsertTemplatePathParamTemplateType](../../Models/Operations/UpsertTemplatePathParamTemplateType.md) | :heavy_check_mark:                                                                                    | The type of template to update                                                                        |
+| `Slug`                                                                                                | *string*                                                                                              | :heavy_check_mark:                                                                                    | The slug of the template to update                                                                    |
+| `RequestBody`                                                                                         | [UpsertTemplateRequestBody](../../Models/Operations/UpsertTemplateRequestBody.md)                     | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
 
 ### Response
 
-**[UpsertTemplateResponse](../../Models/Requests/UpsertTemplateResponse.md)**
+**[UpsertTemplateResponse](../../Models/Operations/UpsertTemplateResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 401, 402, 403, 404, 422                                                  | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 402, 403, 404, 422               | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## ~~Revert~~
 
@@ -61,14 +61,14 @@ Reverts an updated template to its default state
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailAndSmsTemplates.RevertAsync(
-    templateType: OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests.RevertTemplatePathParamTemplateType.Email,
+    templateType: Clerk.BackendAPI.Models.Operations.RevertTemplatePathParamTemplateType.Email,
     slug: "<value>"
 );
 
@@ -77,21 +77,21 @@ var res = await sdk.EmailAndSmsTemplates.RevertAsync(
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `TemplateType`                                                                                      | [RevertTemplatePathParamTemplateType](../../Models/Requests/RevertTemplatePathParamTemplateType.md) | :heavy_check_mark:                                                                                  | The type of template to revert                                                                      |
-| `Slug`                                                                                              | *string*                                                                                            | :heavy_check_mark:                                                                                  | The slug of the template to revert                                                                  |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `TemplateType`                                                                                        | [RevertTemplatePathParamTemplateType](../../Models/Operations/RevertTemplatePathParamTemplateType.md) | :heavy_check_mark:                                                                                    | The type of template to revert                                                                        |
+| `Slug`                                                                                                | *string*                                                                                              | :heavy_check_mark:                                                                                    | The slug of the template to revert                                                                    |
 
 ### Response
 
-**[RevertTemplateResponse](../../Models/Requests/RevertTemplateResponse.md)**
+**[RevertTemplateResponse](../../Models/Operations/RevertTemplateResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 401, 402, 404                                                            | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 402, 404                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## ~~Preview~~
 
@@ -102,9 +102,9 @@ Returns a preview of a template for a given template_type, slug and body
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -119,19 +119,19 @@ var res = await sdk.EmailAndSmsTemplates.PreviewAsync(
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `TemplateType`                                                                    | *string*                                                                          | :heavy_check_mark:                                                                | The type of template to preview                                                   |
-| `Slug`                                                                            | *string*                                                                          | :heavy_check_mark:                                                                | The slug of the template to preview                                               |
-| `RequestBody`                                                                     | [PreviewTemplateRequestBody](../../Models/Requests/PreviewTemplateRequestBody.md) | :heavy_minus_sign:                                                                | Required parameters                                                               |
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `TemplateType`                                                                      | *string*                                                                            | :heavy_check_mark:                                                                  | The type of template to preview                                                     |
+| `Slug`                                                                              | *string*                                                                            | :heavy_check_mark:                                                                  | The slug of the template to preview                                                 |
+| `RequestBody`                                                                       | [PreviewTemplateRequestBody](../../Models/Operations/PreviewTemplateRequestBody.md) | :heavy_minus_sign:                                                                  | Required parameters                                                                 |
 
 ### Response
 
-**[PreviewTemplateResponse](../../Models/Requests/PreviewTemplateResponse.md)**
+**[PreviewTemplateResponse](../../Models/Operations/PreviewTemplateResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 401, 404, 422                                                            | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

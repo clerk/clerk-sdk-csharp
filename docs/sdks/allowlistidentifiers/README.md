@@ -16,8 +16,8 @@ Get a list of all identifiers allowed to sign up to an instance
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -28,14 +28,14 @@ var res = await sdk.AllowlistIdentifiers.ListAsync();
 
 ### Response
 
-**[ListAllowlistIdentifiersResponse](../../Models/Requests/ListAllowlistIdentifiersResponse.md)**
+**[ListAllowlistIdentifiersResponse](../../Models/Operations/ListAllowlistIdentifiersResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 401, 402                                                                      | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 402                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Create
 
@@ -44,9 +44,9 @@ Create an identifier allowed to sign up to an instance
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -61,20 +61,20 @@ var res = await sdk.AllowlistIdentifiers.CreateAsync(req);
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `request`                                                                                             | [CreateAllowlistIdentifierRequestBody](../../Models/Requests/CreateAllowlistIdentifierRequestBody.md) | :heavy_check_mark:                                                                                    | The request object to use for the request.                                                            |
+| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                               | [CreateAllowlistIdentifierRequestBody](../../Models/Operations/CreateAllowlistIdentifierRequestBody.md) | :heavy_check_mark:                                                                                      | The request object to use for the request.                                                              |
 
 ### Response
 
-**[CreateAllowlistIdentifierResponse](../../Models/Requests/CreateAllowlistIdentifierResponse.md)**
+**[CreateAllowlistIdentifierResponse](../../Models/Operations/CreateAllowlistIdentifierResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 402, 422                                                                 | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Delete
 
@@ -83,9 +83,9 @@ Delete an identifier from the instance allow-list
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -102,11 +102,11 @@ var res = await sdk.AllowlistIdentifiers.DeleteAsync(identifierId: "<id>");
 
 ### Response
 
-**[DeleteAllowlistIdentifierResponse](../../Models/Requests/DeleteAllowlistIdentifierResponse.md)**
+**[DeleteAllowlistIdentifierResponse](../../Models/Operations/DeleteAllowlistIdentifierResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 402, 404                                                                      | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

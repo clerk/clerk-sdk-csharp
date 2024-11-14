@@ -19,33 +19,33 @@ The templates are returned sorted by position.
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.EmailSmsTemplates.ListAsync(templateType: OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests.TemplateType.Sms);
+var res = await sdk.EmailSmsTemplates.ListAsync(templateType: Clerk.BackendAPI.Models.Operations.TemplateType.Sms);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `TemplateType`                                        | [TemplateType](../../Models/Requests/TemplateType.md) | :heavy_check_mark:                                    | The type of templates to list (email or SMS)          |
+| Parameter                                               | Type                                                    | Required                                                | Description                                             |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| `TemplateType`                                          | [TemplateType](../../Models/Operations/TemplateType.md) | :heavy_check_mark:                                      | The type of templates to list (email or SMS)            |
 
 ### Response
 
-**[GetTemplateListResponse](../../Models/Requests/GetTemplateListResponse.md)**
+**[GetTemplateListResponse](../../Models/Operations/GetTemplateListResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 401, 422                                                                 | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## ~~Get~~
 
@@ -56,14 +56,14 @@ Returns the details of a template
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailSmsTemplates.GetAsync(
-    templateType: OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests.PathParamTemplateType.Sms,
+    templateType: Clerk.BackendAPI.Models.Operations.PathParamTemplateType.Sms,
     slug: "<value>"
 );
 
@@ -72,21 +72,21 @@ var res = await sdk.EmailSmsTemplates.GetAsync(
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `TemplateType`                                                          | [PathParamTemplateType](../../Models/Requests/PathParamTemplateType.md) | :heavy_check_mark:                                                      | The type of templates to retrieve (email or SMS)                        |
-| `Slug`                                                                  | *string*                                                                | :heavy_check_mark:                                                      | The slug (i.e. machine-friendly name) of the template to retrieve       |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `TemplateType`                                                            | [PathParamTemplateType](../../Models/Operations/PathParamTemplateType.md) | :heavy_check_mark:                                                        | The type of templates to retrieve (email or SMS)                          |
+| `Slug`                                                                    | *string*                                                                  | :heavy_check_mark:                                                        | The slug (i.e. machine-friendly name) of the template to retrieve         |
 
 ### Response
 
-**[GetTemplateResponse](../../Models/Requests/GetTemplateResponse.md)**
+**[GetTemplateResponse](../../Models/Operations/GetTemplateResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 401, 404                                                                 | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## ~~ToggleDelivery~~
 
@@ -99,14 +99,14 @@ The app developer will need to listen to the `email.created` or `sms.created` we
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailSmsTemplates.ToggleDeliveryAsync(
-    templateType: OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests.ToggleTemplateDeliveryPathParamTemplateType.Email,
+    templateType: Clerk.BackendAPI.Models.Operations.ToggleTemplateDeliveryPathParamTemplateType.Email,
     slug: "<value>",
     requestBody: new ToggleTemplateDeliveryRequestBody() {}
 );
@@ -116,19 +116,19 @@ var res = await sdk.EmailSmsTemplates.ToggleDeliveryAsync(
 
 ### Parameters
 
-| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `TemplateType`                                                                                                      | [ToggleTemplateDeliveryPathParamTemplateType](../../Models/Requests/ToggleTemplateDeliveryPathParamTemplateType.md) | :heavy_check_mark:                                                                                                  | The type of template to toggle delivery for                                                                         |
-| `Slug`                                                                                                              | *string*                                                                                                            | :heavy_check_mark:                                                                                                  | The slug of the template for which to toggle delivery                                                               |
-| `RequestBody`                                                                                                       | [ToggleTemplateDeliveryRequestBody](../../Models/Requests/ToggleTemplateDeliveryRequestBody.md)                     | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `TemplateType`                                                                                                        | [ToggleTemplateDeliveryPathParamTemplateType](../../Models/Operations/ToggleTemplateDeliveryPathParamTemplateType.md) | :heavy_check_mark:                                                                                                    | The type of template to toggle delivery for                                                                           |
+| `Slug`                                                                                                                | *string*                                                                                                              | :heavy_check_mark:                                                                                                    | The slug of the template for which to toggle delivery                                                                 |
+| `RequestBody`                                                                                                         | [ToggleTemplateDeliveryRequestBody](../../Models/Operations/ToggleTemplateDeliveryRequestBody.md)                     | :heavy_minus_sign:                                                                                                    | N/A                                                                                                                   |
 
 ### Response
 
-**[ToggleTemplateDeliveryResponse](../../Models/Requests/ToggleTemplateDeliveryResponse.md)**
+**[ToggleTemplateDeliveryResponse](../../Models/Operations/ToggleTemplateDeliveryResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 401, 404                                                                 | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

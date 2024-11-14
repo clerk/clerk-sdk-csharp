@@ -1,9 +1,0 @@
-# RevertTemplateRequest
-
-
-## Fields
-
-| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `TemplateType`                                                                                      | [RevertTemplatePathParamTemplateType](../../Models/Requests/RevertTemplatePathParamTemplateType.md) | :heavy_check_mark:                                                                                  | The type of template to revert                                                                      |
-| `Slug`                                                                                              | *string*                                                                                            | :heavy_check_mark:                                                                                  | The slug of the template to revert                                                                  |

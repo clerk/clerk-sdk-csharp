@@ -25,9 +25,9 @@ The organization invitations are ordered by descending creation date by default.
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -40,20 +40,20 @@ var res = await sdk.OrganizationInvitations.ListForInstanceAsync(req);
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                         | [ListInstanceOrganizationInvitationsRequest](../../Models/Requests/ListInstanceOrganizationInvitationsRequest.md) | :heavy_check_mark:                                                                                                | The request object to use for the request.                                                                        |
+| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                           | [ListInstanceOrganizationInvitationsRequest](../../Models/Operations/ListInstanceOrganizationInvitationsRequest.md) | :heavy_check_mark:                                                                                                  | The request object to use for the request.                                                                          |
 
 ### Response
 
-**[ListInstanceOrganizationInvitationsResponse](../../Models/Requests/ListInstanceOrganizationInvitationsResponse.md)**
+**[ListInstanceOrganizationInvitationsResponse](../../Models/Operations/ListInstanceOrganizationInvitationsResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 404, 422, 500                                                            | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 422, 500                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Create
 
@@ -77,9 +77,9 @@ When the organization invitation is accepted, the metadata will be transferred t
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -96,21 +96,21 @@ var res = await sdk.OrganizationInvitations.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                            | *string*                                                                                                    | :heavy_check_mark:                                                                                          | The ID of the organization for which to send the invitation                                                 |
-| `RequestBody`                                                                                               | [CreateOrganizationInvitationRequestBody](../../Models/Requests/CreateOrganizationInvitationRequestBody.md) | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                              | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the organization for which to send the invitation                                                   |
+| `RequestBody`                                                                                                 | [CreateOrganizationInvitationRequestBody](../../Models/Operations/CreateOrganizationInvitationRequestBody.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
 
 ### Response
 
-**[CreateOrganizationInvitationResponse](../../Models/Requests/CreateOrganizationInvitationResponse.md)**
+**[CreateOrganizationInvitationResponse](../../Models/Operations/CreateOrganizationInvitationResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 403, 404, 422                                                            | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## List
 
@@ -124,9 +124,9 @@ Any invitations created as a result of an Organization Domain are not included i
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -134,7 +134,7 @@ var res = await sdk.OrganizationInvitations.ListAsync(
     organizationId: "<id>",
     limit: 10D,
     offset: 0D,
-    status: OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests.ListOrganizationInvitationsQueryParamStatus.Revoked
+    status: Clerk.BackendAPI.Models.Operations.ListOrganizationInvitationsQueryParamStatus.Revoked
 );
 
 // handle response
@@ -147,18 +147,18 @@ var res = await sdk.OrganizationInvitations.ListAsync(
 | `OrganizationId`                                                                                                                          | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The organization ID.                                                                                                                      |
 | `Limit`                                                                                                                                   | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     |
 | `Offset`                                                                                                                                  | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. |
-| `Status`                                                                                                                                  | [ListOrganizationInvitationsQueryParamStatus](../../Models/Requests/ListOrganizationInvitationsQueryParamStatus.md)                       | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     |
+| `Status`                                                                                                                                  | [ListOrganizationInvitationsQueryParamStatus](../../Models/Operations/ListOrganizationInvitationsQueryParamStatus.md)                     | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     |
 
 ### Response
 
-**[ListOrganizationInvitationsResponse](../../Models/Requests/ListOrganizationInvitationsResponse.md)**
+**[ListOrganizationInvitationsResponse](../../Models/Operations/ListOrganizationInvitationsResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 404                                                                      | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## CreateBulk
 
@@ -179,10 +179,10 @@ When the organization invitation is accepted, the metadata will be transferred t
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -201,21 +201,21 @@ var res = await sdk.OrganizationInvitations.CreateBulkAsync(
 
 ### Parameters
 
-| Parameter                                                 | Type                                                      | Required                                                  | Description                                               |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `OrganizationId`                                          | *string*                                                  | :heavy_check_mark:                                        | The organization ID.                                      |
-| `RequestBody`                                             | List<[RequestBody](../../Models/Requests/RequestBody.md)> | :heavy_check_mark:                                        | N/A                                                       |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `OrganizationId`                                            | *string*                                                    | :heavy_check_mark:                                          | The organization ID.                                        |
+| `RequestBody`                                               | List<[RequestBody](../../Models/Operations/RequestBody.md)> | :heavy_check_mark:                                          | N/A                                                         |
 
 ### Response
 
-**[CreateOrganizationInvitationBulkResponse](../../Models/Requests/CreateOrganizationInvitationBulkResponse.md)**
+**[CreateOrganizationInvitationBulkResponse](../../Models/Operations/CreateOrganizationInvitationBulkResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 403, 404, 422                                                            | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## ~~ListPending~~
 
@@ -231,9 +231,9 @@ Any invitations created as a result of an Organization Domain are not included i
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -256,14 +256,14 @@ var res = await sdk.OrganizationInvitations.ListPendingAsync(
 
 ### Response
 
-**[ListPendingOrganizationInvitationsResponse](../../Models/Requests/ListPendingOrganizationInvitationsResponse.md)**
+**[ListPendingOrganizationInvitationsResponse](../../Models/Operations/ListPendingOrganizationInvitationsResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 404                                                                      | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Get
 
@@ -272,9 +272,9 @@ Use this request to get an existing organization invitation by ID.
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -295,14 +295,14 @@ var res = await sdk.OrganizationInvitations.GetAsync(
 
 ### Response
 
-**[GetOrganizationInvitationResponse](../../Models/Requests/GetOrganizationInvitationResponse.md)**
+**[GetOrganizationInvitationResponse](../../Models/Operations/GetOrganizationInvitationResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 403, 404                                                                 | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Revoke
 
@@ -315,9 +315,9 @@ Only users with "admin" role can revoke invitations.
 ### Example Usage
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -332,19 +332,19 @@ var res = await sdk.OrganizationInvitations.RevokeAsync(
 
 ### Parameters
 
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                            | *string*                                                                                                    | :heavy_check_mark:                                                                                          | The organization ID.                                                                                        |
-| `InvitationId`                                                                                              | *string*                                                                                                    | :heavy_check_mark:                                                                                          | The organization invitation ID.                                                                             |
-| `RequestBody`                                                                                               | [RevokeOrganizationInvitationRequestBody](../../Models/Requests/RevokeOrganizationInvitationRequestBody.md) | :heavy_minus_sign:                                                                                          | N/A                                                                                                         |
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                              | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The organization ID.                                                                                          |
+| `InvitationId`                                                                                                | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The organization invitation ID.                                                                               |
+| `RequestBody`                                                                                                 | [RevokeOrganizationInvitationRequestBody](../../Models/Operations/RevokeOrganizationInvitationRequestBody.md) | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
 
 ### Response
 
-**[RevokeOrganizationInvitationResponse](../../Models/Requests/RevokeOrganizationInvitationResponse.md)**
+**[RevokeOrganizationInvitationResponse](../../Models/Operations/RevokeOrganizationInvitationResponse.md)**
 
 ### Errors
 
-| Error Type                                                                    | Status Code                                                                   | Content Type                                                                  |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 403, 404                                                                 | application/json                                                              |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX                                                                      | \*/\*                                                                         |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

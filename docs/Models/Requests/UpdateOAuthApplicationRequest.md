@@ -1,9 +1,0 @@
-# UpdateOAuthApplicationRequest
-
-
-## Fields
-
-| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `OauthApplicationId`                                                                            | *string*                                                                                        | :heavy_check_mark:                                                                              | The ID of the OAuth application to update                                                       |
-| `RequestBody`                                                                                   | [UpdateOAuthApplicationRequestBody](../../Models/Requests/UpdateOAuthApplicationRequestBody.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |

@@ -37,6 +37,6 @@ csharp:
   methodArguments: infer-optional-args
   outputModelSuffix: output
   packageName: Clerk.BackendAPI
-  packageTags: "Clerk SDK"
+  packageTags: Clerk SDK
   responseFormat: envelope-http
   sourceDirectory: src

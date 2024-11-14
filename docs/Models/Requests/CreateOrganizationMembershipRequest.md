@@ -1,9 +1,0 @@
-# CreateOrganizationMembershipRequest
-
-
-## Fields
-
-| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                            | *string*                                                                                                    | :heavy_check_mark:                                                                                          | The ID of the organization where the new membership will be created                                         |
-| `RequestBody`                                                                                               | [CreateOrganizationMembershipRequestBody](../../Models/Requests/CreateOrganizationMembershipRequestBody.md) | :heavy_check_mark:                                                                                          | N/A                                                                                                         |

@@ -46,7 +46,7 @@ More information about the API can be found at https://clerk.com/docs
 
 To add a reference to a local instance of the SDK in a .NET project:
 ```bash
-dotnet add reference src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.csproj
+dotnet add reference src/Clerk/BackendAPI/Clerk.BackendAPI.csproj
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -56,9 +56,9 @@ dotnet add reference src/OpenapiClerk/BackendAPI/SDKClerk/BackendAPI/SDKsas/Open
 ### Example
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi();
 
@@ -308,7 +308,7 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
 
 Handling errors in this SDK should largely match your expectations. All operations return a response object or throw an exception.
 
-By default, an API error will raise a `OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException` exception, which has the following properties:
+By default, an API error will raise a `Clerk.BackendAPI.Models.Errors.SDKError` exception, which has the following properties:
 
 | Property      | Type                  | Description           |
 |---------------|-----------------------|-----------------------|
@@ -318,19 +318,19 @@ By default, an API error will raise a `OpenapiClerk.BackendAPI.SDKClerk.BackendA
 
 When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `VerifyAsync` method throws the following exceptions:
 
-| Error Type                                                                    | Status Code   | Content Type     |
-| ----------------------------------------------------------------------------- | ------------- | ---------------- |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.ClerkErrors  | 400, 401, 404 | application/json |
-| OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException | 4XX, 5XX      | \*/\*            |
+| Error Type                                 | Status Code   | Content Type     |
+| ------------------------------------------ | ------------- | ---------------- |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404 | application/json |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX      | \*/\*            |
 
 ### Example
 
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 using System;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors;
+using Clerk.BackendAPI.Models.Errors;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -349,7 +349,7 @@ catch (Exception ex)
         // Handle exception data
         throw;
     }
-    else if (ex is OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Errors.APIException)
+    else if (ex is Clerk.BackendAPI.Models.Errors.SDKError)
     {
         // Handle default exception
         throw;
@@ -365,9 +365,9 @@ catch (Exception ex)
 
 The default server can also be overridden globally by passing a URL to the `serverUrl: string` optional parameter when initializing the SDK client instance. For example:
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 
@@ -393,9 +393,9 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `BearerAuth` parameter must be set when initializing the SDK client instance. For example:
 ```csharp
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Requests;
-using OpenapiClerk.BackendAPI.SDKClerk.BackendAPI.SDKsas.Models.Components;
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
