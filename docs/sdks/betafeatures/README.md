@@ -22,7 +22,14 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-UpdateInstanceAuthConfigRequestBody req = new UpdateInstanceAuthConfigRequestBody() {};
+UpdateInstanceAuthConfigRequestBody req = new UpdateInstanceAuthConfigRequestBody() {
+    RestrictedToAllowlist = false,
+    FromEmailAddress = "noreply",
+    ProgressiveSignUp = true,
+    SessionTokenTemplate = "defaultSessionToken",
+    EnhancedEmailDeliverability = true,
+    TestMode = true,
+};
 
 var res = await sdk.BetaFeatures.UpdateInstanceSettingsAsync(req);
 
@@ -65,7 +72,9 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-UpdateProductionInstanceDomainRequestBody req = new UpdateProductionInstanceDomainRequestBody() {};
+UpdateProductionInstanceDomainRequestBody req = new UpdateProductionInstanceDomainRequestBody() {
+    HomeUrl = "https://www.example.com",
+};
 
 var res = await sdk.BetaFeatures.UpdateDomainAsync(req);
 
@@ -106,7 +115,9 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ChangeProductionInstanceDomainRequestBody req = new ChangeProductionInstanceDomainRequestBody() {};
+ChangeProductionInstanceDomainRequestBody req = new ChangeProductionInstanceDomainRequestBody() {
+    HomeUrl = "https://www.newdomain.com",
+};
 
 var res = await sdk.BetaFeatures.ChangeProductionInstanceDomainAsync(req);
 

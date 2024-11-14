@@ -27,8 +27,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.SamlConnections.ListAsync(
-    limit: 10D,
-    offset: 0D
+    limit: 20,
+    offset: 10
 );
 
 // handle response
@@ -36,10 +36,10 @@ var res = await sdk.SamlConnections.ListAsync(
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `Limit`                                                                                                                                   | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     |
-| `Offset`                                                                                                                                  | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. |
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
 
 ### Response
 
@@ -66,9 +66,20 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateSAMLConnectionRequestBody req = new CreateSAMLConnectionRequestBody() {
-    Name = "<value>",
-    Domain = "low-packaging.info",
+    Name = "My SAML Connection",
+    Domain = "example.org",
     Provider = Clerk.BackendAPI.Models.Operations.Provider.SamlCustom,
+    IdpEntityId = "http://idp.example.org/",
+    IdpSsoUrl = "http://idp.example.org/sso",
+    IdpCertificate = "MIIDdzCCAl+gAwIBAgIJAKcyBaiiz+DT...",
+    IdpMetadataUrl = "http://idp.example.org/metadata.xml",
+    IdpMetadata = "<EntityDescriptor ...",
+    AttributeMapping = new Models.Operations.AttributeMapping() {
+        UserId = "nameid",
+        EmailAddress = "mail",
+        FirstName = "givenName",
+        LastName = "surname",
+    },
 };
 
 var res = await sdk.SamlConnections.CreateAsync(req);
@@ -106,16 +117,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.SamlConnections.GetAsync(samlConnectionId: "<id>");
+var res = await sdk.SamlConnections.GetAsync(samlConnectionId: "saml_conn_123");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                     | Type                          | Required                      | Description                   |
-| ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
-| `SamlConnectionId`            | *string*                      | :heavy_check_mark:            | The ID of the SAML Connection |
+| Parameter                     | Type                          | Required                      | Description                   | Example                       |
+| ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
+| `SamlConnectionId`            | *string*                      | :heavy_check_mark:            | The ID of the SAML Connection | saml_conn_123                 |
 
 ### Response
 
@@ -142,8 +153,26 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.SamlConnections.UpdateAsync(
-    samlConnectionId: "<id>",
-    requestBody: new UpdateSAMLConnectionRequestBody() {}
+    samlConnectionId: "saml_conn_123_update",
+    requestBody: new UpdateSAMLConnectionRequestBody() {
+        Name = "Example SAML Connection",
+        Domain = "example.com",
+        IdpEntityId = "entity_123",
+        IdpSsoUrl = "https://idp.example.com/sso",
+        IdpCertificate = "MIIDBTCCAe2gAwIBAgIQ...",
+        IdpMetadataUrl = "https://idp.example.com/metadata",
+        IdpMetadata = "<EntityDescriptor>...</EntityDescriptor>",
+        AttributeMapping = new UpdateSAMLConnectionAttributeMapping() {
+            UserId = "id123",
+            EmailAddress = "user@example.com",
+            FirstName = "Jane",
+            LastName = "Doe",
+        },
+        Active = true,
+        SyncUserAttributes = false,
+        AllowSubdomains = true,
+        AllowIdpInitiated = false,
+    }
 );
 
 // handle response
@@ -151,10 +180,10 @@ var res = await sdk.SamlConnections.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `SamlConnectionId`                                                                            | *string*                                                                                      | :heavy_check_mark:                                                                            | The ID of the SAML Connection to update                                                       |
-| `RequestBody`                                                                                 | [UpdateSAMLConnectionRequestBody](../../Models/Operations/UpdateSAMLConnectionRequestBody.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `SamlConnectionId`                                                                            | *string*                                                                                      | :heavy_check_mark:                                                                            | The ID of the SAML Connection to update                                                       | saml_conn_123_update                                                                          |
+| `RequestBody`                                                                                 | [UpdateSAMLConnectionRequestBody](../../Models/Operations/UpdateSAMLConnectionRequestBody.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
 
 ### Response
 
@@ -180,16 +209,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.SamlConnections.DeleteAsync(samlConnectionId: "<id>");
+var res = await sdk.SamlConnections.DeleteAsync(samlConnectionId: "saml_conn_123_delete");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                               | Type                                    | Required                                | Description                             |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| `SamlConnectionId`                      | *string*                                | :heavy_check_mark:                      | The ID of the SAML Connection to delete |
+| Parameter                               | Type                                    | Required                                | Description                             | Example                                 |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| `SamlConnectionId`                      | *string*                                | :heavy_check_mark:                      | The ID of the SAML Connection to delete | saml_conn_123_delete                    |
 
 ### Response
 

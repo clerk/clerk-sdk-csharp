@@ -23,12 +23,19 @@ Also, trying to create an invitation for an email address that already exists in
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateInvitationRequestBody req = new CreateInvitationRequestBody() {
-    EmailAddress = "Loyal79@yahoo.com",
+    EmailAddress = "user@example.com",
+    PublicMetadata = new Dictionary<string, object>() {
+
+    },
+    RedirectUrl = "https://example.com/welcome",
+    Notify = true,
+    IgnoreExisting = true,
 };
 
 var res = await sdk.Invitations.CreateAsync(req);
@@ -67,9 +74,9 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Invitations.ListAsync(
-    limit: 10D,
-    offset: 0D,
-    status: Clerk.BackendAPI.Models.Operations.ListInvitationsQueryParamStatus.Expired
+    limit: 20,
+    offset: 10,
+    status: Clerk.BackendAPI.Models.Operations.ListInvitationsQueryParamStatus.Pending
 );
 
 // handle response
@@ -77,11 +84,11 @@ var res = await sdk.Invitations.ListAsync(
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `Limit`                                                                                                                                   | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     |
-| `Offset`                                                                                                                                  | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. |
-| `Status`                                                                                                                                  | [ListInvitationsQueryParamStatus](../../Models/Operations/ListInvitationsQueryParamStatus.md)                                             | :heavy_minus_sign:                                                                                                                        | Filter invitations based on their status                                                                                                  |
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
+| `Status`                                                                                                                                  | [ListInvitationsQueryParamStatus](../../Models/Operations/ListInvitationsQueryParamStatus.md)                                             | :heavy_minus_sign:                                                                                                                        | Filter invitations based on their status                                                                                                  | pending                                                                                                                                   |
 
 ### Response
 
@@ -109,16 +116,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Invitations.RevokeAsync(invitationId: "<id>");
+var res = await sdk.Invitations.RevokeAsync(invitationId: "inv_123");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                              | Type                                   | Required                               | Description                            |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| `InvitationId`                         | *string*                               | :heavy_check_mark:                     | The ID of the invitation to be revoked |
+| Parameter                              | Type                                   | Required                               | Description                            | Example                                |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| `InvitationId`                         | *string*                               | :heavy_check_mark:                     | The ID of the invitation to be revoked | inv_123                                |
 
 ### Response
 

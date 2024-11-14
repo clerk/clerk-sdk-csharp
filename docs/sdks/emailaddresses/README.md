@@ -23,7 +23,12 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateEmailAddressRequestBody req = new CreateEmailAddressRequestBody() {};
+CreateEmailAddressRequestBody req = new CreateEmailAddressRequestBody() {
+    UserId = "user_12345",
+    EmailAddress = "example@clerk.com",
+    Verified = false,
+    Primary = true,
+};
 
 var res = await sdk.EmailAddresses.CreateAsync(req);
 
@@ -60,16 +65,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "<id>");
+var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_example");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                               | Type                                    | Required                                | Description                             |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| `EmailAddressId`                        | *string*                                | :heavy_check_mark:                      | The ID of the email address to retrieve |
+| Parameter                               | Type                                    | Required                                | Description                             | Example                                 |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| `EmailAddressId`                        | *string*                                | :heavy_check_mark:                      | The ID of the email address to retrieve | email_address_id_example                |
 
 ### Response
 
@@ -95,16 +100,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.EmailAddresses.DeleteAsync(emailAddressId: "<id>");
+var res = await sdk.EmailAddresses.DeleteAsync(emailAddressId: "email_address_id_example");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                             | Type                                  | Required                              | Description                           |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `EmailAddressId`                      | *string*                              | :heavy_check_mark:                    | The ID of the email address to delete |
+| Parameter                             | Type                                  | Required                              | Description                           | Example                               |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `EmailAddressId`                      | *string*                              | :heavy_check_mark:                    | The ID of the email address to delete | email_address_id_example              |
 
 ### Response
 
@@ -131,8 +136,11 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailAddresses.UpdateAsync(
-    emailAddressId: "<id>",
-    requestBody: new UpdateEmailAddressRequestBody() {}
+    emailAddressId: "email_address_id_example",
+    requestBody: new UpdateEmailAddressRequestBody() {
+        Verified = false,
+        Primary = true,
+    }
 );
 
 // handle response
@@ -140,10 +148,10 @@ var res = await sdk.EmailAddresses.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `EmailAddressId`                                                                          | *string*                                                                                  | :heavy_check_mark:                                                                        | The ID of the email address to update                                                     |
-| `RequestBody`                                                                             | [UpdateEmailAddressRequestBody](../../Models/Operations/UpdateEmailAddressRequestBody.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `EmailAddressId`                                                                          | *string*                                                                                  | :heavy_check_mark:                                                                        | The ID of the email address to update                                                     | email_address_id_example                                                                  |
+| `RequestBody`                                                                             | [UpdateEmailAddressRequestBody](../../Models/Operations/UpdateEmailAddressRequestBody.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |                                                                                           |
 
 ### Response
 

@@ -16,11 +16,7 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         /// <summary>
-        /// The ID of the user that will be added as a member in the organization.<br/>
-        /// 
-        /// <remarks>
-        /// The user needs to exist in the same instance as the organization and must not be a member of the given organization already.
-        /// </remarks>
+        /// The ID of the user that will be added as a member in the organization.
         /// </summary>
         [JsonProperty("user_id")]
         public string UserId { get; set; } = default!;

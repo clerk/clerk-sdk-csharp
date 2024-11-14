@@ -26,8 +26,16 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailAndSmsTemplates.UpsertAsync(
     templateType: Clerk.BackendAPI.Models.Operations.UpsertTemplatePathParamTemplateType.Sms,
-    slug: "<value>",
-    requestBody: new UpsertTemplateRequestBody() {}
+    slug: "verification-code",
+    requestBody: new UpsertTemplateRequestBody() {
+        Name = "Verification Code",
+        Subject = "Your Verification Code",
+        Markup = "<p>Your code: {{code}}</p>",
+        Body = "Use this code to verify your email: {{code}}",
+        DeliveredByClerk = true,
+        FromEmailName = "hello",
+        ReplyToEmailName = "support",
+    }
 );
 
 // handle response
@@ -35,11 +43,11 @@ var res = await sdk.EmailAndSmsTemplates.UpsertAsync(
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `TemplateType`                                                                                        | [UpsertTemplatePathParamTemplateType](../../Models/Operations/UpsertTemplatePathParamTemplateType.md) | :heavy_check_mark:                                                                                    | The type of template to update                                                                        |
-| `Slug`                                                                                                | *string*                                                                                              | :heavy_check_mark:                                                                                    | The slug of the template to update                                                                    |
-| `RequestBody`                                                                                         | [UpsertTemplateRequestBody](../../Models/Operations/UpsertTemplateRequestBody.md)                     | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `TemplateType`                                                                                        | [UpsertTemplatePathParamTemplateType](../../Models/Operations/UpsertTemplatePathParamTemplateType.md) | :heavy_check_mark:                                                                                    | The type of template to update                                                                        | sms                                                                                                   |
+| `Slug`                                                                                                | *string*                                                                                              | :heavy_check_mark:                                                                                    | The slug of the template to update                                                                    | verification-code                                                                                     |
+| `RequestBody`                                                                                         | [UpsertTemplateRequestBody](../../Models/Operations/UpsertTemplateRequestBody.md)                     | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |                                                                                                       |
 
 ### Response
 
@@ -69,7 +77,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailAndSmsTemplates.RevertAsync(
     templateType: Clerk.BackendAPI.Models.Operations.RevertTemplatePathParamTemplateType.Email,
-    slug: "<value>"
+    slug: "welcome-email"
 );
 
 // handle response
@@ -77,10 +85,10 @@ var res = await sdk.EmailAndSmsTemplates.RevertAsync(
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `TemplateType`                                                                                        | [RevertTemplatePathParamTemplateType](../../Models/Operations/RevertTemplatePathParamTemplateType.md) | :heavy_check_mark:                                                                                    | The type of template to revert                                                                        |
-| `Slug`                                                                                                | *string*                                                                                              | :heavy_check_mark:                                                                                    | The slug of the template to revert                                                                    |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `TemplateType`                                                                                        | [RevertTemplatePathParamTemplateType](../../Models/Operations/RevertTemplatePathParamTemplateType.md) | :heavy_check_mark:                                                                                    | The type of template to revert                                                                        | email                                                                                                 |
+| `Slug`                                                                                                | *string*                                                                                              | :heavy_check_mark:                                                                                    | The slug of the template to revert                                                                    | welcome-email                                                                                         |
 
 ### Response
 
@@ -109,9 +117,14 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailAndSmsTemplates.PreviewAsync(
-    templateType: "<value>",
-    slug: "<value>",
-    requestBody: new PreviewTemplateRequestBody() {}
+    templateType: "email",
+    slug: "welcome-email",
+    requestBody: new PreviewTemplateRequestBody() {
+        Subject = "Welcome to our service!",
+        Body = "Hi, thank you for joining our service.",
+        FromEmailName = "hello",
+        ReplyToEmailName = "support",
+    }
 );
 
 // handle response
@@ -119,11 +132,11 @@ var res = await sdk.EmailAndSmsTemplates.PreviewAsync(
 
 ### Parameters
 
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `TemplateType`                                                                      | *string*                                                                            | :heavy_check_mark:                                                                  | The type of template to preview                                                     |
-| `Slug`                                                                              | *string*                                                                            | :heavy_check_mark:                                                                  | The slug of the template to preview                                                 |
-| `RequestBody`                                                                       | [PreviewTemplateRequestBody](../../Models/Operations/PreviewTemplateRequestBody.md) | :heavy_minus_sign:                                                                  | Required parameters                                                                 |
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `TemplateType`                                                                      | *string*                                                                            | :heavy_check_mark:                                                                  | The type of template to preview                                                     | email                                                                               |
+| `Slug`                                                                              | *string*                                                                            | :heavy_check_mark:                                                                  | The slug of the template to preview                                                 | welcome-email                                                                       |
+| `RequestBody`                                                                       | [PreviewTemplateRequestBody](../../Models/Operations/PreviewTemplateRequestBody.md) | :heavy_minus_sign:                                                                  | Required parameters                                                                 |                                                                                     |
 
 ### Response
 

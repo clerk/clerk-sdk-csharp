@@ -51,7 +51,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateAllowlistIdentifierRequestBody req = new CreateAllowlistIdentifierRequestBody() {
-    Identifier = "<value>",
+    Identifier = "user@example.com",
+    Notify = true,
 };
 
 var res = await sdk.AllowlistIdentifiers.CreateAsync(req);
@@ -89,16 +90,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.AllowlistIdentifiers.DeleteAsync(identifierId: "<id>");
+var res = await sdk.AllowlistIdentifiers.DeleteAsync(identifierId: "example_identifier_id");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                              | Type                                                   | Required                                               | Description                                            |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `IdentifierId`                                         | *string*                                               | :heavy_check_mark:                                     | The ID of the identifier to delete from the allow-list |
+| Parameter                                              | Type                                                   | Required                                               | Description                                            | Example                                                |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `IdentifierId`                                         | *string*                                               | :heavy_check_mark:                                     | The ID of the identifier to delete from the allow-list | example_identifier_id                                  |
 
 ### Response
 

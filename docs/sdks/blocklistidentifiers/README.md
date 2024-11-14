@@ -21,7 +21,7 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateBlocklistIdentifierRequestBody req = new CreateBlocklistIdentifierRequestBody() {
-    Identifier = "<value>",
+    Identifier = "example@example.com",
 };
 
 var res = await sdk.BlocklistIdentifiers.CreateAsync(req);

@@ -66,10 +66,10 @@ namespace Clerk.BackendAPI.Models.Components
         public string? LastName { get; set; } = null;
 
         [JsonProperty("unsafe_metadata")]
-        public SignUpUnsafeMetadata? UnsafeMetadata { get; set; }
+        public Dictionary<string, object>? UnsafeMetadata { get; set; }
 
         [JsonProperty("public_metadata")]
-        public SignUpPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         [JsonProperty("custom_action")]
         public bool CustomAction { get; set; } = default!;

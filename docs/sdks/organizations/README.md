@@ -33,7 +33,13 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListOrganizationsRequest req = new ListOrganizationsRequest() {};
+ListOrganizationsRequest req = new ListOrganizationsRequest() {
+    Limit = 20,
+    Offset = 10,
+    IncludeMembersCount = false,
+    Query = "clerk",
+    OrderBy = "-name",
+};
 
 var res = await sdk.Organizations.ListAsync(req);
 
@@ -76,13 +82,22 @@ the next time they create a session, presuming they don't explicitly set a diffe
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateOrganizationRequestBody req = new CreateOrganizationRequestBody() {
-    Name = "<value>",
-    CreatedBy = "<value>",
+    Name = "NewOrg",
+    CreatedBy = "user_123",
+    PrivateMetadata = new Dictionary<string, object>() {
+        { "internal_code", "ABC123" },
+    },
+    PublicMetadata = new Dictionary<string, object>() {
+        { "public_event", "Annual Summit" },
+    },
+    Slug = "neworg",
+    MaxAllowedMemberships = 100,
 };
 
 var res = await sdk.Organizations.CreateAsync(req);
@@ -121,7 +136,7 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Organizations.GetAsync(
-    organizationId: "<id>",
+    organizationId: "org_123",
     includeMembersCount: false
 );
 
@@ -130,10 +145,10 @@ var res = await sdk.Organizations.GetAsync(
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                   | *string*                                                                                           | :heavy_check_mark:                                                                                 | The ID or slug of the organization                                                                 |
-| `IncludeMembersCount`                                                                              | *bool*                                                                                             | :heavy_minus_sign:                                                                                 | Flag to denote whether or not the organization's members count should be included in the response. |
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        | Example                                                                                            |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                   | *string*                                                                                           | :heavy_check_mark:                                                                                 | The ID or slug of the organization                                                                 | org_123                                                                                            |
+| `IncludeMembersCount`                                                                              | *bool*                                                                                             | :heavy_minus_sign:                                                                                 | Flag to denote whether or not the organization's members count should be included in the response. |                                                                                                    |
 
 ### Response
 
@@ -155,13 +170,25 @@ Updates an existing organization
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Organizations.UpdateAsync(
-    organizationId: "<id>",
-    requestBody: new UpdateOrganizationRequestBody() {}
+    organizationId: "org_123_update",
+    requestBody: new UpdateOrganizationRequestBody() {
+        PublicMetadata = new Dictionary<string, object>() {
+
+        },
+        PrivateMetadata = new Dictionary<string, object>() {
+
+        },
+        Name = "New Organization Name",
+        Slug = "new-org-slug",
+        MaxAllowedMemberships = 100,
+        AdminDeleteEnabled = true,
+    }
 );
 
 // handle response
@@ -169,10 +196,10 @@ var res = await sdk.Organizations.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                          | *string*                                                                                  | :heavy_check_mark:                                                                        | The ID of the organization to update                                                      |
-| `RequestBody`                                                                             | [UpdateOrganizationRequestBody](../../Models/Operations/UpdateOrganizationRequestBody.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                          | *string*                                                                                  | :heavy_check_mark:                                                                        | The ID of the organization to update                                                      | org_123_update                                                                            |
+| `RequestBody`                                                                             | [UpdateOrganizationRequestBody](../../Models/Operations/UpdateOrganizationRequestBody.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |                                                                                           |
 
 ### Response
 
@@ -200,16 +227,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Organizations.DeleteAsync(organizationId: "<id>");
+var res = await sdk.Organizations.DeleteAsync(organizationId: "org_321_delete");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                            | Type                                 | Required                             | Description                          |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `OrganizationId`                     | *string*                             | :heavy_check_mark:                   | The ID of the organization to delete |
+| Parameter                            | Type                                 | Required                             | Description                          | Example                              |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `OrganizationId`                     | *string*                             | :heavy_check_mark:                   | The ID of the organization to delete | org_321_delete                       |
 
 ### Response
 
@@ -234,13 +261,21 @@ You can remove metadata keys at any level by setting their value to `null`.
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Organizations.MergeMetadataAsync(
-    organizationId: "<id>",
-    requestBody: new MergeOrganizationMetadataRequestBody() {}
+    organizationId: "org_12345",
+    requestBody: new MergeOrganizationMetadataRequestBody() {
+        PublicMetadata = new Dictionary<string, object>() {
+            { "announcement", "We are opening a new office!" },
+        },
+        PrivateMetadata = new Dictionary<string, object>() {
+            { "internal_use_only", "Future plans discussion." },
+        },
+    }
 );
 
 // handle response
@@ -248,10 +283,10 @@ var res = await sdk.Organizations.MergeMetadataAsync(
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                        | *string*                                                                                                | :heavy_check_mark:                                                                                      | The ID of the organization for which metadata will be merged or updated                                 |
-| `RequestBody`                                                                                           | [MergeOrganizationMetadataRequestBody](../../Models/Operations/MergeOrganizationMetadataRequestBody.md) | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             | Example                                                                                                 |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                        | *string*                                                                                                | :heavy_check_mark:                                                                                      | The ID of the organization for which metadata will be merged or updated                                 | org_12345                                                                                               |
+| `RequestBody`                                                                                           | [MergeOrganizationMetadataRequestBody](../../Models/Operations/MergeOrganizationMetadataRequestBody.md) | :heavy_check_mark:                                                                                      | N/A                                                                                                     |                                                                                                         |
 
 ### Response
 
@@ -281,8 +316,9 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Organizations.UploadLogoAsync(
-    organizationId: "<id>",
+    organizationId: "org_12345",
     requestBody: new UploadOrganizationLogoRequestBody() {
+        UploaderUserId = "user_67890",
         File = new UploadOrganizationLogoFile() {
             FileName = "example.file",
             Content = System.Text.Encoding.UTF8.GetBytes("0x0DDEE4e6Ea"),
@@ -295,10 +331,10 @@ var res = await sdk.Organizations.UploadLogoAsync(
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                  | *string*                                                                                          | :heavy_check_mark:                                                                                | The ID of the organization for which to upload a logo                                             |
-| `RequestBody`                                                                                     | [UploadOrganizationLogoRequestBody](../../Models/Operations/UploadOrganizationLogoRequestBody.md) | :heavy_minus_sign:                                                                                | N/A                                                                                               |
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                  | *string*                                                                                          | :heavy_check_mark:                                                                                | The ID of the organization for which to upload a logo                                             | org_12345                                                                                         |
+| `RequestBody`                                                                                     | [UploadOrganizationLogoRequestBody](../../Models/Operations/UploadOrganizationLogoRequestBody.md) | :heavy_minus_sign:                                                                                | N/A                                                                                               |                                                                                                   |
 
 ### Response
 
@@ -324,16 +360,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Organizations.DeleteLogoAsync(organizationId: "<id>");
+var res = await sdk.Organizations.DeleteLogoAsync(organizationId: "org_12345");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                      | Type                                                           | Required                                                       | Description                                                    |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| `OrganizationId`                                               | *string*                                                       | :heavy_check_mark:                                             | The ID of the organization for which the logo will be deleted. |
+| Parameter                                                      | Type                                                           | Required                                                       | Description                                                    | Example                                                        |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `OrganizationId`                                               | *string*                                                       | :heavy_check_mark:                                             | The ID of the organization for which the logo will be deleted. | org_12345                                                      |
 
 ### Response
 

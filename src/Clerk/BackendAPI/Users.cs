@@ -190,7 +190,7 @@ namespace Clerk.BackendAPI
         /// Retrieve a paginated list of the user&apos;s organization memberships
         /// </remarks>
         /// </summary>
-        Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, double? limit = null, double? offset = null);
+        Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, long? limit = null, long? offset = null);
 
         /// <summary>
         /// Retrieve all invitations for a user
@@ -199,7 +199,7 @@ namespace Clerk.BackendAPI
         /// Retrieve a paginated list of the user&apos;s organization invitations
         /// </remarks>
         /// </summary>
-        Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, double? limit = null, double? offset = null, QueryParamStatus? status = null);
+        Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, long? limit = null, long? offset = null, QueryParamStatus? status = null);
 
         /// <summary>
         /// Verify the password of a user
@@ -288,10 +288,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.1.2";
+        private const string _sdkVersion = "0.2.1";
         private const string _sdkGenVersion = "2.457.9";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.1.2 2.457.9 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.2.1 2.457.9 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -1581,7 +1581,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, double? limit = null, double? offset = null)
+        public async Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, long? limit = null, long? offset = null)
         {
             var request = new UsersGetOrganizationMembershipsRequest()
             {
@@ -1673,7 +1673,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, double? limit = null, double? offset = null, QueryParamStatus? status = null)
+        public async Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, long? limit = null, long? offset = null, QueryParamStatus? status = null)
         {
             var request = new UsersGetOrganizationInvitationsRequest()
             {

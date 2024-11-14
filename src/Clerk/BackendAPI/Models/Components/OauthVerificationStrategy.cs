@@ -19,10 +19,18 @@ namespace Clerk.BackendAPI.Models.Components
         OauthGoogle,
         [JsonProperty("oauth_mock")]
         OauthMock,
-        [JsonProperty("oauth_custom_mock")]
-        OauthCustomMock,
+        [JsonProperty("from_oauth_google")]
+        FromOauthGoogle,
+        [JsonProperty("from_oauth_discord")]
+        FromOauthDiscord,
+        [JsonProperty("from_oauth_microsoft")]
+        FromOauthMicrosoft,
+        [JsonProperty("oauth_apple")]
+        OauthApple,
         [JsonProperty("oauth_microsoft")]
         OauthMicrosoft,
+        [JsonProperty("oauth_github")]
+        OauthGithub,
         [JsonProperty("email_link")]
         EmailLink,
     }

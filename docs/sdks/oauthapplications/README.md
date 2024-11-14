@@ -29,8 +29,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OauthApplications.ListAsync(
-    limit: 10D,
-    offset: 0D
+    limit: 20,
+    offset: 10
 );
 
 // handle response
@@ -38,10 +38,10 @@ var res = await sdk.OauthApplications.ListAsync(
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `Limit`                                                                                                                                   | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     |
-| `Offset`                                                                                                                                  | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. |
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
 
 ### Response
 
@@ -70,9 +70,10 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateOAuthApplicationRequestBody req = new CreateOAuthApplicationRequestBody() {
-    Name = "<value>",
-    CallbackUrl = "https://probable-heating.com/",
+    Name = "Example App",
+    CallbackUrl = "https://example.com/oauth/callback",
     Scopes = "profile email public_metadata",
+    Public = true,
 };
 
 var res = await sdk.OauthApplications.CreateAsync(req);
@@ -110,16 +111,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.OauthApplications.GetAsync(oauthApplicationId: "<id>");
+var res = await sdk.OauthApplications.GetAsync(oauthApplicationId: "oauth_app_12345");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                       | Type                            | Required                        | Description                     |
-| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
-| `OauthApplicationId`            | *string*                        | :heavy_check_mark:              | The ID of the OAuth application |
+| Parameter                       | Type                            | Required                        | Description                     | Example                         |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `OauthApplicationId`            | *string*                        | :heavy_check_mark:              | The ID of the OAuth application | oauth_app_12345                 |
 
 ### Response
 
@@ -146,8 +147,10 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OauthApplications.UpdateAsync(
-    oauthApplicationId: "<id>",
+    oauthApplicationId: "oauth_app_67890",
     requestBody: new UpdateOAuthApplicationRequestBody() {
+        Name = "Updated OAuth App Name",
+        CallbackUrl = "https://example.com/oauth/callback",
         Scopes = "profile email public_metadata private_metadata",
     }
 );
@@ -157,10 +160,10 @@ var res = await sdk.OauthApplications.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `OauthApplicationId`                                                                              | *string*                                                                                          | :heavy_check_mark:                                                                                | The ID of the OAuth application to update                                                         |
-| `RequestBody`                                                                                     | [UpdateOAuthApplicationRequestBody](../../Models/Operations/UpdateOAuthApplicationRequestBody.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `OauthApplicationId`                                                                              | *string*                                                                                          | :heavy_check_mark:                                                                                | The ID of the OAuth application to update                                                         | oauth_app_67890                                                                                   |
+| `RequestBody`                                                                                     | [UpdateOAuthApplicationRequestBody](../../Models/Operations/UpdateOAuthApplicationRequestBody.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
 
 ### Response
 
@@ -187,16 +190,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.OauthApplications.DeleteAsync(oauthApplicationId: "<id>");
+var res = await sdk.OauthApplications.DeleteAsync(oauthApplicationId: "oauth_app_09876");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                 | Type                                      | Required                                  | Description                               |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| `OauthApplicationId`                      | *string*                                  | :heavy_check_mark:                        | The ID of the OAuth application to delete |
+| Parameter                                 | Type                                      | Required                                  | Description                               | Example                                   |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| `OauthApplicationId`                      | *string*                                  | :heavy_check_mark:                        | The ID of the OAuth application to delete | oauth_app_09876                           |
 
 ### Response
 
@@ -223,16 +226,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.OauthApplications.RotateSecretAsync(oauthApplicationId: "<id>");
+var res = await sdk.OauthApplications.RotateSecretAsync(oauthApplicationId: "oauth_application_12345");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `OauthApplicationId`                                                  | *string*                                                              | :heavy_check_mark:                                                    | The ID of the OAuth application for which to rotate the client secret |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           | Example                                                               |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `OauthApplicationId`                                                  | *string*                                                              | :heavy_check_mark:                                                    | The ID of the OAuth application for which to rotate the client secret | oauth_application_12345                                               |
 
 ### Response
 

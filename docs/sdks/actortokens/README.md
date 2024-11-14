@@ -23,8 +23,10 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateActorTokenRequestBody req = new CreateActorTokenRequestBody() {
-    UserId = "<id>",
+    UserId = "user_1a2b3c",
     Actor = new Models.Operations.Actor() {},
+    ExpiresInSeconds = 3600,
+    SessionMaxDurationInSeconds = 1800,
 };
 
 var res = await sdk.ActorTokens.CreateAsync(req);
@@ -62,16 +64,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.ActorTokens.RevokeAsync(actorTokenId: "<id>");
+var res = await sdk.ActorTokens.RevokeAsync(actorTokenId: "act_tok_abcdefghijk");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                | Type                                     | Required                                 | Description                              |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| `ActorTokenId`                           | *string*                                 | :heavy_check_mark:                       | The ID of the actor token to be revoked. |
+| Parameter                                | Type                                     | Required                                 | Description                              | Example                                  |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| `ActorTokenId`                           | *string*                                 | :heavy_check_mark:                       | The ID of the actor token to be revoked. | act_tok_abcdefghijk                      |
 
 ### Response
 

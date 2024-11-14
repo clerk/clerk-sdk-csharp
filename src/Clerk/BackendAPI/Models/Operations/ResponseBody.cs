@@ -9,7 +9,6 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
-    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -45,7 +44,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Provider { get; set; }
 
         [JsonProperty("public_metadata")]
-        public GetOAuthAccessTokenPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         [JsonProperty("label")]
         public string? Label { get; set; } = null;

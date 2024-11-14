@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     /// <summary>
     /// An organization invitation with public organization data populated
@@ -48,10 +49,10 @@ namespace Clerk.BackendAPI.Models.Components
         public string? Status { get; set; }
 
         [JsonProperty("public_metadata")]
-        public OrganizationInvitationWithPublicOrganizationDataPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         [JsonProperty("private_metadata")]
-        public OrganizationInvitationWithPublicOrganizationDataPrivateMetadata? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; }
 
         [JsonProperty("public_organization_data")]
         public PublicOrganizationData? PublicOrganizationData { get; set; }

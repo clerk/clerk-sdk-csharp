@@ -9,9 +9,9 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
-    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     public class CreateOrganizationRequestBody
     {
@@ -36,13 +36,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Metadata saved on the organization, accessible only from the Backend API
         /// </summary>
         [JsonProperty("private_metadata")]
-        public CreateOrganizationPrivateMetadata? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; }
 
         /// <summary>
         /// Metadata saved on the organization, read-only from the Frontend API and fully accessible (read/write) from the Backend API
         /// </summary>
         [JsonProperty("public_metadata")]
-        public CreateOrganizationPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
         /// A slug for the new organization.<br/>

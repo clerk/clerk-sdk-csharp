@@ -19,8 +19,20 @@ namespace Clerk.BackendAPI.Models.Components
         PhoneCode,
         [JsonProperty("email_code")]
         EmailCode,
+        [JsonProperty("email_link")]
+        EmailLink,
         [JsonProperty("reset_password_email_code")]
         ResetPasswordEmailCode,
+        [JsonProperty("from_oauth_discord")]
+        FromOauthDiscord,
+        [JsonProperty("from_oauth_google")]
+        FromOauthGoogle,
+        [JsonProperty("from_oauth_apple")]
+        FromOauthApple,
+        [JsonProperty("from_oauth_microsoft")]
+        FromOauthMicrosoft,
+        [JsonProperty("from_oauth_github")]
+        FromOauthGithub,
     }
 
     public static class StrategyExtension

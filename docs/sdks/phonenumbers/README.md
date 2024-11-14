@@ -23,7 +23,13 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreatePhoneNumberRequestBody req = new CreatePhoneNumberRequestBody() {};
+CreatePhoneNumberRequestBody req = new CreatePhoneNumberRequestBody() {
+    UserId = "usr_12345",
+    PhoneNumber = "+11234567890",
+    Verified = true,
+    Primary = false,
+    ReservedForSecondFactor = false,
+};
 
 var res = await sdk.PhoneNumbers.CreateAsync(req);
 
@@ -60,16 +66,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.PhoneNumbers.GetAsync(phoneNumberId: "<id>");
+var res = await sdk.PhoneNumbers.GetAsync(phoneNumberId: "phone_12345");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                              | Type                                   | Required                               | Description                            |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| `PhoneNumberId`                        | *string*                               | :heavy_check_mark:                     | The ID of the phone number to retrieve |
+| Parameter                              | Type                                   | Required                               | Description                            | Example                                |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| `PhoneNumberId`                        | *string*                               | :heavy_check_mark:                     | The ID of the phone number to retrieve | phone_12345                            |
 
 ### Response
 
@@ -95,16 +101,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.PhoneNumbers.DeleteAsync(phoneNumberId: "<id>");
+var res = await sdk.PhoneNumbers.DeleteAsync(phoneNumberId: "phone_12345");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                            | Type                                 | Required                             | Description                          |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `PhoneNumberId`                      | *string*                             | :heavy_check_mark:                   | The ID of the phone number to delete |
+| Parameter                            | Type                                 | Required                             | Description                          | Example                              |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `PhoneNumberId`                      | *string*                             | :heavy_check_mark:                   | The ID of the phone number to delete | phone_12345                          |
 
 ### Response
 
@@ -131,8 +137,12 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.PhoneNumbers.UpdateAsync(
-    phoneNumberId: "<id>",
-    requestBody: new UpdatePhoneNumberRequestBody() {}
+    phoneNumberId: "phone_12345",
+    requestBody: new UpdatePhoneNumberRequestBody() {
+        Verified = false,
+        Primary = true,
+        ReservedForSecondFactor = true,
+    }
 );
 
 // handle response
@@ -140,10 +150,10 @@ var res = await sdk.PhoneNumbers.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `PhoneNumberId`                                                                         | *string*                                                                                | :heavy_check_mark:                                                                      | The ID of the phone number to update                                                    |
-| `RequestBody`                                                                           | [UpdatePhoneNumberRequestBody](../../Models/Operations/UpdatePhoneNumberRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `PhoneNumberId`                                                                         | *string*                                                                                | :heavy_check_mark:                                                                      | The ID of the phone number to update                                                    | phone_12345                                                                             |
+| `RequestBody`                                                                           | [UpdatePhoneNumberRequestBody](../../Models/Operations/UpdatePhoneNumberRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |                                                                                         |
 
 ### Response
 

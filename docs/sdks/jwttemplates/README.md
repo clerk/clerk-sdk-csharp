@@ -51,7 +51,15 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateJWTTemplateRequestBody req = new CreateJWTTemplateRequestBody() {};
+CreateJWTTemplateRequestBody req = new CreateJWTTemplateRequestBody() {
+    Name = "Example Template",
+    Claims = new Models.Operations.Claims() {},
+    Lifetime = 3600D,
+    AllowedClockSkew = 5D,
+    CustomSigningKey = false,
+    SigningAlgorithm = "RS256",
+    SigningKey = "PRIVATE_KEY_PLACEHOLDER",
+};
 
 var res = await sdk.JwtTemplates.CreateAsync(req);
 
@@ -88,16 +96,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.JwtTemplates.GetAsync(templateId: "<id>");
+var res = await sdk.JwtTemplates.GetAsync(templateId: "template_123");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter          | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `TemplateId`       | *string*           | :heavy_check_mark: | JWT Template ID    |
+| Parameter          | Type               | Required           | Description        | Example            |
+| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+| `TemplateId`       | *string*           | :heavy_check_mark: | JWT Template ID    | template_123       |
 
 ### Response
 

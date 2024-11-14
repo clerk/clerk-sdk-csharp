@@ -58,8 +58,9 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 AddDomainRequestBody req = new AddDomainRequestBody() {
-    Name = "<value>",
-    IsSatellite = false,
+    Name = "example.com",
+    IsSatellite = true,
+    ProxyUrl = "https://proxy.example.com",
 };
 
 var res = await sdk.Domains.AddAsync(req);
@@ -98,16 +99,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Domains.DeleteAsync(domainId: "<id>");
+var res = await sdk.Domains.DeleteAsync(domainId: "domain_12345");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `DomainId`                                                             | *string*                                                               | :heavy_check_mark:                                                     | The ID of the domain that will be deleted. Must be a satellite domain. |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `DomainId`                                                             | *string*                                                               | :heavy_check_mark:                                                     | The ID of the domain that will be deleted. Must be a satellite domain. | domain_12345                                                           |
 
 ### Response
 
@@ -141,8 +142,11 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Domains.UpdateAsync(
-    domainId: "<id>",
-    requestBody: new UpdateDomainRequestBody() {}
+    domainId: "domain_12345",
+    requestBody: new UpdateDomainRequestBody() {
+        Name = "example.com",
+        ProxyUrl = "http://proxy.example.com",
+    }
 );
 
 // handle response
@@ -150,10 +154,10 @@ var res = await sdk.Domains.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `DomainId`                                                                    | *string*                                                                      | :heavy_check_mark:                                                            | The ID of the domain that will be updated.                                    |
-| `RequestBody`                                                                 | [UpdateDomainRequestBody](../../Models/Operations/UpdateDomainRequestBody.md) | :heavy_check_mark:                                                            | N/A                                                                           |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `DomainId`                                                                    | *string*                                                                      | :heavy_check_mark:                                                            | The ID of the domain that will be updated.                                    | domain_12345                                                                  |
+| `RequestBody`                                                                 | [UpdateDomainRequestBody](../../Models/Operations/UpdateDomainRequestBody.md) | :heavy_check_mark:                                                            | N/A                                                                           |                                                                               |
 
 ### Response
 

@@ -5,9 +5,9 @@ Deleted Object
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `Object`           | *string*           | :heavy_check_mark: | N/A                |
-| `Id`               | *string*           | :heavy_minus_sign: | N/A                |
-| `Slug`             | *string*           | :heavy_minus_sign: | N/A                |
-| `Deleted`          | *bool*             | :heavy_check_mark: | N/A                |
+| Field                     | Type                      | Required                  | Description               | Example                   |
+| ------------------------- | ------------------------- | ------------------------- | ------------------------- | ------------------------- |
+| `Object`                  | *string*                  | :heavy_check_mark:        | N/A                       | deleted_object            |
+| `Id`                      | *string*                  | :heavy_minus_sign:        | N/A                       | deleted_object_id_example |
+| `Slug`                    | *string*                  | :heavy_minus_sign:        | N/A                       | deleted-object-slug       |
+| `Deleted`                 | *bool*                    | :heavy_check_mark:        | N/A                       | true                      |

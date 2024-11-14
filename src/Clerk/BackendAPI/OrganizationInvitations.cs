@@ -75,7 +75,7 @@ namespace Clerk.BackendAPI
         /// Any invitations created as a result of an Organization Domain are not included in the results.
         /// </remarks>
         /// </summary>
-        Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, double? limit = null, double? offset = null, ListOrganizationInvitationsQueryParamStatus? status = null);
+        Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, long? limit = null, long? offset = null, ListOrganizationInvitationsQueryParamStatus? status = null);
 
         /// <summary>
         /// Bulk create and send organization invitations
@@ -110,7 +110,7 @@ namespace Clerk.BackendAPI
         /// Any invitations created as a result of an Organization Domain are not included in the results.
         /// </remarks>
         /// </summary>
-        Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, double? limit = null, double? offset = null);
+        Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, long? limit = null, long? offset = null);
 
         /// <summary>
         /// Retrieve an organization invitation by ID
@@ -139,10 +139,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.1.2";
+        private const string _sdkVersion = "0.2.1";
         private const string _sdkGenVersion = "2.457.9";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.1.2 2.457.9 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.2.1 2.457.9 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -338,7 +338,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, double? limit = null, double? offset = null, ListOrganizationInvitationsQueryParamStatus? status = null)
+        public async Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, long? limit = null, long? offset = null, ListOrganizationInvitationsQueryParamStatus? status = null)
         {
             var request = new ListOrganizationInvitationsRequest()
             {
@@ -529,7 +529,7 @@ namespace Clerk.BackendAPI
         }
 
         [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
-        public async Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, double? limit = null, double? offset = null)
+        public async Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, long? limit = null, long? offset = null)
         {
             var request = new ListPendingOrganizationInvitationsRequest()
             {

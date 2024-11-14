@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     public class OrganizationMembershipOrganization
     {
@@ -38,10 +39,10 @@ namespace Clerk.BackendAPI.Models.Components
         public bool? AdminDeleteEnabled { get; set; }
 
         [JsonProperty("public_metadata")]
-        public OrganizationMembershipOrganizationPublicMetadata PublicMetadata { get; set; } = default!;
+        public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
         [JsonProperty("private_metadata")]
-        public OrganizationMembershipOrganizationPrivateMetadata PrivateMetadata { get; set; } = default!;
+        public Dictionary<string, object> PrivateMetadata { get; set; } = default!;
 
         [JsonProperty("created_by")]
         public string? CreatedBy { get; set; }

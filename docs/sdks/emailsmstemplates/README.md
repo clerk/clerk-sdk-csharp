@@ -25,16 +25,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.EmailSmsTemplates.ListAsync(templateType: Clerk.BackendAPI.Models.Operations.TemplateType.Sms);
+var res = await sdk.EmailSmsTemplates.ListAsync(templateType: Clerk.BackendAPI.Models.Operations.TemplateType.Email);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                               | Type                                                    | Required                                                | Description                                             |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `TemplateType`                                          | [TemplateType](../../Models/Operations/TemplateType.md) | :heavy_check_mark:                                      | The type of templates to list (email or SMS)            |
+| Parameter                                               | Type                                                    | Required                                                | Description                                             | Example                                                 |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| `TemplateType`                                          | [TemplateType](../../Models/Operations/TemplateType.md) | :heavy_check_mark:                                      | The type of templates to list (email or SMS)            | email                                                   |
 
 ### Response
 
@@ -63,8 +63,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailSmsTemplates.GetAsync(
-    templateType: Clerk.BackendAPI.Models.Operations.PathParamTemplateType.Sms,
-    slug: "<value>"
+    templateType: Clerk.BackendAPI.Models.Operations.PathParamTemplateType.Email,
+    slug: "welcome-email"
 );
 
 // handle response
@@ -72,10 +72,10 @@ var res = await sdk.EmailSmsTemplates.GetAsync(
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `TemplateType`                                                            | [PathParamTemplateType](../../Models/Operations/PathParamTemplateType.md) | :heavy_check_mark:                                                        | The type of templates to retrieve (email or SMS)                          |
-| `Slug`                                                                    | *string*                                                                  | :heavy_check_mark:                                                        | The slug (i.e. machine-friendly name) of the template to retrieve         |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `TemplateType`                                                            | [PathParamTemplateType](../../Models/Operations/PathParamTemplateType.md) | :heavy_check_mark:                                                        | The type of templates to retrieve (email or SMS)                          | email                                                                     |
+| `Slug`                                                                    | *string*                                                                  | :heavy_check_mark:                                                        | The slug (i.e. machine-friendly name) of the template to retrieve         | welcome-email                                                             |
 
 ### Response
 
@@ -107,8 +107,10 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailSmsTemplates.ToggleDeliveryAsync(
     templateType: Clerk.BackendAPI.Models.Operations.ToggleTemplateDeliveryPathParamTemplateType.Email,
-    slug: "<value>",
-    requestBody: new ToggleTemplateDeliveryRequestBody() {}
+    slug: "welcome-email",
+    requestBody: new ToggleTemplateDeliveryRequestBody() {
+        DeliveredByClerk = true,
+    }
 );
 
 // handle response
@@ -116,11 +118,11 @@ var res = await sdk.EmailSmsTemplates.ToggleDeliveryAsync(
 
 ### Parameters
 
-| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `TemplateType`                                                                                                        | [ToggleTemplateDeliveryPathParamTemplateType](../../Models/Operations/ToggleTemplateDeliveryPathParamTemplateType.md) | :heavy_check_mark:                                                                                                    | The type of template to toggle delivery for                                                                           |
-| `Slug`                                                                                                                | *string*                                                                                                              | :heavy_check_mark:                                                                                                    | The slug of the template for which to toggle delivery                                                                 |
-| `RequestBody`                                                                                                         | [ToggleTemplateDeliveryRequestBody](../../Models/Operations/ToggleTemplateDeliveryRequestBody.md)                     | :heavy_minus_sign:                                                                                                    | N/A                                                                                                                   |
+| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           | Example                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `TemplateType`                                                                                                        | [ToggleTemplateDeliveryPathParamTemplateType](../../Models/Operations/ToggleTemplateDeliveryPathParamTemplateType.md) | :heavy_check_mark:                                                                                                    | The type of template to toggle delivery for                                                                           | email                                                                                                                 |
+| `Slug`                                                                                                                | *string*                                                                                                              | :heavy_check_mark:                                                                                                    | The slug of the template for which to toggle delivery                                                                 | welcome-email                                                                                                         |
+| `RequestBody`                                                                                                         | [ToggleTemplateDeliveryRequestBody](../../Models/Operations/ToggleTemplateDeliveryRequestBody.md)                     | :heavy_minus_sign:                                                                                                    | N/A                                                                                                                   |                                                                                                                       |
 
 ### Response
 

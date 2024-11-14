@@ -50,7 +50,9 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateRedirectURLRequestBody req = new CreateRedirectURLRequestBody() {};
+CreateRedirectURLRequestBody req = new CreateRedirectURLRequestBody() {
+    Url = "https://my-app.com/oauth-callback",
+};
 
 var res = await sdk.RedirectUrls.CreateAsync(req);
 
@@ -87,16 +89,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.RedirectUrls.GetAsync(id: "<id>");
+var res = await sdk.RedirectUrls.GetAsync(id: "redir_01FG4K9G5NWSQ4ZPT4TQE4Z7G3");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                  | Type                       | Required                   | Description                |
-| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| `Id`                       | *string*                   | :heavy_check_mark:         | The ID of the redirect URL |
+| Parameter                        | Type                             | Required                         | Description                      | Example                          |
+| -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
+| `Id`                             | *string*                         | :heavy_check_mark:               | The ID of the redirect URL       | redir_01FG4K9G5NWSQ4ZPT4TQE4Z7G3 |
 
 ### Response
 
@@ -122,16 +124,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.RedirectUrls.DeleteAsync(id: "<id>");
+var res = await sdk.RedirectUrls.DeleteAsync(id: "redir_01FG4K9G5NWSQ4ZPT4TQE4Z7G3");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                  | Type                       | Required                   | Description                |
-| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| `Id`                       | *string*                   | :heavy_check_mark:         | The ID of the redirect URL |
+| Parameter                        | Type                             | Required                         | Description                      | Example                          |
+| -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
+| `Id`                             | *string*                         | :heavy_check_mark:               | The ID of the redirect URL       | redir_01FG4K9G5NWSQ4ZPT4TQE4Z7G3 |
 
 ### Response
 

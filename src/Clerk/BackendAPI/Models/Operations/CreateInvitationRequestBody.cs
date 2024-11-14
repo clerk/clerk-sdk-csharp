@@ -9,9 +9,9 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
-    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     /// <summary>
     /// Required parameters
@@ -34,7 +34,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("public_metadata")]
-        public CreateInvitationPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
         /// Optional URL which specifies where to redirect the user once they click the invitation link.<br/>

@@ -34,7 +34,7 @@ namespace Clerk.BackendAPI
         /// The SAML Connections are ordered by descending creation date and the most recent will be returned first.
         /// </remarks>
         /// </summary>
-        Task<ListSAMLConnectionsResponse> ListAsync(double? limit = null, double? offset = null);
+        Task<ListSAMLConnectionsResponse> ListAsync(long? limit = null, long? offset = null);
 
         /// <summary>
         /// Create a SAML Connection
@@ -77,10 +77,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.1.2";
+        private const string _sdkVersion = "0.2.1";
         private const string _sdkGenVersion = "2.457.9";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.1.2 2.457.9 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.2.1 2.457.9 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -93,7 +93,7 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
-        public async Task<ListSAMLConnectionsResponse> ListAsync(double? limit = null, double? offset = null)
+        public async Task<ListSAMLConnectionsResponse> ListAsync(long? limit = null, long? offset = null)
         {
             var request = new ListSAMLConnectionsRequest()
             {

@@ -60,12 +60,9 @@ using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
-var sdk = new ClerkBackendApi();
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "<value>",
-    publishableKey: "<value>"
-);
+var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_example");
 
 // handle response
 ```
@@ -336,7 +333,9 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 try
 {
-    VerifyClientRequestBody req = new VerifyClientRequestBody() {};
+    VerifyClientRequestBody req = new VerifyClientRequestBody() {
+        Token = "jwt_token_example",
+    };
 
     var res = await sdk.Clients.VerifyAsync(req);
 
@@ -372,8 +371,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 
 var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "<value>",
-    publishableKey: "<value>"
+    frontendApi: "frontend-api_1a2b3c4d",
+    publishableKey: "pub_1a2b3c4d"
 );
 
 // handle response
@@ -400,8 +399,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "<value>",
-    publishableKey: "<value>"
+    frontendApi: "frontend-api_1a2b3c4d",
+    publishableKey: "pub_1a2b3c4d"
 );
 
 // handle response

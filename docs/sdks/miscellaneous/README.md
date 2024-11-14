@@ -24,8 +24,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi();
 
 var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "<value>",
-    publishableKey: "<value>"
+    frontendApi: "frontend-api_1a2b3c4d",
+    publishableKey: "pub_1a2b3c4d"
 );
 
 // handle response
@@ -33,10 +33,10 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
 
 ### Parameters
 
-| Parameter                             | Type                                  | Required                              | Description                           |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `FrontendApi`                         | *string*                              | :heavy_minus_sign:                    | The Frontend API key of your instance |
-| `PublishableKey`                      | *string*                              | :heavy_minus_sign:                    | The publishable key of your instance  |
+| Parameter                             | Type                                  | Required                              | Description                           | Example                               |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `FrontendApi`                         | *string*                              | :heavy_minus_sign:                    | The Frontend API key of your instance | frontend-api_1a2b3c4d                 |
+| `PublishableKey`                      | *string*                              | :heavy_minus_sign:                    | The publishable key of your instance  | pub_1a2b3c4d                          |
 
 ### Response
 

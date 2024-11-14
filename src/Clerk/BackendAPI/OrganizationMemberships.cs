@@ -29,12 +29,7 @@ namespace Clerk.BackendAPI
         /// Create a new organization membership
         /// 
         /// <remarks>
-        /// Adds a user as a member to the given organization.<br/>
-        /// Only users in the same instance as the organization can be added as members.<br/>
-        /// <br/>
-        /// This organization will be the user&apos;s [active organization] (https://clerk.com/docs/organizations/overview#active-organization)<br/>
-        /// the next time they create a session, presuming they don&apos;t explicitly set a<br/>
-        /// different organization as active before then.
+        /// Adds a user as a member to the given organization.
         /// </remarks>
         /// </summary>
         Task<CreateOrganizationMembershipResponse> CreateAsync(string organizationId, CreateOrganizationMembershipRequestBody requestBody);
@@ -46,7 +41,7 @@ namespace Clerk.BackendAPI
         /// Retrieves all user memberships for the given organization
         /// </remarks>
         /// </summary>
-        Task<ListOrganizationMembershipsResponse> ListAsync(string organizationId, double? limit = null, double? offset = null, string? orderBy = null);
+        Task<ListOrganizationMembershipsResponse> ListAsync(string organizationId, long? limit = null, long? offset = null, string? orderBy = null);
 
         /// <summary>
         /// Update an organization membership
@@ -84,17 +79,17 @@ namespace Clerk.BackendAPI
         /// Retrieves all organization user memberships for the given instance.
         /// </remarks>
         /// </summary>
-        Task<InstanceGetOrganizationMembershipsResponse> ListForInstanceAsync(double? limit = null, double? offset = null, string? orderBy = null);
+        Task<InstanceGetOrganizationMembershipsResponse> ListForInstanceAsync(long? limit = null, long? offset = null, string? orderBy = null);
     }
 
     public class OrganizationMemberships: IOrganizationMemberships
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.1.2";
+        private const string _sdkVersion = "0.2.1";
         private const string _sdkGenVersion = "2.457.9";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.1.2 2.457.9 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.2.1 2.457.9 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -204,7 +199,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListOrganizationMembershipsResponse> ListAsync(string organizationId, double? limit = null, double? offset = null, string? orderBy = null)
+        public async Task<ListOrganizationMembershipsResponse> ListAsync(string organizationId, long? limit = null, long? offset = null, string? orderBy = null)
         {
             var request = new ListOrganizationMembershipsRequest()
             {
@@ -584,7 +579,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<InstanceGetOrganizationMembershipsResponse> ListForInstanceAsync(double? limit = null, double? offset = null, string? orderBy = null)
+        public async Task<InstanceGetOrganizationMembershipsResponse> ListForInstanceAsync(long? limit = null, long? offset = null, string? orderBy = null)
         {
             var request = new InstanceGetOrganizationMembershipsRequest()
             {

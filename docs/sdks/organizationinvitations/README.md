@@ -31,7 +31,10 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListInstanceOrganizationInvitationsRequest req = new ListInstanceOrganizationInvitationsRequest() {};
+ListInstanceOrganizationInvitationsRequest req = new ListInstanceOrganizationInvitationsRequest() {
+    Limit = 20,
+    Offset = 10,
+};
 
 var res = await sdk.OrganizationInvitations.ListForInstanceAsync(req);
 
@@ -79,15 +82,24 @@ When the organization invitation is accepted, the metadata will be transferred t
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.CreateAsync(
-    organizationId: "<id>",
+    organizationId: "org_12345",
     requestBody: new CreateOrganizationInvitationRequestBody() {
-        EmailAddress = "Loyal79@yahoo.com",
-        Role = "<value>",
+        EmailAddress = "user@example.com",
+        InviterUserId = "user_67890",
+        Role = "admin",
+        PublicMetadata = new Dictionary<string, object>() {
+            { "key", "value" },
+        },
+        PrivateMetadata = new Dictionary<string, object>() {
+            { "private_key", "secret_value" },
+        },
+        RedirectUrl = "https://example.com/welcome",
     }
 );
 
@@ -96,10 +108,10 @@ var res = await sdk.OrganizationInvitations.CreateAsync(
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                              | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the organization for which to send the invitation                                                   |
-| `RequestBody`                                                                                                 | [CreateOrganizationInvitationRequestBody](../../Models/Operations/CreateOrganizationInvitationRequestBody.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   | Example                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                              | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the organization for which to send the invitation                                                   | org_12345                                                                                                     |
+| `RequestBody`                                                                                                 | [CreateOrganizationInvitationRequestBody](../../Models/Operations/CreateOrganizationInvitationRequestBody.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |                                                                                                               |
 
 ### Response
 
@@ -131,10 +143,10 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.ListAsync(
-    organizationId: "<id>",
-    limit: 10D,
-    offset: 0D,
-    status: Clerk.BackendAPI.Models.Operations.ListOrganizationInvitationsQueryParamStatus.Revoked
+    organizationId: "org_12345",
+    limit: 20,
+    offset: 10,
+    status: Clerk.BackendAPI.Models.Operations.ListOrganizationInvitationsQueryParamStatus.Pending
 );
 
 // handle response
@@ -142,12 +154,12 @@ var res = await sdk.OrganizationInvitations.ListAsync(
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                                                          | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The organization ID.                                                                                                                      |
-| `Limit`                                                                                                                                   | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     |
-| `Offset`                                                                                                                                  | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. |
-| `Status`                                                                                                                                  | [ListOrganizationInvitationsQueryParamStatus](../../Models/Operations/ListOrganizationInvitationsQueryParamStatus.md)                     | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     |
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                                                          | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The organization ID.                                                                                                                      | org_12345                                                                                                                                 |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
+| `Status`                                                                                                                                  | [ListOrganizationInvitationsQueryParamStatus](../../Models/Operations/ListOrganizationInvitationsQueryParamStatus.md)                     | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     | pending                                                                                                                                   |
 
 ### Response
 
@@ -187,11 +199,19 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.CreateBulkAsync(
-    organizationId: "<id>",
+    organizationId: "org_12345",
     requestBody: new List<RequestBody>() {
         new RequestBody() {
-            EmailAddress = "Suzanne.Mills71@yahoo.com",
-            Role = "<value>",
+            EmailAddress = "newmember@example.com",
+            InviterUserId = "user_67890",
+            Role = "admin",
+            PublicMetadata = new Dictionary<string, object>() {
+
+            },
+            PrivateMetadata = new Dictionary<string, object>() {
+
+            },
+            RedirectUrl = "https://example.com/welcome",
         },
     }
 );
@@ -201,10 +221,10 @@ var res = await sdk.OrganizationInvitations.CreateBulkAsync(
 
 ### Parameters
 
-| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `OrganizationId`                                            | *string*                                                    | :heavy_check_mark:                                          | The organization ID.                                        |
-| `RequestBody`                                               | List<[RequestBody](../../Models/Operations/RequestBody.md)> | :heavy_check_mark:                                          | N/A                                                         |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `OrganizationId`                                            | *string*                                                    | :heavy_check_mark:                                          | The organization ID.                                        | org_12345                                                   |
+| `RequestBody`                                               | List<[RequestBody](../../Models/Operations/RequestBody.md)> | :heavy_check_mark:                                          | N/A                                                         |                                                             |
 
 ### Response
 
@@ -238,9 +258,9 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.ListPendingAsync(
-    organizationId: "<id>",
-    limit: 10D,
-    offset: 0D
+    organizationId: "org_12345",
+    limit: 20,
+    offset: 10
 );
 
 // handle response
@@ -248,11 +268,11 @@ var res = await sdk.OrganizationInvitations.ListPendingAsync(
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                                                          | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The organization ID.                                                                                                                      |
-| `Limit`                                                                                                                                   | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     |
-| `Offset`                                                                                                                                  | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. |
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                                                          | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The organization ID.                                                                                                                      | org_12345                                                                                                                                 |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
 
 ### Response
 
@@ -279,8 +299,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.GetAsync(
-    organizationId: "<id>",
-    invitationId: "<id>"
+    organizationId: "org_123456789",
+    invitationId: "inv_987654321"
 );
 
 // handle response
@@ -288,10 +308,10 @@ var res = await sdk.OrganizationInvitations.GetAsync(
 
 ### Parameters
 
-| Parameter                       | Type                            | Required                        | Description                     |
-| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
-| `OrganizationId`                | *string*                        | :heavy_check_mark:              | The organization ID.            |
-| `InvitationId`                  | *string*                        | :heavy_check_mark:              | The organization invitation ID. |
+| Parameter                       | Type                            | Required                        | Description                     | Example                         |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `OrganizationId`                | *string*                        | :heavy_check_mark:              | The organization ID.            | org_123456789                   |
+| `InvitationId`                  | *string*                        | :heavy_check_mark:              | The organization invitation ID. | inv_987654321                   |
 
 ### Response
 
@@ -322,9 +342,11 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.RevokeAsync(
-    organizationId: "<id>",
-    invitationId: "<id>",
-    requestBody: new RevokeOrganizationInvitationRequestBody() {}
+    organizationId: "org_123456",
+    invitationId: "inv_123456",
+    requestBody: new RevokeOrganizationInvitationRequestBody() {
+        RequestingUserId = "usr_12345",
+    }
 );
 
 // handle response
@@ -332,11 +354,11 @@ var res = await sdk.OrganizationInvitations.RevokeAsync(
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                              | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The organization ID.                                                                                          |
-| `InvitationId`                                                                                                | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The organization invitation ID.                                                                               |
-| `RequestBody`                                                                                                 | [RevokeOrganizationInvitationRequestBody](../../Models/Operations/RevokeOrganizationInvitationRequestBody.md) | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   | Example                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                              | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The organization ID.                                                                                          | org_123456                                                                                                    |
+| `InvitationId`                                                                                                | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The organization invitation ID.                                                                               | inv_123456                                                                                                    |
+| `RequestBody`                                                                                                 | [RevokeOrganizationInvitationRequestBody](../../Models/Operations/RevokeOrganizationInvitationRequestBody.md) | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |                                                                                                               |
 
 ### Response
 

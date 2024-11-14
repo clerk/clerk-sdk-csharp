@@ -46,13 +46,13 @@ namespace Clerk.BackendAPI.Models.Components
         /// Metadata saved on the organization membership, accessible from both Frontend and Backend APIs
         /// </summary>
         [JsonProperty("public_metadata")]
-        public OrganizationMembershipPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
         /// Metadata saved on the organization membership, accessible only from the Backend API
         /// </summary>
         [JsonProperty("private_metadata")]
-        public OrganizationMembershipPrivateMetadata? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; }
 
         [JsonProperty("organization")]
         public OrganizationMembershipOrganization? Organization { get; set; }

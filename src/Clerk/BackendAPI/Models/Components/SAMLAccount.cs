@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     public class SAMLAccount
     {
@@ -48,7 +49,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? ProviderUserId { get; set; } = null;
 
         [JsonProperty("public_metadata")]
-        public SAMLAccountPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         [JsonProperty("verification", NullValueHandling = NullValueHandling.Include)]
         public SAMLAccountVerification? Verification { get; set; }

@@ -23,7 +23,10 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateSignInTokenRequestBody req = new CreateSignInTokenRequestBody() {};
+CreateSignInTokenRequestBody req = new CreateSignInTokenRequestBody() {
+    UserId = "user_12345",
+    ExpiresInSeconds = 2592000,
+};
 
 var res = await sdk.SignInTokens.CreateAsync(req);
 
@@ -60,16 +63,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.SignInTokens.RevokeAsync(signInTokenId: "<id>");
+var res = await sdk.SignInTokens.RevokeAsync(signInTokenId: "tok_test_1234567890");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                 | Type                                      | Required                                  | Description                               |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| `SignInTokenId`                           | *string*                                  | :heavy_check_mark:                        | The ID of the sign-in token to be revoked |
+| Parameter                                 | Type                                      | Required                                  | Description                               | Example                                   |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| `SignInTokenId`                           | *string*                                  | :heavy_check_mark:                        | The ID of the sign-in token to be revoked | tok_test_1234567890                       |
 
 ### Response
 

@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     /// <summary>
     /// Success
@@ -29,7 +30,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string EmailAddress { get; set; } = default!;
 
         [JsonProperty("public_metadata")]
-        public InvitationRevokedPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         [JsonProperty("revoked")]
         public bool? Revoked { get; set; }

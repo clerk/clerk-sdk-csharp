@@ -134,7 +134,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
-        public double? Limit { get; set; } = 10D;
+        public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
@@ -145,7 +145,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
-        public double? Offset { get; set; } = 0D;
+        public long? Offset { get; set; } = 0;
 
         /// <summary>
         /// Allows to return users in a particular order.<br/>

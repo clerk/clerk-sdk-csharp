@@ -9,9 +9,9 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
-    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     public class RequestBody
     {
@@ -42,13 +42,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Metadata saved on the organization invitation, read-only from the Frontend API and fully accessible (read/write) from the Backend API.
         /// </summary>
         [JsonProperty("public_metadata")]
-        public CreateOrganizationInvitationBulkPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
         /// Metadata saved on the organization invitation, fully accessible (read/write) from the Backend API but not visible from the Frontend API.
         /// </summary>
         [JsonProperty("private_metadata")]
-        public CreateOrganizationInvitationBulkPrivateMetadata? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; }
 
         /// <summary>
         /// Optional URL that the invitee will be redirected to once they accept the invitation by clicking the join link in the invitation email.

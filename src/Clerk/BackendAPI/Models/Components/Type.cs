@@ -25,6 +25,12 @@ namespace Clerk.BackendAPI.Models.Components
         OauthMicrosoft,
         [JsonProperty("email_link")]
         EmailLink,
+        [JsonProperty("oauth_apple")]
+        OauthApple,
+        [JsonProperty("oauth_discord")]
+        OauthDiscord,
+        [JsonProperty("oauth_github")]
+        OauthGithub,
     }
 
     public static class TypeExtension

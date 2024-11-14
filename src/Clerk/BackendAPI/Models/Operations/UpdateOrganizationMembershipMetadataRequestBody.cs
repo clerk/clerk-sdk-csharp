@@ -9,9 +9,9 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
-    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     public class UpdateOrganizationMembershipMetadataRequestBody
     {
@@ -24,7 +24,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("public_metadata")]
-        public UpdateOrganizationMembershipMetadataPublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
         /// Metadata saved on the organization membership that is only visible to your backend.<br/>
@@ -34,6 +34,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("private_metadata")]
-        public UpdateOrganizationMembershipMetadataPrivateMetadata? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; }
     }
 }

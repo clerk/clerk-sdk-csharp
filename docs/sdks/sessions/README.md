@@ -32,7 +32,13 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-GetSessionListRequest req = new GetSessionListRequest() {};
+GetSessionListRequest req = new GetSessionListRequest() {
+    ClientId = "client_123",
+    UserId = "user_456",
+    Status = Clerk.BackendAPI.Models.Operations.Status.Active,
+    Limit = 20,
+    Offset = 10,
+};
 
 var res = await sdk.Sessions.ListAsync(req);
 
@@ -69,16 +75,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Sessions.GetAsync(sessionId: "<id>");
+var res = await sdk.Sessions.GetAsync(sessionId: "sess_1234567890abcdef");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter             | Type                  | Required              | Description           |
-| --------------------- | --------------------- | --------------------- | --------------------- |
-| `SessionId`           | *string*              | :heavy_check_mark:    | The ID of the session |
+| Parameter             | Type                  | Required              | Description           | Example               |
+| --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
+| `SessionId`           | *string*              | :heavy_check_mark:    | The ID of the session | sess_1234567890abcdef |
 
 ### Response
 
@@ -105,16 +111,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Sessions.RevokeAsync(sessionId: "<id>");
+var res = await sdk.Sessions.RevokeAsync(sessionId: "sess_1234567890abcdef");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter             | Type                  | Required              | Description           |
-| --------------------- | --------------------- | --------------------- | --------------------- |
-| `SessionId`           | *string*              | :heavy_check_mark:    | The ID of the session |
+| Parameter             | Type                  | Required              | Description           | Example               |
+| --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
+| `SessionId`           | *string*              | :heavy_check_mark:    | The ID of the session | sess_1234567890abcdef |
 
 ### Response
 
@@ -146,8 +152,10 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Sessions.VerifyAsync(
-    sessionId: "<id>",
-    requestBody: new VerifySessionRequestBody() {}
+    sessionId: "sess_w8q4g9s60j28fghv00f3",
+    requestBody: new VerifySessionRequestBody() {
+        Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uX2lkIjoic2Vzc193OHF4ZzZzNm9qMjhmZ2h2MDBmMyIsImlhdCI6MTU4MjY0OTg2Mn0.J4KP2L6bEZ6YccHFW4E2vKbOLw_mmO0gF_GNRw-wtLM",
+    }
 );
 
 // handle response
@@ -155,10 +163,10 @@ var res = await sdk.Sessions.VerifyAsync(
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `SessionId`                                                                     | *string*                                                                        | :heavy_check_mark:                                                              | The ID of the session                                                           |
-| `RequestBody`                                                                   | [VerifySessionRequestBody](../../Models/Operations/VerifySessionRequestBody.md) | :heavy_minus_sign:                                                              | Parameters.                                                                     |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `SessionId`                                                                     | *string*                                                                        | :heavy_check_mark:                                                              | The ID of the session                                                           | sess_w8q4g9s60j28fghv00f3                                                       |
+| `RequestBody`                                                                   | [VerifySessionRequestBody](../../Models/Operations/VerifySessionRequestBody.md) | :heavy_minus_sign:                                                              | Parameters.                                                                     |                                                                                 |
 
 ### Response
 
@@ -185,8 +193,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Sessions.CreateTokenAsync(
-    sessionId: "<id>",
-    templateName: "<value>"
+    sessionId: "ses_123abcd4567",
+    templateName: "custom_hasura"
 );
 
 // handle response
@@ -194,10 +202,10 @@ var res = await sdk.Sessions.CreateTokenAsync(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `SessionId`                                                                   | *string*                                                                      | :heavy_check_mark:                                                            | The ID of the session                                                         |
-| `TemplateName`                                                                | *string*                                                                      | :heavy_check_mark:                                                            | The name of the JWT Template defined in your instance (e.g. `custom_hasura`). |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `SessionId`                                                                   | *string*                                                                      | :heavy_check_mark:                                                            | The ID of the session                                                         | ses_123abcd4567                                                               |
+| `TemplateName`                                                                | *string*                                                                      | :heavy_check_mark:                                                            | The name of the JWT Template defined in your instance (e.g. `custom_hasura`). | custom_hasura                                                                 |
 
 ### Response
 

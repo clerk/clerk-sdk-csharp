@@ -66,13 +66,13 @@ namespace Clerk.BackendAPI.Models.Components
         public bool? HasImage { get; set; }
 
         [JsonProperty("public_metadata")]
-        public Models.Components.PublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         [JsonProperty("private_metadata")]
-        public Models.Components.PrivateMetadata? PrivateMetadata { get; set; } = null;
+        public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
 
         [JsonProperty("unsafe_metadata")]
-        public Models.Components.UnsafeMetadata? UnsafeMetadata { get; set; }
+        public Dictionary<string, object>? UnsafeMetadata { get; set; }
 
         [JsonProperty("email_addresses")]
         public List<EmailAddress>? EmailAddresses { get; set; }

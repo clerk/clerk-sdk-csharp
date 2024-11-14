@@ -49,7 +49,31 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 GetUserListRequest req = new GetUserListRequest() {
+    EmailAddress = new List<string>() {
+        "test@example.com",
+    },
+    PhoneNumber = new List<string>() {
+        "+12345678901",
+    },
+    ExternalId = new List<string>() {
+        "external-id-123",
+    },
+    Username = new List<string>() {
+        "user123",
+    },
+    Web3Wallet = new List<string>() {
+        "0x123456789abcdef0x123456789abcdef",
+    },
+    UserId = new List<string>() {
+        "user-id-123",
+    },
+    OrganizationId = new List<string>() {
+        "org-id-123",
+    },
+    Query = "John",
     LastActiveAtSince = 1700690400000,
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Users.ListAsync(req);
@@ -94,7 +118,42 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateUserRequestBody req = new CreateUserRequestBody() {};
+CreateUserRequestBody req = new CreateUserRequestBody() {
+    ExternalId = "ext-id-001",
+    FirstName = "John",
+    LastName = "Doe",
+    EmailAddress = new List<string>() {
+        "john.doe@example.com",
+    },
+    PhoneNumber = new List<string>() {
+        "+12345678901",
+    },
+    Web3Wallet = new List<string>() {
+        "0x123456789abcdef0x123456789abcdef",
+    },
+    Username = "johndoe123",
+    Password = "Secure*Pass4",
+    PasswordDigest = "$argon2i$v=19$m=4096,t=3,p=1$4t6CL3P7YiHBtwESXawI8Hm20zJj4cs7/4/G3c187e0$m7RQFczcKr5bIR0IIxbpO2P0tyrLjf3eUW3M3QSwnLc",
+    SkipPasswordChecks = false,
+    SkipPasswordRequirement = false,
+    TotpSecret = "base32totpsecretkey",
+    BackupCodes = new List<string>() {
+        "123456",
+        "654321",
+    },
+    PublicMetadata = new Dictionary<string, object>() {
+        { "role", "user" },
+    },
+    PrivateMetadata = new Dictionary<string, object>() {
+        { "internal_id", "789" },
+    },
+    UnsafeMetadata = new Dictionary<string, object>() {
+        { "preferences", new Dictionary<string, object>() {
+            { "theme", "dark" },
+        } },
+    },
+    CreatedAt = "2023-03-15T07:15:20.902Z",
+};
 
 var res = await sdk.Users.CreateAsync(req);
 
@@ -132,7 +191,27 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-GetUsersCountRequest req = new GetUsersCountRequest() {};
+GetUsersCountRequest req = new GetUsersCountRequest() {
+    EmailAddress = new List<string>() {
+        "user@example.com",
+    },
+    PhoneNumber = new List<string>() {
+        "+1234567890",
+    },
+    ExternalId = new List<string>() {
+        "external-id-123",
+    },
+    Username = new List<string>() {
+        "username123",
+    },
+    Web3Wallet = new List<string>() {
+        "0x123456789abcdef",
+    },
+    UserId = new List<string>() {
+        "user-id-123",
+    },
+    Query = "John Doe",
+};
 
 var res = await sdk.Users.CountAsync(req);
 
@@ -169,16 +248,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.GetAsync(userId: "<id>");
+var res = await sdk.Users.GetAsync(userId: "usr_1");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                      | Type                           | Required                       | Description                    |
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| `UserId`                       | *string*                       | :heavy_check_mark:             | The ID of the user to retrieve |
+| Parameter                      | Type                           | Required                       | Description                    | Example                        |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `UserId`                       | *string*                       | :heavy_check_mark:             | The ID of the user to retrieve | usr_1                          |
 
 ### Response
 
@@ -217,8 +296,39 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.UpdateAsync(
-    userId: "<id>",
-    requestBody: new UpdateUserRequestBody() {}
+    userId: "usr_1",
+    requestBody: new UpdateUserRequestBody() {
+        ExternalId = "ext_123",
+        FirstName = "Jane",
+        LastName = "Doe",
+        PrimaryEmailAddressId = "eml_12345",
+        NotifyPrimaryEmailAddressChanged = true,
+        PrimaryPhoneNumberId = "phn_67890",
+        PrimaryWeb3WalletId = "wlt_123",
+        Username = "janedoe",
+        ProfileImageId = "img_789",
+        Password = "secretPass123!",
+        PasswordDigest = "$argon2i$v=19$m=4096,t=3,p=1$4t6CL3P7YiHBtwESXawI8Hm20zJj4cs7/4/G3c187e0$m7RQFczcKr5bIR0IIxbpO2P0tyrLjf3eUW3M3QSwnLc",
+        SkipPasswordChecks = false,
+        SignOutOfOtherSessions = true,
+        TotpSecret = "ABCD1234EFGH5678",
+        BackupCodes = new List<string>() {
+            "123456",
+            "654321",
+        },
+        PublicMetadata = new Dictionary<string, object>() {
+            { "theme", "dark" },
+        },
+        PrivateMetadata = new Dictionary<string, object>() {
+            { "vip", true },
+        },
+        UnsafeMetadata = new Dictionary<string, object>() {
+            { "age", 30 },
+        },
+        DeleteSelfEnabled = true,
+        CreateOrganizationEnabled = false,
+        CreatedAt = "2021-04-05T14:30:00.000Z",
+    }
 );
 
 // handle response
@@ -226,10 +336,10 @@ var res = await sdk.Users.UpdateAsync(
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `UserId`                                                                  | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the user to update                                              |
-| `RequestBody`                                                             | [UpdateUserRequestBody](../../Models/Operations/UpdateUserRequestBody.md) | :heavy_check_mark:                                                        | N/A                                                                       |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `UserId`                                                                  | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the user to update                                              | usr_1                                                                     |
+| `RequestBody`                                                             | [UpdateUserRequestBody](../../Models/Operations/UpdateUserRequestBody.md) | :heavy_check_mark:                                                        | N/A                                                                       |                                                                           |
 
 ### Response
 
@@ -255,16 +365,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.DeleteAsync(userId: "<id>");
+var res = await sdk.Users.DeleteAsync(userId: "usr_1");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                    | Type                         | Required                     | Description                  |
-| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| `UserId`                     | *string*                     | :heavy_check_mark:           | The ID of the user to delete |
+| Parameter                    | Type                         | Required                     | Description                  | Example                      |
+| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
+| `UserId`                     | *string*                     | :heavy_check_mark:           | The ID of the user to delete | usr_1                        |
 
 ### Response
 
@@ -290,16 +400,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.BanAsync(userId: "<id>");
+var res = await sdk.Users.BanAsync(userId: "user_12345");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                 | Type                      | Required                  | Description               |
-| ------------------------- | ------------------------- | ------------------------- | ------------------------- |
-| `UserId`                  | *string*                  | :heavy_check_mark:        | The ID of the user to ban |
+| Parameter                 | Type                      | Required                  | Description               | Example                   |
+| ------------------------- | ------------------------- | ------------------------- | ------------------------- | ------------------------- |
+| `UserId`                  | *string*                  | :heavy_check_mark:        | The ID of the user to ban | user_12345                |
 
 ### Response
 
@@ -325,16 +435,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.UnbanAsync(userId: "<id>");
+var res = await sdk.Users.UnbanAsync(userId: "user_12345");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                   | Type                        | Required                    | Description                 |
-| --------------------------- | --------------------------- | --------------------------- | --------------------------- |
-| `UserId`                    | *string*                    | :heavy_check_mark:          | The ID of the user to unban |
+| Parameter                   | Type                        | Required                    | Description                 | Example                     |
+| --------------------------- | --------------------------- | --------------------------- | --------------------------- | --------------------------- |
+| `UserId`                    | *string*                    | :heavy_check_mark:          | The ID of the user to unban | user_12345                  |
 
 ### Response
 
@@ -361,16 +471,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.LockAsync(userId: "<id>");
+var res = await sdk.Users.LockAsync(userId: "user_123456789");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                  | Type                       | Required                   | Description                |
-| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| `UserId`                   | *string*                   | :heavy_check_mark:         | The ID of the user to lock |
+| Parameter                  | Type                       | Required                   | Description                | Example                    |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `UserId`                   | *string*                   | :heavy_check_mark:         | The ID of the user to lock | user_123456789             |
 
 ### Response
 
@@ -396,16 +506,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.UnlockAsync(userId: "<id>");
+var res = await sdk.Users.UnlockAsync(userId: "user_12345");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                    | Type                         | Required                     | Description                  |
-| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| `UserId`                     | *string*                     | :heavy_check_mark:           | The ID of the user to unlock |
+| Parameter                    | Type                         | Required                     | Description                  | Example                      |
+| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
+| `UserId`                     | *string*                     | :heavy_check_mark:           | The ID of the user to unlock | user_12345                   |
 
 ### Response
 
@@ -432,7 +542,7 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.SetProfileImageAsync(
-    userId: "<id>",
+    userId: "usr_test123",
     requestBody: new SetUserProfileImageRequestBody() {}
 );
 
@@ -441,10 +551,10 @@ var res = await sdk.Users.SetProfileImageAsync(
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `UserId`                                                                                    | *string*                                                                                    | :heavy_check_mark:                                                                          | The ID of the user to update the profile image for                                          |
-| `RequestBody`                                                                               | [SetUserProfileImageRequestBody](../../Models/Operations/SetUserProfileImageRequestBody.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `UserId`                                                                                    | *string*                                                                                    | :heavy_check_mark:                                                                          | The ID of the user to update the profile image for                                          | usr_test123                                                                                 |
+| `RequestBody`                                                                               | [SetUserProfileImageRequestBody](../../Models/Operations/SetUserProfileImageRequestBody.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |                                                                                             |
 
 ### Response
 
@@ -470,16 +580,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.DeleteProfileImageAsync(userId: "<id>");
+var res = await sdk.Users.DeleteProfileImageAsync(userId: "usr_test123");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                          | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `UserId`                                           | *string*                                           | :heavy_check_mark:                                 | The ID of the user to delete the profile image for |
+| Parameter                                          | Type                                               | Required                                           | Description                                        | Example                                            |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `UserId`                                           | *string*                                           | :heavy_check_mark:                                 | The ID of the user to delete the profile image for | usr_test123                                        |
 
 ### Response
 
@@ -514,7 +624,7 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.UpdateMetadataAsync(
-    userId: "<id>",
+    userId: "user_123456789",
     requestBody: new UpdateUserMetadataRequestBody() {}
 );
 
@@ -523,10 +633,10 @@ var res = await sdk.Users.UpdateMetadataAsync(
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `UserId`                                                                                  | *string*                                                                                  | :heavy_check_mark:                                                                        | The ID of the user whose metadata will be updated and merged                              |
-| `RequestBody`                                                                             | [UpdateUserMetadataRequestBody](../../Models/Operations/UpdateUserMetadataRequestBody.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `UserId`                                                                                  | *string*                                                                                  | :heavy_check_mark:                                                                        | The ID of the user whose metadata will be updated and merged                              | user_123456789                                                                            |
+| `RequestBody`                                                                             | [UpdateUserMetadataRequestBody](../../Models/Operations/UpdateUserMetadataRequestBody.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |                                                                                           |
 
 ### Response
 
@@ -554,8 +664,8 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.GetOAuthAccessTokenAsync(
-    userId: "<id>",
-    provider: "<value>"
+    userId: "user_123",
+    provider: "oauth_google"
 );
 
 // handle response
@@ -563,10 +673,10 @@ var res = await sdk.Users.GetOAuthAccessTokenAsync(
 
 ### Parameters
 
-| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
-| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `UserId`                                                        | *string*                                                        | :heavy_check_mark:                                              | The ID of the user for which to retrieve the OAuth access token |
-| `Provider`                                                      | *string*                                                        | :heavy_check_mark:                                              | The ID of the OAuth provider (e.g. `oauth_google`)              |
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     | Example                                                         |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `UserId`                                                        | *string*                                                        | :heavy_check_mark:                                              | The ID of the user for which to retrieve the OAuth access token | user_123                                                        |
+| `Provider`                                                      | *string*                                                        | :heavy_check_mark:                                              | The ID of the OAuth provider (e.g. `oauth_google`)              | oauth_google                                                    |
 
 ### Response
 
@@ -593,9 +703,9 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.GetOrganizationMembershipsAsync(
-    userId: "<id>",
-    limit: 10D,
-    offset: 0D
+    userId: "usr_1234567890",
+    limit: 20,
+    offset: 10
 );
 
 // handle response
@@ -603,11 +713,11 @@ var res = await sdk.Users.GetOrganizationMembershipsAsync(
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `UserId`                                                                                                                                  | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The ID of the user whose organization memberships we want to retrieve                                                                     |
-| `Limit`                                                                                                                                   | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     |
-| `Offset`                                                                                                                                  | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. |
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `UserId`                                                                                                                                  | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The ID of the user whose organization memberships we want to retrieve                                                                     | usr_1234567890                                                                                                                            |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
 
 ### Response
 
@@ -635,8 +745,8 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.GetOrganizationInvitationsAsync(
     userId: "<id>",
-    limit: 10D,
-    offset: 0D,
+    limit: 20,
+    offset: 10,
     status: Clerk.BackendAPI.Models.Operations.QueryParamStatus.Pending
 );
 
@@ -645,12 +755,12 @@ var res = await sdk.Users.GetOrganizationInvitationsAsync(
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `UserId`                                                                                                                                  | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The ID of the user whose organization invitations we want to retrieve                                                                     |
-| `Limit`                                                                                                                                   | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     |
-| `Offset`                                                                                                                                  | *double*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. |
-| `Status`                                                                                                                                  | [QueryParamStatus](../../Models/Operations/QueryParamStatus.md)                                                                           | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     |
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `UserId`                                                                                                                                  | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The ID of the user whose organization invitations we want to retrieve                                                                     |                                                                                                                                           |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
+| `Status`                                                                                                                                  | [QueryParamStatus](../../Models/Operations/QueryParamStatus.md)                                                                           | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     |                                                                                                                                           |
 
 ### Response
 
@@ -678,9 +788,9 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.VerifyPasswordAsync(
-    userId: "<id>",
+    userId: "user_123",
     requestBody: new VerifyPasswordRequestBody() {
-        Password = "fSBhIihdxMPlTHN",
+        Password = "securepassword123",
     }
 );
 
@@ -689,10 +799,10 @@ var res = await sdk.Users.VerifyPasswordAsync(
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `UserId`                                                                          | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the user for whom to verify the password                                |
-| `RequestBody`                                                                     | [VerifyPasswordRequestBody](../../Models/Operations/VerifyPasswordRequestBody.md) | :heavy_minus_sign:                                                                | N/A                                                                               |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `UserId`                                                                          | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the user for whom to verify the password                                | user_123                                                                          |
+| `RequestBody`                                                                     | [VerifyPasswordRequestBody](../../Models/Operations/VerifyPasswordRequestBody.md) | :heavy_minus_sign:                                                                | N/A                                                                               |                                                                                   |
 
 ### Response
 
@@ -722,9 +832,9 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.VerifyTotpAsync(
-    userId: "<id>",
+    userId: "usr_1a2b3c",
     requestBody: new VerifyTOTPRequestBody() {
-        Code = "<value>",
+        Code = "123456",
     }
 );
 
@@ -733,10 +843,10 @@ var res = await sdk.Users.VerifyTotpAsync(
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `UserId`                                                                  | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the user for whom to verify the TOTP                            |
-| `RequestBody`                                                             | [VerifyTOTPRequestBody](../../Models/Operations/VerifyTOTPRequestBody.md) | :heavy_minus_sign:                                                        | N/A                                                                       |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `UserId`                                                                  | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the user for whom to verify the TOTP                            | usr_1a2b3c                                                                |
+| `RequestBody`                                                             | [VerifyTOTPRequestBody](../../Models/Operations/VerifyTOTPRequestBody.md) | :heavy_minus_sign:                                                        | N/A                                                                       |                                                                           |
 
 ### Response
 
@@ -762,16 +872,16 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.DisableMfaAsync(userId: "<id>");
+var res = await sdk.Users.DisableMfaAsync(userId: "user_123456");
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                               | Type                                                    | Required                                                | Description                                             |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `UserId`                                                | *string*                                                | :heavy_check_mark:                                      | The ID of the user whose MFA methods are to be disabled |
+| Parameter                                               | Type                                                    | Required                                                | Description                                             | Example                                                 |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| `UserId`                                                | *string*                                                | :heavy_check_mark:                                      | The ID of the user whose MFA methods are to be disabled | user_123456                                             |
 
 ### Response
 

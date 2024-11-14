@@ -9,7 +9,6 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
-    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -168,13 +167,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Metadata saved on the user, that is visible to both your Frontend and Backend APIs
         /// </summary>
         [JsonProperty("public_metadata")]
-        public Models.Operations.PublicMetadata? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
         /// Metadata saved on the user, that is only visible to your Backend API
         /// </summary>
         [JsonProperty("private_metadata")]
-        public Models.Operations.PrivateMetadata? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; }
 
         /// <summary>
         /// Metadata saved on the user, that can be updated from both the Frontend and Backend APIs.<br/>
@@ -184,7 +183,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("unsafe_metadata")]
-        public Models.Operations.UnsafeMetadata? UnsafeMetadata { get; set; }
+        public Dictionary<string, object>? UnsafeMetadata { get; set; }
 
         /// <summary>
         /// If enabled, user can delete themselves via FAPI.<br/>

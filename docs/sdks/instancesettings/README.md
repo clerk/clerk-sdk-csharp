@@ -23,7 +23,20 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-UpdateInstanceRequestBody req = new UpdateInstanceRequestBody() {};
+UpdateInstanceRequestBody req = new UpdateInstanceRequestBody() {
+    TestMode = true,
+    Hibp = false,
+    EnhancedEmailDeliverability = true,
+    SupportEmail = "support@example.com",
+    ClerkJsVersion = "2.3.1",
+    DevelopmentOrigin = "http://localhost:3000",
+    AllowedOrigins = new List<string>() {
+        "http://localhost:3000",
+        "chrome-extension://extension_uiid",
+        "capacitor://localhost",
+    },
+    UrlBasedSessionSyncing = true,
+};
 
 var res = await sdk.InstanceSettings.UpdateAsync(req);
 
@@ -60,7 +73,13 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-UpdateInstanceRestrictionsRequestBody req = new UpdateInstanceRestrictionsRequestBody() {};
+UpdateInstanceRestrictionsRequestBody req = new UpdateInstanceRestrictionsRequestBody() {
+    Allowlist = false,
+    Blocklist = true,
+    BlockEmailSubaddresses = true,
+    BlockDisposableEmailDomains = true,
+    IgnoreDotsForGmailAddresses = false,
+};
 
 var res = await sdk.InstanceSettings.UpdateRestrictionsAsync(req);
 
@@ -98,7 +117,18 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-UpdateInstanceOrganizationSettingsRequestBody req = new UpdateInstanceOrganizationSettingsRequestBody() {};
+UpdateInstanceOrganizationSettingsRequestBody req = new UpdateInstanceOrganizationSettingsRequestBody() {
+    Enabled = true,
+    MaxAllowedMemberships = 10,
+    AdminDeleteEnabled = false,
+    DomainsEnabled = true,
+    DomainsEnrollmentModes = new List<string>() {
+        "automatic_invitation",
+        "automatic_suggestion",
+    },
+    CreatorRoleId = "creator_role",
+    DomainsDefaultRoleId = "member_role",
+};
 
 var res = await sdk.InstanceSettings.UpdateOrganizationAsync(req);
 

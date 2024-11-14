@@ -27,7 +27,10 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-VerifyDomainProxyRequestBody req = new VerifyDomainProxyRequestBody() {};
+VerifyDomainProxyRequestBody req = new VerifyDomainProxyRequestBody() {
+    DomainId = "domain_32hfu3e",
+    ProxyUrl = "https://example.com/__clerk",
+};
 
 var res = await sdk.ProxyChecks.VerifyAsync(req);
 
