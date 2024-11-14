@@ -1,8 +1,8 @@
-speakeasyVersion: 1.437.0
+speakeasyVersion: 1.439.0
 sources:
     clerk-backend-api-OAS:
         sourceNamespace: clerk-backend-api-oas
-        sourceRevisionDigest: sha256:1c11f6d5324c9c6f847e3a6a708258b63f26ff3fe41cd28094908f396250ebf9
+        sourceRevisionDigest: sha256:a0b026424a0e3940bdb003c9a638db4275dd0e295787775bec9ebe79e764f8eb
         sourceBlobDigest: sha256:739df5568c5efb702060c5bc3e4e953e7da4bed7199f8d0e4d3ec4522178ebc4
         tags:
             - latest
@@ -10,10 +10,10 @@ targets:
     clerk-backend-api:
         source: clerk-backend-api-OAS
         sourceNamespace: clerk-backend-api-oas
-        sourceRevisionDigest: sha256:1c11f6d5324c9c6f847e3a6a708258b63f26ff3fe41cd28094908f396250ebf9
+        sourceRevisionDigest: sha256:a0b026424a0e3940bdb003c9a638db4275dd0e295787775bec9ebe79e764f8eb
         sourceBlobDigest: sha256:739df5568c5efb702060c5bc3e4e953e7da4bed7199f8d0e4d3ec4522178ebc4
         codeSamplesNamespace: clerk-backend-api-oas-code-samples
-        codeSamplesRevisionDigest: sha256:e7abd8084013d1c3a506e9cd65d35c6697d62ce23d11d035406d0605d69de6de
+        codeSamplesRevisionDigest: sha256:b09d682e0d14f5867486400c587e0887c9a8cb25024a0f37546cea3c56dff315
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

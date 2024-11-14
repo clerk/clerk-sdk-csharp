@@ -13,7 +13,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 csharp:
-  version: 0.1.1
+  version: 0.1.2
   additionalDependencies: []
   author: Clerk
   clientServerStatusCodesAsErrors: true

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>Clerk.BackendAPI</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Clerk</Authors>
     <Copyright>Copyright (c) Clerk 2024</Copyright>
@@ -35,6 +35,11 @@ Please see https://clerk.com/docs for more information.</Description>
     <None Include="..\..\..\README.md" Pack="true" PackagePath="\"/>
     <None Include="..\..\..\docs\**\*" Pack="true" PackagePath="\docs"  CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
+
+  <PropertyGroup>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="newtonsoft.json" Version="13.0.3" />

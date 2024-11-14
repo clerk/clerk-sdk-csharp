@@ -3,16 +3,16 @@ id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
   docChecksum: eb6e7384f735200207a87b6ff47523a1
   docVersion: v1
-  speakeasyVersion: 1.437.0
-  generationVersion: 2.456.0
-  releaseVersion: 0.1.1
-  configChecksum: 8cba701e0cdaac2524166f30d4720048
+  speakeasyVersion: 1.439.0
+  generationVersion: 2.457.9
+  releaseVersion: 0.1.2
+  configChecksum: 3fb6de22c5b1a2dd0dcf1e7ecb11eff0
 features:
   csharp:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.0.1
-    core: 3.10.4
+    core: 3.10.5
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.6
