@@ -10,8 +10,6 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" /></a>
 </div>
 <br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/loganinc/loganinc). Delete this section before > publishing to a package manager.
 
 <!-- Start Summary [summary] -->
 ## Summary
