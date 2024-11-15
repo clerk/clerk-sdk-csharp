@@ -13,8 +13,10 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 csharp:
-  version: 0.2.1
-  additionalDependencies: []
+  version: 0.2.2
+  additionalDependencies:
+    - package: System.IdentityModel.Tokens.Jwt
+      version: 8.2.0
   author: Clerk
   clientServerStatusCodesAsErrors: true
   defaultErrorName: SDKError
