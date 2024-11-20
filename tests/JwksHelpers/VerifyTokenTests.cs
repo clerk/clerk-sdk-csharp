@@ -21,7 +21,7 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public void TestVerifyTokenNoSecretKey ()
+        public void TestVerifyTokenNoSecretKey()
         {
 
             var ex = Assert.Throws<TokenVerificationException>(
@@ -34,7 +34,7 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public async Task TestVerifyTokenInvalidSecretKey ()
+        public async Task TestVerifyTokenInvalidSecretKey()
         {
             var vtOptions = new VerifyTokenOptions(secretKey: "sk_test_invalid");
 
@@ -47,7 +47,7 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public async Task TestVerifyTokenInvalidJwtKey ()
+        public async Task TestVerifyTokenInvalidJwtKey()
         {
             var (token, jwtKey) = Utils.GenerateTokenKeyPair();
             var vtOptions = new VerifyTokenOptions(jwtKey: "invalid.jwt.key");
@@ -62,7 +62,7 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public async Task TestVerifyTokenInvalidSignature ()
+        public async Task TestVerifyTokenInvalidSignature()
         {
             var vtOptions = new VerifyTokenOptions(
                 jwtKey: fixture.TestJwtKey!.Replace("+", "0")  // tampering with the key
@@ -77,7 +77,7 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public async Task TestVerifyTokenNotActiveYet ()
+        public async Task TestVerifyTokenNotActiveYet()
         {
             var (token, jwtKey) = Utils.GenerateTokenKeyPair(
                 notBefore: DateTime.UtcNow.AddSeconds(10)
@@ -94,11 +94,14 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public async Task TestVerifyTokenClockSkew ()
+        public async Task TestVerifyTokenClockSkew()
         {
+            var nbfDateTime = DateTime.UtcNow.AddSeconds(10);
+            var nbfTimeStamp = ((DateTimeOffset)nbfDateTime).ToUnixTimeSeconds();
+
             var (token, jwtKey) = Utils.GenerateTokenKeyPair(
                 issuedAt: DateTime.UtcNow.AddMinutes(-1),
-                notBefore: DateTime.UtcNow.AddSeconds(10),
+                notBefore: nbfDateTime,
                 expires: DateTime.UtcNow.AddMinutes(2)
             );
 
@@ -112,11 +115,13 @@ namespace JwksHelpers.Tests
 
             vtOptions = new VerifyTokenOptions(jwtKey: jwtKey, clockSkewInMs: 10000);
             var claims = await VerifyToken.VerifyTokenAsync(token, vtOptions);
-            Assert.NotNull(claims.FindFirst("nbf").Value);
+            var nbfClaim = claims.FindFirst("nbf");
+            Assert.NotNull(nbfClaim);
+            Assert.Equal(nbfTimeStamp.ToString(), nbfClaim.Value);
         }
 
         [Fact]
-        public async Task TestVerifyTokenExpired ()
+        public async Task TestVerifyTokenExpired()
         {
             var (token, jwtKey) = Utils.GenerateTokenKeyPair(
                 issuedAt: DateTime.UtcNow.AddMinutes(-3),
@@ -135,7 +140,7 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public async Task TestVerifyTokenIssuedInTheFuture ()
+        public async Task TestVerifyTokenIssuedInTheFuture()
         {
             var (token, jwtKey) = Utils.GenerateTokenKeyPair(
                 issuedAt: DateTime.UtcNow.AddMinutes(1),
@@ -153,7 +158,7 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public async Task TestVerifyTokenInvalidAudience ()
+        public async Task TestVerifyTokenInvalidAudience()
         {
             var vtOptions = new VerifyTokenOptions(
                 jwtKey: fixture.TestJwtKey,
@@ -181,7 +186,7 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public async Task TestVerifyTokenInvalidAuthorizedParties ()
+        public async Task TestVerifyTokenInvalidAuthorizedParties()
         {
             var vtOptions = new VerifyTokenOptions(
                 jwtKey: fixture.TestJwtKey,
@@ -191,7 +196,7 @@ namespace JwksHelpers.Tests
             var claims = await VerifyToken.VerifyTokenAsync(fixture.TestToken, vtOptions);
             var azpClaim = claims.FindFirst("azp");
             Assert.NotNull(azpClaim);
-            Assert.True(fixture.AuthorizedParties.Contains(azpClaim.Value));
+            Assert.Contains(azpClaim.Value, fixture.AuthorizedParties);
 
             vtOptions = new VerifyTokenOptions(
                 jwtKey: fixture.TestJwtKey,
@@ -208,7 +213,7 @@ namespace JwksHelpers.Tests
         }
 
         [ConditionalFact("CLERK_SECRET_KEY")]
-        public async Task TestVerifyTokenInvalidToken ()
+        public async Task TestVerifyTokenInvalidToken()
         {
             var vtOptions = new VerifyTokenOptions(secretKey: fixture.SecretKey);
 
@@ -223,7 +228,7 @@ namespace JwksHelpers.Tests
 
 
         [ConditionalFact("CLERK_SECRET_KEY")]
-        public async Task TestVerifyTokenInvalidKid ()
+        public async Task TestVerifyTokenInvalidKid()
         {
             var token = Utils.GenerateTokenKeyPair().Item1;
 
@@ -238,7 +243,7 @@ namespace JwksHelpers.Tests
         }
 
         [ConditionalFact("CLERK_SECRET_KEY", "CLERK_SESSION_TOKEN")]
-        public async Task TestVerifyTokenRemoteOk ()
+        public async Task TestVerifyTokenRemoteOk()
         {
             var vtOptions = new VerifyTokenOptions(
                 secretKey: fixture.SecretKey,
@@ -251,7 +256,7 @@ namespace JwksHelpers.Tests
         }
 
         [ConditionalFact("CLERK_JWT_KEY", "CLERK_SESSION_TOKEN")]
-        public async Task TestVerifyTokenLocalOk ()
+        public async Task TestVerifyTokenLocalOk()
         {
             var vtOptions = new VerifyTokenOptions(
                 jwtKey: fixture.JwtKey,

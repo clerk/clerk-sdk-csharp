@@ -30,10 +30,10 @@ namespace JwksHelpers.Tests
 
         public JwksHelpersFixture()
         {
-            SecretKey = System.Environment.GetEnvironmentVariable("CLERK_SECRET_KEY");
-            JwtKey = System.Environment.GetEnvironmentVariable("CLERK_JWT_KEY");
-            ApiUrl = System.Environment.GetEnvironmentVariable("CLERK_API_URL");
-            SessionToken = System.Environment.GetEnvironmentVariable("CLERK_SESSION_TOKEN") ?? "";
+            SecretKey = Environment.GetEnvironmentVariable("CLERK_SECRET_KEY");
+            JwtKey = Environment.GetEnvironmentVariable("CLERK_JWT_KEY");
+            ApiUrl = Environment.GetEnvironmentVariable("CLERK_API_URL");
+            SessionToken = Environment.GetEnvironmentVariable("CLERK_SESSION_TOKEN") ?? "";
             Audiences = null;
             AuthorizedParties = new List<string> { RequestUrl };
 

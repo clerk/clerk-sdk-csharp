@@ -1,25 +1,16 @@
-#nullable enable
-namespace Clerk.BackendAPI.Helpers.Jwks
+namespace Clerk.BackendAPI.Helpers.Jwks;
+
+/// <summary>
+///     Represents the reason for a TokenVerificationException or AuthenticateRequestException.
+/// </summary>
+public class ErrorReason
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
+    public readonly string Id;
+    public readonly string Message;
 
-
-    /// <summary>
-    /// Represents the reason for a TokenVerificationException or AuthenticateRequestException
-    /// </summary>
-    public class ErrorReason
+    public ErrorReason(string id, string message)
     {
-        public readonly string Id;
-        public readonly string Message;
-
-        public ErrorReason(string id, string message)
-        {
-            this.Id = id;
-            this.Message = message;
-        }
+        Id = id;
+        Message = message;
     }
 }

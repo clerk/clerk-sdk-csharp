@@ -24,21 +24,21 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
-        public async Task TestAuthenticateRequestNoSesstionToken ()
+        public async Task TestAuthenticateRequestNoSesstionToken()
         {
             var arOptions = new AuthenticateRequestOptions(secretKey: "sk_test_SecretKey");
 
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, _requestUri);
             var state = await AuthenticateRequest.AuthenticateRequestAsync(request, arOptions);
 
-                Assert.True(state.IsSignedOut());
-                Assert.Equal(AuthErrorReason.SESSION_TOKEN_MISSING, state.ErrorReason);
-                Assert.Null(state.Token);
-                Assert.Null(state.Claims);
+            Assert.True(state.IsSignedOut());
+            Assert.Equal(AuthErrorReason.SESSION_TOKEN_MISSING, state.ErrorReason);
+            Assert.Null(state.Token);
+            Assert.Null(state.Claims);
         }
 
         [Fact]
-        public void TestAuthenticateRequestNoSecretKey ()
+        public void TestAuthenticateRequestNoSecretKey()
         {
             var ex = Assert.Throws<AuthenticateRequestException>(
                 () => new AuthenticateRequestOptions()
@@ -50,7 +50,7 @@ namespace JwksHelpers.Tests
         }
 
         [ConditionalFact("CLERK_SECRET_KEY", "CLERK_SESSION_TOKEN")]
-        public async Task TestAuthenticateRequestCookie ()
+        public async Task TestAuthenticateRequestCookie()
         {
             var arOptions = new AuthenticateRequestOptions(
                 secretKey: _fixture.SecretKey,
@@ -67,7 +67,7 @@ namespace JwksHelpers.Tests
         }
 
         [ConditionalFact("CLERK_SECRET_KEY", "CLERK_SESSION_TOKEN")]
-        public async Task TestAuthenticateRequestBearer ()
+        public async Task TestAuthenticateRequestBearer()
         {
             var arOptions = new AuthenticateRequestOptions(
                 secretKey: _fixture.SecretKey,
@@ -84,7 +84,7 @@ namespace JwksHelpers.Tests
         }
 
         [ConditionalFact("CLERK_JWT_KEY", "CLERK_SESSION_TOKEN")]
-        public async Task TestAuthenticateRequestLocal ()
+        public async Task TestAuthenticateRequestLocal()
         {
             var arOptions = new AuthenticateRequestOptions(
                 jwtKey: _fixture.JwtKey,
