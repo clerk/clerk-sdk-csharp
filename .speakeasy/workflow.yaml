@@ -19,5 +19,5 @@ targets:
                 apiKey: $nuget_api_key
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/clerk/clerk/clerk-backend-api-oas-code-samples 
+                location: registry.speakeasyapi.dev/clerk/clerk/clerk-backend-api-oas-code-samples
             blocking: false

@@ -42,6 +42,15 @@ More information about the API can be found at https://clerk.com/docs
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+### NuGet
+
+To add the [NuGet](https://www.nuget.org/) package to a .NET project:
+```bash
+dotnet add package Clerk.BackendAPI
+```
+
+### Locally
+
 To add a reference to a local instance of the SDK in a .NET project:
 ```bash
 dotnet add reference src/Clerk/BackendAPI/Clerk.BackendAPI.csproj
