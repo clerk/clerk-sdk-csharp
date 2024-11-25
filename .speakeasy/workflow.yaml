@@ -14,6 +14,9 @@ targets:
     clerk-backend-api:
         target: csharp
         source: clerk-backend-api-OAS
+        publish:
+            nuget:
+                apiKey: $nuget_api_key
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/loganinc/loganinc/clerk-backend-api-oas-code-samples
