@@ -1,19 +1,21 @@
-speakeasyVersion: 1.440.0
+speakeasyVersion: 1.445.2
 sources:
     clerk-backend-api-OAS:
-        sourceNamespace: clerk-backend-api-oas
-        sourceRevisionDigest: sha256:2ba44da56aa4bada4d11b7a7d11891902b1256674a3ca8dbb80fb87d7b8678cf
-        sourceBlobDigest: sha256:4d849005b7ac40a2433ec505f171a04d8c0dfdbd1e8394e0bb30901d568977b0
+        sourceNamespace: clerk-openapi
+        sourceRevisionDigest: sha256:1b9965b9c97a7e5df88e302f937e5782c6fb149a59f167ea908ea9b8befc129e
+        sourceBlobDigest: sha256:5d6a29bf9f0008381585f32700a84d502810125ee4086e99723a70dd15e6d0f3
         tags:
             - latest
+            - speakeasy-sdk-regen-1732565431
+            - v1
 targets:
     clerk-backend-api:
         source: clerk-backend-api-OAS
-        sourceNamespace: clerk-backend-api-oas
-        sourceRevisionDigest: sha256:2ba44da56aa4bada4d11b7a7d11891902b1256674a3ca8dbb80fb87d7b8678cf
-        sourceBlobDigest: sha256:4d849005b7ac40a2433ec505f171a04d8c0dfdbd1e8394e0bb30901d568977b0
+        sourceNamespace: clerk-openapi
+        sourceRevisionDigest: sha256:1b9965b9c97a7e5df88e302f937e5782c6fb149a59f167ea908ea9b8befc129e
+        sourceBlobDigest: sha256:5d6a29bf9f0008381585f32700a84d502810125ee4086e99723a70dd15e6d0f3
         codeSamplesNamespace: clerk-backend-api-oas-code-samples
-        codeSamplesRevisionDigest: sha256:171075f4bbe9ee5efa5d0a515df304bd5531fc9039461d9794cdeacfaef45969
+        codeSamplesRevisionDigest: sha256:4d91ab90159cf2d6517cd23430f01ca4e7886a3de29accc98ea680b35a874acb
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -26,12 +28,15 @@ workflow:
                 - location: ./fixes.yaml
                 - location: ./examples.yaml
             registry:
-                location: registry.speakeasyapi.dev/loganinc/loganinc/clerk-backend-api-oas
+                location: registry.speakeasyapi.dev/clerk/clerk/clerk-openapi
     targets:
         clerk-backend-api:
             target: csharp
             source: clerk-backend-api-OAS
+            publish:
+                nuget:
+                    apiKey: $nuget_api_key
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/loganinc/loganinc/clerk-backend-api-oas-code-samples
+                    location: registry.speakeasyapi.dev/clerk/clerk/clerk-backend-api-oas-code-samples
                 blocking: false
