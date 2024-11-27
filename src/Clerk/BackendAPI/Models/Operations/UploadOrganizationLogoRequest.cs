@@ -22,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         public string OrganizationId { get; set; } = default!;
 
         [SpeakeasyMetadata("request:mediaType=multipart/form-data")]
-        public UploadOrganizationLogoRequestBody? RequestBody { get; set; }
+        public UploadOrganizationLogoRequestBody RequestBody { get; set; } = default!;
     }
 }

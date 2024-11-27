@@ -171,7 +171,7 @@ namespace Clerk.BackendAPI
         /// You can remove metadata keys at any level by setting their value to `null`.
         /// </remarks>
         /// </summary>
-        Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody? requestBody = null);
+        Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody requestBody);
 
         /// <summary>
         /// Retrieve the OAuth access token of a user
@@ -209,7 +209,7 @@ namespace Clerk.BackendAPI
         /// Useful for custom auth flows and re-verification.
         /// </remarks>
         /// </summary>
-        Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody? requestBody = null);
+        Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody requestBody);
 
         /// <summary>
         /// Verify a TOTP or backup code for a user
@@ -221,7 +221,7 @@ namespace Clerk.BackendAPI
         /// Useful for custom auth flows and re-verification.
         /// </remarks>
         /// </summary>
-        Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody? requestBody = null);
+        Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody requestBody);
 
         /// <summary>
         /// Disable a user&apos;s MFA methods
@@ -288,10 +288,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.2.2";
-        private const string _sdkGenVersion = "2.461.4";
+        private const string _sdkVersion = "0.2.3";
+        private const string _sdkGenVersion = "2.466.0";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.2.2 2.461.4 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.2.3 2.466.0 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -1393,7 +1393,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody? requestBody = null)
+        public async Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody requestBody)
         {
             var request = new UpdateUserMetadataRequest()
             {
@@ -1406,7 +1406,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -1766,7 +1766,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody? requestBody = null)
+        public async Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody requestBody)
         {
             var request = new VerifyPasswordRequest()
             {
@@ -1779,7 +1779,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -1863,7 +1863,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody? requestBody = null)
+        public async Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody requestBody)
         {
             var request = new VerifyTOTPRequest()
             {
@@ -1876,7 +1876,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
