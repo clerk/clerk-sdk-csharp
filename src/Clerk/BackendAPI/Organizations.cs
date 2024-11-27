@@ -59,7 +59,7 @@ namespace Clerk.BackendAPI
         /// the next time they create a session, presuming they don&apos;t explicitly set a different organization as active before then.
         /// </remarks>
         /// </summary>
-        Task<CreateOrganizationResponse> CreateAsync(CreateOrganizationRequestBody? request = null);
+        Task<CreateOrganizationResponse> CreateAsync(CreateOrganizationRequestBody request);
 
         /// <summary>
         /// Retrieve an organization by ID or slug
@@ -112,7 +112,7 @@ namespace Clerk.BackendAPI
         /// Only the following file content types are supported: `image/jpeg`, `image/png`, `image/gif`, `image/webp`, `image/x-icon`, `image/vnd.microsoft.icon`.
         /// </remarks>
         /// </summary>
-        Task<UploadOrganizationLogoResponse> UploadLogoAsync(string organizationId, UploadOrganizationLogoRequestBody? requestBody = null);
+        Task<UploadOrganizationLogoResponse> UploadLogoAsync(string organizationId, UploadOrganizationLogoRequestBody requestBody);
 
         /// <summary>
         /// Delete the organization&apos;s logo.
@@ -129,10 +129,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.2.2";
-        private const string _sdkGenVersion = "2.461.4";
+        private const string _sdkVersion = "0.2.3";
+        private const string _sdkGenVersion = "2.466.0";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.2.2 2.461.4 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.2.3 2.466.0 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -231,7 +231,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateOrganizationResponse> CreateAsync(CreateOrganizationRequestBody? request = null)
+        public async Task<CreateOrganizationResponse> CreateAsync(CreateOrganizationRequestBody request)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -240,7 +240,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -291,7 +291,7 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<Organization>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var obj = ResponseBodyDeserializer.Deserialize<Organization>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     var response = new CreateOrganizationResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -310,7 +310,7 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     throw obj!;
                 }
 
@@ -699,7 +699,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UploadOrganizationLogoResponse> UploadLogoAsync(string organizationId, UploadOrganizationLogoRequestBody? requestBody = null)
+        public async Task<UploadOrganizationLogoResponse> UploadLogoAsync(string organizationId, UploadOrganizationLogoRequestBody requestBody)
         {
             var request = new UploadOrganizationLogoRequest()
             {
@@ -712,7 +712,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "multipart", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "multipart", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;

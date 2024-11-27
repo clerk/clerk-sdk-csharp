@@ -22,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         public string EmailAddressId { get; set; } = default!;
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public UpdateEmailAddressRequestBody? RequestBody { get; set; }
+        public UpdateEmailAddressRequestBody RequestBody { get; set; } = default!;
     }
 }

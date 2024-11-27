@@ -32,17 +32,17 @@ namespace Clerk.BackendAPI
         /// Create an identifier that is blocked from accessing an instance
         /// </remarks>
         /// </summary>
-        Task<CreateBlocklistIdentifierResponse> CreateAsync(CreateBlocklistIdentifierRequestBody? request = null);
+        Task<CreateBlocklistIdentifierResponse> CreateAsync(CreateBlocklistIdentifierRequestBody request);
     }
 
     public class BlocklistIdentifiers: IBlocklistIdentifiers
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.2.2";
-        private const string _sdkGenVersion = "2.461.4";
+        private const string _sdkVersion = "0.2.3";
+        private const string _sdkGenVersion = "2.466.0";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.2.2 2.461.4 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.2.3 2.466.0 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -55,7 +55,7 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
-        public async Task<CreateBlocklistIdentifierResponse> CreateAsync(CreateBlocklistIdentifierRequestBody? request = null)
+        public async Task<CreateBlocklistIdentifierResponse> CreateAsync(CreateBlocklistIdentifierRequestBody request)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -64,7 +64,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -115,7 +115,7 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<BlocklistIdentifier>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var obj = ResponseBodyDeserializer.Deserialize<BlocklistIdentifier>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     var response = new CreateBlocklistIdentifierResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -134,7 +134,7 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     throw obj!;
                 }
 

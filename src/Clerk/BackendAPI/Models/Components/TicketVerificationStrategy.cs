@@ -17,6 +17,8 @@ namespace Clerk.BackendAPI.Models.Components
     {
         [JsonProperty("ticket")]
         Ticket,
+        [JsonProperty("saml")]
+        Saml,
     }
 
     public static class TicketVerificationStrategyExtension

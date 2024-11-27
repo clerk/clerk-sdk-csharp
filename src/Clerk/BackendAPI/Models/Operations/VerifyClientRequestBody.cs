@@ -12,9 +12,6 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     
-    /// <summary>
-    /// Parameters.
-    /// </summary>
     public class VerifyClientRequestBody
     {
 

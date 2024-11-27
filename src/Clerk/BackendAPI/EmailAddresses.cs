@@ -59,17 +59,17 @@ namespace Clerk.BackendAPI
         /// Updates an email address.
         /// </remarks>
         /// </summary>
-        Task<UpdateEmailAddressResponse> UpdateAsync(string emailAddressId, UpdateEmailAddressRequestBody? requestBody = null);
+        Task<UpdateEmailAddressResponse> UpdateAsync(string emailAddressId, UpdateEmailAddressRequestBody requestBody);
     }
 
     public class EmailAddresses: IEmailAddresses
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.2.2";
-        private const string _sdkGenVersion = "2.461.4";
+        private const string _sdkVersion = "0.2.3";
+        private const string _sdkGenVersion = "2.466.0";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.2.2 2.461.4 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.2.3 2.466.0 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -355,7 +355,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UpdateEmailAddressResponse> UpdateAsync(string emailAddressId, UpdateEmailAddressRequestBody? requestBody = null)
+        public async Task<UpdateEmailAddressResponse> UpdateAsync(string emailAddressId, UpdateEmailAddressRequestBody requestBody)
         {
             var request = new UpdateEmailAddressRequest()
             {
@@ -368,7 +368,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
