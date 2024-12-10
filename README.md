@@ -33,10 +33,11 @@ More information about the API can be found at https://clerk.com/docs
 
 * [SDK Installation](#sdk-installation)
 * [SDK Example Usage](#sdk-example-usage)
+* [Authentication](#authentication)
+* [Request Authentication](#request-authentication)
 * [Available Resources and Operations](#available-resources-and-operations)
 * [Error Handling](#error-handling)
 * [Server Selection](#server-selection)
-* [Authentication](#authentication)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -74,6 +75,63 @@ var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_ex
 // handle response
 ```
 <!-- End SDK Example Usage [usage] -->
+
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name         | Type | Scheme      |
+| ------------ | ---- | ----------- |
+| `BearerAuth` | http | HTTP Bearer |
+
+To authenticate with the API the `BearerAuth` parameter must be set when initializing the SDK client instance. For example:
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
+    frontendApi: "frontend-api_1a2b3c4d",
+    publishableKey: "pub_1a2b3c4d"
+);
+
+// handle response
+```
+<!-- End Authentication [security] -->
+
+## Request Authentication
+
+Use the [AuthenticateRequestAsync](https://github.com/clerk/clerk-sdk-csharp/blob/main/src/Clerk/BackendAPI/Helpers/AuthenticateRequest.cs) method to authenticate a request from your app's frontend (when using a Clerk frontend SDK) to Clerk's Backend API. For example the following utility function checks if the user is effectively signed in:
+
+```csharp
+using Clerk.BackendAPI.Helpers.Jwks;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+public class UserAuthentication
+{
+    public static async Task<bool> IsSignedInAsync(HttpRequestMessage request)
+    {
+        var options = new AuthenticateRequestOptions(
+            secretKey: Environment.GetEnvironmentVariable("CLERK_SECRET_KEY"),
+            authorizedParties: new string[] { "https://example.com" }
+        );
+
+        var requestState = await AuthenticateRequest.AuthenticateRequestAsync(request, options);
+
+        return requestState.isSignedIn();
+    }
+}
+```
+
+If the request is correctly authenticated, the token's claims are made available in `requestState.Claims`. Otherwise the reason for the token verification failure is given by `requestState.ErrorReason`.
+
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -385,34 +443,6 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
 // handle response
 ```
 <!-- End Server Selection [server] -->
-
-<!-- Start Authentication [security] -->
-## Authentication
-
-### Per-Client Security Schemes
-
-This SDK supports the following security scheme globally:
-
-| Name         | Type | Scheme      |
-| ------------ | ---- | ----------- |
-| `BearerAuth` | http | HTTP Bearer |
-
-To authenticate with the API the `BearerAuth` parameter must be set when initializing the SDK client instance. For example:
-```csharp
-using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
-using Clerk.BackendAPI.Models.Components;
-
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
-
-var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "frontend-api_1a2b3c4d",
-    publishableKey: "pub_1a2b3c4d"
-);
-
-// handle response
-```
-<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
