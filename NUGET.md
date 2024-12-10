@@ -19,6 +19,34 @@ var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_ex
 ```
 <!-- End SDK Example Usage [usage] -->
 
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name         | Type | Scheme      |
+| ------------ | ---- | ----------- |
+| `BearerAuth` | http | HTTP Bearer |
+
+To authenticate with the API the `BearerAuth` parameter must be set when initializing the SDK client instance. For example:
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
+    frontendApi: "frontend-api_1a2b3c4d",
+    publishableKey: "pub_1a2b3c4d"
+);
+
+// handle response
+```
+<!-- End Authentication [security] -->
+
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
@@ -97,33 +125,5 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
 // handle response
 ```
 <!-- End Server Selection [server] -->
-
-<!-- Start Authentication [security] -->
-## Authentication
-
-### Per-Client Security Schemes
-
-This SDK supports the following security scheme globally:
-
-| Name         | Type | Scheme      |
-| ------------ | ---- | ----------- |
-| `BearerAuth` | http | HTTP Bearer |
-
-To authenticate with the API the `BearerAuth` parameter must be set when initializing the SDK client instance. For example:
-```csharp
-using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
-using Clerk.BackendAPI.Models.Components;
-
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
-
-var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "frontend-api_1a2b3c4d",
-    publishableKey: "pub_1a2b3c4d"
-);
-
-// handle response
-```
-<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
