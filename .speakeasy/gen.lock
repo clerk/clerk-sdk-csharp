@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: 4e86217399ffa709d7db6ff06388b07c
+  docChecksum: e35fb338329b9ae2dee4d840c652b608
   docVersion: v1
-  speakeasyVersion: 1.448.0
-  generationVersion: 2.466.0
-  releaseVersion: 0.2.3
-  configChecksum: 4f7e126da047b023f834b2f4843fbb9e
+  speakeasyVersion: 1.453.10
+  generationVersion: 2.474.15
+  releaseVersion: 0.2.4
+  configChecksum: b129f5eda208ed130bef4e9687189926
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.0.1
-    core: 3.10.6
+    core: 3.10.7
     deprecations: 2.81.2
     examples: 2.81.3
     flattening: 2.81.3
