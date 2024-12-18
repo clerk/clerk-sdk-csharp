@@ -14,3 +14,4 @@
 | `FromOauthApple`          | from_oauth_apple          |
 | `FromOauthMicrosoft`      | from_oauth_microsoft      |
 | `FromOauthGithub`         | from_oauth_github         |
+| `Ticket`                  | ticket                    |

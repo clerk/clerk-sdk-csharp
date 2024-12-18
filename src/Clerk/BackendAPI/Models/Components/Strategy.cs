@@ -33,6 +33,8 @@ namespace Clerk.BackendAPI.Models.Components
         FromOauthMicrosoft,
         [JsonProperty("from_oauth_github")]
         FromOauthGithub,
+        [JsonProperty("ticket")]
+        Ticket,
     }
 
     public static class StrategyExtension

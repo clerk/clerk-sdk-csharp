@@ -33,6 +33,8 @@ namespace Clerk.BackendAPI.Models.Components
         OauthGithub,
         [JsonProperty("email_link")]
         EmailLink,
+        [JsonProperty("ticket")]
+        Ticket,
     }
 
     public static class OauthVerificationStrategyExtension

@@ -15,7 +15,7 @@ namespace Clerk.BackendAPI.Models.Operations
     public class SetUserProfileImageRequestBody
     {
 
-        [SpeakeasyMetadata("multipartForm:file")]
+        [SpeakeasyMetadata("multipartForm:file,name=file")]
         public File? File { get; set; }
     }
 }
