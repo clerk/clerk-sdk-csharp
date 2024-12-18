@@ -16,6 +16,7 @@ actions:
       - "from_oauth_apple"
       - "from_oauth_microsoft"
       - "from_oauth_github"
+      - "ticket"
   - target: $["components"]["schemas"]["Oauth"]["properties"]["strategy"]["enum"][*]
     remove: true
   - target: $["components"]["schemas"]["Oauth"]["properties"]["strategy"]["enum"]
@@ -29,6 +30,7 @@ actions:
       - "oauth_microsoft"
       - "oauth_github"
       - "email_link"
+      - "ticket"
   - target: $["components"]["schemas"]["IdentificationLink"]["properties"]["type"]["enum"]
     update:
       - "oauth_apple"
