@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: 4e86217399ffa709d7db6ff06388b07c
+  docChecksum: a026d44cd257aabf336c5b32794f8274
   docVersion: v1
-  speakeasyVersion: 1.448.0
-  generationVersion: 2.466.0
-  releaseVersion: 0.2.3
-  configChecksum: 4f7e126da047b023f834b2f4843fbb9e
+  speakeasyVersion: 1.456.0
+  generationVersion: 2.481.0
+  releaseVersion: 0.2.4
+  configChecksum: b129f5eda208ed130bef4e9687189926
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.0.1
-    core: 3.10.6
+    core: 3.10.9
     deprecations: 2.81.2
     examples: 2.81.3
     flattening: 2.81.3
@@ -1033,7 +1033,11 @@ examples:
         query:
           frontendApi: "frontend-api_1a2b3c4d"
           publishable_key: "pub_1a2b3c4d"
-  GetJWKS: {}
+  GetJWKS:
+    speakeasy-default-get-JWKS:
+      responses:
+        "200":
+          application/json: {}
   GetClientList:
     speakeasy-default-get-client-list:
       parameters:
@@ -1267,7 +1271,8 @@ examples:
       responses:
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200": {}
+        "200":
+          application/json: {}
   ToggleTemplateDelivery:
     speakeasy-default-toggle-template-delivery:
       parameters:
@@ -1507,7 +1512,8 @@ examples:
       responses:
         "404":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200": {}
+        "200":
+          application/json: {}
   UserPasskeyDelete:
     speakeasy-default-user-passkey-delete:
       parameters:
@@ -1548,7 +1554,8 @@ examples:
       responses:
         "404":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200": {}
+        "200":
+          application/json: {}
   DeleteExternalAccount:
     speakeasy-default-delete-external-account:
       parameters:
@@ -2075,7 +2082,8 @@ examples:
       responses:
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200": {}
+        "200":
+          application/json: {}
   ListOrganizationDomains:
     speakeasy-default-list-organization-domains:
       parameters:
@@ -2109,7 +2117,8 @@ examples:
       responses:
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200": {}
+        "200":
+          application/json: {}
   VerifyDomainProxy:
     speakeasy-default-verify-domain-proxy:
       requestBody:

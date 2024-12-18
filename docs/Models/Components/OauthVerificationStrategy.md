@@ -14,3 +14,4 @@
 | `OauthMicrosoft`     | oauth_microsoft      |
 | `OauthGithub`        | oauth_github         |
 | `EmailLink`          | email_link           |
+| `Ticket`             | ticket               |

@@ -276,7 +276,7 @@ namespace Clerk.BackendAPI.Utils
 
                     byte[]? content = null;
                     string fileName = "";
-                    string fieldName = "";
+                    string fieldName = metadata.Name;
 
                     foreach (var fileProp in fileProps)
                     {
@@ -297,12 +297,11 @@ namespace Clerk.BackendAPI.Utils
                         }
                         else
                         {
-                            fieldName = fileMetadata.Name ?? fileProp.Name;
                             fileName = fileProp.GetValue(value)?.ToString() ?? "";
                         }
                     }
 
-                    if (fieldName == "" || fileName == "" || content == null)
+                    if (fileName == "" || content == null)
                     {
                         throw new Exception("Invalid multipart/form-data file");
                     }
