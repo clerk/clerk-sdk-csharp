@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Optional flag which denotes whether an email invitation should be sent to the given email address.<br/>
         /// 
         /// <remarks>
-        /// Defaults to true.
+        /// Defaults to `true`.
         /// </remarks>
         /// </summary>
         [JsonProperty("notify")]
@@ -63,9 +64,19 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? IgnoreExisting { get; set; } = false;
 
         /// <summary>
-        /// The number of days the invitation will be valid for. By default, the invitation does not expire.
+        /// The number of days the invitation will be valid for. By default, the invitation expires after 30 days.
         /// </summary>
         [JsonProperty("expires_in_days")]
         public long? ExpiresInDays { get; set; } = null;
+
+        /// <summary>
+        /// The slug of the email template to use for the invitation email.<br/>
+        /// 
+        /// <remarks>
+        /// If not provided, the &quot;invitation&quot; template will be used.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("template_slug")]
+        public TemplateSlug? TemplateSlug { get; set; } = null;
     }
 }

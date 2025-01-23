@@ -28,6 +28,6 @@ namespace Clerk.BackendAPI.Models.Operations
         public string UserId { get; set; } = default!;
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public UpdateOrganizationMembershipMetadataRequestBody RequestBody { get; set; } = default!;
+        public UpdateOrganizationMembershipMetadataRequestBody? RequestBody { get; set; }
     }
 }

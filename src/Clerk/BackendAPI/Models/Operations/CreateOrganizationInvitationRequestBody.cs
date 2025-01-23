@@ -39,13 +39,21 @@ namespace Clerk.BackendAPI.Models.Operations
         public string Role { get; set; } = default!;
 
         /// <summary>
-        /// Metadata saved on the organization invitation, read-only from the Frontend API and fully accessible (read/write) from the Backend API.
+        /// Metadata saved on the organization invitation, read-only from the Frontend API and fully accessible (read/write) from the Backend API.<br/>
+        /// 
+        /// <remarks>
+        /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
+        /// </remarks>
         /// </summary>
         [JsonProperty("public_metadata")]
         public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
-        /// Metadata saved on the organization invitation, fully accessible (read/write) from the Backend API but not visible from the Frontend API.
+        /// Metadata saved on the organization invitation, fully accessible (read/write) from the Backend API but not visible from the Frontend API.<br/>
+        /// 
+        /// <remarks>
+        /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
+        /// </remarks>
         /// </summary>
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; }
@@ -55,5 +63,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("redirect_url")]
         public string? RedirectUrl { get; set; }
+
+        /// <summary>
+        /// The number of days the invitation will be valid for. By default, the invitation has a 30 days expire.
+        /// </summary>
+        [JsonProperty("expires_in_days")]
+        public long? ExpiresInDays { get; set; } = null;
     }
 }

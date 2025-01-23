@@ -8,7 +8,6 @@
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -33,7 +32,6 @@ This SDK supports the following security scheme globally:
 To authenticate with the API the `BearerAuth` parameter must be set when initializing the SDK client instance. For example:
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -71,10 +69,9 @@ When custom error responses are specified for an operation, the SDK may also thr
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
-using System;
 using Clerk.BackendAPI.Models.Errors;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -112,8 +109,6 @@ catch (Exception ex)
 The default server can also be overridden globally by passing a URL to the `serverUrl: string` optional parameter when initializing the SDK client instance. For example:
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 

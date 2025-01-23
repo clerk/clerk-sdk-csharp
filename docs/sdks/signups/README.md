@@ -15,8 +15,8 @@ Update the sign-up with the given ID
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -35,7 +35,7 @@ var res = await sdk.SignUps.UpdateAsync(
 | Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | `Id`                                                                          | *string*                                                                      | :heavy_check_mark:                                                            | The ID of the sign-up to update                                               | signup_1234567890abcdef                                                       |
-| `RequestBody`                                                                 | [UpdateSignUpRequestBody](../../Models/Operations/UpdateSignUpRequestBody.md) | :heavy_check_mark:                                                            | N/A                                                                           |                                                                               |
+| `RequestBody`                                                                 | [UpdateSignUpRequestBody](../../Models/Operations/UpdateSignUpRequestBody.md) | :heavy_minus_sign:                                                            | N/A                                                                           |                                                                               |
 
 ### Response
 

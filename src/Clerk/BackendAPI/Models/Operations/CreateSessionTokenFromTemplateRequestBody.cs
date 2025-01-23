@@ -7,20 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Clerk.BackendAPI.Models.Components
+namespace Clerk.BackendAPI.Models.Operations
 {
-    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
     
-    /// <summary>
-    /// Get the JSON Web Key Set
-    /// </summary>
-    public class WellKnownJWKS
+    public class CreateSessionTokenFromTemplateRequestBody
     {
 
-        [JsonProperty("keys")]
-        public List<Keys>? Keys { get; set; }
+        /// <summary>
+        /// Use this parameter to override the JWT token lifetime.
+        /// </summary>
+        [JsonProperty("expires_in_seconds")]
+        public double? ExpiresInSeconds { get; set; } = null;
     }
 }

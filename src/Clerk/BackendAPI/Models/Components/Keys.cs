@@ -32,5 +32,11 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("e")]
         public string? E { get; set; }
+
+        [JsonProperty("x")]
+        public string? X { get; set; }
+
+        [JsonProperty("crv")]
+        public string? Crv { get; set; }
     }
 }

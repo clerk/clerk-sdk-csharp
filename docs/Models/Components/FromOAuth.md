@@ -1,0 +1,12 @@
+# FromOAuth
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Status`                                                                              | [FromOAuthVerificationStatus](../../Models/Components/FromOAuthVerificationStatus.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `Strategy`                                                                            | *string*                                                                              | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `Error`                                                                               | [Error](../../Models/Components/Error.md)                                             | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `ExpireAt`                                                                            | *long*                                                                                | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `Attempts`                                                                            | *long*                                                                                | :heavy_minus_sign:                                                                    | N/A                                                                                   |

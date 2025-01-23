@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: a026d44cd257aabf336c5b32794f8274
+  docChecksum: 9e89f4e0df39546add90b40ae6eac529
   docVersion: v1
-  speakeasyVersion: 1.456.0
-  generationVersion: 2.481.0
-  releaseVersion: 0.2.4
-  configChecksum: b129f5eda208ed130bef4e9687189926
+  speakeasyVersion: 1.473.0
+  generationVersion: 2.495.0
+  releaseVersion: 0.3.0
+  configChecksum: c14f8f63ea342007562335282736245c
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
@@ -14,9 +14,9 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.0.1
-    core: 3.10.9
+    core: 3.10.11
     deprecations: 2.81.2
-    examples: 2.81.3
+    examples: 2.81.5
     flattening: 2.81.3
     globalSecurity: 2.83.6
     globalSecurityCallbacks: 0.1.0
@@ -24,7 +24,7 @@ features:
     globalServerURLs: 2.82.3
     groups: 2.81.2
     intellisenseMarkdownSupport: 0.1.0
-    methodArguments: 0.1.0
+    methodArguments: 0.2.0
     nameOverrides: 2.81.2
     nullables: 0.1.0
     responseFormat: 0.0.4
@@ -32,7 +32,6 @@ features:
     unions: 0.2.2
 generatedFiles:
   - .gitattributes
-  - CONTRIBUTING.md
   - Clerk.BackendAPI.sln
   - NUGET.md
   - USAGE.md
@@ -72,9 +71,13 @@ generatedFiles:
   - docs/Models/Components/ErrorMeta.md
   - docs/Models/Components/ExternalAccount.md
   - docs/Models/Components/ExternalAccounts.md
+  - docs/Models/Components/FromOAuth.md
+  - docs/Models/Components/FromOAuthVerificationStatus.md
   - docs/Models/Components/HTTPMetadata.md
   - docs/Models/Components/IdentificationLink.md
   - docs/Models/Components/IdentifierType.md
+  - docs/Models/Components/Instance.md
+  - docs/Models/Components/InstanceObject.md
   - docs/Models/Components/InstanceRestrictions.md
   - docs/Models/Components/InstanceRestrictionsObject.md
   - docs/Models/Components/InstanceSettings.md
@@ -87,6 +90,7 @@ generatedFiles:
   - docs/Models/Components/InvitationStatus.md
   - docs/Models/Components/JWTTemplate.md
   - docs/Models/Components/JWTTemplateObject.md
+  - docs/Models/Components/Jwks.md
   - docs/Models/Components/Keys.md
   - docs/Models/Components/LatestActivity.md
   - docs/Models/Components/Meta.md
@@ -98,9 +102,6 @@ generatedFiles:
   - docs/Models/Components/OAuthApplications.md
   - docs/Models/Components/OTPVerificationStatus.md
   - docs/Models/Components/OTPVerificationStrategy.md
-  - docs/Models/Components/Oauth.md
-  - docs/Models/Components/OauthVerificationStatus.md
-  - docs/Models/Components/OauthVerificationStrategy.md
   - docs/Models/Components/Object.md
   - docs/Models/Components/Organization.md
   - docs/Models/Components/OrganizationDomain.md
@@ -185,6 +186,13 @@ generatedFiles:
   - docs/Models/Components/VerificationStatus.md
   - docs/Models/Components/VerificationStrategy.md
   - docs/Models/Components/Verifications.md
+  - docs/Models/Components/WaitlistEntries.md
+  - docs/Models/Components/WaitlistEntry.md
+  - docs/Models/Components/WaitlistEntryInvitation.md
+  - docs/Models/Components/WaitlistEntryInvitationObject.md
+  - docs/Models/Components/WaitlistEntryInvitationStatus.md
+  - docs/Models/Components/WaitlistEntryObject.md
+  - docs/Models/Components/WaitlistEntryStatus.md
   - docs/Models/Components/Web3Signature.md
   - docs/Models/Components/Web3SignatureVerificationStatus.md
   - docs/Models/Components/Web3SignatureVerificationStrategy.md
@@ -192,7 +200,6 @@ generatedFiles:
   - docs/Models/Components/Web3WalletObject.md
   - docs/Models/Components/Web3WalletVerification.md
   - docs/Models/Components/Web3WalletVerificationAdmin.md
-  - docs/Models/Components/WellKnownJWKS.md
   - docs/Models/Errors/ClerkErrors.md
   - docs/Models/Errors/Meta.md
   - docs/Models/Operations/Actor.md
@@ -211,6 +218,7 @@ generatedFiles:
   - docs/Models/Operations/CreateAllowlistIdentifierResponse.md
   - docs/Models/Operations/CreateBlocklistIdentifierRequestBody.md
   - docs/Models/Operations/CreateBlocklistIdentifierResponse.md
+  - docs/Models/Operations/CreateBulkInvitationsResponse.md
   - docs/Models/Operations/CreateEmailAddressRequestBody.md
   - docs/Models/Operations/CreateEmailAddressResponse.md
   - docs/Models/Operations/CreateInvitationRequestBody.md
@@ -223,6 +231,7 @@ generatedFiles:
   - docs/Models/Operations/CreateOrganizationDomainRequestBody.md
   - docs/Models/Operations/CreateOrganizationDomainResponse.md
   - docs/Models/Operations/CreateOrganizationInvitationBulkRequest.md
+  - docs/Models/Operations/CreateOrganizationInvitationBulkRequestBody.md
   - docs/Models/Operations/CreateOrganizationInvitationBulkResponse.md
   - docs/Models/Operations/CreateOrganizationInvitationRequest.md
   - docs/Models/Operations/CreateOrganizationInvitationRequestBody.md
@@ -238,9 +247,17 @@ generatedFiles:
   - docs/Models/Operations/CreateRedirectURLResponse.md
   - docs/Models/Operations/CreateSAMLConnectionRequestBody.md
   - docs/Models/Operations/CreateSAMLConnectionResponse.md
+  - docs/Models/Operations/CreateSessionRequestBody.md
+  - docs/Models/Operations/CreateSessionResponse.md
+  - docs/Models/Operations/CreateSessionTokenFromTemplateObject.md
   - docs/Models/Operations/CreateSessionTokenFromTemplateRequest.md
+  - docs/Models/Operations/CreateSessionTokenFromTemplateRequestBody.md
   - docs/Models/Operations/CreateSessionTokenFromTemplateResponse.md
   - docs/Models/Operations/CreateSessionTokenFromTemplateResponseBody.md
+  - docs/Models/Operations/CreateSessionTokenRequest.md
+  - docs/Models/Operations/CreateSessionTokenRequestBody.md
+  - docs/Models/Operations/CreateSessionTokenResponse.md
+  - docs/Models/Operations/CreateSessionTokenResponseBody.md
   - docs/Models/Operations/CreateSignInTokenRequestBody.md
   - docs/Models/Operations/CreateSignInTokenResponse.md
   - docs/Models/Operations/CreateSvixAppResponse.md
@@ -249,6 +266,8 @@ generatedFiles:
   - docs/Models/Operations/CreateUserResponse.md
   - docs/Models/Operations/CreateUserTOTPRequest.md
   - docs/Models/Operations/CreateUserTOTPResponse.md
+  - docs/Models/Operations/CreateWaitlistEntryRequestBody.md
+  - docs/Models/Operations/CreateWaitlistEntryResponse.md
   - docs/Models/Operations/DeleteAllowlistIdentifierRequest.md
   - docs/Models/Operations/DeleteAllowlistIdentifierResponse.md
   - docs/Models/Operations/DeleteBackupCodeRequest.md
@@ -299,6 +318,7 @@ generatedFiles:
   - docs/Models/Operations/GetClientResponse.md
   - docs/Models/Operations/GetEmailAddressRequest.md
   - docs/Models/Operations/GetEmailAddressResponse.md
+  - docs/Models/Operations/GetInstanceResponse.md
   - docs/Models/Operations/GetJWKSResponse.md
   - docs/Models/Operations/GetJWTTemplateRequest.md
   - docs/Models/Operations/GetJWTTemplateResponse.md
@@ -360,6 +380,9 @@ generatedFiles:
   - docs/Models/Operations/ListRedirectURLsResponse.md
   - docs/Models/Operations/ListSAMLConnectionsRequest.md
   - docs/Models/Operations/ListSAMLConnectionsResponse.md
+  - docs/Models/Operations/ListWaitlistEntriesQueryParamStatus.md
+  - docs/Models/Operations/ListWaitlistEntriesRequest.md
+  - docs/Models/Operations/ListWaitlistEntriesResponse.md
   - docs/Models/Operations/LockUserRequest.md
   - docs/Models/Operations/LockUserResponse.md
   - docs/Models/Operations/MergeOrganizationMetadataRequest.md
@@ -395,6 +418,7 @@ generatedFiles:
   - docs/Models/Operations/SetUserProfileImageRequestBody.md
   - docs/Models/Operations/SetUserProfileImageResponse.md
   - docs/Models/Operations/Status.md
+  - docs/Models/Operations/TemplateSlug.md
   - docs/Models/Operations/TemplateType.md
   - docs/Models/Operations/ToggleTemplateDeliveryPathParamTemplateType.md
   - docs/Models/Operations/ToggleTemplateDeliveryRequest.md
@@ -519,6 +543,7 @@ generatedFiles:
   - docs/sdks/testingtokens/README.md
   - docs/sdks/users/README.md
   - docs/sdks/userweb3wallets/README.md
+  - docs/sdks/waitlistentries/README.md
   - docs/sdks/webhooks/README.md
   - global.json
   - src/Clerk/BackendAPI/ActorTokens.cs
@@ -577,9 +602,13 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/ErrorMeta.cs
   - src/Clerk/BackendAPI/Models/Components/ExternalAccount.cs
   - src/Clerk/BackendAPI/Models/Components/ExternalAccounts.cs
+  - src/Clerk/BackendAPI/Models/Components/FromOAuth.cs
+  - src/Clerk/BackendAPI/Models/Components/FromOAuthVerificationStatus.cs
   - src/Clerk/BackendAPI/Models/Components/HTTPMetadata.cs
   - src/Clerk/BackendAPI/Models/Components/IdentificationLink.cs
   - src/Clerk/BackendAPI/Models/Components/IdentifierType.cs
+  - src/Clerk/BackendAPI/Models/Components/Instance.cs
+  - src/Clerk/BackendAPI/Models/Components/InstanceObject.cs
   - src/Clerk/BackendAPI/Models/Components/InstanceRestrictions.cs
   - src/Clerk/BackendAPI/Models/Components/InstanceRestrictionsObject.cs
   - src/Clerk/BackendAPI/Models/Components/InstanceSettings.cs
@@ -592,6 +621,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/InvitationStatus.cs
   - src/Clerk/BackendAPI/Models/Components/JWTTemplate.cs
   - src/Clerk/BackendAPI/Models/Components/JWTTemplateObject.cs
+  - src/Clerk/BackendAPI/Models/Components/Jwks.cs
   - src/Clerk/BackendAPI/Models/Components/Keys.cs
   - src/Clerk/BackendAPI/Models/Components/LatestActivity.cs
   - src/Clerk/BackendAPI/Models/Components/Meta.cs
@@ -603,9 +633,6 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/OAuthApplications.cs
   - src/Clerk/BackendAPI/Models/Components/OTPVerificationStatus.cs
   - src/Clerk/BackendAPI/Models/Components/OTPVerificationStrategy.cs
-  - src/Clerk/BackendAPI/Models/Components/Oauth.cs
-  - src/Clerk/BackendAPI/Models/Components/OauthVerificationStatus.cs
-  - src/Clerk/BackendAPI/Models/Components/OauthVerificationStrategy.cs
   - src/Clerk/BackendAPI/Models/Components/Object.cs
   - src/Clerk/BackendAPI/Models/Components/Organization.cs
   - src/Clerk/BackendAPI/Models/Components/OrganizationDomain.cs
@@ -690,6 +717,13 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/VerificationStatus.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationStrategy.cs
   - src/Clerk/BackendAPI/Models/Components/Verifications.cs
+  - src/Clerk/BackendAPI/Models/Components/WaitlistEntries.cs
+  - src/Clerk/BackendAPI/Models/Components/WaitlistEntry.cs
+  - src/Clerk/BackendAPI/Models/Components/WaitlistEntryInvitation.cs
+  - src/Clerk/BackendAPI/Models/Components/WaitlistEntryInvitationObject.cs
+  - src/Clerk/BackendAPI/Models/Components/WaitlistEntryInvitationStatus.cs
+  - src/Clerk/BackendAPI/Models/Components/WaitlistEntryObject.cs
+  - src/Clerk/BackendAPI/Models/Components/WaitlistEntryStatus.cs
   - src/Clerk/BackendAPI/Models/Components/Web3Signature.cs
   - src/Clerk/BackendAPI/Models/Components/Web3SignatureVerificationStatus.cs
   - src/Clerk/BackendAPI/Models/Components/Web3SignatureVerificationStrategy.cs
@@ -697,7 +731,6 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/Web3WalletObject.cs
   - src/Clerk/BackendAPI/Models/Components/Web3WalletVerification.cs
   - src/Clerk/BackendAPI/Models/Components/Web3WalletVerificationAdmin.cs
-  - src/Clerk/BackendAPI/Models/Components/WellKnownJWKS.cs
   - src/Clerk/BackendAPI/Models/Errors/ClerkErrors.cs
   - src/Clerk/BackendAPI/Models/Errors/Meta.cs
   - src/Clerk/BackendAPI/Models/Errors/SDKError.cs
@@ -717,6 +750,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/CreateAllowlistIdentifierResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateBlocklistIdentifierRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateBlocklistIdentifierResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateBulkInvitationsResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateEmailAddressRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateEmailAddressResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateInvitationRequestBody.cs
@@ -729,6 +763,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/CreateOrganizationDomainRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOrganizationDomainResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOrganizationInvitationBulkRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateOrganizationInvitationBulkRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOrganizationInvitationBulkResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOrganizationInvitationRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOrganizationInvitationRequestBody.cs
@@ -744,9 +779,17 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/CreateRedirectURLResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSAMLConnectionRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSAMLConnectionResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateSessionRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateSessionResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateSessionTokenFromTemplateObject.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSessionTokenFromTemplateRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateSessionTokenFromTemplateRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSessionTokenFromTemplateResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSessionTokenFromTemplateResponseBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateSessionTokenRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateSessionTokenRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateSessionTokenResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateSessionTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSignInTokenRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSignInTokenResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSvixAppResponse.cs
@@ -755,6 +798,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/CreateUserResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateUserTOTPRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateUserTOTPResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateWaitlistEntryRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateWaitlistEntryResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteAllowlistIdentifierRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteAllowlistIdentifierResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteBackupCodeRequest.cs
@@ -805,6 +850,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/GetClientResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetEmailAddressRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetEmailAddressResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetInstanceResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetJWKSResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetJWTTemplateRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetJWTTemplateResponse.cs
@@ -866,6 +912,9 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/ListRedirectURLsResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/ListSAMLConnectionsRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/ListSAMLConnectionsResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/ListWaitlistEntriesQueryParamStatus.cs
+  - src/Clerk/BackendAPI/Models/Operations/ListWaitlistEntriesRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/ListWaitlistEntriesResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/LockUserRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/LockUserResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/MergeOrganizationMetadataRequest.cs
@@ -901,6 +950,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/SetUserProfileImageRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/SetUserProfileImageResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/Status.cs
+  - src/Clerk/BackendAPI/Models/Operations/TemplateSlug.cs
   - src/Clerk/BackendAPI/Models/Operations/TemplateType.cs
   - src/Clerk/BackendAPI/Models/Operations/ToggleTemplateDeliveryPathParamTemplateType.cs
   - src/Clerk/BackendAPI/Models/Operations/ToggleTemplateDeliveryRequest.cs
@@ -1025,6 +1075,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Utils/SpeakeasyMetadata.cs
   - src/Clerk/BackendAPI/Utils/URLBuilder.cs
   - src/Clerk/BackendAPI/Utils/Utilities.cs
+  - src/Clerk/BackendAPI/WaitlistEntries.cs
   - src/Clerk/BackendAPI/Webhooks.cs
 examples:
   GetPublicInterstitial:
@@ -1046,7 +1097,7 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: [{"object": "client", "id": "client_123456789abcd", "session_ids": ["sess_123456789abcd", "sess_23456789abcd"], "sessions": [{"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}, {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}, {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}], "sign_in_id": "signin_123456789abcd", "sign_up_id": "signup_123456789abcd", "last_active_session_id": "session_123456789abcd", "updated_at": 1632580323, "created_at": 1622481123}]
+          application/json: [{"object": "client", "id": "client_123456789abcd", "session_ids": ["sess_123456789abcd", "sess_23456789abcd"], "sessions": [{"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}, {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}], "sign_in_id": "signin_123456789abcd", "sign_up_id": "signup_123456789abcd", "last_active_session_id": "session_123456789abcd", "updated_at": 1632580323, "created_at": 1622481123}, {"object": "client", "id": "client_123456789abcd", "session_ids": ["sess_123456789abcd", "sess_23456789abcd"], "sessions": [{"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}, {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}], "sign_in_id": "signin_123456789abcd", "sign_up_id": "signup_123456789abcd", "last_active_session_id": "session_123456789abcd", "updated_at": 1632580323, "created_at": 1622481123}, {"object": "client", "id": "client_123456789abcd", "session_ids": ["sess_123456789abcd", "sess_23456789abcd"], "sessions": [], "sign_in_id": "signin_123456789abcd", "sign_up_id": "signup_123456789abcd", "last_active_session_id": "session_123456789abcd", "updated_at": 1632580323, "created_at": 1622481123}]
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   VerifyClient:
@@ -1055,7 +1106,7 @@ examples:
         application/json: {"token": "jwt_token_example"}
       responses:
         "200":
-          application/json: {"object": "client", "id": "client_123456789abcd", "session_ids": ["sess_123456789abcd", "sess_23456789abcd"], "sessions": [{"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}], "sign_in_id": "signin_123456789abcd", "sign_up_id": "signup_123456789abcd", "last_active_session_id": "session_123456789abcd", "updated_at": 1632580323, "created_at": 1622481123}
+          application/json: {"object": "client", "id": "client_123456789abcd", "session_ids": ["sess_123456789abcd", "sess_23456789abcd"], "sessions": [{"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}, {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}, {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}], "sign_in_id": "signin_123456789abcd", "sign_up_id": "signup_123456789abcd", "last_active_session_id": "session_123456789abcd", "updated_at": 1632580323, "created_at": 1622481123}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetClient:
@@ -1065,7 +1116,7 @@ examples:
           client_id: "cli_123456789"
       responses:
         "200":
-          application/json: {"object": "client", "id": "client_123456789abcd", "session_ids": ["sess_123456789abcd", "sess_23456789abcd"], "sessions": [{"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}, {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}, {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}], "sign_in_id": "signin_123456789abcd", "sign_up_id": "signup_123456789abcd", "last_active_session_id": "session_123456789abcd", "updated_at": 1632580323, "created_at": 1622481123}
+          application/json: {"object": "client", "id": "client_123456789abcd", "session_ids": ["sess_123456789abcd", "sess_23456789abcd"], "sessions": [{"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}, {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}], "sign_in_id": "signin_123456789abcd", "sign_up_id": "signup_123456789abcd", "last_active_session_id": "session_123456789abcd", "updated_at": 1632580323, "created_at": 1622481123}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateEmailAddress:
@@ -1074,7 +1125,7 @@ examples:
         application/json: {"user_id": "user_12345", "email_address": "example@clerk.com", "verified": false, "primary": true}
       responses:
         "200":
-          application/json: {"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}
+          application/json: {"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetEmailAddress:
@@ -1084,7 +1135,7 @@ examples:
           email_address_id: "email_address_id_example"
       responses:
         "200":
-          application/json: {"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}
+          application/json: {"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteEmailAddress:
@@ -1106,7 +1157,7 @@ examples:
         application/json: {"verified": false, "primary": true}
       responses:
         "200":
-          application/json: {"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}
+          application/json: {"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreatePhoneNumber:
@@ -1164,6 +1215,13 @@ examples:
           application/json: [{"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}]
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+  createSession:
+    speakeasy-default-create-session:
+      responses:
+        "200":
+          application/json: {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetSession:
     speakeasy-default-get-session:
       parameters:
@@ -1196,6 +1254,16 @@ examples:
           application/json: {"object": "session", "id": "sess_123456789abcd", "user_id": "user_123456789abcd", "client_id": "client_123456789abcd", "actor": null, "status": "active", "last_active_organization_id": "org_123456789abcd", "last_active_at": 1622471123, "expire_at": 1685471123, "abandon_at": 1630471123, "updated_at": 1622532323, "created_at": 1622470000}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+  CreateSessionToken:
+    speakeasy-default-create-session-token:
+      parameters:
+        path:
+          session_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "401":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateSessionTokenFromTemplate:
     speakeasy-default-create-session-token-from-template:
       parameters:
@@ -1203,19 +1271,11 @@ examples:
           session_id: "ses_123abcd4567"
           template_name: "custom_hasura"
       responses:
-        "401":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"object": "token", "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvZSBCbG9nZ3MiLCJpYXQiOjE1MTYyMzkwMjJ9.qKVwLLnbfqfM5VCfU8vDhXXXS0VklRcsErgTpELYgfw"}
+        "401":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetTemplateList:
-    speakeasy-default-get-template-list:
-      parameters:
-        path:
-          template_type: "sms"
-      responses:
-        "400":
-          application/json: {"errors": []}
-        "200": {}
     "":
       parameters:
         path:
@@ -1224,7 +1284,7 @@ examples:
         "200":
           application/json: [{"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}, {"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}, {"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}]
         "400":
-          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "meta": {}, "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   GetTemplate:
     speakeasy-default-get-template:
       parameters:
@@ -1232,47 +1292,10 @@ examples:
           template_type: "email"
           slug: "welcome-email"
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}
-  UpsertTemplate:
-    speakeasy-default-upsert-template:
-      parameters:
-        path:
-          template_type: "sms"
-          slug: "verification-code"
-      requestBody:
-        application/json: {"name": "Verification Code", "subject": "Your Verification Code", "markup": "<p>Your code: {{code}}</p>", "body": "Use this code to verify your email: {{code}}", "delivered_by_clerk": true, "from_email_name": "hello", "reply_to_email_name": "support"}
-      responses:
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200":
-          application/json: {"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}
-  RevertTemplate:
-    speakeasy-default-revert-template:
-      parameters:
-        path:
-          template_type: "email"
-          slug: "welcome-email"
-      responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200":
-          application/json: {"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}
-  PreviewTemplate:
-    speakeasy-default-preview-template:
-      parameters:
-        path:
-          template_type: "email"
-          slug: "welcome-email"
-      requestBody:
-        application/json: {"subject": "Welcome to our service!", "body": "Hi, thank you for joining our service.", "from_email_name": "hello", "reply_to_email_name": "support"}
-      responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200":
-          application/json: {}
   ToggleTemplateDelivery:
     speakeasy-default-toggle-template-delivery:
       parameters:
@@ -1282,15 +1305,51 @@ examples:
       requestBody:
         application/json: {"delivered_by_clerk": true}
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+  UpsertTemplate:
+    speakeasy-default-upsert-template:
+      parameters:
+        path:
+          template_type: "sms"
+          slug: "verification-code"
+      requestBody:
+        application/json: {"name": "Verification Code", "subject": "Your Verification Code", "markup": "<p>Your code: {{code}}</p>", "body": "Use this code to verify your email: {{code}}", "delivered_by_clerk": true, "from_email_name": "hello", "reply_to_email_name": "support"}
+      responses:
+        "200":
+          application/json: {"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+  RevertTemplate:
+    speakeasy-default-revert-template:
+      parameters:
+        path:
+          template_type: "email"
+          slug: "welcome-email"
+      responses:
+        "200":
+          application/json: {"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+  PreviewTemplate:
+    speakeasy-default-preview-template:
+      parameters:
+        path:
+          template_type: "email"
+          slug: "welcome-email"
+      requestBody:
+        application/json: {"subject": "Welcome to our service!", "body": "Hi, thank you for joining our service.", "from_email_name": "hello", "reply_to_email_name": "support"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetUserList:
     "":
       parameters:
         query:
-          last_active_at_since: 1700690400000
           email_address: ["test@example.com"]
           phone_number: ["+12345678901"]
           external_id: ["external-id-123"]
@@ -1299,20 +1358,26 @@ examples:
           user_id: ["user-id-123"]
           organization_id: ["org-id-123"]
           query: "John"
+          last_active_at_before: 1700690400000
+          last_active_at_after: 1700690400000
+          last_active_at_since: 1700690400000
+          created_at_before: 1730160000000
+          created_at_after: 1730160000000
           limit: 20
           offset: 10
+          order_by: "-created_at"
       responses:
         "200":
-          application/json: [{"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"status": "verified", "strategy": "from_oauth_microsoft", "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved_for_second_factor": false, "default_second_factor": true, "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 2, "expire_at": 1622852400}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "backup_codes": ["code1", "code2", "code3"], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "first_name": "John", "last_name": "Doe", "provider_user_id": "prov_user_id_123", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml"}, "saml_connection": {"id": "sc_1234567890", "name": "My Company SAML Config", "domain": "mycompany.com", "active": true, "provider": "saml_custom", "sync_user_attributes": true, "allow_subdomains": false, "allow_idp_initiated": true, "created_at": 1614768000, "updated_at": 1622540800}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}]
+          application/json: [{"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 2, "expire_at": 1622852400}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}, {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"status": "verified", "strategy": "email_link", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved": false, "verification": {"status": "verified", "strategy": "phone_code", "attempts": 2, "expire_at": 1622852400}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}, {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 2, "expire_at": 1622852400}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}]
         "400":
-          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>", "meta": {}, "clerk_trace_id": "trace_123456789abcd"}, {"message": "<value>", "long_message": "<value>", "code": "<value>", "meta": {}, "clerk_trace_id": "trace_123456789abcd"}, {"message": "<value>", "long_message": "<value>", "code": "<value>", "meta": {}, "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   CreateUser:
     speakeasy-default-create-user:
       requestBody:
         application/json: {"external_id": "ext-id-001", "first_name": "John", "last_name": "Doe", "email_address": ["john.doe@example.com"], "phone_number": ["+12345678901"], "web3_wallet": ["0x123456789abcdef0x123456789abcdef"], "username": "johndoe123", "password": "Secure*Pass4", "password_digest": "$argon2i$v=19$m=4096,t=3,p=1$4t6CL3P7YiHBtwESXawI8Hm20zJj4cs7/4/G3c187e0$m7RQFczcKr5bIR0IIxbpO2P0tyrLjf3eUW3M3QSwnLc", "skip_password_checks": false, "skip_password_requirement": false, "totp_secret": "base32totpsecretkey", "backup_codes": ["123456", "654321"], "public_metadata": {"role": "user"}, "private_metadata": {"internal_id": "789"}, "unsafe_metadata": {"preferences": {"theme": "dark"}}, "created_at": "2023-03-15T07:15:20.902Z"}
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetUsersCount:
@@ -1338,7 +1403,7 @@ examples:
           user_id: "usr_1"
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UpdateUser:
@@ -1350,7 +1415,7 @@ examples:
         application/json: {"external_id": "ext_123", "first_name": "Jane", "last_name": "Doe", "primary_email_address_id": "eml_12345", "notify_primary_email_address_changed": true, "primary_phone_number_id": "phn_67890", "primary_web3_wallet_id": "wlt_123", "username": "janedoe", "profile_image_id": "img_789", "password": "secretPass123!", "password_digest": "$argon2i$v=19$m=4096,t=3,p=1$4t6CL3P7YiHBtwESXawI8Hm20zJj4cs7/4/G3c187e0$m7RQFczcKr5bIR0IIxbpO2P0tyrLjf3eUW3M3QSwnLc", "skip_password_checks": false, "sign_out_of_other_sessions": true, "totp_secret": "ABCD1234EFGH5678", "backup_codes": ["123456", "654321"], "public_metadata": {"theme": "dark"}, "private_metadata": {"vip": true}, "unsafe_metadata": {"age": 30}, "delete_self_enabled": true, "create_organization_enabled": false, "created_at": "2021-04-05T14:30:00.000Z"}
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteUser:
@@ -1370,7 +1435,7 @@ examples:
           user_id: "user_12345"
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "402":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UnbanUser:
@@ -1380,7 +1445,7 @@ examples:
           user_id: "user_12345"
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "402":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   LockUser:
@@ -1390,7 +1455,7 @@ examples:
           user_id: "user_123456789"
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "403":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UnlockUser:
@@ -1400,7 +1465,7 @@ examples:
           user_id: "user_12345"
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "403":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   SetUserProfileImage:
@@ -1408,9 +1473,11 @@ examples:
       parameters:
         path:
           user_id: "usr_test123"
+      requestBody:
+        multipart/form-data: {}
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteUserProfileImage:
@@ -1420,7 +1487,7 @@ examples:
           user_id: "usr_test123"
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "404":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UpdateUserMetadata:
@@ -1430,7 +1497,7 @@ examples:
           user_id: "user_123456789"
       responses:
         "200":
-          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_56789", "object": "email_address", "email_address": "example@clerk.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin"}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1615458901, "updated_at": 1615459001}], "phone_numbers": [{"id": "ph_123456789", "object": "phone_number", "phone_number": "+11234567890", "reserved": false, "verification": {"status": "verified", "strategy": "email_code", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1594842023, "updated_at": 1604842023}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value"}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce"}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket"}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetOAuthAccessToken:
@@ -1440,10 +1507,10 @@ examples:
           user_id: "user_123"
           provider: "oauth_google"
       responses:
+        "200":
+          application/json: [{"object": "oauth_access_token", "external_account_id": "external_account_456", "provider_user_id": "provider_user_789", "token": "access_token_123", "provider": "oauth_google", "label": "Primary account", "scopes": ["email", "profile"], "token_secret": "token_secret_xyz"}]
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200":
-          application/json: [{"object": "oauth_access_token", "external_account_id": "external_account_456", "provider_user_id": "provider_user_789", "token": "access_token_123", "provider": "oauth_google", "public_metadata": {}, "label": "Primary account", "scopes": ["email", "profile"], "token_secret": "token_secret_xyz"}]
   UsersGetOrganizationMemberships:
     speakeasy-default-users-get-organization-memberships:
       parameters:
@@ -1454,7 +1521,7 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: {"data": [{"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
+          application/json: {"data": [{"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
         "403":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UsersGetOrganizationInvitations:
@@ -1467,7 +1534,7 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: {"data": [], "total_count": 939995}
+          application/json: {"data": [{}], "total_count": 375907}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   VerifyPassword:
@@ -1478,10 +1545,10 @@ examples:
       requestBody:
         application/json: {"password": "securepassword123"}
       responses:
-        "500":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"verified": true}
+        "500":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   VerifyTOTP:
     speakeasy-default-verify-TOTP:
       parameters:
@@ -1490,30 +1557,34 @@ examples:
       requestBody:
         application/json: {"code": "123456"}
       responses:
-        "500":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"verified": true, "code_type": "totp"}
+        "500":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DisableMFA:
     speakeasy-default-disable-MFA:
       parameters:
         path:
           user_id: "user_123456"
       responses:
-        "404":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"user_id": "user_123456"}
+        "404":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+        "500":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteBackupCode:
     speakeasy-default-delete-backup-code:
       parameters:
         path:
           user_id: "<id>"
       responses:
-        "404":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {}
+        "404":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+        "500":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UserPasskeyDelete:
     speakeasy-default-user-passkey-delete:
       parameters:
@@ -1524,6 +1595,45 @@ examples:
         "200":
           application/json: {"object": "deleted_object", "id": "deleted_object_id_example", "slug": "deleted-object-slug", "deleted": true}
         "403":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+        "500":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+  CreateUserTOTP:
+    speakeasy-default-create-user-TOTP:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "<value>", "id": "<id>", "secret": "<value>", "uri": "https://golden-signature.com/", "verified": true, "key": "<value>", "key1": "<value>"}
+        "403":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+        "500":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+  DeleteTOTP:
+    speakeasy-default-delete-TOTP:
+      parameters:
+        path:
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "404":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+        "500":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+  DeleteExternalAccount:
+    speakeasy-default-delete-external-account:
+      parameters:
+        path:
+          user_id: "<id>"
+          external_account_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "deleted_object", "id": "deleted_object_id_example", "slug": "deleted-object-slug", "deleted": true}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+        "500":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UserWeb3WalletDelete:
     speakeasy-default-user-web3-wallet-delete:
@@ -1536,44 +1646,15 @@ examples:
           application/json: {"object": "deleted_object", "id": "deleted_object_id_example", "slug": "deleted-object-slug", "deleted": true}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-  CreateUserTOTP:
-    speakeasy-default-create-user-TOTP:
-      parameters:
-        path:
-          user_id: "<id>"
-      responses:
-        "200":
-          application/json: {"object": "<value>", "id": "<id>", "secret": "<value>", "uri": "https://watery-humidity.org", "verified": true, "key": "<value>"}
-        "403":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-  DeleteTOTP:
-    speakeasy-default-delete-TOTP:
-      parameters:
-        path:
-          user_id: "<id>"
-      responses:
-        "404":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200":
-          application/json: {}
-  DeleteExternalAccount:
-    speakeasy-default-delete-external-account:
-      parameters:
-        path:
-          user_id: "<id>"
-          external_account_id: "<id>"
-      responses:
-        "200":
-          application/json: {"object": "deleted_object", "id": "deleted_object_id_example", "slug": "deleted-object-slug", "deleted": true}
-        "400":
+        "500":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateInvitation:
     speakeasy-default-create-invitation:
       requestBody:
-        application/json: {"email_address": "user@example.com", "public_metadata": {}, "redirect_url": "https://example.com/welcome", "notify": true, "ignore_existing": "​false"}
+        application/json: {"email_address": "user@example.com", "redirect_url": "https://example.com/welcome", "notify": true, "ignore_existing": "​false"}
       responses:
         "200":
-          application/json: {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "public_metadata": {}, "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}
+          application/json: {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   ListInvitations:
@@ -1585,7 +1666,14 @@ examples:
           status: "pending"
       responses:
         "200":
-          application/json: [{"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "public_metadata": {}, "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}, {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "public_metadata": {}, "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}]
+          application/json: [{"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}, {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}, {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}]
+  CreateBulkInvitations:
+    speakeasy-default-create-bulk-invitations:
+      responses:
+        "200":
+          application/json: [{"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}, {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}]
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   RevokeInvitation:
     speakeasy-default-revoke-invitation:
       parameters:
@@ -1593,7 +1681,7 @@ examples:
           invitation_id: "inv_123"
       responses:
         "200":
-          application/json: {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "public_metadata": {}, "revoked": true, "status": "revoked", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}
+          application/json: {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": true, "status": "revoked", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   ListInstanceOrganizationInvitations:
@@ -1602,10 +1690,13 @@ examples:
         query:
           limit: 20
           offset: 10
+          order_by: "-created_at"
       responses:
         "200":
-          application/json: {"data": [], "total_count": 5142}
+          application/json: {"data": [], "total_count": 255187}
         "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+        "500":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateOrganizationInvitation:
     speakeasy-default-create-organization-invitation:
@@ -1615,10 +1706,10 @@ examples:
       requestBody:
         application/json: {"email_address": "user@example.com", "inviter_user_id": "user_67890", "role": "admin", "public_metadata": {"key": "value"}, "private_metadata": {"private_key": "secret_value"}, "redirect_url": "https://example.com/welcome"}
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"id": "inv_12345", "object": "organization_invitation", "email_address": "user@example.com", "role": "admin", "organization_id": "org_12345", "status": "pending", "public_metadata": {"key": "value"}, "private_metadata": {"private_key": "secret_value"}, "created_at": 1622547600, "updated_at": 1622551200}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   ListOrganizationInvitations:
     speakeasy-default-list-organization-invitations:
       parameters:
@@ -1639,23 +1730,13 @@ examples:
         path:
           organization_id: "org_12345"
       requestBody:
-        application/json: []
+        application/json: [{"email_address": "newmember@example.com", "inviter_user_id": "user_67890", "role": "admin", "redirect_url": "https://example.com/welcome"}]
       responses:
         "200":
           application/json: {"data": [{"id": "inv_12345", "object": "organization_invitation", "email_address": "user@example.com", "role": "admin", "organization_id": "org_12345", "status": "pending", "created_at": 1622547600, "updated_at": 1622551200}], "total_count": 10}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   ListPendingOrganizationInvitations:
-    speakeasy-default-list-pending-organization-invitations:
-      parameters:
-        path:
-          organization_id: "<id>"
-        query: {}
-      responses:
-        "200":
-          application/json: {"data": [], "total_count": 910782}
-        "400":
-          application/json: {"errors": [{"message": "<value>", "long_message": "<value>", "code": "<value>"}]}
     "":
       parameters:
         path:
@@ -1665,9 +1746,9 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: {"data": [{"id": "inv_12345", "object": "organization_invitation", "email_address": "user@example.com", "role": "member", "organization_id": "org_12345", "status": "pending", "public_metadata": {"key": "value"}, "private_metadata": {"private_key": "secret_value"}, "created_at": 1617981379, "updated_at": 1625581379}], "total_count": 10}
+          application/json: {"data": [{"id": "inv_12345", "object": "organization_invitation", "email_address": "user@example.com", "role": "member", "organization_id": "org_12345", "status": "pending", "created_at": 1617981379, "updated_at": 1625581379}], "total_count": 10}
         "400":
-          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "meta": {}, "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   GetOrganizationInvitation:
     speakeasy-default-get-organization-invitation:
       parameters:
@@ -1675,10 +1756,10 @@ examples:
           organization_id: "org_123456789"
           invitation_id: "inv_987654321"
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"id": "inv_12345", "object": "organization_invitation", "email_address": "user@example.com", "role": "admin", "organization_id": "org_12345", "status": "pending", "public_metadata": {"key": "value"}, "private_metadata": {"private_key": "secret_value"}, "created_at": 1622547600, "updated_at": 1622551200}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   RevokeOrganizationInvitation:
     speakeasy-default-revoke-organization-invitation:
       parameters:
@@ -1688,26 +1769,26 @@ examples:
       requestBody:
         application/json: {"requesting_user_id": "usr_12345"}
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"id": "inv_12345", "object": "organization_invitation", "email_address": "user@example.com", "role": "admin", "organization_id": "org_12345", "status": "pending", "public_metadata": {"key": "value"}, "private_metadata": {"private_key": "secret_value"}, "created_at": 1622547600, "updated_at": 1622551200}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   ListAllowlistIdentifiers:
     speakeasy-default-list-allowlist-identifiers:
       responses:
-        "401":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: [{"object": "allowlist_identifier", "id": "alid_123456", "invitation_id": "inv_123456", "identifier": "user@example.com", "identifier_type": "email_address", "instance_id": "instance_12345", "created_at": 1622547600, "updated_at": 1622648600}, {"object": "allowlist_identifier", "id": "alid_123456", "invitation_id": "inv_123456", "identifier": "user@example.com", "identifier_type": "email_address", "instance_id": "instance_12345", "created_at": 1622547600, "updated_at": 1622648600}, {"object": "allowlist_identifier", "id": "alid_123456", "invitation_id": "inv_123456", "identifier": "user@example.com", "identifier_type": "email_address", "instance_id": "instance_12345", "created_at": 1622547600, "updated_at": 1622648600}]
+        "401":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateAllowlistIdentifier:
     speakeasy-default-create-allowlist-identifier:
       requestBody:
         application/json: {"identifier": "user@example.com", "notify": true}
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"object": "allowlist_identifier", "id": "alid_123456", "invitation_id": "inv_123456", "identifier": "user@example.com", "identifier_type": "email_address", "instance_id": "instance_12345", "created_at": 1622547600, "updated_at": 1622648600}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteAllowlistIdentifier:
     speakeasy-default-delete-allowlist-identifier:
       parameters:
@@ -1730,10 +1811,10 @@ examples:
       requestBody:
         application/json: {"identifier": "example@example.com"}
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"object": "blocklist_identifier", "id": "identifier_id", "identifier": "blocked@example.com", "identifier_type": "email_address", "instance_id": "instance_id_here", "created_at": 1609459200, "updated_at": 1612137600}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteBlocklistIdentifier:
     speakeasy-default-delete-blocklist-identifier:
       parameters:
@@ -1749,10 +1830,10 @@ examples:
       requestBody:
         application/json: {"restricted_to_allowlist": false, "from_email_address": "noreply", "progressive_sign_up": true, "session_token_template": "defaultSessionToken", "enhanced_email_deliverability": true, "test_mode": true}
       responses:
-        "402":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"object": "instance_settings", "id": "inst_123456789", "restricted_to_allowlist": false, "from_email_address": "noreply@clerk.dev", "progressive_sign_up": true, "enhanced_email_deliverability": true}
+        "402":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UpdateProductionInstanceDomain:
     speakeasy-default-update-production-instance-domain:
       requestBody:
@@ -1770,10 +1851,10 @@ examples:
   CreateActorToken:
     speakeasy-default-create-actor-token:
       requestBody:
-        application/json: {"user_id": "user_1a2b3c", "expires_in_seconds": 3600, "session_max_duration_in_seconds": 1800}
+        application/json: {"user_id": "user_1a2b3c", "actor": {}, "expires_in_seconds": 3600, "session_max_duration_in_seconds": 1800}
       responses:
         "200":
-          application/json: {"object": "actor_token", "id": "actor_tok_1a2b3c", "status": "pending", "user_id": "user_1a2b3c", "token": "token_string", "url": "https://example.com/token", "created_at": 1609459200, "updated_at": 1612137600}
+          application/json: {"object": "actor_token", "id": "actor_tok_1a2b3c", "status": "pending", "user_id": "user_1a2b3c", "actor": {}, "token": "token_string", "url": "https://example.com/token", "created_at": 1609459200, "updated_at": 1612137600}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   RevokeActorToken:
@@ -1783,7 +1864,7 @@ examples:
           actor_token_id: "act_tok_abcdefghijk"
       responses:
         "200":
-          application/json: {"object": "actor_token", "id": "actor_tok_1a2b3c", "status": "pending", "user_id": "user_1a2b3c", "token": "token_string", "url": "https://example.com/token", "created_at": 1609459200, "updated_at": 1612137600}
+          application/json: {"object": "actor_token", "id": "actor_tok_1a2b3c", "status": "pending", "user_id": "user_1a2b3c", "actor": {}, "token": "token_string", "url": "https://example.com/token", "created_at": 1609459200, "updated_at": 1612137600}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   ListDomains:
@@ -1822,6 +1903,11 @@ examples:
           application/json: {"object": "domain", "id": "domain_id", "name": "example.com", "is_satellite": false, "frontend_api_url": "https://frontend.example.com", "accounts_portal_url": null, "proxy_url": null, "development_origin": "http://localhost:3000", "cname_targets": [{"host": "cname.example.com", "value": "value.example.com", "required": true}]}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+  GetInstance:
+    speakeasy-default-get-instance:
+      responses:
+        "200":
+          application/json: {"environment_type": "development", "allowed_origins": ["http://localhost:3000", "https://some-domain"]}
   UpdateInstance:
     speakeasy-default-update-instance:
       requestBody:
@@ -1834,10 +1920,10 @@ examples:
       requestBody:
         application/json: {"allowlist": false, "blocklist": true, "block_email_subaddresses": true, "block_disposable_email_domains": true, "ignore_dots_for_gmail_addresses": false}
       responses:
-        "402":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {"object": "instance_restrictions", "allowlist": false, "blocklist": true, "block_email_subaddresses": true, "ignore_dots_for_gmail_addresses": false}
+        "402":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UpdateInstanceOrganizationSettings:
     speakeasy-default-update-instance-organization-settings:
       requestBody:
@@ -1845,7 +1931,7 @@ examples:
       responses:
         "200":
           application/json: {"object": "organization_settings", "enabled": true, "max_allowed_memberships": 5, "max_allowed_roles": 3, "max_allowed_permissions": 15, "creator_role": "admin", "admin_delete_enabled": true, "domains_enabled": true, "domains_enrollment_modes": ["automatic_invitation", "automatic_suggestion"], "domains_default_role": "member"}
-        "402":
+        "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateSvixApp:
     speakeasy-default-create-svix-app:
@@ -1930,7 +2016,7 @@ examples:
         application/json: {"name": "NewOrg", "created_by": "user_123", "private_metadata": {"internal_code": "ABC123"}, "public_metadata": {"public_event": "Annual Summit"}, "slug": "neworg", "max_allowed_memberships": 100}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"key": "<value>", "public_info": "Info visible to everyone"}, "private_metadata": {"key": "<value>", "key1": "<value>", "internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetOrganization:
@@ -1941,7 +2027,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"key": "<value>", "key1": "<value>", "public_info": "Info visible to everyone"}, "private_metadata": {"key": "<value>", "key1": "<value>", "internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "403":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UpdateOrganization:
@@ -1950,10 +2036,10 @@ examples:
         path:
           organization_id: "org_123_update"
       requestBody:
-        application/json: {"public_metadata": {}, "private_metadata": {}, "name": "New Organization Name", "slug": "new-org-slug", "max_allowed_memberships": 100, "admin_delete_enabled": true}
+        application/json: {"name": "New Organization Name", "slug": "new-org-slug", "max_allowed_memberships": 100, "admin_delete_enabled": true}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>", "public_info": "Info visible to everyone"}, "private_metadata": {"key": "<value>", "key1": "<value>", "internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "402":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteOrganization:
@@ -1975,7 +2061,7 @@ examples:
         application/json: {"public_metadata": {"announcement": "We are opening a new office!"}, "private_metadata": {"internal_use_only": "Future plans discussion."}}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>", "public_info": "Info visible to everyone"}, "private_metadata": {"key": "<value>", "key1": "<value>", "internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UploadOrganizationLogo:
@@ -1987,7 +2073,7 @@ examples:
         multipart/form-data: {"uploader_user_id": "user_67890", "file": {"": "path/to/your/logo.png"}}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>", "internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800, "image_url": "https://example.com/image_url.png", "has_image": true}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800, "image_url": "https://example.com/image_url.png", "has_image": true}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteOrganizationLogo:
@@ -1997,7 +2083,7 @@ examples:
           organization_id: "org_12345"
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>", "public_info": "Info visible to everyone"}, "private_metadata": {"key": "<value>", "key1": "<value>", "key2": "<value>", "internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "404":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateOrganizationMembership:
@@ -2008,10 +2094,10 @@ examples:
       requestBody:
         application/json: {"user_id": "user_456", "role": "admin"}
       responses:
+        "200":
+          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200":
-          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}
   ListOrganizationMemberships:
     speakeasy-default-list-organization-memberships:
       parameters:
@@ -2023,7 +2109,7 @@ examples:
           order_by: "+created_at"
       responses:
         "200":
-          application/json: {"data": [{"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}, {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}, {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
+          application/json: {"data": [{"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}, {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}, {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
         "401":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UpdateOrganizationMembership:
@@ -2035,10 +2121,10 @@ examples:
       requestBody:
         application/json: {"role": "admin"}
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
-          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}
+        "404":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteOrganizationMembership:
     speakeasy-default-delete-organization-membership:
       parameters:
@@ -2046,10 +2132,10 @@ examples:
           organization_id: "org_12345"
           user_id: "user_67890"
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
-          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}
+        "401":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UpdateOrganizationMembershipMetadata:
     speakeasy-default-update-organization-membership-metadata:
       parameters:
@@ -2057,12 +2143,12 @@ examples:
           organization_id: "org_123456"
           user_id: "user_654321"
       requestBody:
-        application/json: {"public_metadata": {}, "private_metadata": {}}
+        application/json: {}
       responses:
+        "200":
+          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
-        "200":
-          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "public_user_data": {"user_id": "usr_123456", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/path/to/image.jpg", "has_image": true, "identifier": "john.doe@example.com"}, "created_at": 1625078400, "updated_at": 1625164800}
   InstanceGetOrganizationMemberships:
     speakeasy-default-instance-get-organization-memberships:
       parameters:
@@ -2074,16 +2160,20 @@ examples:
           application/json: {"data": [], "total_count": 1}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+        "500":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateOrganizationDomain:
     speakeasy-default-create-organization-domain:
       parameters:
         path:
           organization_id: "<id>"
+      requestBody:
+        application/json: {}
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   ListOrganizationDomains:
     speakeasy-default-list-organization-domains:
       parameters:
@@ -2094,7 +2184,7 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: {"total_count": 605114}
+          application/json: {"data": [{}, {}, {}], "total_count": 547272}
         "401":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteOrganizationDomain:
@@ -2114,11 +2204,13 @@ examples:
         path:
           organization_id: "<id>"
           domain_id: "<id>"
+      requestBody:
+        application/json: {}
       responses:
-        "400":
-          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
         "200":
           application/json: {}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   VerifyDomainProxy:
     speakeasy-default-verify-domain-proxy:
       requestBody:
@@ -2190,7 +2282,7 @@ examples:
         application/json: {"external_id": "ext_id_7890abcdef123456"}
       responses:
         "200":
-          application/json: {"object": "sign_up_attempt", "id": "signup_1234567890abcdef", "status": "complete", "required_fields": ["email_address"], "optional_fields": ["first_name", "last_name"], "missing_fields": ["phone_number"], "unverified_fields": ["email_address"], "username": "user_123456", "email_address": "user@example.com", "phone_number": "+1234567890", "web3_wallet": "0x1234567890abcdef1234567890abcdef12345678", "password_enabled": true, "first_name": "John", "last_name": "Doe", "custom_action": false, "external_id": "ext_id_7890abcdef123456", "created_session_id": "sess_1234567890abcdef", "created_user_id": "user_1234567890abcdef", "abandon_at": 1609459200}
+          application/json: {"object": "sign_up_attempt", "id": "signup_1234567890abcdef", "status": "complete", "required_fields": ["email_address"], "optional_fields": ["first_name", "last_name"], "missing_fields": ["phone_number"], "unverified_fields": ["email_address"], "username": "user_123456", "email_address": "user@example.com", "phone_number": "+1234567890", "web3_wallet": "0x1234567890abcdef1234567890abcdef12345678", "password_enabled": true, "first_name": "John", "last_name": "Doe", "custom_action": false, "external_id": "ext_id_7890abcdef123456", "created_session_id": "sess_1234567890abcdef", "created_user_id": "user_1234567890abcdef", "abandon_at": 1609459200, "legal_accepted_at": 1700690400000}
         "403":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   ListOAuthApplications:
@@ -2201,7 +2293,7 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: {"data": [{"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "created_at": 1609459200, "updated_at": 1612137600}], "total_count": 1}
+          application/json: {"data": [{"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://neglected-plastic.biz", "token_introspection_url": "https://crooked-overload.name/", "created_at": 1609459200, "updated_at": 1612137600}], "total_count": 1}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateOAuthApplication:
@@ -2210,7 +2302,7 @@ examples:
         application/json: {"name": "Example App", "callback_url": "https://example.com/oauth/callback", "scopes": "profile email public_metadata", "public": true}
       responses:
         "200":
-          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "created_at": 1609459200, "updated_at": 1612137600, "client_secret": "secretXYZ123"}
+          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://probable-heating.com/", "token_introspection_url": "https://standard-utilization.com/", "created_at": 1609459200, "updated_at": 1612137600, "client_secret": "secretXYZ123"}
         "400":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetOAuthApplication:
@@ -2220,7 +2312,7 @@ examples:
           oauth_application_id: "oauth_app_12345"
       responses:
         "200":
-          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "created_at": 1609459200, "updated_at": 1612137600}
+          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://normal-making.name", "token_introspection_url": "https://lavish-ice-cream.biz", "created_at": 1609459200, "updated_at": 1612137600}
         "403":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UpdateOAuthApplication:
@@ -2232,7 +2324,7 @@ examples:
         application/json: {"name": "Updated OAuth App Name", "callback_url": "https://example.com/oauth/callback", "scopes": "profile email public_metadata private_metadata"}
       responses:
         "200":
-          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "created_at": 1609459200, "updated_at": 1612137600}
+          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://passionate-flu.org", "token_introspection_url": "https://lumbering-wheel.com", "created_at": 1609459200, "updated_at": 1612137600}
         "403":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteOAuthApplication:
@@ -2252,7 +2344,7 @@ examples:
           oauth_application_id: "oauth_application_12345"
       responses:
         "200":
-          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "created_at": 1609459200, "updated_at": 1612137600, "client_secret": "secretXYZ123"}
+          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://enchanting-language.org", "token_introspection_url": "https://tempting-popularity.net/", "created_at": 1609459200, "updated_at": 1612137600, "client_secret": "secretXYZ123"}
         "403":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   ListSAMLConnections:
@@ -2263,7 +2355,7 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: {"data": [{"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "soft-integer.com", "idp_entity_id": "<id>", "idp_sso_url": "https://baggy-conservative.biz/", "idp_certificate": "<value>", "acs_url": "https://impartial-epic.com/", "sp_entity_id": "<id>", "sp_metadata_url": "https://lavish-order.biz/", "active": false, "provider": "<value>", "user_count": 160633, "sync_user_attributes": false, "created_at": 521364, "updated_at": 469208}, {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "rusty-summary.name", "idp_entity_id": "<id>", "idp_sso_url": "https://winding-heating.com", "idp_certificate": "<value>", "acs_url": "https://enlightened-space.net/", "sp_entity_id": "<id>", "sp_metadata_url": "https://favorable-heartbeat.net/", "active": false, "provider": "<value>", "user_count": 15207, "sync_user_attributes": true, "created_at": 532002, "updated_at": 785391}], "total_count": 5}
+          application/json: {"data": [{"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "neglected-plastic.biz", "idp_entity_id": "<id>", "idp_sso_url": "https://crooked-overload.name/", "idp_certificate": "<value>", "acs_url": "https://secret-bob.com/", "sp_entity_id": "<id>", "sp_metadata_url": "https://memorable-overcoat.com", "active": true, "provider": "<value>", "user_count": 367745, "sync_user_attributes": true, "created_at": 73227, "updated_at": 931165}, {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "odd-sustenance.info", "idp_entity_id": "<id>", "idp_sso_url": "https://glorious-strategy.com/", "idp_certificate": "<value>", "acs_url": "https://insistent-tinderbox.biz", "sp_entity_id": "<id>", "sp_metadata_url": "https://unpleasant-chairperson.info/", "active": true, "provider": "<value>", "user_count": 432930, "sync_user_attributes": true, "created_at": 103421, "updated_at": 523875}, {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "tempting-handle.org", "idp_entity_id": "<id>", "idp_sso_url": "https://imaginative-cap.biz/", "idp_certificate": "<value>", "acs_url": "https://animated-ostrich.org", "sp_entity_id": "<id>", "sp_metadata_url": "https://bowed-poppy.name", "active": false, "provider": "<value>", "user_count": 816637, "sync_user_attributes": false, "created_at": 81309, "updated_at": 164965}], "total_count": 5}
         "402":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   CreateSAMLConnection:
@@ -2272,7 +2364,7 @@ examples:
         application/json: {"name": "My SAML Connection", "domain": "example.org", "provider": "saml_custom", "idp_entity_id": "http://idp.example.org/", "idp_sso_url": "http://idp.example.org/sso", "idp_certificate": "MIIDdzCCAl+gAwIBAgIJAKcyBaiiz+DT...", "idp_metadata_url": "http://idp.example.org/metadata.xml", "idp_metadata": "<EntityDescriptor ...", "attribute_mapping": {"user_id": "nameid", "email_address": "mail", "first_name": "givenName", "last_name": "surname"}}
       responses:
         "200":
-          application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "stingy-necklace.name", "idp_entity_id": "<id>", "idp_sso_url": "https://descriptive-skyscraper.net", "idp_certificate": "<value>", "acs_url": "https://junior-meatloaf.org", "sp_entity_id": "<id>", "sp_metadata_url": "https://glorious-discourse.name/", "active": false, "provider": "<value>", "user_count": 373144, "sync_user_attributes": false, "created_at": 67442, "updated_at": 70153}
+          application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "low-packaging.info", "idp_entity_id": "<id>", "idp_sso_url": "https://black-and-white-secrecy.org/", "idp_certificate": "<value>", "acs_url": "https://deafening-bonnet.net/", "sp_entity_id": "<id>", "sp_metadata_url": "https://outrageous-resolve.org", "active": true, "provider": "<value>", "user_count": 259629, "sync_user_attributes": true, "created_at": 230313, "updated_at": 211337}
         "402":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   GetSAMLConnection:
@@ -2282,7 +2374,7 @@ examples:
           saml_connection_id: "saml_conn_123"
       responses:
         "200":
-          application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "whopping-offset.org", "idp_entity_id": "<id>", "idp_sso_url": "https://hospitable-eyeliner.net/", "idp_certificate": "<value>", "acs_url": "https://focused-marimba.org/", "sp_entity_id": "<id>", "sp_metadata_url": "https://athletic-wriggler.name", "active": false, "provider": "<value>", "user_count": 660557, "sync_user_attributes": false, "created_at": 503710, "updated_at": 338454}
+          application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "rural-mathematics.name", "idp_entity_id": "<id>", "idp_sso_url": "https://willing-impostor.info", "idp_certificate": "<value>", "acs_url": "https://earnest-tuber.info/", "sp_entity_id": "<id>", "sp_metadata_url": "https://boiling-dash.biz", "active": true, "provider": "<value>", "user_count": 552582, "sync_user_attributes": false, "created_at": 380699, "updated_at": 746585}
         "402":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   UpdateSAMLConnection:
@@ -2294,7 +2386,7 @@ examples:
         application/json: {"name": "Example SAML Connection", "domain": "example.com", "idp_entity_id": "entity_123", "idp_sso_url": "https://idp.example.com/sso", "idp_certificate": "MIIDBTCCAe2gAwIBAgIQ...", "idp_metadata_url": "https://idp.example.com/metadata", "idp_metadata": "<EntityDescriptor>...</EntityDescriptor>", "attribute_mapping": {"user_id": "id123", "email_address": "user@example.com", "first_name": "Jane", "last_name": "Doe"}, "active": true, "sync_user_attributes": false, "allow_subdomains": true, "allow_idp_initiated": false}
       responses:
         "200":
-          application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "bitter-cheetah.biz", "idp_entity_id": "<id>", "idp_sso_url": "https://dual-pomelo.org", "idp_certificate": "<value>", "acs_url": "https://paltry-middle.net", "sp_entity_id": "<id>", "sp_metadata_url": "https://immediate-tune-up.info/", "active": true, "provider": "<value>", "user_count": 910631, "sync_user_attributes": true, "created_at": 347299, "updated_at": 414806}
+          application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "tinted-nectarine.info", "idp_entity_id": "<id>", "idp_sso_url": "https://powerless-juggernaut.org", "idp_certificate": "<value>", "acs_url": "https://unlucky-hydrolyze.biz/", "sp_entity_id": "<id>", "sp_metadata_url": "https://cool-scout.org/", "active": true, "provider": "<value>", "user_count": 464385, "sync_user_attributes": false, "created_at": 693508, "updated_at": 404265}
         "402":
           application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
   DeleteSAMLConnection:
@@ -2312,4 +2404,22 @@ examples:
       responses:
         "200":
           application/json: {"object": "testing_token", "token": "1713877200-c_2J2MvPu9PnXcuhbPZNao0LOXqK9A7YrnBn0HmIWxy", "expires_at": 1713880800}
+  ListWaitlistEntries:
+    speakeasy-default-list-waitlist-entries:
+      parameters:
+        query:
+          limit: 20
+          offset: 10
+          order_by: "-created_at"
+      responses:
+        "200":
+          application/json: {"data": [{"object": "waitlist_entry", "id": "<id>", "email_address": "Jaylen_Daniel-Haag@yahoo.com", "status": "pending", "created_at": 543511, "updated_at": 155167, "invitation": {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}}, {"object": "waitlist_entry", "id": "<id>", "email_address": "Enid.Bernhard5@gmail.com", "status": "pending", "created_at": 882329, "updated_at": 914872, "invitation": {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}}], "total_count": 843440}
+  CreateWaitlistEntry:
+    speakeasy-default-create-waitlist-entry:
+      responses:
+        "200":
+          application/json: {"object": "waitlist_entry", "id": "<id>", "email_address": "Demond_Willms@hotmail.com", "status": "pending", "created_at": 469096, "updated_at": 843035, "invitation": {"object": "invitation", "id": "inv_f02930r3", "email_address": "invitee@example.com", "revoked": false, "status": "pending", "url": "https://example.com/invitations/accept?code=abcd1234", "created_at": 1622549600, "updated_at": 1622553200}}
+        "400":
+          application/json: {"errors": [{"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}], "meta": {}}
+examplesVersion: 1.0.0
 generatedTests: {}

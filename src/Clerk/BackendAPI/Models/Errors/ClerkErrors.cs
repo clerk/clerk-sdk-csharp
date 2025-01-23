@@ -13,8 +13,8 @@ namespace Clerk.BackendAPI.Models.Errors
     using Clerk.BackendAPI.Models.Errors;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     
     /// <summary>
     /// Request was not successful

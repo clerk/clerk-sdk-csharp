@@ -7,46 +7,37 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Clerk.BackendAPI.Models.Components
+namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
     
-    public enum OauthVerificationStrategy
+    /// <summary>
+    /// The slug of the email template to use for the invitation email.<br/>
+    /// 
+    /// <remarks>
+    /// If not provided, the &quot;invitation&quot; template will be used.
+    /// </remarks>
+    /// </summary>
+    public enum TemplateSlug
     {
-        [JsonProperty("oauth_google")]
-        OauthGoogle,
-        [JsonProperty("oauth_mock")]
-        OauthMock,
-        [JsonProperty("from_oauth_google")]
-        FromOauthGoogle,
-        [JsonProperty("from_oauth_discord")]
-        FromOauthDiscord,
-        [JsonProperty("from_oauth_microsoft")]
-        FromOauthMicrosoft,
-        [JsonProperty("oauth_apple")]
-        OauthApple,
-        [JsonProperty("oauth_microsoft")]
-        OauthMicrosoft,
-        [JsonProperty("oauth_github")]
-        OauthGithub,
-        [JsonProperty("email_link")]
-        EmailLink,
-        [JsonProperty("ticket")]
-        Ticket,
+        [JsonProperty("invitation")]
+        Invitation,
+        [JsonProperty("waitlist_invitation")]
+        WaitlistInvitation,
     }
 
-    public static class OauthVerificationStrategyExtension
+    public static class TemplateSlugExtension
     {
-        public static string Value(this OauthVerificationStrategy value)
+        public static string Value(this TemplateSlug value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static OauthVerificationStrategy ToEnum(this string value)
+        public static TemplateSlug ToEnum(this string value)
         {
-            foreach(var field in typeof(OauthVerificationStrategy).GetFields())
+            foreach(var field in typeof(TemplateSlug).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -59,14 +50,14 @@ namespace Clerk.BackendAPI.Models.Components
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is OauthVerificationStrategy)
+                    if (enumVal is TemplateSlug)
                     {
-                        return (OauthVerificationStrategy)enumVal;
+                        return (TemplateSlug)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum OauthVerificationStrategy");
+            throw new Exception($"Unknown value {value} for enum TemplateSlug");
         }
     }
 

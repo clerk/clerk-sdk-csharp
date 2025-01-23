@@ -52,6 +52,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("sp_metadata_url")]
         public string SpMetadataUrl { get; set; } = default!;
 
+        [JsonProperty("organization_id")]
+        public string? OrganizationId { get; set; } = null;
+
         [JsonProperty("attribute_mapping")]
         public Models.Components.AttributeMapping? AttributeMapping { get; set; }
 

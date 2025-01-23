@@ -11,12 +11,12 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
-    using Newtonsoft.Json.Linq;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    using System;
     
 
     public class PhoneNumberVerificationType

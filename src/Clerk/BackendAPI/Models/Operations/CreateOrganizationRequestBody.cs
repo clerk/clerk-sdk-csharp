@@ -30,7 +30,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The ID of the User who will become the administrator for the new organization
         /// </summary>
         [JsonProperty("created_by")]
-        public string CreatedBy { get; set; } = default!;
+        public string? CreatedBy { get; set; }
 
         /// <summary>
         /// Metadata saved on the organization, accessible only from the Backend API

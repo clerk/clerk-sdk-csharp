@@ -10,6 +10,7 @@ Invitations allow you to invite someone to sign up to your application, via emai
 
 * [Create](#create) - Create an invitation
 * [List](#list) - List all invitations
+* [CreateBulkInvitations](#createbulkinvitations) - Create multiple invitations
 * [Revoke](#revoke) - Revokes an invitation
 
 ## Create
@@ -22,9 +23,9 @@ Also, trying to create an invitation for an email address that already exists in
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -68,15 +69,16 @@ Returns all non-revoked invitations for your application, sorted by creation dat
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Invitations.ListAsync(
     limit: 20,
     offset: 10,
-    status: Clerk.BackendAPI.Models.Operations.ListInvitationsQueryParamStatus.Pending
+    status: ListInvitationsQueryParamStatus.Pending,
+    query: "<value>"
 );
 
 // handle response
@@ -89,6 +91,7 @@ var res = await sdk.Invitations.ListAsync(
 | `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
 | `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
 | `Status`                                                                                                                                  | [ListInvitationsQueryParamStatus](../../Models/Operations/ListInvitationsQueryParamStatus.md)                                             | :heavy_minus_sign:                                                                                                                        | Filter invitations based on their status                                                                                                  | pending                                                                                                                                   |
+| `Query`                                                                                                                                   | *string*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Filter invitations based on their `email_address` or `id`                                                                                 |                                                                                                                                           |
 
 ### Response
 
@@ -99,6 +102,51 @@ var res = await sdk.Invitations.ListAsync(
 | Error Type                              | Status Code                             | Content Type                            |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | Clerk.BackendAPI.Models.Errors.SDKError | 4XX, 5XX                                | \*/\*                                   |
+
+## CreateBulkInvitations
+
+Use this API operation to create multiple invitations for the provided email addresses. You can choose to send the
+invitations as emails by setting the `notify` parameter to `true`. There cannot be an existing invitation for any
+of the email addresses you provide unless you set `ignore_existing` to `true` for specific email addresses. Please
+note that there must be no existing user for any of the email addresses you provide, and this rule cannot be bypassed.
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+List<RequestBody> req = new List<RequestBody>() {
+    new RequestBody() {
+        EmailAddress = "Era_Pouros@yahoo.com",
+    },
+};
+
+var res = await sdk.Invitations.CreateBulkInvitationsAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `request`                                                   | List<[RequestBody](../../Models/Operations/RequestBody.md)> | :heavy_check_mark:                                          | The request object to use for the request.                  |
+
+### Response
+
+**[CreateBulkInvitationsResponse](../../Models/Operations/CreateBulkInvitationsResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Revoke
 
@@ -111,7 +159,6 @@ Only active (i.e. non-revoked) invitations can be revoked.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");

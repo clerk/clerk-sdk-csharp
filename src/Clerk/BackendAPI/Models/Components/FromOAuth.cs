@@ -13,23 +13,20 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     
-    public class Oauth
+    public class FromOAuth
     {
 
         [JsonProperty("status")]
-        public OauthVerificationStatus Status { get; set; } = default!;
+        public FromOAuthVerificationStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
-        public OauthVerificationStrategy Strategy { get; set; } = default!;
-
-        [JsonProperty("external_verification_redirect_url")]
-        public string? ExternalVerificationRedirectUrl { get; set; }
+        public string Strategy { get; set; } = default!;
 
         [JsonProperty("error")]
         public Error? Error { get; set; } = null;
 
-        [JsonProperty("expire_at")]
-        public long ExpireAt { get; set; } = default!;
+        [JsonProperty("expire_at", NullValueHandling = NullValueHandling.Include)]
+        public long? ExpireAt { get; set; }
 
         [JsonProperty("attempts")]
         public long? Attempts { get; set; } = null;

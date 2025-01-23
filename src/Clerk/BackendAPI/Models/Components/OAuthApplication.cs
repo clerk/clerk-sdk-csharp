@@ -49,6 +49,12 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("user_info_url")]
         public string UserInfoUrl { get; set; } = default!;
 
+        [JsonProperty("discovery_url")]
+        public string DiscoveryUrl { get; set; } = default!;
+
+        [JsonProperty("token_introspection_url")]
+        public string TokenIntrospectionUrl { get; set; } = default!;
+
         /// <summary>
         /// Unix timestamp of creation.<br/>
         /// 

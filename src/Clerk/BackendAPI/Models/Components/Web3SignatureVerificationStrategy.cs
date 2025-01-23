@@ -19,6 +19,8 @@ namespace Clerk.BackendAPI.Models.Components
         Web3MetamaskSignature,
         [JsonProperty("web3_coinbase_wallet_signature")]
         Web3CoinbaseWalletSignature,
+        [JsonProperty("web3_okx_wallet_signature")]
+        Web3OkxWalletSignature,
     }
 
     public static class Web3SignatureVerificationStrategyExtension

@@ -20,7 +20,7 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         [JsonProperty("object")]
-        public Models.Operations.Object? Object { get; set; }
+        public CreateSessionTokenFromTemplateObject? Object { get; set; }
 
         [JsonProperty("jwt")]
         public string? Jwt { get; set; }

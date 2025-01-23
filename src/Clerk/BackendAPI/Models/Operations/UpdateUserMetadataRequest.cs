@@ -22,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         public string UserId { get; set; } = default!;
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public UpdateUserMetadataRequestBody RequestBody { get; set; } = default!;
+        public UpdateUserMetadataRequestBody? RequestBody { get; set; }
     }
 }

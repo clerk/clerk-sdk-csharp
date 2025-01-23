@@ -42,9 +42,9 @@ The users are returned sorted by creation date, with the newest users appearing 
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -71,7 +71,10 @@ GetUserListRequest req = new GetUserListRequest() {
         "org-id-123",
     },
     Query = "John",
-    LastActiveAtSince = 1700690400000,
+    LastActiveAtBefore = 1700690400000,
+    LastActiveAtAfter = 1700690400000,
+    CreatedAtBefore = 1730160000000,
+    CreatedAtAfter = 1730160000000,
     Limit = 20,
     Offset = 10,
 };
@@ -112,9 +115,9 @@ A rate limit rule of 20 requests per 10 seconds is applied to this endpoint.
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -185,9 +188,9 @@ Returns a total count of all users that match the given filtering criteria.
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -243,7 +246,6 @@ Retrieve the details of a user
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -289,9 +291,9 @@ You can also choose to sign the user out of all their active sessions on any dev
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -360,7 +362,6 @@ Delete the specified user
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -395,7 +396,6 @@ Marks the given user as banned, which means that all their sessions are revoked 
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -430,7 +430,6 @@ Removes the ban mark from the given user.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -466,7 +465,6 @@ Lock duration can be configured in the instance's restrictions settings.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -501,7 +499,6 @@ Removes the lock from the given user.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -536,8 +533,8 @@ Update a user's profile image
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -575,7 +572,6 @@ Delete a user's profile image
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -617,9 +613,8 @@ You can remove metadata keys at any level by setting their value to `null`.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
-using System.Collections.Generic;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -636,7 +631,7 @@ var res = await sdk.Users.UpdateMetadataAsync(
 | Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
 | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `UserId`                                                                                  | *string*                                                                                  | :heavy_check_mark:                                                                        | The ID of the user whose metadata will be updated and merged                              | user_123456789                                                                            |
-| `RequestBody`                                                                             | [UpdateUserMetadataRequestBody](../../Models/Operations/UpdateUserMetadataRequestBody.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |                                                                                           |
+| `RequestBody`                                                                             | [UpdateUserMetadataRequestBody](../../Models/Operations/UpdateUserMetadataRequestBody.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |                                                                                           |
 
 ### Response
 
@@ -658,7 +653,6 @@ For OAuth 2.0, if the access token has expired and we have a corresponding refre
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -686,7 +680,7 @@ var res = await sdk.Users.GetOAuthAccessTokenAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## GetOrganizationMemberships
@@ -697,7 +691,6 @@ Retrieve a paginated list of the user's organization memberships
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -738,8 +731,8 @@ Retrieve a paginated list of the user's organization invitations
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -747,7 +740,7 @@ var res = await sdk.Users.GetOrganizationInvitationsAsync(
     userId: "<id>",
     limit: 20,
     offset: 10,
-    status: Clerk.BackendAPI.Models.Operations.QueryParamStatus.Pending
+    status: QueryParamStatus.Pending
 );
 
 // handle response
@@ -782,8 +775,8 @@ Useful for custom auth flows and re-verification.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -802,7 +795,7 @@ var res = await sdk.Users.VerifyPasswordAsync(
 | Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
 | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | `UserId`                                                                          | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the user for whom to verify the password                                | user_123                                                                          |
-| `RequestBody`                                                                     | [VerifyPasswordRequestBody](../../Models/Operations/VerifyPasswordRequestBody.md) | :heavy_check_mark:                                                                | N/A                                                                               |                                                                                   |
+| `RequestBody`                                                                     | [VerifyPasswordRequestBody](../../Models/Operations/VerifyPasswordRequestBody.md) | :heavy_minus_sign:                                                                | N/A                                                                               |                                                                                   |
 
 ### Response
 
@@ -826,8 +819,8 @@ Useful for custom auth flows and re-verification.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -846,7 +839,7 @@ var res = await sdk.Users.VerifyTotpAsync(
 | Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | `UserId`                                                                  | *string*                                                                  | :heavy_check_mark:                                                        | The ID of the user for whom to verify the TOTP                            | usr_1a2b3c                                                                |
-| `RequestBody`                                                             | [VerifyTOTPRequestBody](../../Models/Operations/VerifyTOTPRequestBody.md) | :heavy_check_mark:                                                        | N/A                                                                       |                                                                           |
+| `RequestBody`                                                             | [VerifyTOTPRequestBody](../../Models/Operations/VerifyTOTPRequestBody.md) | :heavy_minus_sign:                                                        | N/A                                                                       |                                                                           |
 
 ### Response
 
@@ -867,7 +860,6 @@ Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authen
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -891,7 +883,8 @@ var res = await sdk.Users.DisableMfaAsync(userId: "user_123456");
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 404, 500                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 404                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## DeleteBackupCode
@@ -902,7 +895,6 @@ Disable all of a user's backup codes.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -926,7 +918,8 @@ var res = await sdk.Users.DeleteBackupCodeAsync(userId: "<id>");
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 404, 500                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 404                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## DeletePasskey
@@ -937,7 +930,6 @@ Delete the passkey identification for a given user and notify them through email
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -965,7 +957,8 @@ var res = await sdk.Users.DeletePasskeyAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404, 500                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## CreateTotp
@@ -977,7 +970,6 @@ Creates a TOTP (Time-based One-Time Password) for a given user, returning both t
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -1001,7 +993,8 @@ var res = await sdk.Users.CreateTotpAsync(userId: "<id>");
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404, 500                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## DeleteTOTP
@@ -1012,7 +1005,6 @@ Deletes all of the user's TOTPs.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -1036,7 +1028,8 @@ var res = await sdk.Users.DeleteTOTPAsync(userId: "<id>");
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 404, 500                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 404                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## DeleteExternalAccount
@@ -1047,7 +1040,6 @@ Delete an external account by ID.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -1075,5 +1067,6 @@ var res = await sdk.Users.DeleteExternalAccountAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404, 500                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

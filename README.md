@@ -69,7 +69,6 @@ dotnet add reference src/Clerk/BackendAPI/Clerk.BackendAPI.csproj
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -94,7 +93,6 @@ This SDK supports the following security scheme globally:
 To authenticate with the API the `BearerAuth` parameter must be set when initializing the SDK client instance. For example:
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -207,6 +205,7 @@ If the request is correctly authenticated, the token's claims are made available
 
 ### [InstanceSettings](docs/sdks/instancesettings/README.md)
 
+* [GetInstance](docs/sdks/instancesettings/README.md#getinstance) - Fetch the current instance
 * [Update](docs/sdks/instancesettings/README.md#update) - Update instance settings
 * [UpdateRestrictions](docs/sdks/instancesettings/README.md#updaterestrictions) - Update instance restrictions
 * [UpdateOrganization](docs/sdks/instancesettings/README.md#updateorganization) - Update instance organization settings
@@ -215,6 +214,7 @@ If the request is correctly authenticated, the token's claims are made available
 
 * [Create](docs/sdks/invitations/README.md#create) - Create an invitation
 * [List](docs/sdks/invitations/README.md#list) - List all invitations
+* [CreateBulkInvitations](docs/sdks/invitations/README.md#createbulkinvitations) - Create multiple invitations
 * [Revoke](docs/sdks/invitations/README.md#revoke) - Revokes an invitation
 
 ### [Jwks](docs/sdks/jwks/README.md)
@@ -311,9 +311,11 @@ If the request is correctly authenticated, the token's claims are made available
 ### [Sessions](docs/sdks/sessions/README.md)
 
 * [List](docs/sdks/sessions/README.md#list) - List all sessions
+* [CreateSession](docs/sdks/sessions/README.md#createsession) - Create a new active session
 * [Get](docs/sdks/sessions/README.md#get) - Retrieve a session
 * [Revoke](docs/sdks/sessions/README.md#revoke) - Revoke a session
 * [~~Verify~~](docs/sdks/sessions/README.md#verify) - Verify a session :warning: **Deprecated**
+* [CreateSessionToken](docs/sdks/sessions/README.md#createsessiontoken) - Create a session token
 * [CreateToken](docs/sdks/sessions/README.md#createtoken) - Create a session token from a jwt template
 
 ### [SignInTokens](docs/sdks/signintokens/README.md)
@@ -360,6 +362,11 @@ If the request is correctly authenticated, the token's claims are made available
 
 * [Delete](docs/sdks/userweb3wallets/README.md#delete) - Delete a user web3 wallet
 
+### [WaitlistEntries](docs/sdks/waitlistentries/README.md)
+
+* [ListWaitlistEntries](docs/sdks/waitlistentries/README.md#listwaitlistentries) - List all waitlist entries
+* [CreateWaitlistEntry](docs/sdks/waitlistentries/README.md#createwaitlistentry) - Create a waitlist entry
+
 ### [Webhooks](docs/sdks/webhooks/README.md)
 
 * [CreateSvixApp](docs/sdks/webhooks/README.md#createsvixapp) - Create a Svix app
@@ -393,10 +400,9 @@ When custom error responses are specified for an operation, the SDK may also thr
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
-using System;
 using Clerk.BackendAPI.Models.Errors;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -434,8 +440,6 @@ catch (Exception ex)
 The default server can also be overridden globally by passing a URL to the `serverUrl: string` optional parameter when initializing the SDK client instance. For example:
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 

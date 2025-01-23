@@ -22,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         public string PhoneNumberId { get; set; } = default!;
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public UpdatePhoneNumberRequestBody RequestBody { get; set; } = default!;
+        public UpdatePhoneNumberRequestBody? RequestBody { get; set; }
     }
 }

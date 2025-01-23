@@ -22,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         public string OrganizationId { get; set; } = default!;
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public CreateOrganizationInvitationRequestBody RequestBody { get; set; } = default!;
+        public CreateOrganizationInvitationRequestBody? RequestBody { get; set; }
     }
 }

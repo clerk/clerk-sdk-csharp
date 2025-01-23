@@ -20,8 +20,8 @@ Adds a user as a member to the given organization.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -62,7 +62,6 @@ Retrieves all user memberships for the given organization
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -105,8 +104,8 @@ Updates the properties of an existing organization membership
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -137,7 +136,7 @@ var res = await sdk.OrganizationMemberships.UpdateAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 404, 422                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Delete
@@ -148,7 +147,6 @@ Removes the given membership from the organization
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -176,7 +174,7 @@ var res = await sdk.OrganizationMemberships.DeleteAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 404                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## UpdateMetadata
@@ -189,9 +187,9 @@ You can remove metadata keys at any level by setting their value to `null`.
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -217,7 +215,7 @@ var res = await sdk.OrganizationMemberships.UpdateMetadataAsync(
 | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `OrganizationId`                                                                                                              | *string*                                                                                                                      | :heavy_check_mark:                                                                                                            | The ID of the organization the membership belongs to                                                                          | org_123456                                                                                                                    |
 | `UserId`                                                                                                                      | *string*                                                                                                                      | :heavy_check_mark:                                                                                                            | The ID of the user that this membership belongs to                                                                            | user_654321                                                                                                                   |
-| `RequestBody`                                                                                                                 | [UpdateOrganizationMembershipMetadataRequestBody](../../Models/Operations/UpdateOrganizationMembershipMetadataRequestBody.md) | :heavy_check_mark:                                                                                                            | N/A                                                                                                                           |                                                                                                                               |
+| `RequestBody`                                                                                                                 | [UpdateOrganizationMembershipMetadataRequestBody](../../Models/Operations/UpdateOrganizationMembershipMetadataRequestBody.md) | :heavy_minus_sign:                                                                                                            | N/A                                                                                                                           |                                                                                                                               |
 
 ### Response
 
@@ -238,7 +236,6 @@ Retrieves all organization user memberships for the given instance.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -268,5 +265,6 @@ var res = await sdk.OrganizationMemberships.ListForInstanceAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422, 500                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

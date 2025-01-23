@@ -91,5 +91,38 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
+
+        /// <summary>
+        /// Counts users with emails that match the given query, via case-insensitive partial match.<br/>
+        /// 
+        /// <remarks>
+        /// For example, `email_address_query=ello` will match a user with the email `HELLO@example.com`,<br/>
+        /// and will be included in the resulting count.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=email_address_query")]
+        public string? EmailAddressQuery { get; set; }
+
+        /// <summary>
+        /// Counts users with phone numbers that match the given query, via case-insensitive partial match.<br/>
+        /// 
+        /// <remarks>
+        /// For example, `phone_number_query=555` will match a user with the phone number `+1555xxxxxxx`,<br/>
+        /// and will be included in the resulting count.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=phone_number_query")]
+        public string? PhoneNumberQuery { get; set; }
+
+        /// <summary>
+        /// Counts users with usernames that match the given query, via case-insensitive partial match.<br/>
+        /// 
+        /// <remarks>
+        /// For example, `username_query=CoolUser` will match a user with the username `SomeCoolUser`,<br/>
+        /// and will be included in the resulting count.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=username_query")]
+        public string? UsernameQuery { get; set; }
     }
 }

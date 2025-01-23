@@ -19,13 +19,13 @@ Updates the existing template of the given type and slug
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailAndSmsTemplates.UpsertAsync(
-    templateType: Clerk.BackendAPI.Models.Operations.UpsertTemplatePathParamTemplateType.Sms,
+    templateType: UpsertTemplatePathParamTemplateType.Sms,
     slug: "verification-code",
     requestBody: new UpsertTemplateRequestBody() {
         Name = "Verification Code",
@@ -70,13 +70,13 @@ Reverts an updated template to its default state
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailAndSmsTemplates.RevertAsync(
-    templateType: Clerk.BackendAPI.Models.Operations.RevertTemplatePathParamTemplateType.Email,
+    templateType: RevertTemplatePathParamTemplateType.Email,
     slug: "welcome-email"
 );
 
@@ -111,8 +111,8 @@ Returns a preview of a template for a given template_type, slug and body
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 

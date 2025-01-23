@@ -9,7 +9,7 @@
 
 ## Create
 
-Retrieve a new testing token. Only available for development instances.
+Retrieve a new testing token.
 
 ### Example Usage
 

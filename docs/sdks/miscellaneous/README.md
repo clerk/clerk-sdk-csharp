@@ -18,8 +18,6 @@ It is used by Clerk SDKs when the user's authentication state cannot be immediat
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi();
 

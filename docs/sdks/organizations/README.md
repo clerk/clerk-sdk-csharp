@@ -28,8 +28,8 @@ Most recent organizations will be returned first.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -66,7 +66,6 @@ var res = await sdk.Organizations.ListAsync(req);
 ## Create
 
 Creates a new organization with the given name for an instance.
-In order to successfully create an organization you need to provide the ID of the User who will become the organization administrator.
 You can specify an optional slug for the new organization.
 If provided, the organization slug can contain only lowercase alphanumeric characters (letters and digits) and the dash "-".
 Organization slugs must be unique for the instance.
@@ -81,9 +80,9 @@ the next time they create a session, presuming they don't explicitly set a diffe
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -130,7 +129,6 @@ Fetches the organization whose ID or slug matches the provided `id_or_slug` URL 
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -169,9 +167,9 @@ Updates an existing organization
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -222,7 +220,6 @@ This is not reversible.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -260,9 +257,9 @@ You can remove metadata keys at any level by setting their value to `null`.
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -310,8 +307,9 @@ Only the following file content types are supported: `image/jpeg`, `image/png`, 
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+using System;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -334,7 +332,7 @@ var res = await sdk.Organizations.UploadLogoAsync(
 | Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
 | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | `OrganizationId`                                                                                  | *string*                                                                                          | :heavy_check_mark:                                                                                | The ID of the organization for which to upload a logo                                             | org_12345                                                                                         |
-| `RequestBody`                                                                                     | [UploadOrganizationLogoRequestBody](../../Models/Operations/UploadOrganizationLogoRequestBody.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
+| `RequestBody`                                                                                     | [UploadOrganizationLogoRequestBody](../../Models/Operations/UploadOrganizationLogoRequestBody.md) | :heavy_minus_sign:                                                                                | N/A                                                                                               |                                                                                                   |
 
 ### Response
 
@@ -355,7 +353,6 @@ Delete the organization's logo.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");

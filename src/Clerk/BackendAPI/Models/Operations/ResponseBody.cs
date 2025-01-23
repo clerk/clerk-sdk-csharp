@@ -64,5 +64,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("token_secret")]
         public string? TokenSecret { get; set; }
+
+        /// <summary>
+        /// Unix timestamp of the access token expiration.
+        /// </summary>
+        [JsonProperty("expires_at")]
+        public long? ExpiresAt { get; set; } = null;
     }
 }

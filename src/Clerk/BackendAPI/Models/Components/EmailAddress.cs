@@ -46,6 +46,16 @@ namespace Clerk.BackendAPI.Models.Components
         public List<IdentificationLink> LinkedTo { get; set; } = default!;
 
         /// <summary>
+        /// Indicates whether this email address domain matches an active enterprise connection.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("matches_sso_connection")]
+        public bool? MatchesSsoConnection { get; set; }
+
+        /// <summary>
         /// Unix timestamp of creation<br/>
         /// 
         /// <remarks>

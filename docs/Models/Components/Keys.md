@@ -11,3 +11,5 @@
 | `Alg`              | *string*           | :heavy_minus_sign: | N/A                |
 | `N`                | *string*           | :heavy_minus_sign: | N/A                |
 | `E`                | *string*           | :heavy_minus_sign: | N/A                |
+| `X`                | *string*           | :heavy_minus_sign: | N/A                |
+| `Crv`              | *string*           | :heavy_minus_sign: | N/A                |

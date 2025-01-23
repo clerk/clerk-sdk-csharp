@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     
     public class CreateSessionTokenFromTemplateRequest
@@ -25,5 +26,8 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=template_name")]
         public string TemplateName { get; set; } = default!;
+
+        [SpeakeasyMetadata("request:mediaType=application/json")]
+        public CreateSessionTokenFromTemplateRequestBody? RequestBody { get; set; }
     }
 }

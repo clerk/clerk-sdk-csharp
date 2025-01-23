@@ -13,30 +13,24 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     using System;
     
-    public enum OauthVerificationStatus
+    public enum FromOAuthVerificationStatus
     {
         [JsonProperty("unverified")]
         Unverified,
         [JsonProperty("verified")]
         Verified,
-        [JsonProperty("failed")]
-        Failed,
-        [JsonProperty("expired")]
-        Expired,
-        [JsonProperty("transferable")]
-        Transferable,
     }
 
-    public static class OauthVerificationStatusExtension
+    public static class FromOAuthVerificationStatusExtension
     {
-        public static string Value(this OauthVerificationStatus value)
+        public static string Value(this FromOAuthVerificationStatus value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static OauthVerificationStatus ToEnum(this string value)
+        public static FromOAuthVerificationStatus ToEnum(this string value)
         {
-            foreach(var field in typeof(OauthVerificationStatus).GetFields())
+            foreach(var field in typeof(FromOAuthVerificationStatus).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -49,14 +43,14 @@ namespace Clerk.BackendAPI.Models.Components
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is OauthVerificationStatus)
+                    if (enumVal is FromOAuthVerificationStatus)
                     {
-                        return (OauthVerificationStatus)enumVal;
+                        return (FromOAuthVerificationStatus)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum OauthVerificationStatus");
+            throw new Exception($"Unknown value {value} for enum FromOAuthVerificationStatus");
         }
     }
 

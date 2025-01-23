@@ -11,12 +11,12 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
-    using Newtonsoft.Json.Linq;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    using System;
     
 
     public class VerificationType
@@ -28,7 +28,7 @@ namespace Clerk.BackendAPI.Models.Components
         
         public static VerificationType Admin { get { return new VerificationType("Admin"); } }
         
-        public static VerificationType Oauth { get { return new VerificationType("Oauth"); } }
+        public static VerificationType FromOAuth { get { return new VerificationType("FromOAuth"); } }
         
         public static VerificationType Null { get { return new VerificationType("null"); } }
 
@@ -38,7 +38,7 @@ namespace Clerk.BackendAPI.Models.Components
             switch(v) {
                 case "OTP": return Otp;
                 case "Admin": return Admin;
-                case "Oauth": return Oauth;
+                case "FromOAuth": return FromOAuth;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for VerificationType");
             }
@@ -72,7 +72,7 @@ namespace Clerk.BackendAPI.Models.Components
         public Admin? Admin { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public Oauth? Oauth { get; set; }
+        public FromOAuth? FromOAuth { get; set; }
 
         public VerificationType Type { get; set; }
 
@@ -93,11 +93,11 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static Verification CreateOauth(Oauth oauth) {
-            VerificationType typ = VerificationType.Oauth;
+        public static Verification CreateFromOAuth(FromOAuth fromOAuth) {
+            VerificationType typ = VerificationType.FromOAuth;
 
             Verification res = new Verification(typ);
-            res.Oauth = oauth;
+            res.FromOAuth = fromOAuth;
             return res;
         }
 
@@ -165,14 +165,14 @@ namespace Clerk.BackendAPI.Models.Components
 
                 try
                 {
-                    return new Verification(VerificationType.Oauth)
+                    return new Verification(VerificationType.FromOAuth)
                     {
-                        Oauth = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Oauth>(json)
+                        FromOAuth = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<FromOAuth>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(Oauth), new Verification(VerificationType.Oauth), "Oauth"));
+                    fallbackCandidates.Add((typeof(FromOAuth), new Verification(VerificationType.FromOAuth), "FromOAuth"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -228,9 +228,9 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Admin));
                     return;
                 }
-                if (res.Oauth != null)
+                if (res.FromOAuth != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.Oauth));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.FromOAuth));
                     return;
                 }
 
