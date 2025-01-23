@@ -11,6 +11,8 @@ using Clerk.BackendAPI.Utils;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
+using WellKnownJWKS = Clerk.BackendAPI.Models.Components.Jwks;
+
 namespace Clerk.BackendAPI.Helpers.Jwks;
 
 public static class VerifyToken
