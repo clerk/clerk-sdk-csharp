@@ -15,8 +15,8 @@ Verification.CreateOtp(/* values here */);
 Verification.CreateAdmin(/* values here */);
 ```
 
-### Oauth
+### FromOAuth
 
 ```csharp
-Verification.CreateOauth(/* values here */);
+Verification.CreateFromOAuth(/* values here */);
 ```

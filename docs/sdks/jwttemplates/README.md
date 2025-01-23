@@ -46,8 +46,8 @@ Create a new JWT template
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -91,7 +91,6 @@ Retrieve the details of a given JWT template
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -126,8 +125,8 @@ Updates an existing JWT template
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -144,7 +143,7 @@ var res = await sdk.JwtTemplates.UpdateAsync(
 | Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | `TemplateId`                                                                            | *string*                                                                                | :heavy_check_mark:                                                                      | The ID of the JWT template to update                                                    |
-| `RequestBody`                                                                           | [UpdateJWTTemplateRequestBody](../../Models/Operations/UpdateJWTTemplateRequestBody.md) | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `RequestBody`                                                                           | [UpdateJWTTemplateRequestBody](../../Models/Operations/UpdateJWTTemplateRequestBody.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
 
 ### Response
 
@@ -165,7 +164,6 @@ Delete a Template
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");

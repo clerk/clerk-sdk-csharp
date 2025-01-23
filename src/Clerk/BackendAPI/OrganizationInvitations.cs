@@ -13,14 +13,14 @@ namespace Clerk.BackendAPI
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Models.Errors;
     using Clerk.BackendAPI.Models.Operations;
-    using Clerk.BackendAPI.Utils.Retries;
     using Clerk.BackendAPI.Utils;
+    using Clerk.BackendAPI.Utils.Retries;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
-    using System.Net.Http.Headers;
-    using System.Net.Http;
-    using System.Threading.Tasks;
     using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Threading.Tasks;
 
     public interface IOrganizationInvitations
     {
@@ -61,7 +61,7 @@ namespace Clerk.BackendAPI
         /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
         /// </remarks>
         /// </summary>
-        Task<CreateOrganizationInvitationResponse> CreateAsync(string organizationId, CreateOrganizationInvitationRequestBody requestBody);
+        Task<CreateOrganizationInvitationResponse> CreateAsync(string organizationId, CreateOrganizationInvitationRequestBody? requestBody = null);
 
         /// <summary>
         /// Get a list of organization invitations
@@ -75,7 +75,7 @@ namespace Clerk.BackendAPI
         /// Any invitations created as a result of an Organization Domain are not included in the results.
         /// </remarks>
         /// </summary>
-        Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, long? limit = null, long? offset = null, ListOrganizationInvitationsQueryParamStatus? status = null);
+        Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, long? limit = 10, long? offset = 0, ListOrganizationInvitationsQueryParamStatus? status = null);
 
         /// <summary>
         /// Bulk create and send organization invitations
@@ -96,7 +96,7 @@ namespace Clerk.BackendAPI
         /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
         /// </remarks>
         /// </summary>
-        Task<CreateOrganizationInvitationBulkResponse> CreateBulkAsync(string organizationId, List<RequestBody> requestBody);
+        Task<CreateOrganizationInvitationBulkResponse> CreateBulkAsync(string organizationId, List<CreateOrganizationInvitationBulkRequestBody> requestBody);
 
         /// <summary>
         /// Get a list of pending organization invitations
@@ -110,7 +110,7 @@ namespace Clerk.BackendAPI
         /// Any invitations created as a result of an Organization Domain are not included in the results.
         /// </remarks>
         /// </summary>
-        Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, long? limit = null, long? offset = null);
+        Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, long? limit = 10, long? offset = 0);
 
         /// <summary>
         /// Retrieve an organization invitation by ID
@@ -139,10 +139,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.2.4";
-        private const string _sdkGenVersion = "2.481.0";
+        private const string _sdkVersion = "0.3.0";
+        private const string _sdkGenVersion = "2.495.0";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.2.4 2.481.0 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.3.0 2.495.0 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -223,7 +223,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{400, 404, 422, 500}.Contains(responseStatusCode))
+            else if(new List<int>{400, 404, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -233,7 +233,21 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -241,7 +255,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateOrganizationInvitationResponse> CreateAsync(string organizationId, CreateOrganizationInvitationRequestBody requestBody)
+        public async Task<CreateOrganizationInvitationResponse> CreateAsync(string organizationId, CreateOrganizationInvitationRequestBody? requestBody = null)
         {
             var request = new CreateOrganizationInvitationRequest()
             {
@@ -254,7 +268,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -330,7 +344,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -338,7 +356,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, long? limit = null, long? offset = null, ListOrganizationInvitationsQueryParamStatus? status = null)
+        public async Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, long? limit = 10, long? offset = 0, ListOrganizationInvitationsQueryParamStatus? status = null)
         {
             var request = new ListOrganizationInvitationsRequest()
             {
@@ -423,7 +441,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -431,7 +453,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateOrganizationInvitationBulkResponse> CreateBulkAsync(string organizationId, List<RequestBody> requestBody)
+        public async Task<CreateOrganizationInvitationBulkResponse> CreateBulkAsync(string organizationId, List<CreateOrganizationInvitationBulkRequestBody> requestBody)
         {
             var request = new CreateOrganizationInvitationBulkRequest()
             {
@@ -520,7 +542,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -529,7 +555,7 @@ namespace Clerk.BackendAPI
         }
 
         [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
-        public async Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, long? limit = null, long? offset = null)
+        public async Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, long? limit = 10, long? offset = 0)
         {
             var request = new ListPendingOrganizationInvitationsRequest()
             {
@@ -613,7 +639,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -704,7 +734,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -802,7 +836,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }

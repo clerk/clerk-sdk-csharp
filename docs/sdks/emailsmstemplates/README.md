@@ -20,12 +20,12 @@ The templates are returned sorted by position.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.EmailSmsTemplates.ListAsync(templateType: Clerk.BackendAPI.Models.Operations.TemplateType.Email);
+var res = await sdk.EmailSmsTemplates.ListAsync(templateType: TemplateType.Email);
 
 // handle response
 ```
@@ -57,13 +57,13 @@ Returns the details of a template
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailSmsTemplates.GetAsync(
-    templateType: Clerk.BackendAPI.Models.Operations.PathParamTemplateType.Email,
+    templateType: PathParamTemplateType.Email,
     slug: "welcome-email"
 );
 
@@ -100,13 +100,13 @@ The app developer will need to listen to the `email.created` or `sms.created` we
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailSmsTemplates.ToggleDeliveryAsync(
-    templateType: Clerk.BackendAPI.Models.Operations.ToggleTemplateDeliveryPathParamTemplateType.Email,
+    templateType: ToggleTemplateDeliveryPathParamTemplateType.Email,
     slug: "welcome-email",
     requestBody: new ToggleTemplateDeliveryRequestBody() {
         DeliveredByClerk = true,

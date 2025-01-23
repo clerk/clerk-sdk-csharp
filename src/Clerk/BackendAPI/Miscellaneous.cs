@@ -13,13 +13,13 @@ namespace Clerk.BackendAPI
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Models.Errors;
     using Clerk.BackendAPI.Models.Operations;
-    using Clerk.BackendAPI.Utils.Retries;
     using Clerk.BackendAPI.Utils;
-    using System.Collections.Generic;
-    using System.Net.Http.Headers;
-    using System.Net.Http;
-    using System.Threading.Tasks;
+    using Clerk.BackendAPI.Utils.Retries;
     using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Various endpoints that do not belong in any particular category.
@@ -45,10 +45,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.2.4";
-        private const string _sdkGenVersion = "2.481.0";
+        private const string _sdkVersion = "0.3.0";
+        private const string _sdkGenVersion = "2.495.0";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.2.4 2.481.0 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.3.0 2.495.0 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -121,7 +121,11 @@ namespace Clerk.BackendAPI
                     }
                 };
             }
-            else if(responseStatusCode == 400 || responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode == 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 400 || responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode == 500 || responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }

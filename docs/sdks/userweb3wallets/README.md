@@ -15,7 +15,6 @@ Delete the web3 wallet identification for a given user.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -43,5 +42,6 @@ var res = await sdk.UserWeb3Wallets.DeleteAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404, 500                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

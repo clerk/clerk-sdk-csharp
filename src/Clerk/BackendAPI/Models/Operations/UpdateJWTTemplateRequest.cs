@@ -22,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         public string TemplateId { get; set; } = default!;
 
         [SpeakeasyMetadata("request:mediaType=application/json")]
-        public UpdateJWTTemplateRequestBody RequestBody { get; set; } = default!;
+        public UpdateJWTTemplateRequestBody? RequestBody { get; set; }
     }
 }

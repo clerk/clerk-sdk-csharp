@@ -13,14 +13,14 @@ namespace Clerk.BackendAPI
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Models.Errors;
     using Clerk.BackendAPI.Models.Operations;
-    using Clerk.BackendAPI.Utils.Retries;
     using Clerk.BackendAPI.Utils;
+    using Clerk.BackendAPI.Utils.Retries;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
-    using System.Net.Http.Headers;
-    using System.Net.Http;
-    using System.Threading.Tasks;
     using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// The user object represents a user that has successfully signed up to your application.
@@ -171,7 +171,7 @@ namespace Clerk.BackendAPI
         /// You can remove metadata keys at any level by setting their value to `null`.
         /// </remarks>
         /// </summary>
-        Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody requestBody);
+        Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody? requestBody = null);
 
         /// <summary>
         /// Retrieve the OAuth access token of a user
@@ -190,7 +190,7 @@ namespace Clerk.BackendAPI
         /// Retrieve a paginated list of the user&apos;s organization memberships
         /// </remarks>
         /// </summary>
-        Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, long? limit = null, long? offset = null);
+        Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, long? limit = 10, long? offset = 0);
 
         /// <summary>
         /// Retrieve all invitations for a user
@@ -199,7 +199,7 @@ namespace Clerk.BackendAPI
         /// Retrieve a paginated list of the user&apos;s organization invitations
         /// </remarks>
         /// </summary>
-        Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, long? limit = null, long? offset = null, QueryParamStatus? status = null);
+        Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, long? limit = 10, long? offset = 0, QueryParamStatus? status = null);
 
         /// <summary>
         /// Verify the password of a user
@@ -209,7 +209,7 @@ namespace Clerk.BackendAPI
         /// Useful for custom auth flows and re-verification.
         /// </remarks>
         /// </summary>
-        Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody requestBody);
+        Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody? requestBody = null);
 
         /// <summary>
         /// Verify a TOTP or backup code for a user
@@ -221,7 +221,7 @@ namespace Clerk.BackendAPI
         /// Useful for custom auth flows and re-verification.
         /// </remarks>
         /// </summary>
-        Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody requestBody);
+        Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody? requestBody = null);
 
         /// <summary>
         /// Disable a user&apos;s MFA methods
@@ -288,10 +288,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.2.4";
-        private const string _sdkGenVersion = "2.481.0";
+        private const string _sdkVersion = "0.3.0";
+        private const string _sdkGenVersion = "2.495.0";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.2.4 2.481.0 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.3.0 2.495.0 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -382,7 +382,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -475,7 +479,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -561,7 +569,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -651,7 +663,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -748,7 +764,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -838,7 +858,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -928,7 +952,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1018,7 +1046,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1108,7 +1140,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1198,7 +1234,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1295,7 +1335,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1385,7 +1429,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1393,7 +1441,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody requestBody)
+        public async Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody? requestBody = null)
         {
             var request = new UpdateUserMetadataRequest()
             {
@@ -1406,7 +1454,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -1482,7 +1530,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1518,7 +1570,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await _client.SendAsync(httpRequest);
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1563,7 +1615,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{400, 422}.Contains(responseStatusCode))
+            else if(new List<int>{400, 404, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -1573,7 +1625,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1581,7 +1637,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, long? limit = null, long? offset = null)
+        public async Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, long? limit = 10, long? offset = 0)
         {
             var request = new UsersGetOrganizationMembershipsRequest()
             {
@@ -1665,7 +1721,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1673,7 +1733,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, long? limit = null, long? offset = null, QueryParamStatus? status = null)
+        public async Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, long? limit = 10, long? offset = 0, QueryParamStatus? status = null)
         {
             var request = new UsersGetOrganizationInvitationsRequest()
             {
@@ -1758,7 +1818,11 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1766,7 +1830,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody requestBody)
+        public async Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody? requestBody = null)
         {
             var request = new VerifyPasswordRequest()
             {
@@ -1779,7 +1843,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -1845,7 +1909,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode == 400 || responseStatusCode == 404 || responseStatusCode == 422 || responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 400 || responseStatusCode == 404 || responseStatusCode == 422 || responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1859,11 +1923,15 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody requestBody)
+        public async Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody? requestBody = null)
         {
             var request = new VerifyTOTPRequest()
             {
@@ -1876,7 +1944,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -1942,7 +2010,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode == 400 || responseStatusCode == 404 || responseStatusCode == 422 || responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 400 || responseStatusCode == 404 || responseStatusCode == 422 || responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -1955,6 +2023,10 @@ namespace Clerk.BackendAPI
                 }
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
@@ -2032,7 +2104,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{404, 500}.Contains(responseStatusCode))
+            else if(responseStatusCode == 404)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -2042,7 +2114,21 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -2122,7 +2208,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{404, 500}.Contains(responseStatusCode))
+            else if(responseStatusCode == 404)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -2132,7 +2218,21 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -2213,7 +2313,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{403, 404, 500}.Contains(responseStatusCode))
+            else if(new List<int>{403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -2223,7 +2323,21 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -2303,7 +2417,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{403, 404, 500}.Contains(responseStatusCode))
+            else if(new List<int>{403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -2313,7 +2427,21 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -2393,7 +2521,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{404, 500}.Contains(responseStatusCode))
+            else if(responseStatusCode == 404)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -2403,7 +2531,21 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }
@@ -2484,7 +2626,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{400, 403, 404, 500}.Contains(responseStatusCode))
+            else if(new List<int>{400, 403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -2494,7 +2636,21 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
             }

@@ -5,9 +5,37 @@
 
 ### Available Operations
 
+* [GetInstance](#getinstance) - Fetch the current instance
 * [Update](#update) - Update instance settings
 * [UpdateRestrictions](#updaterestrictions) - Update instance restrictions
 * [UpdateOrganization](#updateorganization) - Update instance organization settings
+
+## GetInstance
+
+Fetches the current instance
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.InstanceSettings.GetInstanceAsync();
+
+// handle response
+```
+
+### Response
+
+**[GetInstanceResponse](../../Models/Operations/GetInstanceResponse.md)**
+
+### Errors
+
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| Clerk.BackendAPI.Models.Errors.SDKError | 4XX, 5XX                                | \*/\*                                   |
 
 ## Update
 
@@ -17,9 +45,9 @@ Updates the settings of an instance
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -68,8 +96,8 @@ Updates the restriction settings of an instance
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -111,9 +139,9 @@ Updates the organization settings of the instance
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -149,5 +177,5 @@ var res = await sdk.InstanceSettings.UpdateOrganizationAsync(req);
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 404, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402, 404, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

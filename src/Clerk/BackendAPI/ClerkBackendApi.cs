@@ -12,13 +12,13 @@ namespace Clerk.BackendAPI
     using Clerk.BackendAPI.Hooks;
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Models.Errors;
-    using Clerk.BackendAPI.Utils.Retries;
     using Clerk.BackendAPI.Utils;
+    using Clerk.BackendAPI.Utils.Retries;
     using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using System;
 
     /// <summary>
     /// Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend<br/>
@@ -121,6 +121,7 @@ namespace Clerk.BackendAPI
         public IOauthApplications OauthApplications { get; }
         public ISamlConnections SamlConnections { get; }
         public ITestingTokens TestingTokens { get; }
+        public IWaitlistEntries WaitlistEntries { get; }
     }
 
     public class SDKConfig
@@ -180,10 +181,10 @@ namespace Clerk.BackendAPI
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.2.4";
-        private const string _sdkGenVersion = "2.481.0";
+        private const string _sdkVersion = "0.3.0";
+        private const string _sdkGenVersion = "2.495.0";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.2.4 2.481.0 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.3.0 2.495.0 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private int _serverIndex = 0;
         private ISpeakeasyHttpClient _client;
@@ -221,6 +222,7 @@ namespace Clerk.BackendAPI
         public IOauthApplications OauthApplications { get; private set; }
         public ISamlConnections SamlConnections { get; private set; }
         public ITestingTokens TestingTokens { get; private set; }
+        public IWaitlistEntries WaitlistEntries { get; private set; }
 
         public ClerkBackendApi(string? bearerAuth = null, Func<string>? bearerAuthSource = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
         {
@@ -360,6 +362,9 @@ namespace Clerk.BackendAPI
 
 
             TestingTokens = new TestingTokens(_client, _securitySource, _serverUrl, SDKConfiguration);
+
+
+            WaitlistEntries = new WaitlistEntries(_client, _securitySource, _serverUrl, SDKConfiguration);
         }
     }
 }

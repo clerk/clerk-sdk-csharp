@@ -41,5 +41,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
         public ListInvitationsQueryParamStatus? Status { get; set; }
+
+        /// <summary>
+        /// Filter invitations based on their `email_address` or `id`
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
+        public string? Query { get; set; }
     }
 }

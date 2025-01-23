@@ -45,7 +45,7 @@ namespace Clerk.BackendAPI.Models.Components
         public Dictionary<string, object> PrivateMetadata { get; set; } = default!;
 
         [JsonProperty("created_by")]
-        public string? CreatedBy { get; set; }
+        public string? CreatedBy { get; set; } = null;
 
         /// <summary>
         /// Unix timestamp of creation.<br/>

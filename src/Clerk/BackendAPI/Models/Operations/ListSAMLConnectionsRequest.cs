@@ -10,6 +10,7 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
+    using System.Collections.Generic;
     
     public class ListSAMLConnectionsRequest
     {
@@ -34,5 +35,20 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
+
+        /// <summary>
+        /// Returns SAML connections that have an associated organization ID to the<br/>
+        /// 
+        /// <remarks>
+        /// given organizations.<br/>
+        /// For each organization id, the `+` and `-` can be<br/>
+        /// prepended to the id, which denote whether the<br/>
+        /// respective organization should be included or<br/>
+        /// excluded from the result set.<br/>
+        /// Accepts up to 100 organization ids.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=organization_id")]
+        public List<string>? OrganizationId { get; set; }
     }
 }

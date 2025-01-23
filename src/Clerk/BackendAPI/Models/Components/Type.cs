@@ -21,14 +21,12 @@ namespace Clerk.BackendAPI.Models.Components
         OauthMock,
         [JsonProperty("saml")]
         Saml,
-        [JsonProperty("oauth_microsoft")]
-        OauthMicrosoft,
-        [JsonProperty("email_link")]
-        EmailLink,
         [JsonProperty("oauth_apple")]
         OauthApple,
         [JsonProperty("oauth_discord")]
         OauthDiscord,
+        [JsonProperty("oauth_microsoft")]
+        OauthMicrosoft,
         [JsonProperty("oauth_github")]
         OauthGithub,
     }

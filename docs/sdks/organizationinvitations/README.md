@@ -26,8 +26,8 @@ The organization invitations are ordered by descending creation date by default.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -55,7 +55,8 @@ var res = await sdk.OrganizationInvitations.ListForInstanceAsync(req);
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 422, 500                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Create
@@ -81,9 +82,9 @@ When the organization invitation is accepted, the metadata will be transferred t
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -111,7 +112,7 @@ var res = await sdk.OrganizationInvitations.CreateAsync(
 | Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   | Example                                                                                                       |
 | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `OrganizationId`                                                                                              | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the organization for which to send the invitation                                                   | org_12345                                                                                                     |
-| `RequestBody`                                                                                                 | [CreateOrganizationInvitationRequestBody](../../Models/Operations/CreateOrganizationInvitationRequestBody.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |                                                                                                               |
+| `RequestBody`                                                                                                 | [CreateOrganizationInvitationRequestBody](../../Models/Operations/CreateOrganizationInvitationRequestBody.md) | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |                                                                                                               |
 
 ### Response
 
@@ -137,8 +138,8 @@ Any invitations created as a result of an Organization Domain are not included i
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -146,7 +147,7 @@ var res = await sdk.OrganizationInvitations.ListAsync(
     organizationId: "org_12345",
     limit: 20,
     offset: 10,
-    status: Clerk.BackendAPI.Models.Operations.ListOrganizationInvitationsQueryParamStatus.Pending
+    status: ListOrganizationInvitationsQueryParamStatus.Pending
 );
 
 // handle response
@@ -192,16 +193,16 @@ When the organization invitation is accepted, the metadata will be transferred t
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
 using System.Collections.Generic;
-using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.CreateBulkAsync(
     organizationId: "org_12345",
-    requestBody: new List<RequestBody>() {
-        new RequestBody() {
+    requestBody: new List<CreateOrganizationInvitationBulkRequestBody>() {
+        new CreateOrganizationInvitationBulkRequestBody() {
             EmailAddress = "newmember@example.com",
             InviterUserId = "user_67890",
             Role = "admin",
@@ -221,10 +222,10 @@ var res = await sdk.OrganizationInvitations.CreateBulkAsync(
 
 ### Parameters
 
-| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `OrganizationId`                                            | *string*                                                    | :heavy_check_mark:                                          | The organization ID.                                        | org_12345                                                   |
-| `RequestBody`                                               | List<[RequestBody](../../Models/Operations/RequestBody.md)> | :heavy_check_mark:                                          | N/A                                                         |                                                             |
+| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 | Example                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                                            | *string*                                                                                                                    | :heavy_check_mark:                                                                                                          | The organization ID.                                                                                                        | org_12345                                                                                                                   |
+| `RequestBody`                                                                                                               | List<[CreateOrganizationInvitationBulkRequestBody](../../Models/Operations/CreateOrganizationInvitationBulkRequestBody.md)> | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |                                                                                                                             |
 
 ### Response
 
@@ -252,7 +253,6 @@ Any invitations created as a result of an Organization Domain are not included i
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -293,7 +293,6 @@ Use this request to get an existing organization invitation by ID.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
@@ -336,8 +335,8 @@ Only users with "admin" role can revoke invitations.
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 

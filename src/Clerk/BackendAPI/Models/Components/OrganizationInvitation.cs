@@ -54,6 +54,19 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; }
 
+        [JsonProperty("url")]
+        public string? Url { get; set; } = null;
+
+        /// <summary>
+        /// Unix timestamp of expiration.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("expires_at")]
+        public long? ExpiresAt { get; set; } = null;
+
         /// <summary>
         /// Unix timestamp of creation.
         /// </summary>

@@ -17,43 +17,52 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         /// <summary>
-        /// The email address of the new member that is going to be invited to the organization
+        /// The email address the invitation will be sent to
         /// </summary>
         [JsonProperty("email_address")]
         public string EmailAddress { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the user that invites the new member to the organization.<br/>
+        /// Metadata that will be attached to the newly created invitation.<br/>
         /// 
         /// <remarks>
-        /// Must be an administrator in the organization.
+        /// The value of this property should be a well-formed JSON object.<br/>
+        /// Once the user accepts the invitation and signs up, these metadata will end up in the user&apos;s public metadata.
         /// </remarks>
-        /// </summary>
-        [JsonProperty("inviter_user_id")]
-        public string? InviterUserId { get; set; } = null;
-
-        /// <summary>
-        /// The role of the new member in the organization.
-        /// </summary>
-        [JsonProperty("role")]
-        public string Role { get; set; } = default!;
-
-        /// <summary>
-        /// Metadata saved on the organization invitation, read-only from the Frontend API and fully accessible (read/write) from the Backend API.
         /// </summary>
         [JsonProperty("public_metadata")]
         public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
-        /// Metadata saved on the organization invitation, fully accessible (read/write) from the Backend API but not visible from the Frontend API.
-        /// </summary>
-        [JsonProperty("private_metadata")]
-        public Dictionary<string, object>? PrivateMetadata { get; set; }
-
-        /// <summary>
-        /// Optional URL that the invitee will be redirected to once they accept the invitation by clicking the join link in the invitation email.
+        /// The URL where the user is redirected upon visiting the invitation link, where they can accept the invitation. Required if you have implemented a <a href="/docs/custom-flows/invitations">custom flow for handling application invitations</a>.
         /// </summary>
         [JsonProperty("redirect_url")]
         public string? RedirectUrl { get; set; }
+
+        /// <summary>
+        /// Optional flag which denotes whether an email invitation should be sent to the given email address.<br/>
+        /// 
+        /// <remarks>
+        /// Defaults to true.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("notify")]
+        public bool? Notify { get; set; } = true;
+
+        /// <summary>
+        /// Whether an invitation should be created if there is already an existing invitation for this email<br/>
+        /// 
+        /// <remarks>
+        /// address, or it&apos;s claimed by another user.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("ignore_existing")]
+        public bool? IgnoreExisting { get; set; } = false;
+
+        /// <summary>
+        /// The number of days the invitation will be valid for. By default, the invitation expires after 30 days.
+        /// </summary>
+        [JsonProperty("expires_in_days")]
+        public long? ExpiresInDays { get; set; } = null;
     }
 }

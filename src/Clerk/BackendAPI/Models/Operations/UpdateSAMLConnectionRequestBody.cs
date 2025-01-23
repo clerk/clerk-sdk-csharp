@@ -59,6 +59,12 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? IdpMetadata { get; set; } = null;
 
         /// <summary>
+        /// The ID of the organization to which users of this SAML Connection will be added
+        /// </summary>
+        [JsonProperty("organization_id")]
+        public string? OrganizationId { get; set; } = null;
+
+        /// <summary>
         /// Define the atrtibute name mapping between Identity Provider and Clerk&apos;s user properties
         /// </summary>
         [JsonProperty("attribute_mapping")]

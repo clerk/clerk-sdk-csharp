@@ -12,8 +12,8 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     
     public class OrganizationWithLogo
     {
@@ -46,7 +46,7 @@ namespace Clerk.BackendAPI.Models.Components
         public Dictionary<string, object> PrivateMetadata { get; set; } = default!;
 
         [JsonProperty("created_by")]
-        public string? CreatedBy { get; set; }
+        public string? CreatedBy { get; set; } = null;
 
         /// <summary>
         /// Unix timestamp of creation.<br/>

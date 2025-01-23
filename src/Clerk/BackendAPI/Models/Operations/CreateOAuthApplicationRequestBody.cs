@@ -25,7 +25,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The callback URL of the new OAuth application
         /// </summary>
         [JsonProperty("callback_url")]
-        public string CallbackUrl { get; set; } = default!;
+        public string? CallbackUrl { get; set; }
 
         /// <summary>
         /// Define the allowed scopes for the new OAuth applications that dictate the user payload of the OAuth user info endpoint. Available scopes are `profile`, `email`, `public_metadata`, `private_metadata`. Provide the requested scopes as a string, separated by spaces.

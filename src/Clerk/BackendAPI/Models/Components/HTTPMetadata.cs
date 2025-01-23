@@ -11,8 +11,8 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    using System.Net.Http;
     using System;
+    using System.Net.Http;
     
     public class HTTPMetadata
     {

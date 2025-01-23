@@ -10,6 +10,7 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
+    using System;
     using System.Collections.Generic;
     
     public class GetUserListRequest
@@ -116,15 +117,92 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Query { get; set; }
 
         /// <summary>
-        /// Returns users that had session activity since the given date, with day precision.<br/>
+        /// Returns users with emails that match the given query, via case-insensitive partial match.<br/>
         /// 
         /// <remarks>
-        /// Providing a value with higher precision than day will result in an error.<br/>
-        /// Example: use 1700690400000 to retrieve users that had session activity from 2023-11-23 until the current day.
+        /// For example, `email_address_query=ello` will match a user with the email `HELLO@example.com`.
         /// </remarks>
         /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=email_address_query")]
+        public string? EmailAddressQuery { get; set; }
+
+        /// <summary>
+        /// Returns users with phone numbers that match the given query, via case-insensitive partial match.<br/>
+        /// 
+        /// <remarks>
+        /// For example, `phone_number_query=555` will match a user with the phone number `+1555xxxxxxx`.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=phone_number_query")]
+        public string? PhoneNumberQuery { get; set; }
+
+        /// <summary>
+        /// Returns users with usernames that match the given query, via case-insensitive partial match.<br/>
+        /// 
+        /// <remarks>
+        /// For example, `username_query=CoolUser` will match a user with the username `SomeCoolUser`.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=username_query")]
+        public string? UsernameQuery { get; set; }
+
+        /// <summary>
+        /// Returns users with names that match the given query, via case-insensitive partial match.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=name_query")]
+        public string? NameQuery { get; set; }
+
+        /// <summary>
+        /// Returns users whose last session activity was before the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1700690400000 to retrieve users whose last session activity was before 2023-11-23.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_before")]
+        public long? LastActiveAtBefore { get; set; }
+
+        /// <summary>
+        /// Returns users whose last session activity was after the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1700690400000 to retrieve users whose last session activity was after 2023-11-23.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_after")]
+        public long? LastActiveAtAfter { get; set; }
+
+        /// <summary>
+        /// Returns users that had session activity since the given date.<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1700690400000 to retrieve users that had session activity from 2023-11-23 until the current day.<br/>
+        /// Deprecated in favor of `last_active_at_after`.
+        /// </remarks>
+        /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_since")]
         public long? LastActiveAtSince { get; set; }
+
+        /// <summary>
+        /// Returns users who have been created before the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1730160000000 to retrieve users who have been created before 2024-10-29.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=created_at_before")]
+        public long? CreatedAtBefore { get; set; }
+
+        /// <summary>
+        /// Returns users who have been created after the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1730160000000 to retrieve users who have been created after 2024-10-29.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=created_at_after")]
+        public long? CreatedAtAfter { get; set; }
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>

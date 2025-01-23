@@ -22,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// Get the JSON Web Key Set
         /// </summary>
-        public WellKnownJWKS? WellKnownJWKS { get; set; }
+        public Models.Components.Jwks? Jwks { get; set; }
     }
 }

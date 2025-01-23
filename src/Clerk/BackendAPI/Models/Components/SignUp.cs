@@ -86,6 +86,16 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("abandon_at")]
         public long AbandonAt { get; set; } = default!;
 
+        /// <summary>
+        /// Unix timestamp at which the user accepted the legal requirements.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("legal_accepted_at")]
+        public long? LegalAcceptedAt { get; set; } = null;
+
         [JsonProperty("external_account")]
         public ExternalAccount? ExternalAccount { get; set; }
     }

@@ -54,6 +54,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; }
 
+        [JsonProperty("url")]
+        public string? Url { get; set; } = null;
+
         [JsonProperty("public_organization_data")]
         public PublicOrganizationData? PublicOrganizationData { get; set; }
 
