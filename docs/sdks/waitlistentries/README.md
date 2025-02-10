@@ -23,10 +23,7 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListWaitlistEntriesRequest req = new ListWaitlistEntriesRequest() {
-    Limit = 20,
-    Offset = 10,
-};
+ListWaitlistEntriesRequest req = new ListWaitlistEntriesRequest() {};
 
 var res = await sdk.WaitlistEntries.ListWaitlistEntriesAsync(req);
 

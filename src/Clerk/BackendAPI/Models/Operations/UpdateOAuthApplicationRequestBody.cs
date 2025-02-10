@@ -11,6 +11,8 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
     
     public class UpdateOAuthApplicationRequestBody
     {
@@ -19,18 +21,31 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The new name of the OAuth application
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string? Name { get; set; } = null;
+
+        /// <summary>
+        /// An array of redirect URIs of the new OAuth application
+        /// </summary>
+        [JsonProperty("redirect_uris")]
+        public List<string>? RedirectUris { get; set; } = null;
 
         /// <summary>
         /// The new callback URL of the OAuth application
         /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("callback_url")]
-        public string? CallbackUrl { get; set; }
+        public string? CallbackUrl { get; set; } = null;
 
         /// <summary>
         /// Define the allowed scopes for the new OAuth applications that dictate the user payload of the OAuth user info endpoint. Available scopes are `profile`, `email`, `public_metadata`, `private_metadata`. Provide the requested scopes as a string, separated by spaces.
         /// </summary>
         [JsonProperty("scopes")]
         public string? Scopes { get; set; } = "profile email";
+
+        /// <summary>
+        /// If true, this client is public and you can use the Proof Key of Code Exchange (PKCE) flow.
+        /// </summary>
+        [JsonProperty("public")]
+        public bool? Public { get; set; }
     }
 }

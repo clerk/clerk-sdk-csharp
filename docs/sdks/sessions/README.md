@@ -38,8 +38,6 @@ GetSessionListRequest req = new GetSessionListRequest() {
     ClientId = "client_123",
     UserId = "user_456",
     Status = Status.Active,
-    Limit = 20,
-    Offset = 10,
 };
 
 var res = await sdk.Sessions.ListAsync(req);

@@ -70,8 +70,6 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateOAuthApplicationRequestBody req = new CreateOAuthApplicationRequestBody() {
     Name = "Example App",
-    CallbackUrl = "https://example.com/oauth/callback",
-    Scopes = "profile email public_metadata",
     Public = true,
 };
 
@@ -148,8 +146,6 @@ var res = await sdk.OauthApplications.UpdateAsync(
     oauthApplicationId: "oauth_app_67890",
     requestBody: new UpdateOAuthApplicationRequestBody() {
         Name = "Updated OAuth App Name",
-        CallbackUrl = "https://example.com/oauth/callback",
-        Scopes = "profile email public_metadata private_metadata",
     }
 );
 
@@ -171,7 +167,7 @@ var res = await sdk.OauthApplications.UpdateAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Delete

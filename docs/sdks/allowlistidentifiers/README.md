@@ -52,7 +52,6 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateAllowlistIdentifierRequestBody req = new CreateAllowlistIdentifierRequestBody() {
     Identifier = "user@example.com",
-    Notify = true,
 };
 
 var res = await sdk.AllowlistIdentifiers.CreateAsync(req);
