@@ -23,7 +23,6 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 UpdateInstanceAuthConfigRequestBody req = new UpdateInstanceAuthConfigRequestBody() {
-    RestrictedToAllowlist = false,
     FromEmailAddress = "noreply",
     ProgressiveSignUp = true,
     SessionTokenTemplate = "defaultSessionToken",

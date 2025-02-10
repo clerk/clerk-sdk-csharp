@@ -34,11 +34,8 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 ListOrganizationsRequest req = new ListOrganizationsRequest() {
-    Limit = 20,
-    Offset = 10,
     IncludeMembersCount = false,
     Query = "clerk",
-    OrderBy = "-name",
 };
 
 var res = await sdk.Organizations.ListAsync(req);

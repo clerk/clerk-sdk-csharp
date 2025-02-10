@@ -153,6 +153,12 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? NameQuery { get; set; }
 
         /// <summary>
+        /// Returns users which are either banned (`banned=true`) or not banned (`banned=false`).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=banned")]
+        public bool? Banned { get; set; }
+
+        /// <summary>
         /// Returns users whose last session activity was before the given date (with millisecond precision).<br/>
         /// 
         /// <remarks>
