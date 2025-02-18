@@ -12,6 +12,8 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
     
     public class OAuthApplication
     {
@@ -37,6 +39,10 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("scopes")]
         public string Scopes { get; set; } = default!;
 
+        [JsonProperty("redirect_uris")]
+        public List<string> RedirectUris { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("callback_url")]
         public string CallbackUrl { get; set; } = default!;
 

@@ -31,10 +31,7 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListInstanceOrganizationInvitationsRequest req = new ListInstanceOrganizationInvitationsRequest() {
-    Limit = 20,
-    Offset = 10,
-};
+ListInstanceOrganizationInvitationsRequest req = new ListInstanceOrganizationInvitationsRequest() {};
 
 var res = await sdk.OrganizationInvitations.ListForInstanceAsync(req);
 

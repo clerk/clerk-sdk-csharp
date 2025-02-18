@@ -53,7 +53,8 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Create a new active session for the provided user ID.<br/>
         /// <br/>
-        /// This operation is only available for Clerk Development instances.
+        /// **This operation is intended only for use in testing, and is not available for production instances.** If you are looking to generate a user session from the backend,<br/>
+        /// we recommend using the <a href="https://clerk.com/docs/reference/backend-api/tag/Sign-in-Tokens#operation/CreateSignInToken">Sign-in Tokens</a> resource instead.
         /// </remarks>
         /// </summary>
         Task<CreateSessionResponse> CreateSessionAsync(CreateSessionRequestBody? request = null);
@@ -122,10 +123,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.3.0";
-        private const string _sdkGenVersion = "2.495.0";
+        private const string _sdkVersion = "0.4.0";
+        private const string _sdkGenVersion = "2.512.4";
         private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.3.0 2.495.0 v1 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.4.0 2.512.4 v1 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;

@@ -35,8 +35,6 @@ CreateInvitationRequestBody req = new CreateInvitationRequestBody() {
 
     },
     RedirectUrl = "https://example.com/welcome",
-    Notify = true,
-    IgnoreExisting = true,
 };
 
 var res = await sdk.Invitations.CreateAsync(req);

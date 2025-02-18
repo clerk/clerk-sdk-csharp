@@ -9,7 +9,6 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
-    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     
@@ -17,7 +16,7 @@ namespace Clerk.BackendAPI.Models.Components
     {
 
         [JsonProperty("type")]
-        public Models.Components.Type Type { get; set; } = default!;
+        public string Type { get; set; } = default!;
 
         [JsonProperty("id")]
         public string Id { get; set; } = default!;

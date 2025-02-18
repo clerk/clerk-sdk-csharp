@@ -354,7 +354,6 @@ If the request is correctly authenticated, the token's claims are made available
 * [DisableMfa](docs/sdks/users/README.md#disablemfa) - Disable a user's MFA methods
 * [DeleteBackupCode](docs/sdks/users/README.md#deletebackupcode) - Disable all user's Backup codes
 * [DeletePasskey](docs/sdks/users/README.md#deletepasskey) - Delete a user passkey
-* [CreateTotp](docs/sdks/users/README.md#createtotp) - Create a TOTP for a user
 * [DeleteTOTP](docs/sdks/users/README.md#deletetotp) - Delete all the user's TOTPs
 * [DeleteExternalAccount](docs/sdks/users/README.md#deleteexternalaccount) - Delete External Account
 

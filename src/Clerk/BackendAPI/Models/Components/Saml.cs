@@ -31,7 +31,10 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("expire_at")]
         public long ExpireAt { get; set; } = default!;
 
-        [JsonProperty("attempts")]
-        public long? Attempts { get; set; } = null;
+        [JsonProperty("attempts", NullValueHandling = NullValueHandling.Include)]
+        public long? Attempts { get; set; }
+
+        [JsonProperty("verified_at_client")]
+        public string? VerifiedAtClient { get; set; } = null;
     }
 }

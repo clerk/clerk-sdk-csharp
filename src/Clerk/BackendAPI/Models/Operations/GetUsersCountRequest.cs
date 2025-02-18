@@ -124,5 +124,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=username_query")]
         public string? UsernameQuery { get; set; }
+
+        /// <summary>
+        /// Counts users which are either banned (`banned=true`) or not banned (`banned=false`).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=banned")]
+        public bool? Banned { get; set; }
     }
 }

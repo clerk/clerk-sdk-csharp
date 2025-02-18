@@ -30,15 +30,16 @@ Most recent organizations will be returned first.
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 ListOrganizationsRequest req = new ListOrganizationsRequest() {
-    Limit = 20,
-    Offset = 10,
     IncludeMembersCount = false,
     Query = "clerk",
-    OrderBy = "-name",
+    OrganizationId = new List<string>() {
+        "-name",
+    },
 };
 
 var res = await sdk.Organizations.ListAsync(req);

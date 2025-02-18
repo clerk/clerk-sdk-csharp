@@ -25,8 +25,6 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 CreateActorTokenRequestBody req = new CreateActorTokenRequestBody() {
     UserId = "user_1a2b3c",
     Actor = new Models.Operations.Actor() {},
-    ExpiresInSeconds = 3600,
-    SessionMaxDurationInSeconds = 1800,
 };
 
 var res = await sdk.ActorTokens.CreateAsync(req);
