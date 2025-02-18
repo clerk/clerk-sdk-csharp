@@ -37,7 +37,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public long? Offset { get; set; } = 0;
 
         /// <summary>
-        /// Filter waitlist entries by email address
+        /// Filter waitlist entries by `email_address` or `id`
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }

@@ -63,8 +63,6 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 ListOrganizationDomainsRequest req = new ListOrganizationDomainsRequest() {
     OrganizationId = "<id>",
-    Limit = 20,
-    Offset = 10,
 };
 
 var res = await sdk.OrganizationDomains.ListAsync(req);

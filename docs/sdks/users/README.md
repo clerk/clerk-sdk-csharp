@@ -29,7 +29,6 @@ The user object represents a user that has successfully signed up to your applic
 * [DisableMfa](#disablemfa) - Disable a user's MFA methods
 * [DeleteBackupCode](#deletebackupcode) - Disable all user's Backup codes
 * [DeletePasskey](#deletepasskey) - Delete a user passkey
-* [CreateTotp](#createtotp) - Create a TOTP for a user
 * [DeleteTOTP](#deletetotp) - Delete all the user's TOTPs
 * [DeleteExternalAccount](#deleteexternalaccount) - Delete External Account
 
@@ -75,8 +74,6 @@ GetUserListRequest req = new GetUserListRequest() {
     LastActiveAtAfter = 1700690400000,
     CreatedAtBefore = 1730160000000,
     CreatedAtAfter = 1730160000000,
-    Limit = 20,
-    Offset = 10,
 };
 
 var res = await sdk.Users.ListAsync(req);
@@ -304,7 +301,6 @@ var res = await sdk.Users.UpdateAsync(
         FirstName = "Jane",
         LastName = "Doe",
         PrimaryEmailAddressId = "eml_12345",
-        NotifyPrimaryEmailAddressChanged = true,
         PrimaryPhoneNumberId = "phn_67890",
         PrimaryWeb3WalletId = "wlt_123",
         Username = "janedoe",
@@ -952,42 +948,6 @@ var res = await sdk.Users.DeletePasskeyAsync(
 ### Response
 
 **[UserPasskeyDeleteResponse](../../Models/Operations/UserPasskeyDeleteResponse.md)**
-
-### Errors
-
-| Error Type                                 | Status Code                                | Content Type                               |
-| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
-| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
-
-## CreateTotp
-
-Creates a TOTP (Time-based One-Time Password) for a given user, returning both the TOTP secret and the URI.
-
-
-### Example Usage
-
-```csharp
-using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
-
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
-
-var res = await sdk.Users.CreateTotpAsync(userId: "<id>");
-
-// handle response
-```
-
-### Parameters
-
-| Parameter                                              | Type                                                   | Required                                               | Description                                            |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `UserId`                                               | *string*                                               | :heavy_check_mark:                                     | The ID of the user for whom the TOTP is being created. |
-
-### Response
-
-**[CreateUserTOTPResponse](../../Models/Operations/CreateUserTOTPResponse.md)**
 
 ### Errors
 

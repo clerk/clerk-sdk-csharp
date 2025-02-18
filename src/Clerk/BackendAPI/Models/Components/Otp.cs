@@ -22,10 +22,13 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("strategy")]
         public Strategy Strategy { get; set; } = default!;
 
-        [JsonProperty("attempts")]
-        public long Attempts { get; set; } = default!;
+        [JsonProperty("attempts", NullValueHandling = NullValueHandling.Include)]
+        public long? Attempts { get; set; }
 
-        [JsonProperty("expire_at")]
-        public long ExpireAt { get; set; } = default!;
+        [JsonProperty("expire_at", NullValueHandling = NullValueHandling.Include)]
+        public long? ExpireAt { get; set; }
+
+        [JsonProperty("verified_at_client")]
+        public string? VerifiedAtClient { get; set; } = null;
     }
 }

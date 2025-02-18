@@ -10,6 +10,7 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
+    using System.Collections.Generic;
     
     public class ListOrganizationsRequest
     {
@@ -50,6 +51,22 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
+
+        /// <summary>
+        /// Returns organizations with the organization ids specified.<br/>
+        /// 
+        /// <remarks>
+        /// Any organization ids not found are ignored.<br/>
+        /// For each organization id, the `+` and `-` can be<br/>
+        /// prepended to the id, which denote whether the<br/>
+        /// respective organization should be included or<br/>
+        /// excluded from the result set.<br/>
+        /// Accepts up to 100 organization ids.<br/>
+        /// Example: ?organization_id=+org_1&amp;organization_id=-org_2
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=organization_id")]
+        public List<string>? OrganizationId { get; set; }
 
         /// <summary>
         /// Allows to return organizations in a particular order.<br/>

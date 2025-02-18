@@ -22,7 +22,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string EmailAddress { get; set; } = default!;
 
         /// <summary>
-        /// Optional flag which denotes whether an email invitation should be sent to the given email address.<br/>
+        /// Optional flag which denotes whether a confirmation email should be sent to the given email address.<br/>
         /// 
         /// <remarks>
         /// Defaults to `true`.
