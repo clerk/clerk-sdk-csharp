@@ -10,6 +10,8 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
+    using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     /// <summary>
     /// The actor payload. It needs to include a sub property which should contain the ID of the actor.<br/>
@@ -20,5 +22,14 @@ namespace Clerk.BackendAPI.Models.Operations
     /// </summary>
     public class Actor
     {
+
+        /// <summary>
+        /// The ID of the actor.
+        /// </summary>
+        [JsonProperty("sub")]
+        public string? Sub { get; set; }
+
+        [JsonProperty("additionalProperties")]
+        public Dictionary<string, object>? AdditionalProperties { get; set; }
     }
 }
