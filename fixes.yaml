@@ -175,12 +175,10 @@ actions:
   - target: $["paths"]["/actor_tokens"]["post"]["requestBody"]["content"]["application/json"]["schema"]["properties"]["actor"]
     update:
       properties:
-        SubscriberId:
+        sub:
           type: string
-          description: The ID of the actor (mapped from the `sub` field).
-          x-speakeasy-name-override: sub # Ensures the property is serialized as 'sub'
+          description: The ID of the actor.
           example: "user_2OEpKhcCN1Lat9NQ0G6puh7q5Rb"
   - target: $["paths"]["/actor_tokens"]["post"]["requestBody"]["content"]["application/json"]["schema"]["properties"]["actor"]
     update:
-      required:
-        - SubscriberId # Ensure the field is required, as per the original 'sub' behavior
+      additionalProperties: true
