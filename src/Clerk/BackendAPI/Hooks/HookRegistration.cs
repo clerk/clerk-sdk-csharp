@@ -25,7 +25,8 @@ namespace Clerk.BackendAPI.Hooks
         /// </remarks>
         public static void InitHooks(IHooks hooks)
         {
-            // var myHook = new MyHook();
+            var clerkBeforeRequestHook = new ClerkBeforeRequestHook();
+            hooks.RegisterBeforeRequestHook(clerkBeforeRequestHook);
 
             // hooks.RegisterSDKInitHook(myHook);
             // hooks.RegisterBeforeRequestHook(myHook);
