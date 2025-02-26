@@ -5,8 +5,6 @@ sources:
         inputs:
             - location: https://raw.githubusercontent.com/clerk/openapi-specs/refs/heads/main/bapi/2024-10-01.yml
         overlays:
-            - location: .speakeasy/speakeasy-modifications-overlay.yaml
-            - location: ./fixes.yaml
             - location: ./examples.yaml
         registry:
             location: registry.speakeasyapi.dev/clerk/clerk/clerk-openapi
