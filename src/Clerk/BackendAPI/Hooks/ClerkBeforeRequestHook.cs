@@ -1,7 +1,7 @@
 namespace Clerk.BackendAPI.Hooks
 {
-    using Speakeasy.Utils;
-    using Speakeasy.Models.Components;
+    using System.Net.Http;
+    using System.Threading.Tasks;
 
     public class ClerkBeforeRequestHook : IBeforeRequestHook
     {
