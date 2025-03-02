@@ -3,8 +3,6 @@
 
 ## Overview
 
-Domains represent each instance's URLs and DNS setup.
-
 ### Available Operations
 
 * [List](#list) - List all instance domains

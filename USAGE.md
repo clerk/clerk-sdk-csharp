@@ -1,11 +1,15 @@
 <!-- Start SDK Example Usage [usage] -->
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+var sdk = new ClerkBackendApi();
 
-var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_example");
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```

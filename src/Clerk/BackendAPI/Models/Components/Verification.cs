@@ -30,6 +30,8 @@ namespace Clerk.BackendAPI.Models.Components
         
         public static VerificationType FromOAuth { get { return new VerificationType("FromOAuth"); } }
         
+        public static VerificationType Ticket { get { return new VerificationType("Ticket"); } }
+        
         public static VerificationType Null { get { return new VerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -39,6 +41,7 @@ namespace Clerk.BackendAPI.Models.Components
                 case "OTP": return Otp;
                 case "Admin": return Admin;
                 case "FromOAuth": return FromOAuth;
+                case "Ticket": return Ticket;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for VerificationType");
             }
@@ -74,6 +77,9 @@ namespace Clerk.BackendAPI.Models.Components
         [SpeakeasyMetadata("form:explode=true")]
         public FromOAuth? FromOAuth { get; set; }
 
+        [SpeakeasyMetadata("form:explode=true")]
+        public Ticket? Ticket { get; set; }
+
         public VerificationType Type { get; set; }
 
 
@@ -98,6 +104,14 @@ namespace Clerk.BackendAPI.Models.Components
 
             Verification res = new Verification(typ);
             res.FromOAuth = fromOAuth;
+            return res;
+        }
+
+        public static Verification CreateTicket(Ticket ticket) {
+            VerificationType typ = VerificationType.Ticket;
+
+            Verification res = new Verification(typ);
+            res.Ticket = ticket;
             return res;
         }
 
@@ -153,6 +167,26 @@ namespace Clerk.BackendAPI.Models.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(Admin), new Verification(VerificationType.Admin), "Admin"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new Verification(VerificationType.Ticket)
+                    {
+                        Ticket = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Ticket>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Ticket), new Verification(VerificationType.Ticket), "Ticket"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -231,6 +265,11 @@ namespace Clerk.BackendAPI.Models.Components
                 if (res.FromOAuth != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.FromOAuth));
+                    return;
+                }
+                if (res.Ticket != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Ticket));
                     return;
                 }
 

@@ -7,6 +7,7 @@
 
 * [Create](#create) - Create a new organization domain.
 * [List](#list) - Get a list of all domains of an organization.
+* [Update](#update) - Update an organization domain.
 * [Delete](#delete) - Remove a domain from an organization.
 
 ## Create
@@ -85,6 +86,47 @@ var res = await sdk.OrganizationDomains.ListAsync(req);
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## Update
+
+Updates the properties of an existing organization domain.
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.OrganizationDomains.UpdateAsync(
+    organizationId: "<id>",
+    domainId: "<id>",
+    requestBody: new UpdateOrganizationDomainRequestBody() {}
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                      | *string*                                                                                              | :heavy_check_mark:                                                                                    | The ID of the organization the domain belongs to                                                      |
+| `DomainId`                                                                                            | *string*                                                                                              | :heavy_check_mark:                                                                                    | The ID of the domain                                                                                  |
+| `RequestBody`                                                                                         | [UpdateOrganizationDomainRequestBody](../../Models/Operations/UpdateOrganizationDomainRequestBody.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+
+### Response
+
+**[UpdateOrganizationDomainResponse](../../Models/Operations/UpdateOrganizationDomainResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Delete

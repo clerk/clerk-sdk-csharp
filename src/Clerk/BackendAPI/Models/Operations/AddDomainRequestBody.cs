@@ -31,6 +31,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The full URL of the proxy which will forward requests to the Clerk Frontend API for this domain. Applicable only to production instances.
         /// </summary>
         [JsonProperty("proxy_url")]
-        public string? ProxyUrl { get; set; }
+        public string? ProxyUrl { get; set; } = null;
     }
 }

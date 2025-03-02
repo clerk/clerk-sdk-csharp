@@ -8,11 +8,15 @@
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+var sdk = new ClerkBackendApi();
 
-var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_example");
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
@@ -33,17 +37,78 @@ To authenticate with the API the `BearerAuth` parameter must be set when initial
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "frontend-api_1a2b3c4d",
-    publishableKey: "pub_1a2b3c4d"
-);
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
 <!-- End Authentication [security] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply pass a `RetryConfig` to the call:
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi();
+
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
+    retryConfig: new RetryConfig(
+        strategy: RetryConfig.RetryStrategy.BACKOFF,
+        backoff: new BackoffStrategy(
+            initialIntervalMs: 1L,
+            maxIntervalMs: 50L,
+            maxElapsedTimeMs: 100L,
+            exponent: 1.1
+        ),
+        retryConnectionErrors: false
+    ),
+    request: req
+);
+
+// handle response
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can use the `RetryConfig` optional parameter when intitializing the SDK:
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(retryConfig: new RetryConfig(
+    strategy: RetryConfig.RetryStrategy.BACKOFF,
+    backoff: new BackoffStrategy(
+        initialIntervalMs: 1L,
+        maxIntervalMs: 50L,
+        maxElapsedTimeMs: 100L,
+        exponent: 1.1
+    ),
+    retryConnectionErrors: false
+));
+
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
+
+// handle response
+```
+<!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling
@@ -109,13 +174,15 @@ catch (Exception ex)
 The default server can be overridden globally by passing a URL to the `serverUrl: string` optional parameter when initializing the SDK client instance. For example:
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 
-var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "frontend-api_1a2b3c4d",
-    publishableKey: "pub_1a2b3c4d"
-);
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```

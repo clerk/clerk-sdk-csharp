@@ -46,7 +46,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; } = null;
 
         /// <summary>
         /// Metadata saved on the organization invitation, fully accessible (read/write) from the Backend API but not visible from the Frontend API.<br/>
@@ -56,13 +56,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("private_metadata")]
-        public Dictionary<string, object>? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
 
         /// <summary>
         /// Optional URL that the invitee will be redirected to once they accept the invitation by clicking the join link in the invitation email.
         /// </summary>
         [JsonProperty("redirect_url")]
-        public string? RedirectUrl { get; set; }
+        public string? RedirectUrl { get; set; } = null;
 
         /// <summary>
         /// The number of days the invitation will be valid for. By default, the invitation has a 30 days expire.

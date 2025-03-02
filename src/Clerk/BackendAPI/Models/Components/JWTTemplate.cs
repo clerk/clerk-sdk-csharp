@@ -38,10 +38,10 @@ namespace Clerk.BackendAPI.Models.Components
         public long AllowedClockSkew { get; set; } = default!;
 
         [JsonProperty("custom_signing_key")]
-        public bool? CustomSigningKey { get; set; }
+        public bool CustomSigningKey { get; set; } = default!;
 
         [JsonProperty("signing_algorithm")]
-        public string? SigningAlgorithm { get; set; }
+        public string SigningAlgorithm { get; set; } = default!;
 
         /// <summary>
         /// Unix timestamp of creation.<br/>

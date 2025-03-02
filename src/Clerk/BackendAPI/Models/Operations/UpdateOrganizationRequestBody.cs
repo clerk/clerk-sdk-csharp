@@ -20,19 +20,20 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Metadata saved on the organization, that is visible to both your frontend and backend.
         /// </summary>
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; } = null;
 
         /// <summary>
         /// Metadata saved on the organization that is only visible to your backend.
         /// </summary>
         [JsonProperty("private_metadata")]
-        public Dictionary<string, object>? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
 
         /// <summary>
         /// The new name of the organization.<br/>
         /// 
         /// <remarks>
-        /// May not contain URLs or HTML.
+        /// May not contain URLs or HTML.<br/>
+        /// Max length: 256
         /// </remarks>
         /// </summary>
         [JsonProperty("name")]
@@ -60,6 +61,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// A custom date/time denoting _when_ the organization was created, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
         /// </summary>
         [JsonProperty("created_at")]
-        public string? CreatedAt { get; set; }
+        public string? CreatedAt { get; set; } = null;
     }
 }

@@ -19,6 +19,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The ID representing the user
         /// </summary>
         [JsonProperty("user_id")]
-        public string? UserId { get; set; }
+        public string UserId { get; set; } = default!;
     }
 }

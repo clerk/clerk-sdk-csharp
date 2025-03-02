@@ -3,9 +3,6 @@
 
 ## Overview
 
-The user object represents a user that has successfully signed up to your application.
-<https://clerk.com/docs/reference/clerkjs/user>
-
 ### Available Operations
 
 * [List](#list) - List all users
@@ -27,10 +24,12 @@ The user object represents a user that has successfully signed up to your applic
 * [VerifyPassword](#verifypassword) - Verify the password of a user
 * [VerifyTotp](#verifytotp) - Verify a TOTP or backup code for a user
 * [DisableMfa](#disablemfa) - Disable a user's MFA methods
-* [DeleteBackupCode](#deletebackupcode) - Disable all user's Backup codes
+* [DeleteBackupCodes](#deletebackupcodes) - Disable all user's Backup codes
 * [DeletePasskey](#deletepasskey) - Delete a user passkey
+* [DeleteWeb3Wallet](#deleteweb3wallet) - Delete a user web3 wallet
 * [DeleteTOTP](#deletetotp) - Delete all the user's TOTPs
 * [DeleteExternalAccount](#deleteexternalaccount) - Delete External Account
+* [GetInstanceOrganizationMemberships](#getinstanceorganizationmemberships) - Get a list of all organization memberships within an instance.
 
 ## List
 
@@ -210,7 +209,13 @@ GetUsersCountRequest req = new GetUsersCountRequest() {
     UserId = new List<string>() {
         "user-id-123",
     },
-    Query = "John Doe",
+    OrganizationId = new List<string>() {
+        "John Doe",
+    },
+    LastActiveAtBefore = 1700690400000,
+    LastActiveAtAfter = 1700690400000,
+    CreatedAtBefore = 1730160000000,
+    CreatedAtAfter = 1730160000000,
 };
 
 var res = await sdk.Users.CountAsync(req);
@@ -650,23 +655,25 @@ For OAuth 2.0, if the access token has expired and we have a corresponding refre
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.GetOAuthAccessTokenAsync(
-    userId: "user_123",
-    provider: "oauth_google"
-);
+GetOAuthAccessTokenRequest req = new GetOAuthAccessTokenRequest() {
+    UserId = "user_123",
+    Provider = "oauth_google",
+};
+
+var res = await sdk.Users.GetOAuthAccessTokenAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     | Example                                                         |
-| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `UserId`                                                        | *string*                                                        | :heavy_check_mark:                                              | The ID of the user for which to retrieve the OAuth access token | user_123                                                        |
-| `Provider`                                                      | *string*                                                        | :heavy_check_mark:                                              | The ID of the OAuth provider (e.g. `oauth_google`)              | oauth_google                                                    |
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `request`                                                                           | [GetOAuthAccessTokenRequest](../../Models/Operations/GetOAuthAccessTokenRequest.md) | :heavy_check_mark:                                                                  | The request object to use for the request.                                          |
 
 ### Response
 
@@ -883,7 +890,7 @@ var res = await sdk.Users.DisableMfaAsync(userId: "user_123456");
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## DeleteBackupCode
+## DeleteBackupCodes
 
 Disable all of a user's backup codes.
 
@@ -895,7 +902,7 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.DeleteBackupCodeAsync(userId: "<id>");
+var res = await sdk.Users.DeleteBackupCodesAsync(userId: "<id>");
 
 // handle response
 ```
@@ -954,6 +961,45 @@ var res = await sdk.Users.DeletePasskeyAsync(
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## DeleteWeb3Wallet
+
+Delete the web3 wallet identification for a given user.
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.DeleteWeb3WalletAsync(
+    userId: "<id>",
+    web3WalletIdentificationId: "<id>"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                        | Type                                             | Required                                         | Description                                      |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| `UserId`                                         | *string*                                         | :heavy_check_mark:                               | The ID of the user that owns the web3 wallet     |
+| `Web3WalletIdentificationId`                     | *string*                                         | :heavy_check_mark:                               | The ID of the web3 wallet identity to be deleted |
+
+### Response
+
+**[UserWeb3WalletDeleteResponse](../../Models/Operations/UserWeb3WalletDeleteResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
@@ -1028,5 +1074,46 @@ var res = await sdk.Users.DeleteExternalAccountAsync(
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetInstanceOrganizationMemberships
+
+Retrieves all organization user memberships for the given instance.
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.GetInstanceOrganizationMembershipsAsync(
+    orderBy: "<value>",
+    limit: 20,
+    offset: 10
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                          | Type                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                        | Example                                                                                                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `OrderBy`                                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                 | Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>By prepending one of those values with + or -,<br/>we can choose to sort in ascending (ASC) or descending (DESC) order. |                                                                                                                                                                                                                                    |
+| `Limit`                                                                                                                                                                                                                            | *long*                                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                 | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                                                                                                              | 20                                                                                                                                                                                                                                 |
+| `Offset`                                                                                                                                                                                                                           | *long*                                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                 | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`.                                                                                  | 10                                                                                                                                                                                                                                 |
+
+### Response
+
+**[InstanceGetOrganizationMembershipsResponse](../../Models/Operations/InstanceGetOrganizationMembershipsResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

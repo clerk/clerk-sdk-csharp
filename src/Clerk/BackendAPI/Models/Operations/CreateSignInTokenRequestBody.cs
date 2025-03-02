@@ -19,7 +19,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The ID of the user that can use the newly created sign in token
         /// </summary>
         [JsonProperty("user_id")]
-        public string? UserId { get; set; }
+        public string UserId { get; set; } = default!;
 
         /// <summary>
         /// Optional parameter to specify the life duration of the sign in token in seconds.<br/>

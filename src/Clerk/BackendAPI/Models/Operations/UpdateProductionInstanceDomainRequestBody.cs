@@ -20,5 +20,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("home_url")]
         public string? HomeUrl { get; set; }
+
+        /// <summary>
+        /// Whether the domain is a secondary app.
+        /// </summary>
+        [JsonProperty("is_secondary")]
+        public bool? IsSecondary { get; set; }
     }
 }

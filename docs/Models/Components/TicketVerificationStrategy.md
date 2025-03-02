@@ -6,4 +6,3 @@
 | Name     | Value    |
 | -------- | -------- |
 | `Ticket` | ticket   |
-| `Saml`   | saml     |

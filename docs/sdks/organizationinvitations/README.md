@@ -5,15 +5,15 @@
 
 ### Available Operations
 
-* [ListForInstance](#listforinstance) - Get a list of organization invitations for the current instance
+* [GetAll](#getall) - Get a list of organization invitations for the current instance
 * [Create](#create) - Create and send an organization invitation
 * [List](#list) - Get a list of organization invitations
-* [CreateBulk](#createbulk) - Bulk create and send organization invitations
+* [BulkCreate](#bulkcreate) - Bulk create and send organization invitations
 * [~~ListPending~~](#listpending) - Get a list of pending organization invitations :warning: **Deprecated**
 * [Get](#get) - Retrieve an organization invitation by ID
 * [Revoke](#revoke) - Revoke a pending organization invitation
 
-## ListForInstance
+## GetAll
 
 This request returns the list of organization invitations for the instance.
 Results can be paginated using the optional `limit` and `offset` query parameters.
@@ -33,7 +33,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 ListInstanceOrganizationInvitationsRequest req = new ListInstanceOrganizationInvitationsRequest() {};
 
-var res = await sdk.OrganizationInvitations.ListForInstanceAsync(req);
+var res = await sdk.OrganizationInvitations.GetAllAsync(req);
 
 // handle response
 ```
@@ -142,9 +142,9 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.ListAsync(
     organizationId: "org_12345",
+    status: ListOrganizationInvitationsQueryParamStatus.Revoked,
     limit: 20,
-    offset: 10,
-    status: ListOrganizationInvitationsQueryParamStatus.Pending
+    offset: 10
 );
 
 // handle response
@@ -155,9 +155,9 @@ var res = await sdk.OrganizationInvitations.ListAsync(
 | Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `OrganizationId`                                                                                                                          | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The organization ID.                                                                                                                      | org_12345                                                                                                                                 |
+| `Status`                                                                                                                                  | [ListOrganizationInvitationsQueryParamStatus](../../Models/Operations/ListOrganizationInvitationsQueryParamStatus.md)                     | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     |                                                                                                                                           |
 | `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
 | `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
-| `Status`                                                                                                                                  | [ListOrganizationInvitationsQueryParamStatus](../../Models/Operations/ListOrganizationInvitationsQueryParamStatus.md)                     | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     | pending                                                                                                                                   |
 
 ### Response
 
@@ -170,7 +170,7 @@ var res = await sdk.OrganizationInvitations.ListAsync(
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## CreateBulk
+## BulkCreate
 
 Creates new organization invitations in bulk and sends out emails to the provided email addresses with a link to accept the invitation and join the organization.
 You can specify a different `role` for each invited organization member.
@@ -196,7 +196,7 @@ using System.Collections.Generic;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.OrganizationInvitations.CreateBulkAsync(
+var res = await sdk.OrganizationInvitations.BulkCreateAsync(
     organizationId: "org_12345",
     requestBody: new List<CreateOrganizationInvitationBulkRequestBody>() {
         new CreateOrganizationInvitationBulkRequestBody() {

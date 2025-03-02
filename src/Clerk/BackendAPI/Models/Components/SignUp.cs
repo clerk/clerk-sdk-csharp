@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
     
     /// <summary>
@@ -30,40 +31,40 @@ namespace Clerk.BackendAPI.Models.Components
         public SignUpStatus Status { get; set; } = default!;
 
         [JsonProperty("required_fields")]
-        public List<string>? RequiredFields { get; set; }
+        public List<string> RequiredFields { get; set; } = default!;
 
         [JsonProperty("optional_fields")]
-        public List<string>? OptionalFields { get; set; }
+        public List<string> OptionalFields { get; set; } = default!;
 
         [JsonProperty("missing_fields")]
-        public List<string>? MissingFields { get; set; }
+        public List<string> MissingFields { get; set; } = default!;
 
         [JsonProperty("unverified_fields")]
-        public List<string>? UnverifiedFields { get; set; }
+        public List<string> UnverifiedFields { get; set; } = default!;
 
         [JsonProperty("verifications")]
-        public Verifications? Verifications { get; set; }
+        public SignUpVerifications Verifications { get; set; } = default!;
 
-        [JsonProperty("username")]
-        public string? Username { get; set; } = null;
+        [JsonProperty("username", NullValueHandling = NullValueHandling.Include)]
+        public string? Username { get; set; }
 
-        [JsonProperty("email_address")]
-        public string? EmailAddress { get; set; } = null;
+        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Include)]
+        public string? EmailAddress { get; set; }
 
-        [JsonProperty("phone_number")]
-        public string? PhoneNumber { get; set; } = null;
+        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Include)]
+        public string? PhoneNumber { get; set; }
 
-        [JsonProperty("web3_wallet")]
-        public string? Web3Wallet { get; set; } = null;
+        [JsonProperty("web3_wallet", NullValueHandling = NullValueHandling.Include)]
+        public string? Web3Wallet { get; set; }
 
         [JsonProperty("password_enabled")]
         public bool PasswordEnabled { get; set; } = default!;
 
-        [JsonProperty("first_name")]
-        public string? FirstName { get; set; } = null;
+        [JsonProperty("first_name", NullValueHandling = NullValueHandling.Include)]
+        public string? FirstName { get; set; }
 
-        [JsonProperty("last_name")]
-        public string? LastName { get; set; } = null;
+        [JsonProperty("last_name", NullValueHandling = NullValueHandling.Include)]
+        public string? LastName { get; set; }
 
         [JsonProperty("unsafe_metadata")]
         public Dictionary<string, object>? UnsafeMetadata { get; set; }
@@ -74,15 +75,22 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("custom_action")]
         public bool CustomAction { get; set; } = default!;
 
-        [JsonProperty("external_id")]
-        public string? ExternalId { get; set; } = null;
+        [JsonProperty("external_id", NullValueHandling = NullValueHandling.Include)]
+        public string? ExternalId { get; set; }
 
-        [JsonProperty("created_session_id")]
-        public string? CreatedSessionId { get; set; } = null;
+        [JsonProperty("created_session_id", NullValueHandling = NullValueHandling.Include)]
+        public string? CreatedSessionId { get; set; }
 
-        [JsonProperty("created_user_id")]
-        public string? CreatedUserId { get; set; } = null;
+        [JsonProperty("created_user_id", NullValueHandling = NullValueHandling.Include)]
+        public string? CreatedUserId { get; set; }
 
+        /// <summary>
+        /// Unix timestamp at which the user abandoned the sign up attempt.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
         [JsonProperty("abandon_at")]
         public long AbandonAt { get; set; } = default!;
 
@@ -93,10 +101,11 @@ namespace Clerk.BackendAPI.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("legal_accepted_at")]
-        public long? LegalAcceptedAt { get; set; } = null;
+        [JsonProperty("legal_accepted_at", NullValueHandling = NullValueHandling.Include)]
+        public long? LegalAcceptedAt { get; set; }
 
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("external_account")]
-        public ExternalAccount? ExternalAccount { get; set; }
+        public SignUpExternalAccount? ExternalAccount { get; set; }
     }
 }

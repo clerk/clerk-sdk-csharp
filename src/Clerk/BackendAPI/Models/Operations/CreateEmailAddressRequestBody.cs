@@ -19,13 +19,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The ID representing the user
         /// </summary>
         [JsonProperty("user_id")]
-        public string? UserId { get; set; }
+        public string UserId { get; set; } = default!;
 
         /// <summary>
         /// The new email address. Must adhere to the RFC 5322 specification for email address format.
         /// </summary>
         [JsonProperty("email_address")]
-        public string? EmailAddress { get; set; }
+        public string EmailAddress { get; set; } = default!;
 
         /// <summary>
         /// When created, the email address will be marked as verified.

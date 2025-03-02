@@ -7,27 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Clerk.BackendAPI.Models.Components
+namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     
-    public class PublicOrganizationData
+    public class GetSignUpResponse
     {
 
-        [JsonProperty("id")]
-        public string? Id { get; set; }
+        [JsonProperty("-")]
+        public HTTPMetadata HttpMeta { get; set; } = default!;
 
-        [JsonProperty("name")]
-        public string? Name { get; set; }
-
-        [JsonProperty("slug")]
-        public string? Slug { get; set; }
-
-        [JsonProperty("image_url")]
-        public string? ImageUrl { get; set; }
-
-        [JsonProperty("has_image")]
-        public bool? HasImage { get; set; }
+        /// <summary>
+        /// Success
+        /// </summary>
+        public SignUp? SignUp { get; set; }
     }
 }

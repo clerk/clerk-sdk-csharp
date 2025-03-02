@@ -34,6 +34,17 @@ namespace Clerk.BackendAPI.Models.Operations
         public Models.Operations.Status? Status { get; set; }
 
         /// <summary>
+        /// Whether to paginate the results.<br/>
+        /// 
+        /// <remarks>
+        /// If true, the results will be paginated.<br/>
+        /// If false, the results will not be paginated.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=paginated")]
+        public bool? Paginated { get; set; }
+
+        /// <summary>
         /// Applies a limit to the number of results returned.<br/>
         /// 
         /// <remarks>

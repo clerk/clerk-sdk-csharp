@@ -24,15 +24,15 @@ namespace Clerk.BackendAPI.Models.Components
         /// String representing the object&apos;s type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
-        public InstanceObject? Object { get; set; }
+        public InstanceObject Object { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         [JsonProperty("environment_type")]
-        public string? EnvironmentType { get; set; }
+        public string EnvironmentType { get; set; } = default!;
 
-        [JsonProperty("allowed_origins")]
-        public List<string>? AllowedOrigins { get; set; } = null;
+        [JsonProperty("allowed_origins", NullValueHandling = NullValueHandling.Include)]
+        public List<string>? AllowedOrigins { get; set; }
     }
 }

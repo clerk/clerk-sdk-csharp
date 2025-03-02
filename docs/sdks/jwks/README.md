@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [Get](#get) - Retrieve the JSON Web Key Set of the instance
+* [GetJWKS](#getjwks) - Retrieve the JSON Web Key Set of the instance
 
-## Get
+## GetJWKS
 
 Retrieve the JSON Web Key Set of the instance
 
@@ -19,7 +19,7 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Jwks.GetAsync();
+var res = await sdk.Jwks.GetJWKSAsync();
 
 // handle response
 ```
