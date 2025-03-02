@@ -18,7 +18,11 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         /// <summary>
-        /// The new name of the OAuth application
+        /// The new name of the OAuth application.<br/>
+        /// 
+        /// <remarks>
+        /// Max length: 256
+        /// </remarks>
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
@@ -46,6 +50,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// If true, this client is public and you can use the Proof Key of Code Exchange (PKCE) flow.
         /// </summary>
         [JsonProperty("public")]
-        public bool? Public { get; set; }
+        public bool? Public { get; set; } = null;
     }
 }

@@ -22,6 +22,12 @@ namespace Clerk.BackendAPI.Models.Operations
         public string OrganizationId { get; set; } = default!;
 
         /// <summary>
+        /// Filter organization invitations based on their status
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
+        public ListOrganizationInvitationsQueryParamStatus? Status { get; set; }
+
+        /// <summary>
         /// Applies a limit to the number of results returned.<br/>
         /// 
         /// <remarks>
@@ -41,11 +47,5 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
-
-        /// <summary>
-        /// Filter organization invitations based on their status
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
-        public ListOrganizationInvitationsQueryParamStatus? Status { get; set; }
     }
 }

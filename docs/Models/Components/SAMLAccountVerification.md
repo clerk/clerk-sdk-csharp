@@ -9,8 +9,8 @@
 SAMLAccountVerification.CreateSaml(/* values here */);
 ```
 
-### Ticket
+### VerificationTicket
 
 ```csharp
-SAMLAccountVerification.CreateTicket(/* values here */);
+SAMLAccountVerification.CreateVerificationTicket(/* values here */);
 ```

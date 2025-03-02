@@ -25,5 +25,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include_members_count")]
         public bool? IncludeMembersCount { get; set; }
+
+        /// <summary>
+        /// Flag to denote whether or not to include a member with elevated permissions who is not currently a member of the organization.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include_missing_member_with_elevated_permissions")]
+        public bool? IncludeMissingMemberWithElevatedPermissions { get; set; }
     }
 }

@@ -12,19 +12,22 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     
-    public class AttributeMapping
+    public class OrganizationInvitationPublicOrganizationData
     {
 
-        [JsonProperty("user_id")]
-        public string? UserId { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; } = default!;
 
-        [JsonProperty("email_address")]
-        public string? EmailAddress { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; } = default!;
 
-        [JsonProperty("first_name")]
-        public string? FirstName { get; set; }
+        [JsonProperty("slug")]
+        public string Slug { get; set; } = default!;
 
-        [JsonProperty("last_name")]
-        public string? LastName { get; set; }
+        [JsonProperty("image_url")]
+        public string? ImageUrl { get; set; }
+
+        [JsonProperty("has_image")]
+        public bool HasImage { get; set; } = default!;
     }
 }

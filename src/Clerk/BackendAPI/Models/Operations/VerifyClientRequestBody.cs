@@ -22,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// A JWT that represents the active client.
         /// </summary>
         [JsonProperty("token")]
-        public string? Token { get; set; }
+        public string Token { get; set; } = default!;
     }
 }

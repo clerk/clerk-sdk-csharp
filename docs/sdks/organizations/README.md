@@ -3,9 +3,6 @@
 
 ## Overview
 
-Organizations are used to group members under a common entity and provide shared access to resources.
-<https://clerk.com/docs/organizations/overview>
-
 ### Available Operations
 
 * [List](#list) - Get a list of organizations for an instance
@@ -35,8 +32,10 @@ using System.Collections.Generic;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 ListOrganizationsRequest req = new ListOrganizationsRequest() {
-    IncludeMembersCount = false,
-    Query = "clerk",
+    Query = "false",
+    UserId = new List<string>() {
+        "clerk",
+    },
     OrganizationId = new List<string>() {
         "-name",
     },
@@ -136,7 +135,8 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Organizations.GetAsync(
     organizationId: "org_123",
-    includeMembersCount: false
+    includeMembersCount: false,
+    includeMissingMemberWithElevatedPermissions: false
 );
 
 // handle response
@@ -144,10 +144,11 @@ var res = await sdk.Organizations.GetAsync(
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        | Example                                                                                            |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                   | *string*                                                                                           | :heavy_check_mark:                                                                                 | The ID or slug of the organization                                                                 | org_123                                                                                            |
-| `IncludeMembersCount`                                                                              | *bool*                                                                                             | :heavy_minus_sign:                                                                                 | Flag to denote whether or not the organization's members count should be included in the response. |                                                                                                    |
+| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    | Example                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `OrganizationId`                                                                                                               | *string*                                                                                                                       | :heavy_check_mark:                                                                                                             | The ID or slug of the organization                                                                                             | org_123                                                                                                                        |
+| `IncludeMembersCount`                                                                                                          | *bool*                                                                                                                         | :heavy_minus_sign:                                                                                                             | Flag to denote whether or not the organization's members count should be included in the response.                             |                                                                                                                                |
+| `IncludeMissingMemberWithElevatedPermissions`                                                                                  | *bool*                                                                                                                         | :heavy_minus_sign:                                                                                                             | Flag to denote whether or not to include a member with elevated permissions who is not currently a member of the organization. |                                                                                                                                |
 
 ### Response
 

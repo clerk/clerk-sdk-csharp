@@ -71,12 +71,12 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("cookieless_dev")]
-        public bool? CookielessDev { get; set; }
+        public bool? CookielessDev { get; set; } = null;
 
         /// <summary>
         /// Whether the instance should use URL-based session syncing in development mode (i.e. without third-party cookies).
         /// </summary>
         [JsonProperty("url_based_session_syncing")]
-        public bool? UrlBasedSessionSyncing { get; set; }
+        public bool? UrlBasedSessionSyncing { get; set; } = null;
     }
 }

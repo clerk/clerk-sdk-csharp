@@ -74,6 +74,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Define the attribute name mapping between Identity Provider and Clerk&apos;s user properties
         /// </summary>
         [JsonProperty("attribute_mapping")]
-        public Models.Operations.AttributeMapping? AttributeMapping { get; set; } = null;
+        public AttributeMapping? AttributeMapping { get; set; } = null;
     }
 }

@@ -12,7 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     
-    public class LatestActivity
+    public class SessionActivityResponse
     {
 
         [JsonProperty("object")]
@@ -25,7 +25,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? DeviceType { get; set; }
 
         [JsonProperty("is_mobile")]
-        public bool? IsMobile { get; set; }
+        public bool IsMobile { get; set; } = default!;
 
         [JsonProperty("browser_name")]
         public string? BrowserName { get; set; }

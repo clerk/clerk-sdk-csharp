@@ -27,7 +27,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string EmailAddress { get; set; } = default!;
 
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
         [JsonProperty("revoked")]
         public bool? Revoked { get; set; }
@@ -36,7 +36,7 @@ namespace Clerk.BackendAPI.Models.Components
         public WaitlistEntryInvitationStatus Status { get; set; } = default!;
 
         [JsonProperty("url")]
-        public string? Url { get; set; } = null;
+        public string? Url { get; set; }
 
         /// <summary>
         /// Unix timestamp of expiration.<br/>

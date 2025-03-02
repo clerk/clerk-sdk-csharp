@@ -24,5 +24,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("external_id")]
         public string? ExternalId { get; set; } = null;
+
+        /// <summary>
+        /// If true, the sign-up will be marked as a custom action.
+        /// </summary>
+        [JsonProperty("custom_action")]
+        public bool? CustomAction { get; set; } = null;
     }
 }

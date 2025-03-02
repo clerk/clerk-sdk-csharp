@@ -21,6 +21,18 @@ namespace Clerk.BackendAPI.Models.Operations
         public string OrganizationId { get; set; } = default!;
 
         /// <summary>
+        /// Filter domains by their verification status. `true` or `false`
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=verified")]
+        public string? Verified { get; set; }
+
+        /// <summary>
+        /// Filter domains by their enrollment mode
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=enrollment_mode")]
+        public string? EnrollmentMode { get; set; }
+
+        /// <summary>
         /// Applies a limit to the number of results returned.<br/>
         /// 
         /// <remarks>
@@ -40,17 +52,5 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
-
-        /// <summary>
-        /// Filter domains by their verification status. `true` or `false`
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=verified")]
-        public string? Verified { get; set; }
-
-        /// <summary>
-        /// Filter domains by their enrollment mode
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=enrollment_mode")]
-        public string? EnrollmentMode { get; set; }
     }
 }

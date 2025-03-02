@@ -15,6 +15,17 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         /// <summary>
+        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
+        /// 
+        /// <remarks>
+        /// By prepending one of those values with + or -,<br/>
+        /// we can choose to sort in ascending (ASC) or descending (DESC) order.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
+        public string? OrderBy { get; set; }
+
+        /// <summary>
         /// Applies a limit to the number of results returned.<br/>
         /// 
         /// <remarks>
@@ -34,16 +45,5 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
-
-        /// <summary>
-        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
-        /// 
-        /// <remarks>
-        /// By prepending one of those values with + or -,<br/>
-        /// we can choose to sort in ascending (ASC) or descending (DESC) order.
-        /// </remarks>
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
-        public string? OrderBy { get; set; }
     }
 }

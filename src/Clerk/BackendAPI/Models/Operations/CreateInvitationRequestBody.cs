@@ -70,13 +70,9 @@ namespace Clerk.BackendAPI.Models.Operations
         public long? ExpiresInDays { get; set; } = null;
 
         /// <summary>
-        /// The slug of the email template to use for the invitation email.<br/>
-        /// 
-        /// <remarks>
-        /// If not provided, the &quot;invitation&quot; template will be used.
-        /// </remarks>
+        /// The slug of the email template to use for the invitation email.
         /// </summary>
         [JsonProperty("template_slug")]
-        public TemplateSlug? TemplateSlug { get; set; } = null;
+        public TemplateSlug? TemplateSlug { get; set; }
     }
 }

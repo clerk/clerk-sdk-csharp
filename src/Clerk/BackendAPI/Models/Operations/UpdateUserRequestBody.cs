@@ -46,7 +46,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("primary_email_address_id")]
-        public string? PrimaryEmailAddressId { get; set; }
+        public string? PrimaryEmailAddressId { get; set; } = null;
 
         /// <summary>
         /// If set to `true`, the user will be notified that their primary email address has changed.<br/>
@@ -66,7 +66,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("primary_phone_number_id")]
-        public string? PrimaryPhoneNumberId { get; set; }
+        public string? PrimaryPhoneNumberId { get; set; } = null;
 
         /// <summary>
         /// The ID of the web3 wallets to set as primary.<br/>
@@ -76,7 +76,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("primary_web3_wallet_id")]
-        public string? PrimaryWeb3WalletId { get; set; }
+        public string? PrimaryWeb3WalletId { get; set; } = null;
 
         /// <summary>
         /// The username to give to the user.<br/>
@@ -154,7 +154,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("totp_secret")]
-        public string? TotpSecret { get; set; }
+        public string? TotpSecret { get; set; } = null;
 
         /// <summary>
         /// If Backup Codes are configured on the instance, you can provide them to enable it on the specific user without the need to reset them.<br/>
@@ -170,13 +170,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Metadata saved on the user, that is visible to both your Frontend and Backend APIs
         /// </summary>
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; } = null;
 
         /// <summary>
         /// Metadata saved on the user, that is only visible to your Backend API
         /// </summary>
         [JsonProperty("private_metadata")]
-        public Dictionary<string, object>? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
 
         /// <summary>
         /// Metadata saved on the user, that can be updated from both the Frontend and Backend APIs.<br/>
@@ -186,7 +186,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("unsafe_metadata")]
-        public Dictionary<string, object>? UnsafeMetadata { get; set; }
+        public Dictionary<string, object>? UnsafeMetadata { get; set; } = null;
 
         /// <summary>
         /// If true, the user can delete themselves with the Frontend API.
@@ -226,6 +226,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// A custom date/time denoting _when_ the user signed up to the application, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
         /// </summary>
         [JsonProperty("created_at")]
-        public string? CreatedAt { get; set; }
+        public string? CreatedAt { get; set; } = null;
     }
 }

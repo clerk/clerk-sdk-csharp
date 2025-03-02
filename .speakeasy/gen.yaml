@@ -15,7 +15,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 csharp:
-  version: 0.5.0
+  version: 0.6.0
   additionalDependencies:
     - package: System.IdentityModel.Tokens.Jwt
       version: 8.2.0
