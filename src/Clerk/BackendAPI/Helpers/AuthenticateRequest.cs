@@ -1,7 +1,12 @@
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
+
 
 namespace Clerk.BackendAPI.Helpers.Jwks;
 
@@ -10,7 +15,7 @@ namespace Clerk.BackendAPI.Helpers.Jwks;
 /// </summary>
 public static class AuthenticateRequest
 {
-    private const string SESSION_COOKIE_NAME = "__session";
+    private const string SESSION_COOKIE_PREFIX = "__session";
 
     /// <summary>
     ///     Checks if the HTTP request is authenticated.
@@ -24,7 +29,7 @@ public static class AuthenticateRequest
     /// <returns>The request state</returns>
     /// <remarks>WARNING: AuthenticateRequestAsync is applicable in the context of Backend APIs only.</remarks>
     public static async Task<RequestState> AuthenticateRequestAsync(
-        HttpRequestMessage request,
+        HttpRequest request,
         AuthenticateRequestOptions options)
     {
         var sessionToken = GetSessionToken(request);
@@ -65,15 +70,16 @@ public static class AuthenticateRequest
     /// </summary>
     /// <param name="request">The HTTP request</param>
     /// <returns>The session token, if present</returns>
-    private static string? GetSessionToken(HttpRequestMessage request)
+    private static string? GetSessionToken(HttpRequest request)
     {
-        if (request.Headers.TryGetValues("Authorization", out var authorizationHeaders))
+        var authorizationHeaders = request.Headers.GetCommaSeparatedValues("Authorization");
+        if (authorizationHeaders != StringValues.Empty)
         {
             var bearerToken = authorizationHeaders.FirstOrDefault();
             if (!string.IsNullOrEmpty(bearerToken)) return bearerToken.Replace("Bearer ", "");
         }
-
-        if (request.Headers.TryGetValues("Cookie", out var cookieHeaders))
+        var cookieHeaders = request.Headers.GetCommaSeparatedValues("Cookie");
+        if (cookieHeaders != StringValues.Empty)
         {
             var cookieHeaderValue = cookieHeaders.FirstOrDefault();
             if (!string.IsNullOrEmpty(cookieHeaderValue))
@@ -83,7 +89,7 @@ public static class AuthenticateRequest
                     .Select(cookie => new Cookie(cookie.Split('=')[0], cookie.Split('=')[1]));
 
                 foreach (var cookie in cookies)
-                    if (cookie.Name == SESSION_COOKIE_NAME)
+                    if (cookie.Name.StartsWith(SESSION_COOKIE_PREFIX))
                         return cookie.Value;
             }
         }
