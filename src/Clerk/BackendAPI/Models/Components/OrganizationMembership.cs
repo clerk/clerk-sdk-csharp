@@ -21,7 +21,7 @@ namespace Clerk.BackendAPI.Models.Components
     {
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
@@ -31,22 +31,22 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("object")]
-        public OrganizationMembershipObject? Object { get; set; }
+        public OrganizationMembershipObject Object { get; set; } = default!;
 
         [JsonProperty("role")]
-        public string? Role { get; set; }
+        public string Role { get; set; } = default!;
 
         [JsonProperty("role_name")]
         public string? RoleName { get; set; }
 
         [JsonProperty("permissions")]
-        public List<string>? Permissions { get; set; }
+        public List<string> Permissions { get; set; } = default!;
 
         /// <summary>
         /// Metadata saved on the organization membership, accessible from both Frontend and Backend APIs
         /// </summary>
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
         /// <summary>
         /// Metadata saved on the organization membership, accessible only from the Backend API
@@ -55,21 +55,24 @@ namespace Clerk.BackendAPI.Models.Components
         public Dictionary<string, object>? PrivateMetadata { get; set; }
 
         [JsonProperty("organization")]
-        public OrganizationMembershipOrganization? Organization { get; set; }
+        public OrganizationMembershipOrganization Organization { get; set; } = default!;
 
+        /// <summary>
+        /// An organization membership with public user data populated
+        /// </summary>
         [JsonProperty("public_user_data")]
-        public PublicUserData? PublicUserData { get; set; }
+        public OrganizationMembershipPublicUserData? PublicUserData { get; set; }
 
         /// <summary>
         /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
-        public long? CreatedAt { get; set; }
+        public long CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
-        public long? UpdatedAt { get; set; }
+        public long UpdatedAt { get; set; } = default!;
     }
 }

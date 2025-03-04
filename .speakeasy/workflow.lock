@@ -1,21 +1,21 @@
-speakeasyVersion: 1.495.1
+speakeasyVersion: 1.509.0
 sources:
     clerk-backend-api-OAS:
         sourceNamespace: clerk-openapi
-        sourceRevisionDigest: sha256:ce6ab7b0af738dc6613a20f434aa7e53e15430905d7445628881d52bc9dbac2d
-        sourceBlobDigest: sha256:49cd2694f21271ce7315b653a28fbfe5cc83da23dc6e5673c4a4181fa67a16b5
+        sourceRevisionDigest: sha256:ad765aabe1e7fbf59f5f7e89c3f2b9f7ddc06fa8332c0229159495d93cb9b517
+        sourceBlobDigest: sha256:65ff654fae9c0e5b09b29ab9388f006024a09c4189d0ca1289811224214d81fc
         tags:
             - latest
-            - speakeasy-sdk-regen-1739989414
-            - v1
+            - speakeasy-sdk-regen-1740873982
+            - "2024-10-01"
 targets:
     clerk-backend-api:
         source: clerk-backend-api-OAS
         sourceNamespace: clerk-openapi
-        sourceRevisionDigest: sha256:ce6ab7b0af738dc6613a20f434aa7e53e15430905d7445628881d52bc9dbac2d
-        sourceBlobDigest: sha256:49cd2694f21271ce7315b653a28fbfe5cc83da23dc6e5673c4a4181fa67a16b5
+        sourceRevisionDigest: sha256:ad765aabe1e7fbf59f5f7e89c3f2b9f7ddc06fa8332c0229159495d93cb9b517
+        sourceBlobDigest: sha256:65ff654fae9c0e5b09b29ab9388f006024a09c4189d0ca1289811224214d81fc
         codeSamplesNamespace: clerk-backend-api-oas-csharp-code-samples
-        codeSamplesRevisionDigest: sha256:6a4cfb41807bfb379e8560057f6e8efff25d1278a72b8c49cb757485f1fe5a7c
+        codeSamplesRevisionDigest: sha256:fa20fc64ca2b3886d9baec77f18f189a80cc0c2128b561eecd3a8f9cbde99e42
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -24,8 +24,6 @@ workflow:
             inputs:
                 - location: https://raw.githubusercontent.com/clerk/openapi-specs/refs/heads/main/bapi/2024-10-01.yml
             overlays:
-                - location: .speakeasy/speakeasy-modifications-overlay.yaml
-                - location: ./fixes.yaml
                 - location: ./examples.yaml
             registry:
                 location: registry.speakeasyapi.dev/clerk/clerk/clerk-openapi

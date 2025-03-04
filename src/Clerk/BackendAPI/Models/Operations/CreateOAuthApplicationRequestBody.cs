@@ -18,7 +18,11 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         /// <summary>
-        /// The name of the new OAuth application
+        /// The name of the new OAuth application.<br/>
+        /// 
+        /// <remarks>
+        /// Max length: 256
+        /// </remarks>
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;

@@ -27,7 +27,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The ID of the actor.
         /// </summary>
         [JsonProperty("sub")]
-        public string? Sub { get; set; }
+        public string Sub { get; set; } = default!;
 
         [JsonProperty("additionalProperties")]
         public Dictionary<string, object>? AdditionalProperties { get; set; }

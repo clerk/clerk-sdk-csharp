@@ -20,3 +20,9 @@ Verification.CreateAdmin(/* values here */);
 ```csharp
 Verification.CreateFromOAuth(/* values here */);
 ```
+
+### Ticket
+
+```csharp
+Verification.CreateTicket(/* values here */);
+```

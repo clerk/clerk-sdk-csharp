@@ -22,16 +22,6 @@ namespace Clerk.BackendAPI
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
 
-    /// <summary>
-    /// The Session object is an abstraction over an HTTP session.<br/>
-    /// 
-    /// <remarks>
-    /// It models the period of information exchange between a user and the server.<br/>
-    /// Sessions are created when a user successfully goes through the sign in or sign up flows.
-    /// </remarks>
-    /// 
-    /// <see>https://clerk.com/docs/reference/clerkjs/session}</see>
-    /// </summary>
     public interface ISessions
     {
 
@@ -45,7 +35,7 @@ namespace Clerk.BackendAPI
         /// moving forward at least one of `client_id` or `user_id` parameters should be provided.
         /// </remarks>
         /// </summary>
-        Task<GetSessionListResponse> ListAsync(GetSessionListRequest? request = null);
+        Task<GetSessionListResponse> ListAsync(GetSessionListRequest? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create a new active session
@@ -57,7 +47,7 @@ namespace Clerk.BackendAPI
         /// we recommend using the <a href="https://clerk.com/docs/reference/backend-api/tag/Sign-in-Tokens#operation/CreateSignInToken">Sign-in Tokens</a> resource instead.
         /// </remarks>
         /// </summary>
-        Task<CreateSessionResponse> CreateSessionAsync(CreateSessionRequestBody? request = null);
+        Task<CreateSessionResponse> CreateAsync(CreateSessionRequestBody? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Retrieve a session
@@ -66,7 +56,7 @@ namespace Clerk.BackendAPI
         /// Retrieve the details of a session
         /// </remarks>
         /// </summary>
-        Task<GetSessionResponse> GetAsync(string sessionId);
+        Task<GetSessionResponse> GetAsync(string sessionId, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Revoke a session
@@ -76,7 +66,7 @@ namespace Clerk.BackendAPI
         /// In multi-session mode, a revoked session will still be returned along with its client object, however the user will need to sign in again.
         /// </remarks>
         /// </summary>
-        Task<RevokeSessionResponse> RevokeAsync(string sessionId);
+        Task<RevokeSessionResponse> RevokeAsync(string sessionId, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Verify a session
@@ -88,7 +78,7 @@ namespace Clerk.BackendAPI
         ///          For more details on how networkless verification works, refer to our <a href="https://clerk.com/docs/backend-requests/resources/session-tokens">Session Tokens documentation</a>.
         /// </remarks>
         /// </summary>
-        Task<VerifySessionResponse> VerifyAsync(string sessionId, VerifySessionRequestBody? requestBody = null);
+        Task<VerifySessionResponse> VerifyAsync(string sessionId, VerifySessionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create a session token
@@ -97,7 +87,7 @@ namespace Clerk.BackendAPI
         /// Creates a session JSON Web Token (JWT) based on a session.
         /// </remarks>
         /// </summary>
-        Task<CreateSessionTokenResponse> CreateSessionTokenAsync(string sessionId, CreateSessionTokenRequestBody? requestBody = null);
+        Task<CreateSessionTokenResponse> CreateTokenAsync(string sessionId, CreateSessionTokenRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create a session token from a jwt template
@@ -106,27 +96,17 @@ namespace Clerk.BackendAPI
         /// Creates a JSON Web Token(JWT) based on a session and a JWT Template name defined for your instance
         /// </remarks>
         /// </summary>
-        Task<CreateSessionTokenFromTemplateResponse> CreateTokenAsync(string sessionId, string templateName, CreateSessionTokenFromTemplateRequestBody? requestBody = null);
+        Task<CreateSessionTokenFromTemplateResponse> CreateTokenFromTemplateAsync(string sessionId, string templateName, CreateSessionTokenFromTemplateRequestBody? requestBody = null, RetryConfig? retryConfig = null);
     }
 
-    /// <summary>
-    /// The Session object is an abstraction over an HTTP session.<br/>
-    /// 
-    /// <remarks>
-    /// It models the period of information exchange between a user and the server.<br/>
-    /// Sessions are created when a user successfully goes through the sign in or sign up flows.
-    /// </remarks>
-    /// 
-    /// <see>https://clerk.com/docs/reference/clerkjs/session}</see>
-    /// </summary>
     public class Sessions: ISessions
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.0";
-        private const string _sdkGenVersion = "2.515.4";
-        private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.515.4 v1 Clerk.BackendAPI";
+        private const string _sdkVersion = "0.6.0";
+        private const string _sdkGenVersion = "2.539.0";
+        private const string _openapiDocVersion = "2024-10-01";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.0 2.539.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -139,7 +119,7 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
-        public async Task<GetSessionListResponse> ListAsync(GetSessionListRequest? request = null)
+        public async Task<GetSessionListResponse> ListAsync(GetSessionListRequest? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/sessions", request);
@@ -155,11 +135,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("GetSessionList", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 401 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -229,7 +242,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateSessionResponse> CreateSessionAsync(CreateSessionRequestBody? request = null)
+        public async Task<CreateSessionResponse> CreateAsync(CreateSessionRequestBody? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -252,11 +265,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("createSession", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -326,7 +372,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<GetSessionResponse> GetAsync(string sessionId)
+        public async Task<GetSessionResponse> GetAsync(string sessionId, RetryConfig? retryConfig = null)
         {
             var request = new GetSessionRequest()
             {
@@ -346,11 +392,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("GetSession", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -420,7 +499,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<RevokeSessionResponse> RevokeAsync(string sessionId)
+        public async Task<RevokeSessionResponse> RevokeAsync(string sessionId, RetryConfig? retryConfig = null)
         {
             var request = new RevokeSessionRequest()
             {
@@ -440,11 +519,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("RevokeSession", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -515,7 +627,7 @@ namespace Clerk.BackendAPI
         }
 
         [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
-        public async Task<VerifySessionResponse> VerifyAsync(string sessionId, VerifySessionRequestBody? requestBody = null)
+        public async Task<VerifySessionResponse> VerifyAsync(string sessionId, VerifySessionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new VerifySessionRequest()
             {
@@ -542,11 +654,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("VerifySession", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode == 410 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -616,7 +761,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateSessionTokenResponse> CreateSessionTokenAsync(string sessionId, CreateSessionTokenRequestBody? requestBody = null)
+        public async Task<CreateSessionTokenResponse> CreateTokenAsync(string sessionId, CreateSessionTokenRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new CreateSessionTokenRequest()
             {
@@ -643,11 +788,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("CreateSessionToken", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -717,7 +895,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateSessionTokenFromTemplateResponse> CreateTokenAsync(string sessionId, string templateName, CreateSessionTokenFromTemplateRequestBody? requestBody = null)
+        public async Task<CreateSessionTokenFromTemplateResponse> CreateTokenFromTemplateAsync(string sessionId, string templateName, CreateSessionTokenFromTemplateRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new CreateSessionTokenFromTemplateRequest()
             {
@@ -745,11 +923,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("CreateSessionTokenFromTemplate", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)

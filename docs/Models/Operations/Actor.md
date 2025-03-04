@@ -8,5 +8,5 @@ This whole payload will be also included in the JWT session token.
 
 | Field                                         | Type                                          | Required                                      | Description                                   | Example                                       |
 | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| `Sub`                                         | *string*                                      | :heavy_minus_sign:                            | The ID of the actor.                          | user_2OEpKhcCN1Lat9NQ0G6puh7q5Rb              |
+| `Sub`                                         | *string*                                      | :heavy_check_mark:                            | The ID of the actor.                          |                                               |
 | `AdditionalProperties`                        | Dictionary<String, *object*>                  | :heavy_minus_sign:                            | N/A                                           | {<br/>"sub": "user_2OEpKhcCN1Lat9NQ0G6puh7q5Rb"<br/>} |

@@ -3,20 +3,15 @@
 
 ## Overview
 
-The Session object is an abstraction over an HTTP session.
-It models the period of information exchange between a user and the server.
-Sessions are created when a user successfully goes through the sign in or sign up flows.
-<https://clerk.com/docs/reference/clerkjs/session>
-
 ### Available Operations
 
 * [List](#list) - List all sessions
-* [CreateSession](#createsession) - Create a new active session
+* [Create](#create) - Create a new active session
 * [Get](#get) - Retrieve a session
 * [Revoke](#revoke) - Revoke a session
 * [~~Verify~~](#verify) - Verify a session :warning: **Deprecated**
-* [CreateSessionToken](#createsessiontoken) - Create a session token
-* [CreateToken](#createtoken) - Create a session token from a jwt template
+* [CreateToken](#createtoken) - Create a session token
+* [CreateTokenFromTemplate](#createtokenfromtemplate) - Create a session token from a jwt template
 
 ## List
 
@@ -62,7 +57,7 @@ var res = await sdk.Sessions.ListAsync(req);
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## CreateSession
+## Create
 
 Create a new active session for the provided user ID.
 
@@ -78,9 +73,11 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateSessionRequestBody req = new CreateSessionRequestBody() {};
+CreateSessionRequestBody req = new CreateSessionRequestBody() {
+    UserId = "<id>",
+};
 
-var res = await sdk.Sessions.CreateSessionAsync(req);
+var res = await sdk.Sessions.CreateAsync(req);
 
 // handle response
 ```
@@ -217,7 +214,7 @@ var res = await sdk.Sessions.VerifyAsync(
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 410                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## CreateSessionToken
+## CreateToken
 
 Creates a session JSON Web Token (JWT) based on a session.
 
@@ -230,7 +227,7 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Sessions.CreateSessionTokenAsync(
+var res = await sdk.Sessions.CreateTokenAsync(
     sessionId: "<id>",
     requestBody: new CreateSessionTokenRequestBody() {}
 );
@@ -256,7 +253,7 @@ var res = await sdk.Sessions.CreateSessionTokenAsync(
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 404                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## CreateToken
+## CreateTokenFromTemplate
 
 Creates a JSON Web Token(JWT) based on a session and a JWT Template name defined for your instance
 
@@ -269,7 +266,7 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Sessions.CreateTokenAsync(
+var res = await sdk.Sessions.CreateTokenFromTemplateAsync(
     sessionId: "ses_123abcd4567",
     templateName: "custom_hasura",
     requestBody: new CreateSessionTokenFromTemplateRequestBody() {}

@@ -42,6 +42,13 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("redirect_uris")]
         public List<string> RedirectUris { get; set; } = default!;
 
+        /// <summary>
+        /// Deprecated: Use redirect_uris instead.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("callback_url")]
         public string CallbackUrl { get; set; } = default!;

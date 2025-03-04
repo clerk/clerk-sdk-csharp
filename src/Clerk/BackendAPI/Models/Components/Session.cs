@@ -48,11 +48,25 @@ namespace Clerk.BackendAPI.Models.Components
         public long LastActiveAt { get; set; } = default!;
 
         [JsonProperty("latest_activity")]
-        public LatestActivity? LatestActivity { get; set; } = null;
+        public SessionActivityResponse? LatestActivity { get; set; } = null;
 
+        /// <summary>
+        /// Unix timestamp of expiration.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
         [JsonProperty("expire_at")]
         public long ExpireAt { get; set; } = default!;
 
+        /// <summary>
+        /// Unix timestamp of abandonment.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
         [JsonProperty("abandon_at")]
         public long AbandonAt { get; set; } = default!;
 

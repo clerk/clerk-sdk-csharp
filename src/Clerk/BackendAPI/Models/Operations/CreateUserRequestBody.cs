@@ -100,7 +100,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("password_digest")]
-        public string? PasswordDigest { get; set; }
+        public string? PasswordDigest { get; set; } = null;
 
         /// <summary>
         /// The hashing algorithm that was used to generate the password digest.<br/>
@@ -127,7 +127,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("skip_password_checks")]
-        public bool? SkipPasswordChecks { get; set; }
+        public bool? SkipPasswordChecks { get; set; } = null;
 
         /// <summary>
         /// When set to `true`, `password` is not required anymore when creating the user and can be omitted.<br/>
@@ -138,7 +138,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("skip_password_requirement")]
-        public bool? SkipPasswordRequirement { get; set; }
+        public bool? SkipPasswordRequirement { get; set; } = null;
 
         /// <summary>
         /// In case TOTP is configured on the instance, you can provide the secret to enable it on the newly created user without the need to reset it.<br/>
@@ -151,7 +151,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("totp_secret")]
-        public string? TotpSecret { get; set; }
+        public string? TotpSecret { get; set; } = null;
 
         /// <summary>
         /// If Backup Codes are configured on the instance, you can provide them to enable it on the newly created user without the need to reset them.<br/>
@@ -235,6 +235,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// A custom date/time denoting _when_ the user signed up to the application, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
         /// </summary>
         [JsonProperty("created_at")]
-        public string? CreatedAt { get; set; }
+        public string? CreatedAt { get; set; } = null;
     }
 }

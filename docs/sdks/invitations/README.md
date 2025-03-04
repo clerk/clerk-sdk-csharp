@@ -3,14 +3,11 @@
 
 ## Overview
 
-Invitations allow you to invite someone to sign up to your application, via email.
-<https://clerk.com/docs/authentication/invitations>
-
 ### Available Operations
 
 * [Create](#create) - Create an invitation
 * [List](#list) - List all invitations
-* [CreateBulkInvitations](#createbulkinvitations) - Create multiple invitations
+* [BulkCreate](#bulkcreate) - Create multiple invitations
 * [Revoke](#revoke) - Revokes an invitation
 
 ## Create
@@ -72,24 +69,20 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Invitations.ListAsync(
-    limit: 20,
-    offset: 10,
-    status: ListInvitationsQueryParamStatus.Pending,
-    query: "<value>"
-);
+ListInvitationsRequest req = new ListInvitationsRequest() {
+    OrderBy = "pending",
+};
+
+var res = await sdk.Invitations.ListAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
-| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
-| `Status`                                                                                                                                  | [ListInvitationsQueryParamStatus](../../Models/Operations/ListInvitationsQueryParamStatus.md)                                             | :heavy_minus_sign:                                                                                                                        | Filter invitations based on their status                                                                                                  | pending                                                                                                                                   |
-| `Query`                                                                                                                                   | *string*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Filter invitations based on their `email_address` or `id`                                                                                 |                                                                                                                                           |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [ListInvitationsRequest](../../Models/Operations/ListInvitationsRequest.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
 
 ### Response
 
@@ -101,7 +94,7 @@ var res = await sdk.Invitations.ListAsync(
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | Clerk.BackendAPI.Models.Errors.SDKError | 4XX, 5XX                                | \*/\*                                   |
 
-## CreateBulkInvitations
+## BulkCreate
 
 Use this API operation to create multiple invitations for the provided email addresses. You can choose to send the
 invitations as emails by setting the `notify` parameter to `true`. There cannot be an existing invitation for any
@@ -120,11 +113,11 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 List<RequestBody> req = new List<RequestBody>() {
     new RequestBody() {
-        EmailAddress = "Era_Pouros@yahoo.com",
+        EmailAddress = "Queen25@gmail.com",
     },
 };
 
-var res = await sdk.Invitations.CreateBulkInvitationsAsync(req);
+var res = await sdk.Invitations.BulkCreateAsync(req);
 
 // handle response
 ```

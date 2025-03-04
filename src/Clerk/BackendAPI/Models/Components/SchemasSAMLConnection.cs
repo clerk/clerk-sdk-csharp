@@ -56,7 +56,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? OrganizationId { get; set; } = null;
 
         [JsonProperty("attribute_mapping")]
-        public Models.Components.AttributeMapping? AttributeMapping { get; set; }
+        public SAMLConnectionAttributeMapping? AttributeMapping { get; set; }
 
         [JsonProperty("active")]
         public bool Active { get; set; } = default!;

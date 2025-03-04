@@ -16,6 +16,42 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         /// <summary>
+        /// Filter invitations based on their status
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
+        public ListInvitationsQueryParamStatus? Status { get; set; }
+
+        /// <summary>
+        /// Filter invitations based on their `email_address` or `id`
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
+        public string? Query { get; set; }
+
+        /// <summary>
+        /// Allows to return organizations in a particular order.<br/>
+        /// 
+        /// <remarks>
+        /// At the moment, you can order the returned organizations either by their `name`, `created_at` or `members_count`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want organizations to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don&apos;t use `+` or `-`, then `+` is implied.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
+        public string? OrderBy { get; set; }
+
+        /// <summary>
+        /// Whether to paginate the results.<br/>
+        /// 
+        /// <remarks>
+        /// If true, the results will be paginated.<br/>
+        /// If false, the results will not be paginated.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=paginated")]
+        public bool? Paginated { get; set; }
+
+        /// <summary>
         /// Applies a limit to the number of results returned.<br/>
         /// 
         /// <remarks>
@@ -35,17 +71,5 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
-
-        /// <summary>
-        /// Filter invitations based on their status
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
-        public ListInvitationsQueryParamStatus? Status { get; set; }
-
-        /// <summary>
-        /// Filter invitations based on their `email_address` or `id`
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
-        public string? Query { get; set; }
     }
 }

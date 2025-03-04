@@ -23,24 +23,24 @@ namespace Clerk.BackendAPI.Models.Components
         /// Status of the verification. It can be `unverified` or `verified`
         /// </summary>
         [JsonProperty("status")]
-        public OrganizationDomainStatus? Status { get; set; }
+        public OrganizationDomainStatus Status { get; set; } = default!;
 
         /// <summary>
         /// Name of the strategy used to verify the domain
         /// </summary>
         [JsonProperty("strategy")]
-        public string? Strategy { get; set; }
+        public string Strategy { get; set; } = default!;
 
         /// <summary>
         /// How many attempts have been made to verify the domain
         /// </summary>
-        [JsonProperty("attempts")]
+        [JsonProperty("attempts", NullValueHandling = NullValueHandling.Include)]
         public long? Attempts { get; set; }
 
         /// <summary>
         /// Unix timestamp of when the verification will expire
         /// </summary>
-        [JsonProperty("expire_at")]
-        public long? ExpireAt { get; set; } = null;
+        [JsonProperty("expire_at", NullValueHandling = NullValueHandling.Include)]
+        public long? ExpireAt { get; set; }
     }
 }

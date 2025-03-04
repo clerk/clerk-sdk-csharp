@@ -14,14 +14,12 @@
 <!-- Start Summary [summary] -->
 ## Summary
 
-Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend
-servers.
+Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend servers.
 
 ### Versions
 
 When the API changes in a way that isn't compatible with older versions, a new version is released.
-Each version is identified by its release date, e.g. `2021-02-05`. For more information, please see [Clerk API Versions](https://clerk.com/docs/backend-requests/versioning/overview).
-
+Each version is identified by its release date, e.g. `2024-10-01`. For more information, please see [Clerk API Versions](https://clerk.com/docs/versioning/available-versions).
 
 Please see https://clerk.com/docs for more information.
 
@@ -36,6 +34,7 @@ More information about the API can be found at https://clerk.com/docs
   * [Authentication](#authentication)
   * [Request Authentication](#request-authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
+  * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
 * [Development](#development)
@@ -69,11 +68,15 @@ dotnet add reference src/Clerk/BackendAPI/Clerk.BackendAPI.csproj
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+var sdk = new ClerkBackendApi();
 
-var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_example");
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
@@ -94,13 +97,15 @@ To authenticate with the API the `BearerAuth` parameter must be set when initial
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "frontend-api_1a2b3c4d",
-    publishableKey: "pub_1a2b3c4d"
-);
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
@@ -146,14 +151,6 @@ If the request is correctly authenticated, the token's claims are made available
 * [Create](docs/sdks/actortokens/README.md#create) - Create actor token
 * [Revoke](docs/sdks/actortokens/README.md#revoke) - Revoke actor token
 
-### [AllowBlockList](docs/sdks/allowblocklist/README.md)
-
-* [DeleteIdentifier](docs/sdks/allowblocklist/README.md#deleteidentifier) - Delete identifier from block-list
-
-### [AllowListBlockList](docs/sdks/allowlistblocklist/README.md)
-
-* [ListBlocklistIdentifiers](docs/sdks/allowlistblocklist/README.md#listblocklistidentifiers) - List all identifiers on the block-list
-
 ### [AllowlistIdentifiers](docs/sdks/allowlistidentifiers/README.md)
 
 * [List](docs/sdks/allowlistidentifiers/README.md#list) - List all identifiers on the allow-list
@@ -163,12 +160,13 @@ If the request is correctly authenticated, the token's claims are made available
 ### [BetaFeatures](docs/sdks/betafeatures/README.md)
 
 * [UpdateInstanceSettings](docs/sdks/betafeatures/README.md#updateinstancesettings) - Update instance settings
-* [~~UpdateDomain~~](docs/sdks/betafeatures/README.md#updatedomain) - Update production instance domain :warning: **Deprecated**
-* [ChangeProductionInstanceDomain](docs/sdks/betafeatures/README.md#changeproductioninstancedomain) - Update production instance domain
+* [~~UpdateProductionInstanceDomain~~](docs/sdks/betafeatures/README.md#updateproductioninstancedomain) - Update production instance domain :warning: **Deprecated**
 
 ### [BlocklistIdentifiers](docs/sdks/blocklistidentifiers/README.md)
 
+* [List](docs/sdks/blocklistidentifiers/README.md#list) - List all identifiers on the block-list
 * [Create](docs/sdks/blocklistidentifiers/README.md#create) - Add identifier to the block-list
+* [Delete](docs/sdks/blocklistidentifiers/README.md#delete) - Delete identifier from block-list
 
 
 ### [Clients](docs/sdks/clients/README.md)
@@ -194,32 +192,32 @@ If the request is correctly authenticated, the token's claims are made available
 ### [~~EmailAndSmsTemplates~~](docs/sdks/emailandsmstemplates/README.md)
 
 * [~~Upsert~~](docs/sdks/emailandsmstemplates/README.md#upsert) - Update a template for a given type and slug :warning: **Deprecated**
-* [~~Revert~~](docs/sdks/emailandsmstemplates/README.md#revert) - Revert a template :warning: **Deprecated**
-* [~~Preview~~](docs/sdks/emailandsmstemplates/README.md#preview) - Preview changes to a template :warning: **Deprecated**
 
-### [~~EmailSmsTemplates~~](docs/sdks/emailsmstemplates/README.md)
+### [~~EmailSMSTemplates~~](docs/sdks/emailsmstemplates/README.md)
 
 * [~~List~~](docs/sdks/emailsmstemplates/README.md#list) - List all templates :warning: **Deprecated**
 * [~~Get~~](docs/sdks/emailsmstemplates/README.md#get) - Retrieve a template :warning: **Deprecated**
-* [~~ToggleDelivery~~](docs/sdks/emailsmstemplates/README.md#toggledelivery) - Toggle the delivery by Clerk for a template of a given type and slug :warning: **Deprecated**
+* [~~Revert~~](docs/sdks/emailsmstemplates/README.md#revert) - Revert a template :warning: **Deprecated**
+* [~~ToggleTemplateDelivery~~](docs/sdks/emailsmstemplates/README.md#toggletemplatedelivery) - Toggle the delivery by Clerk for a template of a given type and slug :warning: **Deprecated**
 
 ### [InstanceSettings](docs/sdks/instancesettings/README.md)
 
-* [GetInstance](docs/sdks/instancesettings/README.md#getinstance) - Fetch the current instance
+* [Get](docs/sdks/instancesettings/README.md#get) - Fetch the current instance
 * [Update](docs/sdks/instancesettings/README.md#update) - Update instance settings
 * [UpdateRestrictions](docs/sdks/instancesettings/README.md#updaterestrictions) - Update instance restrictions
-* [UpdateOrganization](docs/sdks/instancesettings/README.md#updateorganization) - Update instance organization settings
+* [ChangeDomain](docs/sdks/instancesettings/README.md#changedomain) - Update production instance domain
+* [UpdateOrganizationSettings](docs/sdks/instancesettings/README.md#updateorganizationsettings) - Update instance organization settings
 
 ### [Invitations](docs/sdks/invitations/README.md)
 
 * [Create](docs/sdks/invitations/README.md#create) - Create an invitation
 * [List](docs/sdks/invitations/README.md#list) - List all invitations
-* [CreateBulkInvitations](docs/sdks/invitations/README.md#createbulkinvitations) - Create multiple invitations
+* [BulkCreate](docs/sdks/invitations/README.md#bulkcreate) - Create multiple invitations
 * [Revoke](docs/sdks/invitations/README.md#revoke) - Revokes an invitation
 
 ### [Jwks](docs/sdks/jwks/README.md)
 
-* [Get](docs/sdks/jwks/README.md#get) - Retrieve the JSON Web Key Set of the instance
+* [GetJWKS](docs/sdks/jwks/README.md#getjwks) - Retrieve the JSON Web Key Set of the instance
 
 ### [JwtTemplates](docs/sdks/jwttemplates/README.md)
 
@@ -242,22 +240,19 @@ If the request is correctly authenticated, the token's claims are made available
 * [Delete](docs/sdks/oauthapplications/README.md#delete) - Delete an OAuth application
 * [RotateSecret](docs/sdks/oauthapplications/README.md#rotatesecret) - Rotate the client secret of the given OAuth application
 
-### [OrganizationDomain](docs/sdks/organizationdomain/README.md)
-
-* [Update](docs/sdks/organizationdomain/README.md#update) - Update an organization domain.
-
 ### [OrganizationDomains](docs/sdks/organizationdomains/README.md)
 
 * [Create](docs/sdks/organizationdomains/README.md#create) - Create a new organization domain.
 * [List](docs/sdks/organizationdomains/README.md#list) - Get a list of all domains of an organization.
+* [Update](docs/sdks/organizationdomains/README.md#update) - Update an organization domain.
 * [Delete](docs/sdks/organizationdomains/README.md#delete) - Remove a domain from an organization.
 
 ### [OrganizationInvitations](docs/sdks/organizationinvitations/README.md)
 
-* [ListForInstance](docs/sdks/organizationinvitations/README.md#listforinstance) - Get a list of organization invitations for the current instance
+* [GetAll](docs/sdks/organizationinvitations/README.md#getall) - Get a list of organization invitations for the current instance
 * [Create](docs/sdks/organizationinvitations/README.md#create) - Create and send an organization invitation
 * [List](docs/sdks/organizationinvitations/README.md#list) - Get a list of organization invitations
-* [CreateBulk](docs/sdks/organizationinvitations/README.md#createbulk) - Bulk create and send organization invitations
+* [BulkCreate](docs/sdks/organizationinvitations/README.md#bulkcreate) - Bulk create and send organization invitations
 * [~~ListPending~~](docs/sdks/organizationinvitations/README.md#listpending) - Get a list of pending organization invitations :warning: **Deprecated**
 * [Get](docs/sdks/organizationinvitations/README.md#get) - Retrieve an organization invitation by ID
 * [Revoke](docs/sdks/organizationinvitations/README.md#revoke) - Revoke a pending organization invitation
@@ -269,7 +264,6 @@ If the request is correctly authenticated, the token's claims are made available
 * [Update](docs/sdks/organizationmemberships/README.md#update) - Update an organization membership
 * [Delete](docs/sdks/organizationmemberships/README.md#delete) - Remove a member from an organization
 * [UpdateMetadata](docs/sdks/organizationmemberships/README.md#updatemetadata) - Merge and update organization membership metadata
-* [ListForInstance](docs/sdks/organizationmemberships/README.md#listforinstance) - Get a list of all organization memberships within an instance.
 
 ### [Organizations](docs/sdks/organizations/README.md)
 
@@ -311,12 +305,12 @@ If the request is correctly authenticated, the token's claims are made available
 ### [Sessions](docs/sdks/sessions/README.md)
 
 * [List](docs/sdks/sessions/README.md#list) - List all sessions
-* [CreateSession](docs/sdks/sessions/README.md#createsession) - Create a new active session
+* [Create](docs/sdks/sessions/README.md#create) - Create a new active session
 * [Get](docs/sdks/sessions/README.md#get) - Retrieve a session
 * [Revoke](docs/sdks/sessions/README.md#revoke) - Revoke a session
 * [~~Verify~~](docs/sdks/sessions/README.md#verify) - Verify a session :warning: **Deprecated**
-* [CreateSessionToken](docs/sdks/sessions/README.md#createsessiontoken) - Create a session token
-* [CreateToken](docs/sdks/sessions/README.md#createtoken) - Create a session token from a jwt template
+* [CreateToken](docs/sdks/sessions/README.md#createtoken) - Create a session token
+* [CreateTokenFromTemplate](docs/sdks/sessions/README.md#createtokenfromtemplate) - Create a session token from a jwt template
 
 ### [SignInTokens](docs/sdks/signintokens/README.md)
 
@@ -325,7 +319,12 @@ If the request is correctly authenticated, the token's claims are made available
 
 ### [SignUps](docs/sdks/signups/README.md)
 
+* [Get](docs/sdks/signups/README.md#get) - Retrieve a sign-up by ID
 * [Update](docs/sdks/signups/README.md#update) - Update a sign-up
+
+### [~~Templates~~](docs/sdks/templates/README.md)
+
+* [~~Preview~~](docs/sdks/templates/README.md#preview) - Preview changes to a template :warning: **Deprecated**
 
 ### [TestingTokens](docs/sdks/testingtokens/README.md)
 
@@ -352,19 +351,17 @@ If the request is correctly authenticated, the token's claims are made available
 * [VerifyPassword](docs/sdks/users/README.md#verifypassword) - Verify the password of a user
 * [VerifyTotp](docs/sdks/users/README.md#verifytotp) - Verify a TOTP or backup code for a user
 * [DisableMfa](docs/sdks/users/README.md#disablemfa) - Disable a user's MFA methods
-* [DeleteBackupCode](docs/sdks/users/README.md#deletebackupcode) - Disable all user's Backup codes
+* [DeleteBackupCodes](docs/sdks/users/README.md#deletebackupcodes) - Disable all user's Backup codes
 * [DeletePasskey](docs/sdks/users/README.md#deletepasskey) - Delete a user passkey
+* [DeleteWeb3Wallet](docs/sdks/users/README.md#deleteweb3wallet) - Delete a user web3 wallet
 * [DeleteTOTP](docs/sdks/users/README.md#deletetotp) - Delete all the user's TOTPs
 * [DeleteExternalAccount](docs/sdks/users/README.md#deleteexternalaccount) - Delete External Account
-
-### [UserWeb3Wallets](docs/sdks/userweb3wallets/README.md)
-
-* [Delete](docs/sdks/userweb3wallets/README.md#delete) - Delete a user web3 wallet
+* [GetInstanceOrganizationMemberships](docs/sdks/users/README.md#getinstanceorganizationmemberships) - Get a list of all organization memberships within an instance.
 
 ### [WaitlistEntries](docs/sdks/waitlistentries/README.md)
 
-* [ListWaitlistEntries](docs/sdks/waitlistentries/README.md#listwaitlistentries) - List all waitlist entries
-* [CreateWaitlistEntry](docs/sdks/waitlistentries/README.md#createwaitlistentry) - Create a waitlist entry
+* [List](docs/sdks/waitlistentries/README.md#list) - List all waitlist entries
+* [Create](docs/sdks/waitlistentries/README.md#create) - Create a waitlist entry
 
 ### [Webhooks](docs/sdks/webhooks/README.md)
 
@@ -374,6 +371,65 @@ If the request is correctly authenticated, the token's claims are made available
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply pass a `RetryConfig` to the call:
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi();
+
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
+    retryConfig: new RetryConfig(
+        strategy: RetryConfig.RetryStrategy.BACKOFF,
+        backoff: new BackoffStrategy(
+            initialIntervalMs: 1L,
+            maxIntervalMs: 50L,
+            maxElapsedTimeMs: 100L,
+            exponent: 1.1
+        ),
+        retryConnectionErrors: false
+    ),
+    request: req
+);
+
+// handle response
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can use the `RetryConfig` optional parameter when intitializing the SDK:
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(retryConfig: new RetryConfig(
+    strategy: RetryConfig.RetryStrategy.BACKOFF,
+    backoff: new BackoffStrategy(
+        initialIntervalMs: 1L,
+        maxIntervalMs: 50L,
+        maxElapsedTimeMs: 100L,
+        exponent: 1.1
+    ),
+    retryConnectionErrors: false
+));
+
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
+
+// handle response
+```
+<!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling
@@ -439,13 +495,15 @@ catch (Exception ex)
 The default server can be overridden globally by passing a URL to the `serverUrl: string` optional parameter when initializing the SDK client instance. For example:
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 
-var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "frontend-api_1a2b3c4d",
-    publishableKey: "pub_1a2b3c4d"
-);
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```

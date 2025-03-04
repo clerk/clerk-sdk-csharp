@@ -30,13 +30,19 @@ namespace Clerk.BackendAPI.Models.Components
         public string Slug { get; set; } = default!;
 
         [JsonProperty("members_count")]
-        public long? MembersCount { get; set; } = null;
+        public long? MembersCount { get; set; }
+
+        [JsonProperty("missing_member_with_elevated_permissions")]
+        public bool? MissingMemberWithElevatedPermissions { get; set; }
+
+        [JsonProperty("pending_invitations_count")]
+        public long? PendingInvitationsCount { get; set; }
 
         [JsonProperty("max_allowed_memberships")]
         public long MaxAllowedMemberships { get; set; } = default!;
 
         [JsonProperty("admin_delete_enabled")]
-        public bool? AdminDeleteEnabled { get; set; }
+        public bool AdminDeleteEnabled { get; set; } = default!;
 
         [JsonProperty("public_metadata")]
         public Dictionary<string, object> PublicMetadata { get; set; } = default!;
@@ -45,7 +51,7 @@ namespace Clerk.BackendAPI.Models.Components
         public Dictionary<string, object> PrivateMetadata { get; set; } = default!;
 
         [JsonProperty("created_by")]
-        public string? CreatedBy { get; set; } = null;
+        public string? CreatedBy { get; set; }
 
         /// <summary>
         /// Unix timestamp of creation.<br/>

@@ -37,6 +37,23 @@ namespace Clerk.BackendAPI.Models.Operations
         public long? Offset { get; set; } = 0;
 
         /// <summary>
+        /// Returns SAML connections that have a name that matches the given query, via case-insensitive partial match.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
+        public string? Query { get; set; }
+
+        /// <summary>
+        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
+        /// 
+        /// <remarks>
+        /// By prepending one of those values with + or -,<br/>
+        /// we can choose to sort in ascending (ASC) or descending (DESC) order.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
+        public string? OrderBy { get; set; }
+
+        /// <summary>
         /// Returns SAML connections that have an associated organization ID to the<br/>
         /// 
         /// <remarks>

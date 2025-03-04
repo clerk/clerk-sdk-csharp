@@ -20,7 +20,8 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The name of the new organization.<br/>
         /// 
         /// <remarks>
-        /// May not contain URLs or HTML.
+        /// May not contain URLs or HTML.<br/>
+        /// Max length: 256
         /// </remarks>
         /// </summary>
         [JsonProperty("name")]
@@ -30,19 +31,19 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The ID of the User who will become the administrator for the new organization
         /// </summary>
         [JsonProperty("created_by")]
-        public string? CreatedBy { get; set; }
+        public string? CreatedBy { get; set; } = null;
 
         /// <summary>
         /// Metadata saved on the organization, accessible only from the Backend API
         /// </summary>
         [JsonProperty("private_metadata")]
-        public Dictionary<string, object>? PrivateMetadata { get; set; }
+        public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
 
         /// <summary>
         /// Metadata saved on the organization, read-only from the Frontend API and fully accessible (read/write) from the Backend API
         /// </summary>
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; } = null;
 
         /// <summary>
         /// A slug for the new organization.<br/>
@@ -53,18 +54,18 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("slug")]
-        public string? Slug { get; set; }
+        public string? Slug { get; set; } = null;
 
         /// <summary>
         /// The maximum number of memberships allowed for this organization
         /// </summary>
         [JsonProperty("max_allowed_memberships")]
-        public long? MaxAllowedMemberships { get; set; }
+        public long? MaxAllowedMemberships { get; set; } = null;
 
         /// <summary>
         /// A custom date/time denoting _when_ the organization was created, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
         /// </summary>
         [JsonProperty("created_at")]
-        public string? CreatedAt { get; set; }
+        public string? CreatedAt { get; set; } = null;
     }
 }

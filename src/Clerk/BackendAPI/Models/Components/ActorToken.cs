@@ -35,10 +35,10 @@ namespace Clerk.BackendAPI.Models.Components
         public ActorTokenActor Actor { get; set; } = default!;
 
         [JsonProperty("token")]
-        public string? Token { get; set; } = null;
+        public string? Token { get; set; }
 
         [JsonProperty("url")]
-        public string? Url { get; set; } = null;
+        public string? Url { get; set; }
 
         /// <summary>
         /// Unix timestamp of creation.<br/>

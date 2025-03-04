@@ -32,7 +32,7 @@ namespace Clerk.BackendAPI
         /// Get a list of all identifiers allowed to sign up to an instance
         /// </remarks>
         /// </summary>
-        Task<ListAllowlistIdentifiersResponse> ListAsync();
+        Task<ListAllowlistIdentifiersResponse> ListAsync(bool? paginated = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Add identifier to the allow-list
@@ -41,7 +41,7 @@ namespace Clerk.BackendAPI
         /// Create an identifier allowed to sign up to an instance
         /// </remarks>
         /// </summary>
-        Task<CreateAllowlistIdentifierResponse> CreateAsync(CreateAllowlistIdentifierRequestBody? request = null);
+        Task<CreateAllowlistIdentifierResponse> CreateAsync(CreateAllowlistIdentifierRequestBody? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Delete identifier from allow-list
@@ -50,17 +50,17 @@ namespace Clerk.BackendAPI
         /// Delete an identifier from the instance allow-list
         /// </remarks>
         /// </summary>
-        Task<DeleteAllowlistIdentifierResponse> DeleteAsync(string identifierId);
+        Task<DeleteAllowlistIdentifierResponse> DeleteAsync(string identifierId, RetryConfig? retryConfig = null);
     }
 
     public class AllowlistIdentifiers: IAllowlistIdentifiers
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.0";
-        private const string _sdkGenVersion = "2.515.4";
-        private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.515.4 v1 Clerk.BackendAPI";
+        private const string _sdkVersion = "0.6.0";
+        private const string _sdkGenVersion = "2.539.0";
+        private const string _openapiDocVersion = "2024-10-01";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.0 2.539.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -73,11 +73,16 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
-        public async Task<ListAllowlistIdentifiersResponse> ListAsync()
+        public async Task<ListAllowlistIdentifiersResponse> ListAsync(bool? paginated = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
         {
+            var request = new ListAllowlistIdentifiersRequest()
+            {
+                Paginated = paginated,
+                Limit = limit,
+                Offset = offset,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
-            var urlString = baseUrl + "/allowlist_identifiers";
+            var urlString = URLBuilder.Build(baseUrl, "/allowlist_identifiers", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
@@ -90,11 +95,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("ListAllowlistIdentifiers", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 401 || _statusCode == 402 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -127,7 +165,7 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<List<AllowlistIdentifier>>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<List<AllowlistIdentifier>>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
                     var response = new ListAllowlistIdentifiersResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -146,7 +184,7 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
                     throw obj!;
                 }
 
@@ -164,7 +202,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateAllowlistIdentifierResponse> CreateAsync(CreateAllowlistIdentifierRequestBody? request = null)
+        public async Task<CreateAllowlistIdentifierResponse> CreateAsync(CreateAllowlistIdentifierRequestBody? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -187,11 +225,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("CreateAllowlistIdentifier", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 402 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -261,7 +332,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<DeleteAllowlistIdentifierResponse> DeleteAsync(string identifierId)
+        public async Task<DeleteAllowlistIdentifierResponse> DeleteAsync(string identifierId, RetryConfig? retryConfig = null)
         {
             var request = new DeleteAllowlistIdentifierRequest()
             {
@@ -281,11 +352,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("DeleteAllowlistIdentifier", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 402 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)

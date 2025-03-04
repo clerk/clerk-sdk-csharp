@@ -42,12 +42,12 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Specify what the default organization role is for an organization creator.
         /// </summary>
         [JsonProperty("creator_role_id")]
-        public string? CreatorRoleId { get; set; }
+        public string? CreatorRoleId { get; set; } = null;
 
         /// <summary>
         /// Specify what the default organization role is for the organization domains.
         /// </summary>
         [JsonProperty("domains_default_role_id")]
-        public string? DomainsDefaultRoleId { get; set; }
+        public string? DomainsDefaultRoleId { get; set; } = null;
     }
 }

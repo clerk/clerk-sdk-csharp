@@ -19,6 +19,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Whether Clerk should deliver emails or SMS messages based on the current template
         /// </summary>
         [JsonProperty("delivered_by_clerk")]
-        public bool? DeliveredByClerk { get; set; } = null;
+        public bool? DeliveredByClerk { get; set; }
     }
 }

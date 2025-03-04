@@ -33,10 +33,10 @@ namespace Clerk.BackendAPI.Models.Components
         public long MaxAllowedMemberships { get; set; } = default!;
 
         [JsonProperty("max_allowed_roles")]
-        public long? MaxAllowedRoles { get; set; }
+        public long MaxAllowedRoles { get; set; } = default!;
 
         [JsonProperty("max_allowed_permissions")]
-        public long? MaxAllowedPermissions { get; set; }
+        public long MaxAllowedPermissions { get; set; } = default!;
 
         /// <summary>
         /// The role key that a user will be assigned after creating an organization.

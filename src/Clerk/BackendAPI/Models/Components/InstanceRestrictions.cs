@@ -23,18 +23,21 @@ namespace Clerk.BackendAPI.Models.Components
         /// String representing the object&apos;s type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
-        public InstanceRestrictionsObject? Object { get; set; }
+        public InstanceRestrictionsObject Object { get; set; } = default!;
 
         [JsonProperty("allowlist")]
-        public bool? Allowlist { get; set; }
+        public bool Allowlist { get; set; } = default!;
 
         [JsonProperty("blocklist")]
-        public bool? Blocklist { get; set; }
+        public bool Blocklist { get; set; } = default!;
 
         [JsonProperty("block_email_subaddresses")]
-        public bool? BlockEmailSubaddresses { get; set; }
+        public bool BlockEmailSubaddresses { get; set; } = default!;
+
+        [JsonProperty("block_disposable_email_domains")]
+        public bool BlockDisposableEmailDomains { get; set; } = default!;
 
         [JsonProperty("ignore_dots_for_gmail_addresses")]
-        public bool? IgnoreDotsForGmailAddresses { get; set; }
+        public bool IgnoreDotsForGmailAddresses { get; set; } = default!;
     }
 }

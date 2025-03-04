@@ -10,6 +10,7 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
+    using System;
     using System.Collections.Generic;
     
     public class GetUsersCountRequest
@@ -82,6 +83,17 @@ namespace Clerk.BackendAPI.Models.Operations
         public List<string>? UserId { get; set; }
 
         /// <summary>
+        /// Returns users that have memberships to the given organizations. For each organization id, the `+` and `-`<br/>
+        /// 
+        /// <remarks>
+        /// can be prepended to the id, which denote whether the respective organization should be included or<br/>
+        /// excluded from the result set. Accepts up to 100 organization ids.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=organization_id")]
+        public List<string>? OrganizationId { get; set; }
+
+        /// <summary>
         /// Counts users that match the given query.<br/>
         /// 
         /// <remarks>
@@ -126,9 +138,67 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? UsernameQuery { get; set; }
 
         /// <summary>
+        /// Returns users with names that match the given query, via case-insensitive partial match.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=name_query")]
+        public string? NameQuery { get; set; }
+
+        /// <summary>
         /// Counts users which are either banned (`banned=true`) or not banned (`banned=false`).
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=banned")]
         public bool? Banned { get; set; }
+
+        /// <summary>
+        /// Returns users whose last session activity was before the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1700690400000 to retrieve users whose last session activity was before 2023-11-23.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_before")]
+        public long? LastActiveAtBefore { get; set; }
+
+        /// <summary>
+        /// Returns users whose last session activity was after the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1700690400000 to retrieve users whose last session activity was after 2023-11-23.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_after")]
+        public long? LastActiveAtAfter { get; set; }
+
+        /// <summary>
+        /// Returns users that had session activity since the given date.<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1700690400000 to retrieve users that had session activity from 2023-11-23 until the current day.<br/>
+        /// Deprecated in favor of `last_active_at_after`.
+        /// </remarks>
+        /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_since")]
+        public long? LastActiveAtSince { get; set; }
+
+        /// <summary>
+        /// Returns users who have been created before the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1730160000000 to retrieve users who have been created before 2024-10-29.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=created_at_before")]
+        public long? CreatedAtBefore { get; set; }
+
+        /// <summary>
+        /// Returns users who have been created after the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1730160000000 to retrieve users who have been created after 2024-10-29.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=created_at_after")]
+        public long? CreatedAtAfter { get; set; }
     }
 }
