@@ -28,7 +28,7 @@ namespace Clerk.BackendAPI
         /// <summary>
         /// List all templates
         /// </summary>
-        Task<ListJWTTemplatesResponse> ListAsync();
+        Task<ListJWTTemplatesResponse> ListAsync(bool? paginated = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create a JWT template
@@ -37,7 +37,7 @@ namespace Clerk.BackendAPI
         /// Create a new JWT template
         /// </remarks>
         /// </summary>
-        Task<CreateJWTTemplateResponse> CreateAsync(CreateJWTTemplateRequestBody? request = null);
+        Task<CreateJWTTemplateResponse> CreateAsync(CreateJWTTemplateRequestBody? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Retrieve a template
@@ -46,7 +46,7 @@ namespace Clerk.BackendAPI
         /// Retrieve the details of a given JWT template
         /// </remarks>
         /// </summary>
-        Task<GetJWTTemplateResponse> GetAsync(string templateId);
+        Task<GetJWTTemplateResponse> GetAsync(string templateId, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Update a JWT template
@@ -55,22 +55,22 @@ namespace Clerk.BackendAPI
         /// Updates an existing JWT template
         /// </remarks>
         /// </summary>
-        Task<UpdateJWTTemplateResponse> UpdateAsync(string templateId, UpdateJWTTemplateRequestBody? requestBody = null);
+        Task<UpdateJWTTemplateResponse> UpdateAsync(string templateId, UpdateJWTTemplateRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Delete a Template
         /// </summary>
-        Task<DeleteJWTTemplateResponse> DeleteAsync(string templateId);
+        Task<DeleteJWTTemplateResponse> DeleteAsync(string templateId, RetryConfig? retryConfig = null);
     }
 
     public class JwtTemplates: IJwtTemplates
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.0";
-        private const string _sdkGenVersion = "2.515.4";
-        private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.515.4 v1 Clerk.BackendAPI";
+        private const string _sdkVersion = "0.6.0";
+        private const string _sdkGenVersion = "2.539.0";
+        private const string _openapiDocVersion = "2024-10-01";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.0 2.539.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -83,11 +83,16 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
-        public async Task<ListJWTTemplatesResponse> ListAsync()
+        public async Task<ListJWTTemplatesResponse> ListAsync(bool? paginated = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
         {
+            var request = new ListJWTTemplatesRequest()
+            {
+                Paginated = paginated,
+                Limit = limit,
+                Offset = offset,
+            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
-            var urlString = baseUrl + "/jwt_templates";
+            var urlString = URLBuilder.Build(baseUrl, "/jwt_templates", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
@@ -100,11 +105,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("ListJWTTemplates", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -137,7 +175,7 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<List<JWTTemplate>>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<List<JWTTemplate>>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
                     var response = new ListJWTTemplatesResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -164,7 +202,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateJWTTemplateResponse> CreateAsync(CreateJWTTemplateRequestBody? request = null)
+        public async Task<CreateJWTTemplateResponse> CreateAsync(CreateJWTTemplateRequestBody? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -187,11 +225,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("CreateJWTTemplate", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 402 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -261,7 +332,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<GetJWTTemplateResponse> GetAsync(string templateId)
+        public async Task<GetJWTTemplateResponse> GetAsync(string templateId, RetryConfig? retryConfig = null)
         {
             var request = new GetJWTTemplateRequest()
             {
@@ -281,11 +352,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("GetJWTTemplate", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -355,7 +459,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UpdateJWTTemplateResponse> UpdateAsync(string templateId, UpdateJWTTemplateRequestBody? requestBody = null)
+        public async Task<UpdateJWTTemplateResponse> UpdateAsync(string templateId, UpdateJWTTemplateRequestBody? requestBody = null, RetryConfig? retryConfig = null)
         {
             var request = new UpdateJWTTemplateRequest()
             {
@@ -382,11 +486,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("UpdateJWTTemplate", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 402 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -456,7 +593,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<DeleteJWTTemplateResponse> DeleteAsync(string templateId)
+        public async Task<DeleteJWTTemplateResponse> DeleteAsync(string templateId, RetryConfig? retryConfig = null)
         {
             var request = new DeleteJWTTemplateRequest()
             {
@@ -476,11 +613,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("DeleteJWTTemplate", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)

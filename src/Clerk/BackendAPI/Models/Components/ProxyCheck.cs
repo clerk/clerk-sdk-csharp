@@ -28,8 +28,15 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("domain_id")]
         public string DomainId { get; set; } = default!;
 
-        [JsonProperty("last_run_at")]
-        public long LastRunAt { get; set; } = default!;
+        /// <summary>
+        /// Unix timestamp of last run.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("last_run_at", NullValueHandling = NullValueHandling.Include)]
+        public long? LastRunAt { get; set; }
 
         [JsonProperty("proxy_url")]
         public string ProxyUrl { get; set; } = default!;
@@ -37,9 +44,23 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("successful")]
         public bool Successful { get; set; } = default!;
 
+        /// <summary>
+        /// Unix timestamp of creation.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
+        /// <summary>
+        /// Unix timestamp of last update.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;
     }

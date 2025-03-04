@@ -20,13 +20,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// JWT template name
         /// </summary>
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>
         /// JWT template claims in JSON format
         /// </summary>
         [JsonProperty("claims")]
-        public Models.Operations.Claims? Claims { get; set; }
+        public Models.Operations.Claims Claims { get; set; } = default!;
 
         /// <summary>
         /// JWT token lifetime
@@ -47,13 +47,13 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? CustomSigningKey { get; set; }
 
         /// <summary>
-        /// The custom signing algorithm to use when minting JWTs
+        /// The custom signing algorithm to use when minting JWTs. Required if `custom_signing_key` is `true`.
         /// </summary>
         [JsonProperty("signing_algorithm")]
         public string? SigningAlgorithm { get; set; } = null;
 
         /// <summary>
-        /// The custom signing private key to use when minting JWTs
+        /// The custom signing private key to use when minting JWTs. Required if `custom_signing_key` is `true`.
         /// </summary>
         [JsonProperty("signing_key")]
         public string? SigningKey { get; set; } = null;

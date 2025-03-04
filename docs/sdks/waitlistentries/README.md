@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [ListWaitlistEntries](#listwaitlistentries) - List all waitlist entries
-* [CreateWaitlistEntry](#createwaitlistentry) - Create a waitlist entry
+* [List](#list) - List all waitlist entries
+* [Create](#create) - Create a waitlist entry
 
-## ListWaitlistEntries
+## List
 
 Retrieve a list of waitlist entries for the instance.
 Entries are ordered by creation date in descending order by default.
@@ -25,7 +25,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 ListWaitlistEntriesRequest req = new ListWaitlistEntriesRequest() {};
 
-var res = await sdk.WaitlistEntries.ListWaitlistEntriesAsync(req);
+var res = await sdk.WaitlistEntries.ListAsync(req);
 
 // handle response
 ```
@@ -46,7 +46,7 @@ var res = await sdk.WaitlistEntries.ListWaitlistEntriesAsync(req);
 | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | Clerk.BackendAPI.Models.Errors.SDKError | 4XX, 5XX                                | \*/\*                                   |
 
-## CreateWaitlistEntry
+## Create
 
 Creates a new waitlist entry for the given email address.
 If the email address is already on the waitlist, no new entry will be created and the existing waitlist entry will be returned.
@@ -61,10 +61,10 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateWaitlistEntryRequestBody req = new CreateWaitlistEntryRequestBody() {
-    EmailAddress = "Demond_Willms@hotmail.com",
+    EmailAddress = "Loyal79@yahoo.com",
 };
 
-var res = await sdk.WaitlistEntries.CreateWaitlistEntryAsync(req);
+var res = await sdk.WaitlistEntries.CreateAsync(req);
 
 // handle response
 ```

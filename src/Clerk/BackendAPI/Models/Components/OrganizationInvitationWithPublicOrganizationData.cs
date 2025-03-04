@@ -20,9 +20,6 @@ namespace Clerk.BackendAPI.Models.Components
     public class OrganizationInvitationWithPublicOrganizationData
     {
 
-        [JsonProperty("id")]
-        public string? Id { get; set; }
-
         /// <summary>
         /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
         /// 
@@ -31,16 +28,19 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("object")]
-        public OrganizationInvitationWithPublicOrganizationDataObject? Object { get; set; }
+        public OrganizationInvitationWithPublicOrganizationDataObject Object { get; set; } = default!;
+
+        [JsonProperty("id")]
+        public string Id { get; set; } = default!;
 
         [JsonProperty("email_address")]
-        public string? EmailAddress { get; set; }
+        public string EmailAddress { get; set; } = default!;
 
         [JsonProperty("role")]
-        public string? Role { get; set; }
+        public string Role { get; set; } = default!;
 
         [JsonProperty("role_name")]
-        public string? RoleName { get; set; }
+        public string RoleName { get; set; } = default!;
 
         [JsonProperty("organization_id")]
         public string? OrganizationId { get; set; }
@@ -49,27 +49,33 @@ namespace Clerk.BackendAPI.Models.Components
         public string? Status { get; set; }
 
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; }
 
-        [JsonProperty("url")]
-        public string? Url { get; set; } = null;
+        [JsonProperty("url", NullValueHandling = NullValueHandling.Include)]
+        public string? Url { get; set; }
 
-        [JsonProperty("public_organization_data")]
-        public PublicOrganizationData? PublicOrganizationData { get; set; }
+        /// <summary>
+        /// Unix timestamp of expiration.
+        /// </summary>
+        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Include)]
+        public long? ExpiresAt { get; set; }
 
         /// <summary>
         /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
-        public long? CreatedAt { get; set; }
+        public long CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
-        public long? UpdatedAt { get; set; }
+        public long UpdatedAt { get; set; } = default!;
+
+        [JsonProperty("public_organization_data")]
+        public OrganizationInvitationPublicOrganizationData? PublicOrganizationData { get; set; }
     }
 }

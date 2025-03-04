@@ -22,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// An organization domain
         /// </summary>
-        public Models.Components.OrganizationDomain? OrganizationDomain { get; set; }
+        public OrganizationDomain? OrganizationDomain { get; set; }
     }
 }

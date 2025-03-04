@@ -21,7 +21,7 @@ namespace Clerk.BackendAPI.Models.Components
     {
 
         [JsonProperty("data")]
-        public List<Models.Components.OrganizationDomain> Data { get; set; } = default!;
+        public List<OrganizationDomain> Data { get; set; } = default!;
 
         /// <summary>
         /// Total number of organization domains<br/>

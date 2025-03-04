@@ -5,12 +5,13 @@
 
 ### Available Operations
 
-* [GetInstance](#getinstance) - Fetch the current instance
+* [Get](#get) - Fetch the current instance
 * [Update](#update) - Update instance settings
 * [UpdateRestrictions](#updaterestrictions) - Update instance restrictions
-* [UpdateOrganization](#updateorganization) - Update instance organization settings
+* [ChangeDomain](#changedomain) - Update production instance domain
+* [UpdateOrganizationSettings](#updateorganizationsettings) - Update instance organization settings
 
-## GetInstance
+## Get
 
 Fetches the current instance
 
@@ -22,7 +23,7 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.InstanceSettings.GetInstanceAsync();
+var res = await sdk.InstanceSettings.GetAsync();
 
 // handle response
 ```
@@ -131,7 +132,50 @@ var res = await sdk.InstanceSettings.UpdateRestrictionsAsync(req);
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 422                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## UpdateOrganization
+## ChangeDomain
+
+Change the domain of a production instance.
+
+Changing the domain requires updating the [DNS records](https://clerk.com/docs/deployments/overview#dns-records) accordingly, deploying new [SSL certificates](https://clerk.com/docs/deployments/overview#deploy), updating your Social Connection's redirect URLs and setting the new keys in your code.
+
+WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur.
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+ChangeProductionInstanceDomainRequestBody req = new ChangeProductionInstanceDomainRequestBody() {
+    HomeUrl = "https://www.newdomain.com",
+};
+
+var res = await sdk.InstanceSettings.ChangeDomainAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                         | [ChangeProductionInstanceDomainRequestBody](../../Models/Operations/ChangeProductionInstanceDomainRequestBody.md) | :heavy_check_mark:                                                                                                | The request object to use for the request.                                                                        |
+
+### Response
+
+**[ChangeProductionInstanceDomainResponse](../../Models/Operations/ChangeProductionInstanceDomainResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## UpdateOrganizationSettings
 
 Updates the organization settings of the instance
 
@@ -158,7 +202,7 @@ UpdateInstanceOrganizationSettingsRequestBody req = new UpdateInstanceOrganizati
     DomainsDefaultRoleId = "member_role",
 };
 
-var res = await sdk.InstanceSettings.UpdateOrganizationAsync(req);
+var res = await sdk.InstanceSettings.UpdateOrganizationSettingsAsync(req);
 
 // handle response
 ```

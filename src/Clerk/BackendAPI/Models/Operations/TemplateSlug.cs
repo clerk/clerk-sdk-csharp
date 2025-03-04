@@ -14,11 +14,7 @@ namespace Clerk.BackendAPI.Models.Operations
     using System;
     
     /// <summary>
-    /// The slug of the email template to use for the invitation email.<br/>
-    /// 
-    /// <remarks>
-    /// If not provided, the &quot;invitation&quot; template will be used.
-    /// </remarks>
+    /// The slug of the email template to use for the invitation email.
     /// </summary>
     public enum TemplateSlug
     {

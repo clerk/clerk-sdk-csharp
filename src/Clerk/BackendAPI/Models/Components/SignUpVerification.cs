@@ -9,9 +9,21 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
+    using Newtonsoft.Json;
+    using System.Collections.Generic;
     
-    public class Verifications
+    public class SignUpVerification
     {
+
+        [JsonProperty("next_action")]
+        public NextAction? NextAction { get; set; }
+
+        [JsonProperty("supported_strategies")]
+        public List<string>? SupportedStrategies { get; set; }
+
+        [JsonProperty("additionalProperties")]
+        public Dictionary<string, object>? AdditionalProperties { get; set; }
     }
 }

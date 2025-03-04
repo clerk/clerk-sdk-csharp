@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -31,13 +32,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object>? PublicMetadata { get; set; } = null;
 
         /// <summary>
         /// The URL where the user is redirected upon visiting the invitation link, where they can accept the invitation. Required if you have implemented a <a href="/docs/custom-flows/invitations">custom flow for handling application invitations</a>.
         /// </summary>
         [JsonProperty("redirect_url")]
-        public string? RedirectUrl { get; set; }
+        public string? RedirectUrl { get; set; } = null;
 
         /// <summary>
         /// Optional flag which denotes whether an email invitation should be sent to the given email address.<br/>
@@ -64,5 +65,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("expires_in_days")]
         public long? ExpiresInDays { get; set; } = null;
+
+        /// <summary>
+        /// The slug of the email template to use for the invitation email.
+        /// </summary>
+        [JsonProperty("template_slug")]
+        public CreateBulkInvitationsTemplateSlug? TemplateSlug { get; set; } = Clerk.BackendAPI.Models.Operations.CreateBulkInvitationsTemplateSlug.Invitation;
     }
 }

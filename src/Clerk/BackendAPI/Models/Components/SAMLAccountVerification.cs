@@ -26,7 +26,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string Value { get; private set; }
         public static SAMLAccountVerificationType Saml { get { return new SAMLAccountVerificationType("SAML"); } }
         
-        public static SAMLAccountVerificationType Ticket { get { return new SAMLAccountVerificationType("Ticket"); } }
+        public static SAMLAccountVerificationType VerificationTicket { get { return new SAMLAccountVerificationType("verification_Ticket"); } }
         
         public static SAMLAccountVerificationType Null { get { return new SAMLAccountVerificationType("null"); } }
 
@@ -35,7 +35,7 @@ namespace Clerk.BackendAPI.Models.Components
         public static SAMLAccountVerificationType FromString(string v) {
             switch(v) {
                 case "SAML": return Saml;
-                case "Ticket": return Ticket;
+                case "verification_Ticket": return VerificationTicket;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for SAMLAccountVerificationType");
             }
@@ -66,7 +66,7 @@ namespace Clerk.BackendAPI.Models.Components
         public Saml? Saml { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public Ticket? Ticket { get; set; }
+        public VerificationTicket? VerificationTicket { get; set; }
 
         public SAMLAccountVerificationType Type { get; set; }
 
@@ -79,11 +79,11 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static SAMLAccountVerification CreateTicket(Ticket ticket) {
-            SAMLAccountVerificationType typ = SAMLAccountVerificationType.Ticket;
+        public static SAMLAccountVerification CreateVerificationTicket(VerificationTicket verificationTicket) {
+            SAMLAccountVerificationType typ = SAMLAccountVerificationType.VerificationTicket;
 
             SAMLAccountVerification res = new SAMLAccountVerification(typ);
-            res.Ticket = ticket;
+            res.VerificationTicket = verificationTicket;
             return res;
         }
 
@@ -111,14 +111,14 @@ namespace Clerk.BackendAPI.Models.Components
 
                 try
                 {
-                    return new SAMLAccountVerification(SAMLAccountVerificationType.Ticket)
+                    return new SAMLAccountVerification(SAMLAccountVerificationType.VerificationTicket)
                     {
-                        Ticket = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Ticket>(json)
+                        VerificationTicket = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<VerificationTicket>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(Ticket), new SAMLAccountVerification(SAMLAccountVerificationType.Ticket), "Ticket"));
+                    fallbackCandidates.Add((typeof(VerificationTicket), new SAMLAccountVerification(SAMLAccountVerificationType.VerificationTicket), "VerificationTicket"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -189,9 +189,9 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Saml));
                     return;
                 }
-                if (res.Ticket != null)
+                if (res.VerificationTicket != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.Ticket));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationTicket));
                     return;
                 }
 

@@ -3,8 +3,6 @@
 
 ## Overview
 
-Various endpoints that do not belong in any particular category.
-
 ### Available Operations
 
 * [GetPublicInterstitial](#getpublicinterstitial) - Returns the markup for the interstitial page
@@ -18,23 +16,24 @@ It is used by Clerk SDKs when the user's authentication state cannot be immediat
 
 ```csharp
 using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi();
 
-var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
-    frontendApi: "frontend-api_1a2b3c4d",
-    publishableKey: "pub_1a2b3c4d"
-);
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                             | Type                                  | Required                              | Description                           | Example                               |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `FrontendApi`                         | *string*                              | :heavy_minus_sign:                    | The Frontend API key of your instance | frontend-api_1a2b3c4d                 |
-| `PublishableKey`                      | *string*                              | :heavy_minus_sign:                    | The publishable key of your instance  | pub_1a2b3c4d                          |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [GetPublicInterstitialRequest](../../Models/Operations/GetPublicInterstitialRequest.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
 
 ### Response
 

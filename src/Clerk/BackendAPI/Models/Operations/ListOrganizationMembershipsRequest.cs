@@ -10,6 +10,7 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
+    using System.Collections.Generic;
     
     public class ListOrganizationMembershipsRequest
     {
@@ -19,6 +20,154 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_id")]
         public string OrganizationId { get; set; } = default!;
+
+        /// <summary>
+        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
+        /// 
+        /// <remarks>
+        /// By prepending one of those values with + or -, we can choose to sort in ascending (ASC) or descending (DESC) order.&quot;
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
+        public string? OrderBy { get; set; }
+
+        /// <summary>
+        /// Returns users with the user ids specified. For each user id, the `+` and `-` can be<br/>
+        /// 
+        /// <remarks>
+        /// prepended to the id, which denote whether the respective user id should be included or<br/>
+        /// excluded from the result set. Accepts up to 100 user ids. Any user ids not found are ignored.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=user_id")]
+        public List<string>? UserId { get; set; }
+
+        /// <summary>
+        /// Returns users with the specified email addresses. Accepts up to 100 email addresses. Any email addresses not found are ignored.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=email_address")]
+        public List<string>? EmailAddress { get; set; }
+
+        /// <summary>
+        /// Returns users with the specified phone numbers. Accepts up to 100 phone numbers. Any phone numbers not found are ignored.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=phone_number")]
+        public List<string>? PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Returns users with the specified usernames.<br/>
+        /// 
+        /// <remarks>
+        /// Accepts up to 100 usernames.<br/>
+        /// Any usernames not found are ignored.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=username")]
+        public List<string>? Username { get; set; }
+
+        /// <summary>
+        /// Returns users with the specified web3 wallet addresses.<br/>
+        /// 
+        /// <remarks>
+        /// Accepts up to 100 web3 wallet addresses.<br/>
+        /// Any web3 wallet addressed not found are ignored.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=web3_wallet")]
+        public List<string>? Web3Wallet { get; set; }
+
+        /// <summary>
+        /// Returns users with the specified roles. Accepts up to 100 roles. Any roles not found are ignored.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=role")]
+        public List<string>? Role { get; set; }
+
+        /// <summary>
+        /// Returns users that match the given query.<br/>
+        /// 
+        /// <remarks>
+        /// For possible matches, we check the email addresses, phone numbers, usernames, web3 wallets, user ids, first and last names.<br/>
+        /// The query value doesn&apos;t need to match the exact value you are looking for, it is capable of partial matches as well.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
+        public string? Query { get; set; }
+
+        /// <summary>
+        /// Returns users with emails that match the given query, via case-insensitive partial match.<br/>
+        /// 
+        /// <remarks>
+        /// For example, `email_address_query=ello` will match a user with the email `HELLO@example.com`.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=email_address_query")]
+        public string? EmailAddressQuery { get; set; }
+
+        /// <summary>
+        /// Returns users with phone numbers that match the given query, via case-insensitive partial match.<br/>
+        /// 
+        /// <remarks>
+        /// For example, `phone_number_query=555` will match a user with the phone number `+1555xxxxxxx`.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=phone_number_query")]
+        public string? PhoneNumberQuery { get; set; }
+
+        /// <summary>
+        /// Returns users with usernames that match the given query, via case-insensitive partial match.<br/>
+        /// 
+        /// <remarks>
+        /// For example, `username_query=CoolUser` will match a user with the username `SomeCoolUser`.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=username_query")]
+        public string? UsernameQuery { get; set; }
+
+        /// <summary>
+        /// Returns users with names that match the given query, via case-insensitive partial match.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=name_query")]
+        public string? NameQuery { get; set; }
+
+        /// <summary>
+        /// Returns users whose last session activity was before the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1700690400000 to retrieve users whose last session activity was before 2023-11-23.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_before")]
+        public long? LastActiveAtBefore { get; set; }
+
+        /// <summary>
+        /// Returns users whose last session activity was after the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1700690400000 to retrieve users whose last session activity was after 2023-11-23.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_after")]
+        public long? LastActiveAtAfter { get; set; }
+
+        /// <summary>
+        /// Returns users who have been created before the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1730160000000 to retrieve users who have been created before 2024-10-29.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=created_at_before")]
+        public long? CreatedAtBefore { get; set; }
+
+        /// <summary>
+        /// Returns users who have been created after the given date (with millisecond precision).<br/>
+        /// 
+        /// <remarks>
+        /// Example: use 1730160000000 to retrieve users who have been created after 2024-10-29.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=created_at_after")]
+        public long? CreatedAtAfter { get; set; }
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
@@ -40,16 +189,5 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
-
-        /// <summary>
-        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
-        /// 
-        /// <remarks>
-        /// By prepending one of those values with + or -,<br/>
-        /// we can choose to sort in ascending (ASC) or descending (DESC) order.&quot;
-        /// </remarks>
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
-        public string? OrderBy { get; set; }
     }
 }

@@ -3,9 +3,6 @@
 
 ## Overview
 
-You can configure webhooks to be notified about various events that happen on your instance.
-<https://clerk.com/docs/integration/webhooks>
-
 ### Available Operations
 
 * [CreateSvixApp](#createsvixapp) - Create a Svix app

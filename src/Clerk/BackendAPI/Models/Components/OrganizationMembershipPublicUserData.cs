@@ -13,27 +13,30 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     using System;
     
-    public class PublicUserData
+    /// <summary>
+    /// An organization membership with public user data populated
+    /// </summary>
+    public class OrganizationMembershipPublicUserData
     {
 
         [JsonProperty("user_id")]
-        public string? UserId { get; set; }
+        public string UserId { get; set; } = default!;
 
-        [JsonProperty("first_name")]
-        public string? FirstName { get; set; } = null;
+        [JsonProperty("first_name", NullValueHandling = NullValueHandling.Include)]
+        public string? FirstName { get; set; }
 
-        [JsonProperty("last_name")]
-        public string? LastName { get; set; } = null;
+        [JsonProperty("last_name", NullValueHandling = NullValueHandling.Include)]
+        public string? LastName { get; set; }
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
-        [JsonProperty("profile_image_url")]
-        public string? ProfileImageUrl { get; set; } = null;
+        [JsonProperty("profile_image_url", NullValueHandling = NullValueHandling.Include)]
+        public string? ProfileImageUrl { get; set; }
 
         [JsonProperty("image_url")]
-        public string? ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = default!;
 
         [JsonProperty("has_image")]
-        public bool? HasImage { get; set; }
+        public bool HasImage { get; set; } = default!;
 
         [JsonProperty("identifier")]
         public string? Identifier { get; set; } = null;

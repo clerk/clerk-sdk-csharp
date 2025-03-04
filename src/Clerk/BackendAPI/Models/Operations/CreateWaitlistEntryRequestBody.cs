@@ -29,6 +29,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </remarks>
         /// </summary>
         [JsonProperty("notify")]
-        public bool? Notify { get; set; }
+        public bool? Notify { get; set; } = true;
     }
 }

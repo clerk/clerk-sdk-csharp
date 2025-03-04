@@ -21,16 +21,14 @@ namespace Clerk.BackendAPI
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend<br/>
+    /// Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend servers.<br/>
     /// 
     /// <remarks>
-    /// servers.<br/>
     /// <br/>
     /// ### Versions<br/>
     /// <br/>
     /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
-    /// Each version is identified by its release date, e.g. `2021-02-05`. For more information, please see <a href="https://clerk.com/docs/backend-requests/versioning/overview">Clerk API Versions</a>.<br/>
-    /// <br/>
+    /// Each version is identified by its release date, e.g. `2024-10-01`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
@@ -39,81 +37,29 @@ namespace Clerk.BackendAPI
     /// </summary>
     public interface IClerkBackendApi
     {
-
-        /// <summary>
-        /// Various endpoints that do not belong in any particular category.
-        /// </summary>
         public IMiscellaneous Miscellaneous { get; }
         public IJwks Jwks { get; }
-
-        /// <summary>
-        /// The Client object tracks sessions, as well as the state of any sign in and sign up attempts, for a given device.
-        /// 
-        /// <see>https://clerk.com/docs/reference/clerkjs/client}</see>
-        /// </summary>
         public IClients Clients { get; }
         public IEmailAddresses EmailAddresses { get; }
         public IPhoneNumbers PhoneNumbers { get; }
-
-        /// <summary>
-        /// The Session object is an abstraction over an HTTP session.<br/>
-        /// 
-        /// <remarks>
-        /// It models the period of information exchange between a user and the server.<br/>
-        /// Sessions are created when a user successfully goes through the sign in or sign up flows.
-        /// </remarks>
-        /// 
-        /// <see>https://clerk.com/docs/reference/clerkjs/session}</see>
-        /// </summary>
         public ISessions Sessions { get; }
-        public IEmailSmsTemplates EmailSmsTemplates { get; }
+        public IEmailSMSTemplates EmailSMSTemplates { get; }
         public IEmailAndSmsTemplates EmailAndSmsTemplates { get; }
-
-        /// <summary>
-        /// The user object represents a user that has successfully signed up to your application.
-        /// 
-        /// <see>https://clerk.com/docs/reference/clerkjs/user}</see>
-        /// </summary>
+        public ITemplates Templates { get; }
         public IUsers Users { get; }
-        public IUserWeb3Wallets UserWeb3Wallets { get; }
-
-        /// <summary>
-        /// Invitations allow you to invite someone to sign up to your application, via email.
-        /// 
-        /// <see>https://clerk.com/docs/authentication/invitations}</see>
-        /// </summary>
         public IInvitations Invitations { get; }
         public IOrganizationInvitations OrganizationInvitations { get; }
         public IAllowlistIdentifiers AllowlistIdentifiers { get; }
-        public IAllowListBlockList AllowListBlockList { get; }
         public IBlocklistIdentifiers BlocklistIdentifiers { get; }
-        public IAllowBlockList AllowBlockList { get; }
         public IBetaFeatures BetaFeatures { get; }
         public IActorTokens ActorTokens { get; }
-
-        /// <summary>
-        /// Domains represent each instance&apos;s URLs and DNS setup.
-        /// </summary>
         public IDomains Domains { get; }
         public IInstanceSettings InstanceSettings { get; }
-
-        /// <summary>
-        /// You can configure webhooks to be notified about various events that happen on your instance.
-        /// 
-        /// <see>https://clerk.com/docs/integration/webhooks}</see>
-        /// </summary>
         public IWebhooks Webhooks { get; }
         public IJwtTemplates JwtTemplates { get; }
-
-        /// <summary>
-        /// Organizations are used to group members under a common entity and provide shared access to resources.
-        /// 
-        /// <see>https://clerk.com/docs/organizations/overview}</see>
-        /// </summary>
         public IOrganizations Organizations { get; }
         public IOrganizationMemberships OrganizationMemberships { get; }
         public IOrganizationDomains OrganizationDomains { get; }
-        public IOrganizationDomain OrganizationDomain { get; }
         public IProxyChecks ProxyChecks { get; }
         public IRedirectUrls RedirectUrls { get; }
         public ISignInTokens SignInTokens { get; }
@@ -160,16 +106,14 @@ namespace Clerk.BackendAPI
     }
 
     /// <summary>
-    /// Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend<br/>
+    /// Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend servers.<br/>
     /// 
     /// <remarks>
-    /// servers.<br/>
     /// <br/>
     /// ### Versions<br/>
     /// <br/>
     /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
-    /// Each version is identified by its release date, e.g. `2021-02-05`. For more information, please see <a href="https://clerk.com/docs/backend-requests/versioning/overview">Clerk API Versions</a>.<br/>
-    /// <br/>
+    /// Each version is identified by its release date, e.g. `2024-10-01`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
@@ -181,10 +125,10 @@ namespace Clerk.BackendAPI
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.0";
-        private const string _sdkGenVersion = "2.515.4";
-        private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.515.4 v1 Clerk.BackendAPI";
+        private const string _sdkVersion = "0.6.0";
+        private const string _sdkGenVersion = "2.539.0";
+        private const string _openapiDocVersion = "2024-10-01";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.0 2.539.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private int _serverIndex = 0;
         private ISpeakeasyHttpClient _client;
@@ -195,16 +139,14 @@ namespace Clerk.BackendAPI
         public IEmailAddresses EmailAddresses { get; private set; }
         public IPhoneNumbers PhoneNumbers { get; private set; }
         public ISessions Sessions { get; private set; }
-        public IEmailSmsTemplates EmailSmsTemplates { get; private set; }
+        public IEmailSMSTemplates EmailSMSTemplates { get; private set; }
         public IEmailAndSmsTemplates EmailAndSmsTemplates { get; private set; }
+        public ITemplates Templates { get; private set; }
         public IUsers Users { get; private set; }
-        public IUserWeb3Wallets UserWeb3Wallets { get; private set; }
         public IInvitations Invitations { get; private set; }
         public IOrganizationInvitations OrganizationInvitations { get; private set; }
         public IAllowlistIdentifiers AllowlistIdentifiers { get; private set; }
-        public IAllowListBlockList AllowListBlockList { get; private set; }
         public IBlocklistIdentifiers BlocklistIdentifiers { get; private set; }
-        public IAllowBlockList AllowBlockList { get; private set; }
         public IBetaFeatures BetaFeatures { get; private set; }
         public IActorTokens ActorTokens { get; private set; }
         public IDomains Domains { get; private set; }
@@ -214,7 +156,6 @@ namespace Clerk.BackendAPI
         public IOrganizations Organizations { get; private set; }
         public IOrganizationMemberships OrganizationMemberships { get; private set; }
         public IOrganizationDomains OrganizationDomains { get; private set; }
-        public IOrganizationDomain OrganizationDomain { get; private set; }
         public IProxyChecks ProxyChecks { get; private set; }
         public IRedirectUrls RedirectUrls { get; private set; }
         public ISignInTokens SignInTokens { get; private set; }
@@ -283,16 +224,16 @@ namespace Clerk.BackendAPI
             Sessions = new Sessions(_client, _securitySource, _serverUrl, SDKConfiguration);
 
 
-            EmailSmsTemplates = new EmailSmsTemplates(_client, _securitySource, _serverUrl, SDKConfiguration);
+            EmailSMSTemplates = new EmailSMSTemplates(_client, _securitySource, _serverUrl, SDKConfiguration);
 
 
             EmailAndSmsTemplates = new EmailAndSmsTemplates(_client, _securitySource, _serverUrl, SDKConfiguration);
 
 
+            Templates = new Templates(_client, _securitySource, _serverUrl, SDKConfiguration);
+
+
             Users = new Users(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            UserWeb3Wallets = new UserWeb3Wallets(_client, _securitySource, _serverUrl, SDKConfiguration);
 
 
             Invitations = new Invitations(_client, _securitySource, _serverUrl, SDKConfiguration);
@@ -304,13 +245,7 @@ namespace Clerk.BackendAPI
             AllowlistIdentifiers = new AllowlistIdentifiers(_client, _securitySource, _serverUrl, SDKConfiguration);
 
 
-            AllowListBlockList = new AllowListBlockList(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
             BlocklistIdentifiers = new BlocklistIdentifiers(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            AllowBlockList = new AllowBlockList(_client, _securitySource, _serverUrl, SDKConfiguration);
 
 
             BetaFeatures = new BetaFeatures(_client, _securitySource, _serverUrl, SDKConfiguration);
@@ -338,9 +273,6 @@ namespace Clerk.BackendAPI
 
 
             OrganizationDomains = new OrganizationDomains(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            OrganizationDomain = new OrganizationDomain(_client, _securitySource, _serverUrl, SDKConfiguration);
 
 
             ProxyChecks = new ProxyChecks(_client, _securitySource, _serverUrl, SDKConfiguration);

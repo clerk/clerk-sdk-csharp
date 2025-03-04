@@ -22,11 +22,6 @@ namespace Clerk.BackendAPI
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
 
-    /// <summary>
-    /// Invitations allow you to invite someone to sign up to your application, via email.
-    /// 
-    /// <see>https://clerk.com/docs/authentication/invitations}</see>
-    /// </summary>
     public interface IInvitations
     {
 
@@ -39,7 +34,7 @@ namespace Clerk.BackendAPI
         /// Also, trying to create an invitation for an email address that already exists in your application will result to an error.
         /// </remarks>
         /// </summary>
-        Task<CreateInvitationResponse> CreateAsync(CreateInvitationRequestBody? request = null);
+        Task<CreateInvitationResponse> CreateAsync(CreateInvitationRequestBody? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List all invitations
@@ -48,7 +43,7 @@ namespace Clerk.BackendAPI
         /// Returns all non-revoked invitations for your application, sorted by creation date
         /// </remarks>
         /// </summary>
-        Task<ListInvitationsResponse> ListAsync(long? limit = 10, long? offset = 0, ListInvitationsQueryParamStatus? status = null, string? query = null);
+        Task<ListInvitationsResponse> ListAsync(ListInvitationsRequest? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create multiple invitations
@@ -60,7 +55,7 @@ namespace Clerk.BackendAPI
         /// note that there must be no existing user for any of the email addresses you provide, and this rule cannot be bypassed.
         /// </remarks>
         /// </summary>
-        Task<CreateBulkInvitationsResponse> CreateBulkInvitationsAsync(List<RequestBody>? request = null);
+        Task<CreateBulkInvitationsResponse> BulkCreateAsync(List<RequestBody>? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Revokes an invitation
@@ -72,22 +67,17 @@ namespace Clerk.BackendAPI
         /// Only active (i.e. non-revoked) invitations can be revoked.
         /// </remarks>
         /// </summary>
-        Task<RevokeInvitationResponse> RevokeAsync(string invitationId);
+        Task<RevokeInvitationResponse> RevokeAsync(string invitationId, RetryConfig? retryConfig = null);
     }
 
-    /// <summary>
-    /// Invitations allow you to invite someone to sign up to your application, via email.
-    /// 
-    /// <see>https://clerk.com/docs/authentication/invitations}</see>
-    /// </summary>
     public class Invitations: IInvitations
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.0";
-        private const string _sdkGenVersion = "2.515.4";
-        private const string _openapiDocVersion = "v1";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.515.4 v1 Clerk.BackendAPI";
+        private const string _sdkVersion = "0.6.0";
+        private const string _sdkGenVersion = "2.539.0";
+        private const string _openapiDocVersion = "2024-10-01";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.0 2.539.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -100,7 +90,7 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
-        public async Task<CreateInvitationResponse> CreateAsync(CreateInvitationRequestBody? request = null)
+        public async Task<CreateInvitationResponse> CreateAsync(CreateInvitationRequestBody? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -123,11 +113,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("CreateInvitation", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -197,15 +220,8 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListInvitationsResponse> ListAsync(long? limit = 10, long? offset = 0, ListInvitationsQueryParamStatus? status = null, string? query = null)
+        public async Task<ListInvitationsResponse> ListAsync(ListInvitationsRequest? request = null, RetryConfig? retryConfig = null)
         {
-            var request = new ListInvitationsRequest()
-            {
-                Limit = limit,
-                Offset = offset,
-                Status = status,
-                Query = query,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/invitations", request);
 
@@ -220,11 +236,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("ListInvitations", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -284,7 +333,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateBulkInvitationsResponse> CreateBulkInvitationsAsync(List<RequestBody>? request = null)
+        public async Task<CreateBulkInvitationsResponse> BulkCreateAsync(List<RequestBody>? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -307,11 +356,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("CreateBulkInvitations", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
@@ -381,7 +463,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<RevokeInvitationResponse> RevokeAsync(string invitationId)
+        public async Task<RevokeInvitationResponse> RevokeAsync(string invitationId, RetryConfig? retryConfig = null)
         {
             var request = new RevokeInvitationRequest()
             {
@@ -401,11 +483,44 @@ namespace Clerk.BackendAPI
             var hookCtx = new HookContext("RevokeInvitation", null, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
 
             HttpResponseMessage httpResponse;
             try
             {
-                httpResponse = await _client.SendAsync(httpRequest);
+                httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
                 if (_statusCode == 400 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)

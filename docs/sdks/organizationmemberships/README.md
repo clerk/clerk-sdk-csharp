@@ -10,7 +10,6 @@
 * [Update](#update) - Update an organization membership
 * [Delete](#delete) - Remove a member from an organization
 * [UpdateMetadata](#updatemetadata) - Merge and update organization membership metadata
-* [ListForInstance](#listforinstance) - Get a list of all organization memberships within an instance.
 
 ## Create
 
@@ -63,27 +62,32 @@ Retrieves all user memberships for the given organization
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.OrganizationMemberships.ListAsync(
-    organizationId: "org_789",
-    limit: 20,
-    offset: 10,
-    orderBy: "+created_at"
-);
+ListOrganizationMembershipsRequest req = new ListOrganizationMembershipsRequest() {
+    OrganizationId = "org_789",
+    EmailAddress = new List<string>() {
+        "+created_at",
+    },
+    LastActiveAtBefore = 1700690400000,
+    LastActiveAtAfter = 1700690400000,
+    CreatedAtBefore = 1730160000000,
+    CreatedAtAfter = 1730160000000,
+};
+
+var res = await sdk.OrganizationMemberships.ListAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                | Required                                                                                                                                                                                                                            | Description                                                                                                                                                                                                                         | Example                                                                                                                                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                                                                                                                                                    | *string*                                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                  | The organization ID.                                                                                                                                                                                                                | org_789                                                                                                                                                                                                                             |
-| `Limit`                                                                                                                                                                                                                             | *long*                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                  | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                                                                                                               | 20                                                                                                                                                                                                                                  |
-| `Offset`                                                                                                                                                                                                                            | *long*                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                  | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`.                                                                                   | 10                                                                                                                                                                                                                                  |
-| `OrderBy`                                                                                                                                                                                                                           | *string*                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                  | Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>By prepending one of those values with + or -,<br/>we can choose to sort in ascending (ASC) or descending (DESC) order." | +created_at                                                                                                                                                                                                                         |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `request`                                                                                           | [ListOrganizationMembershipsRequest](../../Models/Operations/ListOrganizationMembershipsRequest.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
 
 ### Response
 
@@ -226,45 +230,4 @@ var res = await sdk.OrganizationMemberships.UpdateMetadataAsync(
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 422                              | application/json                           |
-| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
-
-## ListForInstance
-
-Retrieves all organization user memberships for the given instance.
-
-### Example Usage
-
-```csharp
-using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
-
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
-
-var res = await sdk.OrganizationMemberships.ListForInstanceAsync(
-    limit: 20,
-    offset: 10,
-    orderBy: "<value>"
-);
-
-// handle response
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                          | Type                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                        | Example                                                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Limit`                                                                                                                                                                                                                            | *long*                                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                 | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                                                                                                              | 20                                                                                                                                                                                                                                 |
-| `Offset`                                                                                                                                                                                                                           | *long*                                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                 | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`.                                                                                  | 10                                                                                                                                                                                                                                 |
-| `OrderBy`                                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                 | Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>By prepending one of those values with + or -,<br/>we can choose to sort in ascending (ASC) or descending (DESC) order. |                                                                                                                                                                                                                                    |
-
-### Response
-
-**[InstanceGetOrganizationMembershipsResponse](../../Models/Operations/InstanceGetOrganizationMembershipsResponse.md)**
-
-### Errors
-
-| Error Type                                 | Status Code                                | Content Type                               |
-| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
