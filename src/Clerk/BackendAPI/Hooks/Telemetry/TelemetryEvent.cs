@@ -42,7 +42,8 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
             // Extract bearer token from security source if available
             if (ctx.SecuritySource != null)
             {
-                Security securityObj = (Security)ctx.SecuritySource();
+                var securitySource = ctx.SecuritySource();
+                Security? securityObj = securitySource is Security ? (Security)securitySource : null;
                 sk = securityObj?.BearerAuth ?? "unknown";
             }
 
@@ -62,38 +63,6 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
                 payload,
                 samplingRate
             );
-        }
-        
-        private static string ExtractBearerToken(object securityObj)
-        {
-            try 
-            {
-                // Since we know the implementation, we can check if the object has headerParams dictionary
-                var type = securityObj.GetType();
-                var headerParamsField = type.GetField("headerParams", BindingFlags.Instance | BindingFlags.NonPublic);
-                
-                if (headerParamsField != null)
-                {
-                    var headerParams = headerParamsField.GetValue(securityObj) as Dictionary<string, string>;
-                    
-                    if (headerParams != null && headerParams.TryGetValue("Authorization", out string authHeader))
-                    {
-                        // If it starts with "Bearer ", extract the token
-                        if (authHeader != null && authHeader.StartsWith("Bearer "))
-                        {
-                            return authHeader.Substring(7);
-                        }
-                        
-                        return authHeader ?? "unknown";
-                    }
-                }
-            }
-            catch
-            {
-                // Ignore errors in extraction
-            }
-            
-            return "unknown";
         }
     }
 }
