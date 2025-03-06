@@ -1,6 +1,10 @@
 
 namespace Clerk.BackendAPI.Hooks
 {
+    using System;
+    using System.Collections.Generic;
+    using Clerk.BackendAPI.Hooks.Telemetry;
+
     /// <summary>
     /// Hook Registration File.
     /// </summary>
@@ -28,10 +32,17 @@ namespace Clerk.BackendAPI.Hooks
             var clerkBeforeRequestHook = new ClerkBeforeRequestHook();
             hooks.RegisterBeforeRequestHook(clerkBeforeRequestHook);
 
-            // hooks.RegisterSDKInitHook(myHook);
-            // hooks.RegisterBeforeRequestHook(myHook);
-            // hooks.RegisterAfterSuccessHook(myHook);
-            // hooks.RegisterAfterErrorHook(myHook;
+            // Register telemetry hooks
+            var telemetryCollectors = new List<ITelemetryCollector> { new DebugTelemetryCollector(), LiveTelemetryCollector.Standard() };
+
+            var telemetryBeforeRequestHook = new TelemetryBeforeRequestHook(telemetryCollectors);
+            hooks.RegisterBeforeRequestHook(telemetryBeforeRequestHook);
+            
+            var telemetryAfterSuccessHook = new TelemetryAfterSuccessHook(telemetryCollectors);
+            hooks.RegisterAfterSuccessHook(telemetryAfterSuccessHook);
+            
+            var telemetryAfterErrorHook = new TelemetryAfterErrorHook(telemetryCollectors);
+            hooks.RegisterAfterErrorHook(telemetryAfterErrorHook);
         }
     }
 }
