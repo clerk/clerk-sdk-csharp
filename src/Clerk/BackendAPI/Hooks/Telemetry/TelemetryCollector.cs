@@ -33,7 +33,7 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
             }
         }
 
-        protected string SerializeToJson(PreparedEvent preparedEvent)
+        protected virtual string SerializeToJson(PreparedEvent preparedEvent)
         {
             return JsonSerializer.Serialize(preparedEvent);
         }

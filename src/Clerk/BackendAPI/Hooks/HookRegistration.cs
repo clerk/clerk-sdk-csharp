@@ -33,7 +33,10 @@ namespace Clerk.BackendAPI.Hooks
             hooks.RegisterBeforeRequestHook(clerkBeforeRequestHook);
 
             // Register telemetry hooks
-            var telemetryCollectors = new List<ITelemetryCollector> { new DebugTelemetryCollector(), LiveTelemetryCollector.Standard() };
+            var telemetryCollectors = new List<ITelemetryCollector> { LiveTelemetryCollector.Standard() };
+            if (Environment.GetEnvironmentVariable("CLERK_TELEMETRY_DEBUG") == "1") {
+                telemetryCollectors.Add(new DebugTelemetryCollector());
+            }
 
             var telemetryBeforeRequestHook = new TelemetryBeforeRequestHook(telemetryCollectors);
             hooks.RegisterBeforeRequestHook(telemetryBeforeRequestHook);
