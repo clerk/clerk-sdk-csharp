@@ -1,4 +1,3 @@
-
 namespace Clerk.BackendAPI.Hooks
 {
     using System;
@@ -33,6 +32,20 @@ namespace Clerk.BackendAPI.Hooks
             hooks.RegisterBeforeRequestHook(clerkBeforeRequestHook);
 
             // Register telemetry hooks
+            RegisterTelemetryHooks(hooks);
+        }
+
+        /// <summary>
+        /// Registers telemetry hooks for collecting usage data.
+        /// </summary>
+        /// <param name="hooks">The hooks registry to add telemetry hooks to.</param>
+        private static void RegisterTelemetryHooks(IHooks hooks)
+        {
+
+            if (Environment.GetEnvironmentVariable("CLERK_TELEMETRY_DISABLED") == "1") {
+                return;
+            }
+
             var telemetryCollectors = new List<ITelemetryCollector> { LiveTelemetryCollector.Standard() };
             if (Environment.GetEnvironmentVariable("CLERK_TELEMETRY_DEBUG") == "1") {
                 telemetryCollectors.Add(new DebugTelemetryCollector());

@@ -6,7 +6,7 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
 
     public interface ITelemetrySampler
     {
-        bool Test(PreparedEvent preparedEvent, TelemetryEvent telemetryEvent);
+        bool shouldSample(PreparedEvent preparedEvent, TelemetryEvent telemetryEvent);
     }
 
     public class RandomSampler : ITelemetrySampler
@@ -18,7 +18,7 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
             _random = random;
         }
 
-        public bool Test(PreparedEvent preparedEvent, TelemetryEvent telemetryEvent)
+        public bool shouldSample(PreparedEvent preparedEvent, TelemetryEvent telemetryEvent)
         {
             return _random.NextDouble() < telemetryEvent.SamplingRate;
         }
@@ -41,7 +41,7 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
             _nowProvider = nowProvider;
         }
 
-        public bool Test(PreparedEvent preparedEvent, TelemetryEvent telemetryEvent)
+        public bool shouldSample(PreparedEvent preparedEvent, TelemetryEvent telemetryEvent)
         {
             try
             {

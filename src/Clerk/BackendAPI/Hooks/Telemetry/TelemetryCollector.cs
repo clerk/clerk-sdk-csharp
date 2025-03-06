@@ -86,7 +86,7 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
             PreparedEvent preparedEvent = PrepareEvent(@event);
             foreach (var sampler in _samplers)
             {
-                if (!sampler.Test(preparedEvent, @event))
+                if (!sampler.shouldSample(preparedEvent, @event))
                 {
                     return;
                 }
