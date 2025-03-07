@@ -35,7 +35,9 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
 
         protected virtual string SerializeToJson(PreparedEvent preparedEvent)
         {
-            return JsonSerializer.Serialize(preparedEvent);
+            // Convert to sanitized dictionary with lowercase keys then serialize
+            var sanitizedEvent = preparedEvent.Sanitize();
+            return JsonSerializer.Serialize(sanitizedEvent);
         }
 
         protected PreparedEvent PrepareEvent(TelemetryEvent @event)
