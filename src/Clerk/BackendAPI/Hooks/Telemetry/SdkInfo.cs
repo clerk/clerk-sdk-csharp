@@ -37,7 +37,7 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
                 var name = assemblyName.Name ?? "unknown";
                 
                 // For .NET we'll use the first part of the namespace as groupId
-                var groupId = name.Contains('.') ? name.Substring(0, name.IndexOf('.')) : "Clerk";
+                var groupId = name.Contains('.') ? name.Substring(0, name.IndexOf('.')) : "C#";
 
                 return new SdkInfo(version, name, groupId);
             }
