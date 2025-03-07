@@ -112,33 +112,18 @@ namespace Clerk.BackendAPI.Hooks.Telemetry
                 
                 if (!response.IsSuccessStatusCode)
                 {
-                    LogWarning($"Failed to send telemetry event. Response code: {(int)response.StatusCode}, error: {responseContent}");
-                }
-                else
-                {
-                    LogDebug($"Telemetry event sent successfully. Response: {responseContent}");
+                    LogDebug($"Failed to send telemetry event. Response code: {(int)response.StatusCode}, error: {responseContent}");
                 }
             }
             catch (Exception ex)
             {
-                LogWarning($"Error sending telemetry event: {ex.Message}");
+                LogDebug($"Error sending telemetry event: {ex.Message}");
             }
         }
-
-        private void LogWarning(string message)
-        {
-            lock (_consoleLock)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Error.WriteLine(message);
-                Console.ResetColor();
-            }
-        }
-
         private void LogDebug(string message)
         {
             // Only log in debug mode or controlled by environment variable
-            if (Environment.GetEnvironmentVariable("CLERK_DEBUG") == "1")
+            if (Environment.GetEnvironmentVariable("CLERK_TELEMETRY_DEBUG") == "1")
             {
                 lock (_consoleLock)
                 {
