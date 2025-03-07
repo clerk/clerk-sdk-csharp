@@ -1,6 +1,9 @@
-
 namespace Clerk.BackendAPI.Hooks
 {
+    using System;
+    using System.Collections.Generic;
+    using Clerk.BackendAPI.Hooks.Telemetry;
+
     /// <summary>
     /// Hook Registration File.
     /// </summary>
@@ -28,10 +31,34 @@ namespace Clerk.BackendAPI.Hooks
             var clerkBeforeRequestHook = new ClerkBeforeRequestHook();
             hooks.RegisterBeforeRequestHook(clerkBeforeRequestHook);
 
-            // hooks.RegisterSDKInitHook(myHook);
-            // hooks.RegisterBeforeRequestHook(myHook);
-            // hooks.RegisterAfterSuccessHook(myHook);
-            // hooks.RegisterAfterErrorHook(myHook;
+            // Register telemetry hooks
+            RegisterTelemetryHooks(hooks);
+        }
+
+        /// <summary>
+        /// Registers telemetry hooks for collecting usage data.
+        /// </summary>
+        /// <param name="hooks">The hooks registry to add telemetry hooks to.</param>
+        private static void RegisterTelemetryHooks(IHooks hooks)
+        {
+
+            if (Environment.GetEnvironmentVariable("CLERK_TELEMETRY_DISABLED") == "1") {
+                return;
+            }
+
+            var telemetryCollectors = new List<ITelemetryCollector> { LiveTelemetryCollector.Standard() };
+            if (Environment.GetEnvironmentVariable("CLERK_TELEMETRY_DEBUG") == "1") {
+                telemetryCollectors.Add(new DebugTelemetryCollector());
+            }
+
+            var telemetryBeforeRequestHook = new TelemetryBeforeRequestHook(telemetryCollectors);
+            hooks.RegisterBeforeRequestHook(telemetryBeforeRequestHook);
+            
+            var telemetryAfterSuccessHook = new TelemetryAfterSuccessHook(telemetryCollectors);
+            hooks.RegisterAfterSuccessHook(telemetryAfterSuccessHook);
+            
+            var telemetryAfterErrorHook = new TelemetryAfterErrorHook(telemetryCollectors);
+            hooks.RegisterAfterErrorHook(telemetryAfterErrorHook);
         }
     }
 }
