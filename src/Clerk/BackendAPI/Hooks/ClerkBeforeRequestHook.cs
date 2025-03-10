@@ -8,6 +8,7 @@ namespace Clerk.BackendAPI.Hooks
         public async Task<HttpRequestMessage> BeforeRequestAsync(BeforeRequestContext hookCtx, HttpRequestMessage request)
         {
             request.Headers.Add("Clerk-API-Version", "2024-10-01");
+            await Task.CompletedTask;
             return request;
         }
     }
