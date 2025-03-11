@@ -16,7 +16,7 @@ namespace JwksHelpers.Tests
 
     public class JwksHelpersFixture
     {
-        public readonly string RequestUrl = "http://localhost:3000";
+        public readonly string RequestHost = "http://localhost:3000";
 
         public readonly string? SecretKey;
         public readonly string? JwtKey;
