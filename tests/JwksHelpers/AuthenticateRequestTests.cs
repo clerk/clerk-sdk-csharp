@@ -3,6 +3,7 @@ namespace JwksHelpers.Tests
 {
     using Clerk.BackendAPI.Helpers.Jwks;
     using Microsoft.IdentityModel.Tokens;
+    using Microsoft.AspNetCore.Http;
     using System;
     using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
@@ -15,21 +16,23 @@ namespace JwksHelpers.Tests
     public class AuthenticateRequestTests : IClassFixture<JwksHelpersFixture>
     {
         private readonly JwksHelpersFixture _fixture;
-        private readonly Uri _requestUri;
+        private readonly HostString _requestHost;
 
         public AuthenticateRequestTests(JwksHelpersFixture fixture)
         {
             _fixture = fixture;
-            _requestUri = new Uri(_fixture.RequestUrl);
+            _requestHost = new HostString(_fixture.RequestHost);
         }
 
         [Fact]
-        public async Task TestAuthenticateRequestNoSesstionToken()
+        public async Task TestAuthenticateRequestNoSessionToken()
         {
             var arOptions = new AuthenticateRequestOptions(secretKey: "sk_test_SecretKey");
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, _requestUri);
-            var state = await AuthenticateRequest.AuthenticateRequestAsync(request, arOptions);
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Method = "GET";
+            httpContext.Request.Host = _requestHost;
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
 
             Assert.True(state.IsSignedOut());
             Assert.Equal(AuthErrorReason.SESSION_TOKEN_MISSING, state.ErrorReason);
@@ -58,10 +61,12 @@ namespace JwksHelpers.Tests
                 authorizedParties: _fixture.AuthorizedParties
             );
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, _requestUri);
-            request.Headers.Add("Cookie", $"__session={_fixture.SessionToken}");
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Method = "GET";
+            httpContext.Request.Host = _requestHost;
+            httpContext.Request.Headers.Add("Cookie", $"__session={_fixture.SessionToken}");
 
-            var state = await AuthenticateRequest.AuthenticateRequestAsync(request, arOptions);
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
 
             Utils.AssertStateAsync(state, _fixture.SessionToken);
         }
@@ -75,10 +80,13 @@ namespace JwksHelpers.Tests
                 authorizedParties: _fixture.AuthorizedParties
             );
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, _requestUri);
-            request.Headers.Add("Authorization", $"Bearer {_fixture.SessionToken}");
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Method = "GET";
+            httpContext.Request.Host = _requestHost;
+            httpContext.Request.Headers.Add("Authorization", $"Bearer {_fixture.SessionToken}");
 
-            var state = await AuthenticateRequest.AuthenticateRequestAsync(request, arOptions);
+
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
 
             Utils.AssertStateAsync(state, _fixture.SessionToken);
         }
@@ -92,10 +100,12 @@ namespace JwksHelpers.Tests
                 authorizedParties: _fixture.AuthorizedParties
             );
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, _requestUri);
-            request.Headers.Add("Authorization", $"Bearer {_fixture.SessionToken}");
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Method = "GET";
+            httpContext.Request.Host = _requestHost;
+            httpContext.Request.Headers.Add("Authorization", $"Bearer {_fixture.SessionToken}");
 
-            var state = await AuthenticateRequest.AuthenticateRequestAsync(request, arOptions);
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
 
             Utils.AssertStateAsync(state, _fixture.SessionToken);
         }

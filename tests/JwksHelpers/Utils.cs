@@ -35,14 +35,14 @@ namespace JwksHelpers.Tests
             ApiUrl = Environment.GetEnvironmentVariable("CLERK_API_URL");
             SessionToken = Environment.GetEnvironmentVariable("CLERK_SESSION_TOKEN") ?? "";
             Audiences = null;
-            AuthorizedParties = new List<string> { RequestUrl };
+            AuthorizedParties = new List<string> { RequestHost };
 
             (TestToken, TestJwtKey) = Utils.GenerateTokenKeyPair(
                 keyId: "ins_abcdefghijklmnopqrstuvwxyz0",
                 issuedAt: DateTime.UtcNow.AddMinutes(-1),
                 notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddMinutes(1),
-                audience: RequestUrl,
+                audience: RequestHost,
                 authorizedParties: AuthorizedParties);
         }
     }
