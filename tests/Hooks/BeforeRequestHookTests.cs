@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Clerk.BackendAPI.Hooks;
@@ -6,11 +7,11 @@ using Xunit;
 public class ClerkBeforeRequestHookTests
 {
     [Fact]
-    public Task BeforeRequestAsync_AddsClerkApiVersionHeader()
+    public async Task BeforeRequestAsync_AddsClerkApiVersionHeader()
     {
         var hook = new ClerkBeforeRequestHook();
         var request = new HttpRequestMessage();
-        var hookCtx = new BeforeRequestContext();
+        var hookCtx = new BeforeRequestContext(new HookContext("test", null, null));
 
         var result = await hook.BeforeRequestAsync(hookCtx, request);
 

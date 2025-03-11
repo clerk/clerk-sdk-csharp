@@ -162,13 +162,13 @@ namespace JwksHelpers.Tests
         {
             var vtOptions = new VerifyTokenOptions(
                 jwtKey: fixture.TestJwtKey,
-                audiences: new string[] { fixture.RequestUrl }
+                audiences: new string[] { fixture.RequestHost }
             );
 
             var claims = await VerifyToken.VerifyTokenAsync(fixture.TestToken, vtOptions);
             var audClaim = claims.FindFirst("aud");
             Assert.NotNull(audClaim);
-            Assert.Equal(fixture.RequestUrl, audClaim.Value);
+            Assert.Equal(fixture.RequestHost, audClaim.Value);
 
 
             vtOptions = new VerifyTokenOptions(
