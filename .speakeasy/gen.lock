@@ -3,10 +3,10 @@ id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
   docChecksum: 1b8d2602d0682acb05ec46d1c240c9cd
   docVersion: "2024-10-01"
-  speakeasyVersion: 1.509.1
-  generationVersion: 2.539.1
-  releaseVersion: 0.6.1
-  configChecksum: 1c48da8d17b2a3f7e528c782f9ecb751
+  speakeasyVersion: 1.522.0
+  generationVersion: 2.559.0
+  releaseVersion: 0.6.2
+  configChecksum: 8e3ffbb436f3602ceeb097ce2cbd56cf
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
