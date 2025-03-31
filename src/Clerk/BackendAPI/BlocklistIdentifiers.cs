@@ -57,10 +57,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.1";
-        private const string _sdkGenVersion = "2.539.1";
+        private const string _sdkVersion = "0.6.2";
+        private const string _sdkGenVersion = "2.563.0";
         private const string _openapiDocVersion = "2024-10-01";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.6.1 2.539.1 2024-10-01 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.2 2.563.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -87,7 +87,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("ListBlocklistIdentifiers", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "ListBlocklistIdentifiers", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -217,7 +217,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("CreateBlocklistIdentifier", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "CreateBlocklistIdentifier", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -344,7 +344,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("DeleteBlocklistIdentifier", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "DeleteBlocklistIdentifier", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)

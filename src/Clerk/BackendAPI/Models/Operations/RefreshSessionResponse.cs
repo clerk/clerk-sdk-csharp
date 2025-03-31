@@ -7,11 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Clerk.BackendAPI.Models.Components
+namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
+    using Newtonsoft.Json;
     
-    public class ExternalAccounts
+    public class RefreshSessionResponse
     {
+
+        [JsonProperty("-")]
+        public HTTPMetadata HttpMeta { get; set; } = default!;
+
+        /// <summary>
+        /// Success
+        /// </summary>
+        public SessionRefresh? SessionRefresh { get; set; }
     }
 }

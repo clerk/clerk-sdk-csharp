@@ -39,10 +39,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.1";
-        private const string _sdkGenVersion = "2.539.1";
+        private const string _sdkVersion = "0.6.2";
+        private const string _sdkGenVersion = "2.563.0";
         private const string _openapiDocVersion = "2024-10-01";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.6.1 2.539.1 2024-10-01 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.2 2.563.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -63,7 +63,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var hookCtx = new HookContext("GetPublicInterstitial", null, null);
+            var hookCtx = new HookContext(baseUrl, "GetPublicInterstitial", new List<string> {  }, null);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)

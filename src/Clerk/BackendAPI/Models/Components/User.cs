@@ -119,7 +119,7 @@ namespace Clerk.BackendAPI.Models.Components
         public long? MfaDisabledAt { get; set; } = null;
 
         [JsonProperty("external_accounts")]
-        public List<ExternalAccounts>? ExternalAccounts { get; set; }
+        public List<ExternalAccountWithVerification>? ExternalAccounts { get; set; }
 
         [JsonProperty("saml_accounts")]
         public List<SAMLAccount>? SamlAccounts { get; set; }

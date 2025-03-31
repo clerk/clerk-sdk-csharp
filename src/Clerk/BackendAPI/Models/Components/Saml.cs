@@ -26,7 +26,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? ExternalVerificationRedirectUrl { get; set; }
 
         [JsonProperty("error")]
-        public VerificationError? Error { get; set; } = null;
+        public SAMLVerificationError? Error { get; set; } = null;
 
         [JsonProperty("expire_at")]
         public long ExpireAt { get; set; } = default!;
