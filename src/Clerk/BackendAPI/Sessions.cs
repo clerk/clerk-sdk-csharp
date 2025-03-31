@@ -59,6 +59,16 @@ namespace Clerk.BackendAPI
         Task<GetSessionResponse> GetAsync(string sessionId, RetryConfig? retryConfig = null);
 
         /// <summary>
+        /// Refresh a session
+        /// 
+        /// <remarks>
+        /// Refreshes a session by creating a new session token. A 401 is returned when there<br/>
+        /// are validation errors, which signals the SDKs to fallback to the handshake flow.
+        /// </remarks>
+        /// </summary>
+        Task<RefreshSessionResponse> RefreshAsync(string sessionId, RefreshSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+
+        /// <summary>
         /// Revoke a session
         /// 
         /// <remarks>
@@ -103,10 +113,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.1";
-        private const string _sdkGenVersion = "2.539.1";
+        private const string _sdkVersion = "0.6.2";
+        private const string _sdkGenVersion = "2.563.0";
         private const string _openapiDocVersion = "2024-10-01";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.6.1 2.539.1 2024-10-01 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.2 2.563.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
@@ -132,7 +142,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("GetSessionList", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "GetSessionList", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -262,7 +272,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("createSession", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "createSession", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -389,7 +399,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("GetSession", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "GetSession", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -499,6 +509,140 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
+        public async Task<RefreshSessionResponse> RefreshAsync(string sessionId, RefreshSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        {
+            var request = new RefreshSessionRequest()
+            {
+                SessionId = sessionId,
+                RequestBody = requestBody,
+            };
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/refresh", request);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", _userAgent);
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (_securitySource != null)
+            {
+                httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(baseUrl, "RefreshSession", new List<string> {  }, _securitySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await _client.CloneAsync(httpRequest);
+                return await _client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<SessionRefresh>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new RefreshSessionResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.SessionRefresh = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(new List<int>{400, 401}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
+        }
+
         public async Task<RevokeSessionResponse> RevokeAsync(string sessionId, RetryConfig? retryConfig = null)
         {
             var request = new RevokeSessionRequest()
@@ -516,7 +660,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("RevokeSession", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "RevokeSession", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -651,7 +795,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("VerifySession", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "VerifySession", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -785,7 +929,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("CreateSessionToken", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "CreateSessionToken", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -920,7 +1064,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext("CreateSessionTokenFromTemplate", null, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "CreateSessionTokenFromTemplate", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)

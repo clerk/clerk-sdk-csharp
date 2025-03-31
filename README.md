@@ -307,6 +307,7 @@ If the request is correctly authenticated, the token's claims are made available
 * [List](docs/sdks/sessions/README.md#list) - List all sessions
 * [Create](docs/sdks/sessions/README.md#create) - Create a new active session
 * [Get](docs/sdks/sessions/README.md#get) - Retrieve a session
+* [Refresh](docs/sdks/sessions/README.md#refresh) - Refresh a session
 * [Revoke](docs/sdks/sessions/README.md#revoke) - Revoke a session
 * [~~Verify~~](docs/sdks/sessions/README.md#verify) - Verify a session :warning: **Deprecated**
 * [CreateToken](docs/sdks/sessions/README.md#createtoken) - Create a session token

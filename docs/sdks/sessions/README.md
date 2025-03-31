@@ -8,6 +8,7 @@
 * [List](#list) - List all sessions
 * [Create](#create) - Create a new active session
 * [Get](#get) - Retrieve a session
+* [Refresh](#refresh) - Refresh a session
 * [Revoke](#revoke) - Revoke a session
 * [~~Verify~~](#verify) - Verify a session :warning: **Deprecated**
 * [CreateToken](#createtoken) - Create a session token
@@ -131,6 +132,50 @@ var res = await sdk.Sessions.GetAsync(sessionId: "sess_1234567890abcdef");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## Refresh
+
+Refreshes a session by creating a new session token. A 401 is returned when there
+are validation errors, which signals the SDKs to fallback to the handshake flow.
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Sessions.RefreshAsync(
+    sessionId: "<id>",
+    requestBody: new RefreshSessionRequestBody() {
+        ExpiredToken = "<value>",
+        RefreshToken = "<value>",
+        RequestOrigin = "<value>",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `SessionId`                                                                       | *string*                                                                          | :heavy_check_mark:                                                                | The ID of the session                                                             |
+| `RequestBody`                                                                     | [RefreshSessionRequestBody](../../Models/Operations/RefreshSessionRequestBody.md) | :heavy_minus_sign:                                                                | Refresh session parameters                                                        |
+
+### Response
+
+**[RefreshSessionResponse](../../Models/Operations/RefreshSessionResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Revoke
