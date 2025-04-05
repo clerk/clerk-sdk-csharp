@@ -19,41 +19,31 @@ namespace Clerk.BackendAPI
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
-    using System.Net.Http.Headers;
     using System.Threading.Tasks;
 
-    public interface IBlocklistIdentifiers
+    public interface IExperimentalAccountlessApplications
     {
 
         /// <summary>
-        /// List all identifiers on the block-list
+        /// Create an accountless application [EXPERIMENTAL]
         /// 
         /// <remarks>
-        /// Get a list of all identifiers which are not allowed to access an instance
+        /// Creates a new accountless application. [EXPERIMENTAL]
         /// </remarks>
         /// </summary>
-        Task<ListBlocklistIdentifiersResponse> ListAsync(RetryConfig? retryConfig = null);
+        Task<CreateAccountlessApplicationResponse> CreateAsync(RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Add identifier to the block-list
+        /// Complete an accountless application [EXPERIMENTAL]
         /// 
         /// <remarks>
-        /// Create an identifier that is blocked from accessing an instance
+        /// Completes an accountless application. [EXPERIMENTAL]
         /// </remarks>
         /// </summary>
-        Task<CreateBlocklistIdentifierResponse> CreateAsync(CreateBlocklistIdentifierRequestBody? request = null, RetryConfig? retryConfig = null);
-
-        /// <summary>
-        /// Delete identifier from block-list
-        /// 
-        /// <remarks>
-        /// Delete an identifier from the instance block-list
-        /// </remarks>
-        /// </summary>
-        Task<DeleteBlocklistIdentifierResponse> DeleteAsync(string identifierId, RetryConfig? retryConfig = null);
+        Task<CompleteAccountlessApplicationResponse> CompleteAsync(RetryConfig? retryConfig = null);
     }
 
-    public class BlocklistIdentifiers: IBlocklistIdentifiers
+    public class ExperimentalAccountlessApplications: IExperimentalAccountlessApplications
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
@@ -65,7 +55,7 @@ namespace Clerk.BackendAPI
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
 
-        public BlocklistIdentifiers(ISpeakeasyHttpClient client, Func<Clerk.BackendAPI.Models.Components.Security>? securitySource, string serverUrl, SDKConfig config)
+        public ExperimentalAccountlessApplications(ISpeakeasyHttpClient client, Func<Clerk.BackendAPI.Models.Components.Security>? securitySource, string serverUrl, SDKConfig config)
         {
             _client = client;
             _securitySource = securitySource;
@@ -73,13 +63,13 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
-        public async Task<ListBlocklistIdentifiersResponse> ListAsync(RetryConfig? retryConfig = null)
+        public async Task<CreateAccountlessApplicationResponse> CreateAsync(RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
-            var urlString = baseUrl + "/blocklist_identifiers";
+            var urlString = baseUrl + "/accountless_applications";
 
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
             if (_securitySource != null)
@@ -87,7 +77,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(baseUrl, "ListBlocklistIdentifiers", new List<string> {  }, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "CreateAccountlessApplication", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -130,7 +120,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 402 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -160,8 +150,8 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<Models.Components.BlocklistIdentifiers>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new ListBlocklistIdentifiersResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<AccountlessApplication>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new CreateAccountlessApplicationResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -169,13 +159,13 @@ namespace Clerk.BackendAPI
                             Request = httpRequest
                         }
                     };
-                    response.BlocklistIdentifiers = obj;
+                    response.AccountlessApplication = obj;
                     return response;
                 }
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{401, 402}.Contains(responseStatusCode))
+            else if(responseStatusCode == 500)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -197,27 +187,21 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateBlocklistIdentifierResponse> CreateAsync(CreateBlocklistIdentifierRequestBody? request = null, RetryConfig? retryConfig = null)
+        public async Task<CompleteAccountlessApplicationResponse> CompleteAsync(RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
-            var urlString = baseUrl + "/blocklist_identifiers";
+            var urlString = baseUrl + "/accountless_applications/complete";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
-            if (serializedBody != null)
-            {
-                httpRequest.Content = serializedBody;
-            }
-
             if (_securitySource != null)
             {
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(baseUrl, "CreateBlocklistIdentifier", new List<string> {  }, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "CompleteAccountlessApplication", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -260,7 +244,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 402 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -290,8 +274,8 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<BlocklistIdentifier>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
-                    var response = new CreateBlocklistIdentifierResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<AccountlessApplication>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new CompleteAccountlessApplicationResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -299,140 +283,13 @@ namespace Clerk.BackendAPI
                             Request = httpRequest
                         }
                     };
-                    response.BlocklistIdentifier = obj;
+                    response.AccountlessApplication = obj;
                     return response;
                 }
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{400, 402, 422}.Contains(responseStatusCode))
-            {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
-                    throw obj!;
-                }
-
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500)
-            {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode >= 500 && responseStatusCode < 600)
-            {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
-            }
-
-            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
-        }
-
-        public async Task<DeleteBlocklistIdentifierResponse> DeleteAsync(string identifierId, RetryConfig? retryConfig = null)
-        {
-            var request = new DeleteBlocklistIdentifierRequest()
-            {
-                IdentifierId = identifierId,
-            };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/blocklist_identifiers/{identifier_id}", request);
-
-            var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
-            httpRequest.Headers.Add("user-agent", _userAgent);
-
-            if (_securitySource != null)
-            {
-                httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
-            }
-
-            var hookCtx = new HookContext(baseUrl, "DeleteBlocklistIdentifier", new List<string> {  }, _securitySource);
-
-            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
-            if (retryConfig == null)
-            {
-                if (this.SDKConfiguration.RetryConfig != null)
-                {
-                    retryConfig = this.SDKConfiguration.RetryConfig;
-                }
-                else
-                {
-                    var backoff = new BackoffStrategy(
-                        initialIntervalMs: 500L,
-                        maxIntervalMs: 60000L,
-                        maxElapsedTimeMs: 3600000L,
-                        exponent: 1.5
-                    );
-                    retryConfig = new RetryConfig(
-                        strategy: RetryConfig.RetryStrategy.BACKOFF,
-                        backoff: backoff,
-                        retryConnectionErrors: true
-                    );
-                }
-            }
-
-            List<string> statusCodes = new List<string>
-            {
-                "5XX",
-            };
-
-            Func<Task<HttpResponseMessage>> retrySend = async () =>
-            {
-                var _httpRequest = await _client.CloneAsync(httpRequest);
-                return await _client.SendAsync(_httpRequest);
-            };
-            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
-
-            HttpResponseMessage httpResponse;
-            try
-            {
-                httpResponse = await retries.Run();
-                int _statusCode = (int)httpResponse.StatusCode;
-
-                if (_statusCode == 402 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
-                {
-                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
-                    if (_httpResponse != null)
-                    {
-                        httpResponse = _httpResponse;
-                    }
-                }
-            }
-            catch (Exception error)
-            {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
-                if (_httpResponse != null)
-                {
-                    httpResponse = _httpResponse;
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
-
-            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
-            int responseStatusCode = (int)httpResponse.StatusCode;
-            if(responseStatusCode == 200)
-            {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<DeletedObject>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new DeleteBlocklistIdentifierResponse()
-                    {
-                        HttpMeta = new Models.Components.HTTPMetadata()
-                        {
-                            Response = httpResponse,
-                            Request = httpRequest
-                        }
-                    };
-                    response.DeletedObject = obj;
-                    return response;
-                }
-
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(new List<int>{402, 404}.Contains(responseStatusCode))
+            else if(responseStatusCode == 500)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
