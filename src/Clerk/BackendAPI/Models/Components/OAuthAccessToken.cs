@@ -7,54 +7,60 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Clerk.BackendAPI.Models.Operations
+namespace Clerk.BackendAPI.Models.Components
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
     
-    public class ResponseBody
+    /// <summary>
+    /// Success
+    /// </summary>
+    public class OAuthAccessToken
     {
 
         [JsonProperty("object")]
-        public string? Object { get; set; }
+        public OAuthAccessTokenObject Object { get; set; } = default!;
 
         /// <summary>
         /// External account ID
         /// </summary>
         [JsonProperty("external_account_id")]
-        public string? ExternalAccountId { get; set; }
+        public string ExternalAccountId { get; set; } = default!;
 
         /// <summary>
         /// The unique ID of the user in the external provider&apos;s system
         /// </summary>
         [JsonProperty("provider_user_id")]
-        public string? ProviderUserId { get; set; }
+        public string ProviderUserId { get; set; } = default!;
 
         /// <summary>
         /// The access token
         /// </summary>
         [JsonProperty("token")]
-        public string? Token { get; set; }
+        public string Token { get; set; } = default!;
+
+        /// <summary>
+        /// Unix timestamp of the access token expiration.
+        /// </summary>
+        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Include)]
+        public long? ExpiresAt { get; set; }
 
         /// <summary>
         /// The ID of the provider
         /// </summary>
         [JsonProperty("provider")]
-        public string? Provider { get; set; }
+        public string Provider { get; set; } = default!;
 
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
-        [JsonProperty("label")]
-        public string? Label { get; set; } = null;
+        [JsonProperty("label", NullValueHandling = NullValueHandling.Include)]
+        public string? Label { get; set; }
 
         /// <summary>
-        /// The list of scopes that the token is valid for.<br/>
-        /// 
-        /// <remarks>
-        /// Only present for OAuth 2.0 tokens.
-        /// </remarks>
+        /// The list of scopes that the token is valid for. Only present for OAuth 2.0 tokens.
         /// </summary>
         [JsonProperty("scopes")]
         public List<string>? Scopes { get; set; }
@@ -64,11 +70,5 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("token_secret")]
         public string? TokenSecret { get; set; }
-
-        /// <summary>
-        /// Unix timestamp of the access token expiration.
-        /// </summary>
-        [JsonProperty("expires_at")]
-        public long? ExpiresAt { get; set; } = null;
     }
 }
