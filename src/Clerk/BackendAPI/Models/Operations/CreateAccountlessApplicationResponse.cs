@@ -12,9 +12,8 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
     
-    public class GetOAuthAccessTokenResponse
+    public class CreateAccountlessApplicationResponse
     {
 
         [JsonProperty("-")]
@@ -23,6 +22,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// Success
         /// </summary>
-        public List<OAuthAccessToken>? OAuthAccessToken { get; set; }
+        public AccountlessApplication? AccountlessApplication { get; set; }
     }
 }
