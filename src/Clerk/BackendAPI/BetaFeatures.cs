@@ -52,10 +52,10 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.2";
-        private const string _sdkGenVersion = "2.563.0";
+        private const string _sdkVersion = "0.6.3";
+        private const string _sdkGenVersion = "2.578.0";
         private const string _openapiDocVersion = "2024-10-01";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.6.2 2.563.0 2024-10-01 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.3 2.578.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;

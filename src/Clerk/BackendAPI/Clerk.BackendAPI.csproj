@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>Clerk.BackendAPI</PackageId>
-    <Version>0.6.2</Version>
+    <Version>0.6.3</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Clerk</Authors>
     <Copyright>Copyright (c) Clerk 2025</Copyright>

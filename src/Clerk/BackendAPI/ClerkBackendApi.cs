@@ -68,6 +68,7 @@ namespace Clerk.BackendAPI
         public ISamlConnections SamlConnections { get; }
         public ITestingTokens TestingTokens { get; }
         public IWaitlistEntries WaitlistEntries { get; }
+        public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; }
     }
 
     public class SDKConfig
@@ -125,10 +126,10 @@ namespace Clerk.BackendAPI
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.6.2";
-        private const string _sdkGenVersion = "2.563.0";
+        private const string _sdkVersion = "0.6.3";
+        private const string _sdkGenVersion = "2.578.0";
         private const string _openapiDocVersion = "2024-10-01";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.6.2 2.563.0 2024-10-01 Clerk.BackendAPI";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.6.3 2.578.0 2024-10-01 Clerk.BackendAPI";
         private string _serverUrl = "";
         private int _serverIndex = 0;
         private ISpeakeasyHttpClient _client;
@@ -164,6 +165,7 @@ namespace Clerk.BackendAPI
         public ISamlConnections SamlConnections { get; private set; }
         public ITestingTokens TestingTokens { get; private set; }
         public IWaitlistEntries WaitlistEntries { get; private set; }
+        public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; private set; }
 
         public ClerkBackendApi(string? bearerAuth = null, Func<string>? bearerAuthSource = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
         {
@@ -297,6 +299,9 @@ namespace Clerk.BackendAPI
 
 
             WaitlistEntries = new WaitlistEntries(_client, _securitySource, _serverUrl, SDKConfiguration);
+
+
+            ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(_client, _securitySource, _serverUrl, SDKConfiguration);
         }
     }
 }

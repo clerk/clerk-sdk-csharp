@@ -19,32 +19,31 @@ namespace Clerk.BackendAPI
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
-    using System.Net.Http.Headers;
     using System.Threading.Tasks;
 
-    public interface ISignUps
+    public interface IExperimentalAccountlessApplications
     {
 
         /// <summary>
-        /// Retrieve a sign-up by ID
+        /// Create an accountless application [EXPERIMENTAL]
         /// 
         /// <remarks>
-        /// Retrieve the details of the sign-up with the given ID
+        /// Creates a new accountless application. [EXPERIMENTAL]
         /// </remarks>
         /// </summary>
-        Task<GetSignUpResponse> GetAsync(string id, RetryConfig? retryConfig = null);
+        Task<CreateAccountlessApplicationResponse> CreateAsync(RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update a sign-up
+        /// Complete an accountless application [EXPERIMENTAL]
         /// 
         /// <remarks>
-        /// Update the sign-up with the given ID
+        /// Completes an accountless application. [EXPERIMENTAL]
         /// </remarks>
         /// </summary>
-        Task<UpdateSignUpResponse> UpdateAsync(string id, UpdateSignUpRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        Task<CompleteAccountlessApplicationResponse> CompleteAsync(RetryConfig? retryConfig = null);
     }
 
-    public class SignUps: ISignUps
+    public class ExperimentalAccountlessApplications: IExperimentalAccountlessApplications
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
@@ -56,7 +55,7 @@ namespace Clerk.BackendAPI
         private ISpeakeasyHttpClient _client;
         private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
 
-        public SignUps(ISpeakeasyHttpClient client, Func<Clerk.BackendAPI.Models.Components.Security>? securitySource, string serverUrl, SDKConfig config)
+        public ExperimentalAccountlessApplications(ISpeakeasyHttpClient client, Func<Clerk.BackendAPI.Models.Components.Security>? securitySource, string serverUrl, SDKConfig config)
         {
             _client = client;
             _securitySource = securitySource;
@@ -64,16 +63,13 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
-        public async Task<GetSignUpResponse> GetAsync(string id, RetryConfig? retryConfig = null)
+        public async Task<CreateAccountlessApplicationResponse> CreateAsync(RetryConfig? retryConfig = null)
         {
-            var request = new GetSignUpRequest()
-            {
-                Id = id,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sign_ups/{id}", request);
 
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            var urlString = baseUrl + "/accountless_applications";
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
 
             if (_securitySource != null)
@@ -81,7 +77,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(baseUrl, "GetSignUp", new List<string> {  }, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "CreateAccountlessApplication", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -124,7 +120,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -154,8 +150,8 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<SignUp>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new GetSignUpResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<AccountlessApplication>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new CreateAccountlessApplicationResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -163,13 +159,13 @@ namespace Clerk.BackendAPI
                             Request = httpRequest
                         }
                     };
-                    response.SignUp = obj;
+                    response.AccountlessApplication = obj;
                     return response;
                 }
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode == 403)
+            else if(responseStatusCode == 500)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -191,31 +187,21 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UpdateSignUpResponse> UpdateAsync(string id, UpdateSignUpRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async Task<CompleteAccountlessApplicationResponse> CompleteAsync(RetryConfig? retryConfig = null)
         {
-            var request = new UpdateSignUpRequest()
-            {
-                Id = id,
-                RequestBody = requestBody,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sign_ups/{id}", request);
 
-            var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
+            var urlString = baseUrl + "/accountless_applications/complete";
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", _userAgent);
-
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
-            if (serializedBody != null)
-            {
-                httpRequest.Content = serializedBody;
-            }
 
             if (_securitySource != null)
             {
                 httpRequest = new SecurityMetadata(_securitySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(baseUrl, "UpdateSignUp", new List<string> {  }, _securitySource);
+            var hookCtx = new HookContext(baseUrl, "CompleteAccountlessApplication", new List<string> {  }, _securitySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -258,7 +244,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -288,8 +274,8 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<SignUp>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new UpdateSignUpResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<AccountlessApplication>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new CompleteAccountlessApplicationResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -297,13 +283,13 @@ namespace Clerk.BackendAPI
                             Request = httpRequest
                         }
                     };
-                    response.SignUp = obj;
+                    response.AccountlessApplication = obj;
                     return response;
                 }
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(responseStatusCode == 403)
+            else if(responseStatusCode == 500)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
