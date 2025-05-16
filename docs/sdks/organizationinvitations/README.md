@@ -142,7 +142,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.ListAsync(
     organizationId: "org_12345",
-    status: ListOrganizationInvitationsQueryParamStatus.Revoked,
+    status: ListOrganizationInvitationsQueryParamStatus.Accepted,
     limit: 20,
     offset: 10
 );

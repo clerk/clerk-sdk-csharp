@@ -77,4 +77,4 @@ public static class OrganizationClaimsProcessor
 
         return orgPermissions;
     }
-} 
+}

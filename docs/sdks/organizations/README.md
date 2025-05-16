@@ -321,7 +321,7 @@ var res = await sdk.Organizations.UploadLogoAsync(
         UploaderUserId = "user_67890",
         File = new UploadOrganizationLogoFile() {
             FileName = "example.file",
-            Content = System.Text.Encoding.UTF8.GetBytes("0x0DDEE4e6Ea"),
+            Content = System.Text.Encoding.UTF8.GetBytes("0xDFaa4F5676"),
         },
     }
 );
