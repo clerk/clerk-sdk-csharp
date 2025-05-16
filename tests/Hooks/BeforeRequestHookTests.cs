@@ -11,7 +11,7 @@ public class ClerkBeforeRequestHookTests
     {
         var hook = new ClerkBeforeRequestHook();
         var request = new HttpRequestMessage();
-        var hookCtx = new BeforeRequestContext(new HookContext("test", null, null));
+        var hookCtx = new BeforeRequestContext(new HookContext("test", null, null, null));
 
         var result = await hook.BeforeRequestAsync(hookCtx, request);
 
