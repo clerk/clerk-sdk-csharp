@@ -76,7 +76,7 @@ public static class VerifyToken
             DateTimeOffset.UtcNow.ToUnixTimeSeconds() + options.ClockSkewInMs / 1000)
             throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_IAT_IN_THE_FUTURE);
 
-
+        claims = OrganizationClaimsProcessor.ProcessOrganizationClaims(claims);
         return claims;
     }
 

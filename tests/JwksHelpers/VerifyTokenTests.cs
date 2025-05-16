@@ -10,6 +10,9 @@ namespace JwksHelpers.Tests
     using System.Threading.Tasks;
     using System.Text;
     using Microsoft.IdentityModel.Tokens;
+    using Newtonsoft.Json;
+    using System.Security.Cryptography;
+    using System.Linq;
 
     public class VerifyTokenTests : IClassFixture<JwksHelpersFixture>
     {
@@ -266,6 +269,327 @@ namespace JwksHelpers.Tests
             );
 
             await Utils.AssertClaimsAsync(fixture.SessionToken, vtOptions);
+        }
+
+        [Fact]
+        public async Task TestVerifyTokenWithOrganizationClaims()
+        {
+            var orgClaims = new Dictionary<string, object>
+            {
+                ["id"] = "org_123",
+                ["slg"] = "test-org",
+                ["rol"] = "admin",
+                ["per"] = "read,write",
+                ["fpm"] = "3,1"
+            };
+            var claims = new List<Claim>
+            {
+                new Claim("v", "2"),
+                new Claim("o", JsonConvert.SerializeObject(orgClaims)),
+                new Claim("fea", "o:users,o:settings")
+            };
+            var (token, jwtKey) = Utils.GenerateTokenKeyPair(
+                keyId: "ins_abcdefghijklmnopqrstuvwxyz0",
+                issuedAt: DateTime.UtcNow.AddMinutes(-1),
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(1)
+            );
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var identity = new ClaimsIdentity(jwtToken.Claims);
+            foreach (var claim in claims)
+                identity.AddClaim(claim);
+            var rsa = RSA.Create();
+            rsa.ImportFromPem(jwtKey.ToCharArray());
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256),
+                Subject = identity,
+                Issuer = jwtToken.Issuer,
+                Audience = jwtToken.Audiences.FirstOrDefault(),
+                IssuedAt = jwtToken.IssuedAt,
+                NotBefore = jwtToken.ValidFrom,
+                Expires = jwtToken.ValidTo
+            };
+            var newToken = tokenHandler.CreateToken(tokenDescriptor);
+            var newTokenString = tokenHandler.WriteToken(newToken);
+            var vtOptions = new VerifyTokenOptions(jwtKey: jwtKey);
+            var result = await VerifyToken.VerifyTokenAsync(newTokenString, vtOptions);
+            Assert.Equal("org_123", result.FindFirst("org_id")?.Value);
+            Assert.Equal("test-org", result.FindFirst("org_slug")?.Value);
+            Assert.Equal("admin", result.FindFirst("org_role")?.Value);
+            var orgPermissions = result.FindFirst("org_permissions")?.Value;
+            Assert.NotNull(orgPermissions);
+            Assert.Contains("org:users:read", orgPermissions);
+            Assert.Contains("org:users:write", orgPermissions);
+            Assert.Contains("org:settings:read", orgPermissions);
+        }
+
+        [Fact]
+        public async Task TestVerifyTokenWithInvalidOrganizationVersion()
+        {
+            var orgClaims = new Dictionary<string, object>
+            {
+                ["id"] = "org_123",
+                ["slg"] = "test-org",
+                ["rol"] = "admin"
+            };
+            var claims = new List<Claim>
+            {
+                new Claim("v", "1"),
+                new Claim("o", JsonConvert.SerializeObject(orgClaims)),
+                new Claim("fea", "o:users")
+            };
+            var (token, jwtKey) = Utils.GenerateTokenKeyPair(
+                keyId: "ins_abcdefghijklmnopqrstuvwxyz0",
+                issuedAt: DateTime.UtcNow.AddMinutes(-1),
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(1)
+            );
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var identity = new ClaimsIdentity(jwtToken.Claims);
+            foreach (var claim in claims)
+                identity.AddClaim(claim);
+            var rsa = RSA.Create();
+            rsa.ImportFromPem(jwtKey.ToCharArray());
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256),
+                Subject = identity,
+                Issuer = jwtToken.Issuer,
+                Audience = jwtToken.Audiences.FirstOrDefault(),
+                IssuedAt = jwtToken.IssuedAt,
+                NotBefore = jwtToken.ValidFrom,
+                Expires = jwtToken.ValidTo
+            };
+            var newToken = tokenHandler.CreateToken(tokenDescriptor);
+            var newTokenString = tokenHandler.WriteToken(newToken);
+            var vtOptions = new VerifyTokenOptions(jwtKey: jwtKey);
+            var result = await VerifyToken.VerifyTokenAsync(newTokenString, vtOptions);
+            Assert.Null(result.FindFirst("org_id"));
+            Assert.Null(result.FindFirst("org_slug"));
+            Assert.Null(result.FindFirst("org_role"));
+            Assert.Null(result.FindFirst("org_permissions"));
+        }
+
+        [Fact]
+        public async Task TestVerifyTokenWithMissingOrganizationClaim()
+        {
+            var claims = new List<Claim>
+            {
+                new Claim("v", "2"),
+                new Claim("fea", "o:users")
+            };
+            var (token, jwtKey) = Utils.GenerateTokenKeyPair(
+                keyId: "ins_abcdefghijklmnopqrstuvwxyz0",
+                issuedAt: DateTime.UtcNow.AddMinutes(-1),
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(1)
+            );
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var identity = new ClaimsIdentity(jwtToken.Claims);
+            foreach (var claim in claims)
+                identity.AddClaim(claim);
+            var rsa = RSA.Create();
+            rsa.ImportFromPem(jwtKey.ToCharArray());
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256),
+                Subject = identity,
+                Issuer = jwtToken.Issuer,
+                Audience = jwtToken.Audiences.FirstOrDefault(),
+                IssuedAt = jwtToken.IssuedAt,
+                NotBefore = jwtToken.ValidFrom,
+                Expires = jwtToken.ValidTo
+            };
+            var newToken = tokenHandler.CreateToken(tokenDescriptor);
+            var newTokenString = tokenHandler.WriteToken(newToken);
+            var vtOptions = new VerifyTokenOptions(jwtKey: jwtKey);
+            var result = await VerifyToken.VerifyTokenAsync(newTokenString, vtOptions);
+            Assert.Null(result.FindFirst("org_id"));
+            Assert.Null(result.FindFirst("org_slug"));
+            Assert.Null(result.FindFirst("org_role"));
+            Assert.Null(result.FindFirst("org_permissions"));
+        }
+
+        [Fact]
+        public async Task TestVerifyTokenPreservesOriginalClaims()
+        {
+            var orgClaims = new Dictionary<string, object>
+            {
+                ["id"] = "org_123",
+                ["slg"] = "test-org",
+                ["rol"] = "admin"
+            };
+            var claims = new List<Claim>
+            {
+                new Claim("v", "2"),
+                new Claim("o", JsonConvert.SerializeObject(orgClaims)),
+                new Claim("fea", "o:users"),
+                new Claim("sub", "user_123"),
+                new Claim("iat", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
+            };
+            var identity = new ClaimsIdentity(claims);
+            var rsa = RSA.Create();
+            var keyPair = Utils.GenerateTokenKeyPair(
+                keyId: "ins_abcdefghijklmnopqrstuvwxyz0",
+                issuedAt: DateTime.UtcNow.AddMinutes(-1),
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(1)
+            );
+            var jwtKey = keyPair.Item2;
+            rsa.ImportFromPem(jwtKey.ToCharArray());
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256),
+                Subject = identity,
+                Issuer = "https://test.com",
+                Audience = "test-audience",
+                IssuedAt = DateTime.UtcNow.AddMinutes(-1),
+                NotBefore = DateTime.UtcNow,
+                Expires = DateTime.UtcNow.AddMinutes(1)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+            var vtOptions = new VerifyTokenOptions(jwtKey: jwtKey);
+            var result = await VerifyToken.VerifyTokenAsync(tokenString, vtOptions);
+            // Debug output
+            foreach (var c in result.Claims) {
+                Console.WriteLine($"CLAIM: {c.Type} = {c.Value}");
+            }
+            Assert.Equal("user_123", result.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            Assert.NotNull(result.FindFirst("iat"));
+            Assert.Equal("org_123", result.FindFirst("org_id")?.Value);
+            Assert.Equal("test-org", result.FindFirst("org_slug")?.Value);
+            Assert.Equal("admin", result.FindFirst("org_role")?.Value);
+        }
+
+        [Fact]
+        public async Task TestVerifyTokenOrganizationClaimsMatchDocumentation()
+        {
+            var orgClaims = new Dictionary<string, object>
+            {
+                ["id"] = "org_123",
+                ["slg"] = "test-org",
+                ["rol"] = "admin",
+                ["per"] = "read,write,manage",
+                ["fpm"] = "7,3,1"
+            };
+            var claims = new List<Claim>
+            {
+                new Claim("v", "2"),
+                new Claim("o", JsonConvert.SerializeObject(orgClaims)),
+                new Claim("fea", "o:users,o:settings,o:billing")
+            };
+            var identity = new ClaimsIdentity(claims);
+            var rsa = RSA.Create();
+            var keyPair = Utils.GenerateTokenKeyPair(
+                keyId: "ins_abcdefghijklmnopqrstuvwxyz0",
+                issuedAt: DateTime.UtcNow.AddMinutes(-1),
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(1)
+            );
+            var jwtKey = keyPair.Item2;
+            rsa.ImportFromPem(jwtKey.ToCharArray());
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256),
+                Subject = identity,
+                Issuer = "https://test.com",
+                Audience = "test-audience",
+                IssuedAt = DateTime.UtcNow.AddMinutes(-1),
+                NotBefore = DateTime.UtcNow,
+                Expires = DateTime.UtcNow.AddMinutes(1)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+            var vtOptions = new VerifyTokenOptions(jwtKey: jwtKey);
+            var result = await VerifyToken.VerifyTokenAsync(tokenString, vtOptions);
+            // Debug output
+            foreach (var c in result.Claims) {
+                Console.WriteLine($"CLAIM: {c.Type} = {c.Value}");
+            }
+            var orgIdClaim = result.FindFirst("org_id");
+            Assert.NotNull(orgIdClaim);
+            Assert.Equal("org_123", orgIdClaim.Value);
+            var orgSlugClaim = result.FindFirst("org_slug");
+            Assert.NotNull(orgSlugClaim);
+            Assert.Equal("test-org", orgSlugClaim.Value);
+            var orgRoleClaim = result.FindFirst("org_role");
+            Assert.NotNull(orgRoleClaim);
+            Assert.Equal("admin", orgRoleClaim.Value);
+            var orgPermissionsClaim = result.FindFirst("org_permissions");
+            Assert.NotNull(orgPermissionsClaim);
+            var permissions = orgPermissionsClaim.Value.Split(',');
+            Assert.Contains("org:users:read", permissions);
+            Assert.Contains("org:users:write", permissions);
+            Assert.Contains("org:users:manage", permissions);
+            Assert.Contains("org:settings:read", permissions);
+            Assert.Contains("org:settings:write", permissions);
+            Assert.Contains("org:billing:read", permissions);
+            Assert.DoesNotContain(permissions, p => p.StartsWith("system:"));
+        }
+
+        [Fact]
+        public async Task TestVerifyTokenOrganizationClaimsCompactFormat()
+        {
+            var orgClaims = new Dictionary<string, object>
+            {
+                ["id"] = "org_123",
+                ["slg"] = "test-org",
+                ["rol"] = "admin",
+                ["per"] = "read,write",
+                ["fpm"] = "3,1"
+            };
+            var claims = new List<Claim>
+            {
+                new Claim("v", "2"),
+                new Claim("o", JsonConvert.SerializeObject(orgClaims)),
+                new Claim("fea", "o:users,o:settings")
+            };
+            var (token, jwtKey) = Utils.GenerateTokenKeyPair(
+                keyId: "ins_abcdefghijklmnopqrstuvwxyz0",
+                issuedAt: DateTime.UtcNow.AddMinutes(-1),
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(1)
+            );
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var identity = new ClaimsIdentity(jwtToken.Claims);
+            foreach (var claim in claims)
+                identity.AddClaim(claim);
+            var rsa = RSA.Create();
+            rsa.ImportFromPem(jwtKey.ToCharArray());
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                SigningCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256),
+                Subject = identity,
+                Issuer = jwtToken.Issuer,
+                Audience = jwtToken.Audiences.FirstOrDefault(),
+                IssuedAt = jwtToken.IssuedAt,
+                NotBefore = jwtToken.ValidFrom,
+                Expires = jwtToken.ValidTo
+            };
+            var newToken = tokenHandler.CreateToken(tokenDescriptor);
+            var newTokenString = tokenHandler.WriteToken(newToken);
+            var vtOptions = new VerifyTokenOptions(jwtKey: jwtKey);
+            var result = await VerifyToken.VerifyTokenAsync(newTokenString, vtOptions);
+            var orgClaim = result.FindFirst("o");
+            Assert.NotNull(orgClaim);
+            var deserializedOrgClaims = JsonConvert.DeserializeObject<Dictionary<string, object>>(orgClaim.Value);
+            Assert.NotNull(deserializedOrgClaims);
+            Assert.Equal("3,1", deserializedOrgClaims["fpm"].ToString());
+            var orgPermissionsClaim = result.FindFirst("org_permissions");
+            Assert.NotNull(orgPermissionsClaim);
+            var permissions = orgPermissionsClaim.Value.Split(',');
+            Assert.Contains("org:users:read", permissions);
+            Assert.Contains("org:users:write", permissions);
+            Assert.Contains("org:settings:read", permissions);
+            Assert.DoesNotContain("org:settings:write", permissions);
         }
 
     }
