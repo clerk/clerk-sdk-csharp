@@ -61,7 +61,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateWaitlistEntryRequestBody req = new CreateWaitlistEntryRequestBody() {
-    EmailAddress = "Loyal79@yahoo.com",
+    EmailAddress = "Victoria21@gmail.com",
 };
 
 var res = await sdk.WaitlistEntries.CreateAsync(req);
