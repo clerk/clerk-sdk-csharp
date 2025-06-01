@@ -76,5 +76,17 @@ public static class TokenVerificationErrorReason
         SECRET_KEY_MISSING = new(
             "secret-key-missing",
             "Missing Clerk Secret Key. Go to https://dashboard.clerk.com and get your key for your instance."
+        ),
+        TOKEN_TYPE_NOT_SUPPORTED = new(
+            "token-type-not-supported",
+            "The provided token type is not supported."
+        ),
+        INVALID_TOKEN_TYPE = new(
+            "invalid-token-type",
+            "The provided token is not a valid Clerk token type. Expected one of: session, machine, oauth, or api key."
+        ),
+        SERVER_ERROR = new(
+            "server-error",
+            "An unexpected error occurred while verifying the token. Please try again later."
         );
 }

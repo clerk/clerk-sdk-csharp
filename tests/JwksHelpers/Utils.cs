@@ -6,6 +6,7 @@ namespace JwksHelpers.Tests
     using System;
     using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
+    using System.IO;
     using System.Linq;
     using System.Security.Claims;
     using System.Security.Cryptography;
@@ -13,6 +14,7 @@ namespace JwksHelpers.Tests
     using System.Text;
     using System.Threading.Tasks;
     using Xunit;
+    using DotNetEnv;
 
     public class JwksHelpersFixture
     {
@@ -25,17 +27,50 @@ namespace JwksHelpers.Tests
         public readonly List<string>? Audiences;
         public readonly List<string> AuthorizedParties;
 
+        public readonly string? MachineToken;
+        public readonly string? OAuthToken;
+        public readonly string? ApiKey;
+        public readonly string? TestAudience;
+        public readonly bool EnableRealIntegrationTests;
+
         public readonly string TestToken;
         public readonly string TestJwtKey;
 
         public JwksHelpersFixture()
         {
+            // Loading logic for the .env file
+            var currentDir = Directory.GetCurrentDirectory();
+            var envPath = Path.Combine(currentDir, ".env");
+
+            // If .env is not found in current directory, look for it in parent directories
+            while (!File.Exists(envPath) && Directory.GetParent(currentDir) != null)
+            {
+                currentDir = Directory.GetParent(currentDir)!.FullName;
+                envPath = Path.Combine(currentDir, ".env");
+            }
+
+            if (File.Exists(envPath))
+            {
+                DotNetEnv.Env.Load(envPath);
+            }
+            
+            var enableRealTests = Environment.GetEnvironmentVariable("ENABLE_REAL_INTEGRATION_TESTS");
+            EnableRealIntegrationTests = string.Equals(enableRealTests, "true", StringComparison.OrdinalIgnoreCase);
+
             SecretKey = Environment.GetEnvironmentVariable("CLERK_SECRET_KEY");
             JwtKey = Environment.GetEnvironmentVariable("CLERK_JWT_KEY");
             ApiUrl = Environment.GetEnvironmentVariable("CLERK_API_URL");
             SessionToken = Environment.GetEnvironmentVariable("CLERK_SESSION_TOKEN") ?? "";
+            
+            MachineToken = Environment.GetEnvironmentVariable("CLERK_MACHINE_TOKEN");
+            OAuthToken = Environment.GetEnvironmentVariable("CLERK_OAUTH_TOKEN");
+            ApiKey = Environment.GetEnvironmentVariable("CLERK_API_KEY");
+            TestAudience = Environment.GetEnvironmentVariable("CLERK_TEST_AUDIENCE") ?? "test-api";
+            
             Audiences = null;
-            AuthorizedParties = new List<string> { RequestHost };
+            AuthorizedParties = new List<string> { 
+                Environment.GetEnvironmentVariable("CLERK_TEST_AUTHORIZED_PARTY") ?? RequestHost 
+            };
 
             (TestToken, TestJwtKey) = Utils.GenerateTokenKeyPair(
                 keyId: "ins_abcdefghijklmnopqrstuvwxyz0",
@@ -62,6 +97,49 @@ namespace JwksHelpers.Tests
             if (missingEnvVars.Count > 0)
             {
                 Skip = $"Missing environment variable(s): {string.Join(", ", missingEnvVars)}.";
+            }
+        }
+    }
+
+    public class RealIntegrationFactAttribute : FactAttribute
+    {
+        public RealIntegrationFactAttribute(params string[] requiredEnvVars)
+        {
+            var currentDir = Directory.GetCurrentDirectory();
+            var envPath = Path.Combine(currentDir, ".env");
+            
+            // Look for .env file in current directory and parent directories
+            while (!File.Exists(envPath) && Directory.GetParent(currentDir) != null)
+            {
+                currentDir = Directory.GetParent(currentDir)!.FullName;
+                envPath = Path.Combine(currentDir, ".env");
+            }
+            
+            if (File.Exists(envPath))
+            {
+                try
+                {
+                    DotNetEnv.Env.Load(envPath);
+                }
+                catch (Exception ex)
+                {
+                    // Continue without .env file if parsing fails
+                }
+            }
+
+            var enableRealTests = Environment.GetEnvironmentVariable("ENABLE_REAL_INTEGRATION_TESTS");
+            
+            if (!string.Equals(enableRealTests, "true", StringComparison.OrdinalIgnoreCase))
+            {
+                Skip = "Real integration tests are disabled. Set ENABLE_REAL_INTEGRATION_TESTS=true to enable.";
+                return;
+            }
+
+            // Check if all required environment variables are present
+            var missingVars = requiredEnvVars.Where(varName => string.IsNullOrEmpty(Environment.GetEnvironmentVariable(varName))).ToList();
+            if (missingVars.Any())
+            {
+                Skip = $"Missing required environment variables: {string.Join(", ", missingVars)}";
             }
         }
     }
