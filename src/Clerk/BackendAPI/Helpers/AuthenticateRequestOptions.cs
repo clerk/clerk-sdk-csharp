@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Clerk.BackendAPI.Helpers.Jwks;
 
@@ -9,8 +10,8 @@ public sealed class AuthenticateRequestOptions
     public readonly IEnumerable<string> AuthorizedParties;
     public readonly long ClockSkewInMs;
     public readonly string? JwtKey;
-
     public readonly string? SecretKey;
+    public readonly IEnumerable<string> AcceptsToken;
 
     /// <summary>
     ///     Options to configure AuthenticateRequestAsync.
@@ -23,12 +24,14 @@ public sealed class AuthenticateRequestOptions
     ///     Allowed time difference (in milliseconds) between the Clerk server (which generates the
     ///     token) and the clock of the user's application server when validating a token. Defaults to 5000 ms.
     /// </param>
+    /// <param name="acceptsToken">A list of token types to accept. Defaults to ["any"].</param>
     public AuthenticateRequestOptions(
         string? secretKey = null,
         string? jwtKey = null,
         IEnumerable<string>? audiences = null,
         IEnumerable<string>? authorizedParties = null,
-        long? clockSkewInMs = null)
+        long? clockSkewInMs = null,
+        IEnumerable<string>? acceptsToken = null)
     {
         if (string.IsNullOrEmpty(secretKey) && string.IsNullOrEmpty(jwtKey))
             throw new AuthenticateRequestException(AuthErrorReason.SECRET_KEY_MISSING);
@@ -38,5 +41,6 @@ public sealed class AuthenticateRequestOptions
         Audiences = audiences;
         AuthorizedParties = authorizedParties ?? new List<string>();
         ClockSkewInMs = clockSkewInMs ?? DEFAULT_CLOCK_SKEW_MS;
+        AcceptsToken = acceptsToken ?? new[] { "any" };
     }
 }
