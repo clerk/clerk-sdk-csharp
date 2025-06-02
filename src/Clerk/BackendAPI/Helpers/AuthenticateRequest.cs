@@ -39,12 +39,12 @@ public static class AuthenticateRequest
         var tokenTypeName = tokenType switch
         {
             TokenType.SessionToken => "session_token",
-            TokenType.MachineToken => "machine_token", 
+            TokenType.MachineToken => "machine_token",
             TokenType.OAuthToken => "oauth_token",
             TokenType.ApiKey => "api_key",
             _ => tokenType.ToString().ToLowerInvariant()
         };
-        
+
         // Check if token type is accepted
         if (!options.AcceptsToken.Contains("any") && !options.AcceptsToken.Contains(tokenTypeName))
         {
@@ -58,7 +58,7 @@ public static class AuthenticateRequest
             // Machine tokens require secret key for API verification
             if (options.SecretKey == null)
                 return RequestState.SignedOut(AuthErrorReason.SECRET_KEY_MISSING);
-                
+
             verifyTokenOptions = new VerifyTokenOptions(secretKey: options.SecretKey);
         }
         else

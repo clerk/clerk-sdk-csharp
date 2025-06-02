@@ -272,7 +272,7 @@ public static class VerifyToken
         try
         {
             var response = await client.PostAsync(verificationUrl, content);
-            
+
             if (!response.IsSuccessStatusCode)
             {
                 throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID);
@@ -288,7 +288,7 @@ public static class VerifyToken
 
             // Create claims from the token verification response
             var claims = new List<Claim>();
-            
+
             foreach (var kvp in tokenData)
             {
                 if (kvp.Value != null)
