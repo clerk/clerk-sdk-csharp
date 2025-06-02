@@ -61,10 +61,10 @@ public static class TokenTypeHelper
 
         if (token.StartsWith(TokenPrefix.MachineToken))
             return TokenType.MachineToken;
-        
+
         if (token.StartsWith(TokenPrefix.ApiKey))
             return TokenType.ApiKey;
-        
+
         if (token.StartsWith(TokenPrefix.OAuthToken))
             return TokenType.OAuthToken;
 
@@ -86,4 +86,4 @@ public static class TokenTypeHelper
             _ => throw new ArgumentException($"No verification endpoint for token type: {tokenType}")
         };
     }
-} 
+}

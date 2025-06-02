@@ -17,36 +17,47 @@ namespace Clerk.BackendAPI.Hooks
 
     public class HookContext
     {
+        public SDKConfig SDKConfiguration { get; set; }
         public string BaseURL { get; set; } = "";
         public string OperationID { get; set; }
         public List<string>? Oauth2Scopes { get; set; }
         public Func<object>? SecuritySource { get; set; }
 
-        public HookContext(string baseURL, string operationID, List<string>? oauth2Scopes, Func<object>? securitySource)
+        public HookContext(SDKConfig config, string baseURL, string operationID, List<string>? oauth2Scopes, Func<object>? securitySource)
         {
+            SDKConfiguration = config;
             BaseURL = baseURL;
             OperationID = operationID;
             Oauth2Scopes = oauth2Scopes;
             SecuritySource = securitySource;
+        }
+
+        public HookContext(HookContext hookCtx)
+        {
+            SDKConfiguration = hookCtx.SDKConfiguration;
+            BaseURL = hookCtx.BaseURL;
+            OperationID = hookCtx.OperationID;
+            Oauth2Scopes = hookCtx.Oauth2Scopes;
+            SecuritySource = hookCtx.SecuritySource;
         }
     }
 
     public class BeforeRequestContext : HookContext
     {
         public BeforeRequestContext(HookContext hookCtx)
-            : base(hookCtx.BaseURL, hookCtx.OperationID, hookCtx.Oauth2Scopes, hookCtx.SecuritySource) { }
+            : base(hookCtx) { }
     }
 
     public class AfterSuccessContext : HookContext
     {
         public AfterSuccessContext(HookContext hookCtx)
-            : base(hookCtx.BaseURL, hookCtx.OperationID, hookCtx.Oauth2Scopes, hookCtx.SecuritySource) { }
+            : base(hookCtx) { }
     }
 
     public class AfterErrorContext : HookContext
     {
         public AfterErrorContext(HookContext hookCtx)
-            : base(hookCtx.BaseURL, hookCtx.OperationID, hookCtx.Oauth2Scopes, hookCtx.SecuritySource) { }
+            : base(hookCtx) { }
     }
 
     /// <summary>
