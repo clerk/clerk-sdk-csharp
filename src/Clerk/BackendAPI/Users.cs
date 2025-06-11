@@ -48,7 +48,7 @@ namespace Clerk.BackendAPI
         /// A rate limit rule of 20 requests per 10 seconds is applied to this endpoint.
         /// </remarks>
         /// </summary>
-        Task<CreateUserResponse> CreateAsync(CreateUserRequestBody? request = null, RetryConfig? retryConfig = null);
+        Task<CreateUserResponse> CreateAsync(CreateUserRequestBody request, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Count users
@@ -286,9 +286,9 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.0";
-        private const string _sdkGenVersion = "2.618.0";
-        private const string _openapiDocVersion = "2024-10-01";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.625.0";
+        private const string _openapiDocVersion = "2025-03-12";
 
         public Users(SDKConfig config)
         {
@@ -418,7 +418,7 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateUserResponse> CreateAsync(CreateUserRequestBody? request = null, RetryConfig? retryConfig = null)
+        public async Task<CreateUserResponse> CreateAsync(CreateUserRequestBody request, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -427,7 +427,7 @@ namespace Clerk.BackendAPI
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, true);
+            var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -511,7 +511,7 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<User>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var obj = ResponseBodyDeserializer.Deserialize<User>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     var response = new CreateUserResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -530,7 +530,7 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     throw obj!;
                 }
 

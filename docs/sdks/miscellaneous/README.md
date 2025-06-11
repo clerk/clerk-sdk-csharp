@@ -21,6 +21,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi();
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 

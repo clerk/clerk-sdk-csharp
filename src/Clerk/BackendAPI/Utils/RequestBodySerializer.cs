@@ -265,48 +265,44 @@ namespace Clerk.BackendAPI.Utils
 
                 if (metadata.File)
                 {
-                    if (!Utilities.IsClass(value))
+                    if (Utilities.IsList(value))
+                    {
+                        // Handle array/list of files - similar to how normal lists are handled
+                        foreach (var fileItem in (IList)value)
+                        {
+                            if (!Utilities.IsClass(fileItem))
+                            {
+                                throw new Exception(
+                                    "Cannot serialize multipart file from type " + fileItem.GetType().Name
+                                );
+                            }
+
+                            var fileProps = fileItem.GetType().GetProperties();
+                            var (fileName, content) = ExtractFileProperties(fileProps, fileItem);
+                            string fieldName = (metadata.Name ?? prop.Name) + "[]";
+
+                            var fileContent = new ByteArrayContent(content);
+                            fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                            formData.Add(fileContent, fieldName, fileName);
+                        }
+                    }
+                    else if (Utilities.IsClass(value))
+                    {
+                        // Handle single file
+                        var fileProps = value.GetType().GetProperties();
+                        var (fileName, content) = ExtractFileProperties(fileProps, value);
+                        string fieldName = metadata.Name;
+
+                        var fileContent = new ByteArrayContent(content);
+                        fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                        formData.Add(fileContent, fieldName, fileName);
+                    }
+                    else
                     {
                         throw new Exception(
                             "Cannot serialize multipart file from type " + value.GetType().Name
                         );
                     }
-
-                    var fileProps = value.GetType().GetProperties();
-
-                    byte[]? content = null;
-                    string fileName = "";
-                    string fieldName = metadata.Name;
-
-                    foreach (var fileProp in fileProps)
-                    {
-                        var fileMetadata = fileProp
-                            .GetCustomAttribute<SpeakeasyMetadata>()
-                            ?.GetMultipartFormMetadata();
-                        if (
-                            fileMetadata == null
-                            || (!fileMetadata.Content && fileMetadata.Name == "")
-                        )
-                        {
-                            continue;
-                        }
-
-                        if (fileMetadata.Content)
-                        {
-                            content = (byte[]?)fileProp.GetValue(value);
-                        }
-                        else
-                        {
-                            fileName = fileProp.GetValue(value)?.ToString() ?? "";
-                        }
-                    }
-
-                    if (fileName == "" || content == null)
-                    {
-                        throw new Exception("Invalid multipart/form-data file");
-                    }
-
-                    formData.Add(new ByteArrayContent(content), fieldName, fileName);
                 }
                 else if (metadata.Json)
                 {
@@ -518,6 +514,42 @@ namespace Clerk.BackendAPI.Utils
 
                 form[fieldName].Add(Utilities.ValueToString(value));
             }
+        }
+
+        private static (string fileName, byte[] content) ExtractFileProperties(PropertyInfo[] fileProps, object fileObject)
+        {
+            byte[]? content = null;
+            string fileName = "";
+
+            foreach (var fileProp in fileProps)
+            {
+                var fileMetadata = fileProp
+                    .GetCustomAttribute<SpeakeasyMetadata>()
+                    ?.GetMultipartFormMetadata();
+                if (
+                    fileMetadata == null
+                    || (!fileMetadata.Content && fileMetadata.Name == "")
+                )
+                {
+                    continue;
+                }
+
+                if (fileMetadata.Content)
+                {
+                    content = (byte[]?)fileProp.GetValue(fileObject);
+                }
+                else
+                {
+                    fileName = fileProp.GetValue(fileObject)?.ToString() ?? "";
+                }
+            }
+
+            if (fileName == "" || content == null)
+            {
+                throw new Exception("Invalid multipart/form-data file");
+            }
+
+            return (fileName, content);
         }
 
         private static PropertyInfo? GetPropertyInfo(object value, string propertyName)

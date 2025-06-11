@@ -31,7 +31,10 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListInstanceOrganizationInvitationsRequest req = new ListInstanceOrganizationInvitationsRequest() {};
+ListInstanceOrganizationInvitationsRequest req = new ListInstanceOrganizationInvitationsRequest() {
+    Limit = 20,
+    Offset = 10,
+};
 
 var res = await sdk.OrganizationInvitations.GetAllAsync(req);
 
@@ -136,13 +139,11 @@ Any invitations created as a result of an Organization Domain are not included i
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.OrganizationInvitations.ListAsync(
     organizationId: "org_12345",
-    status: ListOrganizationInvitationsQueryParamStatus.Accepted,
     limit: 20,
     offset: 10
 );
@@ -203,12 +204,12 @@ var res = await sdk.OrganizationInvitations.BulkCreateAsync(
             EmailAddress = "newmember@example.com",
             InviterUserId = "user_67890",
             Role = "admin",
-            PublicMetadata = new Dictionary<string, object>() {
-
-            },
-            PrivateMetadata = new Dictionary<string, object>() {
-
-            },
+            RedirectUrl = "https://example.com/welcome",
+        },
+        new CreateOrganizationInvitationBulkRequestBody() {
+            EmailAddress = "newmember@example.com",
+            InviterUserId = "user_67890",
+            Role = "admin",
             RedirectUrl = "https://example.com/welcome",
         },
     }

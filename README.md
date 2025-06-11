@@ -19,7 +19,7 @@ Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend s
 ### Versions
 
 When the API changes in a way that isn't compatible with older versions, a new version is released.
-Each version is identified by its release date, e.g. `2024-10-01`. For more information, please see [Clerk API Versions](https://clerk.com/docs/versioning/available-versions).
+Each version is identified by its release date, e.g. `2025-03-12`. For more information, please see [Clerk API Versions](https://clerk.com/docs/versioning/available-versions).
 
 Please see https://clerk.com/docs for more information.
 
@@ -68,11 +68,16 @@ dotnet add reference src/Clerk/BackendAPI/Clerk.BackendAPI.csproj
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+var sdk = new ClerkBackendApi();
 
-var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_example");
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
@@ -98,6 +103,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -387,6 +393,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi();
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -424,6 +431,7 @@ var sdk = new ClerkBackendApi(retryConfig: new RetryConfig(
 ));
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -502,6 +510,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 

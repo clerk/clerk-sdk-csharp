@@ -76,6 +76,8 @@ ListOrganizationMembershipsRequest req = new ListOrganizationMembershipsRequest(
     LastActiveAtAfter = 1700690400000,
     CreatedAtBefore = 1730160000000,
     CreatedAtAfter = 1730160000000,
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.OrganizationMemberships.ListAsync(req);

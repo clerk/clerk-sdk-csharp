@@ -71,6 +71,8 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 ListInvitationsRequest req = new ListInvitationsRequest() {
     OrderBy = "pending",
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Invitations.ListAsync(req);
@@ -111,11 +113,7 @@ using System.Collections.Generic;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-List<RequestBody> req = new List<RequestBody>() {
-    new RequestBody() {
-        EmailAddress = "Katlyn77@yahoo.com",
-    },
-};
+List<RequestBody> req = ;
 
 var res = await sdk.Invitations.BulkCreateAsync(req);
 

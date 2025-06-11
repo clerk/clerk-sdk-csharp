@@ -70,6 +70,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateOAuthApplicationRequestBody req = new CreateOAuthApplicationRequestBody() {
     Name = "Example App",
+    Scopes = "profile email public_metadata",
     Public = true,
 };
 
@@ -146,6 +147,7 @@ var res = await sdk.OauthApplications.UpdateAsync(
     oauthApplicationId: "oauth_app_67890",
     requestBody: new UpdateOAuthApplicationRequestBody() {
         Name = "Updated OAuth App Name",
+        Scopes = "profile email public_metadata private_metadata",
     }
 );
 

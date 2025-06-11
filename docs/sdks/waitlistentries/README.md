@@ -23,7 +23,10 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListWaitlistEntriesRequest req = new ListWaitlistEntriesRequest() {};
+ListWaitlistEntriesRequest req = new ListWaitlistEntriesRequest() {
+    Limit = 20,
+    Offset = 10,
+};
 
 var res = await sdk.WaitlistEntries.ListAsync(req);
 
@@ -60,9 +63,7 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateWaitlistEntryRequestBody req = new CreateWaitlistEntryRequestBody() {
-    EmailAddress = "Victoria21@gmail.com",
-};
+CreateWaitlistEntryRequestBody req = ;
 
 var res = await sdk.WaitlistEntries.CreateAsync(req);
 

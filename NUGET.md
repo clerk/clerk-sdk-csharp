@@ -8,11 +8,16 @@
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+var sdk = new ClerkBackendApi();
 
-var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_example");
+GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
+    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
+};
+
+var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
@@ -38,6 +43,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -60,6 +66,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi();
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -97,6 +104,7 @@ var sdk = new ClerkBackendApi(retryConfig: new RetryConfig(
 ));
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -175,6 +183,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 

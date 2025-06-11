@@ -139,3 +139,13 @@ Based on:
 - [csharp v0.8.0] .
 ### Releases
 - [NuGet v0.8.0] https://www.nuget.org/packages/Clerk.BackendAPI/0.8.0 - .
+
+## 2025-06-11 13:37:02
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.560.0 (2.625.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [csharp v0.9.0] .
+### Releases
+- [NuGet v0.9.0] https://www.nuget.org/packages/Clerk.BackendAPI/0.9.0 - .

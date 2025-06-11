@@ -69,9 +69,9 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.0";
-        private const string _sdkGenVersion = "2.618.0";
-        private const string _openapiDocVersion = "2024-10-01";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.625.0";
+        private const string _openapiDocVersion = "2025-03-12";
 
         public EmailSMSTemplates(SDKConfig config)
         {
