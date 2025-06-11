@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     public class Session
     {
@@ -89,5 +90,8 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
+
+        [JsonProperty("tasks")]
+        public List<SessionTask>? Tasks { get; set; } = null;
     }
 }

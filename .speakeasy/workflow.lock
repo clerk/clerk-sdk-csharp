@@ -1,28 +1,28 @@
-speakeasyVersion: 1.555.0
+speakeasyVersion: 1.560.0
 sources:
     clerk-backend-api-OAS:
         sourceNamespace: clerk-openapi
-        sourceRevisionDigest: sha256:673551e996d53f9ae1609a3d00a190201b845bbeeafdb74d56858b9449857478
-        sourceBlobDigest: sha256:d64d439a324819076eb2941bddebe10c544f5d276cd95788970d49c8f643bcf1
+        sourceRevisionDigest: sha256:86ef2bc2bc48aec759432b7014ddacda33b499ddfc43a4dad03096ce84ddd965
+        sourceBlobDigest: sha256:a82c310fc15cfea1ba234d207461311ad01e41fba0c5b4acb306797703c6de31
         tags:
             - latest
-            - speakeasy-sdk-regen-1748880378
-            - "2024-10-01"
+            - speakeasy-sdk-regen-1749649038
+            - "2025-03-12"
 targets:
     clerk-backend-api:
         source: clerk-backend-api-OAS
         sourceNamespace: clerk-openapi
-        sourceRevisionDigest: sha256:673551e996d53f9ae1609a3d00a190201b845bbeeafdb74d56858b9449857478
-        sourceBlobDigest: sha256:d64d439a324819076eb2941bddebe10c544f5d276cd95788970d49c8f643bcf1
+        sourceRevisionDigest: sha256:86ef2bc2bc48aec759432b7014ddacda33b499ddfc43a4dad03096ce84ddd965
+        sourceBlobDigest: sha256:a82c310fc15cfea1ba234d207461311ad01e41fba0c5b4acb306797703c6de31
         codeSamplesNamespace: clerk-backend-api-oas-csharp-code-samples
-        codeSamplesRevisionDigest: sha256:412a19eafa31edf8f78d116a8b4d10239b71ee918586496e974bdc42dfa89ddc
+        codeSamplesRevisionDigest: sha256:cc34a08734814d538ca010e16dc443d4b79b8d929de1f06f43c71629d5f5b23c
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         clerk-backend-api-OAS:
             inputs:
-                - location: https://raw.githubusercontent.com/clerk/openapi-specs/refs/heads/main/bapi/2024-10-01.yml
+                - location: https://raw.githubusercontent.com/clerk/openapi-specs/refs/heads/main/bapi/2025-03-12.yml
             overlays:
                 - location: ./examples.yaml
                 - location: https://raw.githubusercontent.com/clerk/openapi-specs/refs/heads/main/.speakeasy/bapi/fixes.yml

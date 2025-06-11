@@ -34,6 +34,8 @@ GetSessionListRequest req = new GetSessionListRequest() {
     ClientId = "client_123",
     UserId = "user_456",
     Status = Status.Active,
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Sessions.ListAsync(req);
@@ -74,9 +76,7 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateSessionRequestBody req = new CreateSessionRequestBody() {
-    UserId = "<id>",
-};
+CreateSessionRequestBody req = ;
 
 var res = await sdk.Sessions.CreateAsync(req);
 
@@ -144,18 +144,10 @@ are validation errors, which signals the SDKs to fallback to the handshake flow.
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Sessions.RefreshAsync(
-    sessionId: "<id>",
-    requestBody: new RefreshSessionRequestBody() {
-        ExpiredToken = "<value>",
-        RefreshToken = "<value>",
-        RequestOrigin = "<value>",
-    }
-);
+var res = await sdk.Sessions.RefreshAsync(sessionId: "<id>");
 
 // handle response
 ```
@@ -268,14 +260,10 @@ Creates a session JSON Web Token (JWT) based on a session.
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Sessions.CreateTokenAsync(
-    sessionId: "<id>",
-    requestBody: new CreateSessionTokenRequestBody() {}
-);
+var res = await sdk.Sessions.CreateTokenAsync(sessionId: "<id>");
 
 // handle response
 ```
@@ -307,14 +295,12 @@ Creates a JSON Web Token(JWT) based on a session and a JWT Template name defined
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Sessions.CreateTokenFromTemplateAsync(
     sessionId: "ses_123abcd4567",
-    templateName: "custom_hasura",
-    requestBody: new CreateSessionTokenFromTemplateRequestBody() {}
+    templateName: "custom_hasura"
 );
 
 // handle response

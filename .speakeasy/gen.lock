@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: 492ff7da055299da5af8c719b8b81a21
-  docVersion: "2024-10-01"
-  speakeasyVersion: 1.555.0
-  generationVersion: 2.618.0
-  releaseVersion: 0.8.0
-  configChecksum: 98d18e9e30350f25f4524578884d7c2c
+  docChecksum: 988da0b376f34c1dad41f86578b90dd5
+  docVersion: "2025-03-12"
+  speakeasyVersion: 1.560.0
+  generationVersion: 2.625.0
+  releaseVersion: 0.9.0
+  configChecksum: 369a3bd2b7ad374c43e3708a8c0b8335
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
@@ -14,9 +14,8 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.0.1
-    core: 3.11.0
+    core: 3.11.1
     deprecations: 2.81.2
-    examples: 2.81.5
     flattening: 2.81.3
     globalSecurity: 2.83.7
     globalSecurityCallbacks: 0.1.0
@@ -179,6 +178,7 @@ generatedFiles:
   - docs/Models/Components/SessionActivityResponse.md
   - docs/Models/Components/SessionObject.md
   - docs/Models/Components/SessionRefresh.md
+  - docs/Models/Components/SessionTask.md
   - docs/Models/Components/SignInToken.md
   - docs/Models/Components/SignInTokenObject.md
   - docs/Models/Components/SignInTokenStatus.md
@@ -742,6 +742,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/SessionActivityResponse.cs
   - src/Clerk/BackendAPI/Models/Components/SessionObject.cs
   - src/Clerk/BackendAPI/Models/Components/SessionRefresh.cs
+  - src/Clerk/BackendAPI/Models/Components/SessionTask.cs
   - src/Clerk/BackendAPI/Models/Components/SignInToken.cs
   - src/Clerk/BackendAPI/Models/Components/SignInTokenObject.cs
   - src/Clerk/BackendAPI/Models/Components/SignInTokenStatus.cs
@@ -1366,6 +1367,18 @@ examples:
           application/json: [{"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}]
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+    speakeasy-default-get-template-list:
+      parameters:
+        path:
+          template_type: "email"
+        query:
+          limit: 20
+          offset: 10
+      responses:
+        "200":
+          application/json: [{"id": "temp_12345", "object": "template", "instance_id": "inst_67890", "resource_type": "system", "template_type": "email", "name": "Welcome Email", "slug": "welcome_email", "position": 1, "can_revert": false, "can_delete": true, "subject": "Welcome to our service!", "markup": "<p>Hello, {{ user.name }}</p>", "body": "You are now signed up. Welcome!", "available_variables": ["user.name", "user.email"], "required_variables": ["user.name"], "from_email_name": "Clerk Support", "reply_to_email_name": "support@clerk.com", "delivered_by_clerk": true, "updated_at": 1610000000, "created_at": 1600000000}]
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   GetTemplate:
     speakeasy-default-get-template:
       parameters:
@@ -1452,6 +1465,29 @@ examples:
           application/json: [{"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 2, "expire_at": 1622852400}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce", "attempts": null, "expire_at": null}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{"object": "google_account", "id": "ext_account_id_123", "provider": "Facebook", "identification_id": "<id>", "provider_user_id": "<id>", "approved_scopes": "<value>", "email_address": "Edison.Brekke90@hotmail.com", "first_name": "Kendall", "last_name": "Mann", "public_metadata": {}, "created_at": 805295, "updated_at": 682381, "verification": {"status": "unverified", "strategy": "google_one_tap", "expire_at": 624301, "attempts": 634404, "error": {"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}}, "user_id": "user_id_at_provider"}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400, "attempts": null}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}]
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+    speakeasy-default-get-user-list:
+      parameters:
+        query:
+          email_address: ["test@example.com"]
+          phone_number: ["+12345678901"]
+          external_id: ["external-id-123"]
+          username: ["user123"]
+          web3_wallet: ["0x123456789abcdef0x123456789abcdef"]
+          user_id: ["user-id-123"]
+          organization_id: ["org-id-123"]
+          query: "John"
+          last_active_at_before: 1700690400000
+          last_active_at_after: 1700690400000
+          created_at_before: 1730160000000
+          created_at_after: 1730160000000
+          limit: 20
+          offset: 10
+          order_by: "-created_at"
+      responses:
+        "200":
+          application/json: [{"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved": false, "verification": {"status": "verified", "strategy": "phone_code", "attempts": 2, "expire_at": 1622852400}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce", "attempts": null, "expire_at": null}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{"object": "google_account", "id": "ext_account_id_123", "provider": "Facebook", "identification_id": "<id>", "provider_user_id": "<id>", "approved_scopes": "<value>", "email_address": "Margie23@hotmail.com", "first_name": "Brionna", "last_name": "Walter", "public_metadata": {"key": "<value>", "key1": "<value>"}, "created_at": 14941, "updated_at": 805295, "verification": {"status": "unverified", "strategy": "google_one_tap", "expire_at": 634404, "attempts": 583086, "error": {"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}}, "user_id": "user_id_at_provider"}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket", "attempts": null, "expire_at": null}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}]
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   CreateUser:
     speakeasy-default-create-user:
       requestBody:
@@ -1475,6 +1511,25 @@ examples:
           last_active_at_before: 1700690400000
           last_active_at_after: 1700690400000
           last_active_at_since: 1700690400000
+          created_at_before: 1730160000000
+          created_at_after: 1730160000000
+      responses:
+        "200":
+          application/json: {"object": "total_count", "total_count": 100}
+        "422":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+    speakeasy-default-get-users-count:
+      parameters:
+        query:
+          email_address: ["user@example.com"]
+          phone_number: ["+1234567890"]
+          external_id: ["external-id-123"]
+          username: ["username123"]
+          web3_wallet: ["0x123456789abcdef"]
+          user_id: ["user-id-123"]
+          organization_id: ["John Doe"]
+          last_active_at_before: 1700690400000
+          last_active_at_after: 1700690400000
           created_at_before: 1730160000000
           created_at_after: 1730160000000
       responses:
@@ -1838,6 +1893,18 @@ examples:
           application/json: {"data": [{"object": "organization_invitation", "id": "inv_12345", "email_address": "user@example.com", "role": "member", "role_name": "<value>", "organization_id": "org_12345", "status": "pending", "public_metadata": {"key": "value"}, "url": "https://sardonic-hydrolyse.org", "expires_at": 141187, "created_at": 1617981379, "updated_at": 1625581379}], "total_count": 10}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+    speakeasy-default-list-pending-organization-invitations:
+      parameters:
+        path:
+          organization_id: "org_12345"
+        query:
+          limit: 20
+          offset: 10
+      responses:
+        "200":
+          application/json: {"data": [{"object": "organization_invitation", "id": "inv_12345", "email_address": "user@example.com", "role": "member", "role_name": "<value>", "organization_id": "org_12345", "status": "pending", "public_metadata": {"key": "value"}, "url": "https://junior-tribe.com", "expires_at": 713465, "created_at": 1617981379, "updated_at": 1625581379}], "total_count": 10}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   GetOrganizationInvitation:
     speakeasy-default-get-organization-invitation:
       parameters:
@@ -2168,7 +2235,7 @@ examples:
         path:
           organization_id: "org_12345"
       requestBody:
-        multipart/form-data: {"uploader_user_id": "user_67890", "file": {"": "path/to/your/logo.png"}}
+        multipart/form-data: {"uploader_user_id": "user_67890", "file": "path/to/your/logo.png"}
       responses:
         "200":
           application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800, "image_url": "https://example.com/image_url.png", "has_image": true}
@@ -2198,6 +2265,23 @@ examples:
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   ListOrganizationMemberships:
     "":
+      parameters:
+        path:
+          organization_id: "org_789"
+        query:
+          email_address: ["+created_at"]
+          last_active_at_before: 1700690400000
+          last_active_at_after: 1700690400000
+          created_at_before: 1730160000000
+          created_at_after: 1730160000000
+          limit: 20
+          offset: 10
+      responses:
+        "200":
+          application/json: {"data": [], "total_count": 1}
+        "401":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+    speakeasy-default-list-organization-memberships:
       parameters:
         path:
           organization_id: "org_789"

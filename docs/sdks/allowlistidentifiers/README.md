@@ -22,7 +22,6 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.AllowlistIdentifiers.ListAsync(
-    paginated: false,
     limit: 20,
     offset: 10
 );
@@ -64,6 +63,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateAllowlistIdentifierRequestBody req = new CreateAllowlistIdentifierRequestBody() {
     Identifier = "user@example.com",
+    Notify = true,
 };
 
 var res = await sdk.AllowlistIdentifiers.CreateAsync(req);

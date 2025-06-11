@@ -23,7 +23,6 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.RedirectUrls.ListAsync(
-    paginated: false,
     limit: 20,
     offset: 10
 );

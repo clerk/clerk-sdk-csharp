@@ -71,8 +71,11 @@ GetUserListRequest req = new GetUserListRequest() {
     Query = "John",
     LastActiveAtBefore = 1700690400000,
     LastActiveAtAfter = 1700690400000,
+    LastActiveAtSince = 1700690400000,
     CreatedAtBefore = 1730160000000,
     CreatedAtAfter = 1730160000000,
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Users.ListAsync(req);
@@ -214,6 +217,7 @@ GetUsersCountRequest req = new GetUsersCountRequest() {
     },
     LastActiveAtBefore = 1700690400000,
     LastActiveAtAfter = 1700690400000,
+    LastActiveAtSince = 1700690400000,
     CreatedAtBefore = 1730160000000,
     CreatedAtAfter = 1730160000000,
 };
@@ -306,6 +310,7 @@ var res = await sdk.Users.UpdateAsync(
         FirstName = "Jane",
         LastName = "Doe",
         PrimaryEmailAddressId = "eml_12345",
+        NotifyPrimaryEmailAddressChanged = true,
         PrimaryPhoneNumberId = "phn_67890",
         PrimaryWeb3WalletId = "wlt_123",
         Username = "janedoe",
@@ -615,14 +620,10 @@ You can remove metadata keys at any level by setting their value to `null`.
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.UpdateMetadataAsync(
-    userId: "user_123456789",
-    requestBody: new UpdateUserMetadataRequestBody() {}
-);
+var res = await sdk.Users.UpdateMetadataAsync(userId: "user_123456789");
 
 // handle response
 ```
@@ -662,6 +663,8 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 GetOAuthAccessTokenRequest req = new GetOAuthAccessTokenRequest() {
     UserId = "user_123",
     Provider = "oauth_google",
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Users.GetOAuthAccessTokenAsync(req);
@@ -735,15 +738,13 @@ Retrieve a paginated list of the user's organization invitations
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.GetOrganizationInvitationsAsync(
     userId: "<id>",
     limit: 20,
-    offset: 10,
-    status: QueryParamStatus.Pending
+    offset: 10
 );
 
 // handle response
@@ -1090,7 +1091,6 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.GetInstanceOrganizationMembershipsAsync(
-    orderBy: "<value>",
     limit: 20,
     offset: 10
 );

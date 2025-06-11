@@ -29,6 +29,8 @@ namespace Clerk.BackendAPI.Models.Components
         Abandoned,
         [JsonProperty("replaced")]
         Replaced,
+        [JsonProperty("pending")]
+        Pending,
     }
 
     public static class StatusExtension

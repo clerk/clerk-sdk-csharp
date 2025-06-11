@@ -28,7 +28,7 @@ namespace Clerk.BackendAPI
     /// ### Versions<br/>
     /// <br/>
     /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
-    /// Each version is identified by its release date, e.g. `2024-10-01`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
+    /// Each version is identified by its release date, e.g. `2025-03-12`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
@@ -80,7 +80,7 @@ namespace Clerk.BackendAPI
     /// ### Versions<br/>
     /// <br/>
     /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
-    /// Each version is identified by its release date, e.g. `2024-10-01`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
+    /// Each version is identified by its release date, e.g. `2025-03-12`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
@@ -92,9 +92,9 @@ namespace Clerk.BackendAPI
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.8.0";
-        private const string _sdkGenVersion = "2.618.0";
-        private const string _openapiDocVersion = "2024-10-01";
+        private const string _sdkVersion = "0.9.0";
+        private const string _sdkGenVersion = "2.625.0";
+        private const string _openapiDocVersion = "2025-03-12";
         public IMiscellaneous Miscellaneous { get; private set; }
         public IJwks Jwks { get; private set; }
         public IClients Clients { get; private set; }

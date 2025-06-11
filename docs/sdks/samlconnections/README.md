@@ -26,7 +26,10 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListSAMLConnectionsRequest req = new ListSAMLConnectionsRequest() {};
+ListSAMLConnectionsRequest req = new ListSAMLConnectionsRequest() {
+    Limit = 20,
+    Offset = 10,
+};
 
 var res = await sdk.SamlConnections.ListAsync(req);
 

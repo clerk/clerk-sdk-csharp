@@ -39,6 +39,8 @@ ListOrganizationsRequest req = new ListOrganizationsRequest() {
     OrganizationId = new List<string>() {
         "-name",
     },
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Organizations.ListAsync(req);
@@ -133,11 +135,7 @@ using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Organizations.GetAsync(
-    organizationId: "org_123",
-    includeMembersCount: false,
-    includeMissingMemberWithElevatedPermissions: false
-);
+var res = await sdk.Organizations.GetAsync(organizationId: "org_123");
 
 // handle response
 ```
@@ -311,7 +309,7 @@ Only the following file content types are supported: `image/jpeg`, `image/png`, 
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
-using System;
+using System.IO;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -321,7 +319,7 @@ var res = await sdk.Organizations.UploadLogoAsync(
         UploaderUserId = "user_67890",
         File = new UploadOrganizationLogoFile() {
             FileName = "example.file",
-            Content = System.Text.Encoding.UTF8.GetBytes("0xDFaa4F5676"),
+            Content = File.ReadAllBytes("example.file"),
         },
     }
 );

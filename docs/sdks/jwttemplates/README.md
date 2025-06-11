@@ -24,7 +24,6 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.JwtTemplates.ListAsync(
-    paginated: false,
     limit: 20,
     offset: 10
 );
@@ -138,17 +137,10 @@ Updates an existing JWT template
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.JwtTemplates.UpdateAsync(
-    templateId: "<id>",
-    requestBody: new UpdateJWTTemplateRequestBody() {
-        Name = "<value>",
-        Claims = new UpdateJWTTemplateClaims() {},
-    }
-);
+var res = await sdk.JwtTemplates.UpdateAsync(templateId: "<id>");
 
 // handle response
 ```

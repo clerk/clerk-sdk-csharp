@@ -28,7 +28,6 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.EmailSMSTemplates.ListAsync(
     templateType: TemplateType.Email,
-    paginated: false,
     limit: 20,
     offset: 10
 );
