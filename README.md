@@ -138,9 +138,30 @@ public class UserAuthentication
     }
 }
 ```
+### Machine Authentication
 
-If the request is correctly authenticated, the token's claims are made available in `requestState.Claims`. Otherwise the reason for the token verification failure is given by `requestState.ErrorReason`.
+For machine-to-machine authentication, you can use machine tokens as shown below.
 
+```csharp
+using Clerk.BackendAPI.Helpers.Jwks;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+public class MachineAuthentication
+{
+    // Accept only machine tokens
+    public static async Task<bool> IsMachineAuthenticatedAsync(HttpRequestMessage request)
+    {
+        var options = new AuthenticateRequestOptions(
+            secretKey: Environment.GetEnvironmentVariable("CLERK_SECRET_KEY"),
+            acceptsToken: new[] { "machine_token" }  // Only accept machine tokens
+        );
+
+        var requestState = await AuthenticateRequest.AuthenticateRequestAsync(request, options);
+        return requestState.isSignedIn();
+    }
+```
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
