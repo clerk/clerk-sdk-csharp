@@ -155,7 +155,7 @@ public class MachineAuthentication
     {
         var options = new AuthenticateRequestOptions(
             secretKey: Environment.GetEnvironmentVariable("CLERK_SECRET_KEY"),
-            acceptsToken: new[] { "machine_token" }  // Only accept machine tokens
+            acceptsToken: new[] { "oauth_token" }  // Only accept oauth tokens
         );
 
         var requestState = await AuthenticateRequest.AuthenticateRequestAsync(request, options);
