@@ -676,5 +676,165 @@ namespace JwksHelpers.Tests
         }
 
         #endregion
+
+        [Fact]
+        public void ToAuth_ReturnsSessionAuthObjectV2_WhenSessionTokenV2()
+        {
+            // Arrange
+            var claims = new List<Claim>
+            {
+                new Claim("v", "2"),
+                new Claim("azp", "test_azp"),
+                new Claim("email", "test@example.com"),
+                new Claim("exp", "1234567890"),
+                new Claim("fva", "1"),
+                new Claim("iat", "1234567890"),
+                new Claim("iss", "test_iss"),
+                new Claim("jti", "test_jti"),
+                new Claim("nbf", "1234567890"),
+                new Claim("role", "test_role"),
+                new Claim("sid", "test_sid"),
+                new Claim("sub", "test_sub")
+            };
+            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims));
+            var requestState = new RequestState(AuthStatus.SignedIn, null, "session_token", claimsPrincipal);
+
+            // Act
+            var authObject = requestState.ToAuth() as SessionAuthObjectV2;
+
+            // Assert
+            Assert.NotNull(authObject);
+            Assert.Equal("test_azp", authObject.Azp);
+            Assert.Equal("test@example.com", authObject.Email);
+            Assert.Equal(1234567890, authObject.Exp);
+            Assert.Contains(1, authObject.Fva);
+            Assert.Equal(1234567890, authObject.Iat);
+            Assert.Equal("test_iss", authObject.Iss);
+            Assert.Equal("test_jti", authObject.Jti);
+            Assert.Equal(1234567890, authObject.Nbf);
+            Assert.Equal("test_role", authObject.Role);
+            Assert.Equal("test_sid", authObject.Sid);
+            Assert.Equal("test_sub", authObject.Sub);
+            Assert.Equal(2, authObject.V);
+        }
+
+        [Fact]
+        public void ToAuth_ReturnsOAuthMachineAuthObject_WhenOAuthToken()
+        {
+            // Arrange
+            var claims = new List<Claim>
+            {
+                new Claim("id", "test_id"),
+                new Claim("subject", "test_user_id"),
+                new Claim("client_id", "test_client_id"),
+                new Claim("name", "test_name"),
+                new Claim("scopes", "read"),
+                new Claim("scopes", "write")
+            };
+            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims));
+            var requestState = new RequestState(AuthStatus.SignedIn, null, "oat_test_token", claimsPrincipal);
+
+            // Act
+            var authObject = requestState.ToAuth() as OAuthMachineAuthObject;
+
+            // Assert
+            Assert.NotNull(authObject);
+            Assert.Equal(TokenType.OAuthToken, authObject.TokenType);
+            Assert.Equal("test_id", authObject.Id);
+            Assert.Equal("test_user_id", authObject.UserId);
+            Assert.Equal("test_client_id", authObject.ClientId);
+            Assert.Equal("test_name", authObject.Name);
+            Assert.Contains("read", authObject.Scopes);
+            Assert.Contains("write", authObject.Scopes);
+        }
+
+        [Fact]
+        public void ToAuth_ReturnsAPIKeyMachineAuthObject_WhenApiKey()
+        {
+            // Arrange
+            var claims = new List<Claim>
+            {
+                new Claim("id", "test_id"),
+                new Claim("subject", "test_user_id"),
+                new Claim("org_id", "test_org_id"),
+                new Claim("name", "test_name"),
+                new Claim("scopes", "read"),
+                new Claim("scopes", "write"),
+                new Claim("foo", "bar")
+            };
+            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims));
+            var requestState = new RequestState(AuthStatus.SignedIn, null, "ak_test_token", claimsPrincipal);
+
+            // Act
+            var authObject = requestState.ToAuth() as APIKeyMachineAuthObject;
+
+            // Assert
+            Assert.NotNull(authObject);
+            Assert.Equal(TokenType.ApiKey, authObject.TokenType);
+            Assert.Equal("test_id", authObject.Id);
+            Assert.Equal("test_user_id", authObject.UserId);
+            Assert.Equal("test_org_id", authObject.OrgId);
+            Assert.Equal("test_name", authObject.Name);
+            Assert.Contains("read", authObject.Scopes);
+            Assert.Contains("write", authObject.Scopes);
+            Assert.Equal("bar", ((List<string>)authObject.Claims["foo"])[0]);
+        }
+
+        [Fact]
+        public void ToAuth_ReturnsM2MMachineAuthObject_WhenMachineToken()
+        {
+            // Arrange
+            var claims = new List<Claim>
+            {
+                new Claim("id", "test_id"),
+                new Claim("subject", "test_machine_id"),
+                new Claim("client_id", "test_client_id"),
+                new Claim("name", "test_name"),
+                new Claim("scopes", "read"),
+                new Claim("scopes", "write"),
+                new Claim("important_metadata", "Some useful data")
+            };
+            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims));
+            var requestState = new RequestState(AuthStatus.SignedIn, null, "mt_test_token", claimsPrincipal);
+
+            // Act
+            var authObject = requestState.ToAuth() as M2MMachineAuthObject;
+
+            // Assert
+            Assert.NotNull(authObject);
+            Assert.Equal(TokenType.MachineToken, authObject.TokenType);
+            Assert.Equal("test_id", authObject.Id);
+            Assert.Equal("test_machine_id", authObject.MachineId);
+            Assert.Equal("test_client_id", authObject.ClientId);
+            Assert.Equal("test_name", authObject.Name);
+            Assert.Contains("read", authObject.Scopes);
+            Assert.Contains("write", authObject.Scopes);
+            Assert.Equal("Some useful data", ((List<string>)authObject.Claims["important_metadata"])[0]);
+        }
+
+        [Fact]
+        public void IsAuthenticated_ReturnsTrue_WhenSignedIn()
+        {
+            // Arrange
+            var claims = new List<Claim>
+            {
+                new Claim("sub", "test_user_id")
+            };
+            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims));
+            var requestState = new RequestState(AuthStatus.SignedIn, null, "test_token", claimsPrincipal);
+
+            // Act & Assert
+            Assert.True(requestState.IsAuthenticated);
+        }
+
+        [Fact]
+        public void IsAuthenticated_ReturnsFalse_WhenSignedOut()
+        {
+            // Arrange
+            var requestState = new RequestState(AuthStatus.SignedOut, AuthErrorReason.SESSION_TOKEN_MISSING, null, null);
+
+            // Act & Assert
+            Assert.False(requestState.IsAuthenticated);
+        }
     }
 }

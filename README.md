@@ -111,6 +111,25 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
+
+### Using SDKBuilder with Origin Hooks
+
+To ensure session tokens include the `azp` (authorized parties) claim, you can use the `SDKBuilder` with origin hooks:
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Hooks;
+
+// Build SDK with origin header hook for azp claim
+var sdk = ClerkBackendApi.Builder()
+    .WithBeforeRequestHook(new ClerkBeforeRequestHook("https://your-app.com")) 
+    .Build();
+
+// Now session tokens will include the azp claim
+var sessionTokenResponse = await sdk.Sessions.CreateTokenAsync("session_id");
+var jwt = sessionTokenResponse.Object?.Jwt; // JWT will contain azp claim
+```
+ 
 <!-- End Authentication [security] -->
 
 ## Request Authentication
@@ -161,6 +180,7 @@ public class MachineAuthentication
         var requestState = await AuthenticateRequest.AuthenticateRequestAsync(request, options);
         return requestState.isSignedIn();
     }
+}
 ```
 
 <!-- Start Available Resources and Operations [operations] -->
