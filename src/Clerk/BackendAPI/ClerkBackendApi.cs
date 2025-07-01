@@ -364,6 +364,12 @@ namespace Clerk.BackendAPI
                 return this;
             }
 
+            public SDKBuilder WithBeforeRequestHook(IBeforeRequestHook hook)
+            {
+                _sdkConfig.Hooks.RegisterBeforeRequestHook(hook);
+                return this;
+            }
+
             public ClerkBackendApi Build()
             {
               return new ClerkBackendApi(_sdkConfig);
