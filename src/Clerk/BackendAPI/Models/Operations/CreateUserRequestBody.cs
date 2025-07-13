@@ -85,7 +85,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The plaintext password to give the user.<br/>
         /// 
         /// <remarks>
-        /// Must be at least 8 characters long, and can not be in any list of hacked passwords.
+        /// Must be at least 8 characters long, and cannot be in any list of hacked passwords.
         /// </remarks>
         /// </summary>
         [JsonProperty("password")]
