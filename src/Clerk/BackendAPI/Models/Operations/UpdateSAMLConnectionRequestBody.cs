@@ -65,7 +65,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? OrganizationId { get; set; } = null;
 
         /// <summary>
-        /// Define the atrtibute name mapping between Identity Provider and Clerk&apos;s user properties
+        /// Define the attribute name mapping between Identity Provider and Clerk&apos;s user properties
         /// </summary>
         [JsonProperty("attribute_mapping")]
         public UpdateSAMLConnectionAttributeMapping? AttributeMapping { get; set; } = null;
