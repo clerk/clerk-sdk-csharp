@@ -63,7 +63,7 @@ namespace Clerk.BackendAPI
         /// 
         /// <remarks>
         /// Refreshes a session by creating a new session token. A 401 is returned when there<br/>
-        /// are validation errors, which signals the SDKs to fallback to the handshake flow.
+        /// are validation errors, which signals the SDKs to fall back to the handshake flow.
         /// </remarks>
         /// </summary>
         Task<RefreshSessionResponse> RefreshAsync(string sessionId, RefreshSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null);

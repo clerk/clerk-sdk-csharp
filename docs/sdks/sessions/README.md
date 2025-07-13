@@ -137,7 +137,7 @@ var res = await sdk.Sessions.GetAsync(sessionId: "sess_1234567890abcdef");
 ## Refresh
 
 Refreshes a session by creating a new session token. A 401 is returned when there
-are validation errors, which signals the SDKs to fallback to the handshake flow.
+are validation errors, which signals the SDKs to fall back to the handshake flow.
 
 ### Example Usage
 
