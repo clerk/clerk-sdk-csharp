@@ -61,7 +61,7 @@ UpdateInstanceRequestBody req = new UpdateInstanceRequestBody() {
     DevelopmentOrigin = "http://localhost:3000",
     AllowedOrigins = new List<string>() {
         "http://localhost:3000",
-        "chrome-extension://extension_uiid",
+        "chrome-extension://extension_uuid",
         "capacitor://localhost",
     },
     UrlBasedSessionSyncing = true,

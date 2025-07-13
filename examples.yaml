@@ -1387,7 +1387,7 @@ actions:
       example:
         [
           "http://localhost:3000",
-          "chrome-extension://extension_uiid",
+          "chrome-extension://extension_uuid",
           "capacitor://localhost",
         ]
   - target: $["paths"]["/instance"]["patch"]["requestBody"]["content"]["application/json"]["schema"]["properties"]["cookieless_dev"]
