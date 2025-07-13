@@ -22,7 +22,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string OrganizationId { get; set; } = default!;
 
         /// <summary>
-        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
+        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name, or username.<br/>
         /// 
         /// <remarks>
         /// By prepending one of those values with + or -, we can choose to sort in ascending (ASC) or descending (DESC) order.&quot;

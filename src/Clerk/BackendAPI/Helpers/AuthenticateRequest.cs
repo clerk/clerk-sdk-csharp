@@ -22,7 +22,7 @@ public static class AuthenticateRequest
     ///     First the session token is retrieved from either the __session cookie
     ///     or the HTTP Authorization header.
     ///     Then the session token is verified: networklessly if the options.jwtKey
-    ///     is provided, otherwise by fetching the JWKS from Clerk's Backend API.
+    ///     is provided; otherwise, by fetching the JWKS from Clerk's Backend API.
     /// </summary>
     /// <param name="request">The HTTP request</param>
     /// <param name="options">The request authentication options</param>

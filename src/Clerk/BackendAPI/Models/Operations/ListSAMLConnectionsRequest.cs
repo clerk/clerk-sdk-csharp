@@ -43,7 +43,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Query { get; set; }
 
         /// <summary>
-        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
+        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name, or username.<br/>
         /// 
         /// <remarks>
         /// By prepending one of those values with + or -,<br/>
