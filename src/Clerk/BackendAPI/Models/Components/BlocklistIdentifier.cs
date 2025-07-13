@@ -30,7 +30,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? Id { get; set; }
 
         /// <summary>
-        /// An email address, email domain, phone number or web3 wallet.<br/>
+        /// An email address, email domain, phone number, or web3 wallet.<br/>
         /// 
         /// <remarks>
         /// 
