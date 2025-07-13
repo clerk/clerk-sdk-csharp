@@ -87,7 +87,7 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(
 // handle response
 ```
 
-If you'd like to override the default retry strategy for all operations that support retries, you can use the `RetryConfig` optional parameter when intitializing the SDK:
+If you'd like to override the default retry strategy for all operations that support retries, you can use the `RetryConfig` optional parameter when initializing the SDK:
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Operations;
