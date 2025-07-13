@@ -82,7 +82,7 @@ namespace Clerk.BackendAPI
         /// Verify a session
         /// 
         /// <remarks>
-        /// Returns the session if it is authenticated, otherwise returns an error.<br/>
+        /// Returns the session if it is authenticated; otherwise, returns an error.<br/>
         /// WARNING: This endpoint is deprecated and will be removed in future versions. We strongly recommend switching to networkless verification using short-lived session tokens,<br/>
         ///          which is implemented transparently in all recent SDK versions (e.g. <a href="https://clerk.com/docs/backend-requests/handling/nodejs#clerk-express-require-auth">NodeJS SDK</a>).<br/>
         ///          For more details on how networkless verification works, refer to our <a href="https://clerk.com/docs/backend-requests/resources/session-tokens">Session Tokens documentation</a>.

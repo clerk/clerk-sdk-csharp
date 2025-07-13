@@ -89,7 +89,7 @@ namespace Clerk.BackendAPI.Hooks
 
     /// <summary>
     /// AfterErrorAsync is called after the SDK encounters an error, or a non-successful response.
-    /// The hook can modify the response, if available, otherwise modify the error.
+    /// The hook can modify the response, if available; otherwise, modify the error.
     /// All hooks are called sequentially. If an error is returned, it will be passed to the subsequent hook implementing IAfterErrorHook.
     /// If you want to prevent other AfterError hooks from being run, you can throw an FailEarlyException instead.
     /// </summary>
