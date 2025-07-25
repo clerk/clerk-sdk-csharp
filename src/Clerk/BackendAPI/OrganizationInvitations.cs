@@ -75,7 +75,7 @@ namespace Clerk.BackendAPI
         /// Any invitations created as a result of an Organization Domain are not included in the results.
         /// </remarks>
         /// </summary>
-        Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, ListOrganizationInvitationsQueryParamStatus? status = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        Task<ListOrganizationInvitationsResponse> ListAsync(ListOrganizationInvitationsRequest request, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Bulk create and send organization invitations
@@ -139,9 +139,9 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.0";
-        private const string _sdkGenVersion = "2.625.0";
-        private const string _openapiDocVersion = "2025-03-12";
+        private const string _sdkVersion = "0.10.0";
+        private const string _sdkGenVersion = "2.664.0";
+        private const string _openapiDocVersion = "2025-04-10";
 
         public OrganizationInvitations(SDKConfig config)
         {
@@ -415,15 +415,8 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListOrganizationInvitationsResponse> ListAsync(string organizationId, ListOrganizationInvitationsQueryParamStatus? status = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+        public async Task<ListOrganizationInvitationsResponse> ListAsync(ListOrganizationInvitationsRequest request, RetryConfig? retryConfig = null)
         {
-            var request = new ListOrganizationInvitationsRequest()
-            {
-                OrganizationId = organizationId,
-                Status = status,
-                Limit = limit,
-                Offset = offset,
-            };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations", request);
 
@@ -478,7 +471,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -523,7 +516,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{400, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 404, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

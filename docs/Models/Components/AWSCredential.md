@@ -1,0 +1,15 @@
+# AWSCredential
+
+Success
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Id`                                                                                   | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `Object`                                                                               | [Models.Components.Object](../../Models/Components/Object.md)                          | :heavy_check_mark:                                                                     | String representing the object's type. Objects of the same type share the same value.<br/> |
+| `AccessKeyId`                                                                          | *string*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `UserPoolIds`                                                                          | List<*string*>                                                                         | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `CreatedAt`                                                                            | *long*                                                                                 | :heavy_check_mark:                                                                     | Unix timestamp of creation<br/>                                                        |
+| `UpdatedAt`                                                                            | *long*                                                                                 | :heavy_check_mark:                                                                     | Unix timestamp of creation<br/>                                                        |

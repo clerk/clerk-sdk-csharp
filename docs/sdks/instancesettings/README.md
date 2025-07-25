@@ -107,7 +107,6 @@ UpdateInstanceRestrictionsRequestBody req = new UpdateInstanceRestrictionsReques
     Blocklist = true,
     BlockEmailSubaddresses = true,
     BlockDisposableEmailDomains = true,
-    IgnoreDotsForGmailAddresses = false,
 };
 
 var res = await sdk.InstanceSettings.UpdateRestrictionsAsync(req);

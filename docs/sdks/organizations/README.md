@@ -309,7 +309,6 @@ Only the following file content types are supported: `image/jpeg`, `image/png`, 
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
-using System.IO;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -319,7 +318,7 @@ var res = await sdk.Organizations.UploadLogoAsync(
         UploaderUserId = "user_67890",
         File = new UploadOrganizationLogoFile() {
             FileName = "example.file",
-            Content = File.ReadAllBytes("example.file"),
+            Content = System.IO.File.ReadAllBytes("example.file"),
         },
     }
 );

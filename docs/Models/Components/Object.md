@@ -6,6 +6,6 @@ String representing the object's type. Objects of the same type share the same v
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `Client` | client   |
+| Name            | Value           |
+| --------------- | --------------- |
+| `AwsCredential` | aws_credential  |

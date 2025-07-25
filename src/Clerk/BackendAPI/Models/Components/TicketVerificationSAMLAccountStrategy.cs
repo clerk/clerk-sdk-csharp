@@ -12,44 +12,62 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum TicketVerificationSAMLAccountStrategy
-    {
-        [JsonProperty("ticket")]
-        Ticket,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class TicketVerificationSAMLAccountStrategyExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class TicketVerificationSAMLAccountStrategy : IEquatable<TicketVerificationSAMLAccountStrategy>
     {
-        public static string Value(this TicketVerificationSAMLAccountStrategy value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly TicketVerificationSAMLAccountStrategy Ticket = new TicketVerificationSAMLAccountStrategy("ticket");
 
-        public static TicketVerificationSAMLAccountStrategy ToEnum(this string value)
-        {
-            foreach(var field in typeof(TicketVerificationSAMLAccountStrategy).GetFields())
+        private static readonly Dictionary <string, TicketVerificationSAMLAccountStrategy> _knownValues =
+            new Dictionary <string, TicketVerificationSAMLAccountStrategy> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["ticket"] = Ticket
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, TicketVerificationSAMLAccountStrategy> _values =
+            new ConcurrentDictionary<string, TicketVerificationSAMLAccountStrategy>(_knownValues);
 
-                    if (enumVal is TicketVerificationSAMLAccountStrategy)
-                    {
-                        return (TicketVerificationSAMLAccountStrategy)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum TicketVerificationSAMLAccountStrategy");
+        private TicketVerificationSAMLAccountStrategy(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static TicketVerificationSAMLAccountStrategy Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new TicketVerificationSAMLAccountStrategy(value));
+        }
+
+        public static implicit operator TicketVerificationSAMLAccountStrategy(string value) => Of(value);
+        public static implicit operator string(TicketVerificationSAMLAccountStrategy ticketverificationsamlaccountstrategy) => ticketverificationsamlaccountstrategy.Value;
+
+        public static TicketVerificationSAMLAccountStrategy[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as TicketVerificationSAMLAccountStrategy);
+
+        public bool Equals(TicketVerificationSAMLAccountStrategy? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

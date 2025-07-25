@@ -12,91 +12,192 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class SchemasSAMLConnection
+
+    public class SchemasSAMLConnectionType
     {
+        private SchemasSAMLConnectionType(string value) { Value = value; }
 
-        [JsonProperty("object")]
-        public SchemasSAMLConnectionObject Object { get; set; } = default!;
+        public string Value { get; private set; }
+        public static SchemasSAMLConnectionType One { get { return new SchemasSAMLConnectionType("1"); } }
+        
+        public static SchemasSAMLConnectionType Two { get { return new SchemasSAMLConnectionType("2"); } }
+        
+        public static SchemasSAMLConnectionType Null { get { return new SchemasSAMLConnectionType("null"); } }
 
-        [JsonProperty("id")]
-        public string Id { get; set; } = default!;
+        public override string ToString() { return Value; }
+        public static implicit operator String(SchemasSAMLConnectionType v) { return v.Value; }
+        public static SchemasSAMLConnectionType FromString(string v) {
+            switch(v) {
+                case "1": return One;
+                case "2": return Two;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for SchemasSAMLConnectionType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((SchemasSAMLConnectionType)obj).Value);
+        }
 
-        [JsonProperty("name")]
-        public string Name { get; set; } = default!;
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
 
-        [JsonProperty("domain")]
-        public string Domain { get; set; } = default!;
 
-        [JsonProperty("idp_entity_id", NullValueHandling = NullValueHandling.Include)]
-        public string? IdpEntityId { get; set; }
+    [JsonConverter(typeof(SchemasSAMLConnection.SchemasSAMLConnectionConverter))]
+    public class SchemasSAMLConnection {
+        public SchemasSAMLConnection(SchemasSAMLConnectionType type) {
+            Type = type;
+        }
 
-        [JsonProperty("idp_sso_url", NullValueHandling = NullValueHandling.Include)]
-        public string? IdpSsoUrl { get; set; }
+        [SpeakeasyMetadata("form:explode=true")]
+        public Models.Components.One? One { get; set; }
 
-        [JsonProperty("idp_certificate", NullValueHandling = NullValueHandling.Include)]
-        public string? IdpCertificate { get; set; }
+        [SpeakeasyMetadata("form:explode=true")]
+        public Models.Components.Two? Two { get; set; }
 
-        [JsonProperty("idp_metadata_url")]
-        public string? IdpMetadataUrl { get; set; } = null;
+        public SchemasSAMLConnectionType Type { get; set; }
 
-        [JsonProperty("idp_metadata")]
-        public string? IdpMetadata { get; set; } = null;
 
-        [JsonProperty("acs_url")]
-        public string AcsUrl { get; set; } = default!;
+        public static SchemasSAMLConnection CreateOne(Models.Components.One one) {
+            SchemasSAMLConnectionType typ = SchemasSAMLConnectionType.One;
 
-        [JsonProperty("sp_entity_id")]
-        public string SpEntityId { get; set; } = default!;
+            SchemasSAMLConnection res = new SchemasSAMLConnection(typ);
+            res.One = one;
+            return res;
+        }
 
-        [JsonProperty("sp_metadata_url")]
-        public string SpMetadataUrl { get; set; } = default!;
+        public static SchemasSAMLConnection CreateTwo(Models.Components.Two two) {
+            SchemasSAMLConnectionType typ = SchemasSAMLConnectionType.Two;
 
-        [JsonProperty("organization_id")]
-        public string? OrganizationId { get; set; } = null;
+            SchemasSAMLConnection res = new SchemasSAMLConnection(typ);
+            res.Two = two;
+            return res;
+        }
 
-        [JsonProperty("attribute_mapping")]
-        public SAMLConnectionAttributeMapping? AttributeMapping { get; set; }
+        public static SchemasSAMLConnection CreateNull() {
+            SchemasSAMLConnectionType typ = SchemasSAMLConnectionType.Null;
+            return new SchemasSAMLConnection(typ);
+        }
 
-        [JsonProperty("active")]
-        public bool Active { get; set; } = default!;
+        public class SchemasSAMLConnectionConverter : JsonConverter
+        {
 
-        [JsonProperty("provider")]
-        public string Provider { get; set; } = default!;
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(SchemasSAMLConnection);
 
-        [JsonProperty("user_count")]
-        public long UserCount { get; set; } = default!;
+            public override bool CanRead => true;
 
-        [JsonProperty("sync_user_attributes")]
-        public bool SyncUserAttributes { get; set; } = default!;
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
 
-        [JsonProperty("allow_subdomains")]
-        public bool? AllowSubdomains { get; set; }
+                var fallbackCandidates = new List<(System.Type, object, string)>();
 
-        [JsonProperty("allow_idp_initiated")]
-        public bool? AllowIdpInitiated { get; set; }
+                try
+                {
+                    return new SchemasSAMLConnection(SchemasSAMLConnectionType.One)
+                    {
+                        One = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Models.Components.One>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Models.Components.One), new SchemasSAMLConnection(SchemasSAMLConnectionType.One), "One"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
-        [JsonProperty("disable_additional_identifications")]
-        public bool? DisableAdditionalIdentifications { get; set; }
+                try
+                {
+                    return new SchemasSAMLConnection(SchemasSAMLConnectionType.Two)
+                    {
+                        Two = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Models.Components.Two>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Models.Components.Two), new SchemasSAMLConnection(SchemasSAMLConnectionType.Two), "Two"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
-        /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("created_at")]
-        public long CreatedAt { get; set; } = default!;
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
 
-        /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("updated_at")]
-        public long UpdatedAt { get; set; } = default!;
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                SchemasSAMLConnection res = (SchemasSAMLConnection)value;
+                if (SchemasSAMLConnectionType.FromString(res.Type).Equals(SchemasSAMLConnectionType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.One != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.One));
+                    return;
+                }
+                if (res.Two != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Two));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

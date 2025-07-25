@@ -12,44 +12,62 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum AdminVerificationWeb3WalletStrategy
-    {
-        [JsonProperty("admin")]
-        Admin,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class AdminVerificationWeb3WalletStrategyExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class AdminVerificationWeb3WalletStrategy : IEquatable<AdminVerificationWeb3WalletStrategy>
     {
-        public static string Value(this AdminVerificationWeb3WalletStrategy value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly AdminVerificationWeb3WalletStrategy Admin = new AdminVerificationWeb3WalletStrategy("admin");
 
-        public static AdminVerificationWeb3WalletStrategy ToEnum(this string value)
-        {
-            foreach(var field in typeof(AdminVerificationWeb3WalletStrategy).GetFields())
+        private static readonly Dictionary <string, AdminVerificationWeb3WalletStrategy> _knownValues =
+            new Dictionary <string, AdminVerificationWeb3WalletStrategy> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["admin"] = Admin
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, AdminVerificationWeb3WalletStrategy> _values =
+            new ConcurrentDictionary<string, AdminVerificationWeb3WalletStrategy>(_knownValues);
 
-                    if (enumVal is AdminVerificationWeb3WalletStrategy)
-                    {
-                        return (AdminVerificationWeb3WalletStrategy)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum AdminVerificationWeb3WalletStrategy");
+        private AdminVerificationWeb3WalletStrategy(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static AdminVerificationWeb3WalletStrategy Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new AdminVerificationWeb3WalletStrategy(value));
+        }
+
+        public static implicit operator AdminVerificationWeb3WalletStrategy(string value) => Of(value);
+        public static implicit operator string(AdminVerificationWeb3WalletStrategy adminverificationweb3walletstrategy) => adminverificationweb3walletstrategy.Value;
+
+        public static AdminVerificationWeb3WalletStrategy[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as AdminVerificationWeb3WalletStrategy);
+
+        public bool Equals(AdminVerificationWeb3WalletStrategy? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

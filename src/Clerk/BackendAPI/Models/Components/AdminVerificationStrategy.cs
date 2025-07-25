@@ -12,44 +12,62 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum AdminVerificationStrategy
-    {
-        [JsonProperty("admin")]
-        Admin,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class AdminVerificationStrategyExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class AdminVerificationStrategy : IEquatable<AdminVerificationStrategy>
     {
-        public static string Value(this AdminVerificationStrategy value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly AdminVerificationStrategy Admin = new AdminVerificationStrategy("admin");
 
-        public static AdminVerificationStrategy ToEnum(this string value)
-        {
-            foreach(var field in typeof(AdminVerificationStrategy).GetFields())
+        private static readonly Dictionary <string, AdminVerificationStrategy> _knownValues =
+            new Dictionary <string, AdminVerificationStrategy> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["admin"] = Admin
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, AdminVerificationStrategy> _values =
+            new ConcurrentDictionary<string, AdminVerificationStrategy>(_knownValues);
 
-                    if (enumVal is AdminVerificationStrategy)
-                    {
-                        return (AdminVerificationStrategy)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum AdminVerificationStrategy");
+        private AdminVerificationStrategy(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static AdminVerificationStrategy Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new AdminVerificationStrategy(value));
+        }
+
+        public static implicit operator AdminVerificationStrategy(string value) => Of(value);
+        public static implicit operator string(AdminVerificationStrategy adminverificationstrategy) => adminverificationstrategy.Value;
+
+        public static AdminVerificationStrategy[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as AdminVerificationStrategy);
+
+        public bool Equals(AdminVerificationStrategy? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

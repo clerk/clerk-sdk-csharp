@@ -12,52 +12,70 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum OauthVerificationStatus
-    {
-        [JsonProperty("unverified")]
-        Unverified,
-        [JsonProperty("verified")]
-        Verified,
-        [JsonProperty("failed")]
-        Failed,
-        [JsonProperty("expired")]
-        Expired,
-        [JsonProperty("transferable")]
-        Transferable,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class OauthVerificationStatusExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class OauthVerificationStatus : IEquatable<OauthVerificationStatus>
     {
-        public static string Value(this OauthVerificationStatus value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly OauthVerificationStatus Unverified = new OauthVerificationStatus("unverified");
+        public static readonly OauthVerificationStatus Verified = new OauthVerificationStatus("verified");
+        public static readonly OauthVerificationStatus Failed = new OauthVerificationStatus("failed");
+        public static readonly OauthVerificationStatus Expired = new OauthVerificationStatus("expired");
+        public static readonly OauthVerificationStatus Transferable = new OauthVerificationStatus("transferable");
 
-        public static OauthVerificationStatus ToEnum(this string value)
-        {
-            foreach(var field in typeof(OauthVerificationStatus).GetFields())
+        private static readonly Dictionary <string, OauthVerificationStatus> _knownValues =
+            new Dictionary <string, OauthVerificationStatus> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["unverified"] = Unverified,
+                ["verified"] = Verified,
+                ["failed"] = Failed,
+                ["expired"] = Expired,
+                ["transferable"] = Transferable
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, OauthVerificationStatus> _values =
+            new ConcurrentDictionary<string, OauthVerificationStatus>(_knownValues);
 
-                    if (enumVal is OauthVerificationStatus)
-                    {
-                        return (OauthVerificationStatus)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum OauthVerificationStatus");
+        private OauthVerificationStatus(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static OauthVerificationStatus Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new OauthVerificationStatus(value));
+        }
+
+        public static implicit operator OauthVerificationStatus(string value) => Of(value);
+        public static implicit operator string(OauthVerificationStatus oauthverificationstatus) => oauthverificationstatus.Value;
+
+        public static OauthVerificationStatus[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as OauthVerificationStatus);
+
+        public bool Equals(OauthVerificationStatus? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

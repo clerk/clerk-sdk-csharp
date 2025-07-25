@@ -64,6 +64,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("username")]
         public string? Username { get; set; } = null;
 
+        [JsonProperty("phone_number")]
+        public string? PhoneNumber { get; set; } = null;
+
         [JsonProperty("public_metadata")]
         public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 

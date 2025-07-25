@@ -34,5 +34,25 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
+
+        /// <summary>
+        /// Allows to return OAuth applications in a particular order.<br/>
+        /// 
+        /// <remarks>
+        /// At the moment, you can order the returned OAuth applications by their `created_at` and `name`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want OAuth applications to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don&apos;t use `+` or `-`, then `+` is implied. We only support one `order_by` parameter, and if multiple `order_by` parameters are provided, we will only keep the first one. For example,<br/>
+        /// if you pass `order_by=name&amp;order_by=created_at`, we will consider only the first `order_by` parameter, which is `name`. The `created_at` parameter will be ignored in this case.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
+        public string? OrderBy { get; set; } = "+created_at";
+
+        /// <summary>
+        /// Returns OAuth applications with names that match the given query, via case-insensitive partial match.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=name_query")]
+        public string? NameQuery { get; set; }
     }
 }

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: 988da0b376f34c1dad41f86578b90dd5
-  docVersion: "2025-03-12"
-  speakeasyVersion: 1.560.0
-  generationVersion: 2.625.0
-  releaseVersion: 0.9.0
-  configChecksum: 369a3bd2b7ad374c43e3708a8c0b8335
+  docChecksum: 9fb68c0ed6fe9792883a1c716ec74311
+  docVersion: "2025-04-10"
+  speakeasyVersion: 1.589.0
+  generationVersion: 2.664.0
+  releaseVersion: 0.10.0
+  configChecksum: 11d8303d45326fa6b571145250e58077
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
@@ -16,6 +16,7 @@ features:
     constsAndDefaults: 0.0.1
     core: 3.11.1
     deprecations: 2.81.2
+    examples: 2.81.6
     flattening: 2.81.3
     globalSecurity: 2.83.7
     globalSecurityCallbacks: 0.1.0
@@ -24,8 +25,10 @@ features:
     groups: 2.81.2
     intellisenseMarkdownSupport: 0.1.0
     methodArguments: 0.2.0
+    methodSecurity: 2.82.3
     nameOverrides: 2.81.2
     nullables: 0.1.1
+    openEnums: 0.1.0
     responseFormat: 0.0.4
     retries: 0.0.1
     sdkHooks: 0.2.0
@@ -35,6 +38,7 @@ generatedFiles:
   - Clerk.BackendAPI.sln
   - NUGET.md
   - USAGE.md
+  - docs/Models/Components/AWSCredential.md
   - docs/Models/Components/AccountlessApplication.md
   - docs/Models/Components/AccountlessApplicationObject.md
   - docs/Models/Components/Actor.md
@@ -61,6 +65,7 @@ generatedFiles:
   - docs/Models/Components/ClerkErrorErrorMeta.md
   - docs/Models/Components/ClerkErrorErrorSAMLAccountMeta.md
   - docs/Models/Components/Client.md
+  - docs/Models/Components/ClientObject.md
   - docs/Models/Components/Cookies.md
   - docs/Models/Components/CookiesObject.md
   - docs/Models/Components/DeletedObject.md
@@ -71,6 +76,7 @@ generatedFiles:
   - docs/Models/Components/EmailAddress.md
   - docs/Models/Components/EmailAddressObject.md
   - docs/Models/Components/EnrollmentMode.md
+  - docs/Models/Components/EnvironmentTypes.md
   - docs/Models/Components/Error.md
   - docs/Models/Components/ErrorClerkError.md
   - docs/Models/Components/ErrorMeta.md
@@ -104,6 +110,29 @@ generatedFiles:
   - docs/Models/Components/JWTTemplateObject.md
   - docs/Models/Components/Jwks.md
   - docs/Models/Components/Keys.md
+  - docs/Models/Components/Machine.md
+  - docs/Models/Components/MachineCreated.md
+  - docs/Models/Components/MachineCreatedObject.md
+  - docs/Models/Components/MachineDeleted.md
+  - docs/Models/Components/MachineDeletedObject.md
+  - docs/Models/Components/MachineList.md
+  - docs/Models/Components/MachineObject.md
+  - docs/Models/Components/MachineScope.md
+  - docs/Models/Components/MachineScopeDeleted.md
+  - docs/Models/Components/MachineScopeDeletedObject.md
+  - docs/Models/Components/MachineScopeObject.md
+  - docs/Models/Components/MachineSecretKey.md
+  - docs/Models/Components/MachineSecretKeyObject.md
+  - docs/Models/Components/MachineToken.md
+  - docs/Models/Components/MachineTokenObject.md
+  - docs/Models/Components/MachineWithoutScopedMachines.md
+  - docs/Models/Components/MachineWithoutScopedMachinesObject.md
+  - docs/Models/Components/ManagementApplicationInstance.md
+  - docs/Models/Components/ManagementApplicationResponse.md
+  - docs/Models/Components/ManagementApplicationSubscription.md
+  - docs/Models/Components/ManagementCreateApplicationRequest.md
+  - docs/Models/Components/ManagementCreateOrganizationRequest.md
+  - docs/Models/Components/ManagementUpsertUserRequest.md
   - docs/Models/Components/Meta.md
   - docs/Models/Components/NextAction.md
   - docs/Models/Components/Nonce.md
@@ -120,6 +149,7 @@ generatedFiles:
   - docs/Models/Components/OauthErrorClerkError.md
   - docs/Models/Components/OauthVerificationStatus.md
   - docs/Models/Components/Object.md
+  - docs/Models/Components/One.md
   - docs/Models/Components/Organization.md
   - docs/Models/Components/OrganizationDomain.md
   - docs/Models/Components/OrganizationDomainObject.md
@@ -152,13 +182,17 @@ generatedFiles:
   - docs/Models/Components/PhoneNumber.md
   - docs/Models/Components/PhoneNumberObject.md
   - docs/Models/Components/PhoneNumberVerification.md
+  - docs/Models/Components/PrivateMetadata.md
   - docs/Models/Components/ProxyCheck.md
   - docs/Models/Components/ProxyCheckObject.md
+  - docs/Models/Components/PublicMetadata.md
   - docs/Models/Components/RedirectURL.md
   - docs/Models/Components/RedirectURLObject.md
   - docs/Models/Components/SAMLAccount.md
   - docs/Models/Components/SAMLAccountObject.md
   - docs/Models/Components/SAMLAccountVerification.md
+  - docs/Models/Components/SAMLConnection1.md
+  - docs/Models/Components/SAMLConnection2.md
   - docs/Models/Components/SAMLConnectionAttributeMapping.md
   - docs/Models/Components/SAMLConnectionSAMLConnection.md
   - docs/Models/Components/SAMLConnections.md
@@ -172,6 +206,7 @@ generatedFiles:
   - docs/Models/Components/SchemasPasskeyObject.md
   - docs/Models/Components/SchemasPasskeyVerification.md
   - docs/Models/Components/SchemasSAMLConnection.md
+  - docs/Models/Components/SchemasSAMLConnection2Object.md
   - docs/Models/Components/SchemasSAMLConnectionObject.md
   - docs/Models/Components/Security.md
   - docs/Models/Components/Session.md
@@ -204,6 +239,7 @@ generatedFiles:
   - docs/Models/Components/TokenObject.md
   - docs/Models/Components/TotalCount.md
   - docs/Models/Components/TotalCountObject.md
+  - docs/Models/Components/Two.md
   - docs/Models/Components/User.md
   - docs/Models/Components/UserObject.md
   - docs/Models/Components/Verification.md
@@ -228,7 +264,11 @@ generatedFiles:
   - docs/Models/Components/Web3WalletVerification.md
   - docs/Models/Components/Web3WalletVerificationAdmin.md
   - docs/Models/Errors/ClerkErrors.md
+  - docs/Models/Errors/Errors.md
   - docs/Models/Errors/Meta.md
+  - docs/Models/Errors/VerifyOAuthAccessTokenErrors.md
+  - docs/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensResponseBody.md
+  - docs/Models/Errors/VerifyOAuthAccessTokenResponseBody.md
   - docs/Models/Operations/Actor.md
   - docs/Models/Operations/AddDomainRequestBody.md
   - docs/Models/Operations/AddDomainResponse.md
@@ -240,6 +280,8 @@ generatedFiles:
   - docs/Models/Operations/Claims.md
   - docs/Models/Operations/CodeType.md
   - docs/Models/Operations/CompleteAccountlessApplicationResponse.md
+  - docs/Models/Operations/CreateAWSCredentialRequestBody.md
+  - docs/Models/Operations/CreateAWSCredentialResponse.md
   - docs/Models/Operations/CreateAccountlessApplicationResponse.md
   - docs/Models/Operations/CreateActorTokenRequestBody.md
   - docs/Models/Operations/CreateActorTokenResponse.md
@@ -255,6 +297,14 @@ generatedFiles:
   - docs/Models/Operations/CreateInvitationResponse.md
   - docs/Models/Operations/CreateJWTTemplateRequestBody.md
   - docs/Models/Operations/CreateJWTTemplateResponse.md
+  - docs/Models/Operations/CreateMachineRequestBody.md
+  - docs/Models/Operations/CreateMachineResponse.md
+  - docs/Models/Operations/CreateMachineScopeRequest.md
+  - docs/Models/Operations/CreateMachineScopeRequestBody.md
+  - docs/Models/Operations/CreateMachineScopeResponse.md
+  - docs/Models/Operations/CreateMachineTokenClaims.md
+  - docs/Models/Operations/CreateMachineTokenRequestBody.md
+  - docs/Models/Operations/CreateMachineTokenResponse.md
   - docs/Models/Operations/CreateOAuthApplicationRequestBody.md
   - docs/Models/Operations/CreateOAuthApplicationResponse.md
   - docs/Models/Operations/CreateOrganizationDomainRequest.md
@@ -276,6 +326,7 @@ generatedFiles:
   - docs/Models/Operations/CreateRedirectURLRequestBody.md
   - docs/Models/Operations/CreateRedirectURLResponse.md
   - docs/Models/Operations/CreateSAMLConnectionRequestBody.md
+  - docs/Models/Operations/CreateSAMLConnectionRequestBodyAttributeMapping.md
   - docs/Models/Operations/CreateSAMLConnectionResponse.md
   - docs/Models/Operations/CreateSessionRequestBody.md
   - docs/Models/Operations/CreateSessionResponse.md
@@ -296,6 +347,8 @@ generatedFiles:
   - docs/Models/Operations/CreateUserResponse.md
   - docs/Models/Operations/CreateWaitlistEntryRequestBody.md
   - docs/Models/Operations/CreateWaitlistEntryResponse.md
+  - docs/Models/Operations/DeleteAWSCredentialRequest.md
+  - docs/Models/Operations/DeleteAWSCredentialResponse.md
   - docs/Models/Operations/DeleteAllowlistIdentifierRequest.md
   - docs/Models/Operations/DeleteAllowlistIdentifierResponse.md
   - docs/Models/Operations/DeleteBackupCodeRequest.md
@@ -311,6 +364,10 @@ generatedFiles:
   - docs/Models/Operations/DeleteExternalAccountResponse.md
   - docs/Models/Operations/DeleteJWTTemplateRequest.md
   - docs/Models/Operations/DeleteJWTTemplateResponse.md
+  - docs/Models/Operations/DeleteMachineRequest.md
+  - docs/Models/Operations/DeleteMachineResponse.md
+  - docs/Models/Operations/DeleteMachineScopeRequest.md
+  - docs/Models/Operations/DeleteMachineScopeResponse.md
   - docs/Models/Operations/DeleteOAuthApplicationRequest.md
   - docs/Models/Operations/DeleteOAuthApplicationResponse.md
   - docs/Models/Operations/DeleteOrganizationDomainRequest.md
@@ -338,9 +395,13 @@ generatedFiles:
   - docs/Models/Operations/DisableMFARequest.md
   - docs/Models/Operations/DisableMFAResponse.md
   - docs/Models/Operations/DisableMFAResponseBody.md
+  - docs/Models/Operations/EnrollmentMode.md
   - docs/Models/Operations/File.md
   - docs/Models/Operations/Format.md
   - docs/Models/Operations/GenerateSvixAuthURLResponse.md
+  - docs/Models/Operations/GetAWSCredentialListResponse.md
+  - docs/Models/Operations/GetAWSCredentialRequest.md
+  - docs/Models/Operations/GetAWSCredentialResponse.md
   - docs/Models/Operations/GetClientListRequest.md
   - docs/Models/Operations/GetClientListResponse.md
   - docs/Models/Operations/GetClientRequest.md
@@ -351,6 +412,10 @@ generatedFiles:
   - docs/Models/Operations/GetJWKSResponse.md
   - docs/Models/Operations/GetJWTTemplateRequest.md
   - docs/Models/Operations/GetJWTTemplateResponse.md
+  - docs/Models/Operations/GetMachineRequest.md
+  - docs/Models/Operations/GetMachineResponse.md
+  - docs/Models/Operations/GetMachineSecretKeyRequest.md
+  - docs/Models/Operations/GetMachineSecretKeyResponse.md
   - docs/Models/Operations/GetOAuthAccessTokenRequest.md
   - docs/Models/Operations/GetOAuthAccessTokenResponse.md
   - docs/Models/Operations/GetOAuthApplicationRequest.md
@@ -385,6 +450,8 @@ generatedFiles:
   - docs/Models/Operations/GetUsersCountResponse.md
   - docs/Models/Operations/InstanceGetOrganizationMembershipsRequest.md
   - docs/Models/Operations/InstanceGetOrganizationMembershipsResponse.md
+  - docs/Models/Operations/ListAllOrganizationDomainsRequest.md
+  - docs/Models/Operations/ListAllOrganizationDomainsResponse.md
   - docs/Models/Operations/ListAllowlistIdentifiersRequest.md
   - docs/Models/Operations/ListAllowlistIdentifiersResponse.md
   - docs/Models/Operations/ListBlocklistIdentifiersResponse.md
@@ -397,6 +464,8 @@ generatedFiles:
   - docs/Models/Operations/ListInvitationsResponse.md
   - docs/Models/Operations/ListJWTTemplatesRequest.md
   - docs/Models/Operations/ListJWTTemplatesResponse.md
+  - docs/Models/Operations/ListMachinesRequest.md
+  - docs/Models/Operations/ListMachinesResponse.md
   - docs/Models/Operations/ListOAuthApplicationsRequest.md
   - docs/Models/Operations/ListOAuthApplicationsResponse.md
   - docs/Models/Operations/ListOrganizationDomainsRequest.md
@@ -419,10 +488,17 @@ generatedFiles:
   - docs/Models/Operations/ListWaitlistEntriesResponse.md
   - docs/Models/Operations/LockUserRequest.md
   - docs/Models/Operations/LockUserResponse.md
+  - docs/Models/Operations/ManagementCreateApplicationResponse.md
+  - docs/Models/Operations/ManagementCreateApplicationSecurity.md
+  - docs/Models/Operations/ManagementCreateOrganizationResponse.md
+  - docs/Models/Operations/ManagementCreateOrganizationSecurity.md
+  - docs/Models/Operations/ManagementUpsertUserResponse.md
+  - docs/Models/Operations/ManagementUpsertUserSecurity.md
   - docs/Models/Operations/MergeOrganizationMetadataRequest.md
   - docs/Models/Operations/MergeOrganizationMetadataRequestBody.md
   - docs/Models/Operations/MergeOrganizationMetadataResponse.md
   - docs/Models/Operations/Object.md
+  - docs/Models/Operations/One.md
   - docs/Models/Operations/PathParamTemplateType.md
   - docs/Models/Operations/PreviewTemplateRequest.md
   - docs/Models/Operations/PreviewTemplateRequestBody.md
@@ -434,6 +510,8 @@ generatedFiles:
   - docs/Models/Operations/RefreshSessionRequestBody.md
   - docs/Models/Operations/RefreshSessionResponse.md
   - docs/Models/Operations/RequestBody.md
+  - docs/Models/Operations/RequestBodyAttributeMapping.md
+  - docs/Models/Operations/RequestBodyProvider.md
   - docs/Models/Operations/RevertTemplatePathParamTemplateType.md
   - docs/Models/Operations/RevertTemplateRequest.md
   - docs/Models/Operations/RevertTemplateResponse.md
@@ -460,10 +538,14 @@ generatedFiles:
   - docs/Models/Operations/ToggleTemplateDeliveryRequest.md
   - docs/Models/Operations/ToggleTemplateDeliveryRequestBody.md
   - docs/Models/Operations/ToggleTemplateDeliveryResponse.md
+  - docs/Models/Operations/Two.md
   - docs/Models/Operations/UnbanUserRequest.md
   - docs/Models/Operations/UnbanUserResponse.md
   - docs/Models/Operations/UnlockUserRequest.md
   - docs/Models/Operations/UnlockUserResponse.md
+  - docs/Models/Operations/UpdateAWSCredentialRequest.md
+  - docs/Models/Operations/UpdateAWSCredentialRequestBody.md
+  - docs/Models/Operations/UpdateAWSCredentialResponse.md
   - docs/Models/Operations/UpdateDomainRequest.md
   - docs/Models/Operations/UpdateDomainRequestBody.md
   - docs/Models/Operations/UpdateDomainResponse.md
@@ -482,6 +564,9 @@ generatedFiles:
   - docs/Models/Operations/UpdateJWTTemplateRequest.md
   - docs/Models/Operations/UpdateJWTTemplateRequestBody.md
   - docs/Models/Operations/UpdateJWTTemplateResponse.md
+  - docs/Models/Operations/UpdateMachineRequest.md
+  - docs/Models/Operations/UpdateMachineRequestBody.md
+  - docs/Models/Operations/UpdateMachineResponse.md
   - docs/Models/Operations/UpdateOAuthApplicationRequest.md
   - docs/Models/Operations/UpdateOAuthApplicationRequestBody.md
   - docs/Models/Operations/UpdateOAuthApplicationResponse.md
@@ -502,7 +587,6 @@ generatedFiles:
   - docs/Models/Operations/UpdatePhoneNumberResponse.md
   - docs/Models/Operations/UpdateProductionInstanceDomainRequestBody.md
   - docs/Models/Operations/UpdateProductionInstanceDomainResponse.md
-  - docs/Models/Operations/UpdateSAMLConnectionAttributeMapping.md
   - docs/Models/Operations/UpdateSAMLConnectionRequest.md
   - docs/Models/Operations/UpdateSAMLConnectionRequestBody.md
   - docs/Models/Operations/UpdateSAMLConnectionResponse.md
@@ -527,27 +611,34 @@ generatedFiles:
   - docs/Models/Operations/UserPasskeyDeleteResponse.md
   - docs/Models/Operations/UserWeb3WalletDeleteRequest.md
   - docs/Models/Operations/UserWeb3WalletDeleteResponse.md
+  - docs/Models/Operations/UsersBanRequestBody.md
+  - docs/Models/Operations/UsersBanResponse.md
   - docs/Models/Operations/UsersGetOrganizationInvitationsRequest.md
   - docs/Models/Operations/UsersGetOrganizationInvitationsResponse.md
   - docs/Models/Operations/UsersGetOrganizationMembershipsRequest.md
   - docs/Models/Operations/UsersGetOrganizationMembershipsResponse.md
+  - docs/Models/Operations/UsersUnbanRequestBody.md
+  - docs/Models/Operations/UsersUnbanResponse.md
+  - docs/Models/Operations/Verified.md
   - docs/Models/Operations/VerifyClientRequestBody.md
   - docs/Models/Operations/VerifyClientResponse.md
   - docs/Models/Operations/VerifyDomainProxyRequestBody.md
   - docs/Models/Operations/VerifyDomainProxyResponse.md
+  - docs/Models/Operations/VerifyOAuthAccessTokenObject.md
+  - docs/Models/Operations/VerifyOAuthAccessTokenRequestBody.md
+  - docs/Models/Operations/VerifyOAuthAccessTokenResponse.md
+  - docs/Models/Operations/VerifyOAuthAccessTokenResponseBody.md
   - docs/Models/Operations/VerifyPasswordRequest.md
   - docs/Models/Operations/VerifyPasswordRequestBody.md
   - docs/Models/Operations/VerifyPasswordResponse.md
   - docs/Models/Operations/VerifyPasswordResponseBody.md
-  - docs/Models/Operations/VerifySessionRequest.md
-  - docs/Models/Operations/VerifySessionRequestBody.md
-  - docs/Models/Operations/VerifySessionResponse.md
   - docs/Models/Operations/VerifyTOTPRequest.md
   - docs/Models/Operations/VerifyTOTPRequestBody.md
   - docs/Models/Operations/VerifyTOTPResponse.md
   - docs/Models/Operations/VerifyTOTPResponseBody.md
   - docs/sdks/actortokens/README.md
   - docs/sdks/allowlistidentifiers/README.md
+  - docs/sdks/awscredentials/README.md
   - docs/sdks/betafeatures/README.md
   - docs/sdks/blocklistidentifiers/README.md
   - docs/sdks/clerkbackendapi/README.md
@@ -561,7 +652,11 @@ generatedFiles:
   - docs/sdks/invitations/README.md
   - docs/sdks/jwks/README.md
   - docs/sdks/jwttemplates/README.md
+  - docs/sdks/machines/README.md
+  - docs/sdks/machinetokens/README.md
+  - docs/sdks/management/README.md
   - docs/sdks/miscellaneous/README.md
+  - docs/sdks/oauthaccesstokens/README.md
   - docs/sdks/oauthapplications/README.md
   - docs/sdks/organizationdomains/README.md
   - docs/sdks/organizationinvitations/README.md
@@ -582,6 +677,7 @@ generatedFiles:
   - global.json
   - src/Clerk/BackendAPI/ActorTokens.cs
   - src/Clerk/BackendAPI/AllowlistIdentifiers.cs
+  - src/Clerk/BackendAPI/AwsCredentials.cs
   - src/Clerk/BackendAPI/BetaFeatures.cs
   - src/Clerk/BackendAPI/BlocklistIdentifiers.cs
   - src/Clerk/BackendAPI/Clerk.BackendAPI.csproj
@@ -598,7 +694,11 @@ generatedFiles:
   - src/Clerk/BackendAPI/Invitations.cs
   - src/Clerk/BackendAPI/Jwks.cs
   - src/Clerk/BackendAPI/JwtTemplates.cs
+  - src/Clerk/BackendAPI/MachineTokens.cs
+  - src/Clerk/BackendAPI/Machines.cs
+  - src/Clerk/BackendAPI/Management.cs
   - src/Clerk/BackendAPI/Miscellaneous.cs
+  - src/Clerk/BackendAPI/Models/Components/AWSCredential.cs
   - src/Clerk/BackendAPI/Models/Components/AccountlessApplication.cs
   - src/Clerk/BackendAPI/Models/Components/AccountlessApplicationObject.cs
   - src/Clerk/BackendAPI/Models/Components/Actor.cs
@@ -625,6 +725,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/ClerkErrorErrorMeta.cs
   - src/Clerk/BackendAPI/Models/Components/ClerkErrorErrorSAMLAccountMeta.cs
   - src/Clerk/BackendAPI/Models/Components/Client.cs
+  - src/Clerk/BackendAPI/Models/Components/ClientObject.cs
   - src/Clerk/BackendAPI/Models/Components/Cookies.cs
   - src/Clerk/BackendAPI/Models/Components/CookiesObject.cs
   - src/Clerk/BackendAPI/Models/Components/DeletedObject.cs
@@ -635,6 +736,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/EmailAddress.cs
   - src/Clerk/BackendAPI/Models/Components/EmailAddressObject.cs
   - src/Clerk/BackendAPI/Models/Components/EnrollmentMode.cs
+  - src/Clerk/BackendAPI/Models/Components/EnvironmentTypes.cs
   - src/Clerk/BackendAPI/Models/Components/Error.cs
   - src/Clerk/BackendAPI/Models/Components/ErrorClerkError.cs
   - src/Clerk/BackendAPI/Models/Components/ErrorMeta.cs
@@ -668,6 +770,29 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/JWTTemplateObject.cs
   - src/Clerk/BackendAPI/Models/Components/Jwks.cs
   - src/Clerk/BackendAPI/Models/Components/Keys.cs
+  - src/Clerk/BackendAPI/Models/Components/Machine.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineCreated.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineCreatedObject.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineDeleted.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineDeletedObject.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineList.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineObject.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineScope.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineScopeDeleted.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineScopeDeletedObject.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineScopeObject.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineSecretKey.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineSecretKeyObject.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineToken.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineTokenObject.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineWithoutScopedMachines.cs
+  - src/Clerk/BackendAPI/Models/Components/MachineWithoutScopedMachinesObject.cs
+  - src/Clerk/BackendAPI/Models/Components/ManagementApplicationInstance.cs
+  - src/Clerk/BackendAPI/Models/Components/ManagementApplicationResponse.cs
+  - src/Clerk/BackendAPI/Models/Components/ManagementApplicationSubscription.cs
+  - src/Clerk/BackendAPI/Models/Components/ManagementCreateApplicationRequest.cs
+  - src/Clerk/BackendAPI/Models/Components/ManagementCreateOrganizationRequest.cs
+  - src/Clerk/BackendAPI/Models/Components/ManagementUpsertUserRequest.cs
   - src/Clerk/BackendAPI/Models/Components/Meta.cs
   - src/Clerk/BackendAPI/Models/Components/NextAction.cs
   - src/Clerk/BackendAPI/Models/Components/Nonce.cs
@@ -684,6 +809,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/OauthErrorClerkError.cs
   - src/Clerk/BackendAPI/Models/Components/OauthVerificationStatus.cs
   - src/Clerk/BackendAPI/Models/Components/Object.cs
+  - src/Clerk/BackendAPI/Models/Components/One.cs
   - src/Clerk/BackendAPI/Models/Components/Organization.cs
   - src/Clerk/BackendAPI/Models/Components/OrganizationDomain.cs
   - src/Clerk/BackendAPI/Models/Components/OrganizationDomainObject.cs
@@ -716,13 +842,17 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/PhoneNumber.cs
   - src/Clerk/BackendAPI/Models/Components/PhoneNumberObject.cs
   - src/Clerk/BackendAPI/Models/Components/PhoneNumberVerification.cs
+  - src/Clerk/BackendAPI/Models/Components/PrivateMetadata.cs
   - src/Clerk/BackendAPI/Models/Components/ProxyCheck.cs
   - src/Clerk/BackendAPI/Models/Components/ProxyCheckObject.cs
+  - src/Clerk/BackendAPI/Models/Components/PublicMetadata.cs
   - src/Clerk/BackendAPI/Models/Components/RedirectURL.cs
   - src/Clerk/BackendAPI/Models/Components/RedirectURLObject.cs
   - src/Clerk/BackendAPI/Models/Components/SAMLAccount.cs
   - src/Clerk/BackendAPI/Models/Components/SAMLAccountObject.cs
   - src/Clerk/BackendAPI/Models/Components/SAMLAccountVerification.cs
+  - src/Clerk/BackendAPI/Models/Components/SAMLConnection1.cs
+  - src/Clerk/BackendAPI/Models/Components/SAMLConnection2.cs
   - src/Clerk/BackendAPI/Models/Components/SAMLConnectionAttributeMapping.cs
   - src/Clerk/BackendAPI/Models/Components/SAMLConnectionSAMLConnection.cs
   - src/Clerk/BackendAPI/Models/Components/SAMLConnections.cs
@@ -736,6 +866,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/SchemasPasskeyObject.cs
   - src/Clerk/BackendAPI/Models/Components/SchemasPasskeyVerification.cs
   - src/Clerk/BackendAPI/Models/Components/SchemasSAMLConnection.cs
+  - src/Clerk/BackendAPI/Models/Components/SchemasSAMLConnection2Object.cs
   - src/Clerk/BackendAPI/Models/Components/SchemasSAMLConnectionObject.cs
   - src/Clerk/BackendAPI/Models/Components/Security.cs
   - src/Clerk/BackendAPI/Models/Components/Session.cs
@@ -768,6 +899,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/TokenObject.cs
   - src/Clerk/BackendAPI/Models/Components/TotalCount.cs
   - src/Clerk/BackendAPI/Models/Components/TotalCountObject.cs
+  - src/Clerk/BackendAPI/Models/Components/Two.cs
   - src/Clerk/BackendAPI/Models/Components/User.cs
   - src/Clerk/BackendAPI/Models/Components/UserObject.cs
   - src/Clerk/BackendAPI/Models/Components/Verification.cs
@@ -792,8 +924,12 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/Web3WalletVerification.cs
   - src/Clerk/BackendAPI/Models/Components/Web3WalletVerificationAdmin.cs
   - src/Clerk/BackendAPI/Models/Errors/ClerkErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/Errors.cs
   - src/Clerk/BackendAPI/Models/Errors/Meta.cs
   - src/Clerk/BackendAPI/Models/Errors/SDKError.cs
+  - src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensResponseBody.cs
+  - src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/Actor.cs
   - src/Clerk/BackendAPI/Models/Operations/AddDomainRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/AddDomainResponse.cs
@@ -805,6 +941,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/Claims.cs
   - src/Clerk/BackendAPI/Models/Operations/CodeType.cs
   - src/Clerk/BackendAPI/Models/Operations/CompleteAccountlessApplicationResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateAWSCredentialRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateAWSCredentialResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateAccountlessApplicationResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateActorTokenRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateActorTokenResponse.cs
@@ -820,6 +958,14 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/CreateInvitationResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateJWTTemplateRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateJWTTemplateResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateMachineRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateMachineResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateMachineScopeRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateMachineScopeRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateMachineScopeResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateMachineTokenClaims.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateMachineTokenRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateMachineTokenResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOAuthApplicationRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOAuthApplicationResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOrganizationDomainRequest.cs
@@ -841,6 +987,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/CreateRedirectURLRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateRedirectURLResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSAMLConnectionRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateSAMLConnectionRequestBodyAttributeMapping.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSAMLConnectionResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSessionRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateSessionResponse.cs
@@ -861,6 +1008,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/CreateUserResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateWaitlistEntryRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateWaitlistEntryResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/DeleteAWSCredentialRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/DeleteAWSCredentialResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteAllowlistIdentifierRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteAllowlistIdentifierResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteBackupCodeRequest.cs
@@ -876,6 +1025,10 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/DeleteExternalAccountResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteJWTTemplateRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteJWTTemplateResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/DeleteMachineRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/DeleteMachineResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/DeleteMachineScopeRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/DeleteMachineScopeResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteOAuthApplicationRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteOAuthApplicationResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteOrganizationDomainRequest.cs
@@ -903,9 +1056,13 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/DisableMFARequest.cs
   - src/Clerk/BackendAPI/Models/Operations/DisableMFAResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DisableMFAResponseBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/EnrollmentMode.cs
   - src/Clerk/BackendAPI/Models/Operations/File.cs
   - src/Clerk/BackendAPI/Models/Operations/Format.cs
   - src/Clerk/BackendAPI/Models/Operations/GenerateSvixAuthURLResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetAWSCredentialListResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetAWSCredentialRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetAWSCredentialResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetClientListRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetClientListResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetClientRequest.cs
@@ -916,6 +1073,10 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/GetJWKSResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetJWTTemplateRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetJWTTemplateResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetMachineRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetMachineResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetMachineSecretKeyRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetMachineSecretKeyResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetOAuthAccessTokenRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetOAuthAccessTokenResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetOAuthApplicationRequest.cs
@@ -950,6 +1111,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/GetUsersCountResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/InstanceGetOrganizationMembershipsRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/InstanceGetOrganizationMembershipsResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/ListAllOrganizationDomainsRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/ListAllOrganizationDomainsResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/ListAllowlistIdentifiersRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/ListAllowlistIdentifiersResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/ListBlocklistIdentifiersResponse.cs
@@ -962,6 +1125,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/ListInvitationsResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/ListJWTTemplatesRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/ListJWTTemplatesResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/ListMachinesRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/ListMachinesResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/ListOAuthApplicationsRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/ListOAuthApplicationsResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/ListOrganizationDomainsRequest.cs
@@ -984,10 +1149,17 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/ListWaitlistEntriesResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/LockUserRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/LockUserResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/ManagementCreateApplicationResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/ManagementCreateApplicationSecurity.cs
+  - src/Clerk/BackendAPI/Models/Operations/ManagementCreateOrganizationResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/ManagementCreateOrganizationSecurity.cs
+  - src/Clerk/BackendAPI/Models/Operations/ManagementUpsertUserResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/ManagementUpsertUserSecurity.cs
   - src/Clerk/BackendAPI/Models/Operations/MergeOrganizationMetadataRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/MergeOrganizationMetadataRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/MergeOrganizationMetadataResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/Object.cs
+  - src/Clerk/BackendAPI/Models/Operations/One.cs
   - src/Clerk/BackendAPI/Models/Operations/PathParamTemplateType.cs
   - src/Clerk/BackendAPI/Models/Operations/PreviewTemplateRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/PreviewTemplateRequestBody.cs
@@ -999,6 +1171,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/RefreshSessionRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/RefreshSessionResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/RequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/RequestBodyAttributeMapping.cs
+  - src/Clerk/BackendAPI/Models/Operations/RequestBodyProvider.cs
   - src/Clerk/BackendAPI/Models/Operations/RevertTemplatePathParamTemplateType.cs
   - src/Clerk/BackendAPI/Models/Operations/RevertTemplateRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/RevertTemplateResponse.cs
@@ -1025,10 +1199,14 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/ToggleTemplateDeliveryRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/ToggleTemplateDeliveryRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/ToggleTemplateDeliveryResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/Two.cs
   - src/Clerk/BackendAPI/Models/Operations/UnbanUserRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/UnbanUserResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/UnlockUserRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/UnlockUserResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/UpdateAWSCredentialRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/UpdateAWSCredentialRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/UpdateAWSCredentialResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateDomainRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateDomainRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateDomainResponse.cs
@@ -1047,6 +1225,9 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/UpdateJWTTemplateRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateJWTTemplateRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateJWTTemplateResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/UpdateMachineRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/UpdateMachineRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/UpdateMachineResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateOAuthApplicationRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateOAuthApplicationRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateOAuthApplicationResponse.cs
@@ -1067,7 +1248,6 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/UpdatePhoneNumberResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateProductionInstanceDomainRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateProductionInstanceDomainResponse.cs
-  - src/Clerk/BackendAPI/Models/Operations/UpdateSAMLConnectionAttributeMapping.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateSAMLConnectionRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateSAMLConnectionRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/UpdateSAMLConnectionResponse.cs
@@ -1092,25 +1272,32 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/UserPasskeyDeleteResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/UserWeb3WalletDeleteRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/UserWeb3WalletDeleteResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/UsersBanRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/UsersBanResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/UsersGetOrganizationInvitationsRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/UsersGetOrganizationInvitationsResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/UsersGetOrganizationMembershipsRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/UsersGetOrganizationMembershipsResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/UsersUnbanRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/UsersUnbanResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/Verified.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyClientRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyClientResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyDomainProxyRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyDomainProxyResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/VerifyOAuthAccessTokenObject.cs
+  - src/Clerk/BackendAPI/Models/Operations/VerifyOAuthAccessTokenRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/VerifyOAuthAccessTokenResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/VerifyOAuthAccessTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyPasswordRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyPasswordRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyPasswordResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyPasswordResponseBody.cs
-  - src/Clerk/BackendAPI/Models/Operations/VerifySessionRequest.cs
-  - src/Clerk/BackendAPI/Models/Operations/VerifySessionRequestBody.cs
-  - src/Clerk/BackendAPI/Models/Operations/VerifySessionResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyTOTPRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyTOTPRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyTOTPResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyTOTPResponseBody.cs
+  - src/Clerk/BackendAPI/OauthAccessTokens.cs
   - src/Clerk/BackendAPI/OauthApplications.cs
   - src/Clerk/BackendAPI/OrganizationDomains.cs
   - src/Clerk/BackendAPI/OrganizationInvitations.cs
@@ -1134,6 +1321,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Utils/FlexibleObjectDeserializer.cs
   - src/Clerk/BackendAPI/Utils/HeaderSerializer.cs
   - src/Clerk/BackendAPI/Utils/IsoDateTimeSerializer.cs
+  - src/Clerk/BackendAPI/Utils/OpenEnumConverter.cs
   - src/Clerk/BackendAPI/Utils/RequestBodySerializer.cs
   - src/Clerk/BackendAPI/Utils/ResponseBodyDeserializer.cs
   - src/Clerk/BackendAPI/Utils/Retries/BackoffStrategy.cs
@@ -1665,7 +1853,7 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: {"data": [{"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}, {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}, {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
+          application/json: {"data": [{"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}, {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}, {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": true, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
         "403":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   UsersGetOrganizationInvitations:
@@ -1788,7 +1976,7 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: {"data": [{"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
+          application/json: {"data": [{"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read"], "public_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": true, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
         "500":
@@ -1863,6 +2051,7 @@ examples:
         query:
           limit: 20
           offset: 10
+          order_by: "pending"
       responses:
         "200":
           application/json: {"data": [{"object": "organization_invitation", "id": "inv_12345", "email_address": "user@example.com", "role": "member", "role_name": "<value>", "organization_id": "org_12345", "status": "pending", "public_metadata": {"key": "value"}, "url": "https://utter-antelope.info/", "expires_at": 783375, "created_at": 1617981379, "updated_at": 1625581379}], "total_count": 10}
@@ -2071,10 +2260,10 @@ examples:
   UpdateInstanceRestrictions:
     speakeasy-default-update-instance-restrictions:
       requestBody:
-        application/json: {"allowlist": false, "blocklist": true, "block_email_subaddresses": true, "block_disposable_email_domains": true, "ignore_dots_for_gmail_addresses": false}
+        application/json: {"allowlist": false, "blocklist": true, "block_email_subaddresses": true, "block_disposable_email_domains": true}
       responses:
         "200":
-          application/json: {"object": "instance_restrictions", "allowlist": false, "blocklist": true, "block_email_subaddresses": true, "block_disposable_email_domains": false, "ignore_dots_for_gmail_addresses": false}
+          application/json: {"object": "instance_restrictions", "allowlist": false, "blocklist": true, "block_email_subaddresses": true, "block_disposable_email_domains": false}
         "402":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   ChangeProductionInstanceDomain:
@@ -2172,7 +2361,7 @@ examples:
           offset: 10
       responses:
         "200":
-          application/json: {"data": [{"object": "organization", "id": "org_1234", "name": "Sample Organization", "slug": "acme-corp", "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
+          application/json: {"data": [{"object": "organization", "id": "org_1234", "name": "Sample Organization", "slug": "acme-corp", "has_image": true, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "created_at": 1625078400, "updated_at": 1625164800}], "total_count": 1}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   CreateOrganization:
@@ -2181,7 +2370,7 @@ examples:
         application/json: {"name": "NewOrg", "created_by": "user_123", "private_metadata": {"internal_code": "ABC123"}, "public_metadata": {"public_event": "Annual Summit"}, "slug": "neworg", "max_allowed_memberships": 100}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   GetOrganization:
@@ -2192,7 +2381,7 @@ examples:
         query: {}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "403":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   UpdateOrganization:
@@ -2204,7 +2393,7 @@ examples:
         application/json: {"public_metadata": {}, "private_metadata": {}, "name": "New Organization Name", "slug": "new-org-slug", "max_allowed_memberships": 100, "admin_delete_enabled": true}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "402":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   DeleteOrganization:
@@ -2226,7 +2415,7 @@ examples:
         application/json: {"public_metadata": {"announcement": "We are opening a new office!"}, "private_metadata": {"internal_use_only": "Future plans discussion."}}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   UploadOrganizationLogo:
@@ -2238,7 +2427,7 @@ examples:
         multipart/form-data: {"uploader_user_id": "user_67890", "file": "path/to/your/logo.png"}
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800, "image_url": "https://example.com/image_url.png", "has_image": true}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "image_url": "https://example.com/image_url.png", "has_image": true, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   DeleteOrganizationLogo:
@@ -2248,7 +2437,7 @@ examples:
           organization_id: "org_12345"
       responses:
         "200":
-          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
         "404":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   CreateOrganizationMembership:
@@ -2260,7 +2449,7 @@ examples:
         application/json: {"user_id": "user_456", "role": "admin"}
       responses:
         "200":
-          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read", "write"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read", "write"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   ListOrganizationMemberships:
@@ -2308,7 +2497,7 @@ examples:
         application/json: {"role": "admin"}
       responses:
         "200":
-          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read", "write"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read", "write"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": true, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}
         "404":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   DeleteOrganizationMembership:
@@ -2319,7 +2508,7 @@ examples:
           user_id: "user_67890"
       responses:
         "200":
-          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read", "write"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read", "write"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": true, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}
         "401":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   UpdateOrganizationMembershipMetadata:
@@ -2332,7 +2521,7 @@ examples:
         application/json: {"public_metadata": {}, "private_metadata": {}}
       responses:
         "200":
-          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read", "write"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}
+          application/json: {"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read", "write"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": true, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   CreateOrganizationDomain:
@@ -2478,18 +2667,19 @@ examples:
         query:
           limit: 20
           offset: 10
+          order_by: "+created_at"
       responses:
         "200":
-          application/json: {"data": [{"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "redirect_uris": [], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://kosher-volleyball.biz", "token_introspection_url": "https://realistic-designation.info/", "created_at": 1609459200, "updated_at": 1612137600}], "total_count": 1}
+          application/json: {"data": [{"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "client_uri": "https://kosher-volleyball.biz", "client_image_url": "https://exalted-impact.biz", "dynamically_registered": false, "consent_screen_enabled": true, "pkce_required": true, "public": false, "scopes": "profile email", "redirect_uris": [], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://kosher-volleyball.biz", "token_introspection_url": "https://realistic-designation.info/", "created_at": 1609459200, "updated_at": 1612137600}], "total_count": 1}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   CreateOAuthApplication:
     speakeasy-default-create-O-auth-application:
       requestBody:
-        application/json: {"name": "Example App", "scopes": "profile email public_metadata", "public": true}
+        application/json: {"name": "Example App", "scopes": "profile email public_metadata", "consent_screen_enabled": true, "pkce_required": false, "public": true}
       responses:
         "200":
-          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "redirect_uris": ["<value 1>"], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://familiar-sport.info/", "token_introspection_url": "https://hateful-castanet.com/", "created_at": 1609459200, "updated_at": 1612137600, "client_secret": "secretXYZ123"}
+          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "client_uri": "https://familiar-sport.info/", "client_image_url": "https://colorful-collectivization.biz/", "dynamically_registered": false, "consent_screen_enabled": true, "pkce_required": true, "public": false, "scopes": "profile email", "redirect_uris": ["<value 1>"], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://familiar-sport.info/", "token_introspection_url": "https://hateful-castanet.com/", "created_at": 1609459200, "updated_at": 1612137600, "client_secret": "secretXYZ123"}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   GetOAuthApplication:
@@ -2499,7 +2689,7 @@ examples:
           oauth_application_id: "oauth_app_12345"
       responses:
         "200":
-          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "redirect_uris": [], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://profitable-yin.name/", "token_introspection_url": "https://remorseful-declaration.org/", "created_at": 1609459200, "updated_at": 1612137600}
+          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "client_uri": "https://profitable-yin.name/", "client_image_url": "https://eminent-warming.com", "dynamically_registered": true, "consent_screen_enabled": true, "pkce_required": true, "public": false, "scopes": "profile email", "redirect_uris": [], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://profitable-yin.name/", "token_introspection_url": "https://remorseful-declaration.org/", "created_at": 1609459200, "updated_at": 1612137600}
         "403":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   UpdateOAuthApplication:
@@ -2511,7 +2701,7 @@ examples:
         application/json: {"name": "Updated OAuth App Name", "scopes": "profile email public_metadata private_metadata"}
       responses:
         "200":
-          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "redirect_uris": [], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://frequent-tentacle.info/", "token_introspection_url": "https://lasting-restaurant.net", "created_at": 1609459200, "updated_at": 1612137600}
+          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "client_uri": null, "client_image_url": null, "dynamically_registered": true, "consent_screen_enabled": false, "pkce_required": true, "public": false, "scopes": "profile email", "redirect_uris": [], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://frequent-tentacle.info/", "token_introspection_url": "https://lasting-restaurant.net", "created_at": 1609459200, "updated_at": 1612137600}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   DeleteOAuthApplication:
@@ -2531,7 +2721,7 @@ examples:
           oauth_application_id: "oauth_application_12345"
       responses:
         "200":
-          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "public": false, "scopes": "profile email", "redirect_uris": [], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://avaricious-puritan.name", "token_introspection_url": "https://exalted-gown.net/", "created_at": 1609459200, "updated_at": 1612137600, "client_secret": "secretXYZ123"}
+          application/json: {"object": "oauth_application", "id": "oauth_app_1234", "instance_id": "instance_5678", "name": "Example OAuth App", "client_id": "client_12345", "client_uri": "https://avaricious-puritan.name", "client_image_url": "https://ill-fated-sonar.com/", "dynamically_registered": true, "consent_screen_enabled": false, "pkce_required": true, "public": false, "scopes": "profile email", "redirect_uris": [], "callback_url": "https://example.com/oauth/callback", "authorize_url": "https://example.com/authorize", "token_fetch_url": "https://example.com/oauth/token", "user_info_url": "https://example.com/userinfo", "discovery_url": "https://avaricious-puritan.name", "token_introspection_url": "https://exalted-gown.net/", "created_at": 1609459200, "updated_at": 1612137600, "client_secret": "secretXYZ123"}
         "403":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   ListSAMLConnections:
@@ -2570,7 +2760,7 @@ examples:
         path:
           saml_connection_id: "saml_conn_123_update"
       requestBody:
-        application/json: {"name": "Example SAML Connection", "domain": "example.com", "idp_entity_id": "entity_123", "idp_sso_url": "https://idp.example.com/sso", "idp_certificate": "MIIDBTCCAe2gAwIBAgIQ...", "idp_metadata_url": "https://idp.example.com/metadata", "idp_metadata": "<EntityDescriptor>...</EntityDescriptor>", "attribute_mapping": {"user_id": "id123", "email_address": "user@example.com", "first_name": "Jane", "last_name": "Doe"}, "active": true, "sync_user_attributes": false, "allow_subdomains": true, "allow_idp_initiated": false}
+        application/json: {"name": "Example SAML Connection", "idp_entity_id": "entity_123", "idp_sso_url": "https://idp.example.com/sso", "idp_certificate": "MIIDBTCCAe2gAwIBAgIQ...", "idp_metadata_url": "https://idp.example.com/metadata", "idp_metadata": "<EntityDescriptor>...</EntityDescriptor>", "attribute_mapping": {"user_id": "id123", "email_address": "user@example.com", "first_name": "Jane", "last_name": "Doe"}, "active": true, "sync_user_attributes": false, "allow_subdomains": true, "allow_idp_initiated": false}
       responses:
         "200":
           application/json: {"object": "saml_connection", "id": "<id>", "name": "<value>", "domain": "inborn-turret.net", "idp_entity_id": "<id>", "idp_sso_url": "https://likely-fen.com", "idp_certificate": "<value>", "acs_url": "https://critical-commodity.com", "sp_entity_id": "<id>", "sp_metadata_url": "https://juvenile-fax.biz/", "active": false, "provider": "<value>", "user_count": 288333, "sync_user_attributes": true, "created_at": 181401, "updated_at": 981924}
@@ -2622,5 +2812,201 @@ examples:
           application/json: {"object": "accountless_application", "publishable_key": "<value>"}
         "500":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  GetAWSCredentialList:
+    speakeasy-default-get-AWS-credential-list:
+      responses:
+        "200":
+          application/json: [{"id": "<id>", "object": "aws_credential", "access_key_id": "<id>", "user_pool_ids": ["<value 1>"], "created_at": 501283, "updated_at": 667161}]
+  CreateAWSCredential:
+    speakeasy-default-create-AWS-credential:
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "aws_credential", "access_key_id": "<id>", "user_pool_ids": [], "created_at": 496503, "updated_at": 621715}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  GetAWSCredential:
+    speakeasy-default-get-AWS-credential:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "aws_credential", "access_key_id": "<id>", "user_pool_ids": ["<value 1>", "<value 2>"], "created_at": 157966, "updated_at": 986671}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  DeleteAWSCredential:
+    speakeasy-default-delete-AWS-credential:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "deleted_object", "id": "deleted_object_id_example", "slug": "deleted-object-slug", "deleted": true}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  UpdateAWSCredential:
+    speakeasy-default-update-AWS-credential:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "aws_credential", "access_key_id": "<id>", "user_pool_ids": [], "created_at": 242620, "updated_at": 514946}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  UsersBan:
+    speakeasy-default-users-ban:
+      requestBody:
+        application/json: {"user_ids": ["<value 1>", "<value 2>", "<value 3>"]}
+      responses:
+        "200":
+          application/json: [{"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"status": "verified", "strategy": "ticket", "attempts": null, "expire_at": null}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 2, "expire_at": 1622852400}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "web3_metamask_signature", "nonce": "nonce_value", "attempts": null, "expire_at": null}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce", "attempts": null, "expire_at": null}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{"object": "external_account", "id": "ext_account_id_123", "provider": "Facebook", "identification_id": "<id>", "provider_user_id": "<id>", "approved_scopes": "<value>", "email_address": "Melody48@gmail.com", "first_name": "Bartholome", "last_name": "Marvin", "public_metadata": {"key": "<value>"}, "created_at": 404836, "updated_at": 474992, "verification": {"status": "verified", "strategy": "oauth_google", "external_verification_redirect_url": "https://oauth.google.com/verify", "error": null, "expire_at": 1615462399, "attempts": 1}, "user_id": "user_id_at_provider"}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "saml", "external_verification_redirect_url": "https://example.com/saml_callback", "expire_at": 1622852400, "attempts": null}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}]
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  UsersUnban:
+    speakeasy-default-users-unban:
+      requestBody:
+        application/json: {"user_ids": ["<value 1>", "<value 2>", "<value 3>"]}
+      responses:
+        "200":
+          application/json: [{"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 2, "expire_at": 1622852400}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce", "attempts": null, "expire_at": null}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{"object": "external_account", "id": "ext_account_id_123", "provider": "Facebook", "identification_id": "<id>", "provider_user_id": "<id>", "approved_scopes": "<value>", "email_address": "Kristopher.Cummerata0@gmail.com", "first_name": "Enid", "last_name": "Jerde", "public_metadata": {"key": "<value>", "key1": "<value>"}, "created_at": 773787, "updated_at": 794368, "verification": {"status": "verified", "strategy": "google_one_tap", "expire_at": 138607, "attempts": 294052, "error": {"message": "Error message", "long_message": "Longer error message with more details", "code": "error_code", "clerk_trace_id": "trace_id"}}, "user_id": "user_id_at_provider"}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket", "attempts": null, "expire_at": null}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}]
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  CreateMachineToken:
+    speakeasy-default-create-machine-token:
+      responses:
+        "200":
+          application/json: {"object": "token", "jwt": "<value>"}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  ListMachines:
+    speakeasy-default-list-machines:
+      parameters:
+        query:
+          limit: 20
+          offset: 10
+      responses:
+        "200":
+          application/json: {"data": [{"object": "machine", "id": "<id>", "name": "<value>", "instance_id": "<id>", "created_at": 249864, "updated_at": 973340, "default_token_ttl": 3600, "scoped_machines": [{"object": "machine", "id": "<id>", "name": "<value>", "instance_id": "<id>", "created_at": 925110, "updated_at": 858677, "default_token_ttl": 3600}]}], "total_count": 970564}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  CreateMachine:
+    speakeasy-default-create-machine:
+      responses:
+        "200":
+          application/json: {"object": "machine", "id": "<id>", "name": "<value>", "instance_id": "<id>", "created_at": 724380, "updated_at": 123379, "default_token_ttl": 3600, "scoped_machines": [], "secret_key": "<value>"}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  GetMachine:
+    speakeasy-default-get-machine:
+      parameters:
+        path:
+          machine_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "machine", "id": "<id>", "name": "<value>", "instance_id": "<id>", "created_at": 209081, "updated_at": 894118, "default_token_ttl": 3600, "scoped_machines": [{"object": "machine", "id": "<id>", "name": "<value>", "instance_id": "<id>", "created_at": 149027, "updated_at": 82383, "default_token_ttl": 3600}]}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  UpdateMachine:
+    speakeasy-default-update-machine:
+      parameters:
+        path:
+          machine_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "machine", "id": "<id>", "name": "<value>", "instance_id": "<id>", "created_at": 754540, "updated_at": 50086, "default_token_ttl": 3600, "scoped_machines": []}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  DeleteMachine:
+    speakeasy-default-delete-machine:
+      parameters:
+        path:
+          machine_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "machine", "id": "<id>", "deleted": true}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  GetMachineSecretKey:
+    speakeasy-default-get-machine-secret-key:
+      parameters:
+        path:
+          machine_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "machine_secret_key", "secret": "<value>"}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  CreateMachineScope:
+    speakeasy-default-create-machine-scope:
+      parameters:
+        path:
+          machine_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "machine_scope", "from_machine_id": "<id>", "to_machine_id": "<id>", "created_at": 144489}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  DeleteMachineScope:
+    speakeasy-default-delete-machine-scope:
+      parameters:
+        path:
+          machine_id: "<id>"
+          other_machine_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "machine_scope", "from_machine_id": "<id>", "to_machine_id": "<id>", "deleted": false}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  ListAllOrganizationDomains:
+    speakeasy-default-list-all-organization-domains:
+      parameters:
+        query:
+          order_by: "-created_at"
+          offset: 10
+          limit: 20
+      responses:
+        "200":
+          application/json: {"data": [], "total_count": 812605}
+        "401":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  ManagementUpsertUser:
+    speakeasy-default-management-upsert-user:
+      requestBody:
+        application/json: {"email_address": "Roger_OReilly-Dibbert10@hotmail.com", "first_name": "Diana", "last_name": "Schmidt-Kutch"}
+      responses:
+        "200":
+          application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "expire_at": 834496, "attempts": 697033}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved": false, "verification": {"status": "verified", "strategy": "admin", "attempts": 2, "expire_at": 1622852400}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"status": "verified", "strategy": "passkey", "nonce": "nonce", "attempts": null, "expire_at": null}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{"object": "facebook_account", "id": "ext_account_id_123", "provider": "Facebook", "identification_id": "<id>", "provider_user_id": "<id>", "approved_scopes": "<value>", "email_address": "Alessandra.Homenick26@yahoo.com", "first_name": "Alvah", "last_name": "Ullrich", "public_metadata": {"key": "<value>"}, "created_at": 76841, "updated_at": 107917, "verification": {"status": "verified", "strategy": "oauth_google", "external_verification_redirect_url": "https://oauth.google.com/verify", "error": null, "expire_at": 1615462399, "attempts": 1}, "user_id": "user_id_at_provider"}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"status": "verified", "strategy": "ticket", "attempts": null, "expire_at": null}}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  ManagementCreateOrganization:
+    speakeasy-default-management-create-organization:
+      requestBody:
+        application/json: {"name": "<value>", "slug": "<value>"}
+      responses:
+        "200":
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": true, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  ManagementCreateApplication:
+    speakeasy-default-management-create-application:
+      requestBody:
+        application/json: {"name": "<value>", "owner_id": "<id>", "plan_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"application_id": "<id>", "instances": []}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  verifyOAuthAccessToken:
+    speakeasy-default-verify-O-auth-access-token:
+      requestBody:
+        application/json: {"access_token": "XXXXXXXXXXXXXX"}
+      responses:
+        "200":
+          application/json: {"object": "clerk_idp_oauth_access_token", "id": "oat_0ef5a7a33d87ed87ee7954c845d80450", "client_id": "client_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "subject": "user_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "scopes": ["read", "write"], "revoked": false, "revocation_reason": "Revoked by user", "expired": false, "expiration": 1716883200, "created_at": 1716883200, "updated_at": 1716883200}
+        "400":
+          application/json: {"errors": []}
+        "404":
+          application/json: {"errors": []}
 examplesVersion: 1.0.2
 generatedTests: {}
