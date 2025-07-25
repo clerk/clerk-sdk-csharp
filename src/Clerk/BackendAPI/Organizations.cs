@@ -103,7 +103,7 @@ namespace Clerk.BackendAPI
         /// Set or replace an organization&apos;s logo, by uploading an image file.<br/>
         /// This endpoint uses the `multipart/form-data` request content type and accepts a file of image type.<br/>
         /// The file size cannot exceed 10MB.<br/>
-        /// Only the following file content types are supported: `image/jpeg`, `image/png`, `image/gif`, `image/webp`, `image/x-icon`, `image/vnd.microsoft.icon`.
+        /// Only the following file content types are supported: `image/jpeg`, `image/png`, `image/gif`, `image/webp`.
         /// </remarks>
         /// </summary>
         Task<UploadOrganizationLogoResponse> UploadLogoAsync(string organizationId, UploadOrganizationLogoRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -122,9 +122,9 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.0";
-        private const string _sdkGenVersion = "2.625.0";
-        private const string _openapiDocVersion = "2025-03-12";
+        private const string _sdkVersion = "0.10.0";
+        private const string _sdkGenVersion = "2.666.0";
+        private const string _openapiDocVersion = "2025-04-10";
 
         public Organizations(SDKConfig config)
         {

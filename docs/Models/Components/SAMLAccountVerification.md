@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### Saml
+### VerificationSaml
 
 ```csharp
-SAMLAccountVerification.CreateSaml(/* values here */);
+SAMLAccountVerification.CreateVerificationSaml(/* values here */);
 ```
 
 ### VerificationTicket

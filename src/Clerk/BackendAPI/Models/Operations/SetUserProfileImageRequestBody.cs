@@ -16,6 +16,6 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         [SpeakeasyMetadata("multipartForm:file,name=file")]
-        public File? File { get; set; }
+        public Models.Operations.File? File { get; set; }
     }
 }

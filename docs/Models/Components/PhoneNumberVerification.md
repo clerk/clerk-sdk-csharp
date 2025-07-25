@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### VerificationOTP
+### VerificationOtp
 
 ```csharp
-PhoneNumberVerification.CreateVerificationOTP(/* values here */);
+PhoneNumberVerification.CreateVerificationOtp(/* values here */);
 ```
 
 ### VerificationAdmin

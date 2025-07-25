@@ -30,6 +30,12 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("slug")]
         public string Slug { get; set; } = default!;
 
+        [JsonProperty("image_url")]
+        public string ImageUrl { get; set; } = default!;
+
+        [JsonProperty("has_image")]
+        public bool HasImage { get; set; } = default!;
+
         [JsonProperty("members_count")]
         public long? MembersCount { get; set; }
 
@@ -49,7 +55,7 @@ namespace Clerk.BackendAPI.Models.Components
         public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
         [JsonProperty("private_metadata")]
-        public Dictionary<string, object> PrivateMetadata { get; set; } = default!;
+        public Dictionary<string, object>? PrivateMetadata { get; set; }
 
         [JsonProperty("created_by")]
         public string? CreatedBy { get; set; }
@@ -77,11 +83,5 @@ namespace Clerk.BackendAPI.Models.Components
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("logo_url")]
         public string? LogoUrl { get; set; }
-
-        [JsonProperty("image_url")]
-        public string ImageUrl { get; set; } = default!;
-
-        [JsonProperty("has_image")]
-        public bool HasImage { get; set; } = default!;
     }
 }

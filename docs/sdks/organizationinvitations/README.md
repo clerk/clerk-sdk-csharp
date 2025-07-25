@@ -139,26 +139,27 @@ Any invitations created as a result of an Organization Domain are not included i
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.OrganizationInvitations.ListAsync(
-    organizationId: "org_12345",
-    limit: 20,
-    offset: 10
-);
+ListOrganizationInvitationsRequest req = new ListOrganizationInvitationsRequest() {
+    OrganizationId = "org_12345",
+    OrderBy = "pending",
+    Limit = 20,
+    Offset = 10,
+};
+
+var res = await sdk.OrganizationInvitations.ListAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                                                          | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The organization ID.                                                                                                                      | org_12345                                                                                                                                 |
-| `Status`                                                                                                                                  | [ListOrganizationInvitationsQueryParamStatus](../../Models/Operations/ListOrganizationInvitationsQueryParamStatus.md)                     | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     |                                                                                                                                           |
-| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
-| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `request`                                                                                           | [ListOrganizationInvitationsRequest](../../Models/Operations/ListOrganizationInvitationsRequest.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
 
 ### Response
 
@@ -168,7 +169,7 @@ var res = await sdk.OrganizationInvitations.ListAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## BulkCreate

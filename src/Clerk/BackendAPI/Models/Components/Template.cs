@@ -34,7 +34,7 @@ namespace Clerk.BackendAPI.Models.Components
         public TemplateObject? Object { get; set; }
 
         /// <summary>
-        /// the id of the instance the template belongs to
+        /// The id of the instance to which this template belongs
         /// </summary>
         [JsonProperty("instance_id")]
         public string? InstanceId { get; set; } = null;
@@ -80,6 +80,12 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("can_delete")]
         public bool? CanDelete { get; set; }
+
+        /// <summary>
+        /// whether the body of this template can be edited
+        /// </summary>
+        [JsonProperty("can_edit_body")]
+        public bool? CanEditBody { get; set; }
 
         /// <summary>
         /// whether this template can be enabled or disabled, true only for notification SMS templates

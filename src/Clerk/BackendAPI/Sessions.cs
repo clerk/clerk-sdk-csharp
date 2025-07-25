@@ -63,7 +63,7 @@ namespace Clerk.BackendAPI
         /// 
         /// <remarks>
         /// Refreshes a session by creating a new session token. A 401 is returned when there<br/>
-        /// are validation errors, which signals the SDKs to fallback to the handshake flow.
+        /// are validation errors, which signals the SDKs to fall back to the handshake flow.
         /// </remarks>
         /// </summary>
         Task<RefreshSessionResponse> RefreshAsync(string sessionId, RefreshSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -77,18 +77,6 @@ namespace Clerk.BackendAPI
         /// </remarks>
         /// </summary>
         Task<RevokeSessionResponse> RevokeAsync(string sessionId, RetryConfig? retryConfig = null);
-
-        /// <summary>
-        /// Verify a session
-        /// 
-        /// <remarks>
-        /// Returns the session if it is authenticated, otherwise returns an error.<br/>
-        /// WARNING: This endpoint is deprecated and will be removed in future versions. We strongly recommend switching to networkless verification using short-lived session tokens,<br/>
-        ///          which is implemented transparently in all recent SDK versions (e.g. <a href="https://clerk.com/docs/backend-requests/handling/nodejs#clerk-express-require-auth">NodeJS SDK</a>).<br/>
-        ///          For more details on how networkless verification works, refer to our <a href="https://clerk.com/docs/backend-requests/resources/session-tokens">Session Tokens documentation</a>.
-        /// </remarks>
-        /// </summary>
-        Task<VerifySessionResponse> VerifyAsync(string sessionId, VerifySessionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create a session token
@@ -113,9 +101,9 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.0";
-        private const string _sdkGenVersion = "2.625.0";
-        private const string _openapiDocVersion = "2025-03-12";
+        private const string _sdkVersion = "0.10.0";
+        private const string _sdkGenVersion = "2.666.0";
+        private const string _openapiDocVersion = "2025-04-10";
 
         public Sessions(SDKConfig config)
         {
@@ -742,141 +730,6 @@ namespace Clerk.BackendAPI
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
             else if(new List<int>{400, 401, 404}.Contains(responseStatusCode))
-            {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    throw obj!;
-                }
-
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500)
-            {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode >= 500 && responseStatusCode < 600)
-            {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
-            }
-
-            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
-        }
-
-        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
-        public async Task<VerifySessionResponse> VerifyAsync(string sessionId, VerifySessionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
-        {
-            var request = new VerifySessionRequest()
-            {
-                SessionId = sessionId,
-                RequestBody = requestBody,
-            };
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/verify", request);
-
-            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
-            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
-
-            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
-            if (serializedBody != null)
-            {
-                httpRequest.Content = serializedBody;
-            }
-
-            if (SDKConfiguration.SecuritySource != null)
-            {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
-            }
-
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "VerifySession", new List<string> {  }, SDKConfiguration.SecuritySource);
-
-            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
-            if (retryConfig == null)
-            {
-                if (this.SDKConfiguration.RetryConfig != null)
-                {
-                    retryConfig = this.SDKConfiguration.RetryConfig;
-                }
-                else
-                {
-                    var backoff = new BackoffStrategy(
-                        initialIntervalMs: 500L,
-                        maxIntervalMs: 60000L,
-                        maxElapsedTimeMs: 3600000L,
-                        exponent: 1.5
-                    );
-                    retryConfig = new RetryConfig(
-                        strategy: RetryConfig.RetryStrategy.BACKOFF,
-                        backoff: backoff,
-                        retryConnectionErrors: true
-                    );
-                }
-            }
-
-            List<string> statusCodes = new List<string>
-            {
-                "5XX",
-            };
-
-            Func<Task<HttpResponseMessage>> retrySend = async () =>
-            {
-                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
-                return await SDKConfiguration.Client.SendAsync(_httpRequest);
-            };
-            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
-
-            HttpResponseMessage httpResponse;
-            try
-            {
-                httpResponse = await retries.Run();
-                int _statusCode = (int)httpResponse.StatusCode;
-
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode == 410 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
-                {
-                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
-                    if (_httpResponse != null)
-                    {
-                        httpResponse = _httpResponse;
-                    }
-                }
-            }
-            catch (Exception error)
-            {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
-                if (_httpResponse != null)
-                {
-                    httpResponse = _httpResponse;
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
-
-            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
-            int responseStatusCode = (int)httpResponse.StatusCode;
-            if(responseStatusCode == 200)
-            {
-                if(Utilities.IsContentTypeMatch("application/json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<Session>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new VerifySessionResponse()
-                    {
-                        HttpMeta = new Models.Components.HTTPMetadata()
-                        {
-                            Response = httpResponse,
-                            Request = httpRequest
-                        }
-                    };
-                    response.Session = obj;
-                    return response;
-                }
-
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(new List<int>{400, 401, 404, 410}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

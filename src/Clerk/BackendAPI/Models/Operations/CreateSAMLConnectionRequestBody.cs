@@ -12,68 +12,192 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class CreateSAMLConnectionRequestBody
+
+    public class CreateSAMLConnectionRequestBodyType
     {
+        private CreateSAMLConnectionRequestBodyType(string value) { Value = value; }
 
-        /// <summary>
-        /// The name to use as a label for this SAML Connection
-        /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; set; } = default!;
+        public string Value { get; private set; }
+        public static CreateSAMLConnectionRequestBodyType One { get { return new CreateSAMLConnectionRequestBodyType("1"); } }
+        
+        public static CreateSAMLConnectionRequestBodyType Two { get { return new CreateSAMLConnectionRequestBodyType("2"); } }
+        
+        public static CreateSAMLConnectionRequestBodyType Null { get { return new CreateSAMLConnectionRequestBodyType("null"); } }
 
-        /// <summary>
-        /// The domain of your organization. Sign in flows using an email with this domain, will use this SAML Connection.
-        /// </summary>
-        [JsonProperty("domain")]
-        public string Domain { get; set; } = default!;
+        public override string ToString() { return Value; }
+        public static implicit operator String(CreateSAMLConnectionRequestBodyType v) { return v.Value; }
+        public static CreateSAMLConnectionRequestBodyType FromString(string v) {
+            switch(v) {
+                case "1": return One;
+                case "2": return Two;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for CreateSAMLConnectionRequestBodyType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((CreateSAMLConnectionRequestBodyType)obj).Value);
+        }
 
-        /// <summary>
-        /// The IdP provider of the connection.
-        /// </summary>
-        [JsonProperty("provider")]
-        public Provider Provider { get; set; } = default!;
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
 
-        /// <summary>
-        /// The Entity ID as provided by the IdP
-        /// </summary>
-        [JsonProperty("idp_entity_id")]
-        public string? IdpEntityId { get; set; } = null;
 
-        /// <summary>
-        /// The Single-Sign On URL as provided by the IdP
-        /// </summary>
-        [JsonProperty("idp_sso_url")]
-        public string? IdpSsoUrl { get; set; } = null;
+    [JsonConverter(typeof(CreateSAMLConnectionRequestBody.CreateSAMLConnectionRequestBodyConverter))]
+    public class CreateSAMLConnectionRequestBody {
+        public CreateSAMLConnectionRequestBody(CreateSAMLConnectionRequestBodyType type) {
+            Type = type;
+        }
 
-        /// <summary>
-        /// The X.509 certificate as provided by the IdP
-        /// </summary>
-        [JsonProperty("idp_certificate")]
-        public string? IdpCertificate { get; set; } = null;
+        [SpeakeasyMetadata("form:explode=true")]
+        public Models.Operations.One? One { get; set; }
 
-        /// <summary>
-        /// The URL which serves the IdP metadata. If present, it takes priority over the corresponding individual properties
-        /// </summary>
-        [JsonProperty("idp_metadata_url")]
-        public string? IdpMetadataUrl { get; set; } = null;
+        [SpeakeasyMetadata("form:explode=true")]
+        public Models.Operations.Two? Two { get; set; }
 
-        /// <summary>
-        /// The XML content of the IdP metadata file. If present, it takes priority over the corresponding individual properties
-        /// </summary>
-        [JsonProperty("idp_metadata")]
-        public string? IdpMetadata { get; set; } = null;
+        public CreateSAMLConnectionRequestBodyType Type { get; set; }
 
-        /// <summary>
-        /// The ID of the organization to which users of this SAML Connection will be added
-        /// </summary>
-        [JsonProperty("organization_id")]
-        public string? OrganizationId { get; set; } = null;
 
-        /// <summary>
-        /// Define the attribute name mapping between Identity Provider and Clerk&apos;s user properties
-        /// </summary>
-        [JsonProperty("attribute_mapping")]
-        public AttributeMapping? AttributeMapping { get; set; } = null;
+        public static CreateSAMLConnectionRequestBody CreateOne(Models.Operations.One one) {
+            CreateSAMLConnectionRequestBodyType typ = CreateSAMLConnectionRequestBodyType.One;
+
+            CreateSAMLConnectionRequestBody res = new CreateSAMLConnectionRequestBody(typ);
+            res.One = one;
+            return res;
+        }
+
+        public static CreateSAMLConnectionRequestBody CreateTwo(Models.Operations.Two two) {
+            CreateSAMLConnectionRequestBodyType typ = CreateSAMLConnectionRequestBodyType.Two;
+
+            CreateSAMLConnectionRequestBody res = new CreateSAMLConnectionRequestBody(typ);
+            res.Two = two;
+            return res;
+        }
+
+        public static CreateSAMLConnectionRequestBody CreateNull() {
+            CreateSAMLConnectionRequestBodyType typ = CreateSAMLConnectionRequestBodyType.Null;
+            return new CreateSAMLConnectionRequestBody(typ);
+        }
+
+        public class CreateSAMLConnectionRequestBodyConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(CreateSAMLConnectionRequestBody);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                try
+                {
+                    return new CreateSAMLConnectionRequestBody(CreateSAMLConnectionRequestBodyType.One)
+                    {
+                        One = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Models.Operations.One>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Models.Operations.One), new CreateSAMLConnectionRequestBody(CreateSAMLConnectionRequestBodyType.One), "One"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new CreateSAMLConnectionRequestBody(CreateSAMLConnectionRequestBodyType.Two)
+                    {
+                        Two = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Models.Operations.Two>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(Models.Operations.Two), new CreateSAMLConnectionRequestBody(CreateSAMLConnectionRequestBodyType.Two), "Two"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                CreateSAMLConnectionRequestBody res = (CreateSAMLConnectionRequestBody)value;
+                if (CreateSAMLConnectionRequestBodyType.FromString(res.Type).Equals(CreateSAMLConnectionRequestBodyType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.One != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.One));
+                    return;
+                }
+                if (res.Two != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Two));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

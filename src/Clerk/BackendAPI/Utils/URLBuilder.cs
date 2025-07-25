@@ -68,7 +68,7 @@ namespace Clerk.BackendAPI.Utils
             {
                 foreach (var value in queryParams[key])
                 {
-                    queries.Add($"{key}={WebUtility.UrlEncode(value)}");
+                    queries.Add($"{key}={value}");
                 }
             }
 

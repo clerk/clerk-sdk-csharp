@@ -12,44 +12,62 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum VerificationStrategy
-    {
-        [JsonProperty("admin")]
-        Admin,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class VerificationStrategyExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class VerificationStrategy : IEquatable<VerificationStrategy>
     {
-        public static string Value(this VerificationStrategy value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly VerificationStrategy Admin = new VerificationStrategy("admin");
 
-        public static VerificationStrategy ToEnum(this string value)
-        {
-            foreach(var field in typeof(VerificationStrategy).GetFields())
+        private static readonly Dictionary <string, VerificationStrategy> _knownValues =
+            new Dictionary <string, VerificationStrategy> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["admin"] = Admin
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, VerificationStrategy> _values =
+            new ConcurrentDictionary<string, VerificationStrategy>(_knownValues);
 
-                    if (enumVal is VerificationStrategy)
-                    {
-                        return (VerificationStrategy)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum VerificationStrategy");
+        private VerificationStrategy(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static VerificationStrategy Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new VerificationStrategy(value));
+        }
+
+        public static implicit operator VerificationStrategy(string value) => Of(value);
+        public static implicit operator string(VerificationStrategy verificationstrategy) => verificationstrategy.Value;
+
+        public static VerificationStrategy[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as VerificationStrategy);
+
+        public bool Equals(VerificationStrategy? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

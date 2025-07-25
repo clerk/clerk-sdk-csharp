@@ -64,9 +64,9 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateJWTTemplateRequestBody req = new CreateJWTTemplateRequestBody() {
     Name = "Example Template",
-    Claims = new Models.Operations.Claims() {},
-    Lifetime = 3600D,
-    AllowedClockSkew = 5D,
+    Claims = new Clerk.BackendAPI.Models.Operations.Claims() {},
+    Lifetime = 3600,
+    AllowedClockSkew = 5,
     CustomSigningKey = false,
     SigningAlgorithm = "RS256",
     SigningKey = "PRIVATE_KEY_PLACEHOLDER",

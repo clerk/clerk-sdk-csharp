@@ -32,13 +32,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// JWT token lifetime
         /// </summary>
         [JsonProperty("lifetime")]
-        public double? Lifetime { get; set; } = null;
+        public long? Lifetime { get; set; } = null;
 
         /// <summary>
         /// JWT token allowed clock skew
         /// </summary>
         [JsonProperty("allowed_clock_skew")]
-        public double? AllowedClockSkew { get; set; } = null;
+        public long? AllowedClockSkew { get; set; } = null;
 
         /// <summary>
         /// Whether a custom signing key/algorithm is also provided for this template

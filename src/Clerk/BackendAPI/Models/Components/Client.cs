@@ -28,7 +28,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("object")]
-        public Models.Components.Object Object { get; set; } = default!;
+        public ClientObject Object { get; set; } = default!;
 
         /// <summary>
         /// String representing the identifier of the session.<br/>

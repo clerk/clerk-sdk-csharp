@@ -3,26 +3,26 @@
 
 ## Supported Types
 
-### Otp
+### VerificationOtp
 
 ```csharp
-Verification.CreateOtp(/* values here */);
+Verification.CreateVerificationOtp(/* values here */);
 ```
 
-### Admin
+### VerificationAdmin
 
 ```csharp
-Verification.CreateAdmin(/* values here */);
+Verification.CreateVerificationAdmin(/* values here */);
 ```
 
-### FromOAuth
+### VerificationFromOauth
 
 ```csharp
-Verification.CreateFromOAuth(/* values here */);
+Verification.CreateVerificationFromOauth(/* values here */);
 ```
 
-### Ticket
+### VerificationTicket
 
 ```csharp
-Verification.CreateTicket(/* values here */);
+Verification.CreateVerificationTicket(/* values here */);
 ```
