@@ -19,7 +19,7 @@ Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend s
 ### Versions
 
 When the API changes in a way that isn't compatible with older versions, a new version is released.
-Each version is identified by its release date, e.g. `2025-03-12`. For more information, please see [Clerk API Versions](https://clerk.com/docs/versioning/available-versions).
+Each version is identified by its release date, e.g. `2025-04-10`. For more information, please see [Clerk API Versions](https://clerk.com/docs/versioning/available-versions).
 
 Please see https://clerk.com/docs for more information.
 
@@ -68,16 +68,11 @@ dotnet add reference src/Clerk/BackendAPI/Clerk.BackendAPI.csproj
 
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Operations;
+using Clerk.BackendAPI.Models.Components;
 
-var sdk = new ClerkBackendApi();
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
-    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
-    FrontendApiQueryParameter1 = "pub_1a2b3c4d",
-};
-
-var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
+var res = await sdk.EmailAddresses.GetAsync(emailAddressId: "email_address_id_example");
 
 // handle response
 ```
@@ -112,24 +107,31 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 // handle response
 ```
 
-### Using SDKBuilder with Origin Hooks
+### Per-Operation Security Schemes
 
-To ensure session tokens include the `azp` (authorized parties) claim, you can use the `SDKBuilder` with origin hooks:
-
+Some operations in this SDK require the security scheme to be specified at the request level. For example:
 ```csharp
 using Clerk.BackendAPI;
-using Clerk.BackendAPI.Hooks;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
 
-// Build SDK with origin header hook for azp claim
-var sdk = ClerkBackendApi.Builder()
-    .WithBeforeRequestHook(new ClerkBeforeRequestHook("https://your-app.com")) 
-    .Build();
+var sdk = new ClerkBackendApi();
 
-// Now session tokens will include the azp claim
-var sessionTokenResponse = await sdk.Sessions.CreateTokenAsync("session_id");
-var jwt = sessionTokenResponse.Object?.Jwt; // JWT will contain azp claim
+ManagementUpsertUserRequest req = new ManagementUpsertUserRequest() {
+    EmailAddress = "Roger_OReilly-Dibbert10@hotmail.com",
+    FirstName = "Diana",
+    LastName = "Schmidt-Kutch",
+};
+
+var res = await sdk.Management.UpsertUserAsync(
+    security: new ManagementUpsertUserSecurity() {
+        ManagementToken = "<YOUR_BEARER_TOKEN_HERE>",
+    },
+    request: req
+);
+
+// handle response
 ```
- 
 <!-- End Authentication [security] -->
 
 ## Request Authentication
@@ -199,6 +201,14 @@ public class MachineAuthentication
 * [List](docs/sdks/allowlistidentifiers/README.md#list) - List all identifiers on the allow-list
 * [Create](docs/sdks/allowlistidentifiers/README.md#create) - Add identifier to the allow-list
 * [Delete](docs/sdks/allowlistidentifiers/README.md#delete) - Delete identifier from allow-list
+
+### [AwsCredentials](docs/sdks/awscredentials/README.md)
+
+* [List](docs/sdks/awscredentials/README.md#list) - List all AWS Credentials
+* [Create](docs/sdks/awscredentials/README.md#create) - Create an AWS Credential
+* [Get](docs/sdks/awscredentials/README.md#get) - Retrieve an AWS Credential
+* [Delete](docs/sdks/awscredentials/README.md#delete) - Delete an AWS Credential
+* [Update](docs/sdks/awscredentials/README.md#update) - Update an AWS Credential
 
 ### [BetaFeatures](docs/sdks/betafeatures/README.md)
 
@@ -275,9 +285,34 @@ public class MachineAuthentication
 * [Update](docs/sdks/jwttemplates/README.md#update) - Update a JWT template
 * [Delete](docs/sdks/jwttemplates/README.md#delete) - Delete a Template
 
+### [Machines](docs/sdks/machines/README.md)
+
+* [List](docs/sdks/machines/README.md#list) - Get a list of machines for an instance
+* [Create](docs/sdks/machines/README.md#create) - Create a machine
+* [Get](docs/sdks/machines/README.md#get) - Retrieve a machine
+* [Update](docs/sdks/machines/README.md#update) - Update a machine
+* [Delete](docs/sdks/machines/README.md#delete) - Delete a machine
+* [GetSecretKey](docs/sdks/machines/README.md#getsecretkey) - Retrieve a machine secret key
+* [CreateScope](docs/sdks/machines/README.md#createscope) - Create a machine scope
+* [DeleteScope](docs/sdks/machines/README.md#deletescope) - Delete a machine scope
+
+### [MachineTokens](docs/sdks/machinetokens/README.md)
+
+* [Create](docs/sdks/machinetokens/README.md#create) - Create a machine token
+
+### [Management](docs/sdks/management/README.md)
+
+* [UpsertUser](docs/sdks/management/README.md#upsertuser) - Upsert a user
+* [CreateOrganization](docs/sdks/management/README.md#createorganization) - Create an organization
+* [CreateApplication](docs/sdks/management/README.md#createapplication) - Create an application (instance)
+
 ### [Miscellaneous](docs/sdks/miscellaneous/README.md)
 
 * [GetPublicInterstitial](docs/sdks/miscellaneous/README.md#getpublicinterstitial) - Returns the markup for the interstitial page
+
+### [OauthAccessTokens](docs/sdks/oauthaccesstokens/README.md)
+
+* [Verify](docs/sdks/oauthaccesstokens/README.md#verify) - Verify an OAuth Access Token
 
 ### [OauthApplications](docs/sdks/oauthapplications/README.md)
 
@@ -294,6 +329,7 @@ public class MachineAuthentication
 * [List](docs/sdks/organizationdomains/README.md#list) - Get a list of all domains of an organization.
 * [Update](docs/sdks/organizationdomains/README.md#update) - Update an organization domain.
 * [Delete](docs/sdks/organizationdomains/README.md#delete) - Remove a domain from an organization.
+* [ListAll](docs/sdks/organizationdomains/README.md#listall) - List all organization domains
 
 ### [OrganizationInvitations](docs/sdks/organizationinvitations/README.md)
 
@@ -357,7 +393,6 @@ public class MachineAuthentication
 * [Get](docs/sdks/sessions/README.md#get) - Retrieve a session
 * [Refresh](docs/sdks/sessions/README.md#refresh) - Refresh a session
 * [Revoke](docs/sdks/sessions/README.md#revoke) - Revoke a session
-* [~~Verify~~](docs/sdks/sessions/README.md#verify) - Verify a session :warning: **Deprecated**
 * [CreateToken](docs/sdks/sessions/README.md#createtoken) - Create a session token
 * [CreateTokenFromTemplate](docs/sdks/sessions/README.md#createtokenfromtemplate) - Create a session token from a jwt template
 
@@ -389,6 +424,8 @@ public class MachineAuthentication
 * [Delete](docs/sdks/users/README.md#delete) - Delete a user
 * [Ban](docs/sdks/users/README.md#ban) - Ban a user
 * [Unban](docs/sdks/users/README.md#unban) - Unban a user
+* [BulkBan](docs/sdks/users/README.md#bulkban) - Ban multiple users
+* [BulkUnban](docs/sdks/users/README.md#bulkunban) - Unban multiple users
 * [Lock](docs/sdks/users/README.md#lock) - Lock a user
 * [Unlock](docs/sdks/users/README.md#unlock) - Unlock a user
 * [SetProfileImage](docs/sdks/users/README.md#setprofileimage) - Set user profile image
@@ -495,12 +532,12 @@ By default, an API error will raise a `Clerk.BackendAPI.Models.Errors.SDKError` 
 | `Request`     | *HttpRequestMessage*  | The HTTP request      |
 | `Response`    | *HttpResponseMessage* | The HTTP response     |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `VerifyAsync` method throws the following exceptions:
+When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `CreateAsync` method throws the following exceptions:
 
-| Error Type                                 | Status Code   | Content Type     |
-| ------------------------------------------ | ------------- | ---------------- |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404 | application/json |
-| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX      | \*/\*            |
+| Error Type                                 | Status Code             | Content Type     |
+| ------------------------------------------ | ----------------------- | ---------------- |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422 | application/json |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                | \*/\*            |
 
 ### Example
 
@@ -514,11 +551,9 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 try
 {
-    VerifyClientRequestBody req = new VerifyClientRequestBody() {
-        Token = "jwt_token_example",
-    };
+    CreateAWSCredentialRequestBody? req = null;
 
-    var res = await sdk.Clients.VerifyAsync(req);
+    var res = await sdk.AwsCredentials.CreateAsync(req);
 
     // handle response
 }

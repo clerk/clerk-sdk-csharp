@@ -12,12 +12,19 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class Oauth
     {
 
+        [JsonProperty("object")]
+        public VerificationOauthVerificationObject? Object { get; set; }
+
         [JsonProperty("status")]
-        public OauthVerificationStatus Status { get; set; } = default!;
+        public VerificationOauthVerificationStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
         public string Strategy { get; set; } = default!;

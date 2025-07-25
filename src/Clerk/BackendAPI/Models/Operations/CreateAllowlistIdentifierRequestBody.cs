@@ -19,7 +19,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The identifier to be added in the allow-list.<br/>
         /// 
         /// <remarks>
-        /// This can be an email address, a phone number or a web3 wallet.
+        /// This can be an email address, a phone number, or a web3 wallet.
         /// </remarks>
         /// </summary>
         [JsonProperty("identifier")]

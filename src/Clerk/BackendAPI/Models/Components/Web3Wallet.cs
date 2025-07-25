@@ -35,6 +35,16 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("verification", NullValueHandling = NullValueHandling.Include)]
         public Web3WalletVerification? Verification { get; set; }
 
+        public Web3Signature? GetVerificationVerificationWeb3()
+        {
+            return Verification != null ? Verification.Web3Signature : null;
+        }
+
+        public VerificationAdminVerificationAdmin? GetVerificationVerificationAdmin()
+        {
+            return Verification != null ? Verification.VerificationAdminVerificationAdmin : null;
+        }
+
         /// <summary>
         /// Unix timestamp of creation<br/>
         /// 

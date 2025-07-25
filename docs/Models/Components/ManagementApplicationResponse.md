@@ -1,0 +1,10 @@
+# ManagementApplicationResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `ApplicationId`                                                                                   | *string*                                                                                          | :heavy_check_mark:                                                                                | The ID of the application.                                                                        |
+| `Subscription`                                                                                    | [ManagementApplicationSubscription](../../Models/Components/ManagementApplicationSubscription.md) | :heavy_minus_sign:                                                                                | N/A                                                                                               |
+| `Instances`                                                                                       | List<[ManagementApplicationInstance](../../Models/Components/ManagementApplicationInstance.md)>   | :heavy_check_mark:                                                                                | List of instances associated with this application.                                               |

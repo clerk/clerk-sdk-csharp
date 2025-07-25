@@ -77,9 +77,9 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.0";
-        private const string _sdkGenVersion = "2.625.0";
-        private const string _openapiDocVersion = "2025-03-12";
+        private const string _sdkVersion = "0.10.0";
+        private const string _sdkGenVersion = "2.666.0";
+        private const string _openapiDocVersion = "2025-04-10";
 
         public OrganizationMemberships(SDKConfig config)
         {
@@ -539,7 +539,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode == 401 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -584,7 +584,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
             }
-            else if(new List<int>{401, 404}.Contains(responseStatusCode))
+            else if(new List<int>{401, 404, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

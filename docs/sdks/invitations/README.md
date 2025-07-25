@@ -113,7 +113,7 @@ using System.Collections.Generic;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-List<RequestBody> req = ;
+List<RequestBody>? req = null;
 
 var res = await sdk.Invitations.BulkCreateAsync(req);
 

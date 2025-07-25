@@ -16,8 +16,12 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
 csharp:
-  version: 0.9.0
+  version: 0.10.0
   additionalDependencies:
     - package: Microsoft.AspNetCore
       version: 2.3.0

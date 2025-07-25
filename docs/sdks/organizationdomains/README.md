@@ -9,6 +9,7 @@
 * [List](#list) - Get a list of all domains of an organization.
 * [Update](#update) - Update an organization domain.
 * [Delete](#delete) - Remove a domain from an organization.
+* [ListAll](#listall) - List all organization domains
 
 ## Create
 
@@ -167,4 +168,50 @@ var res = await sdk.OrganizationDomains.DeleteAsync(
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ListAll
+
+Retrieves a list of all organization domains within the current instance.
+This endpoint can be used to list all domains across all organizations
+or filter domains by organization, verification status, enrollment mode, or search query.
+
+The response includes pagination information and details about each domain
+including its verification status, enrollment mode, and associated counts.
+
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+ListAllOrganizationDomainsRequest req = new ListAllOrganizationDomainsRequest() {
+    Offset = 10,
+    Limit = 20,
+};
+
+var res = await sdk.OrganizationDomains.ListAllAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `request`                                                                                         | [ListAllOrganizationDomainsRequest](../../Models/Operations/ListAllOrganizationDomainsRequest.md) | :heavy_check_mark:                                                                                | The request object to use for the request.                                                        |
+
+### Response
+
+**[ListAllOrganizationDomainsResponse](../../Models/Operations/ListAllOrganizationDomainsResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 403, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

@@ -33,6 +33,21 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("client_id")]
         public string ClientId { get; set; } = default!;
 
+        [JsonProperty("client_uri", NullValueHandling = NullValueHandling.Include)]
+        public string? ClientUri { get; set; }
+
+        [JsonProperty("client_image_url", NullValueHandling = NullValueHandling.Include)]
+        public string? ClientImageUrl { get; set; }
+
+        [JsonProperty("dynamically_registered")]
+        public bool DynamicallyRegistered { get; set; } = default!;
+
+        [JsonProperty("consent_screen_enabled")]
+        public bool ConsentScreenEnabled { get; set; } = default!;
+
+        [JsonProperty("pkce_required")]
+        public bool PkceRequired { get; set; } = default!;
+
         [JsonProperty("public")]
         public bool Public { get; set; } = default!;
 

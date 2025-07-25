@@ -64,6 +64,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("username")]
         public string? Username { get; set; } = null;
 
+        [JsonProperty("phone_number")]
+        public string? PhoneNumber { get; set; } = null;
+
         [JsonProperty("public_metadata")]
         public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
@@ -92,6 +95,16 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("verification", NullValueHandling = NullValueHandling.Include)]
         public ExternalAccountWithVerificationVerification? Verification { get; set; }
+
+        public Oauth? GetVerificationVerificationOauth()
+        {
+            return Verification != null ? Verification.Oauth : null;
+        }
+
+        public GoogleOneTap? GetVerificationVerificationGoogleOneTap()
+        {
+            return Verification != null ? Verification.GoogleOneTap : null;
+        }
 
         [JsonProperty("additionalProperties")]
         public Dictionary<string, object>? AdditionalProperties { get; set; }

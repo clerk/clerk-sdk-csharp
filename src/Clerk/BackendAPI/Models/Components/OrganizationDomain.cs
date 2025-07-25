@@ -51,7 +51,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// Mode of enrollment for the domain
         /// </summary>
         [JsonProperty("enrollment_mode")]
-        public EnrollmentMode EnrollmentMode { get; set; } = default!;
+        public Models.Components.EnrollmentMode EnrollmentMode { get; set; } = default!;
 
         /// <summary>
         /// Affiliation email address for the domain, if available.

@@ -24,18 +24,17 @@ namespace Clerk.BackendAPI.Models.Components
         private SAMLAccountVerificationType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        public static SAMLAccountVerificationType Saml { get { return new SAMLAccountVerificationType("SAML"); } }
         
-        public static SAMLAccountVerificationType VerificationTicket { get { return new SAMLAccountVerificationType("verification_Ticket"); } }
-        
+        public static SAMLAccountVerificationType VerificationSaml { get { return new SAMLAccountVerificationType("verification_saml"); } }
+        public static SAMLAccountVerificationType VerificationTicket { get { return new SAMLAccountVerificationType("verification_ticket"); } }
         public static SAMLAccountVerificationType Null { get { return new SAMLAccountVerificationType("null"); } }
 
         public override string ToString() { return Value; }
         public static implicit operator String(SAMLAccountVerificationType v) { return v.Value; }
         public static SAMLAccountVerificationType FromString(string v) {
             switch(v) {
-                case "SAML": return Saml;
-                case "verification_Ticket": return VerificationTicket;
+                case "verification_saml": return VerificationSaml;
+                case "verification_ticket": return VerificationTicket;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for SAMLAccountVerificationType");
             }
@@ -71,22 +70,26 @@ namespace Clerk.BackendAPI.Models.Components
         public SAMLAccountVerificationType Type { get; set; }
 
 
-        public static SAMLAccountVerification CreateSaml(Saml saml) {
-            SAMLAccountVerificationType typ = SAMLAccountVerificationType.Saml;
-
+        public static SAMLAccountVerification CreateVerificationSaml(Saml verificationSaml) {
+            SAMLAccountVerificationType typ = SAMLAccountVerificationType.VerificationSaml;
+        
+            string typStr = SAMLAccountVerificationType.VerificationSaml.ToString();
+            
+            verificationSaml.Object = VerificationSamlVerificationObjectExtension.ToEnum(SAMLAccountVerificationType.VerificationSaml.ToString());
             SAMLAccountVerification res = new SAMLAccountVerification(typ);
-            res.Saml = saml;
+            res.Saml = verificationSaml;
             return res;
         }
-
         public static SAMLAccountVerification CreateVerificationTicket(VerificationTicket verificationTicket) {
             SAMLAccountVerificationType typ = SAMLAccountVerificationType.VerificationTicket;
-
+        
+            string typStr = SAMLAccountVerificationType.VerificationTicket.ToString();
+            
+            verificationTicket.Object = VerificationTicketVerificationSAMLAccountObjectExtension.ToEnum(SAMLAccountVerificationType.VerificationTicket.ToString());
             SAMLAccountVerification res = new SAMLAccountVerification(typ);
             res.VerificationTicket = verificationTicket;
             return res;
         }
-
         public static SAMLAccountVerification CreateNull() {
             SAMLAccountVerificationType typ = SAMLAccountVerificationType.Null;
             return new SAMLAccountVerification(typ);
@@ -101,72 +104,17 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                JObject jo = JObject.Load(reader);
+                string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
+                if (discriminator == SAMLAccountVerificationType.VerificationSaml.ToString())
                 {
-                    return null;
+                    Saml? saml = ResponseBodyDeserializer.Deserialize<Saml>(jo.ToString());
+                    return CreateVerificationSaml(saml!);
                 }
-
-                var fallbackCandidates = new List<(System.Type, object, string)>();
-
-                try
+                if (discriminator == SAMLAccountVerificationType.VerificationTicket.ToString())
                 {
-                    return new SAMLAccountVerification(SAMLAccountVerificationType.VerificationTicket)
-                    {
-                        VerificationTicket = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<VerificationTicket>(json)
-                    };
-                }
-                catch (ResponseBodyDeserializer.MissingMemberException)
-                {
-                    fallbackCandidates.Add((typeof(VerificationTicket), new SAMLAccountVerification(SAMLAccountVerificationType.VerificationTicket), "VerificationTicket"));
-                }
-                catch (ResponseBodyDeserializer.DeserializationException)
-                {
-                    // try next option
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-
-                try
-                {
-                    return new SAMLAccountVerification(SAMLAccountVerificationType.Saml)
-                    {
-                        Saml = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Saml>(json)
-                    };
-                }
-                catch (ResponseBodyDeserializer.MissingMemberException)
-                {
-                    fallbackCandidates.Add((typeof(Saml), new SAMLAccountVerification(SAMLAccountVerificationType.Saml), "Saml"));
-                }
-                catch (ResponseBodyDeserializer.DeserializationException)
-                {
-                    // try next option
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-
-                if (fallbackCandidates.Count > 0)
-                {
-                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
-                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
-                    {
-                        try
-                        {
-                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
-                        }
-                        catch (ResponseBodyDeserializer.DeserializationException)
-                        {
-                            // try next fallback option
-                        }
-                        catch (Exception)
-                        {
-                            throw;
-                        }
-                    }
+                    VerificationTicket? verificationTicket = ResponseBodyDeserializer.Deserialize<VerificationTicket>(jo.ToString());
+                    return CreateVerificationTicket(verificationTicket!);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");

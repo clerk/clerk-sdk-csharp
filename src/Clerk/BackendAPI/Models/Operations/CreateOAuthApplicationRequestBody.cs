@@ -47,6 +47,18 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Scopes { get; set; } = "profile email";
 
         /// <summary>
+        /// True to enable a consent screen to display in the authentication flow.
+        /// </summary>
+        [JsonProperty("consent_screen_enabled")]
+        public bool? ConsentScreenEnabled { get; set; } = true;
+
+        /// <summary>
+        /// True to require the Proof Key of Code Exchange (PKCE) flow.
+        /// </summary>
+        [JsonProperty("pkce_required")]
+        public bool? PkceRequired { get; set; } = false;
+
+        /// <summary>
         /// If true, this client is public and you can use the Proof Key of Code Exchange (PKCE) flow.
         /// </summary>
         [JsonProperty("public")]

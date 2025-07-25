@@ -12,15 +12,22 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class VerificationTicket
     {
 
+        [JsonProperty("object")]
+        public VerificationTicketVerificationSAMLAccountObject? Object { get; set; }
+
         [JsonProperty("status")]
-        public TicketVerificationSAMLAccountStatus Status { get; set; } = default!;
+        public VerificationTicketVerificationSAMLAccountStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
-        public TicketVerificationSAMLAccountStrategy Strategy { get; set; } = default!;
+        public VerificationTicketVerificationSAMLAccountStrategy Strategy { get; set; } = default!;
 
         [JsonProperty("attempts", NullValueHandling = NullValueHandling.Include)]
         public long? Attempts { get; set; }

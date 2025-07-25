@@ -12,48 +12,66 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
-    public enum Strategy
-    {
-        [JsonProperty("phone_code")]
-        PhoneCode,
-        [JsonProperty("email_code")]
-        EmailCode,
-        [JsonProperty("reset_password_email_code")]
-        ResetPasswordEmailCode,
-    }
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public static class StrategyExtension
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class Strategy : IEquatable<Strategy>
     {
-        public static string Value(this Strategy value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
+        public static readonly Strategy PhoneCode = new Strategy("phone_code");
+        public static readonly Strategy EmailCode = new Strategy("email_code");
+        public static readonly Strategy ResetPasswordEmailCode = new Strategy("reset_password_email_code");
 
-        public static Strategy ToEnum(this string value)
-        {
-            foreach(var field in typeof(Strategy).GetFields())
+        private static readonly Dictionary <string, Strategy> _knownValues =
+            new Dictionary <string, Strategy> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["phone_code"] = PhoneCode,
+                ["email_code"] = EmailCode,
+                ["reset_password_email_code"] = ResetPasswordEmailCode
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, Strategy> _values =
+            new ConcurrentDictionary<string, Strategy>(_knownValues);
 
-                    if (enumVal is Strategy)
-                    {
-                        return (Strategy)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum Strategy");
+        private Strategy(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static Strategy Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new Strategy(value));
+        }
+
+        public static implicit operator Strategy(string value) => Of(value);
+        public static implicit operator string(Strategy strategy) => strategy.Value;
+
+        public static Strategy[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as Strategy);
+
+        public bool Equals(Strategy? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

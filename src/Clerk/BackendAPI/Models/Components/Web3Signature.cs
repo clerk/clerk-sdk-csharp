@@ -16,11 +16,14 @@ namespace Clerk.BackendAPI.Models.Components
     public class Web3Signature
     {
 
+        [JsonProperty("object")]
+        public VerificationWeb3VerificationObject? Object { get; set; }
+
         [JsonProperty("status")]
-        public Web3SignatureVerificationStatus Status { get; set; } = default!;
+        public VerificationWeb3VerificationStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
-        public Web3SignatureVerificationStrategy Strategy { get; set; } = default!;
+        public VerificationWeb3VerificationStrategy Strategy { get; set; } = default!;
 
         [JsonProperty("nonce")]
         public string? Nonce { get; set; } = null;

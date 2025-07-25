@@ -24,24 +24,21 @@ namespace Clerk.BackendAPI.Models.Components
         private VerificationType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        public static VerificationType Otp { get { return new VerificationType("OTP"); } }
         
-        public static VerificationType Admin { get { return new VerificationType("Admin"); } }
-        
-        public static VerificationType FromOAuth { get { return new VerificationType("FromOAuth"); } }
-        
-        public static VerificationType Ticket { get { return new VerificationType("Ticket"); } }
-        
+        public static VerificationType VerificationOtp { get { return new VerificationType("verification_otp"); } }
+        public static VerificationType VerificationAdmin { get { return new VerificationType("verification_admin"); } }
+        public static VerificationType VerificationFromOauth { get { return new VerificationType("verification_from_oauth"); } }
+        public static VerificationType VerificationTicket { get { return new VerificationType("verification_ticket"); } }
         public static VerificationType Null { get { return new VerificationType("null"); } }
 
         public override string ToString() { return Value; }
         public static implicit operator String(VerificationType v) { return v.Value; }
         public static VerificationType FromString(string v) {
             switch(v) {
-                case "OTP": return Otp;
-                case "Admin": return Admin;
-                case "FromOAuth": return FromOAuth;
-                case "Ticket": return Ticket;
+                case "verification_otp": return VerificationOtp;
+                case "verification_admin": return VerificationAdmin;
+                case "verification_from_oauth": return VerificationFromOauth;
+                case "verification_ticket": return VerificationTicket;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for VerificationType");
             }
@@ -83,38 +80,46 @@ namespace Clerk.BackendAPI.Models.Components
         public VerificationType Type { get; set; }
 
 
-        public static Verification CreateOtp(Otp otp) {
-            VerificationType typ = VerificationType.Otp;
-
+        public static Verification CreateVerificationOtp(Otp verificationOtp) {
+            VerificationType typ = VerificationType.VerificationOtp;
+        
+            string typStr = VerificationType.VerificationOtp.ToString();
+            
+            verificationOtp.Object = VerificationObjectExtension.ToEnum(VerificationType.VerificationOtp.ToString());
             Verification res = new Verification(typ);
-            res.Otp = otp;
+            res.Otp = verificationOtp;
             return res;
         }
-
-        public static Verification CreateAdmin(Admin admin) {
-            VerificationType typ = VerificationType.Admin;
-
+        public static Verification CreateVerificationAdmin(Admin verificationAdmin) {
+            VerificationType typ = VerificationType.VerificationAdmin;
+        
+            string typStr = VerificationType.VerificationAdmin.ToString();
+            
+            verificationAdmin.Object = VerificationAdminVerificationObjectExtension.ToEnum(VerificationType.VerificationAdmin.ToString());
             Verification res = new Verification(typ);
-            res.Admin = admin;
+            res.Admin = verificationAdmin;
             return res;
         }
-
-        public static Verification CreateFromOAuth(FromOAuth fromOAuth) {
-            VerificationType typ = VerificationType.FromOAuth;
-
+        public static Verification CreateVerificationFromOauth(FromOAuth verificationFromOauth) {
+            VerificationType typ = VerificationType.VerificationFromOauth;
+        
+            string typStr = VerificationType.VerificationFromOauth.ToString();
+            
+            verificationFromOauth.Object = VerificationFromOauthVerificationObjectExtension.ToEnum(VerificationType.VerificationFromOauth.ToString());
             Verification res = new Verification(typ);
-            res.FromOAuth = fromOAuth;
+            res.FromOAuth = verificationFromOauth;
             return res;
         }
-
-        public static Verification CreateTicket(Ticket ticket) {
-            VerificationType typ = VerificationType.Ticket;
-
+        public static Verification CreateVerificationTicket(Ticket verificationTicket) {
+            VerificationType typ = VerificationType.VerificationTicket;
+        
+            string typStr = VerificationType.VerificationTicket.ToString();
+            
+            verificationTicket.Object = VerificationTicketVerificationObjectExtension.ToEnum(VerificationType.VerificationTicket.ToString());
             Verification res = new Verification(typ);
-            res.Ticket = ticket;
+            res.Ticket = verificationTicket;
             return res;
         }
-
         public static Verification CreateNull() {
             VerificationType typ = VerificationType.Null;
             return new Verification(typ);
@@ -129,112 +134,27 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                JObject jo = JObject.Load(reader);
+                string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
+                if (discriminator == VerificationType.VerificationOtp.ToString())
                 {
-                    return null;
+                    Otp? otp = ResponseBodyDeserializer.Deserialize<Otp>(jo.ToString());
+                    return CreateVerificationOtp(otp!);
                 }
-
-                var fallbackCandidates = new List<(System.Type, object, string)>();
-
-                try
+                if (discriminator == VerificationType.VerificationAdmin.ToString())
                 {
-                    return new Verification(VerificationType.Otp)
-                    {
-                        Otp = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Otp>(json)
-                    };
+                    Admin? admin = ResponseBodyDeserializer.Deserialize<Admin>(jo.ToString());
+                    return CreateVerificationAdmin(admin!);
                 }
-                catch (ResponseBodyDeserializer.MissingMemberException)
+                if (discriminator == VerificationType.VerificationFromOauth.ToString())
                 {
-                    fallbackCandidates.Add((typeof(Otp), new Verification(VerificationType.Otp), "Otp"));
+                    FromOAuth? fromOAuth = ResponseBodyDeserializer.Deserialize<FromOAuth>(jo.ToString());
+                    return CreateVerificationFromOauth(fromOAuth!);
                 }
-                catch (ResponseBodyDeserializer.DeserializationException)
+                if (discriminator == VerificationType.VerificationTicket.ToString())
                 {
-                    // try next option
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-
-                try
-                {
-                    return new Verification(VerificationType.Admin)
-                    {
-                        Admin = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Admin>(json)
-                    };
-                }
-                catch (ResponseBodyDeserializer.MissingMemberException)
-                {
-                    fallbackCandidates.Add((typeof(Admin), new Verification(VerificationType.Admin), "Admin"));
-                }
-                catch (ResponseBodyDeserializer.DeserializationException)
-                {
-                    // try next option
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-
-                try
-                {
-                    return new Verification(VerificationType.Ticket)
-                    {
-                        Ticket = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<Ticket>(json)
-                    };
-                }
-                catch (ResponseBodyDeserializer.MissingMemberException)
-                {
-                    fallbackCandidates.Add((typeof(Ticket), new Verification(VerificationType.Ticket), "Ticket"));
-                }
-                catch (ResponseBodyDeserializer.DeserializationException)
-                {
-                    // try next option
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-
-                try
-                {
-                    return new Verification(VerificationType.FromOAuth)
-                    {
-                        FromOAuth = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<FromOAuth>(json)
-                    };
-                }
-                catch (ResponseBodyDeserializer.MissingMemberException)
-                {
-                    fallbackCandidates.Add((typeof(FromOAuth), new Verification(VerificationType.FromOAuth), "FromOAuth"));
-                }
-                catch (ResponseBodyDeserializer.DeserializationException)
-                {
-                    // try next option
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-
-                if (fallbackCandidates.Count > 0)
-                {
-                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
-                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
-                    {
-                        try
-                        {
-                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
-                        }
-                        catch (ResponseBodyDeserializer.DeserializationException)
-                        {
-                            // try next fallback option
-                        }
-                        catch (Exception)
-                        {
-                            throw;
-                        }
-                    }
+                    Ticket? ticket = ResponseBodyDeserializer.Deserialize<Ticket>(jo.ToString());
+                    return CreateVerificationTicket(ticket!);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");

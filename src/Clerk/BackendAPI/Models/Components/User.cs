@@ -22,7 +22,7 @@ namespace Clerk.BackendAPI.Models.Components
     {
 
         [JsonProperty("id")]
-        public string? Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>
         /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
@@ -32,28 +32,28 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("object")]
-        public UserObject? Object { get; set; }
+        public UserObject Object { get; set; } = default!;
 
-        [JsonProperty("external_id")]
-        public string? ExternalId { get; set; } = null;
+        [JsonProperty("external_id", NullValueHandling = NullValueHandling.Include)]
+        public string? ExternalId { get; set; }
 
-        [JsonProperty("primary_email_address_id")]
-        public string? PrimaryEmailAddressId { get; set; } = null;
+        [JsonProperty("primary_email_address_id", NullValueHandling = NullValueHandling.Include)]
+        public string? PrimaryEmailAddressId { get; set; }
 
-        [JsonProperty("primary_phone_number_id")]
-        public string? PrimaryPhoneNumberId { get; set; } = null;
+        [JsonProperty("primary_phone_number_id", NullValueHandling = NullValueHandling.Include)]
+        public string? PrimaryPhoneNumberId { get; set; }
 
-        [JsonProperty("primary_web3_wallet_id")]
-        public string? PrimaryWeb3WalletId { get; set; } = null;
+        [JsonProperty("primary_web3_wallet_id", NullValueHandling = NullValueHandling.Include)]
+        public string? PrimaryWeb3WalletId { get; set; }
 
-        [JsonProperty("username")]
-        public string? Username { get; set; } = null;
+        [JsonProperty("username", NullValueHandling = NullValueHandling.Include)]
+        public string? Username { get; set; }
 
-        [JsonProperty("first_name")]
-        public string? FirstName { get; set; } = null;
+        [JsonProperty("first_name", NullValueHandling = NullValueHandling.Include)]
+        public string? FirstName { get; set; }
 
-        [JsonProperty("last_name")]
-        public string? LastName { get; set; } = null;
+        [JsonProperty("last_name", NullValueHandling = NullValueHandling.Include)]
+        public string? LastName { get; set; }
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("profile_image_url")]
@@ -63,10 +63,10 @@ namespace Clerk.BackendAPI.Models.Components
         public string? ImageUrl { get; set; }
 
         [JsonProperty("has_image")]
-        public bool? HasImage { get; set; }
+        public bool HasImage { get; set; } = default!;
 
         [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; }
+        public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
@@ -75,28 +75,28 @@ namespace Clerk.BackendAPI.Models.Components
         public Dictionary<string, object>? UnsafeMetadata { get; set; }
 
         [JsonProperty("email_addresses")]
-        public List<EmailAddress>? EmailAddresses { get; set; }
+        public List<EmailAddress> EmailAddresses { get; set; } = default!;
 
         [JsonProperty("phone_numbers")]
-        public List<PhoneNumber>? PhoneNumbers { get; set; }
+        public List<PhoneNumber> PhoneNumbers { get; set; } = default!;
 
         [JsonProperty("web3_wallets")]
-        public List<Web3Wallet>? Web3Wallets { get; set; }
+        public List<Web3Wallet> Web3Wallets { get; set; } = default!;
 
         [JsonProperty("passkeys")]
-        public List<SchemasPasskey>? Passkeys { get; set; }
+        public List<Passkey> Passkeys { get; set; } = default!;
 
         [JsonProperty("password_enabled")]
-        public bool? PasswordEnabled { get; set; }
+        public bool PasswordEnabled { get; set; } = default!;
 
         [JsonProperty("two_factor_enabled")]
-        public bool? TwoFactorEnabled { get; set; }
+        public bool TwoFactorEnabled { get; set; } = default!;
 
         [JsonProperty("totp_enabled")]
-        public bool? TotpEnabled { get; set; }
+        public bool TotpEnabled { get; set; } = default!;
 
         [JsonProperty("backup_code_enabled")]
-        public bool? BackupCodeEnabled { get; set; }
+        public bool BackupCodeEnabled { get; set; } = default!;
 
         /// <summary>
         /// Unix timestamp of when MFA was last enabled for this user. It should be noted that this field is not nullified if MFA is disabled.<br/>
@@ -105,8 +105,8 @@ namespace Clerk.BackendAPI.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("mfa_enabled_at")]
-        public long? MfaEnabledAt { get; set; } = null;
+        [JsonProperty("mfa_enabled_at", NullValueHandling = NullValueHandling.Include)]
+        public long? MfaEnabledAt { get; set; }
 
         /// <summary>
         /// Unix timestamp of when MFA was last disabled for this user. It should be noted that this field is not nullified if MFA is enabled again.<br/>
@@ -115,14 +115,14 @@ namespace Clerk.BackendAPI.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("mfa_disabled_at")]
-        public long? MfaDisabledAt { get; set; } = null;
+        [JsonProperty("mfa_disabled_at", NullValueHandling = NullValueHandling.Include)]
+        public long? MfaDisabledAt { get; set; }
 
         [JsonProperty("external_accounts")]
-        public List<ExternalAccountWithVerification>? ExternalAccounts { get; set; }
+        public List<ExternalAccountWithVerification> ExternalAccounts { get; set; } = default!;
 
         [JsonProperty("saml_accounts")]
-        public List<SAMLAccount>? SamlAccounts { get; set; }
+        public List<SAMLAccount> SamlAccounts { get; set; } = default!;
 
         /// <summary>
         /// Unix timestamp of last sign-in.<br/>
@@ -131,8 +131,8 @@ namespace Clerk.BackendAPI.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("last_sign_in_at")]
-        public long? LastSignInAt { get; set; } = null;
+        [JsonProperty("last_sign_in_at", NullValueHandling = NullValueHandling.Include)]
+        public long? LastSignInAt { get; set; }
 
         /// <summary>
         /// Flag to denote whether user is banned or not.<br/>
@@ -142,7 +142,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("banned")]
-        public bool? Banned { get; set; }
+        public bool Banned { get; set; } = default!;
 
         /// <summary>
         /// Flag to denote whether user is currently locked, i.e. restricted from signing in or not.<br/>
@@ -152,7 +152,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("locked")]
-        public bool? Locked { get; set; }
+        public bool Locked { get; set; } = default!;
 
         /// <summary>
         /// The number of seconds remaining until the lockout period expires for a locked user. A null value for a locked user indicates that lockout never expires.<br/>
@@ -161,8 +161,8 @@ namespace Clerk.BackendAPI.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("lockout_expires_in_seconds")]
-        public long? LockoutExpiresInSeconds { get; set; } = null;
+        [JsonProperty("lockout_expires_in_seconds", NullValueHandling = NullValueHandling.Include)]
+        public long? LockoutExpiresInSeconds { get; set; }
 
         /// <summary>
         /// The number of verification attempts remaining until the user is locked. Null if account lockout is not enabled. Note: if a user is locked explicitly via the Backend API, they may still have verification attempts remaining.<br/>
@@ -171,8 +171,8 @@ namespace Clerk.BackendAPI.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("verification_attempts_remaining")]
-        public long? VerificationAttemptsRemaining { get; set; } = null;
+        [JsonProperty("verification_attempts_remaining", NullValueHandling = NullValueHandling.Include)]
+        public long? VerificationAttemptsRemaining { get; set; }
 
         /// <summary>
         /// Unix timestamp of last update.<br/>
@@ -182,7 +182,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("updated_at")]
-        public long? UpdatedAt { get; set; }
+        public long UpdatedAt { get; set; } = default!;
 
         /// <summary>
         /// Unix timestamp of creation.<br/>
@@ -192,7 +192,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("created_at")]
-        public long? CreatedAt { get; set; }
+        public long CreatedAt { get; set; } = default!;
 
         /// <summary>
         /// If enabled, user can delete themselves via FAPI.<br/>
@@ -202,7 +202,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("delete_self_enabled")]
-        public bool? DeleteSelfEnabled { get; set; }
+        public bool DeleteSelfEnabled { get; set; } = default!;
 
         /// <summary>
         /// If enabled, user can create organizations via FAPI.<br/>
@@ -212,7 +212,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("create_organization_enabled")]
-        public bool? CreateOrganizationEnabled { get; set; }
+        public bool CreateOrganizationEnabled { get; set; } = default!;
 
         /// <summary>
         /// The maximum number of organizations the user can create. 0 means unlimited.<br/>
@@ -231,8 +231,8 @@ namespace Clerk.BackendAPI.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("last_active_at")]
-        public long? LastActiveAt { get; set; } = null;
+        [JsonProperty("last_active_at", NullValueHandling = NullValueHandling.Include)]
+        public long? LastActiveAt { get; set; }
 
         /// <summary>
         /// Unix timestamp of when the user accepted the legal requirements.<br/>
@@ -241,7 +241,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// 
         /// </remarks>
         /// </summary>
-        [JsonProperty("legal_accepted_at")]
-        public long? LegalAcceptedAt { get; set; } = null;
+        [JsonProperty("legal_accepted_at", NullValueHandling = NullValueHandling.Include)]
+        public long? LegalAcceptedAt { get; set; }
     }
 }

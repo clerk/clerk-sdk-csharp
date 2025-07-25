@@ -10,7 +10,6 @@
 * [Get](#get) - Retrieve a session
 * [Refresh](#refresh) - Refresh a session
 * [Revoke](#revoke) - Revoke a session
-* [~~Verify~~](#verify) - Verify a session :warning: **Deprecated**
 * [CreateToken](#createtoken) - Create a session token
 * [CreateTokenFromTemplate](#createtokenfromtemplate) - Create a session token from a jwt template
 
@@ -33,7 +32,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 GetSessionListRequest req = new GetSessionListRequest() {
     ClientId = "client_123",
     UserId = "user_456",
-    Status = Status.Active,
+    Status = Clerk.BackendAPI.Models.Operations.Status.Active,
     Limit = 20,
     Offset = 10,
 };
@@ -76,7 +75,7 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateSessionRequestBody req = ;
+CreateSessionRequestBody? req = null;
 
 var res = await sdk.Sessions.CreateAsync(req);
 
@@ -137,7 +136,7 @@ var res = await sdk.Sessions.GetAsync(sessionId: "sess_1234567890abcdef");
 ## Refresh
 
 Refreshes a session by creating a new session token. A 401 is returned when there
-are validation errors, which signals the SDKs to fallback to the handshake flow.
+are validation errors, which signals the SDKs to fall back to the handshake flow.
 
 ### Example Usage
 
@@ -203,52 +202,6 @@ var res = await sdk.Sessions.RevokeAsync(sessionId: "sess_1234567890abcdef");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
-| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
-
-## ~~Verify~~
-
-Returns the session if it is authenticated, otherwise returns an error.
-WARNING: This endpoint is deprecated and will be removed in future versions. We strongly recommend switching to networkless verification using short-lived session tokens,
-         which is implemented transparently in all recent SDK versions (e.g. [NodeJS SDK](https://clerk.com/docs/backend-requests/handling/nodejs#clerk-express-require-auth)).
-         For more details on how networkless verification works, refer to our [Session Tokens documentation](https://clerk.com/docs/backend-requests/resources/session-tokens).
-
-> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
-
-### Example Usage
-
-```csharp
-using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
-
-var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
-
-var res = await sdk.Sessions.VerifyAsync(
-    sessionId: "sess_w8q4g9s60j28fghv00f3",
-    requestBody: new VerifySessionRequestBody() {
-        Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uX2lkIjoic2Vzc193OHF4ZzZzNm9qMjhmZ2h2MDBmMyIsImlhdCI6MTU4MjY0OTg2Mn0.J4KP2L6bEZ6YccHFW4E2vKbOLw_mmO0gF_GNRw-wtLM",
-    }
-);
-
-// handle response
-```
-
-### Parameters
-
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `SessionId`                                                                     | *string*                                                                        | :heavy_check_mark:                                                              | The ID of the session                                                           | sess_w8q4g9s60j28fghv00f3                                                       |
-| `RequestBody`                                                                   | [VerifySessionRequestBody](../../Models/Operations/VerifySessionRequestBody.md) | :heavy_minus_sign:                                                              | Parameters.                                                                     |                                                                                 |
-
-### Response
-
-**[VerifySessionResponse](../../Models/Operations/VerifySessionResponse.md)**
-
-### Errors
-
-| Error Type                                 | Status Code                                | Content Type                               |
-| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 410                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## CreateToken

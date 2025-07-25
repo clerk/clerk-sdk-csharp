@@ -3,14 +3,14 @@
 
 ## Supported Types
 
-### Oauth
+### VerificationOauth
 
 ```csharp
-ExternalAccountWithVerificationVerification.CreateOauth(/* values here */);
+ExternalAccountWithVerificationVerification.CreateVerificationOauth(/* values here */);
 ```
 
-### GoogleOneTap
+### VerificationGoogleOneTap
 
 ```csharp
-ExternalAccountWithVerificationVerification.CreateGoogleOneTap(/* values here */);
+ExternalAccountWithVerificationVerification.CreateVerificationGoogleOneTap(/* values here */);
 ```

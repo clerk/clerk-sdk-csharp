@@ -16,17 +16,20 @@ namespace Clerk.BackendAPI.Models.Components
     public class Saml
     {
 
+        [JsonProperty("object")]
+        public VerificationSamlVerificationObject? Object { get; set; }
+
         [JsonProperty("status")]
-        public SAMLVerificationStatus Status { get; set; } = default!;
+        public VerificationSamlVerificationStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
-        public SAMLVerificationStrategy Strategy { get; set; } = default!;
+        public VerificationSamlVerificationStrategy Strategy { get; set; } = default!;
 
         [JsonProperty("external_verification_redirect_url", NullValueHandling = NullValueHandling.Include)]
         public string? ExternalVerificationRedirectUrl { get; set; }
 
         [JsonProperty("error")]
-        public SAMLVerificationError? Error { get; set; } = null;
+        public VerificationSamlVerificationError? Error { get; set; } = null;
 
         [JsonProperty("expire_at")]
         public long ExpireAt { get; set; } = default!;

@@ -30,7 +30,7 @@ namespace Clerk.BackendAPI.Hooks
             request.Headers.Add("Clerk-API-Version", "2024-10-01");
 
             // Add Origin header for session token creation operations if origin is specified
-            if (!string.IsNullOrEmpty(_origin) && 
+            if (!string.IsNullOrEmpty(_origin) &&
                 (hookCtx.OperationID == "CreateSessionToken" || hookCtx.OperationID == "CreateSessionTokenFromTemplate"))
             {
                 if (!request.Headers.Contains("Origin"))

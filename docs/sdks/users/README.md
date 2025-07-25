@@ -13,6 +13,8 @@
 * [Delete](#delete) - Delete a user
 * [Ban](#ban) - Ban a user
 * [Unban](#unban) - Unban a user
+* [BulkBan](#bulkban) - Ban multiple users
+* [BulkUnban](#bulkunban) - Unban multiple users
 * [Lock](#lock) - Lock a user
 * [Unlock](#unlock) - Unlock a user
 * [SetProfileImage](#setprofileimage) - Set user profile image
@@ -108,7 +110,7 @@ Any email address and phone number created using this method will be marked as v
 
 Note: If you are performing a migration, check out our guide on [zero downtime migrations](https://clerk.com/docs/deployments/migrate-overview).
 
-A rate limit rule of 20 requests per 10 seconds is applied to this endpoint.
+The following rate limit rules apply to this endpoint: 1000 requests per 10 seconds for production instances and 100 requests per 10 seconds for development instances
 
 ### Example Usage
 
@@ -460,6 +462,94 @@ var res = await sdk.Users.UnbanAsync(userId: "user_12345");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 402                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## BulkBan
+
+Marks multiple users as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+UsersBanRequestBody req = new UsersBanRequestBody() {
+    UserIds = new List<string>() {
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+    },
+};
+
+var res = await sdk.Users.BulkBanAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [UsersBanRequestBody](../../Models/Operations/UsersBanRequestBody.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
+
+### Response
+
+**[UsersBanResponse](../../Models/Operations/UsersBanResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## BulkUnban
+
+Removes the ban mark from multiple users.
+
+### Example Usage
+
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+UsersUnbanRequestBody req = new UsersUnbanRequestBody() {
+    UserIds = new List<string>() {
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+    },
+};
+
+var res = await sdk.Users.BulkUnbanAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `request`                                                                 | [UsersUnbanRequestBody](../../Models/Operations/UsersUnbanRequestBody.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
+
+### Response
+
+**[UsersUnbanResponse](../../Models/Operations/UsersUnbanResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Lock
