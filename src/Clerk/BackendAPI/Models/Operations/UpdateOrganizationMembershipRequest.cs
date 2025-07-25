@@ -16,7 +16,7 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         /// <summary>
-        /// The ID of the organization the membership belongs to
+        /// The ID of the organization to which the membership belongs
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_id")]
         public string OrganizationId { get; set; } = default!;

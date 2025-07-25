@@ -16,8 +16,11 @@ namespace Clerk.BackendAPI.Models.Components
     public class FromOAuth
     {
 
+        [JsonProperty("object")]
+        public VerificationFromOauthVerificationObject? Object { get; set; }
+
         [JsonProperty("status")]
-        public FromOAuthVerificationStatus Status { get; set; } = default!;
+        public VerificationFromOauthVerificationStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
         public string Strategy { get; set; } = default!;

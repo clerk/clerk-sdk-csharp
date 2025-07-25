@@ -26,8 +26,5 @@ namespace Clerk.BackendAPI.Models.Operations
 
         [JsonProperty("block_disposable_email_domains")]
         public bool? BlockDisposableEmailDomains { get; set; } = null;
-
-        [JsonProperty("ignore_dots_for_gmail_addresses")]
-        public bool? IgnoreDotsForGmailAddresses { get; set; } = null;
     }
 }

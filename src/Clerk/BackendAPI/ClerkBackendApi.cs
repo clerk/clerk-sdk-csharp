@@ -28,7 +28,7 @@ namespace Clerk.BackendAPI
     /// ### Versions<br/>
     /// <br/>
     /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
-    /// Each version is identified by its release date, e.g. `2025-03-12`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
+    /// Each version is identified by its release date, e.g. `2025-04-10`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
@@ -39,6 +39,7 @@ namespace Clerk.BackendAPI
     {
         public IMiscellaneous Miscellaneous { get; }
         public IJwks Jwks { get; }
+        public IAwsCredentials AwsCredentials { get; }
         public IClients Clients { get; }
         public IEmailAddresses EmailAddresses { get; }
         public IPhoneNumbers PhoneNumbers { get; }
@@ -57,6 +58,8 @@ namespace Clerk.BackendAPI
         public IInstanceSettings InstanceSettings { get; }
         public IWebhooks Webhooks { get; }
         public IJwtTemplates JwtTemplates { get; }
+        public IMachineTokens MachineTokens { get; }
+        public IMachines Machines { get; }
         public IOrganizations Organizations { get; }
         public IOrganizationMemberships OrganizationMemberships { get; }
         public IOrganizationDomains OrganizationDomains { get; }
@@ -69,6 +72,8 @@ namespace Clerk.BackendAPI
         public ITestingTokens TestingTokens { get; }
         public IWaitlistEntries WaitlistEntries { get; }
         public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; }
+        public IManagement Management { get; }
+        public IOauthAccessTokens OauthAccessTokens { get; }
     }
 
 
@@ -80,7 +85,7 @@ namespace Clerk.BackendAPI
     /// ### Versions<br/>
     /// <br/>
     /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
-    /// Each version is identified by its release date, e.g. `2025-03-12`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
+    /// Each version is identified by its release date, e.g. `2025-04-10`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
@@ -92,11 +97,12 @@ namespace Clerk.BackendAPI
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.0";
-        private const string _sdkGenVersion = "2.625.0";
-        private const string _openapiDocVersion = "2025-03-12";
+        private const string _sdkVersion = "0.10.0";
+        private const string _sdkGenVersion = "2.666.0";
+        private const string _openapiDocVersion = "2025-04-10";
         public IMiscellaneous Miscellaneous { get; private set; }
         public IJwks Jwks { get; private set; }
+        public IAwsCredentials AwsCredentials { get; private set; }
         public IClients Clients { get; private set; }
         public IEmailAddresses EmailAddresses { get; private set; }
         public IPhoneNumbers PhoneNumbers { get; private set; }
@@ -115,6 +121,8 @@ namespace Clerk.BackendAPI
         public IInstanceSettings InstanceSettings { get; private set; }
         public IWebhooks Webhooks { get; private set; }
         public IJwtTemplates JwtTemplates { get; private set; }
+        public IMachineTokens MachineTokens { get; private set; }
+        public IMachines Machines { get; private set; }
         public IOrganizations Organizations { get; private set; }
         public IOrganizationMemberships OrganizationMemberships { get; private set; }
         public IOrganizationDomains OrganizationDomains { get; private set; }
@@ -127,6 +135,8 @@ namespace Clerk.BackendAPI
         public ITestingTokens TestingTokens { get; private set; }
         public IWaitlistEntries WaitlistEntries { get; private set; }
         public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; private set; }
+        public IManagement Management { get; private set; }
+        public IOauthAccessTokens OauthAccessTokens { get; private set; }
 
         public ClerkBackendApi(SDKConfig config)
         {
@@ -136,6 +146,8 @@ namespace Clerk.BackendAPI
             Miscellaneous = new Miscellaneous(SDKConfiguration);
 
             Jwks = new Jwks(SDKConfiguration);
+
+            AwsCredentials = new AwsCredentials(SDKConfiguration);
 
             Clients = new Clients(SDKConfiguration);
 
@@ -173,6 +185,10 @@ namespace Clerk.BackendAPI
 
             JwtTemplates = new JwtTemplates(SDKConfiguration);
 
+            MachineTokens = new MachineTokens(SDKConfiguration);
+
+            Machines = new Machines(SDKConfiguration);
+
             Organizations = new Organizations(SDKConfiguration);
 
             OrganizationMemberships = new OrganizationMemberships(SDKConfiguration);
@@ -196,6 +212,10 @@ namespace Clerk.BackendAPI
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
 
             ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(SDKConfiguration);
+
+            Management = new Management(SDKConfiguration);
+
+            OauthAccessTokens = new OauthAccessTokens(SDKConfiguration);
         }
 
         public ClerkBackendApi(string? bearerAuth = null, Func<string>? bearerAuthSource = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
@@ -240,6 +260,8 @@ namespace Clerk.BackendAPI
 
             Jwks = new Jwks(SDKConfiguration);
 
+            AwsCredentials = new AwsCredentials(SDKConfiguration);
+
             Clients = new Clients(SDKConfiguration);
 
             EmailAddresses = new EmailAddresses(SDKConfiguration);
@@ -276,6 +298,10 @@ namespace Clerk.BackendAPI
 
             JwtTemplates = new JwtTemplates(SDKConfiguration);
 
+            MachineTokens = new MachineTokens(SDKConfiguration);
+
+            Machines = new Machines(SDKConfiguration);
+
             Organizations = new Organizations(SDKConfiguration);
 
             OrganizationMemberships = new OrganizationMemberships(SDKConfiguration);
@@ -299,6 +325,10 @@ namespace Clerk.BackendAPI
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
 
             ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(SDKConfiguration);
+
+            Management = new Management(SDKConfiguration);
+
+            OauthAccessTokens = new OauthAccessTokens(SDKConfiguration);
         }
 
         private void InitHooks()
@@ -361,12 +391,6 @@ namespace Clerk.BackendAPI
             public SDKBuilder WithRetryConfig(RetryConfig retryConfig)
             {
                 _sdkConfig.RetryConfig = retryConfig;
-                return this;
-            }
-
-            public SDKBuilder WithBeforeRequestHook(IBeforeRequestHook hook)
-            {
-                _sdkConfig.Hooks.RegisterBeforeRequestHook(hook);
                 return this;
             }
 

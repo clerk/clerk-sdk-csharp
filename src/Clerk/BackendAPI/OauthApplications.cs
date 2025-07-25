@@ -35,7 +35,7 @@ namespace Clerk.BackendAPI
         /// Most recent OAuth applications will be returned first.
         /// </remarks>
         /// </summary>
-        Task<ListOAuthApplicationsResponse> ListAsync(long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        Task<ListOAuthApplicationsResponse> ListAsync(long? limit = 10, long? offset = 0, string? orderBy = "+created_at", string? nameQuery = null, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create an OAuth application
@@ -91,21 +91,23 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.9.0";
-        private const string _sdkGenVersion = "2.625.0";
-        private const string _openapiDocVersion = "2025-03-12";
+        private const string _sdkVersion = "0.10.0";
+        private const string _sdkGenVersion = "2.666.0";
+        private const string _openapiDocVersion = "2025-04-10";
 
         public OauthApplications(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListOAuthApplicationsResponse> ListAsync(long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+        public async Task<ListOAuthApplicationsResponse> ListAsync(long? limit = 10, long? offset = 0, string? orderBy = "+created_at", string? nameQuery = null, RetryConfig? retryConfig = null)
         {
             var request = new ListOAuthApplicationsRequest()
             {
                 Limit = limit,
                 Offset = offset,
+                OrderBy = orderBy,
+                NameQuery = nameQuery,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/oauth_applications", request);

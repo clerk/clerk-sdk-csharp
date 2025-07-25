@@ -28,6 +28,26 @@ namespace Clerk.BackendAPI.Models.Operations
         public ListOrganizationInvitationsQueryParamStatus? Status { get; set; }
 
         /// <summary>
+        /// Returns organization invitations inviting the specified email address.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=email_address")]
+        public string? EmailAddress { get; set; }
+
+        /// <summary>
+        /// Allows to return organization invitations in a particular order.<br/>
+        /// 
+        /// <remarks>
+        /// You can order the returned organization invitations either by their `created_at` or `email_address`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want organization invitations to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don&apos;t use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
+        public string? OrderBy { get; set; } = "-created_at";
+
+        /// <summary>
         /// Applies a limit to the number of results returned.<br/>
         /// 
         /// <remarks>

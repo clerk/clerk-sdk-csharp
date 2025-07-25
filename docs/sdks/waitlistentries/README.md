@@ -63,7 +63,7 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateWaitlistEntryRequestBody req = ;
+CreateWaitlistEntryRequestBody? req = null;
 
 var res = await sdk.WaitlistEntries.CreateAsync(req);
 

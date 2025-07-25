@@ -81,4 +81,4 @@ public class M2MMachineAuthObject : AuthObject
     public string? Name { get; set; }
     public List<string>? Scopes { get; set; }
     public Dictionary<string, object>? Claims { get; set; }
-} 
+}

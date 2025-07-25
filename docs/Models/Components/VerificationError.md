@@ -3,8 +3,8 @@
 
 ## Supported Types
 
-### OauthErrorClerkError
+### VerificationOauthErrorClerkError
 
 ```csharp
-VerificationError.CreateOauthErrorClerkError(/* values here */);
+VerificationError.CreateVerificationOauthErrorClerkError(/* values here */);
 ```

@@ -12,7 +12,10 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
     /// 
@@ -20,43 +23,58 @@ namespace Clerk.BackendAPI.Models.Components
     /// 
     /// </remarks>
     /// </summary>
-    public enum EmailAddressObject
+    [JsonConverter(typeof(OpenEnumConverter))]
+    public class EmailAddressObject : IEquatable<EmailAddressObject>
     {
-        [JsonProperty("email_address")]
-        EmailAddress,
-    }
+        public static readonly EmailAddressObject EmailAddress = new EmailAddressObject("email_address");
 
-    public static class EmailAddressObjectExtension
-    {
-        public static string Value(this EmailAddressObject value)
-        {
-            return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
-        }
-
-        public static EmailAddressObject ToEnum(this string value)
-        {
-            foreach(var field in typeof(EmailAddressObject).GetFields())
+        private static readonly Dictionary <string, EmailAddressObject> _knownValues =
+            new Dictionary <string, EmailAddressObject> ()
             {
-                var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
+                ["email_address"] = EmailAddress
+            };
 
-                var attribute = attributes[0] as JsonPropertyAttribute;
-                if (attribute != null && attribute.PropertyName == value)
-                {
-                    var enumVal = field.GetValue(null);
+        private static readonly ConcurrentDictionary<string, EmailAddressObject> _values =
+            new ConcurrentDictionary<string, EmailAddressObject>(_knownValues);
 
-                    if (enumVal is EmailAddressObject)
-                    {
-                        return (EmailAddressObject)enumVal;
-                    }
-                }
-            }
-
-            throw new Exception($"Unknown value {value} for enum EmailAddressObject");
+        private EmailAddressObject(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            Value = value;
         }
+
+        public string Value { get; }
+
+        public static EmailAddressObject Of(string value)
+        {
+            return _values.GetOrAdd(value, _ => new EmailAddressObject(value));
+        }
+
+        public static implicit operator EmailAddressObject(string value) => Of(value);
+        public static implicit operator string(EmailAddressObject emailaddressobject) => emailaddressobject.Value;
+
+        public static EmailAddressObject[] Values()
+        {
+            return _values.Values.ToArray();
+        }
+
+        public override string ToString() => Value.ToString();
+
+        public bool IsKnown()
+        {
+            return _knownValues.ContainsKey(Value);
+        }
+
+        public override bool Equals(object? obj) => Equals(obj as EmailAddressObject);
+
+        public bool Equals(EmailAddressObject? other)
+        {
+            if (ReferenceEquals(this, other)) return true;
+            if (other is null) return false;
+            return string.Equals(Value, other.Value);
+        }
+
+        public override int GetHashCode() => Value.GetHashCode();
     }
 
 }

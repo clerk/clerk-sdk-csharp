@@ -66,22 +66,24 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateSAMLConnectionRequestBody req = new CreateSAMLConnectionRequestBody() {
-    Name = "My SAML Connection",
-    Domain = "example.org",
-    Provider = Provider.SamlCustom,
-    IdpEntityId = "http://idp.example.org/",
-    IdpSsoUrl = "http://idp.example.org/sso",
-    IdpCertificate = "MIIDdzCCAl+gAwIBAgIJAKcyBaiiz+DT...",
-    IdpMetadataUrl = "http://idp.example.org/metadata.xml",
-    IdpMetadata = "<EntityDescriptor ...",
-    AttributeMapping = new AttributeMapping() {
-        UserId = "nameid",
-        EmailAddress = "mail",
-        FirstName = "givenName",
-        LastName = "surname",
-    },
-};
+CreateSAMLConnectionRequestBody req = CreateSAMLConnectionRequestBody.CreateOne(
+    new Clerk.BackendAPI.Models.Operations.One() {
+        Name = "My SAML Connection",
+        Domain = "example.org",
+        Provider = Provider.SamlCustom,
+        IdpEntityId = "http://idp.example.org/",
+        IdpSsoUrl = "http://idp.example.org/sso",
+        IdpCertificate = "MIIDdzCCAl+gAwIBAgIJAKcyBaiiz+DT...",
+        IdpMetadataUrl = "http://idp.example.org/metadata.xml",
+        IdpMetadata = "<EntityDescriptor ...",
+        AttributeMapping = new CreateSAMLConnectionRequestBodyAttributeMapping() {
+            UserId = "nameid",
+            EmailAddress = "mail",
+            FirstName = "givenName",
+            LastName = "surname",
+        },
+    }
+);
 
 var res = await sdk.SamlConnections.CreateAsync(req);
 
@@ -156,13 +158,12 @@ var res = await sdk.SamlConnections.UpdateAsync(
     samlConnectionId: "saml_conn_123_update",
     requestBody: new UpdateSAMLConnectionRequestBody() {
         Name = "Example SAML Connection",
-        Domain = "example.com",
         IdpEntityId = "entity_123",
         IdpSsoUrl = "https://idp.example.com/sso",
         IdpCertificate = "MIIDBTCCAe2gAwIBAgIQ...",
         IdpMetadataUrl = "https://idp.example.com/metadata",
         IdpMetadata = "<EntityDescriptor>...</EntityDescriptor>",
-        AttributeMapping = new UpdateSAMLConnectionAttributeMapping() {
+        AttributeMapping = new AttributeMapping() {
             UserId = "id123",
             EmailAddress = "user@example.com",
             FirstName = "Jane",
