@@ -3,8 +3,8 @@
 
 ## Supported Types
 
-### VerificationSamlErrorClerkError
+### VerificationSAMLErrorSAMLAccountClerkError
 
 ```csharp
-VerificationSamlVerificationError.CreateVerificationSamlErrorClerkError(/* values here */);
+VerificationSamlVerificationError.CreateVerificationSAMLErrorSAMLAccountClerkError(/* values here */);
 ```

@@ -24,7 +24,7 @@ namespace Clerk.BackendAPI.Models.Components
         private VerificationErrorType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        public static VerificationErrorType VerificationOauthErrorClerkError { get { return new VerificationErrorType("verification_oauth_error_ClerkError"); } }
+        public static VerificationErrorType VerificationSamlErrorClerkError { get { return new VerificationErrorType("verification_saml_error_ClerkError"); } }
         
         public static VerificationErrorType Null { get { return new VerificationErrorType("null"); } }
 
@@ -32,7 +32,7 @@ namespace Clerk.BackendAPI.Models.Components
         public static implicit operator String(VerificationErrorType v) { return v.Value; }
         public static VerificationErrorType FromString(string v) {
             switch(v) {
-                case "verification_oauth_error_ClerkError": return VerificationOauthErrorClerkError;
+                case "verification_saml_error_ClerkError": return VerificationSamlErrorClerkError;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for VerificationErrorType");
             }
@@ -60,16 +60,16 @@ namespace Clerk.BackendAPI.Models.Components
         }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public VerificationOauthErrorClerkError? VerificationOauthErrorClerkError { get; set; }
+        public VerificationSamlErrorClerkError? VerificationSamlErrorClerkError { get; set; }
 
         public VerificationErrorType Type { get; set; }
 
 
-        public static VerificationError CreateVerificationOauthErrorClerkError(VerificationOauthErrorClerkError verificationOauthErrorClerkError) {
-            VerificationErrorType typ = VerificationErrorType.VerificationOauthErrorClerkError;
+        public static VerificationError CreateVerificationSamlErrorClerkError(VerificationSamlErrorClerkError verificationSamlErrorClerkError) {
+            VerificationErrorType typ = VerificationErrorType.VerificationSamlErrorClerkError;
 
             VerificationError res = new VerificationError(typ);
-            res.VerificationOauthErrorClerkError = verificationOauthErrorClerkError;
+            res.VerificationSamlErrorClerkError = verificationSamlErrorClerkError;
             return res;
         }
 
@@ -97,14 +97,14 @@ namespace Clerk.BackendAPI.Models.Components
 
                 try
                 {
-                    return new VerificationError(VerificationErrorType.VerificationOauthErrorClerkError)
+                    return new VerificationError(VerificationErrorType.VerificationSamlErrorClerkError)
                     {
-                        VerificationOauthErrorClerkError = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<VerificationOauthErrorClerkError>(json)
+                        VerificationSamlErrorClerkError = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<VerificationSamlErrorClerkError>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(VerificationOauthErrorClerkError), new VerificationError(VerificationErrorType.VerificationOauthErrorClerkError), "VerificationOauthErrorClerkError"));
+                    fallbackCandidates.Add((typeof(VerificationSamlErrorClerkError), new VerificationError(VerificationErrorType.VerificationSamlErrorClerkError), "VerificationSamlErrorClerkError"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -150,9 +150,9 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
-                if (res.VerificationOauthErrorClerkError != null)
+                if (res.VerificationSamlErrorClerkError != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationOauthErrorClerkError));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationSamlErrorClerkError));
                     return;
                 }
 

@@ -49,7 +49,7 @@ namespace Clerk.BackendAPI
         /// Organizations support private and public metadata.<br/>
         /// Private metadata can only be accessed from the Backend API.<br/>
         /// Public metadata can be accessed from the Backend API, and are read-only from the Frontend API.<br/>
-        /// The `created_by` user will see this as their [active organization] (https://clerk.com/docs/organizations/overview#active-organization)<br/>
+        /// The `created_by` user will see this as their <a href="https://clerk.com/docs/organizations/overview#active-organization">active organization</a><br/>
         /// the next time they create a session, presuming they don&apos;t explicitly set a different organization as active before then.
         /// </remarks>
         /// </summary>
@@ -122,8 +122,8 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.11.0";
-        private const string _sdkGenVersion = "2.684.0";
+        private const string _sdkVersion = "0.11.1";
+        private const string _sdkGenVersion = "2.686.7";
         private const string _openapiDocVersion = "2025-04-10";
 
         public Organizations(SDKConfig config)

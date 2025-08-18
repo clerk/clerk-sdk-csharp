@@ -62,7 +62,7 @@ namespace Clerk.BackendAPI.Models.Components
         }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public Saml? Saml { get; set; }
+        public VerificationSAML? VerificationSAML { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public VerificationTicket? VerificationTicket { get; set; }
@@ -70,14 +70,14 @@ namespace Clerk.BackendAPI.Models.Components
         public SAMLAccountVerificationType Type { get; set; }
 
 
-        public static SAMLAccountVerification CreateVerificationSaml(Saml verificationSaml) {
+        public static SAMLAccountVerification CreateVerificationSaml(VerificationSAML verificationSaml) {
             SAMLAccountVerificationType typ = SAMLAccountVerificationType.VerificationSaml;
         
             string typStr = SAMLAccountVerificationType.VerificationSaml.ToString();
             
-            verificationSaml.Object = VerificationSamlVerificationObjectExtension.ToEnum(SAMLAccountVerificationType.VerificationSaml.ToString());
+            verificationSaml.Object = VerificationSAMLVerificationSAMLAccountObjectExtension.ToEnum(SAMLAccountVerificationType.VerificationSaml.ToString());
             SAMLAccountVerification res = new SAMLAccountVerification(typ);
-            res.Saml = verificationSaml;
+            res.VerificationSAML = verificationSaml;
             return res;
         }
         public static SAMLAccountVerification CreateVerificationTicket(VerificationTicket verificationTicket) {
@@ -108,8 +108,8 @@ namespace Clerk.BackendAPI.Models.Components
                 string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
                 if (discriminator == SAMLAccountVerificationType.VerificationSaml.ToString())
                 {
-                    Saml? saml = ResponseBodyDeserializer.Deserialize<Saml>(jo.ToString());
-                    return CreateVerificationSaml(saml!);
+                    VerificationSAML? verificationSAML = ResponseBodyDeserializer.Deserialize<VerificationSAML>(jo.ToString());
+                    return CreateVerificationSaml(verificationSAML!);
                 }
                 if (discriminator == SAMLAccountVerificationType.VerificationTicket.ToString())
                 {
@@ -132,9 +132,9 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
-                if (res.Saml != null)
+                if (res.VerificationSAML != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.Saml));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationSAML));
                     return;
                 }
                 if (res.VerificationTicket != null)
