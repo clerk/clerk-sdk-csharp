@@ -29,6 +29,7 @@ namespace Clerk.BackendAPI.Models.Components
         public static VerificationType VerificationAdmin { get { return new VerificationType("verification_admin"); } }
         public static VerificationType VerificationFromOauth { get { return new VerificationType("verification_from_oauth"); } }
         public static VerificationType VerificationTicket { get { return new VerificationType("verification_ticket"); } }
+        public static VerificationType VerificationSaml { get { return new VerificationType("verification_saml"); } }
         public static VerificationType Null { get { return new VerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -39,6 +40,7 @@ namespace Clerk.BackendAPI.Models.Components
                 case "verification_admin": return VerificationAdmin;
                 case "verification_from_oauth": return VerificationFromOauth;
                 case "verification_ticket": return VerificationTicket;
+                case "verification_saml": return VerificationSaml;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for VerificationType");
             }
@@ -76,6 +78,9 @@ namespace Clerk.BackendAPI.Models.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public Ticket? Ticket { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public Saml? Saml { get; set; }
 
         public VerificationType Type { get; set; }
 
@@ -120,6 +125,16 @@ namespace Clerk.BackendAPI.Models.Components
             res.Ticket = verificationTicket;
             return res;
         }
+        public static Verification CreateVerificationSaml(Saml verificationSaml) {
+            VerificationType typ = VerificationType.VerificationSaml;
+        
+            string typStr = VerificationType.VerificationSaml.ToString();
+            
+            verificationSaml.Object = VerificationSamlVerificationObjectExtension.ToEnum(VerificationType.VerificationSaml.ToString());
+            Verification res = new Verification(typ);
+            res.Saml = verificationSaml;
+            return res;
+        }
         public static Verification CreateNull() {
             VerificationType typ = VerificationType.Null;
             return new Verification(typ);
@@ -156,6 +171,11 @@ namespace Clerk.BackendAPI.Models.Components
                     Ticket? ticket = ResponseBodyDeserializer.Deserialize<Ticket>(jo.ToString());
                     return CreateVerificationTicket(ticket!);
                 }
+                if (discriminator == VerificationType.VerificationSaml.ToString())
+                {
+                    Saml? saml = ResponseBodyDeserializer.Deserialize<Saml>(jo.ToString());
+                    return CreateVerificationSaml(saml!);
+                }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
             }
@@ -190,6 +210,11 @@ namespace Clerk.BackendAPI.Models.Components
                 if (res.Ticket != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Ticket));
+                    return;
+                }
+                if (res.Saml != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.Saml));
                     return;
                 }
 

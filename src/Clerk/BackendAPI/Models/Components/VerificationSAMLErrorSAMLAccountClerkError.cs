@@ -13,7 +13,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     
-    public class VerificationGoogleOneTapErrorClerkError
+    public class VerificationSAMLErrorSAMLAccountClerkError
     {
 
         [JsonProperty("message")]
@@ -26,7 +26,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string Code { get; set; } = default!;
 
         [JsonProperty("meta")]
-        public ClerkErrorErrorExternalAccountWithVerificationVerificationMeta? Meta { get; set; }
+        public ClerkErrorErrorSAMLAccountMeta? Meta { get; set; }
 
         [JsonProperty("clerk_trace_id")]
         public string? ClerkTraceId { get; set; }

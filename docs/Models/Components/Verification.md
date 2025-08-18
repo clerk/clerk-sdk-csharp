@@ -26,3 +26,9 @@ Verification.CreateVerificationFromOauth(/* values here */);
 ```csharp
 Verification.CreateVerificationTicket(/* values here */);
 ```
+
+### VerificationSaml
+
+```csharp
+Verification.CreateVerificationSaml(/* values here */);
+```

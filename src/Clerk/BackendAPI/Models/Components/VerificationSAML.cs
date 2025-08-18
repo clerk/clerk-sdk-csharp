@@ -13,23 +13,23 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     
-    public class Saml
+    public class VerificationSAML
     {
 
         [JsonProperty("object")]
-        public VerificationSamlVerificationObject? Object { get; set; }
+        public VerificationSAMLVerificationSAMLAccountObject? Object { get; set; }
 
         [JsonProperty("status")]
-        public VerificationSamlVerificationStatus Status { get; set; } = default!;
+        public VerificationSAMLVerificationSAMLAccountStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
-        public VerificationSamlVerificationStrategy Strategy { get; set; } = default!;
+        public VerificationSAMLVerificationSAMLAccountStrategy Strategy { get; set; } = default!;
 
         [JsonProperty("external_verification_redirect_url", NullValueHandling = NullValueHandling.Include)]
         public string? ExternalVerificationRedirectUrl { get; set; }
 
         [JsonProperty("error")]
-        public VerificationError? Error { get; set; } = null;
+        public VerificationSamlVerificationError? Error { get; set; } = null;
 
         [JsonProperty("expire_at")]
         public long ExpireAt { get; set; } = default!;

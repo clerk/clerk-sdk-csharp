@@ -26,7 +26,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string Code { get; set; } = default!;
 
         [JsonProperty("meta")]
-        public ClerkErrorErrorSAMLAccountMeta? Meta { get; set; }
+        public ClerkErrorErrorMeta? Meta { get; set; }
 
         [JsonProperty("clerk_trace_id")]
         public string? ClerkTraceId { get; set; }

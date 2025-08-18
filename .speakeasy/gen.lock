@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: 4768d838ef01763f7b4d008935c9c123
+  docChecksum: 1eedd487d4bb2862b474bf504f3afac6
   docVersion: "2025-04-10"
-  speakeasyVersion: 1.605.1
-  generationVersion: 2.684.0
-  releaseVersion: 0.11.0
-  configChecksum: 588bd1cd406c239cf57f7f491288fc9e
+  speakeasyVersion: 1.606.0
+  generationVersion: 2.686.7
+  releaseVersion: 0.11.1
+  configChecksum: 5bd8d2c370cdd2bf707cc7923d0af263
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
@@ -56,6 +56,7 @@ generatedFiles:
   - docs/Models/Components/Claims.md
   - docs/Models/Components/ClerkError.md
   - docs/Models/Components/ClerkErrorErrorExternalAccountWithVerificationMeta.md
+  - docs/Models/Components/ClerkErrorErrorExternalAccountWithVerificationVerificationMeta.md
   - docs/Models/Components/ClerkErrorErrorMeta.md
   - docs/Models/Components/ClerkErrorErrorSAMLAccountMeta.md
   - docs/Models/Components/Client.md
@@ -233,6 +234,7 @@ generatedFiles:
   - docs/Models/Components/VerificationGoogleOneTapVerificationStrategy.md
   - docs/Models/Components/VerificationOTP.md
   - docs/Models/Components/VerificationOauthErrorClerkError.md
+  - docs/Models/Components/VerificationOauthVerificationError.md
   - docs/Models/Components/VerificationOauthVerificationObject.md
   - docs/Models/Components/VerificationOauthVerificationStatus.md
   - docs/Models/Components/VerificationObject.md
@@ -243,6 +245,11 @@ generatedFiles:
   - docs/Models/Components/VerificationPasskeyVerificationObject.md
   - docs/Models/Components/VerificationPasskeyVerificationStatus.md
   - docs/Models/Components/VerificationPasskeyVerificationStrategy.md
+  - docs/Models/Components/VerificationSAML.md
+  - docs/Models/Components/VerificationSAMLErrorSAMLAccountClerkError.md
+  - docs/Models/Components/VerificationSAMLVerificationSAMLAccountObject.md
+  - docs/Models/Components/VerificationSAMLVerificationSAMLAccountStatus.md
+  - docs/Models/Components/VerificationSAMLVerificationSAMLAccountStrategy.md
   - docs/Models/Components/VerificationSamlErrorClerkError.md
   - docs/Models/Components/VerificationSamlVerificationError.md
   - docs/Models/Components/VerificationSamlVerificationObject.md
@@ -750,6 +757,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/Claims.cs
   - src/Clerk/BackendAPI/Models/Components/ClerkError.cs
   - src/Clerk/BackendAPI/Models/Components/ClerkErrorErrorExternalAccountWithVerificationMeta.cs
+  - src/Clerk/BackendAPI/Models/Components/ClerkErrorErrorExternalAccountWithVerificationVerificationMeta.cs
   - src/Clerk/BackendAPI/Models/Components/ClerkErrorErrorMeta.cs
   - src/Clerk/BackendAPI/Models/Components/ClerkErrorErrorSAMLAccountMeta.cs
   - src/Clerk/BackendAPI/Models/Components/Client.cs
@@ -927,6 +935,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/VerificationGoogleOneTapVerificationStrategy.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationOTP.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationOauthErrorClerkError.cs
+  - src/Clerk/BackendAPI/Models/Components/VerificationOauthVerificationError.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationOauthVerificationObject.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationOauthVerificationStatus.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationObject.cs
@@ -937,6 +946,11 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/VerificationPasskeyVerificationObject.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationPasskeyVerificationStatus.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationPasskeyVerificationStrategy.cs
+  - src/Clerk/BackendAPI/Models/Components/VerificationSAML.cs
+  - src/Clerk/BackendAPI/Models/Components/VerificationSAMLErrorSAMLAccountClerkError.cs
+  - src/Clerk/BackendAPI/Models/Components/VerificationSAMLVerificationSAMLAccountObject.cs
+  - src/Clerk/BackendAPI/Models/Components/VerificationSAMLVerificationSAMLAccountStatus.cs
+  - src/Clerk/BackendAPI/Models/Components/VerificationSAMLVerificationSAMLAccountStrategy.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationSamlErrorClerkError.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationSamlVerificationError.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationSamlVerificationObject.cs
@@ -3144,4 +3158,21 @@ examples:
           application/json: {"errors": [{"message": "some details about the error", "long_message": "some details about the error", "code": "some_error_code"}]}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## SDK Changes Detected:\n* `ClerkBackendApi.Commerce.ListPlans()`: **Added**\n* `ClerkBackendApi.M2m.CreateToken()`: **Added**\n* `ClerkBackendApi.M2m.ListTokens()`: **Added**\n* `ClerkBackendApi.M2m.RevokeToken()`: **Added**\n* `ClerkBackendApi.M2m.VerifyToken()`: **Added**\n* `ClerkBackendApi.AwsCredentials.List()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.AwsCredentials.Create()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.AwsCredentials.Get()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.MachineTokens.Create()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.Management.UpsertUser()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.Management.CreateOrganization()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.Management.CreateApplication()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.EmailSmsTemplates.List()`:  `response.[].FlaggedAsSuspicious` **Added**\n* `ClerkBackendApi.EmailSmsTemplates.Get()`:  `response.flaggedAsSuspicious` **Added**\n* `ClerkBackendApi.EmailSmsTemplates.Revert()`:  `response.flaggedAsSuspicious` **Added**\n* `ClerkBackendApi.EmailSmsTemplates.ToggleTemplateDelivery()`:  `response.flaggedAsSuspicious` **Added**\n* `ClerkBackendApi.EmailAndSmsTemplates.Upsert()`:  `response.flaggedAsSuspicious` **Added**\n* `ClerkBackendApi.InstanceSettings.UpdateRestrictions()`: \n  *  `request.AllowlistBlocklistDisabledOnSignIn` **Added**\n  *  `response.allowlistBlocklistDisabledOnSignIn` **Added**\n* `ClerkBackendApi.InstanceSettings.UpdateOrganizationSettings()`:  `response.maxAllowedPermissions` **Changed**\n* `ClerkBackendApi.OrganizationDomains.Create()`:  `response.publicOrganizationData` **Added**\n* `ClerkBackendApi.OrganizationDomains.List()`:  `response.data.[].PublicOrganizationData` **Added**\n* `ClerkBackendApi.OrganizationDomains.Update()`:  `response.publicOrganizationData` **Added**\n* `ClerkBackendApi.OrganizationDomains.ListAll()`:  `response.data.[].PublicOrganizationData` **Added**\n"
+releaseNotes: |
+  ## SDK Changes Detected:
+  * `ClerkBackendApi.EmailAddresses.Create()`:  `response.verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.EmailAddresses.Get()`:  `response.verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.EmailAddresses.Update()`:  `response.verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.List()`:  `response.[].EmailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.Create()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.Get()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.Update()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.Ban()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.Unban()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.BulkBan()`:  `response.[].EmailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.BulkUnban()`:  `response.[].EmailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.Lock()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.Unlock()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.SetProfileImage()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.DeleteProfileImage()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Users.UpdateMetadata()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
