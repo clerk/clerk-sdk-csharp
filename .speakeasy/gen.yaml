@@ -28,7 +28,7 @@ csharp:
     - package: System.IdentityModel.Tokens.Jwt
       version: 8.2.0
   author: Clerk
-  baseErrorName: ClerkBackendAPIError
+  baseErrorName: SDKBaseError
   clientServerStatusCodesAsErrors: true
   defaultErrorName: SDKError
   disableNamespacePascalCasingApr2024: true
