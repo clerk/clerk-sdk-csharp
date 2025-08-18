@@ -31,6 +31,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("blocklist")]
         public bool Blocklist { get; set; } = default!;
 
+        [JsonProperty("allowlist_blocklist_disabled_on_sign_in")]
+        public bool AllowlistBlocklistDisabledOnSignIn { get; set; } = default!;
+
         [JsonProperty("block_email_subaddresses")]
         public bool BlockEmailSubaddresses { get; set; } = default!;
 

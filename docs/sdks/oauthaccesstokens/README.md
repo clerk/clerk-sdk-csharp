@@ -13,6 +13,7 @@ Verify an OAuth Access Token
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="verifyOAuthAccessToken" method="post" path="/oauth_applications/access_tokens/verify" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

@@ -19,6 +19,7 @@ The templates are returned sorted by position.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetTemplateList" method="get" path="/templates/{template_type}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -63,6 +64,7 @@ Returns the details of a template
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetTemplate" method="get" path="/templates/{template_type}/{slug}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -104,6 +106,7 @@ Reverts an updated template to its default state
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="RevertTemplate" method="post" path="/templates/{template_type}/{slug}/revert" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -147,6 +150,7 @@ The app developer will need to listen to the `email.created` or `sms.created` we
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ToggleTemplateDelivery" method="post" path="/templates/{template_type}/{slug}/toggle_delivery" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

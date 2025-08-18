@@ -14,6 +14,7 @@ It is used by Clerk SDKs when the user's authentication state cannot be immediat
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetPublicInterstitial" method="get" path="/public/interstitial" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Operations;

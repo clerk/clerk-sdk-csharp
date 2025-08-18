@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: fd8024cb5f2913e8ec3ac141c5c7518d
+  docChecksum: 4768d838ef01763f7b4d008935c9c123
   docVersion: "2025-04-10"
-  speakeasyVersion: 1.590.0
-  generationVersion: 2.666.0
-  releaseVersion: 0.10.0
-  configChecksum: 11d8303d45326fa6b571145250e58077
+  speakeasyVersion: 1.605.1
+  generationVersion: 2.684.0
+  releaseVersion: 0.11.0
+  configChecksum: 588bd1cd406c239cf57f7f491288fc9e
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
@@ -14,7 +14,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.0.1
-    core: 3.11.1
+    core: 3.11.2
     deprecations: 2.81.2
     examples: 2.81.6
     flattening: 2.81.3
@@ -25,7 +25,6 @@ features:
     groups: 2.81.2
     intellisenseMarkdownSupport: 0.1.0
     methodArguments: 0.2.0
-    methodSecurity: 2.82.3
     nameOverrides: 2.81.2
     nullables: 0.1.1
     openEnums: 0.1.0
@@ -61,6 +60,9 @@ generatedFiles:
   - docs/Models/Components/ClerkErrorErrorSAMLAccountMeta.md
   - docs/Models/Components/Client.md
   - docs/Models/Components/ClientObject.md
+  - docs/Models/Components/CommerceMoneyResponse.md
+  - docs/Models/Components/CommercePlan.md
+  - docs/Models/Components/CommercePlanObject.md
   - docs/Models/Components/Cookies.md
   - docs/Models/Components/CookiesObject.md
   - docs/Models/Components/DeletedObject.md
@@ -71,7 +73,6 @@ generatedFiles:
   - docs/Models/Components/EmailAddress.md
   - docs/Models/Components/EmailAddressObject.md
   - docs/Models/Components/EnrollmentMode.md
-  - docs/Models/Components/EnvironmentTypes.md
   - docs/Models/Components/Error.md
   - docs/Models/Components/ErrorClerkError.md
   - docs/Models/Components/ErrorMeta.md
@@ -79,6 +80,8 @@ generatedFiles:
   - docs/Models/Components/ExternalAccountWithVerification.md
   - docs/Models/Components/ExternalAccountWithVerificationObject.md
   - docs/Models/Components/ExternalAccountWithVerificationVerification.md
+  - docs/Models/Components/FeatureResponse.md
+  - docs/Models/Components/FeatureResponseObject.md
   - docs/Models/Components/FromOAuth.md
   - docs/Models/Components/GoogleOneTap.md
   - docs/Models/Components/HTTPMetadata.md
@@ -113,16 +116,8 @@ generatedFiles:
   - docs/Models/Components/MachineScopeObject.md
   - docs/Models/Components/MachineSecretKey.md
   - docs/Models/Components/MachineSecretKeyObject.md
-  - docs/Models/Components/MachineToken.md
-  - docs/Models/Components/MachineTokenObject.md
   - docs/Models/Components/MachineWithoutScopedMachines.md
   - docs/Models/Components/MachineWithoutScopedMachinesObject.md
-  - docs/Models/Components/ManagementApplicationInstance.md
-  - docs/Models/Components/ManagementApplicationResponse.md
-  - docs/Models/Components/ManagementApplicationSubscription.md
-  - docs/Models/Components/ManagementCreateApplicationRequest.md
-  - docs/Models/Components/ManagementCreateOrganizationRequest.md
-  - docs/Models/Components/ManagementUpsertUserRequest.md
   - docs/Models/Components/Meta.md
   - docs/Models/Components/NextAction.md
   - docs/Models/Components/Nonce.md
@@ -162,16 +157,16 @@ generatedFiles:
   - docs/Models/Components/OrganizationWithLogoObject.md
   - docs/Models/Components/Organizations.md
   - docs/Models/Components/Otp.md
+  - docs/Models/Components/PaginatedCommercePlanResponse.md
   - docs/Models/Components/Passkey.md
   - docs/Models/Components/PasskeyObject.md
   - docs/Models/Components/PasskeyVerification.md
   - docs/Models/Components/PhoneNumber.md
   - docs/Models/Components/PhoneNumberObject.md
   - docs/Models/Components/PhoneNumberVerification.md
-  - docs/Models/Components/PrivateMetadata.md
   - docs/Models/Components/ProxyCheck.md
   - docs/Models/Components/ProxyCheckObject.md
-  - docs/Models/Components/PublicMetadata.md
+  - docs/Models/Components/PublicOrganizationData.md
   - docs/Models/Components/RedirectURL.md
   - docs/Models/Components/RedirectURLObject.md
   - docs/Models/Components/SAMLAccount.md
@@ -277,9 +272,27 @@ generatedFiles:
   - docs/Models/Components/Web3WalletObject.md
   - docs/Models/Components/Web3WalletVerification.md
   - docs/Models/Errors/ClerkErrors.md
+  - docs/Models/Errors/CreateM2MTokenErrors.md
+  - docs/Models/Errors/CreateM2MTokenM2mResponseBody.md
+  - docs/Models/Errors/CreateM2MTokenResponseBody.md
   - docs/Models/Errors/Errors.md
+  - docs/Models/Errors/GetM2MTokensErrors.md
+  - docs/Models/Errors/GetM2MTokensM2mErrors.md
+  - docs/Models/Errors/GetM2MTokensM2mResponseBody.md
+  - docs/Models/Errors/GetM2MTokensM2mResponseErrors.md
+  - docs/Models/Errors/GetM2MTokensM2mResponseResponseBody.md
+  - docs/Models/Errors/GetM2MTokensResponseBody.md
   - docs/Models/Errors/Meta.md
+  - docs/Models/Errors/RevokeM2MTokenErrors.md
+  - docs/Models/Errors/RevokeM2MTokenM2mErrors.md
+  - docs/Models/Errors/RevokeM2MTokenM2mResponseBody.md
+  - docs/Models/Errors/RevokeM2MTokenResponseBody.md
+  - docs/Models/Errors/VerifyM2MTokenErrors.md
+  - docs/Models/Errors/VerifyM2MTokenM2mErrors.md
+  - docs/Models/Errors/VerifyM2MTokenM2mResponseBody.md
+  - docs/Models/Errors/VerifyM2MTokenResponseBody.md
   - docs/Models/Errors/VerifyOAuthAccessTokenErrors.md
+  - docs/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensErrors.md
   - docs/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensResponseBody.md
   - docs/Models/Errors/VerifyOAuthAccessTokenResponseBody.md
   - docs/Models/Operations/Actor.md
@@ -293,8 +306,6 @@ generatedFiles:
   - docs/Models/Operations/Claims.md
   - docs/Models/Operations/CodeType.md
   - docs/Models/Operations/CompleteAccountlessApplicationResponse.md
-  - docs/Models/Operations/CreateAWSCredentialRequestBody.md
-  - docs/Models/Operations/CreateAWSCredentialResponse.md
   - docs/Models/Operations/CreateAccountlessApplicationResponse.md
   - docs/Models/Operations/CreateActorTokenRequestBody.md
   - docs/Models/Operations/CreateActorTokenResponse.md
@@ -310,14 +321,15 @@ generatedFiles:
   - docs/Models/Operations/CreateInvitationResponse.md
   - docs/Models/Operations/CreateJWTTemplateRequestBody.md
   - docs/Models/Operations/CreateJWTTemplateResponse.md
+  - docs/Models/Operations/CreateM2MTokenObject.md
+  - docs/Models/Operations/CreateM2MTokenRequestBody.md
+  - docs/Models/Operations/CreateM2MTokenResponse.md
+  - docs/Models/Operations/CreateM2MTokenResponseBody.md
   - docs/Models/Operations/CreateMachineRequestBody.md
   - docs/Models/Operations/CreateMachineResponse.md
   - docs/Models/Operations/CreateMachineScopeRequest.md
   - docs/Models/Operations/CreateMachineScopeRequestBody.md
   - docs/Models/Operations/CreateMachineScopeResponse.md
-  - docs/Models/Operations/CreateMachineTokenClaims.md
-  - docs/Models/Operations/CreateMachineTokenRequestBody.md
-  - docs/Models/Operations/CreateMachineTokenResponse.md
   - docs/Models/Operations/CreateOAuthApplicationRequestBody.md
   - docs/Models/Operations/CreateOAuthApplicationResponse.md
   - docs/Models/Operations/CreateOrganizationDomainRequest.md
@@ -412,19 +424,22 @@ generatedFiles:
   - docs/Models/Operations/File.md
   - docs/Models/Operations/Format.md
   - docs/Models/Operations/GenerateSvixAuthURLResponse.md
-  - docs/Models/Operations/GetAWSCredentialListResponse.md
-  - docs/Models/Operations/GetAWSCredentialRequest.md
-  - docs/Models/Operations/GetAWSCredentialResponse.md
   - docs/Models/Operations/GetClientListRequest.md
   - docs/Models/Operations/GetClientListResponse.md
   - docs/Models/Operations/GetClientRequest.md
   - docs/Models/Operations/GetClientResponse.md
+  - docs/Models/Operations/GetCommercePlanListRequest.md
+  - docs/Models/Operations/GetCommercePlanListResponse.md
   - docs/Models/Operations/GetEmailAddressRequest.md
   - docs/Models/Operations/GetEmailAddressResponse.md
   - docs/Models/Operations/GetInstanceResponse.md
   - docs/Models/Operations/GetJWKSResponse.md
   - docs/Models/Operations/GetJWTTemplateRequest.md
   - docs/Models/Operations/GetJWTTemplateResponse.md
+  - docs/Models/Operations/GetM2MTokensObject.md
+  - docs/Models/Operations/GetM2MTokensRequest.md
+  - docs/Models/Operations/GetM2MTokensResponse.md
+  - docs/Models/Operations/GetM2MTokensResponseBody.md
   - docs/Models/Operations/GetMachineRequest.md
   - docs/Models/Operations/GetMachineResponse.md
   - docs/Models/Operations/GetMachineSecretKeyRequest.md
@@ -501,18 +516,14 @@ generatedFiles:
   - docs/Models/Operations/ListWaitlistEntriesResponse.md
   - docs/Models/Operations/LockUserRequest.md
   - docs/Models/Operations/LockUserResponse.md
-  - docs/Models/Operations/ManagementCreateApplicationResponse.md
-  - docs/Models/Operations/ManagementCreateApplicationSecurity.md
-  - docs/Models/Operations/ManagementCreateOrganizationResponse.md
-  - docs/Models/Operations/ManagementCreateOrganizationSecurity.md
-  - docs/Models/Operations/ManagementUpsertUserResponse.md
-  - docs/Models/Operations/ManagementUpsertUserSecurity.md
+  - docs/Models/Operations/M2mTokens.md
   - docs/Models/Operations/MergeOrganizationMetadataRequest.md
   - docs/Models/Operations/MergeOrganizationMetadataRequestBody.md
   - docs/Models/Operations/MergeOrganizationMetadataResponse.md
   - docs/Models/Operations/Object.md
   - docs/Models/Operations/One.md
   - docs/Models/Operations/PathParamTemplateType.md
+  - docs/Models/Operations/PayerType.md
   - docs/Models/Operations/PreviewTemplateRequest.md
   - docs/Models/Operations/PreviewTemplateRequestBody.md
   - docs/Models/Operations/PreviewTemplateResponse.md
@@ -532,6 +543,11 @@ generatedFiles:
   - docs/Models/Operations/RevokeActorTokenResponse.md
   - docs/Models/Operations/RevokeInvitationRequest.md
   - docs/Models/Operations/RevokeInvitationResponse.md
+  - docs/Models/Operations/RevokeM2MTokenObject.md
+  - docs/Models/Operations/RevokeM2MTokenRequest.md
+  - docs/Models/Operations/RevokeM2MTokenRequestBody.md
+  - docs/Models/Operations/RevokeM2MTokenResponse.md
+  - docs/Models/Operations/RevokeM2MTokenResponseBody.md
   - docs/Models/Operations/RevokeOrganizationInvitationRequest.md
   - docs/Models/Operations/RevokeOrganizationInvitationRequestBody.md
   - docs/Models/Operations/RevokeOrganizationInvitationResponse.md
@@ -637,6 +653,10 @@ generatedFiles:
   - docs/Models/Operations/VerifyClientResponse.md
   - docs/Models/Operations/VerifyDomainProxyRequestBody.md
   - docs/Models/Operations/VerifyDomainProxyResponse.md
+  - docs/Models/Operations/VerifyM2MTokenObject.md
+  - docs/Models/Operations/VerifyM2MTokenRequestBody.md
+  - docs/Models/Operations/VerifyM2MTokenResponse.md
+  - docs/Models/Operations/VerifyM2MTokenResponseBody.md
   - docs/Models/Operations/VerifyOAuthAccessTokenObject.md
   - docs/Models/Operations/VerifyOAuthAccessTokenRequestBody.md
   - docs/Models/Operations/VerifyOAuthAccessTokenResponse.md
@@ -656,6 +676,7 @@ generatedFiles:
   - docs/sdks/blocklistidentifiers/README.md
   - docs/sdks/clerkbackendapi/README.md
   - docs/sdks/clients/README.md
+  - docs/sdks/commerce/README.md
   - docs/sdks/domains/README.md
   - docs/sdks/emailaddresses/README.md
   - docs/sdks/emailandsmstemplates/README.md
@@ -665,9 +686,8 @@ generatedFiles:
   - docs/sdks/invitations/README.md
   - docs/sdks/jwks/README.md
   - docs/sdks/jwttemplates/README.md
+  - docs/sdks/m2m/README.md
   - docs/sdks/machines/README.md
-  - docs/sdks/machinetokens/README.md
-  - docs/sdks/management/README.md
   - docs/sdks/miscellaneous/README.md
   - docs/sdks/oauthaccesstokens/README.md
   - docs/sdks/oauthapplications/README.md
@@ -696,6 +716,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Clerk.BackendAPI.csproj
   - src/Clerk/BackendAPI/ClerkBackendApi.cs
   - src/Clerk/BackendAPI/Clients.cs
+  - src/Clerk/BackendAPI/Commerce.cs
   - src/Clerk/BackendAPI/Domains.cs
   - src/Clerk/BackendAPI/EmailAddresses.cs
   - src/Clerk/BackendAPI/EmailAndSmsTemplates.cs
@@ -707,9 +728,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Invitations.cs
   - src/Clerk/BackendAPI/Jwks.cs
   - src/Clerk/BackendAPI/JwtTemplates.cs
-  - src/Clerk/BackendAPI/MachineTokens.cs
+  - src/Clerk/BackendAPI/M2m.cs
   - src/Clerk/BackendAPI/Machines.cs
-  - src/Clerk/BackendAPI/Management.cs
   - src/Clerk/BackendAPI/Miscellaneous.cs
   - src/Clerk/BackendAPI/Models/Components/AWSCredential.cs
   - src/Clerk/BackendAPI/Models/Components/AccountlessApplication.cs
@@ -734,6 +754,9 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/ClerkErrorErrorSAMLAccountMeta.cs
   - src/Clerk/BackendAPI/Models/Components/Client.cs
   - src/Clerk/BackendAPI/Models/Components/ClientObject.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceMoneyResponse.cs
+  - src/Clerk/BackendAPI/Models/Components/CommercePlan.cs
+  - src/Clerk/BackendAPI/Models/Components/CommercePlanObject.cs
   - src/Clerk/BackendAPI/Models/Components/Cookies.cs
   - src/Clerk/BackendAPI/Models/Components/CookiesObject.cs
   - src/Clerk/BackendAPI/Models/Components/DeletedObject.cs
@@ -744,7 +767,6 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/EmailAddress.cs
   - src/Clerk/BackendAPI/Models/Components/EmailAddressObject.cs
   - src/Clerk/BackendAPI/Models/Components/EnrollmentMode.cs
-  - src/Clerk/BackendAPI/Models/Components/EnvironmentTypes.cs
   - src/Clerk/BackendAPI/Models/Components/Error.cs
   - src/Clerk/BackendAPI/Models/Components/ErrorClerkError.cs
   - src/Clerk/BackendAPI/Models/Components/ErrorMeta.cs
@@ -752,6 +774,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/ExternalAccountWithVerification.cs
   - src/Clerk/BackendAPI/Models/Components/ExternalAccountWithVerificationObject.cs
   - src/Clerk/BackendAPI/Models/Components/ExternalAccountWithVerificationVerification.cs
+  - src/Clerk/BackendAPI/Models/Components/FeatureResponse.cs
+  - src/Clerk/BackendAPI/Models/Components/FeatureResponseObject.cs
   - src/Clerk/BackendAPI/Models/Components/FromOAuth.cs
   - src/Clerk/BackendAPI/Models/Components/GoogleOneTap.cs
   - src/Clerk/BackendAPI/Models/Components/HTTPMetadata.cs
@@ -786,16 +810,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/MachineScopeObject.cs
   - src/Clerk/BackendAPI/Models/Components/MachineSecretKey.cs
   - src/Clerk/BackendAPI/Models/Components/MachineSecretKeyObject.cs
-  - src/Clerk/BackendAPI/Models/Components/MachineToken.cs
-  - src/Clerk/BackendAPI/Models/Components/MachineTokenObject.cs
   - src/Clerk/BackendAPI/Models/Components/MachineWithoutScopedMachines.cs
   - src/Clerk/BackendAPI/Models/Components/MachineWithoutScopedMachinesObject.cs
-  - src/Clerk/BackendAPI/Models/Components/ManagementApplicationInstance.cs
-  - src/Clerk/BackendAPI/Models/Components/ManagementApplicationResponse.cs
-  - src/Clerk/BackendAPI/Models/Components/ManagementApplicationSubscription.cs
-  - src/Clerk/BackendAPI/Models/Components/ManagementCreateApplicationRequest.cs
-  - src/Clerk/BackendAPI/Models/Components/ManagementCreateOrganizationRequest.cs
-  - src/Clerk/BackendAPI/Models/Components/ManagementUpsertUserRequest.cs
   - src/Clerk/BackendAPI/Models/Components/Meta.cs
   - src/Clerk/BackendAPI/Models/Components/NextAction.cs
   - src/Clerk/BackendAPI/Models/Components/Nonce.cs
@@ -835,16 +851,16 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/OrganizationWithLogoObject.cs
   - src/Clerk/BackendAPI/Models/Components/Organizations.cs
   - src/Clerk/BackendAPI/Models/Components/Otp.cs
+  - src/Clerk/BackendAPI/Models/Components/PaginatedCommercePlanResponse.cs
   - src/Clerk/BackendAPI/Models/Components/Passkey.cs
   - src/Clerk/BackendAPI/Models/Components/PasskeyObject.cs
   - src/Clerk/BackendAPI/Models/Components/PasskeyVerification.cs
   - src/Clerk/BackendAPI/Models/Components/PhoneNumber.cs
   - src/Clerk/BackendAPI/Models/Components/PhoneNumberObject.cs
   - src/Clerk/BackendAPI/Models/Components/PhoneNumberVerification.cs
-  - src/Clerk/BackendAPI/Models/Components/PrivateMetadata.cs
   - src/Clerk/BackendAPI/Models/Components/ProxyCheck.cs
   - src/Clerk/BackendAPI/Models/Components/ProxyCheckObject.cs
-  - src/Clerk/BackendAPI/Models/Components/PublicMetadata.cs
+  - src/Clerk/BackendAPI/Models/Components/PublicOrganizationData.cs
   - src/Clerk/BackendAPI/Models/Components/RedirectURL.cs
   - src/Clerk/BackendAPI/Models/Components/RedirectURLObject.cs
   - src/Clerk/BackendAPI/Models/Components/SAMLAccount.cs
@@ -950,10 +966,28 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/Web3WalletObject.cs
   - src/Clerk/BackendAPI/Models/Components/Web3WalletVerification.cs
   - src/Clerk/BackendAPI/Models/Errors/ClerkErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenM2mResponseBody.cs
+  - src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Errors/Errors.cs
+  - src/Clerk/BackendAPI/Models/Errors/GetM2MTokensErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseBody.cs
+  - src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseResponseBody.cs
+  - src/Clerk/BackendAPI/Models/Errors/GetM2MTokensResponseBody.cs
   - src/Clerk/BackendAPI/Models/Errors/Meta.cs
+  - src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenM2mErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenM2mResponseBody.cs
+  - src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Errors/SDKError.cs
+  - src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenM2mErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenM2mResponseBody.cs
+  - src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenErrors.cs
+  - src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensErrors.cs
   - src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensResponseBody.cs
   - src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/Actor.cs
@@ -967,8 +1001,6 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/Claims.cs
   - src/Clerk/BackendAPI/Models/Operations/CodeType.cs
   - src/Clerk/BackendAPI/Models/Operations/CompleteAccountlessApplicationResponse.cs
-  - src/Clerk/BackendAPI/Models/Operations/CreateAWSCredentialRequestBody.cs
-  - src/Clerk/BackendAPI/Models/Operations/CreateAWSCredentialResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateAccountlessApplicationResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateActorTokenRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateActorTokenResponse.cs
@@ -984,14 +1016,15 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/CreateInvitationResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateJWTTemplateRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateJWTTemplateResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateM2MTokenObject.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateM2MTokenRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateM2MTokenResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/CreateM2MTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateMachineRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateMachineResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateMachineScopeRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateMachineScopeRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateMachineScopeResponse.cs
-  - src/Clerk/BackendAPI/Models/Operations/CreateMachineTokenClaims.cs
-  - src/Clerk/BackendAPI/Models/Operations/CreateMachineTokenRequestBody.cs
-  - src/Clerk/BackendAPI/Models/Operations/CreateMachineTokenResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOAuthApplicationRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOAuthApplicationResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/CreateOrganizationDomainRequest.cs
@@ -1086,19 +1119,22 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/File.cs
   - src/Clerk/BackendAPI/Models/Operations/Format.cs
   - src/Clerk/BackendAPI/Models/Operations/GenerateSvixAuthURLResponse.cs
-  - src/Clerk/BackendAPI/Models/Operations/GetAWSCredentialListResponse.cs
-  - src/Clerk/BackendAPI/Models/Operations/GetAWSCredentialRequest.cs
-  - src/Clerk/BackendAPI/Models/Operations/GetAWSCredentialResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetClientListRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetClientListResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetClientRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetClientResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetCommercePlanListRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetCommercePlanListResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetEmailAddressRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetEmailAddressResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetInstanceResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetJWKSResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetJWTTemplateRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetJWTTemplateResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetM2MTokensObject.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetM2MTokensRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetM2MTokensResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetM2MTokensResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/GetMachineRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetMachineResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetMachineSecretKeyRequest.cs
@@ -1175,18 +1211,14 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/ListWaitlistEntriesResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/LockUserRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/LockUserResponse.cs
-  - src/Clerk/BackendAPI/Models/Operations/ManagementCreateApplicationResponse.cs
-  - src/Clerk/BackendAPI/Models/Operations/ManagementCreateApplicationSecurity.cs
-  - src/Clerk/BackendAPI/Models/Operations/ManagementCreateOrganizationResponse.cs
-  - src/Clerk/BackendAPI/Models/Operations/ManagementCreateOrganizationSecurity.cs
-  - src/Clerk/BackendAPI/Models/Operations/ManagementUpsertUserResponse.cs
-  - src/Clerk/BackendAPI/Models/Operations/ManagementUpsertUserSecurity.cs
+  - src/Clerk/BackendAPI/Models/Operations/M2mTokens.cs
   - src/Clerk/BackendAPI/Models/Operations/MergeOrganizationMetadataRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/MergeOrganizationMetadataRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/MergeOrganizationMetadataResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/Object.cs
   - src/Clerk/BackendAPI/Models/Operations/One.cs
   - src/Clerk/BackendAPI/Models/Operations/PathParamTemplateType.cs
+  - src/Clerk/BackendAPI/Models/Operations/PayerType.cs
   - src/Clerk/BackendAPI/Models/Operations/PreviewTemplateRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/PreviewTemplateRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/PreviewTemplateResponse.cs
@@ -1206,6 +1238,11 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/RevokeActorTokenResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/RevokeInvitationRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/RevokeInvitationResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/RevokeM2MTokenObject.cs
+  - src/Clerk/BackendAPI/Models/Operations/RevokeM2MTokenRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/RevokeM2MTokenRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/RevokeM2MTokenResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/RevokeM2MTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/RevokeOrganizationInvitationRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/RevokeOrganizationInvitationRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/RevokeOrganizationInvitationResponse.cs
@@ -1311,6 +1348,10 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/VerifyClientResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyDomainProxyRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyDomainProxyResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/VerifyM2MTokenObject.cs
+  - src/Clerk/BackendAPI/Models/Operations/VerifyM2MTokenRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/VerifyM2MTokenResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/VerifyM2MTokenResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyOAuthAccessTokenObject.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyOAuthAccessTokenRequestBody.cs
   - src/Clerk/BackendAPI/Models/Operations/VerifyOAuthAccessTokenResponse.cs
@@ -2289,7 +2330,7 @@ examples:
         application/json: {"allowlist": false, "blocklist": true, "block_email_subaddresses": true, "block_disposable_email_domains": true}
       responses:
         "200":
-          application/json: {"object": "instance_restrictions", "allowlist": false, "blocklist": true, "block_email_subaddresses": true, "block_disposable_email_domains": false}
+          application/json: {"object": "instance_restrictions", "allowlist": false, "blocklist": true, "allowlist_blocklist_disabled_on_sign_in": false, "block_email_subaddresses": true, "block_disposable_email_domains": false}
         "402":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   ChangeProductionInstanceDomain:
@@ -2305,7 +2346,7 @@ examples:
         application/json: {"enabled": true, "max_allowed_memberships": 10, "admin_delete_enabled": false, "domains_enabled": true, "domains_enrollment_modes": ["automatic_invitation", "automatic_suggestion"], "creator_role_id": "creator_role", "domains_default_role_id": "member_role"}
       responses:
         "200":
-          application/json: {"object": "organization_settings", "enabled": true, "max_allowed_memberships": 5, "max_allowed_roles": 3, "max_allowed_permissions": 15, "creator_role": "admin", "admin_delete_enabled": true, "domains_enabled": true, "domains_enrollment_modes": ["automatic_invitation", "automatic_suggestion"], "domains_default_role": "member"}
+          application/json: {"object": "organization_settings", "enabled": true, "max_allowed_memberships": 5, "max_allowed_roles": 3, "creator_role": "admin", "admin_delete_enabled": true, "domains_enabled": true, "domains_enrollment_modes": ["automatic_invitation", "automatic_suggestion"], "domains_default_role": "member"}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
   CreateSvixApp:
@@ -3034,5 +3075,73 @@ examples:
           application/json: {"errors": []}
         "404":
           application/json: {"errors": []}
+  GetCommercePlanList:
+    speakeasy-default-get-commerce-plan-list:
+      parameters:
+        query:
+          limit: 20
+          offset: 10
+      responses:
+        "200":
+          application/json: {"data": [], "total_count": 685364}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+        "500":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  createM2MToken:
+    speakeasy-default-create-m2-M-token:
+      requestBody:
+        application/json: {}
+      responses:
+        "201":
+          application/json: {"object": "machine_to_machine_token", "id": "mt_f7f0ba8c3b4843ce7d85fcdd5e71853e", "subject": "mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "claims": {"important_metadata": "Some useful data"}, "scopes": ["mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "mch_2yGkLpQ7Y3rXSwtU24CzTk9I7Em"], "token": "mt_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "revoked": false, "revocation_reason": "Revoked by user", "expired": false, "expiration": 1716883200, "last_used_at": 1716883200, "created_at": 1716883200, "updated_at": 1716883200}
+        "400":
+          application/json: {"errors": []}
+        "409":
+          application/json: {"errors": [{"message": "some details about the error", "long_message": "some details about the error", "code": "some_error_code"}]}
+  getM2MTokens:
+    speakeasy-default-get-m2-M-tokens:
+      parameters:
+        query:
+          subject: "<value>"
+          revoked: false
+          expired: false
+          limit: 10
+          offset: 0
+      responses:
+        "200":
+          application/json: {"m2m_tokens": [{"object": "machine_to_machine_token", "id": "mt_f7f0ba8c3b4843ce7d85fcdd5e71853e", "subject": "mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "claims": {"important_metadata": "Some useful data"}, "scopes": ["mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "mch_2yGkLpQ7Y3rXSwtU24CzTk9I7Em"], "revoked": false, "revocation_reason": "Revoked by user", "expired": false, "expiration": 1716883200, "last_used_at": 1716883200, "created_at": 1716883200, "updated_at": 1716883200}], "total_count": 1715.8}
+        "400":
+          application/json: {"errors": []}
+        "403":
+          application/json: {"errors": [{"message": "some details about the error", "long_message": "some details about the error", "code": "some_error_code"}]}
+        "404":
+          application/json: {"errors": [{"message": "some details about the error", "long_message": "some details about the error", "code": "some_error_code"}]}
+  revokeM2MToken:
+    speakeasy-default-revoke-m2-M-token:
+      parameters:
+        path:
+          m2m_token_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"object": "machine_to_machine_token", "id": "mt_f7f0ba8c3b4843ce7d85fcdd5e71853e", "subject": "mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "claims": {"important_metadata": "Some useful data"}, "scopes": ["mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "mch_2yGkLpQ7Y3rXSwtU24CzTk9I7Em"], "revoked": false, "revocation_reason": "Revoked by user", "expired": false, "expiration": 1716883200, "last_used_at": 1716883200, "created_at": 1716883200, "updated_at": 1716883200}
+        "400":
+          application/json: {"errors": []}
+        "404":
+          application/json: {"errors": []}
+  verifyM2MToken:
+    speakeasy-default-verify-m2-M-token:
+      requestBody:
+        application/json: {"token": "<value>"}
+      responses:
+        "200":
+          application/json: {"object": "machine_to_machine_token", "id": "mt_f7f0ba8c3b4843ce7d85fcdd5e71853e", "subject": "mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "claims": {"important_metadata": "Some useful data"}, "scopes": ["mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "mch_2yGkLpQ7Y3rXSwtU24CzTk9I7Em"], "revoked": false, "revocation_reason": "Revoked by user", "expired": false, "expiration": 1716883200, "last_used_at": 1716883200, "created_at": 1716883200, "updated_at": 1716883200}
+        "400":
+          application/json: {"errors": []}
+        "404":
+          application/json: {"errors": [{"message": "some details about the error", "long_message": "some details about the error", "code": "some_error_code"}]}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## SDK Changes Detected:\n* `ClerkBackendApi.Commerce.ListPlans()`: **Added**\n* `ClerkBackendApi.M2m.CreateToken()`: **Added**\n* `ClerkBackendApi.M2m.ListTokens()`: **Added**\n* `ClerkBackendApi.M2m.RevokeToken()`: **Added**\n* `ClerkBackendApi.M2m.VerifyToken()`: **Added**\n* `ClerkBackendApi.AwsCredentials.List()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.AwsCredentials.Create()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.AwsCredentials.Get()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.MachineTokens.Create()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.Management.UpsertUser()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.Management.CreateOrganization()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.Management.CreateApplication()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.EmailSmsTemplates.List()`:  `response.[].FlaggedAsSuspicious` **Added**\n* `ClerkBackendApi.EmailSmsTemplates.Get()`:  `response.flaggedAsSuspicious` **Added**\n* `ClerkBackendApi.EmailSmsTemplates.Revert()`:  `response.flaggedAsSuspicious` **Added**\n* `ClerkBackendApi.EmailSmsTemplates.ToggleTemplateDelivery()`:  `response.flaggedAsSuspicious` **Added**\n* `ClerkBackendApi.EmailAndSmsTemplates.Upsert()`:  `response.flaggedAsSuspicious` **Added**\n* `ClerkBackendApi.InstanceSettings.UpdateRestrictions()`: \n  *  `request.AllowlistBlocklistDisabledOnSignIn` **Added**\n  *  `response.allowlistBlocklistDisabledOnSignIn` **Added**\n* `ClerkBackendApi.InstanceSettings.UpdateOrganizationSettings()`:  `response.maxAllowedPermissions` **Changed**\n* `ClerkBackendApi.OrganizationDomains.Create()`:  `response.publicOrganizationData` **Added**\n* `ClerkBackendApi.OrganizationDomains.List()`:  `response.data.[].PublicOrganizationData` **Added**\n* `ClerkBackendApi.OrganizationDomains.Update()`:  `response.publicOrganizationData` **Added**\n* `ClerkBackendApi.OrganizationDomains.ListAll()`:  `response.data.[].PublicOrganizationData` **Added**\n"

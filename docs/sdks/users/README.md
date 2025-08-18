@@ -40,6 +40,7 @@ The users are returned sorted by creation date, with the newest users appearing 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetUserList" method="get" path="/users" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -114,6 +115,7 @@ The following rate limit rules apply to this endpoint: 1000 requests per 10 seco
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateUser" method="post" path="/users" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -187,6 +189,7 @@ Returns a total count of all users that match the given filtering criteria.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetUsersCount" method="get" path="/users/count" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -252,6 +255,7 @@ Retrieve the details of a user
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetUser" method="get" path="/users/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -297,6 +301,7 @@ You can also choose to sign the user out of all their active sessions on any dev
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateUser" method="patch" path="/users/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -368,6 +373,7 @@ Delete the specified user
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteUser" method="delete" path="/users/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -402,6 +408,7 @@ Marks the given user as banned, which means that all their sessions are revoked 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="BanUser" method="post" path="/users/{user_id}/ban" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -436,6 +443,7 @@ Removes the ban mark from the given user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UnbanUser" method="post" path="/users/{user_id}/unban" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -470,6 +478,7 @@ Marks multiple users as banned, which means that all their sessions are revoked 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UsersBan" method="post" path="/users/ban" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -514,6 +523,7 @@ Removes the ban mark from multiple users.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UsersUnban" method="post" path="/users/unban" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -559,6 +569,7 @@ Lock duration can be configured in the instance's restrictions settings.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="LockUser" method="post" path="/users/{user_id}/lock" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -593,6 +604,7 @@ Removes the lock from the given user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UnlockUser" method="post" path="/users/{user_id}/unlock" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -627,6 +639,7 @@ Update a user's profile image
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="SetUserProfileImage" method="post" path="/users/{user_id}/profile_image" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -666,6 +679,7 @@ Delete a user's profile image
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteUserProfileImage" method="delete" path="/users/{user_id}/profile_image" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -707,6 +721,7 @@ You can remove metadata keys at any level by setting their value to `null`.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateUserMetadata" method="patch" path="/users/{user_id}/metadata" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -743,6 +758,7 @@ For OAuth 2.0, if the access token has expired and we have a corresponding refre
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetOAuthAccessToken" method="get" path="/users/{user_id}/oauth_access_tokens/{provider}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -785,6 +801,7 @@ Retrieve a paginated list of the user's organization memberships
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UsersGetOrganizationMemberships" method="get" path="/users/{user_id}/organization_memberships" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -825,6 +842,7 @@ Retrieve a paginated list of the user's organization invitations
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UsersGetOrganizationInvitations" method="get" path="/users/{user_id}/organization_invitations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -867,6 +885,7 @@ Useful for custom auth flows and re-verification.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="VerifyPassword" method="post" path="/users/{user_id}/verify_password" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -911,6 +930,7 @@ Useful for custom auth flows and re-verification.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="VerifyTOTP" method="post" path="/users/{user_id}/verify_totp" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -952,6 +972,7 @@ Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authen
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DisableMFA" method="delete" path="/users/{user_id}/mfa" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -987,6 +1008,7 @@ Disable all of a user's backup codes.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteBackupCode" method="delete" path="/users/{user_id}/backup_code" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -1022,6 +1044,7 @@ Delete the passkey identification for a given user and notify them through email
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UserPasskeyDelete" method="delete" path="/users/{user_id}/passkeys/{passkey_identification_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -1061,6 +1084,7 @@ Delete the web3 wallet identification for a given user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UserWeb3WalletDelete" method="delete" path="/users/{user_id}/web3_wallets/{web3_wallet_identification_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -1100,6 +1124,7 @@ Deletes all of the user's TOTPs.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteTOTP" method="delete" path="/users/{user_id}/totp" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -1135,6 +1160,7 @@ Delete an external account by ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteExternalAccount" method="delete" path="/users/{user_id}/external_accounts/{external_account_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -1174,6 +1200,7 @@ Retrieves all organization user memberships for the given instance.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="InstanceGetOrganizationMemberships" method="get" path="/organization_memberships" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

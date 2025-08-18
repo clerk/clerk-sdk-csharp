@@ -22,6 +22,7 @@ returned first)
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListMachines" method="get" path="/machines" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -61,6 +62,7 @@ Creates a new machine.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateMachine" method="post" path="/machines" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -98,6 +100,7 @@ Returns the details of a machine.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetMachine" method="get" path="/machines/{machine_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -133,6 +136,7 @@ Only the provided fields will be updated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateMachine" method="patch" path="/machines/{machine_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -168,6 +172,7 @@ Deletes a machine.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteMachine" method="delete" path="/machines/{machine_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -202,6 +207,7 @@ Returns the secret key for a machine.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetMachineSecretKey" method="get" path="/machines/{machine_id}/secret_key" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -237,6 +243,7 @@ Maximum of 25 scopes per machine.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateMachineScope" method="post" path="/machines/{machine_id}/scopes" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -272,6 +279,7 @@ Deletes a machine scope, removing access from one machine to another.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteMachineScope" method="delete" path="/machines/{machine_id}/scopes/{other_machine_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

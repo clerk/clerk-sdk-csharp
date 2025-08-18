@@ -57,8 +57,8 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.10.0";
-        private const string _sdkGenVersion = "2.666.0";
+        private const string _sdkVersion = "0.11.0";
+        private const string _sdkGenVersion = "2.684.0";
         private const string _openapiDocVersion = "2025-04-10";
 
         public BlocklistIdentifiers(SDKConfig config)

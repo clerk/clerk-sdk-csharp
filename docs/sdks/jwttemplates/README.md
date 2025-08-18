@@ -17,6 +17,7 @@ List all templates
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListJWTTemplates" method="get" path="/jwt_templates" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -55,6 +56,7 @@ Create a new JWT template
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateJWTTemplate" method="post" path="/jwt_templates" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -100,6 +102,7 @@ Retrieve the details of a given JWT template
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetJWTTemplate" method="get" path="/jwt_templates/{template_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -134,6 +137,7 @@ Updates an existing JWT template
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateJWTTemplate" method="patch" path="/jwt_templates/{template_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -169,6 +173,7 @@ Delete a Template
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteJWTTemplate" method="delete" path="/jwt_templates/{template_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

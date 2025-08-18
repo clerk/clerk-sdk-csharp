@@ -16,6 +16,7 @@ You can optionally supply a different duration in seconds using the `expires_in_
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateSignInToken" method="post" path="/sign_in_tokens" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -55,6 +56,7 @@ Revokes a pending sign-in token
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="RevokeSignInToken" method="post" path="/sign_in_tokens/{sign_in_token_id}/revoke" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

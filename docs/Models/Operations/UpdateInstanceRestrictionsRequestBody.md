@@ -3,9 +3,10 @@
 
 ## Fields
 
-| Field                         | Type                          | Required                      | Description                   | Example                       |
-| ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
-| `Allowlist`                   | *bool*                        | :heavy_minus_sign:            | N/A                           | false                         |
-| `Blocklist`                   | *bool*                        | :heavy_minus_sign:            | N/A                           | true                          |
-| `BlockEmailSubaddresses`      | *bool*                        | :heavy_minus_sign:            | N/A                           | true                          |
-| `BlockDisposableEmailDomains` | *bool*                        | :heavy_minus_sign:            | N/A                           | true                          |
+| Field                                | Type                                 | Required                             | Description                          | Example                              |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `Allowlist`                          | *bool*                               | :heavy_minus_sign:                   | N/A                                  | false                                |
+| `Blocklist`                          | *bool*                               | :heavy_minus_sign:                   | N/A                                  | true                                 |
+| `AllowlistBlocklistDisabledOnSignIn` | *bool*                               | :heavy_minus_sign:                   | N/A                                  |                                      |
+| `BlockEmailSubaddresses`             | *bool*                               | :heavy_minus_sign:                   | N/A                                  | true                                 |
+| `BlockDisposableEmailDomains`        | *bool*                               | :heavy_minus_sign:                   | N/A                                  | true                                 |

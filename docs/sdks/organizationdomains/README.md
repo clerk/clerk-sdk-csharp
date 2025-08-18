@@ -17,6 +17,7 @@ Creates a new organization domain. By default the domain is verified, but can be
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateOrganizationDomain" method="post" path="/organizations/{organization_id}/domains" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -56,6 +57,7 @@ Get a list of all domains of an organization.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListOrganizationDomains" method="get" path="/organizations/{organization_id}/domains" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -97,6 +99,7 @@ Updates the properties of an existing organization domain.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateOrganizationDomain" method="patch" path="/organizations/{organization_id}/domains/{domain_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -138,6 +141,7 @@ Removes the given domain from the organization.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteOrganizationDomain" method="delete" path="/organizations/{organization_id}/domains/{domain_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -182,6 +186,7 @@ including its verification status, enrollment mode, and associated counts.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListAllOrganizationDomains" method="get" path="/organization_domains" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

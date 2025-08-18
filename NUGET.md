@@ -46,32 +46,6 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
-
-### Per-Operation Security Schemes
-
-Some operations in this SDK require the security scheme to be specified at the request level. For example:
-```csharp
-using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
-
-var sdk = new ClerkBackendApi();
-
-ManagementUpsertUserRequest req = new ManagementUpsertUserRequest() {
-    EmailAddress = "Roger_OReilly-Dibbert10@hotmail.com",
-    FirstName = "Diana",
-    LastName = "Schmidt-Kutch",
-};
-
-var res = await sdk.Management.UpsertUserAsync(
-    security: new ManagementUpsertUserSecurity() {
-        ManagementToken = "<YOUR_BEARER_TOKEN_HERE>",
-    },
-    request: req
-);
-
-// handle response
-```
 <!-- End Authentication [security] -->
 
 <!-- Start Retries [retries] -->
@@ -148,12 +122,12 @@ By default, an API error will raise a `Clerk.BackendAPI.Models.Errors.SDKError` 
 | `Request`     | *HttpRequestMessage*  | The HTTP request      |
 | `Response`    | *HttpResponseMessage* | The HTTP response     |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `CreateAsync` method throws the following exceptions:
+When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `DeleteAsync` method throws the following exceptions:
 
-| Error Type                                 | Status Code             | Content Type     |
-| ------------------------------------------ | ----------------------- | ---------------- |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422 | application/json |
-| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                | \*/\*            |
+| Error Type                                 | Status Code        | Content Type     |
+| ------------------------------------------ | ------------------ | ---------------- |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404 | application/json |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX           | \*/\*            |
 
 ### Example
 
@@ -161,15 +135,12 @@ When custom error responses are specified for an operation, the SDK may also thr
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Errors;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 try
 {
-    CreateAWSCredentialRequestBody? req = null;
-
-    var res = await sdk.AwsCredentials.CreateAsync(req);
+    var res = await sdk.AwsCredentials.DeleteAsync(id: "<id>");
 
     // handle response
 }

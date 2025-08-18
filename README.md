@@ -106,32 +106,6 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 
 // handle response
 ```
-
-### Per-Operation Security Schemes
-
-Some operations in this SDK require the security scheme to be specified at the request level. For example:
-```csharp
-using Clerk.BackendAPI;
-using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
-
-var sdk = new ClerkBackendApi();
-
-ManagementUpsertUserRequest req = new ManagementUpsertUserRequest() {
-    EmailAddress = "Roger_OReilly-Dibbert10@hotmail.com",
-    FirstName = "Diana",
-    LastName = "Schmidt-Kutch",
-};
-
-var res = await sdk.Management.UpsertUserAsync(
-    security: new ManagementUpsertUserSecurity() {
-        ManagementToken = "<YOUR_BEARER_TOKEN_HERE>",
-    },
-    request: req
-);
-
-// handle response
-```
 <!-- End Authentication [security] -->
 
 ## Request Authentication
@@ -204,9 +178,6 @@ public class MachineAuthentication
 
 ### [AwsCredentials](docs/sdks/awscredentials/README.md)
 
-* [List](docs/sdks/awscredentials/README.md#list) - List all AWS Credentials
-* [Create](docs/sdks/awscredentials/README.md#create) - Create an AWS Credential
-* [Get](docs/sdks/awscredentials/README.md#get) - Retrieve an AWS Credential
 * [Delete](docs/sdks/awscredentials/README.md#delete) - Delete an AWS Credential
 * [Update](docs/sdks/awscredentials/README.md#update) - Update an AWS Credential
 
@@ -227,6 +198,10 @@ public class MachineAuthentication
 * [~~List~~](docs/sdks/clients/README.md#list) - List all clients :warning: **Deprecated**
 * [Verify](docs/sdks/clients/README.md#verify) - Verify a client
 * [Get](docs/sdks/clients/README.md#get) - Get a client
+
+### [Commerce](docs/sdks/commerce/README.md)
+
+* [ListPlans](docs/sdks/commerce/README.md#listplans) - List all commerce plans
 
 ### [Domains](docs/sdks/domains/README.md)
 
@@ -285,6 +260,13 @@ public class MachineAuthentication
 * [Update](docs/sdks/jwttemplates/README.md#update) - Update a JWT template
 * [Delete](docs/sdks/jwttemplates/README.md#delete) - Delete a Template
 
+### [M2m](docs/sdks/m2m/README.md)
+
+* [CreateToken](docs/sdks/m2m/README.md#createtoken) - Create a M2M Token
+* [ListTokens](docs/sdks/m2m/README.md#listtokens) - Get M2M Tokens
+* [RevokeToken](docs/sdks/m2m/README.md#revoketoken) - Revoke a M2M Token
+* [VerifyToken](docs/sdks/m2m/README.md#verifytoken) - Verify a M2M Token
+
 ### [Machines](docs/sdks/machines/README.md)
 
 * [List](docs/sdks/machines/README.md#list) - Get a list of machines for an instance
@@ -295,16 +277,6 @@ public class MachineAuthentication
 * [GetSecretKey](docs/sdks/machines/README.md#getsecretkey) - Retrieve a machine secret key
 * [CreateScope](docs/sdks/machines/README.md#createscope) - Create a machine scope
 * [DeleteScope](docs/sdks/machines/README.md#deletescope) - Delete a machine scope
-
-### [MachineTokens](docs/sdks/machinetokens/README.md)
-
-* [Create](docs/sdks/machinetokens/README.md#create) - Create a machine token
-
-### [Management](docs/sdks/management/README.md)
-
-* [UpsertUser](docs/sdks/management/README.md#upsertuser) - Upsert a user
-* [CreateOrganization](docs/sdks/management/README.md#createorganization) - Create an organization
-* [CreateApplication](docs/sdks/management/README.md#createapplication) - Create an application (instance)
 
 ### [Miscellaneous](docs/sdks/miscellaneous/README.md)
 
@@ -532,12 +504,12 @@ By default, an API error will raise a `Clerk.BackendAPI.Models.Errors.SDKError` 
 | `Request`     | *HttpRequestMessage*  | The HTTP request      |
 | `Response`    | *HttpResponseMessage* | The HTTP response     |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `CreateAsync` method throws the following exceptions:
+When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `DeleteAsync` method throws the following exceptions:
 
-| Error Type                                 | Status Code             | Content Type     |
-| ------------------------------------------ | ----------------------- | ---------------- |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422 | application/json |
-| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                | \*/\*            |
+| Error Type                                 | Status Code        | Content Type     |
+| ------------------------------------------ | ------------------ | ---------------- |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404 | application/json |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX           | \*/\*            |
 
 ### Example
 
@@ -545,15 +517,12 @@ When custom error responses are specified for an operation, the SDK may also thr
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Errors;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 try
 {
-    CreateAWSCredentialRequestBody? req = null;
-
-    var res = await sdk.AwsCredentials.CreateAsync(req);
+    var res = await sdk.AwsCredentials.DeleteAsync(id: "<id>");
 
     // handle response
 }

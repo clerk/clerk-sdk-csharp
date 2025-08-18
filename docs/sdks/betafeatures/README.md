@@ -14,6 +14,7 @@ Updates the settings of an instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateInstanceAuthConfig" method="patch" path="/beta_features/instance_settings" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -62,6 +63,7 @@ WARNING: Changing your domain will invalidate all current user sessions (i.e. us
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateProductionInstanceDomain" method="put" path="/beta_features/domain" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

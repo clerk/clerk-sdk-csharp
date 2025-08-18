@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
     
     /// <summary>
@@ -35,8 +36,12 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("max_allowed_roles")]
         public long MaxAllowedRoles { get; set; } = default!;
 
+        /// <summary>
+        /// max_allowed_permissions is now a no-op, as permissions are now unlimited
+        /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("max_allowed_permissions")]
-        public long MaxAllowedPermissions { get; set; } = default!;
+        public long? MaxAllowedPermissions { get; set; }
 
         /// <summary>
         /// The role key that a user will be assigned after creating an organization.

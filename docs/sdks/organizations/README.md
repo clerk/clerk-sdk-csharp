@@ -23,6 +23,7 @@ Most recent organizations will be returned first.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListOrganizations" method="get" path="/organizations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -80,6 +81,7 @@ the next time they create a session, presuming they don't explicitly set a diffe
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateOrganization" method="post" path="/organizations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -129,6 +131,7 @@ Fetches the organization whose ID or slug matches the provided `id_or_slug` URL 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetOrganization" method="get" path="/organizations/{organization_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -165,6 +168,7 @@ Updates an existing organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateOrganization" method="patch" path="/organizations/{organization_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -218,6 +222,7 @@ This is not reversible.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteOrganization" method="delete" path="/organizations/{organization_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -255,6 +260,7 @@ You can remove metadata keys at any level by setting their value to `null`.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="MergeOrganizationMetadata" method="patch" path="/organizations/{organization_id}/metadata" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -305,6 +311,7 @@ Only the following file content types are supported: `image/jpeg`, `image/png`, 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UploadOrganizationLogo" method="put" path="/organizations/{organization_id}/logo" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -350,6 +357,7 @@ Delete the organization's logo.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteOrganizationLogo" method="delete" path="/organizations/{organization_id}/logo" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

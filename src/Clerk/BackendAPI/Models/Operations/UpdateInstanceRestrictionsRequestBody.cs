@@ -21,6 +21,9 @@ namespace Clerk.BackendAPI.Models.Operations
         [JsonProperty("blocklist")]
         public bool? Blocklist { get; set; } = null;
 
+        [JsonProperty("allowlist_blocklist_disabled_on_sign_in")]
+        public bool? AllowlistBlocklistDisabledOnSignIn { get; set; } = null;
+
         [JsonProperty("block_email_subaddresses")]
         public bool? BlockEmailSubaddresses { get; set; } = null;
 

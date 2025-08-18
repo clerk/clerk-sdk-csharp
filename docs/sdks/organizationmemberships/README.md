@@ -17,6 +17,7 @@ Adds a user as a member to the given organization.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateOrganizationMembership" method="post" path="/organizations/{organization_id}/memberships" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -59,6 +60,7 @@ Retrieves all user memberships for the given organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListOrganizationMemberships" method="get" path="/organizations/{organization_id}/memberships" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -108,6 +110,7 @@ Updates the properties of an existing organization membership
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateOrganizationMembership" method="patch" path="/organizations/{organization_id}/memberships/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -151,6 +154,7 @@ Removes the given membership from the organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteOrganizationMembership" method="delete" path="/organizations/{organization_id}/memberships/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -191,6 +195,7 @@ You can remove metadata keys at any level by setting their value to `null`.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateOrganizationMembershipMetadata" method="patch" path="/organizations/{organization_id}/memberships/{user_id}/metadata" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

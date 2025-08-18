@@ -22,6 +22,7 @@ moving forward at least one of `client_id` or `user_id` parameters should be pro
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetSessionList" method="get" path="/sessions" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -68,6 +69,7 @@ we recommend using the [Sign-in Tokens](https://clerk.com/docs/reference/backend
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="createSession" method="post" path="/sessions" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -105,6 +107,7 @@ Retrieve the details of a session
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetSession" method="get" path="/sessions/{session_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -140,6 +143,7 @@ are validation errors, which signals the SDKs to fall back to the handshake flow
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="RefreshSession" method="post" path="/sessions/{session_id}/refresh" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -176,6 +180,7 @@ In multi-session mode, a revoked session will still be returned along with its c
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="RevokeSession" method="post" path="/sessions/{session_id}/revoke" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -210,6 +215,7 @@ Creates a session JSON Web Token (JWT) based on a session.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateSessionToken" method="post" path="/sessions/{session_id}/tokens" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -245,6 +251,7 @@ Creates a JSON Web Token(JWT) based on a session and a JWT Template name defined
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateSessionTokenFromTemplate" method="post" path="/sessions/{session_id}/tokens/{template_name}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

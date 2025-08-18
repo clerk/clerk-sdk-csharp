@@ -78,6 +78,12 @@ namespace Clerk.BackendAPI.Models.Components
         public int TotalPendingSuggestions { get; set; } = default!;
 
         /// <summary>
+        /// Public organization data associated with this domain
+        /// </summary>
+        [JsonProperty("public_organization_data")]
+        public PublicOrganizationData? PublicOrganizationData { get; set; } = null;
+
+        /// <summary>
         /// Unix timestamp when the domain was created
         /// </summary>
         [JsonProperty("created_at")]
