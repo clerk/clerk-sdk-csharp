@@ -15,6 +15,7 @@ Get a list of all identifiers which are not allowed to access an instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListBlocklistIdentifiers" method="get" path="/blocklist_identifiers" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -43,6 +44,7 @@ Create an identifier that is blocked from accessing an instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateBlocklistIdentifier" method="post" path="/blocklist_identifiers" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -82,6 +84,7 @@ Delete an identifier from the instance block-list
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteBlocklistIdentifier" method="delete" path="/blocklist_identifiers/{identifier_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

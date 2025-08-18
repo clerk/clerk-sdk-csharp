@@ -58,7 +58,6 @@ namespace Clerk.BackendAPI
         public IInstanceSettings InstanceSettings { get; }
         public IWebhooks Webhooks { get; }
         public IJwtTemplates JwtTemplates { get; }
-        public IMachineTokens MachineTokens { get; }
         public IMachines Machines { get; }
         public IOrganizations Organizations { get; }
         public IOrganizationMemberships OrganizationMemberships { get; }
@@ -72,7 +71,8 @@ namespace Clerk.BackendAPI
         public ITestingTokens TestingTokens { get; }
         public IWaitlistEntries WaitlistEntries { get; }
         public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; }
-        public IManagement Management { get; }
+        public ICommerce Commerce { get; }
+        public IM2m M2m { get; }
         public IOauthAccessTokens OauthAccessTokens { get; }
     }
 
@@ -97,8 +97,8 @@ namespace Clerk.BackendAPI
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.10.0";
-        private const string _sdkGenVersion = "2.666.0";
+        private const string _sdkVersion = "0.11.0";
+        private const string _sdkGenVersion = "2.684.0";
         private const string _openapiDocVersion = "2025-04-10";
         public IMiscellaneous Miscellaneous { get; private set; }
         public IJwks Jwks { get; private set; }
@@ -121,7 +121,6 @@ namespace Clerk.BackendAPI
         public IInstanceSettings InstanceSettings { get; private set; }
         public IWebhooks Webhooks { get; private set; }
         public IJwtTemplates JwtTemplates { get; private set; }
-        public IMachineTokens MachineTokens { get; private set; }
         public IMachines Machines { get; private set; }
         public IOrganizations Organizations { get; private set; }
         public IOrganizationMemberships OrganizationMemberships { get; private set; }
@@ -135,7 +134,8 @@ namespace Clerk.BackendAPI
         public ITestingTokens TestingTokens { get; private set; }
         public IWaitlistEntries WaitlistEntries { get; private set; }
         public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; private set; }
-        public IManagement Management { get; private set; }
+        public ICommerce Commerce { get; private set; }
+        public IM2m M2m { get; private set; }
         public IOauthAccessTokens OauthAccessTokens { get; private set; }
 
         public ClerkBackendApi(SDKConfig config)
@@ -185,8 +185,6 @@ namespace Clerk.BackendAPI
 
             JwtTemplates = new JwtTemplates(SDKConfiguration);
 
-            MachineTokens = new MachineTokens(SDKConfiguration);
-
             Machines = new Machines(SDKConfiguration);
 
             Organizations = new Organizations(SDKConfiguration);
@@ -213,7 +211,9 @@ namespace Clerk.BackendAPI
 
             ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(SDKConfiguration);
 
-            Management = new Management(SDKConfiguration);
+            Commerce = new Commerce(SDKConfiguration);
+
+            M2m = new M2m(SDKConfiguration);
 
             OauthAccessTokens = new OauthAccessTokens(SDKConfiguration);
         }
@@ -298,8 +298,6 @@ namespace Clerk.BackendAPI
 
             JwtTemplates = new JwtTemplates(SDKConfiguration);
 
-            MachineTokens = new MachineTokens(SDKConfiguration);
-
             Machines = new Machines(SDKConfiguration);
 
             Organizations = new Organizations(SDKConfiguration);
@@ -326,7 +324,9 @@ namespace Clerk.BackendAPI
 
             ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(SDKConfiguration);
 
-            Management = new Management(SDKConfiguration);
+            Commerce = new Commerce(SDKConfiguration);
+
+            M2m = new M2m(SDKConfiguration);
 
             OauthAccessTokens = new OauthAccessTokens(SDKConfiguration);
         }

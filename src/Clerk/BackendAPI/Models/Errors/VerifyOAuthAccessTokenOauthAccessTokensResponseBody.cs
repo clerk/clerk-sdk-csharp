@@ -23,7 +23,7 @@ namespace Clerk.BackendAPI.Models.Errors
     {
 
         [JsonProperty("errors")]
-        public List<VerifyOAuthAccessTokenErrors> Errors { get; set; } = default!;
+        public List<VerifyOAuthAccessTokenOauthAccessTokensErrors> Errors { get; set; } = default!;
 
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;

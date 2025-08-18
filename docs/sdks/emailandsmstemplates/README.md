@@ -15,6 +15,7 @@ Updates the existing template of the given type and slug
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpsertTemplate" method="put" path="/templates/{template_type}/{slug}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

@@ -15,6 +15,7 @@ Returns a preview of a template for a given template_type, slug and body
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="PreviewTemplate" method="post" path="/templates/{template_type}/{slug}/preview" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

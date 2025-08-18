@@ -16,6 +16,7 @@ Create a new phone number
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreatePhoneNumber" method="post" path="/phone_numbers" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -59,6 +60,7 @@ Returns the details of a phone number
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetPhoneNumber" method="get" path="/phone_numbers/{phone_number_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -93,6 +95,7 @@ Delete the phone number with the given ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeletePhoneNumber" method="delete" path="/phone_numbers/{phone_number_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -127,6 +130,7 @@ Updates a phone number
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdatePhoneNumber" method="patch" path="/phone_numbers/{phone_number_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

@@ -15,6 +15,7 @@ Get a list of all identifiers allowed to sign up to an instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListAllowlistIdentifiers" method="get" path="/allowlist_identifiers" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -54,6 +55,7 @@ Create an identifier allowed to sign up to an instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateAllowlistIdentifier" method="post" path="/allowlist_identifiers" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -94,6 +96,7 @@ Delete an identifier from the instance allow-list
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteAllowlistIdentifier" method="delete" path="/allowlist_identifiers/{identifier_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

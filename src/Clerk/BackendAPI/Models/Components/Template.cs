@@ -135,6 +135,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
 
+        [JsonProperty("flagged_as_suspicious")]
+        public bool? FlaggedAsSuspicious { get; set; }
+
         /// <summary>
         /// Unix timestamp of last update.<br/>
         /// 

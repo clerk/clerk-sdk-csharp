@@ -21,6 +21,7 @@ Most recent OAuth applications will be returned first.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListOAuthApplications" method="get" path="/oauth_applications" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -64,6 +65,7 @@ All URL schemes are allowed such as `http://`, `https://`, `myapp://`, etc...
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateOAuthApplication" method="post" path="/oauth_applications" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -105,6 +107,7 @@ Fetches the OAuth application whose ID matches the provided `id` in the path.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetOAuthApplication" method="get" path="/oauth_applications/{oauth_application_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -139,6 +142,7 @@ Updates an existing OAuth application
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateOAuthApplication" method="patch" path="/oauth_applications/{oauth_application_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -182,6 +186,7 @@ This is not reversible.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteOAuthApplication" method="delete" path="/oauth_applications/{oauth_application_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -217,6 +222,7 @@ When the client secret is rotated, make sure to update it in authorized OAuth cl
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="RotateOAuthApplicationSecret" method="post" path="/oauth_applications/{oauth_application_id}/rotate_secret" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

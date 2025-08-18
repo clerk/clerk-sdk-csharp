@@ -13,6 +13,7 @@ Retrieve a new testing token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateTestingToken" method="post" path="/testing_tokens" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
