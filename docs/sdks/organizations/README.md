@@ -23,6 +23,7 @@ Most recent organizations will be returned first.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListOrganizations" method="get" path="/organizations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -39,6 +40,8 @@ ListOrganizationsRequest req = new ListOrganizationsRequest() {
     OrganizationId = new List<string>() {
         "-name",
     },
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Organizations.ListAsync(req);
@@ -78,6 +81,7 @@ the next time they create a session, presuming they don't explicitly set a diffe
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateOrganization" method="post" path="/organizations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -127,17 +131,14 @@ Fetches the organization whose ID or slug matches the provided `id_or_slug` URL 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetOrganization" method="get" path="/organizations/{organization_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Organizations.GetAsync(
-    organizationId: "org_123",
-    includeMembersCount: false,
-    includeMissingMemberWithElevatedPermissions: false
-);
+var res = await sdk.Organizations.GetAsync(organizationId: "org_123");
 
 // handle response
 ```
@@ -167,6 +168,7 @@ Updates an existing organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateOrganization" method="patch" path="/organizations/{organization_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -220,6 +222,7 @@ This is not reversible.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteOrganization" method="delete" path="/organizations/{organization_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -257,6 +260,7 @@ You can remove metadata keys at any level by setting their value to `null`.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="MergeOrganizationMetadata" method="patch" path="/organizations/{organization_id}/metadata" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -303,15 +307,15 @@ var res = await sdk.Organizations.MergeMetadataAsync(
 Set or replace an organization's logo, by uploading an image file.
 This endpoint uses the `multipart/form-data` request content type and accepts a file of image type.
 The file size cannot exceed 10MB.
-Only the following file content types are supported: `image/jpeg`, `image/png`, `image/gif`, `image/webp`, `image/x-icon`, `image/vnd.microsoft.icon`.
+Only the following file content types are supported: `image/jpeg`, `image/png`, `image/gif`, `image/webp`.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UploadOrganizationLogo" method="put" path="/organizations/{organization_id}/logo" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
-using System;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -321,7 +325,7 @@ var res = await sdk.Organizations.UploadLogoAsync(
         UploaderUserId = "user_67890",
         File = new UploadOrganizationLogoFile() {
             FileName = "example.file",
-            Content = System.Text.Encoding.UTF8.GetBytes("0x0DDEE4e6Ea"),
+            Content = System.IO.File.ReadAllBytes("example.file"),
         },
     }
 );
@@ -353,6 +357,7 @@ Delete the organization's logo.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteOrganizationLogo" method="delete" path="/organizations/{organization_id}/logo" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

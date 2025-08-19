@@ -38,6 +38,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -60,6 +61,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi();
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -97,6 +99,7 @@ var sdk = new ClerkBackendApi(retryConfig: new RetryConfig(
 ));
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -119,12 +122,12 @@ By default, an API error will raise a `Clerk.BackendAPI.Models.Errors.SDKError` 
 | `Request`     | *HttpRequestMessage*  | The HTTP request      |
 | `Response`    | *HttpResponseMessage* | The HTTP response     |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `VerifyAsync` method throws the following exceptions:
+When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `DeleteAsync` method throws the following exceptions:
 
-| Error Type                                 | Status Code   | Content Type     |
-| ------------------------------------------ | ------------- | ---------------- |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404 | application/json |
-| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX      | \*/\*            |
+| Error Type                                 | Status Code        | Content Type     |
+| ------------------------------------------ | ------------------ | ---------------- |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404 | application/json |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX           | \*/\*            |
 
 ### Example
 
@@ -132,17 +135,12 @@ When custom error responses are specified for an operation, the SDK may also thr
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Errors;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 try
 {
-    VerifyClientRequestBody req = new VerifyClientRequestBody() {
-        Token = "jwt_token_example",
-    };
-
-    var res = await sdk.Clients.VerifyAsync(req);
+    var res = await sdk.AwsCredentials.DeleteAsync(id: "<id>");
 
     // handle response
 }
@@ -175,6 +173,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 

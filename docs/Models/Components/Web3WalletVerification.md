@@ -3,14 +3,14 @@
 
 ## Supported Types
 
-### Web3Signature
+### VerificationWeb3
 
 ```csharp
-Web3WalletVerification.CreateWeb3Signature(/* values here */);
+Web3WalletVerification.CreateVerificationWeb3(/* values here */);
 ```
 
-### Web3WalletVerificationAdmin
+### VerificationAdmin
 
 ```csharp
-Web3WalletVerification.CreateWeb3WalletVerificationAdmin(/* values here */);
+Web3WalletVerification.CreateVerificationAdmin(/* values here */);
 ```

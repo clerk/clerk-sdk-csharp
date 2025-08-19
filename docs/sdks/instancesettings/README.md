@@ -17,6 +17,7 @@ Fetches the current instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetInstance" method="get" path="/instance" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -44,6 +45,7 @@ Updates the settings of an instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateInstance" method="patch" path="/instance" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -95,6 +97,7 @@ Updates the restriction settings of an instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateInstanceRestrictions" method="patch" path="/instance/restrictions" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -107,7 +110,6 @@ UpdateInstanceRestrictionsRequestBody req = new UpdateInstanceRestrictionsReques
     Blocklist = true,
     BlockEmailSubaddresses = true,
     BlockDisposableEmailDomains = true,
-    IgnoreDotsForGmailAddresses = false,
 };
 
 var res = await sdk.InstanceSettings.UpdateRestrictionsAsync(req);
@@ -142,6 +144,7 @@ WARNING: Changing your domain will invalidate all current user sessions (i.e. us
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ChangeProductionInstanceDomain" method="post" path="/instance/change_domain" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -181,6 +184,7 @@ Updates the organization settings of the instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateInstanceOrganizationSettings" method="patch" path="/instance/organization_settings" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

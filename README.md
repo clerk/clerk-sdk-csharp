@@ -19,7 +19,7 @@ Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend s
 ### Versions
 
 When the API changes in a way that isn't compatible with older versions, a new version is released.
-Each version is identified by its release date, e.g. `2024-10-01`. For more information, please see [Clerk API Versions](https://clerk.com/docs/versioning/available-versions).
+Each version is identified by its release date, e.g. `2025-04-10`. For more information, please see [Clerk API Versions](https://clerk.com/docs/versioning/available-versions).
 
 Please see https://clerk.com/docs for more information.
 
@@ -98,6 +98,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -132,9 +133,31 @@ public class UserAuthentication
     }
 }
 ```
+### Machine Authentication
 
-If the request is correctly authenticated, the token's claims are made available in `requestState.Claims`. Otherwise the reason for the token verification failure is given by `requestState.ErrorReason`.
+For machine-to-machine authentication, you can use machine tokens as shown below.
 
+```csharp
+using Clerk.BackendAPI.Helpers.Jwks;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+public class MachineAuthentication
+{
+    // Accept only machine tokens
+    public static async Task<bool> IsMachineAuthenticatedAsync(HttpRequestMessage request)
+    {
+        var options = new AuthenticateRequestOptions(
+            secretKey: Environment.GetEnvironmentVariable("CLERK_SECRET_KEY"),
+            acceptsToken: new[] { "oauth_token" }  // Only accept oauth tokens
+        );
+
+        var requestState = await AuthenticateRequest.AuthenticateRequestAsync(request, options);
+        return requestState.isSignedIn();
+    }
+}
+```
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -153,6 +176,11 @@ If the request is correctly authenticated, the token's claims are made available
 * [Create](docs/sdks/allowlistidentifiers/README.md#create) - Add identifier to the allow-list
 * [Delete](docs/sdks/allowlistidentifiers/README.md#delete) - Delete identifier from allow-list
 
+### [AwsCredentials](docs/sdks/awscredentials/README.md)
+
+* [Delete](docs/sdks/awscredentials/README.md#delete) - Delete an AWS Credential
+* [Update](docs/sdks/awscredentials/README.md#update) - Update an AWS Credential
+
 ### [BetaFeatures](docs/sdks/betafeatures/README.md)
 
 * [UpdateInstanceSettings](docs/sdks/betafeatures/README.md#updateinstancesettings) - Update instance settings
@@ -170,6 +198,11 @@ If the request is correctly authenticated, the token's claims are made available
 * [~~List~~](docs/sdks/clients/README.md#list) - List all clients :warning: **Deprecated**
 * [Verify](docs/sdks/clients/README.md#verify) - Verify a client
 * [Get](docs/sdks/clients/README.md#get) - Get a client
+
+### [Commerce](docs/sdks/commerce/README.md)
+
+* [ListPlans](docs/sdks/commerce/README.md#listplans) - List all commerce plans
+* [ListSubscriptionItems](docs/sdks/commerce/README.md#listsubscriptionitems) - List all subscription items
 
 ### [Domains](docs/sdks/domains/README.md)
 
@@ -228,9 +261,31 @@ If the request is correctly authenticated, the token's claims are made available
 * [Update](docs/sdks/jwttemplates/README.md#update) - Update a JWT template
 * [Delete](docs/sdks/jwttemplates/README.md#delete) - Delete a Template
 
+### [M2m](docs/sdks/m2m/README.md)
+
+* [CreateToken](docs/sdks/m2m/README.md#createtoken) - Create a M2M Token
+* [ListTokens](docs/sdks/m2m/README.md#listtokens) - Get M2M Tokens
+* [RevokeToken](docs/sdks/m2m/README.md#revoketoken) - Revoke a M2M Token
+* [VerifyToken](docs/sdks/m2m/README.md#verifytoken) - Verify a M2M Token
+
+### [Machines](docs/sdks/machines/README.md)
+
+* [List](docs/sdks/machines/README.md#list) - Get a list of machines for an instance
+* [Create](docs/sdks/machines/README.md#create) - Create a machine
+* [Get](docs/sdks/machines/README.md#get) - Retrieve a machine
+* [Update](docs/sdks/machines/README.md#update) - Update a machine
+* [Delete](docs/sdks/machines/README.md#delete) - Delete a machine
+* [GetSecretKey](docs/sdks/machines/README.md#getsecretkey) - Retrieve a machine secret key
+* [CreateScope](docs/sdks/machines/README.md#createscope) - Create a machine scope
+* [DeleteScope](docs/sdks/machines/README.md#deletescope) - Delete a machine scope
+
 ### [Miscellaneous](docs/sdks/miscellaneous/README.md)
 
 * [GetPublicInterstitial](docs/sdks/miscellaneous/README.md#getpublicinterstitial) - Returns the markup for the interstitial page
+
+### [OauthAccessTokens](docs/sdks/oauthaccesstokens/README.md)
+
+* [Verify](docs/sdks/oauthaccesstokens/README.md#verify) - Verify an OAuth Access Token
 
 ### [OauthApplications](docs/sdks/oauthapplications/README.md)
 
@@ -247,6 +302,7 @@ If the request is correctly authenticated, the token's claims are made available
 * [List](docs/sdks/organizationdomains/README.md#list) - Get a list of all domains of an organization.
 * [Update](docs/sdks/organizationdomains/README.md#update) - Update an organization domain.
 * [Delete](docs/sdks/organizationdomains/README.md#delete) - Remove a domain from an organization.
+* [ListAll](docs/sdks/organizationdomains/README.md#listall) - List all organization domains
 
 ### [OrganizationInvitations](docs/sdks/organizationinvitations/README.md)
 
@@ -310,7 +366,6 @@ If the request is correctly authenticated, the token's claims are made available
 * [Get](docs/sdks/sessions/README.md#get) - Retrieve a session
 * [Refresh](docs/sdks/sessions/README.md#refresh) - Refresh a session
 * [Revoke](docs/sdks/sessions/README.md#revoke) - Revoke a session
-* [~~Verify~~](docs/sdks/sessions/README.md#verify) - Verify a session :warning: **Deprecated**
 * [CreateToken](docs/sdks/sessions/README.md#createtoken) - Create a session token
 * [CreateTokenFromTemplate](docs/sdks/sessions/README.md#createtokenfromtemplate) - Create a session token from a jwt template
 
@@ -342,6 +397,8 @@ If the request is correctly authenticated, the token's claims are made available
 * [Delete](docs/sdks/users/README.md#delete) - Delete a user
 * [Ban](docs/sdks/users/README.md#ban) - Ban a user
 * [Unban](docs/sdks/users/README.md#unban) - Unban a user
+* [BulkBan](docs/sdks/users/README.md#bulkban) - Ban multiple users
+* [BulkUnban](docs/sdks/users/README.md#bulkunban) - Unban multiple users
 * [Lock](docs/sdks/users/README.md#lock) - Lock a user
 * [Unlock](docs/sdks/users/README.md#unlock) - Unlock a user
 * [SetProfileImage](docs/sdks/users/README.md#setprofileimage) - Set user profile image
@@ -387,6 +444,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi();
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -424,6 +482,7 @@ var sdk = new ClerkBackendApi(retryConfig: new RetryConfig(
 ));
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 
@@ -446,12 +505,12 @@ By default, an API error will raise a `Clerk.BackendAPI.Models.Errors.SDKError` 
 | `Request`     | *HttpRequestMessage*  | The HTTP request      |
 | `Response`    | *HttpResponseMessage* | The HTTP response     |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `VerifyAsync` method throws the following exceptions:
+When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `DeleteAsync` method throws the following exceptions:
 
-| Error Type                                 | Status Code   | Content Type     |
-| ------------------------------------------ | ------------- | ---------------- |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404 | application/json |
-| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX      | \*/\*            |
+| Error Type                                 | Status Code        | Content Type     |
+| ------------------------------------------ | ------------------ | ---------------- |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404 | application/json |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX           | \*/\*            |
 
 ### Example
 
@@ -459,17 +518,12 @@ When custom error responses are specified for an operation, the SDK may also thr
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Errors;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 try
 {
-    VerifyClientRequestBody req = new VerifyClientRequestBody() {
-        Token = "jwt_token_example",
-    };
-
-    var res = await sdk.Clients.VerifyAsync(req);
+    var res = await sdk.AwsCredentials.DeleteAsync(id: "<id>");
 
     // handle response
 }
@@ -502,6 +556,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi(serverUrl: "https://api.clerk.com/v1");
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 

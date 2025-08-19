@@ -24,6 +24,7 @@ The organization invitations are ordered by descending creation date by default.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListInstanceOrganizationInvitations" method="get" path="/organization_invitations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -31,7 +32,10 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListInstanceOrganizationInvitationsRequest req = new ListInstanceOrganizationInvitationsRequest() {};
+ListInstanceOrganizationInvitationsRequest req = new ListInstanceOrganizationInvitationsRequest() {
+    Limit = 20,
+    Offset = 10,
+};
 
 var res = await sdk.OrganizationInvitations.GetAllAsync(req);
 
@@ -77,6 +81,7 @@ When the organization invitation is accepted, the metadata will be transferred t
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateOrganizationInvitation" method="post" path="/organizations/{organization_id}/invitations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -133,6 +138,7 @@ Any invitations created as a result of an Organization Domain are not included i
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListOrganizationInvitations" method="get" path="/organizations/{organization_id}/invitations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -140,24 +146,23 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.OrganizationInvitations.ListAsync(
-    organizationId: "org_12345",
-    status: ListOrganizationInvitationsQueryParamStatus.Revoked,
-    limit: 20,
-    offset: 10
-);
+ListOrganizationInvitationsRequest req = new ListOrganizationInvitationsRequest() {
+    OrganizationId = "org_12345",
+    OrderBy = "pending",
+    Limit = 20,
+    Offset = 10,
+};
+
+var res = await sdk.OrganizationInvitations.ListAsync(req);
 
 // handle response
 ```
 
 ### Parameters
 
-| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                                                          | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The organization ID.                                                                                                                      | org_12345                                                                                                                                 |
-| `Status`                                                                                                                                  | [ListOrganizationInvitationsQueryParamStatus](../../Models/Operations/ListOrganizationInvitationsQueryParamStatus.md)                     | :heavy_minus_sign:                                                                                                                        | Filter organization invitations based on their status                                                                                     |                                                                                                                                           |
-| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
-| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `request`                                                                                           | [ListOrganizationInvitationsRequest](../../Models/Operations/ListOrganizationInvitationsRequest.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
 
 ### Response
 
@@ -167,7 +172,7 @@ var res = await sdk.OrganizationInvitations.ListAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## BulkCreate
@@ -188,6 +193,7 @@ When the organization invitation is accepted, the metadata will be transferred t
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateOrganizationInvitationBulk" method="post" path="/organizations/{organization_id}/invitations/bulk" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -203,12 +209,12 @@ var res = await sdk.OrganizationInvitations.BulkCreateAsync(
             EmailAddress = "newmember@example.com",
             InviterUserId = "user_67890",
             Role = "admin",
-            PublicMetadata = new Dictionary<string, object>() {
-
-            },
-            PrivateMetadata = new Dictionary<string, object>() {
-
-            },
+            RedirectUrl = "https://example.com/welcome",
+        },
+        new CreateOrganizationInvitationBulkRequestBody() {
+            EmailAddress = "newmember@example.com",
+            InviterUserId = "user_67890",
+            Role = "admin",
             RedirectUrl = "https://example.com/welcome",
         },
     }
@@ -248,6 +254,7 @@ Any invitations created as a result of an Organization Domain are not included i
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListPendingOrganizationInvitations" method="get" path="/organizations/{organization_id}/invitations/pending" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -288,6 +295,7 @@ Use this request to get an existing organization invitation by ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetOrganizationInvitation" method="get" path="/organizations/{organization_id}/invitations/{invitation_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -330,6 +338,7 @@ Only users with "admin" role can revoke invitations.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="RevokeOrganizationInvitation" method="post" path="/organizations/{organization_id}/invitations/{invitation_id}/revoke" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

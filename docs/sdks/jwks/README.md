@@ -13,6 +13,7 @@ Retrieve the JSON Web Key Set of the instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetJWKS" method="get" path="/jwks" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

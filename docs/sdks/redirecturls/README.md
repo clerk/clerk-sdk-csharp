@@ -16,6 +16,7 @@ Lists all whitelisted redirect_urls for the instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListRedirectURLs" method="get" path="/redirect_urls" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -23,7 +24,6 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.RedirectUrls.ListAsync(
-    paginated: false,
     limit: 20,
     offset: 10
 );
@@ -55,6 +55,7 @@ Create a redirect URL
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateRedirectURL" method="post" path="/redirect_urls" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -94,6 +95,7 @@ Retrieve the details of the redirect URL with the given ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetRedirectURL" method="get" path="/redirect_urls/{id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -128,6 +130,7 @@ Remove the selected redirect URL from the whitelist of the instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteRedirectURL" method="delete" path="/redirect_urls/{id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

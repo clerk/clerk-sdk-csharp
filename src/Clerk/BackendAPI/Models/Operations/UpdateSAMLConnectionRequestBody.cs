@@ -12,6 +12,8 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
     
     public class UpdateSAMLConnectionRequestBody
     {
@@ -25,8 +27,15 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// The domain to use for the new SAML Connection
         /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("domain")]
         public string? Domain { get; set; } = null;
+
+        /// <summary>
+        /// A list of the domains on use for the SAML connection
+        /// </summary>
+        [JsonProperty("domains")]
+        public List<string>? Domains { get; set; } = null;
 
         /// <summary>
         /// The entity id as provided by the IdP
@@ -68,7 +77,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Define the atrtibute name mapping between Identity Provider and Clerk&apos;s user properties
         /// </summary>
         [JsonProperty("attribute_mapping")]
-        public UpdateSAMLConnectionAttributeMapping? AttributeMapping { get; set; } = null;
+        public AttributeMapping? AttributeMapping { get; set; } = null;
 
         /// <summary>
         /// Activate or de-activate the SAML Connection

@@ -48,6 +48,16 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("verification", NullValueHandling = NullValueHandling.Include)]
         public PhoneNumberVerification? Verification { get; set; }
 
+        public VerificationOTP? GetVerificationVerificationOtp()
+        {
+            return Verification != null ? Verification.VerificationOTP : null;
+        }
+
+        public VerificationAdmin? GetVerificationVerificationAdmin()
+        {
+            return Verification != null ? Verification.VerificationAdmin : null;
+        }
+
         [JsonProperty("linked_to")]
         public List<IdentificationLink> LinkedTo { get; set; } = default!;
 

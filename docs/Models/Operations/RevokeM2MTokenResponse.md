@@ -1,0 +1,9 @@
+# RevokeM2MTokenResponse
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                            | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                               | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `Object`                                                                                              | [Models.Operations.RevokeM2MTokenResponseBody](../../Models/Operations/RevokeM2MTokenResponseBody.md) | :heavy_minus_sign:                                                                                    | 200 OK                                                                                                |

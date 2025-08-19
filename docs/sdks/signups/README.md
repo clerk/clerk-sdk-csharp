@@ -14,6 +14,7 @@ Retrieve the details of the sign-up with the given ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetSignUp" method="get" path="/sign_ups/{id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -48,6 +49,7 @@ Update the sign-up with the given ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateSignUp" method="patch" path="/sign_ups/{id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

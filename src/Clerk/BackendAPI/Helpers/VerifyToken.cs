@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Utils;
@@ -18,6 +20,24 @@ namespace Clerk.BackendAPI.Helpers.Jwks;
 public static class VerifyToken
 {
     public static async Task<ClaimsPrincipal> VerifyTokenAsync(string token, VerifyTokenOptions options)
+    {
+        var tokenType = TokenTypeHelper.GetTokenType(token);
+
+        if (tokenType == TokenType.SessionToken)
+        {
+            return await VerifySessionTokenAsync(token, options);
+        }
+        else if (TokenTypeHelper.IsMachineToken(token))
+        {
+            return await VerifyMachineTokenAsync(token, options, tokenType);
+        }
+        else
+        {
+            throw new TokenVerificationException(TokenVerificationErrorReason.INVALID_TOKEN_TYPE);
+        }
+    }
+
+    private static async Task<ClaimsPrincipal> VerifySessionTokenAsync(string token, VerifyTokenOptions options)
     {
         RsaSecurityKey rsaKey;
         if (options.JwtKey != null)
@@ -76,7 +96,7 @@ public static class VerifyToken
             DateTimeOffset.UtcNow.ToUnixTimeSeconds() + options.ClockSkewInMs / 1000)
             throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_IAT_IN_THE_FUTURE);
 
-
+        claims = OrganizationClaimsProcessor.ProcessOrganizationClaims(claims);
         return claims;
     }
 
@@ -223,6 +243,74 @@ public static class VerifyToken
                 throw new TokenVerificationException(TokenVerificationErrorReason.JWK_REMOTE_INVALID);
 
             return wellKnownJWKS!;
+        }
+    }
+
+    /// <summary>
+    /// Verifies machine tokens (M2M, OAuth, API keys) by making API calls to Clerk's backend
+    /// </summary>
+    /// <param name="token">The machine token to verify</param>
+    /// <param name="options">Verification options</param>
+    /// <param name="tokenType">The type of machine token</param>
+    /// <returns>ClaimsPrincipal containing token information</returns>
+    private static async Task<ClaimsPrincipal> VerifyMachineTokenAsync(string token, VerifyTokenOptions options, TokenType tokenType)
+    {
+        if (options.SecretKey == null)
+            throw new TokenVerificationException(TokenVerificationErrorReason.SECRET_KEY_MISSING);
+
+        var endpoint = TokenTypeHelper.GetVerificationEndpoint(tokenType);
+        var verificationUrl = $"{options.ApiUrl}/{options.ApiVersion}{endpoint}";
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.SecretKey);
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var payload = new { secret = token };
+        var jsonContent = JsonConvert.SerializeObject(payload);
+        var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+        try
+        {
+            var response = await client.PostAsync(verificationUrl, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID);
+            }
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var tokenData = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseBody);
+
+            if (tokenData == null)
+            {
+                throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID);
+            }
+
+            // Create claims from the token verification response
+            var claims = new List<Claim>();
+
+            foreach (var kvp in tokenData)
+            {
+                if (kvp.Value != null)
+                {
+                    claims.Add(new Claim(kvp.Key, kvp.Value.ToString()!));
+                }
+            }
+
+            var identity = new ClaimsIdentity(claims, "ClerkMachineToken");
+            return new ClaimsPrincipal(identity);
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new TokenVerificationException(TokenVerificationErrorReason.SERVER_ERROR, ex);
+        }
+        catch (TaskCanceledException ex)
+        {
+            throw new TokenVerificationException(TokenVerificationErrorReason.SERVER_ERROR, ex);
+        }
+        catch (JsonException ex)
+        {
+            throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID, ex);
         }
     }
 }

@@ -1,0 +1,9 @@
+# GetM2MTokensResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                        | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                           | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `Object`                                                                                          | [Models.Operations.GetM2MTokensResponseBody](../../Models/Operations/GetM2MTokensResponseBody.md) | :heavy_minus_sign:                                                                                | 200 OK                                                                                            |

@@ -12,15 +12,22 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class VerificationOTP
     {
 
+        [JsonProperty("object")]
+        public VerificationOtpVerificationObject? Object { get; set; }
+
         [JsonProperty("status")]
-        public OTPVerificationStatus Status { get; set; } = default!;
+        public VerificationOtpVerificationStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
-        public OTPVerificationStrategy Strategy { get; set; } = default!;
+        public VerificationOtpVerificationStrategy Strategy { get; set; } = default!;
 
         [JsonProperty("attempts", NullValueHandling = NullValueHandling.Include)]
         public long? Attempts { get; set; }

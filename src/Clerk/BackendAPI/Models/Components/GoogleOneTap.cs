@@ -16,11 +16,14 @@ namespace Clerk.BackendAPI.Models.Components
     public class GoogleOneTap
     {
 
+        [JsonProperty("object")]
+        public VerificationGoogleOneTapVerificationObject? Object { get; set; }
+
         [JsonProperty("status")]
-        public GoogleOneTapVerificationStatus Status { get; set; } = default!;
+        public VerificationGoogleOneTapVerificationStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
-        public GoogleOneTapVerificationStrategy Strategy { get; set; } = default!;
+        public VerificationGoogleOneTapVerificationStrategy Strategy { get; set; } = default!;
 
         [JsonProperty("expire_at", NullValueHandling = NullValueHandling.Include)]
         public long? ExpireAt { get; set; }
@@ -32,6 +35,6 @@ namespace Clerk.BackendAPI.Models.Components
         public string? VerifiedAtClient { get; set; } = null;
 
         [JsonProperty("error")]
-        public GoogleOneTapVerificationError? Error { get; set; } = null;
+        public VerificationGoogleOneTapVerificationError? Error { get; set; } = null;
     }
 }

@@ -35,24 +35,52 @@ public static class AuthenticateRequest
         var sessionToken = GetSessionToken(request);
         if (sessionToken == null) return RequestState.SignedOut(AuthErrorReason.SESSION_TOKEN_MISSING);
 
+        var tokenType = TokenTypeHelper.GetTokenType(sessionToken);
+        var tokenTypeName = tokenType switch
+        {
+            TokenType.SessionToken => "session_token",
+            TokenType.MachineToken => "machine_token",
+            TokenType.OAuthToken => "oauth_token",
+            TokenType.ApiKey => "api_key",
+            _ => tokenType.ToString().ToLowerInvariant()
+        };
+
+        // Check if token type is accepted
+        if (!options.AcceptsToken.Contains("any") && !options.AcceptsToken.Contains(tokenTypeName))
+        {
+            return RequestState.SignedOut(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED);
+        }
+
         VerifyTokenOptions verifyTokenOptions;
 
-        if (options.JwtKey != null)
-            verifyTokenOptions = new VerifyTokenOptions(
-                jwtKey: options.JwtKey,
-                audiences: options.Audiences,
-                authorizedParties: options.AuthorizedParties,
-                clockSkewInMs: options.ClockSkewInMs
-            );
-        else if (options.SecretKey != null)
-            verifyTokenOptions = new VerifyTokenOptions(
-                options.SecretKey,
-                audiences: options.Audiences,
-                authorizedParties: options.AuthorizedParties,
-                clockSkewInMs: options.ClockSkewInMs
-            );
+        if (TokenTypeHelper.IsMachineToken(sessionToken))
+        {
+            // Machine tokens require secret key for API verification
+            if (options.SecretKey == null)
+                return RequestState.SignedOut(AuthErrorReason.SECRET_KEY_MISSING);
+
+            verifyTokenOptions = new VerifyTokenOptions(secretKey: options.SecretKey);
+        }
         else
-            return RequestState.SignedOut(AuthErrorReason.SECRET_KEY_MISSING);
+        {
+            // Session tokens can use either JWT key or secret key
+            if (options.JwtKey != null)
+                verifyTokenOptions = new VerifyTokenOptions(
+                    jwtKey: options.JwtKey,
+                    audiences: options.Audiences,
+                    authorizedParties: options.AuthorizedParties,
+                    clockSkewInMs: options.ClockSkewInMs
+                );
+            else if (options.SecretKey != null)
+                verifyTokenOptions = new VerifyTokenOptions(
+                    options.SecretKey,
+                    audiences: options.Audiences,
+                    authorizedParties: options.AuthorizedParties,
+                    clockSkewInMs: options.ClockSkewInMs
+                );
+            else
+                return RequestState.SignedOut(AuthErrorReason.SECRET_KEY_MISSING);
+        }
 
         try
         {

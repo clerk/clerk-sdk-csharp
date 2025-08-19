@@ -12,15 +12,22 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class VerificationAdmin
     {
 
+        [JsonProperty("object")]
+        public VerificationAdminVerificationPhoneNumberObject? Object { get; set; }
+
         [JsonProperty("status")]
-        public AdminVerificationPhoneNumberStatus Status { get; set; } = default!;
+        public VerificationAdminVerificationPhoneNumberStatus Status { get; set; } = default!;
 
         [JsonProperty("strategy")]
-        public AdminVerificationStrategy Strategy { get; set; } = default!;
+        public VerificationAdminVerificationStrategy Strategy { get; set; } = default!;
 
         [JsonProperty("attempts", NullValueHandling = NullValueHandling.Include)]
         public long? Attempts { get; set; }

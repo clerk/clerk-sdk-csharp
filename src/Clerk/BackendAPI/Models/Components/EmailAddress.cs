@@ -12,7 +12,10 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
     
     /// <summary>
     /// Success
@@ -41,6 +44,36 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("verification", NullValueHandling = NullValueHandling.Include)]
         public Verification? Verification { get; set; }
+
+        public Otp? GetVerificationVerificationOtp()
+        {
+            return Verification != null ? Verification.Otp : null;
+        }
+
+        public Admin? GetVerificationVerificationAdmin()
+        {
+            return Verification != null ? Verification.Admin : null;
+        }
+
+        public FromOAuth? GetVerificationVerificationFromOauth()
+        {
+            return Verification != null ? Verification.FromOAuth : null;
+        }
+
+        public Ticket? GetVerificationVerificationTicket()
+        {
+            return Verification != null ? Verification.Ticket : null;
+        }
+
+        public Saml? GetVerificationVerificationSaml()
+        {
+            return Verification != null ? Verification.Saml : null;
+        }
+
+        public EmailLink? GetVerificationVerificationEmailLink()
+        {
+            return Verification != null ? Verification.EmailLink : null;
+        }
 
         [JsonProperty("linked_to")]
         public List<IdentificationLink> LinkedTo { get; set; } = default!;

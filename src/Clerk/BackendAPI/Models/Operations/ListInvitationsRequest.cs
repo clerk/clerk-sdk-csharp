@@ -28,17 +28,18 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Query { get; set; }
 
         /// <summary>
-        /// Allows to return organizations in a particular order.<br/>
+        /// Allows to return invitations in a particular order.<br/>
         /// 
         /// <remarks>
-        /// At the moment, you can order the returned organizations either by their `name`, `created_at` or `members_count`.<br/>
+        /// At the moment, you can order the returned invitations either by their `created_at`, `email_address` or `expires_at`.<br/>
         /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
-        /// For example, if you want organizations to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
-        /// If you don&apos;t use `+` or `-`, then `+` is implied.
+        /// For example, if you want invitations to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don&apos;t use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
-        public string? OrderBy { get; set; }
+        public string? OrderBy { get; set; } = "-created_at";
 
         /// <summary>
         /// Whether to paginate the results.<br/>

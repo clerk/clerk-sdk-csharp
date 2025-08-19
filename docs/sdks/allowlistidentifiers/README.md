@@ -15,6 +15,7 @@ Get a list of all identifiers allowed to sign up to an instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListAllowlistIdentifiers" method="get" path="/allowlist_identifiers" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -22,7 +23,6 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.AllowlistIdentifiers.ListAsync(
-    paginated: false,
     limit: 20,
     offset: 10
 );
@@ -55,6 +55,7 @@ Create an identifier allowed to sign up to an instance
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateAllowlistIdentifier" method="post" path="/allowlist_identifiers" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -64,6 +65,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateAllowlistIdentifierRequestBody req = new CreateAllowlistIdentifierRequestBody() {
     Identifier = "user@example.com",
+    Notify = true,
 };
 
 var res = await sdk.AllowlistIdentifiers.CreateAsync(req);
@@ -94,6 +96,7 @@ Delete an identifier from the instance allow-list
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteAllowlistIdentifier" method="delete" path="/allowlist_identifiers/{identifier_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

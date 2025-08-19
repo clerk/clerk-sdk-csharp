@@ -15,6 +15,7 @@ The `actor` parameter needs to include at least a "sub" key whose value is the I
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateActorToken" method="post" path="/actor_tokens" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -24,7 +25,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateActorTokenRequestBody req = new CreateActorTokenRequestBody() {
     UserId = "user_1a2b3c",
-    Actor = new Models.Operations.Actor() {
+    Actor = new Clerk.BackendAPI.Models.Operations.Actor() {
         Sub = "user_2OEpKhcCN1Lat9NQ0G6puh7q5Rb",
     },
 };
@@ -57,6 +58,7 @@ Revokes a pending actor token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="RevokeActorToken" method="post" path="/actor_tokens/{actor_token_id}/revoke" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

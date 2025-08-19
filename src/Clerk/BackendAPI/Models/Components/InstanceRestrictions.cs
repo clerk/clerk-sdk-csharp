@@ -31,13 +31,13 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("blocklist")]
         public bool Blocklist { get; set; } = default!;
 
+        [JsonProperty("allowlist_blocklist_disabled_on_sign_in")]
+        public bool AllowlistBlocklistDisabledOnSignIn { get; set; } = default!;
+
         [JsonProperty("block_email_subaddresses")]
         public bool BlockEmailSubaddresses { get; set; } = default!;
 
         [JsonProperty("block_disposable_email_domains")]
         public bool BlockDisposableEmailDomains { get; set; } = default!;
-
-        [JsonProperty("ignore_dots_for_gmail_addresses")]
-        public bool IgnoreDotsForGmailAddresses { get; set; } = default!;
     }
 }

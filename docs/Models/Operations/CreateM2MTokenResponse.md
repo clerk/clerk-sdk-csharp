@@ -1,0 +1,9 @@
+# CreateM2MTokenResponse
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                            | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                               | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `Object`                                                                                              | [Models.Operations.CreateM2MTokenResponseBody](../../Models/Operations/CreateM2MTokenResponseBody.md) | :heavy_minus_sign:                                                                                    | 201 Created                                                                                           |

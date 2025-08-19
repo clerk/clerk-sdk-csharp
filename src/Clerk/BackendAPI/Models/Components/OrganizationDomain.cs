@@ -51,7 +51,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// Mode of enrollment for the domain
         /// </summary>
         [JsonProperty("enrollment_mode")]
-        public EnrollmentMode EnrollmentMode { get; set; } = default!;
+        public Models.Components.EnrollmentMode EnrollmentMode { get; set; } = default!;
 
         /// <summary>
         /// Affiliation email address for the domain, if available.
@@ -76,6 +76,12 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("total_pending_suggestions")]
         public int TotalPendingSuggestions { get; set; } = default!;
+
+        /// <summary>
+        /// Public organization data associated with this domain
+        /// </summary>
+        [JsonProperty("public_organization_data")]
+        public PublicOrganizationData? PublicOrganizationData { get; set; } = null;
 
         /// <summary>
         /// Unix timestamp when the domain was created

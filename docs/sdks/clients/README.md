@@ -19,6 +19,7 @@ Warning: the endpoint is being deprecated and will be removed in future versions
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetClientList" method="get" path="/clients" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -26,7 +27,6 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Clients.ListAsync(
-    paginated: false,
     limit: 20,
     offset: 10
 );
@@ -59,6 +59,7 @@ Verifies the client in the provided token
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="VerifyClient" method="post" path="/clients/verify" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -98,6 +99,7 @@ Returns the details of a client.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetClient" method="get" path="/clients/{client_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

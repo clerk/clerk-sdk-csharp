@@ -16,6 +16,7 @@ Supports filtering by email address or status and pagination with limit and offs
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListWaitlistEntries" method="get" path="/waitlist_entries" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -23,7 +24,10 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListWaitlistEntriesRequest req = new ListWaitlistEntriesRequest() {};
+ListWaitlistEntriesRequest req = new ListWaitlistEntriesRequest() {
+    Limit = 20,
+    Offset = 10,
+};
 
 var res = await sdk.WaitlistEntries.ListAsync(req);
 
@@ -53,6 +57,7 @@ If the email address is already on the waitlist, no new entry will be created an
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateWaitlistEntry" method="post" path="/waitlist_entries" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -60,9 +65,7 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateWaitlistEntryRequestBody req = new CreateWaitlistEntryRequestBody() {
-    EmailAddress = "Loyal79@yahoo.com",
-};
+CreateWaitlistEntryRequestBody? req = null;
 
 var res = await sdk.WaitlistEntries.CreateAsync(req);
 

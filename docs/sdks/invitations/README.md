@@ -18,6 +18,7 @@ Also, trying to create an invitation for an email address that already exists in
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateInvitation" method="post" path="/invitations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -62,6 +63,7 @@ Returns all non-revoked invitations for your application, sorted by creation dat
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListInvitations" method="get" path="/invitations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -71,6 +73,8 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 ListInvitationsRequest req = new ListInvitationsRequest() {
     OrderBy = "pending",
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Invitations.ListAsync(req);
@@ -103,6 +107,7 @@ note that there must be no existing user for any of the email addresses you prov
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateBulkInvitations" method="post" path="/invitations/bulk" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -111,11 +116,7 @@ using System.Collections.Generic;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-List<RequestBody> req = new List<RequestBody>() {
-    new RequestBody() {
-        EmailAddress = "Queen25@gmail.com",
-    },
-};
+List<RequestBody>? req = null;
 
 var res = await sdk.Invitations.BulkCreateAsync(req);
 
@@ -148,6 +149,7 @@ Only active (i.e. non-revoked) invitations can be revoked.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="RevokeInvitation" method="post" path="/invitations/{invitation_id}/revoke" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

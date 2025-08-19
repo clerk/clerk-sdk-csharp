@@ -17,6 +17,7 @@ Adds a user as a member to the given organization.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateOrganizationMembership" method="post" path="/organizations/{organization_id}/memberships" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -59,6 +60,7 @@ Retrieves all user memberships for the given organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListOrganizationMemberships" method="get" path="/organizations/{organization_id}/memberships" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -76,6 +78,8 @@ ListOrganizationMembershipsRequest req = new ListOrganizationMembershipsRequest(
     LastActiveAtAfter = 1700690400000,
     CreatedAtBefore = 1730160000000,
     CreatedAtAfter = 1730160000000,
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.OrganizationMemberships.ListAsync(req);
@@ -106,6 +110,7 @@ Updates the properties of an existing organization membership
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateOrganizationMembership" method="patch" path="/organizations/{organization_id}/memberships/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -128,7 +133,7 @@ var res = await sdk.OrganizationMemberships.UpdateAsync(
 
 | Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   | Example                                                                                                       |
 | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                              | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the organization the membership belongs to                                                          | org_12345                                                                                                     |
+| `OrganizationId`                                                                                              | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the organization to which the membership belongs                                                    | org_12345                                                                                                     |
 | `UserId`                                                                                                      | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the user that this membership belongs to                                                            | user_67890                                                                                                    |
 | `RequestBody`                                                                                                 | [UpdateOrganizationMembershipRequestBody](../../Models/Operations/UpdateOrganizationMembershipRequestBody.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |                                                                                                               |
 
@@ -149,6 +154,7 @@ Removes the given membership from the organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteOrganizationMembership" method="delete" path="/organizations/{organization_id}/memberships/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -165,10 +171,10 @@ var res = await sdk.OrganizationMemberships.DeleteAsync(
 
 ### Parameters
 
-| Parameter                                            | Type                                                 | Required                                             | Description                                          | Example                                              |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| `OrganizationId`                                     | *string*                                             | :heavy_check_mark:                                   | The ID of the organization the membership belongs to | org_12345                                            |
-| `UserId`                                             | *string*                                             | :heavy_check_mark:                                   | The ID of the user that this membership belongs to   | user_67890                                           |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `OrganizationId`                                           | *string*                                                   | :heavy_check_mark:                                         | The ID of the organization to which the membership belongs | org_12345                                                  |
+| `UserId`                                                   | *string*                                                   | :heavy_check_mark:                                         | The ID of the user that this membership belongs to         | user_67890                                                 |
 
 ### Response
 
@@ -178,7 +184,7 @@ var res = await sdk.OrganizationMemberships.DeleteAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 404, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## UpdateMetadata
@@ -189,6 +195,7 @@ You can remove metadata keys at any level by setting their value to `null`.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateOrganizationMembershipMetadata" method="patch" path="/organizations/{organization_id}/memberships/{user_id}/metadata" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -217,7 +224,7 @@ var res = await sdk.OrganizationMemberships.UpdateMetadataAsync(
 
 | Parameter                                                                                                                     | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   | Example                                                                                                                       |
 | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                                              | *string*                                                                                                                      | :heavy_check_mark:                                                                                                            | The ID of the organization the membership belongs to                                                                          | org_123456                                                                                                                    |
+| `OrganizationId`                                                                                                              | *string*                                                                                                                      | :heavy_check_mark:                                                                                                            | The ID of the organization to which the membership belongs                                                                    | org_123456                                                                                                                    |
 | `UserId`                                                                                                                      | *string*                                                                                                                      | :heavy_check_mark:                                                                                                            | The ID of the user that this membership belongs to                                                                            | user_654321                                                                                                                   |
 | `RequestBody`                                                                                                                 | [UpdateOrganizationMembershipMetadataRequestBody](../../Models/Operations/UpdateOrganizationMembershipMetadataRequestBody.md) | :heavy_minus_sign:                                                                                                            | N/A                                                                                                                           |                                                                                                                               |
 

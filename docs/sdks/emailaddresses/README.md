@@ -16,6 +16,7 @@ Create a new email address
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateEmailAddress" method="post" path="/email_addresses" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -58,6 +59,7 @@ Returns the details of an email address.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetEmailAddress" method="get" path="/email_addresses/{email_address_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -92,6 +94,7 @@ Delete the email address with the given ID
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteEmailAddress" method="delete" path="/email_addresses/{email_address_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -126,6 +129,7 @@ Updates an email address.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateEmailAddress" method="patch" path="/email_addresses/{email_address_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

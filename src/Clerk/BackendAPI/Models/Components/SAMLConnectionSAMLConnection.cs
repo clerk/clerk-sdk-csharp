@@ -9,57 +9,195 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
     
-    public class SAMLConnectionSAMLConnection
+
+    public class SAMLConnectionSAMLConnectionType
     {
+        private SAMLConnectionSAMLConnectionType(string value) { Value = value; }
 
-        [JsonProperty("id")]
-        public string Id { get; set; } = default!;
+        public string Value { get; private set; }
+        public static SAMLConnectionSAMLConnectionType SAMLConnection1 { get { return new SAMLConnectionSAMLConnectionType("SAMLConnection_1"); } }
+        
+        public static SAMLConnectionSAMLConnectionType SAMLConnection2 { get { return new SAMLConnectionSAMLConnectionType("SAMLConnection_2"); } }
+        
+        public static SAMLConnectionSAMLConnectionType Null { get { return new SAMLConnectionSAMLConnectionType("null"); } }
 
-        [JsonProperty("name")]
-        public string Name { get; set; } = default!;
+        public override string ToString() { return Value; }
+        public static implicit operator String(SAMLConnectionSAMLConnectionType v) { return v.Value; }
+        public static SAMLConnectionSAMLConnectionType FromString(string v) {
+            switch(v) {
+                case "SAMLConnection_1": return SAMLConnection1;
+                case "SAMLConnection_2": return SAMLConnection2;
+                case "null": return Null;
+                default: throw new ArgumentException("Invalid value for SAMLConnectionSAMLConnectionType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((SAMLConnectionSAMLConnectionType)obj).Value);
+        }
 
-        [JsonProperty("domain")]
-        public string Domain { get; set; } = default!;
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
 
-        [JsonProperty("active")]
-        public bool Active { get; set; } = default!;
 
-        [JsonProperty("provider")]
-        public string Provider { get; set; } = default!;
+    [JsonConverter(typeof(SAMLConnectionSAMLConnection.SAMLConnectionSAMLConnectionConverter))]
+    public class SAMLConnectionSAMLConnection {
+        public SAMLConnectionSAMLConnection(SAMLConnectionSAMLConnectionType type) {
+            Type = type;
+        }
 
-        [JsonProperty("sync_user_attributes")]
-        public bool SyncUserAttributes { get; set; } = default!;
+        [SpeakeasyMetadata("form:explode=true")]
+        public SAMLConnection1? SAMLConnection1 { get; set; }
 
-        [JsonProperty("allow_subdomains")]
-        public bool? AllowSubdomains { get; set; }
+        [SpeakeasyMetadata("form:explode=true")]
+        public SAMLConnection2? SAMLConnection2 { get; set; }
 
-        [JsonProperty("allow_idp_initiated")]
-        public bool? AllowIdpInitiated { get; set; }
+        public SAMLConnectionSAMLConnectionType Type { get; set; }
 
-        [JsonProperty("disable_additional_identifications")]
-        public bool? DisableAdditionalIdentifications { get; set; }
 
-        /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("created_at")]
-        public long CreatedAt { get; set; } = default!;
+        public static SAMLConnectionSAMLConnection CreateSAMLConnection1(SAMLConnection1 samlConnection1) {
+            SAMLConnectionSAMLConnectionType typ = SAMLConnectionSAMLConnectionType.SAMLConnection1;
 
-        /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("updated_at")]
-        public long UpdatedAt { get; set; } = default!;
+            SAMLConnectionSAMLConnection res = new SAMLConnectionSAMLConnection(typ);
+            res.SAMLConnection1 = samlConnection1;
+            return res;
+        }
+
+        public static SAMLConnectionSAMLConnection CreateSAMLConnection2(SAMLConnection2 samlConnection2) {
+            SAMLConnectionSAMLConnectionType typ = SAMLConnectionSAMLConnectionType.SAMLConnection2;
+
+            SAMLConnectionSAMLConnection res = new SAMLConnectionSAMLConnection(typ);
+            res.SAMLConnection2 = samlConnection2;
+            return res;
+        }
+
+        public static SAMLConnectionSAMLConnection CreateNull() {
+            SAMLConnectionSAMLConnectionType typ = SAMLConnectionSAMLConnectionType.Null;
+            return new SAMLConnectionSAMLConnection(typ);
+        }
+
+        public class SAMLConnectionSAMLConnectionConverter : JsonConverter
+        {
+
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(SAMLConnectionSAMLConnection);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                var json = JRaw.Create(reader).ToString();
+                if (json == "null")
+                {
+                    return null;
+                }
+
+                var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                try
+                {
+                    return new SAMLConnectionSAMLConnection(SAMLConnectionSAMLConnectionType.SAMLConnection1)
+                    {
+                        SAMLConnection1 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<SAMLConnection1>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(SAMLConnection1), new SAMLConnectionSAMLConnection(SAMLConnectionSAMLConnectionType.SAMLConnection1), "SAMLConnection1"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new SAMLConnectionSAMLConnection(SAMLConnectionSAMLConnectionType.SAMLConnection2)
+                    {
+                        SAMLConnection2 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<SAMLConnection2>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(SAMLConnection2), new SAMLConnectionSAMLConnection(SAMLConnectionSAMLConnectionType.SAMLConnection2), "SAMLConnection2"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null) {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                SAMLConnectionSAMLConnection res = (SAMLConnectionSAMLConnection)value;
+                if (SAMLConnectionSAMLConnectionType.FromString(res.Type).Equals(SAMLConnectionSAMLConnectionType.Null))
+                {
+                    writer.WriteRawValue("null");
+                    return;
+                }
+                if (res.SAMLConnection1 != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.SAMLConnection1));
+                    return;
+                }
+                if (res.SAMLConnection2 != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.SAMLConnection2));
+                    return;
+                }
+
+            }
+
+        }
+
     }
 }

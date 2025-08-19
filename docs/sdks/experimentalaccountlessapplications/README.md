@@ -14,6 +14,7 @@ Creates a new accountless application. [EXPERIMENTAL]
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateAccountlessApplication" method="post" path="/accountless_applications" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -42,6 +43,7 @@ Completes an accountless application. [EXPERIMENTAL]
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CompleteAccountlessApplication" method="post" path="/accountless_applications/complete" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

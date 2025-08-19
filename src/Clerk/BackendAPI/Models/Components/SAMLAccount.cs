@@ -54,6 +54,16 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("verification", NullValueHandling = NullValueHandling.Include)]
         public SAMLAccountVerification? Verification { get; set; }
 
+        public VerificationSAML? GetVerificationVerificationSaml()
+        {
+            return Verification != null ? Verification.VerificationSAML : null;
+        }
+
+        public VerificationTicket? GetVerificationVerificationTicket()
+        {
+            return Verification != null ? Verification.VerificationTicket : null;
+        }
+
         [JsonProperty("saml_connection")]
         public SamlConnection? SamlConnection { get; set; } = null;
     }

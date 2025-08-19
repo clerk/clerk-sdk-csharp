@@ -28,7 +28,7 @@ namespace Clerk.BackendAPI
     /// ### Versions<br/>
     /// <br/>
     /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
-    /// Each version is identified by its release date, e.g. `2024-10-01`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
+    /// Each version is identified by its release date, e.g. `2025-04-10`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
@@ -39,6 +39,7 @@ namespace Clerk.BackendAPI
     {
         public IMiscellaneous Miscellaneous { get; }
         public IJwks Jwks { get; }
+        public IAwsCredentials AwsCredentials { get; }
         public IClients Clients { get; }
         public IEmailAddresses EmailAddresses { get; }
         public IPhoneNumbers PhoneNumbers { get; }
@@ -57,6 +58,7 @@ namespace Clerk.BackendAPI
         public IInstanceSettings InstanceSettings { get; }
         public IWebhooks Webhooks { get; }
         public IJwtTemplates JwtTemplates { get; }
+        public IMachines Machines { get; }
         public IOrganizations Organizations { get; }
         public IOrganizationMemberships OrganizationMemberships { get; }
         public IOrganizationDomains OrganizationDomains { get; }
@@ -69,42 +71,11 @@ namespace Clerk.BackendAPI
         public ITestingTokens TestingTokens { get; }
         public IWaitlistEntries WaitlistEntries { get; }
         public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; }
+        public ICommerce Commerce { get; }
+        public IM2m M2m { get; }
+        public IOauthAccessTokens OauthAccessTokens { get; }
     }
 
-    public class SDKConfig
-    {
-        /// <summary>
-        /// List of server URLs available to the SDK.
-        /// </summary>
-        public static readonly string[] ServerList = {
-            "https://api.clerk.com/v1",
-        };
-
-        public string ServerUrl = "";
-        public int ServerIndex = 0;
-        public SDKHooks Hooks = new SDKHooks();
-        public RetryConfig? RetryConfig = null;
-
-        public string GetTemplatedServerUrl()
-        {
-            if (!String.IsNullOrEmpty(this.ServerUrl))
-            {
-                return Utilities.TemplateUrl(Utilities.RemoveSuffix(this.ServerUrl, "/"), new Dictionary<string, string>());
-            }
-            return Utilities.TemplateUrl(SDKConfig.ServerList[this.ServerIndex], new Dictionary<string, string>());
-        }
-
-        public ISpeakeasyHttpClient InitHooks(ISpeakeasyHttpClient client)
-        {
-            string preHooksUrl = GetTemplatedServerUrl();
-            var (postHooksUrl, postHooksClient) = this.Hooks.SDKInit(preHooksUrl, client);
-            if (preHooksUrl != postHooksUrl)
-            {
-                this.ServerUrl = postHooksUrl;
-            }
-            return postHooksClient;
-        }
-    }
 
     /// <summary>
     /// Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend servers.<br/>
@@ -114,7 +85,7 @@ namespace Clerk.BackendAPI
     /// ### Versions<br/>
     /// <br/>
     /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
-    /// Each version is identified by its release date, e.g. `2024-10-01`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
+    /// Each version is identified by its release date, e.g. `2025-04-10`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
@@ -126,16 +97,12 @@ namespace Clerk.BackendAPI
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.7.0";
-        private const string _sdkGenVersion = "2.585.1";
-        private const string _openapiDocVersion = "2024-10-01";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.7.0 2.585.1 2024-10-01 Clerk.BackendAPI";
-        private string _serverUrl = "";
-        private int _serverIndex = 0;
-        private ISpeakeasyHttpClient _client;
-        private Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource;
+        private const string _sdkVersion = "0.11.2";
+        private const string _sdkGenVersion = "2.686.7";
+        private const string _openapiDocVersion = "2025-04-10";
         public IMiscellaneous Miscellaneous { get; private set; }
         public IJwks Jwks { get; private set; }
+        public IAwsCredentials AwsCredentials { get; private set; }
         public IClients Clients { get; private set; }
         public IEmailAddresses EmailAddresses { get; private set; }
         public IPhoneNumbers PhoneNumbers { get; private set; }
@@ -154,6 +121,7 @@ namespace Clerk.BackendAPI
         public IInstanceSettings InstanceSettings { get; private set; }
         public IWebhooks Webhooks { get; private set; }
         public IJwtTemplates JwtTemplates { get; private set; }
+        public IMachines Machines { get; private set; }
         public IOrganizations Organizations { get; private set; }
         public IOrganizationMemberships OrganizationMemberships { get; private set; }
         public IOrganizationDomains OrganizationDomains { get; private set; }
@@ -166,6 +134,89 @@ namespace Clerk.BackendAPI
         public ITestingTokens TestingTokens { get; private set; }
         public IWaitlistEntries WaitlistEntries { get; private set; }
         public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; private set; }
+        public ICommerce Commerce { get; private set; }
+        public IM2m M2m { get; private set; }
+        public IOauthAccessTokens OauthAccessTokens { get; private set; }
+
+        public ClerkBackendApi(SDKConfig config)
+        {
+            SDKConfiguration = config;
+            InitHooks();
+
+            Miscellaneous = new Miscellaneous(SDKConfiguration);
+
+            Jwks = new Jwks(SDKConfiguration);
+
+            AwsCredentials = new AwsCredentials(SDKConfiguration);
+
+            Clients = new Clients(SDKConfiguration);
+
+            EmailAddresses = new EmailAddresses(SDKConfiguration);
+
+            PhoneNumbers = new PhoneNumbers(SDKConfiguration);
+
+            Sessions = new Sessions(SDKConfiguration);
+
+            EmailSMSTemplates = new EmailSMSTemplates(SDKConfiguration);
+
+            EmailAndSmsTemplates = new EmailAndSmsTemplates(SDKConfiguration);
+
+            Templates = new Templates(SDKConfiguration);
+
+            Users = new Users(SDKConfiguration);
+
+            Invitations = new Invitations(SDKConfiguration);
+
+            OrganizationInvitations = new OrganizationInvitations(SDKConfiguration);
+
+            AllowlistIdentifiers = new AllowlistIdentifiers(SDKConfiguration);
+
+            BlocklistIdentifiers = new BlocklistIdentifiers(SDKConfiguration);
+
+            BetaFeatures = new BetaFeatures(SDKConfiguration);
+
+            ActorTokens = new ActorTokens(SDKConfiguration);
+
+            Domains = new Domains(SDKConfiguration);
+
+            InstanceSettings = new InstanceSettings(SDKConfiguration);
+
+            Webhooks = new Webhooks(SDKConfiguration);
+
+            JwtTemplates = new JwtTemplates(SDKConfiguration);
+
+            Machines = new Machines(SDKConfiguration);
+
+            Organizations = new Organizations(SDKConfiguration);
+
+            OrganizationMemberships = new OrganizationMemberships(SDKConfiguration);
+
+            OrganizationDomains = new OrganizationDomains(SDKConfiguration);
+
+            ProxyChecks = new ProxyChecks(SDKConfiguration);
+
+            RedirectUrls = new RedirectUrls(SDKConfiguration);
+
+            SignInTokens = new SignInTokens(SDKConfiguration);
+
+            SignUps = new SignUps(SDKConfiguration);
+
+            OauthApplications = new OauthApplications(SDKConfiguration);
+
+            SamlConnections = new SamlConnections(SDKConfiguration);
+
+            TestingTokens = new TestingTokens(SDKConfiguration);
+
+            WaitlistEntries = new WaitlistEntries(SDKConfiguration);
+
+            ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(SDKConfiguration);
+
+            Commerce = new Commerce(SDKConfiguration);
+
+            M2m = new M2m(SDKConfiguration);
+
+            OauthAccessTokens = new OauthAccessTokens(SDKConfiguration);
+        }
 
         public ClerkBackendApi(string? bearerAuth = null, Func<string>? bearerAuthSource = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
         {
@@ -175,7 +226,6 @@ namespace Clerk.BackendAPI
                 {
                     throw new Exception($"Invalid server index {serverIndex.Value}");
                 }
-                _serverIndex = serverIndex.Value;
             }
 
             if (serverUrl != null)
@@ -184,10 +234,8 @@ namespace Clerk.BackendAPI
                 {
                     serverUrl = Utilities.TemplateUrl(serverUrl, urlParams);
                 }
-                _serverUrl = serverUrl;
             }
-
-            _client = client ?? new SpeakeasyHttpClient();
+            Func<Clerk.BackendAPI.Models.Components.Security>? _securitySource = null;
 
             if(bearerAuthSource != null)
             {
@@ -198,110 +246,161 @@ namespace Clerk.BackendAPI
                 _securitySource = () => new Clerk.BackendAPI.Models.Components.Security() { BearerAuth = bearerAuth };
             }
 
-            SDKConfiguration = new SDKConfig()
+            SDKConfiguration = new SDKConfig(client)
             {
-                ServerIndex = _serverIndex,
-                ServerUrl = _serverUrl,
+                ServerIndex = serverIndex == null ? 0 : serverIndex.Value,
+                ServerUrl = serverUrl == null ? "" : serverUrl,
+                SecuritySource = _securitySource,
                 RetryConfig = retryConfig
             };
 
-            _client = SDKConfiguration.InitHooks(_client);
+            InitHooks();
 
+            Miscellaneous = new Miscellaneous(SDKConfiguration);
 
-            Miscellaneous = new Miscellaneous(_client, _securitySource, _serverUrl, SDKConfiguration);
+            Jwks = new Jwks(SDKConfiguration);
 
+            AwsCredentials = new AwsCredentials(SDKConfiguration);
 
-            Jwks = new Jwks(_client, _securitySource, _serverUrl, SDKConfiguration);
+            Clients = new Clients(SDKConfiguration);
 
+            EmailAddresses = new EmailAddresses(SDKConfiguration);
 
-            Clients = new Clients(_client, _securitySource, _serverUrl, SDKConfiguration);
+            PhoneNumbers = new PhoneNumbers(SDKConfiguration);
 
+            Sessions = new Sessions(SDKConfiguration);
 
-            EmailAddresses = new EmailAddresses(_client, _securitySource, _serverUrl, SDKConfiguration);
+            EmailSMSTemplates = new EmailSMSTemplates(SDKConfiguration);
 
+            EmailAndSmsTemplates = new EmailAndSmsTemplates(SDKConfiguration);
 
-            PhoneNumbers = new PhoneNumbers(_client, _securitySource, _serverUrl, SDKConfiguration);
+            Templates = new Templates(SDKConfiguration);
 
+            Users = new Users(SDKConfiguration);
 
-            Sessions = new Sessions(_client, _securitySource, _serverUrl, SDKConfiguration);
+            Invitations = new Invitations(SDKConfiguration);
 
+            OrganizationInvitations = new OrganizationInvitations(SDKConfiguration);
 
-            EmailSMSTemplates = new EmailSMSTemplates(_client, _securitySource, _serverUrl, SDKConfiguration);
+            AllowlistIdentifiers = new AllowlistIdentifiers(SDKConfiguration);
 
+            BlocklistIdentifiers = new BlocklistIdentifiers(SDKConfiguration);
 
-            EmailAndSmsTemplates = new EmailAndSmsTemplates(_client, _securitySource, _serverUrl, SDKConfiguration);
+            BetaFeatures = new BetaFeatures(SDKConfiguration);
 
+            ActorTokens = new ActorTokens(SDKConfiguration);
 
-            Templates = new Templates(_client, _securitySource, _serverUrl, SDKConfiguration);
+            Domains = new Domains(SDKConfiguration);
 
+            InstanceSettings = new InstanceSettings(SDKConfiguration);
 
-            Users = new Users(_client, _securitySource, _serverUrl, SDKConfiguration);
+            Webhooks = new Webhooks(SDKConfiguration);
 
+            JwtTemplates = new JwtTemplates(SDKConfiguration);
 
-            Invitations = new Invitations(_client, _securitySource, _serverUrl, SDKConfiguration);
+            Machines = new Machines(SDKConfiguration);
 
+            Organizations = new Organizations(SDKConfiguration);
 
-            OrganizationInvitations = new OrganizationInvitations(_client, _securitySource, _serverUrl, SDKConfiguration);
+            OrganizationMemberships = new OrganizationMemberships(SDKConfiguration);
 
+            OrganizationDomains = new OrganizationDomains(SDKConfiguration);
 
-            AllowlistIdentifiers = new AllowlistIdentifiers(_client, _securitySource, _serverUrl, SDKConfiguration);
+            ProxyChecks = new ProxyChecks(SDKConfiguration);
 
+            RedirectUrls = new RedirectUrls(SDKConfiguration);
 
-            BlocklistIdentifiers = new BlocklistIdentifiers(_client, _securitySource, _serverUrl, SDKConfiguration);
+            SignInTokens = new SignInTokens(SDKConfiguration);
 
+            SignUps = new SignUps(SDKConfiguration);
 
-            BetaFeatures = new BetaFeatures(_client, _securitySource, _serverUrl, SDKConfiguration);
+            OauthApplications = new OauthApplications(SDKConfiguration);
 
+            SamlConnections = new SamlConnections(SDKConfiguration);
 
-            ActorTokens = new ActorTokens(_client, _securitySource, _serverUrl, SDKConfiguration);
+            TestingTokens = new TestingTokens(SDKConfiguration);
 
+            WaitlistEntries = new WaitlistEntries(SDKConfiguration);
 
-            Domains = new Domains(_client, _securitySource, _serverUrl, SDKConfiguration);
+            ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(SDKConfiguration);
 
+            Commerce = new Commerce(SDKConfiguration);
 
-            InstanceSettings = new InstanceSettings(_client, _securitySource, _serverUrl, SDKConfiguration);
+            M2m = new M2m(SDKConfiguration);
 
-
-            Webhooks = new Webhooks(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            JwtTemplates = new JwtTemplates(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            Organizations = new Organizations(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            OrganizationMemberships = new OrganizationMemberships(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            OrganizationDomains = new OrganizationDomains(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            ProxyChecks = new ProxyChecks(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            RedirectUrls = new RedirectUrls(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            SignInTokens = new SignInTokens(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            SignUps = new SignUps(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            OauthApplications = new OauthApplications(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            SamlConnections = new SamlConnections(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            TestingTokens = new TestingTokens(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            WaitlistEntries = new WaitlistEntries(_client, _securitySource, _serverUrl, SDKConfiguration);
-
-
-            ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(_client, _securitySource, _serverUrl, SDKConfiguration);
+            OauthAccessTokens = new OauthAccessTokens(SDKConfiguration);
         }
+
+        private void InitHooks()
+        {
+            string preHooksUrl = SDKConfiguration.GetTemplatedServerUrl();
+            var (postHooksUrl, postHooksClient) = SDKConfiguration.Hooks.SDKInit(preHooksUrl, SDKConfiguration.Client);
+            var config = SDKConfiguration;
+            if (preHooksUrl != postHooksUrl)
+            {
+                config.ServerUrl = postHooksUrl;
+            }
+            config.Client = postHooksClient;
+            SDKConfiguration = config;
+        }
+
+        public class SDKBuilder
+        {
+            private SDKConfig _sdkConfig = new SDKConfig(client: new SpeakeasyHttpClient());
+
+            public SDKBuilder() { }
+
+            public SDKBuilder WithServerIndex(int serverIndex)
+            {
+                if (serverIndex < 0 || serverIndex >= SDKConfig.ServerList.Length)
+                {
+                    throw new Exception($"Invalid server index {serverIndex}");
+                }
+                _sdkConfig.ServerIndex = serverIndex;
+                return this;
+            }
+
+            public SDKBuilder WithServerUrl(string serverUrl, Dictionary<string, string>? serverVariables = null)
+            {
+                if (serverVariables != null)
+                {
+                    serverUrl = Utilities.TemplateUrl(serverUrl, serverVariables);
+                }
+                _sdkConfig.ServerUrl = serverUrl;
+                return this;
+            }
+
+            public SDKBuilder WithBearerAuthSource(Func<string> bearerAuthSource)
+            {
+                _sdkConfig.SecuritySource = () => new Clerk.BackendAPI.Models.Components.Security() { BearerAuth = bearerAuthSource() };
+                return this;
+            }
+
+            public SDKBuilder WithBearerAuth(string bearerAuth)
+            {
+                _sdkConfig.SecuritySource = () => new Clerk.BackendAPI.Models.Components.Security() { BearerAuth = bearerAuth };
+                return this;
+            }
+
+            public SDKBuilder WithClient(ISpeakeasyHttpClient client)
+            {
+                _sdkConfig.Client = client;
+                return this;
+            }
+
+            public SDKBuilder WithRetryConfig(RetryConfig retryConfig)
+            {
+                _sdkConfig.RetryConfig = retryConfig;
+                return this;
+            }
+
+            public ClerkBackendApi Build()
+            {
+              return new ClerkBackendApi(_sdkConfig);
+            }
+
+        }
+
+        public static SDKBuilder Builder() => new SDKBuilder();
     }
 }

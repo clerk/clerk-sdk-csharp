@@ -1,26 +1,28 @@
-speakeasyVersion: 1.535.0
+speakeasyVersion: 1.606.0
 sources:
     clerk-backend-api-OAS:
         sourceNamespace: clerk-openapi
-        sourceRevisionDigest: sha256:b43dfea611bdcaa93683a8dcf54b13539aaa6c042d67b942843a73cfbebb7c8b
-        sourceBlobDigest: sha256:d64d439a324819076eb2941bddebe10c544f5d276cd95788970d49c8f643bcf1
+        sourceRevisionDigest: sha256:bc5197ea23ad1f2afc0c88dc8c1c2dfaadacf3ca26e391cd915f9dad42f9c0f8
+        sourceBlobDigest: sha256:a092c7bbbcdb787f567876fc4b8bd030d8e8c4272b7b3d1d097983243c1b8914
         tags:
             - latest
-            - speakeasy-sdk-regen-1744913818
-            - "2024-10-01"
+            - speakeasy-sdk-regen-1755614021
+            - "2025-04-10"
 targets:
     clerk-backend-api:
         source: clerk-backend-api-OAS
         sourceNamespace: clerk-openapi
-        sourceRevisionDigest: sha256:b43dfea611bdcaa93683a8dcf54b13539aaa6c042d67b942843a73cfbebb7c8b
-        sourceBlobDigest: sha256:d64d439a324819076eb2941bddebe10c544f5d276cd95788970d49c8f643bcf1
+        sourceRevisionDigest: sha256:bc5197ea23ad1f2afc0c88dc8c1c2dfaadacf3ca26e391cd915f9dad42f9c0f8
+        sourceBlobDigest: sha256:a092c7bbbcdb787f567876fc4b8bd030d8e8c4272b7b3d1d097983243c1b8914
+        codeSamplesNamespace: clerk-backend-api-oas-csharp-code-samples
+        codeSamplesRevisionDigest: sha256:4ae1ef8673ce33523f133dfefde05fea855bca4404105dc3696da2797ccebf3b
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         clerk-backend-api-OAS:
             inputs:
-                - location: https://raw.githubusercontent.com/clerk/openapi-specs/refs/heads/main/bapi/2024-10-01.yml
+                - location: https://raw.githubusercontent.com/clerk/openapi-specs/refs/heads/main/bapi/2025-04-10.yml
             overlays:
                 - location: ./examples.yaml
                 - location: https://raw.githubusercontent.com/clerk/openapi-specs/refs/heads/main/.speakeasy/bapi/fixes.yml

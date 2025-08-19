@@ -17,6 +17,7 @@ The response will contain the primary domain for the instance and any satellite 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListDomains" method="get" path="/domains" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -48,6 +49,7 @@ If you're planning to configure the new satellite domain to run behind a proxy, 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="AddDomain" method="post" path="/domains" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -90,6 +92,7 @@ It is currently not possible to delete the instance's primary domain.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteDomain" method="delete" path="/domains/{domain_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -131,6 +134,7 @@ update the instance's home origin, affecting the default application paths.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateDomain" method="patch" path="/domains/{domain_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

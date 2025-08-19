@@ -19,6 +19,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Use this parameter to override the default session token lifetime.
         /// </summary>
         [JsonProperty("expires_in_seconds")]
-        public double? ExpiresInSeconds { get; set; } = null;
+        public long? ExpiresInSeconds { get; set; } = null;
     }
 }

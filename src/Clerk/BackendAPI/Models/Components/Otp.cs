@@ -12,9 +12,16 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
     
     public class Otp
     {
+
+        [JsonProperty("object")]
+        public VerificationObject? Object { get; set; }
 
         [JsonProperty("status")]
         public VerificationStatus Status { get; set; } = default!;

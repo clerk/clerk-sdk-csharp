@@ -98,7 +98,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The plaintext password to give the user.<br/>
         /// 
         /// <remarks>
-        /// Must be at least 8 characters long, and can not be in any list of hacked passwords.
+        /// Must be at least 8 characters long, and cannot be in any list of hacked passwords.
         /// </remarks>
         /// </summary>
         [JsonProperty("password")]
@@ -121,9 +121,9 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <remarks>
         /// <br/>
         /// The algorithms we support at the moment are <a href="https://en.wikipedia.org/wiki/Bcrypt">`bcrypt`</a>, <a href="https://docs.djangoproject.com/en/4.0/topics/auth/passwords/">`bcrypt_sha256_django`</a>, <a href="https://en.wikipedia.org/wiki/MD5">`md5`</a>, `pbkdf2_sha1`, `pbkdf2_sha256`, <a href="https://docs.djangoproject.com/en/4.0/topics/auth/passwords/">`pbkdf2_sha256_django`</a>,<br/>
-        /// <a href="https://www.openwall.com/phpass/">`phpass`</a>, <a href="https://firebaseopensource.com/projects/firebase/scrypt/">`scrypt_firebase`</a>,<br/>
+        /// <a href="https://www.openwall.com/phpass/">`phpass`</a>, `md5_phpass`, <a href="https://firebaseopensource.com/projects/firebase/scrypt/">`scrypt_firebase`</a>,<br/>
         /// <a href="https://werkzeug.palletsprojects.com/en/3.0.x/utils/#werkzeug.security.generate_password_hash">`scrypt_werkzeug`</a>, <a href="https://en.wikipedia.org/wiki/SHA-2">`sha256`</a>,<br/>
-        /// and the <a href="https://argon2.online/">`argon2`</a> variants: `argon2i` and `argon2id`.<br/>
+        /// <a href="https://www.openldap.org/faq/data/cache/347.html">`ldap_ssha`</a> and the <a href="https://argon2.online/">`argon2`</a> variants: `argon2i` and `argon2id`.<br/>
         /// <br/>
         /// Each of the supported hashers expects the incoming digest to be in a particular format. See the <a href="https://clerk.com/docs/references/backend/user/create-user">Clerk docs</a> for more information.
         /// </remarks>

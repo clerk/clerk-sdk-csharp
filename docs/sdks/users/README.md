@@ -13,6 +13,8 @@
 * [Delete](#delete) - Delete a user
 * [Ban](#ban) - Ban a user
 * [Unban](#unban) - Unban a user
+* [BulkBan](#bulkban) - Ban multiple users
+* [BulkUnban](#bulkunban) - Unban multiple users
 * [Lock](#lock) - Lock a user
 * [Unlock](#unlock) - Unlock a user
 * [SetProfileImage](#setprofileimage) - Set user profile image
@@ -38,6 +40,7 @@ The users are returned sorted by creation date, with the newest users appearing 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetUserList" method="get" path="/users" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -71,8 +74,11 @@ GetUserListRequest req = new GetUserListRequest() {
     Query = "John",
     LastActiveAtBefore = 1700690400000,
     LastActiveAtAfter = 1700690400000,
+    LastActiveAtSince = 1700690400000,
     CreatedAtBefore = 1730160000000,
     CreatedAtAfter = 1730160000000,
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Users.ListAsync(req);
@@ -105,10 +111,11 @@ Any email address and phone number created using this method will be marked as v
 
 Note: If you are performing a migration, check out our guide on [zero downtime migrations](https://clerk.com/docs/deployments/migrate-overview).
 
-A rate limit rule of 20 requests per 10 seconds is applied to this endpoint.
+The following rate limit rules apply to this endpoint: 1000 requests per 10 seconds for production instances and 100 requests per 10 seconds for development instances
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateUser" method="post" path="/users" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -182,6 +189,7 @@ Returns a total count of all users that match the given filtering criteria.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetUsersCount" method="get" path="/users/count" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -214,6 +222,7 @@ GetUsersCountRequest req = new GetUsersCountRequest() {
     },
     LastActiveAtBefore = 1700690400000,
     LastActiveAtAfter = 1700690400000,
+    LastActiveAtSince = 1700690400000,
     CreatedAtBefore = 1730160000000,
     CreatedAtAfter = 1730160000000,
 };
@@ -246,6 +255,7 @@ Retrieve the details of a user
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetUser" method="get" path="/users/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -291,6 +301,7 @@ You can also choose to sign the user out of all their active sessions on any dev
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateUser" method="patch" path="/users/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -306,6 +317,7 @@ var res = await sdk.Users.UpdateAsync(
         FirstName = "Jane",
         LastName = "Doe",
         PrimaryEmailAddressId = "eml_12345",
+        NotifyPrimaryEmailAddressChanged = true,
         PrimaryPhoneNumberId = "phn_67890",
         PrimaryWeb3WalletId = "wlt_123",
         Username = "janedoe",
@@ -361,6 +373,7 @@ Delete the specified user
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteUser" method="delete" path="/users/{user_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -395,6 +408,7 @@ Marks the given user as banned, which means that all their sessions are revoked 
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="BanUser" method="post" path="/users/{user_id}/ban" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -429,6 +443,7 @@ Removes the ban mark from the given user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UnbanUser" method="post" path="/users/{user_id}/unban" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -457,6 +472,96 @@ var res = await sdk.Users.UnbanAsync(userId: "user_12345");
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 402                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
+## BulkBan
+
+Marks multiple users as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="UsersBan" method="post" path="/users/ban" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+UsersBanRequestBody req = new UsersBanRequestBody() {
+    UserIds = new List<string>() {
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+    },
+};
+
+var res = await sdk.Users.BulkBanAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `request`                                                             | [UsersBanRequestBody](../../Models/Operations/UsersBanRequestBody.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
+
+### Response
+
+**[UsersBanResponse](../../Models/Operations/UsersBanResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## BulkUnban
+
+Removes the ban mark from multiple users.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="UsersUnban" method="post" path="/users/unban" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+UsersUnbanRequestBody req = new UsersUnbanRequestBody() {
+    UserIds = new List<string>() {
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+    },
+};
+
+var res = await sdk.Users.BulkUnbanAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `request`                                                                 | [UsersUnbanRequestBody](../../Models/Operations/UsersUnbanRequestBody.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
+
+### Response
+
+**[UsersUnbanResponse](../../Models/Operations/UsersUnbanResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
 ## Lock
 
 Marks the given user as locked, which means they are not allowed to sign in again until the lock expires.
@@ -464,6 +569,7 @@ Lock duration can be configured in the instance's restrictions settings.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="LockUser" method="post" path="/users/{user_id}/lock" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -498,6 +604,7 @@ Removes the lock from the given user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UnlockUser" method="post" path="/users/{user_id}/unlock" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -532,6 +639,7 @@ Update a user's profile image
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="SetUserProfileImage" method="post" path="/users/{user_id}/profile_image" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -571,6 +679,7 @@ Delete a user's profile image
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteUserProfileImage" method="delete" path="/users/{user_id}/profile_image" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -612,17 +721,14 @@ You can remove metadata keys at any level by setting their value to `null`.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateUserMetadata" method="patch" path="/users/{user_id}/metadata" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.Users.UpdateMetadataAsync(
-    userId: "user_123456789",
-    requestBody: new UpdateUserMetadataRequestBody() {}
-);
+var res = await sdk.Users.UpdateMetadataAsync(userId: "user_123456789");
 
 // handle response
 ```
@@ -652,6 +758,7 @@ For OAuth 2.0, if the access token has expired and we have a corresponding refre
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetOAuthAccessToken" method="get" path="/users/{user_id}/oauth_access_tokens/{provider}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -662,6 +769,8 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 GetOAuthAccessTokenRequest req = new GetOAuthAccessTokenRequest() {
     UserId = "user_123",
     Provider = "oauth_google",
+    Limit = 20,
+    Offset = 10,
 };
 
 var res = await sdk.Users.GetOAuthAccessTokenAsync(req);
@@ -692,6 +801,7 @@ Retrieve a paginated list of the user's organization memberships
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UsersGetOrganizationMemberships" method="get" path="/users/{user_id}/organization_memberships" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -732,18 +842,17 @@ Retrieve a paginated list of the user's organization invitations
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UsersGetOrganizationInvitations" method="get" path="/users/{user_id}/organization_invitations" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.GetOrganizationInvitationsAsync(
     userId: "<id>",
     limit: 20,
-    offset: 10,
-    status: QueryParamStatus.Pending
+    offset: 10
 );
 
 // handle response
@@ -776,6 +885,7 @@ Useful for custom auth flows and re-verification.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="VerifyPassword" method="post" path="/users/{user_id}/verify_password" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -820,6 +930,7 @@ Useful for custom auth flows and re-verification.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="VerifyTOTP" method="post" path="/users/{user_id}/verify_totp" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -861,6 +972,7 @@ Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authen
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DisableMFA" method="delete" path="/users/{user_id}/mfa" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -896,6 +1008,7 @@ Disable all of a user's backup codes.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteBackupCode" method="delete" path="/users/{user_id}/backup_code" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -931,6 +1044,7 @@ Delete the passkey identification for a given user and notify them through email
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UserPasskeyDelete" method="delete" path="/users/{user_id}/passkeys/{passkey_identification_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -970,6 +1084,7 @@ Delete the web3 wallet identification for a given user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UserWeb3WalletDelete" method="delete" path="/users/{user_id}/web3_wallets/{web3_wallet_identification_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -1009,6 +1124,7 @@ Deletes all of the user's TOTPs.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteTOTP" method="delete" path="/users/{user_id}/totp" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -1044,6 +1160,7 @@ Delete an external account by ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteExternalAccount" method="delete" path="/users/{user_id}/external_accounts/{external_account_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -1083,6 +1200,7 @@ Retrieves all organization user memberships for the given instance.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="InstanceGetOrganizationMemberships" method="get" path="/organization_memberships" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -1090,7 +1208,6 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Users.GetInstanceOrganizationMembershipsAsync(
-    orderBy: "<value>",
     limit: 20,
     offset: 10
 );

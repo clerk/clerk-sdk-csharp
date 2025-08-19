@@ -17,6 +17,7 @@ List all templates
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListJWTTemplates" method="get" path="/jwt_templates" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -24,7 +25,6 @@ using Clerk.BackendAPI.Models.Components;
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.JwtTemplates.ListAsync(
-    paginated: false,
     limit: 20,
     offset: 10
 );
@@ -56,6 +56,7 @@ Create a new JWT template
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateJWTTemplate" method="post" path="/jwt_templates" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -65,9 +66,9 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateJWTTemplateRequestBody req = new CreateJWTTemplateRequestBody() {
     Name = "Example Template",
-    Claims = new Models.Operations.Claims() {},
-    Lifetime = 3600D,
-    AllowedClockSkew = 5D,
+    Claims = new Clerk.BackendAPI.Models.Operations.Claims() {},
+    Lifetime = 3600,
+    AllowedClockSkew = 5,
     CustomSigningKey = false,
     SigningAlgorithm = "RS256",
     SigningKey = "PRIVATE_KEY_PLACEHOLDER",
@@ -101,6 +102,7 @@ Retrieve the details of a given JWT template
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetJWTTemplate" method="get" path="/jwt_templates/{template_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -135,20 +137,14 @@ Updates an existing JWT template
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateJWTTemplate" method="patch" path="/jwt_templates/{template_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
-using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-var res = await sdk.JwtTemplates.UpdateAsync(
-    templateId: "<id>",
-    requestBody: new UpdateJWTTemplateRequestBody() {
-        Name = "<value>",
-        Claims = new UpdateJWTTemplateClaims() {},
-    }
-);
+var res = await sdk.JwtTemplates.UpdateAsync(templateId: "<id>");
 
 // handle response
 ```
@@ -177,6 +173,7 @@ Delete a Template
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteJWTTemplate" method="delete" path="/jwt_templates/{template_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

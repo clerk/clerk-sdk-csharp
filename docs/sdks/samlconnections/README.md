@@ -19,6 +19,7 @@ The SAML Connections are ordered by descending creation date and the most recent
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="ListSAMLConnections" method="get" path="/saml_connections" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -26,7 +27,10 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-ListSAMLConnectionsRequest req = new ListSAMLConnectionsRequest() {};
+ListSAMLConnectionsRequest req = new ListSAMLConnectionsRequest() {
+    Limit = 20,
+    Offset = 10,
+};
 
 var res = await sdk.SamlConnections.ListAsync(req);
 
@@ -56,6 +60,7 @@ Create a new SAML Connection.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="CreateSAMLConnection" method="post" path="/saml_connections" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -63,22 +68,24 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateSAMLConnectionRequestBody req = new CreateSAMLConnectionRequestBody() {
-    Name = "My SAML Connection",
-    Domain = "example.org",
-    Provider = Provider.SamlCustom,
-    IdpEntityId = "http://idp.example.org/",
-    IdpSsoUrl = "http://idp.example.org/sso",
-    IdpCertificate = "MIIDdzCCAl+gAwIBAgIJAKcyBaiiz+DT...",
-    IdpMetadataUrl = "http://idp.example.org/metadata.xml",
-    IdpMetadata = "<EntityDescriptor ...",
-    AttributeMapping = new AttributeMapping() {
-        UserId = "nameid",
-        EmailAddress = "mail",
-        FirstName = "givenName",
-        LastName = "surname",
-    },
-};
+CreateSAMLConnectionRequestBody req = CreateSAMLConnectionRequestBody.CreateOne(
+    new Clerk.BackendAPI.Models.Operations.One() {
+        Name = "My SAML Connection",
+        Domain = "example.org",
+        Provider = Provider.SamlCustom,
+        IdpEntityId = "http://idp.example.org/",
+        IdpSsoUrl = "http://idp.example.org/sso",
+        IdpCertificate = "MIIDdzCCAl+gAwIBAgIJAKcyBaiiz+DT...",
+        IdpMetadataUrl = "http://idp.example.org/metadata.xml",
+        IdpMetadata = "<EntityDescriptor ...",
+        AttributeMapping = new CreateSAMLConnectionRequestBodyAttributeMapping() {
+            UserId = "nameid",
+            EmailAddress = "mail",
+            FirstName = "givenName",
+            LastName = "surname",
+        },
+    }
+);
 
 var res = await sdk.SamlConnections.CreateAsync(req);
 
@@ -108,6 +115,7 @@ Fetches the SAML Connection whose ID matches the provided `saml_connection_id` i
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetSAMLConnection" method="get" path="/saml_connections/{saml_connection_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -142,6 +150,7 @@ Updates the SAML Connection whose ID matches the provided `id` in the path.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="UpdateSAMLConnection" method="patch" path="/saml_connections/{saml_connection_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
@@ -153,13 +162,12 @@ var res = await sdk.SamlConnections.UpdateAsync(
     samlConnectionId: "saml_conn_123_update",
     requestBody: new UpdateSAMLConnectionRequestBody() {
         Name = "Example SAML Connection",
-        Domain = "example.com",
         IdpEntityId = "entity_123",
         IdpSsoUrl = "https://idp.example.com/sso",
         IdpCertificate = "MIIDBTCCAe2gAwIBAgIQ...",
         IdpMetadataUrl = "https://idp.example.com/metadata",
         IdpMetadata = "<EntityDescriptor>...</EntityDescriptor>",
-        AttributeMapping = new UpdateSAMLConnectionAttributeMapping() {
+        AttributeMapping = new AttributeMapping() {
             UserId = "id123",
             EmailAddress = "user@example.com",
             FirstName = "Jane",
@@ -199,6 +207,7 @@ Deletes the SAML Connection whose ID matches the provided `id` in the path.
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="DeleteSAMLConnection" method="delete" path="/saml_connections/{saml_connection_id}" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;

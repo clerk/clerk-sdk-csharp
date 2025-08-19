@@ -14,6 +14,7 @@ It is used by Clerk SDKs when the user's authentication state cannot be immediat
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="GetPublicInterstitial" method="get" path="/public/interstitial" -->
 ```csharp
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Operations;
@@ -21,6 +22,7 @@ using Clerk.BackendAPI.Models.Operations;
 var sdk = new ClerkBackendApi();
 
 GetPublicInterstitialRequest req = new GetPublicInterstitialRequest() {
+    FrontendApiQueryParameter = "frontend-api_1a2b3c4d",
     FrontendApiQueryParameter1 = "pub_1a2b3c4d",
 };
 

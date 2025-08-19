@@ -16,25 +16,38 @@ namespace Clerk.BackendAPI.Models.Components
     public class Passkey
     {
 
-        [JsonProperty("status")]
-        public PasskeyVerificationStatus Status { get; set; } = default!;
+        [JsonProperty("id")]
+        public string? Id { get; set; }
 
-        [JsonProperty("strategy")]
-        public PasskeyVerificationStrategy Strategy { get; set; } = default!;
+        /// <summary>
+        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("object")]
+        public PasskeyObject Object { get; set; } = default!;
 
-        [JsonProperty("nonce")]
-        public Nonce? Nonce { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; } = default!;
 
-        [JsonProperty("message")]
-        public string? Message { get; set; } = null;
+        /// <summary>
+        /// Unix timestamp of when the passkey was last used.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("last_used_at")]
+        public long LastUsedAt { get; set; } = default!;
 
-        [JsonProperty("attempts", NullValueHandling = NullValueHandling.Include)]
-        public long? Attempts { get; set; }
+        [JsonProperty("verification", NullValueHandling = NullValueHandling.Include)]
+        public PasskeyVerification? Verification { get; set; }
 
-        [JsonProperty("expire_at", NullValueHandling = NullValueHandling.Include)]
-        public long? ExpireAt { get; set; }
-
-        [JsonProperty("verified_at_client")]
-        public string? VerifiedAtClient { get; set; } = null;
+        public VerificationPasskey? GetVerificationVerificationPasskey()
+        {
+            return Verification != null ? Verification.VerificationPasskey : null;
+        }
     }
 }
