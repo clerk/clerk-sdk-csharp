@@ -40,7 +40,7 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Change the domain of a production instance.<br/>
         /// <br/>
-        /// Changing the domain requires updating the <a href="https://clerk.com/docs/deployments/overview#dns-records">DNS records</a> accordingly, deploying new <a href="https://clerk.com/docs/deployments/overview#deploy">SSL certificates</a>, updating your Social Connection&apos;s redirect URLs and setting the new keys in your code.<br/>
+        /// Changing the domain requires updating the <a href="https://clerk.com/docs/deployments/overview#dns-records">DNS records</a> accordingly, deploying new <a href="https://clerk.com/docs/deployments/overview#deploy-certificates">SSL certificates</a>, updating your Social Connection&apos;s redirect URLs and setting the new keys in your code.<br/>
         /// <br/>
         /// WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur.
         /// </remarks>
@@ -52,7 +52,7 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.11.1";
+        private const string _sdkVersion = "0.11.2";
         private const string _sdkGenVersion = "2.686.7";
         private const string _openapiDocVersion = "2025-04-10";
 

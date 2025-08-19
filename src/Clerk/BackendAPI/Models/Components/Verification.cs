@@ -30,6 +30,7 @@ namespace Clerk.BackendAPI.Models.Components
         public static VerificationType VerificationFromOauth { get { return new VerificationType("verification_from_oauth"); } }
         public static VerificationType VerificationTicket { get { return new VerificationType("verification_ticket"); } }
         public static VerificationType VerificationSaml { get { return new VerificationType("verification_saml"); } }
+        public static VerificationType VerificationEmailLink { get { return new VerificationType("verification_email_link"); } }
         public static VerificationType Null { get { return new VerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -41,6 +42,7 @@ namespace Clerk.BackendAPI.Models.Components
                 case "verification_from_oauth": return VerificationFromOauth;
                 case "verification_ticket": return VerificationTicket;
                 case "verification_saml": return VerificationSaml;
+                case "verification_email_link": return VerificationEmailLink;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for VerificationType");
             }
@@ -81,6 +83,9 @@ namespace Clerk.BackendAPI.Models.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public Saml? Saml { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public EmailLink? EmailLink { get; set; }
 
         public VerificationType Type { get; set; }
 
@@ -135,6 +140,16 @@ namespace Clerk.BackendAPI.Models.Components
             res.Saml = verificationSaml;
             return res;
         }
+        public static Verification CreateVerificationEmailLink(EmailLink verificationEmailLink) {
+            VerificationType typ = VerificationType.VerificationEmailLink;
+        
+            string typStr = VerificationType.VerificationEmailLink.ToString();
+            
+            verificationEmailLink.Object = VerificationEmailLinkVerificationObjectExtension.ToEnum(VerificationType.VerificationEmailLink.ToString());
+            Verification res = new Verification(typ);
+            res.EmailLink = verificationEmailLink;
+            return res;
+        }
         public static Verification CreateNull() {
             VerificationType typ = VerificationType.Null;
             return new Verification(typ);
@@ -176,6 +191,11 @@ namespace Clerk.BackendAPI.Models.Components
                     Saml? saml = ResponseBodyDeserializer.Deserialize<Saml>(jo.ToString());
                     return CreateVerificationSaml(saml!);
                 }
+                if (discriminator == VerificationType.VerificationEmailLink.ToString())
+                {
+                    EmailLink? emailLink = ResponseBodyDeserializer.Deserialize<EmailLink>(jo.ToString());
+                    return CreateVerificationEmailLink(emailLink!);
+                }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
             }
@@ -215,6 +235,11 @@ namespace Clerk.BackendAPI.Models.Components
                 if (res.Saml != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Saml));
+                    return;
+                }
+                if (res.EmailLink != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.EmailLink));
                     return;
                 }
 

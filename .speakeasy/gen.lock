@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: 1eedd487d4bb2862b474bf504f3afac6
+  docChecksum: eeb92438f9d849dcbf911c139648c302
   docVersion: "2025-04-10"
   speakeasyVersion: 1.606.0
   generationVersion: 2.686.7
-  releaseVersion: 0.11.1
-  configChecksum: 5bd8d2c370cdd2bf707cc7923d0af263
+  releaseVersion: 0.11.2
+  configChecksum: a5ea54cdb86c4b40ef222cc08d73db60
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
@@ -48,6 +48,7 @@ generatedFiles:
   - docs/Models/Components/Admin.md
   - docs/Models/Components/AllowlistIdentifier.md
   - docs/Models/Components/AllowlistIdentifierObject.md
+  - docs/Models/Components/Amount.md
   - docs/Models/Components/BlocklistIdentifier.md
   - docs/Models/Components/BlocklistIdentifierIdentifierType.md
   - docs/Models/Components/BlocklistIdentifierObject.md
@@ -64,8 +65,19 @@ generatedFiles:
   - docs/Models/Components/CommerceMoneyResponse.md
   - docs/Models/Components/CommercePlan.md
   - docs/Models/Components/CommercePlanObject.md
+  - docs/Models/Components/CommerceSubscriptionItem.md
+  - docs/Models/Components/CommerceSubscriptionItemAmount.md
+  - docs/Models/Components/CommerceSubscriptionItemNextInvoiceAmount.md
+  - docs/Models/Components/CommerceSubscriptionItemNextPaymentAmount.md
+  - docs/Models/Components/CommerceSubscriptionItemObject.md
+  - docs/Models/Components/CommerceSubscriptionItemPayerObject.md
+  - docs/Models/Components/CommerceSubscriptionItemPaymentSourceObject.md
+  - docs/Models/Components/CommerceSubscriptionItemPaymentSourceStatus.md
+  - docs/Models/Components/CommerceSubscriptionItemPlanObject.md
+  - docs/Models/Components/CommerceSubscriptionItemStatus.md
   - docs/Models/Components/Cookies.md
   - docs/Models/Components/CookiesObject.md
+  - docs/Models/Components/Credit.md
   - docs/Models/Components/DeletedObject.md
   - docs/Models/Components/Domain.md
   - docs/Models/Components/DomainObject.md
@@ -73,6 +85,7 @@ generatedFiles:
   - docs/Models/Components/DomainsEnrollmentModes.md
   - docs/Models/Components/EmailAddress.md
   - docs/Models/Components/EmailAddressObject.md
+  - docs/Models/Components/EmailLink.md
   - docs/Models/Components/EnrollmentMode.md
   - docs/Models/Components/Error.md
   - docs/Models/Components/ErrorClerkError.md
@@ -104,6 +117,7 @@ generatedFiles:
   - docs/Models/Components/JWTTemplateObject.md
   - docs/Models/Components/Jwks.md
   - docs/Models/Components/Keys.md
+  - docs/Models/Components/LifetimePaid.md
   - docs/Models/Components/Machine.md
   - docs/Models/Components/MachineCreated.md
   - docs/Models/Components/MachineCreatedObject.md
@@ -121,6 +135,8 @@ generatedFiles:
   - docs/Models/Components/MachineWithoutScopedMachinesObject.md
   - docs/Models/Components/Meta.md
   - docs/Models/Components/NextAction.md
+  - docs/Models/Components/NextInvoice.md
+  - docs/Models/Components/NextPayment.md
   - docs/Models/Components/Nonce.md
   - docs/Models/Components/OAuthAccessToken.md
   - docs/Models/Components/OAuthAccessTokenObject.md
@@ -159,12 +175,18 @@ generatedFiles:
   - docs/Models/Components/Organizations.md
   - docs/Models/Components/Otp.md
   - docs/Models/Components/PaginatedCommercePlanResponse.md
+  - docs/Models/Components/PaginatedCommerceSubscriptionItemResponse.md
   - docs/Models/Components/Passkey.md
   - docs/Models/Components/PasskeyObject.md
   - docs/Models/Components/PasskeyVerification.md
+  - docs/Models/Components/Payer.md
+  - docs/Models/Components/PaymentMethod.md
+  - docs/Models/Components/PaymentSource.md
   - docs/Models/Components/PhoneNumber.md
   - docs/Models/Components/PhoneNumberObject.md
   - docs/Models/Components/PhoneNumberVerification.md
+  - docs/Models/Components/Plan.md
+  - docs/Models/Components/PlanPeriod.md
   - docs/Models/Components/ProxyCheck.md
   - docs/Models/Components/ProxyCheckObject.md
   - docs/Models/Components/PublicOrganizationData.md
@@ -224,6 +246,9 @@ generatedFiles:
   - docs/Models/Components/VerificationAdminVerificationWeb3WalletObject.md
   - docs/Models/Components/VerificationAdminVerificationWeb3WalletStatus.md
   - docs/Models/Components/VerificationAdminVerificationWeb3WalletStrategy.md
+  - docs/Models/Components/VerificationEmailLinkVerificationObject.md
+  - docs/Models/Components/VerificationEmailLinkVerificationStatus.md
+  - docs/Models/Components/VerificationEmailLinkVerificationStrategy.md
   - docs/Models/Components/VerificationError.md
   - docs/Models/Components/VerificationFromOauthVerificationObject.md
   - docs/Models/Components/VerificationFromOauthVerificationStatus.md
@@ -437,6 +462,9 @@ generatedFiles:
   - docs/Models/Operations/GetClientResponse.md
   - docs/Models/Operations/GetCommercePlanListRequest.md
   - docs/Models/Operations/GetCommercePlanListResponse.md
+  - docs/Models/Operations/GetCommerceSubscriptionItemListQueryParamStatus.md
+  - docs/Models/Operations/GetCommerceSubscriptionItemListRequest.md
+  - docs/Models/Operations/GetCommerceSubscriptionItemListResponse.md
   - docs/Models/Operations/GetEmailAddressRequest.md
   - docs/Models/Operations/GetEmailAddressResponse.md
   - docs/Models/Operations/GetInstanceResponse.md
@@ -536,6 +564,7 @@ generatedFiles:
   - docs/Models/Operations/PreviewTemplateResponse.md
   - docs/Models/Operations/PreviewTemplateResponseBody.md
   - docs/Models/Operations/Provider.md
+  - docs/Models/Operations/QueryParamPayerType.md
   - docs/Models/Operations/QueryParamStatus.md
   - docs/Models/Operations/RefreshSessionRequest.md
   - docs/Models/Operations/RefreshSessionRequestBody.md
@@ -749,6 +778,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/Admin.cs
   - src/Clerk/BackendAPI/Models/Components/AllowlistIdentifier.cs
   - src/Clerk/BackendAPI/Models/Components/AllowlistIdentifierObject.cs
+  - src/Clerk/BackendAPI/Models/Components/Amount.cs
   - src/Clerk/BackendAPI/Models/Components/BlocklistIdentifier.cs
   - src/Clerk/BackendAPI/Models/Components/BlocklistIdentifierIdentifierType.cs
   - src/Clerk/BackendAPI/Models/Components/BlocklistIdentifierObject.cs
@@ -765,8 +795,19 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/CommerceMoneyResponse.cs
   - src/Clerk/BackendAPI/Models/Components/CommercePlan.cs
   - src/Clerk/BackendAPI/Models/Components/CommercePlanObject.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItem.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItemAmount.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItemNextInvoiceAmount.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItemNextPaymentAmount.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItemObject.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItemPayerObject.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItemPaymentSourceObject.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItemPaymentSourceStatus.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItemPlanObject.cs
+  - src/Clerk/BackendAPI/Models/Components/CommerceSubscriptionItemStatus.cs
   - src/Clerk/BackendAPI/Models/Components/Cookies.cs
   - src/Clerk/BackendAPI/Models/Components/CookiesObject.cs
+  - src/Clerk/BackendAPI/Models/Components/Credit.cs
   - src/Clerk/BackendAPI/Models/Components/DeletedObject.cs
   - src/Clerk/BackendAPI/Models/Components/Domain.cs
   - src/Clerk/BackendAPI/Models/Components/DomainObject.cs
@@ -774,6 +815,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/DomainsEnrollmentModes.cs
   - src/Clerk/BackendAPI/Models/Components/EmailAddress.cs
   - src/Clerk/BackendAPI/Models/Components/EmailAddressObject.cs
+  - src/Clerk/BackendAPI/Models/Components/EmailLink.cs
   - src/Clerk/BackendAPI/Models/Components/EnrollmentMode.cs
   - src/Clerk/BackendAPI/Models/Components/Error.cs
   - src/Clerk/BackendAPI/Models/Components/ErrorClerkError.cs
@@ -805,6 +847,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/JWTTemplateObject.cs
   - src/Clerk/BackendAPI/Models/Components/Jwks.cs
   - src/Clerk/BackendAPI/Models/Components/Keys.cs
+  - src/Clerk/BackendAPI/Models/Components/LifetimePaid.cs
   - src/Clerk/BackendAPI/Models/Components/Machine.cs
   - src/Clerk/BackendAPI/Models/Components/MachineCreated.cs
   - src/Clerk/BackendAPI/Models/Components/MachineCreatedObject.cs
@@ -822,6 +865,8 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/MachineWithoutScopedMachinesObject.cs
   - src/Clerk/BackendAPI/Models/Components/Meta.cs
   - src/Clerk/BackendAPI/Models/Components/NextAction.cs
+  - src/Clerk/BackendAPI/Models/Components/NextInvoice.cs
+  - src/Clerk/BackendAPI/Models/Components/NextPayment.cs
   - src/Clerk/BackendAPI/Models/Components/Nonce.cs
   - src/Clerk/BackendAPI/Models/Components/OAuthAccessToken.cs
   - src/Clerk/BackendAPI/Models/Components/OAuthAccessTokenObject.cs
@@ -860,12 +905,18 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/Organizations.cs
   - src/Clerk/BackendAPI/Models/Components/Otp.cs
   - src/Clerk/BackendAPI/Models/Components/PaginatedCommercePlanResponse.cs
+  - src/Clerk/BackendAPI/Models/Components/PaginatedCommerceSubscriptionItemResponse.cs
   - src/Clerk/BackendAPI/Models/Components/Passkey.cs
   - src/Clerk/BackendAPI/Models/Components/PasskeyObject.cs
   - src/Clerk/BackendAPI/Models/Components/PasskeyVerification.cs
+  - src/Clerk/BackendAPI/Models/Components/Payer.cs
+  - src/Clerk/BackendAPI/Models/Components/PaymentMethod.cs
+  - src/Clerk/BackendAPI/Models/Components/PaymentSource.cs
   - src/Clerk/BackendAPI/Models/Components/PhoneNumber.cs
   - src/Clerk/BackendAPI/Models/Components/PhoneNumberObject.cs
   - src/Clerk/BackendAPI/Models/Components/PhoneNumberVerification.cs
+  - src/Clerk/BackendAPI/Models/Components/Plan.cs
+  - src/Clerk/BackendAPI/Models/Components/PlanPeriod.cs
   - src/Clerk/BackendAPI/Models/Components/ProxyCheck.cs
   - src/Clerk/BackendAPI/Models/Components/ProxyCheckObject.cs
   - src/Clerk/BackendAPI/Models/Components/PublicOrganizationData.cs
@@ -925,6 +976,9 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/VerificationAdminVerificationWeb3WalletObject.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationAdminVerificationWeb3WalletStatus.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationAdminVerificationWeb3WalletStrategy.cs
+  - src/Clerk/BackendAPI/Models/Components/VerificationEmailLinkVerificationObject.cs
+  - src/Clerk/BackendAPI/Models/Components/VerificationEmailLinkVerificationStatus.cs
+  - src/Clerk/BackendAPI/Models/Components/VerificationEmailLinkVerificationStrategy.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationError.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationFromOauthVerificationObject.cs
   - src/Clerk/BackendAPI/Models/Components/VerificationFromOauthVerificationStatus.cs
@@ -1139,6 +1193,9 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/GetClientResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetCommercePlanListRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetCommercePlanListResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetCommerceSubscriptionItemListQueryParamStatus.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetCommerceSubscriptionItemListRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/GetCommerceSubscriptionItemListResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetEmailAddressRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/GetEmailAddressResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/GetInstanceResponse.cs
@@ -1238,6 +1295,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/PreviewTemplateResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/PreviewTemplateResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/Provider.cs
+  - src/Clerk/BackendAPI/Models/Operations/QueryParamPayerType.cs
   - src/Clerk/BackendAPI/Models/Operations/QueryParamStatus.cs
   - src/Clerk/BackendAPI/Models/Operations/RefreshSessionRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/RefreshSessionRequestBody.cs
@@ -3156,23 +3214,39 @@ examples:
           application/json: {"errors": []}
         "404":
           application/json: {"errors": [{"message": "some details about the error", "long_message": "some details about the error", "code": "some_error_code"}]}
+  GetCommerceSubscriptionItemList:
+    speakeasy-default-get-commerce-subscription-item-list:
+      parameters:
+        query:
+          limit: 20
+          offset: 10
+          include_free: false
+      responses:
+        "200":
+          application/json: {"data": [{"object": "commerce_subscription_item", "id": "<id>", "instance_id": "<id>", "status": "abandoned", "plan_id": "<id>", "plan": {"object": "commerce_plan", "id": "<id>", "name": "<value>", "fee": {"amount": 692858, "amount_formatted": "<value>", "currency": "New Zealand Dollar", "currency_symbol": "kr"}, "annual_monthly_fee": {"amount": 119895, "amount_formatted": "<value>", "currency": "Brunei Dollar", "currency_symbol": "ден"}, "annual_fee": {"amount": 989424, "amount_formatted": "<value>", "currency": "Kwacha", "currency_symbol": "L"}, "amount": 349721, "amount_formatted": "<value>", "annual_monthly_amount": 405709, "annual_monthly_amount_formatted": "<value>", "annual_amount": 848366, "annual_amount_formatted": "<value>", "currency_symbol": "₪", "currency": "Sri Lanka Rupee", "description": "scrap numb sentimental advertisement pfft cardboard above satirise", "product_id": "<id>", "is_default": false, "is_recurring": true, "publicly_visible": true, "has_base_fee": true, "payer_type": ["<value 1>", "<value 2>", "<value 3>"], "for_payer_type": "<value>", "slug": "<value>", "avatar_url": "https://nervous-jump.net", "features": [{"object": "feature", "id": "<id>", "name": "<value>", "description": "intrepid nautical gee judgementally neaten chasuble dimly", "slug": "<value>", "avatar_url": "https://anguished-cheetah.net"}]}, "plan_period": "month", "payment_source_id": "<id>", "payer_id": "<id>", "is_free_trial": true, "proration_date": "<value>", "created_at": 52347, "updated_at": 42603}], "total_count": 88070}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+        "500":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## SDK Changes Detected:
-  * `ClerkBackendApi.EmailAddresses.Create()`:  `response.verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.EmailAddresses.Get()`:  `response.verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.EmailAddresses.Update()`:  `response.verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.List()`:  `response.[].EmailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.Create()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.Get()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.Update()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.Ban()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.Unban()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.BulkBan()`:  `response.[].EmailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.BulkUnban()`:  `response.[].EmailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.Lock()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.Unlock()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.SetProfileImage()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.DeleteProfileImage()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
-  * `ClerkBackendApi.Users.UpdateMetadata()`:  `response.emailAddresses.[].Verification.[verificationSaml]` **Added**
+  * `ClerkBackendApi.Commerce.ListSubscriptionItems()`: **Added**
+  * `ClerkBackendApi.EmailAddresses.Create()`:  `response.verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.EmailAddresses.Get()`:  `response.verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.EmailAddresses.Update()`:  `response.verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.List()`:  `response.[].EmailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.Create()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.Get()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.Update()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.Ban()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.Unban()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.BulkBan()`:  `response.[].EmailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.BulkUnban()`:  `response.[].EmailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.Lock()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.Unlock()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.SetProfileImage()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.DeleteProfileImage()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Users.UpdateMetadata()`:  `response.emailAddresses.[].Verification.[verificationEmailLink]` **Added**
+  * `ClerkBackendApi.Commerce.ListPlans()`:  `response.data.[]` **Changed**

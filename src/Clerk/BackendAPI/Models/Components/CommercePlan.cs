@@ -169,5 +169,17 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("features")]
         public List<FeatureResponse> Features { get; set; } = default!;
+
+        /// <summary>
+        /// Whether free trial is enabled for this plan.
+        /// </summary>
+        [JsonProperty("free_trial_enabled")]
+        public bool? FreeTrialEnabled { get; set; }
+
+        /// <summary>
+        /// Number of free trial days for this plan.
+        /// </summary>
+        [JsonProperty("free_trial_days")]
+        public long? FreeTrialDays { get; set; } = null;
     }
 }

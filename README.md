@@ -202,6 +202,7 @@ public class MachineAuthentication
 ### [Commerce](docs/sdks/commerce/README.md)
 
 * [ListPlans](docs/sdks/commerce/README.md#listplans) - List all commerce plans
+* [ListSubscriptionItems](docs/sdks/commerce/README.md#listsubscriptionitems) - List all subscription items
 
 ### [Domains](docs/sdks/domains/README.md)
 
