@@ -6,6 +6,7 @@
 ### Available Operations
 
 * [ListPlans](#listplans) - List all commerce plans
+* [ListSubscriptionItems](#listsubscriptionitems) - List all subscription items
 
 ## ListPlans
 
@@ -41,6 +42,49 @@ var res = await sdk.Commerce.ListPlansAsync(
 ### Response
 
 **[GetCommercePlanListResponse](../../Models/Operations/GetCommercePlanListResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ListSubscriptionItems
+
+Returns a list of all subscription items for the instance. The subscription items are returned sorted by creation date,
+with the newest appearing first. This includes subscriptions for both users and organizations. Pagination is supported.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetCommerceSubscriptionItemList" method="get" path="/commerce/subscription_items" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+GetCommerceSubscriptionItemListRequest req = new GetCommerceSubscriptionItemListRequest() {
+    Limit = 20,
+    Offset = 10,
+};
+
+var res = await sdk.Commerce.ListSubscriptionItemsAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                   | [GetCommerceSubscriptionItemListRequest](../../Models/Operations/GetCommerceSubscriptionItemListRequest.md) | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
+
+### Response
+
+**[GetCommerceSubscriptionItemListResponse](../../Models/Operations/GetCommerceSubscriptionItemListResponse.md)**
 
 ### Errors
 

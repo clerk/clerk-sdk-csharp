@@ -32,3 +32,9 @@ Verification.CreateVerificationTicket(/* values here */);
 ```csharp
 Verification.CreateVerificationSaml(/* values here */);
 ```
+
+### VerificationEmailLink
+
+```csharp
+Verification.CreateVerificationEmailLink(/* values here */);
+```

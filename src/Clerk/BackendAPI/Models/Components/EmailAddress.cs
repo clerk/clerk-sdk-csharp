@@ -70,6 +70,11 @@ namespace Clerk.BackendAPI.Models.Components
             return Verification != null ? Verification.Saml : null;
         }
 
+        public EmailLink? GetVerificationVerificationEmailLink()
+        {
+            return Verification != null ? Verification.EmailLink : null;
+        }
+
         [JsonProperty("linked_to")]
         public List<IdentificationLink> LinkedTo { get; set; } = default!;
 
