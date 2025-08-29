@@ -45,14 +45,32 @@ namespace Clerk.BackendAPI
         /// </remarks>
         /// </summary>
         Task<CreateWaitlistEntryResponse> CreateAsync(CreateWaitlistEntryRequestBody? request = null, RetryConfig? retryConfig = null);
+
+        /// <summary>
+        /// Invite a waitlist entry
+        /// 
+        /// <remarks>
+        /// Send an invite to the email address in a waitlist entry.
+        /// </remarks>
+        /// </summary>
+        Task<InviteWaitlistEntryResponse> InviteAsync(string waitlistEntryId, InviteWaitlistEntryRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+
+        /// <summary>
+        /// Reject a waitlist entry
+        /// 
+        /// <remarks>
+        /// Reject a waitlist entry.
+        /// </remarks>
+        /// </summary>
+        Task<RejectWaitlistEntryResponse> RejectAsync(string waitlistEntryId, RetryConfig? retryConfig = null);
     }
 
     public class WaitlistEntries: IWaitlistEntries
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.11.2";
-        private const string _sdkGenVersion = "2.686.7";
+        private const string _sdkVersion = "0.12.0";
+        private const string _sdkGenVersion = "2.687.13";
         private const string _openapiDocVersion = "2025-04-10";
 
         public WaitlistEntries(SDKConfig config)
@@ -286,6 +304,267 @@ namespace Clerk.BackendAPI
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
+        }
+
+        public async Task<InviteWaitlistEntryResponse> InviteAsync(string waitlistEntryId, InviteWaitlistEntryRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        {
+            var request = new InviteWaitlistEntryRequest()
+            {
+                WaitlistEntryId = waitlistEntryId,
+                RequestBody = requestBody,
+            };
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}/invite", request);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "InviteWaitlistEntry", new List<string> {  }, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 409 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<WaitlistEntry>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new InviteWaitlistEntryResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.WaitlistEntry = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(new List<int>{400, 404, 409, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    throw obj!;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
+        }
+
+        public async Task<RejectWaitlistEntryResponse> RejectAsync(string waitlistEntryId, RetryConfig? retryConfig = null)
+        {
+            var request = new RejectWaitlistEntryRequest()
+            {
+                WaitlistEntryId = waitlistEntryId,
+            };
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}/reject", request);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "RejectWaitlistEntry", new List<string> {  }, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 409 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<WaitlistEntry>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new RejectWaitlistEntryResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.WaitlistEntry = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(new List<int>{400, 404, 409, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     throw obj!;
                 }
 

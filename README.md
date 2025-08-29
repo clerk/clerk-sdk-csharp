@@ -203,6 +203,7 @@ public class MachineAuthentication
 
 * [ListPlans](docs/sdks/commerce/README.md#listplans) - List all commerce plans
 * [ListSubscriptionItems](docs/sdks/commerce/README.md#listsubscriptionitems) - List all subscription items
+* [CancelSubscriptionItem](docs/sdks/commerce/README.md#cancelsubscriptionitem) - Cancel a subscription item
 
 ### [Domains](docs/sdks/domains/README.md)
 
@@ -332,6 +333,7 @@ public class MachineAuthentication
 * [MergeMetadata](docs/sdks/organizations/README.md#mergemetadata) - Merge and update metadata for an organization
 * [UploadLogo](docs/sdks/organizations/README.md#uploadlogo) - Upload a logo for the organization
 * [DeleteLogo](docs/sdks/organizations/README.md#deletelogo) - Delete the organization's logo.
+* [GetBillingSubscription](docs/sdks/organizations/README.md#getbillingsubscription) - Retrieve an organization's billing subscription
 
 ### [PhoneNumbers](docs/sdks/phonenumbers/README.md)
 
@@ -404,6 +406,7 @@ public class MachineAuthentication
 * [SetProfileImage](docs/sdks/users/README.md#setprofileimage) - Set user profile image
 * [DeleteProfileImage](docs/sdks/users/README.md#deleteprofileimage) - Delete user profile image
 * [UpdateMetadata](docs/sdks/users/README.md#updatemetadata) - Merge and update a user's metadata
+* [GetBillingSubscription](docs/sdks/users/README.md#getbillingsubscription) - Retrieve a user's billing subscription
 * [GetOAuthAccessToken](docs/sdks/users/README.md#getoauthaccesstoken) - Retrieve the OAuth access token of a user
 * [GetOrganizationMemberships](docs/sdks/users/README.md#getorganizationmemberships) - Retrieve all memberships for a user
 * [GetOrganizationInvitations](docs/sdks/users/README.md#getorganizationinvitations) - Retrieve all invitations for a user
@@ -421,6 +424,8 @@ public class MachineAuthentication
 
 * [List](docs/sdks/waitlistentries/README.md#list) - List all waitlist entries
 * [Create](docs/sdks/waitlistentries/README.md#create) - Create a waitlist entry
+* [Invite](docs/sdks/waitlistentries/README.md#invite) - Invite a waitlist entry
+* [Reject](docs/sdks/waitlistentries/README.md#reject) - Reject a waitlist entry
 
 ### [Webhooks](docs/sdks/webhooks/README.md)
 

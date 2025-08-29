@@ -40,5 +40,19 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
+
+        /// <summary>
+        /// Allows to return machines in a particular order.<br/>
+        /// 
+        /// <remarks>
+        /// You can order the returned machines by their `name` or `created_at`.<br/>
+        /// To specify the direction, use the `+` or `-` symbols prepended to the property to order by.<br/>
+        /// For example, to return machines in descending order by `created_at`, use `-created_at`.<br/>
+        /// If you don&apos;t use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
+        /// </remarks>
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
+        public string? OrderBy { get; set; } = "-created_at";
     }
 }

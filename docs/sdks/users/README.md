@@ -20,6 +20,7 @@
 * [SetProfileImage](#setprofileimage) - Set user profile image
 * [DeleteProfileImage](#deleteprofileimage) - Delete user profile image
 * [UpdateMetadata](#updatemetadata) - Merge and update a user's metadata
+* [GetBillingSubscription](#getbillingsubscription) - Retrieve a user's billing subscription
 * [GetOAuthAccessToken](#getoauthaccesstoken) - Retrieve the OAuth access token of a user
 * [GetOrganizationMemberships](#getorganizationmemberships) - Retrieve all memberships for a user
 * [GetOrganizationInvitations](#getorganizationinvitations) - Retrieve all invitations for a user
@@ -749,6 +750,44 @@ var res = await sdk.Users.UpdateMetadataAsync(userId: "user_123456789");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetBillingSubscription
+
+Retrieves the billing subscription for the specified user.
+This includes subscription details, active plans, billing information, and payment status.
+The subscription contains subscription items which represent the individual plans the user is subscribed to.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetUserBillingSubscription" method="get" path="/users/{user_id}/billing/subscription" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.GetBillingSubscriptionAsync(userId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                         | Type                                              | Required                                          | Description                                       |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| `UserId`                                          | *string*                                          | :heavy_check_mark:                                | The ID of the user whose subscription to retrieve |
+
+### Response
+
+**[GetUserBillingSubscriptionResponse](../../Models/Operations/GetUserBillingSubscriptionResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## GetOAuthAccessToken

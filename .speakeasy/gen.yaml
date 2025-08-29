@@ -21,7 +21,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.11.2
+  version: 0.12.0
   additionalDependencies:
     - package: Microsoft.AspNetCore
       version: 2.3.0
@@ -36,6 +36,7 @@ csharp:
   enableSourceLink: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
+  httpClientPrefix: Speakeasy
   imports:
     option: openapi
     paths:

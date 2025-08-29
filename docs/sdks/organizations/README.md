@@ -13,6 +13,7 @@
 * [MergeMetadata](#mergemetadata) - Merge and update metadata for an organization
 * [UploadLogo](#uploadlogo) - Upload a logo for the organization
 * [DeleteLogo](#deletelogo) - Delete the organization's logo.
+* [GetBillingSubscription](#getbillingsubscription) - Retrieve an organization's billing subscription
 
 ## List
 
@@ -384,4 +385,42 @@ var res = await sdk.Organizations.DeleteLogoAsync(organizationId: "org_12345");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 404                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetBillingSubscription
+
+Retrieves the billing subscription for the specified organization.
+This includes subscription details, active plans, billing information, and payment status.
+The subscription contains subscription items which represent the individual plans the organization is subscribed to.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetOrganizationBillingSubscription" method="get" path="/organizations/{organization_id}/billing/subscription" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Organizations.GetBillingSubscriptionAsync(organizationId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                 | Type                                                      | Required                                                  | Description                                               |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `OrganizationId`                                          | *string*                                                  | :heavy_check_mark:                                        | The ID of the organization whose subscription to retrieve |
+
+### Response
+
+**[GetOrganizationBillingSubscriptionResponse](../../Models/Operations/GetOrganizationBillingSubscriptionResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

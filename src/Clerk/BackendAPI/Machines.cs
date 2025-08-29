@@ -34,7 +34,7 @@ namespace Clerk.BackendAPI
         /// returned first)
         /// </remarks>
         /// </summary>
-        Task<ListMachinesResponse> ListAsync(long? limit = 10, long? offset = 0, string? query = null, RetryConfig? retryConfig = null);
+        Task<ListMachinesResponse> ListAsync(long? limit = 10, long? offset = 0, string? query = null, string? orderBy = "-created_at", RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Create a machine
@@ -106,8 +106,8 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.11.2";
-        private const string _sdkGenVersion = "2.686.7";
+        private const string _sdkVersion = "0.12.0";
+        private const string _sdkGenVersion = "2.687.13";
         private const string _openapiDocVersion = "2025-04-10";
 
         public Machines(SDKConfig config)
@@ -115,13 +115,14 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
-        public async Task<ListMachinesResponse> ListAsync(long? limit = 10, long? offset = 0, string? query = null, RetryConfig? retryConfig = null)
+        public async Task<ListMachinesResponse> ListAsync(long? limit = 10, long? offset = 0, string? query = null, string? orderBy = "-created_at", RetryConfig? retryConfig = null)
         {
             var request = new ListMachinesRequest()
             {
                 Limit = limit,
                 Offset = offset,
                 Query = query,
+                OrderBy = orderBy,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/machines", request);

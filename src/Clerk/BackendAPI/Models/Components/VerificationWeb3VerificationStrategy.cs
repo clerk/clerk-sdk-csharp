@@ -17,6 +17,8 @@ namespace Clerk.BackendAPI.Models.Components
     {
         [JsonProperty("web3_metamask_signature")]
         Web3MetamaskSignature,
+        [JsonProperty("web3_base_signature")]
+        Web3BaseSignature,
         [JsonProperty("web3_coinbase_wallet_signature")]
         Web3CoinbaseWalletSignature,
         [JsonProperty("web3_okx_wallet_signature")]
