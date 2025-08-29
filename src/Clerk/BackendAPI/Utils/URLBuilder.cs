@@ -55,7 +55,7 @@ namespace Clerk.BackendAPI.Utils
         {
             foreach (var key in parameters.Keys)
             {
-                url = url.Replace($"{{{key}}}", parameters[key]);
+                url = url.Replace($"{{{key}}}", Uri.EscapeDataString(parameters[key]));
             }
 
             return url;
@@ -68,7 +68,7 @@ namespace Clerk.BackendAPI.Utils
             {
                 foreach (var value in queryParams[key])
                 {
-                    queries.Add($"{key}={value}");
+                    queries.Add($"{key}={WebUtility.UrlEncode(Utilities.ToString(value))}");
                 }
             }
 
@@ -114,7 +114,7 @@ namespace Clerk.BackendAPI.Utils
                         case "json":
                             parameters.Add(
                                 metadata.Name ?? prop.Name,
-                                WebUtility.UrlEncode(Utilities.SerializeJSON(val))
+                                Utilities.SerializeJSON(val)
                             );
                             break;
                         default:

@@ -7,6 +7,8 @@
 
 * [List](#list) - List all waitlist entries
 * [Create](#create) - Create a waitlist entry
+* [Invite](#invite) - Invite a waitlist entry
+* [Reject](#reject) - Reject a waitlist entry
 
 ## List
 
@@ -87,4 +89,75 @@ var res = await sdk.WaitlistEntries.CreateAsync(req);
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## Invite
+
+Send an invite to the email address in a waitlist entry.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="InviteWaitlistEntry" method="post" path="/waitlist_entries/{waitlist_entry_id}/invite" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.WaitlistEntries.InviteAsync(waitlistEntryId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `WaitlistEntryId`                                                                           | *string*                                                                                    | :heavy_check_mark:                                                                          | The ID of the waitlist entry to invite                                                      |
+| `RequestBody`                                                                               | [InviteWaitlistEntryRequestBody](../../Models/Operations/InviteWaitlistEntryRequestBody.md) | :heavy_minus_sign:                                                                          | N/A                                                                                         |
+
+### Response
+
+**[InviteWaitlistEntryResponse](../../Models/Operations/InviteWaitlistEntryResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 409, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## Reject
+
+Reject a waitlist entry.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="RejectWaitlistEntry" method="post" path="/waitlist_entries/{waitlist_entry_id}/reject" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.WaitlistEntries.RejectAsync(waitlistEntryId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                              | Type                                   | Required                               | Description                            |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| `WaitlistEntryId`                      | *string*                               | :heavy_check_mark:                     | The ID of the waitlist entry to reject |
+
+### Response
+
+**[RejectWaitlistEntryResponse](../../Models/Operations/RejectWaitlistEntryResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 409, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

@@ -7,6 +7,7 @@
 
 * [ListPlans](#listplans) - List all commerce plans
 * [ListSubscriptionItems](#listsubscriptionitems) - List all subscription items
+* [CancelSubscriptionItem](#cancelsubscriptionitem) - Cancel a subscription item
 
 ## ListPlans
 
@@ -91,5 +92,45 @@ var res = await sdk.Commerce.ListSubscriptionItemsAsync(req);
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## CancelSubscriptionItem
+
+Cancel a specific subscription item. The subscription item can be canceled immediately or at the end of the current billing period.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="CancelCommerceSubscriptionItem" method="delete" path="/commerce/subscription_items/{subscription_item_id}" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Commerce.CancelSubscriptionItemAsync(
+    subscriptionItemId: "<id>",
+    endNow: false
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `SubscriptionItemId`                                                                                               | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | The ID of the subscription item to cancel                                                                          |
+| `EndNow`                                                                                                           | *bool*                                                                                                             | :heavy_minus_sign:                                                                                                 | Whether to cancel the subscription immediately (true) or at the end of the current billing period (false, default) |
+
+### Response
+
+**[CancelCommerceSubscriptionItemResponse](../../Models/Operations/CancelCommerceSubscriptionItemResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
