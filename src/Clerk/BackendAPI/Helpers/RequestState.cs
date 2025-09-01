@@ -128,6 +128,7 @@ public class RequestState
                     Claims = Claims.Claims.GroupBy(c => c.Type).ToDictionary(g => g.Key, g => (object)g.Select(c => c.Value).ToList())
                 };
             case TokenType.MachineToken:
+            case TokenType.MachineTokenV2:
                 return new M2MMachineAuthObject
                 {
                     Id = Claims.FindFirst("id")?.Value,

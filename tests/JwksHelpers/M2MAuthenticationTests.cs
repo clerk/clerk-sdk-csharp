@@ -104,13 +104,38 @@ namespace JwksHelpers.Tests
         public async Task TestVerifyMachineToken_MissingSecretKey()
         {
             var machineToken = "mt_test_machine_token_12345";
-            var options = new VerifyTokenOptions(jwtKey: "some-jwt-key"); // No secret key
+            var options = new VerifyTokenOptions(jwtKey: "some-jwt-key");
 
             var exception = await Assert.ThrowsAsync<TokenVerificationException>(
                 () => VerifyToken.VerifyTokenAsync(machineToken, options)
             );
 
             Assert.Equal(TokenVerificationErrorReason.SECRET_KEY_MISSING, exception.Reason);
+        }
+
+        [Fact]
+        public async Task TestVerifyMachineToken_WithMachineSecretKey()
+        {
+            var machineToken = "mt_test_machine_token_12345";
+            var options = new VerifyTokenOptions(machineSecretKey: "ms_test_machine_secret_key");
+
+            var tokenType = TokenTypeHelper.GetTokenType(machineToken);
+            Assert.Equal(TokenType.MachineToken, tokenType);
+            Assert.True(TokenTypeHelper.IsMachineToken(machineToken));
+        }
+
+        [Fact]
+        public async Task TestVerifyMachineToken_WithBothKeys()
+        {
+            var machineToken = "mt_test_machine_token_12345";
+            var options = new VerifyTokenOptions(
+                secretKey: "sk_test_secret_key",
+                machineSecretKey: "ms_test_machine_secret_key"
+            );
+
+            var tokenType = TokenTypeHelper.GetTokenType(machineToken);
+            Assert.Equal(TokenType.MachineToken, tokenType);
+            Assert.True(TokenTypeHelper.IsMachineToken(machineToken));
         }
 
         #endregion

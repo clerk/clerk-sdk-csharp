@@ -40,6 +40,7 @@ public static class AuthenticateRequest
         {
             TokenType.SessionToken => "session_token",
             TokenType.MachineToken => "machine_token",
+            TokenType.MachineTokenV2 => "m2m_token",
             TokenType.OAuthToken => "oauth_token",
             TokenType.ApiKey => "api_key",
             _ => tokenType.ToString().ToLowerInvariant()
@@ -55,11 +56,13 @@ public static class AuthenticateRequest
 
         if (TokenTypeHelper.IsMachineToken(sessionToken))
         {
-            // Machine tokens require secret key for API verification
-            if (options.SecretKey == null)
+            if (options.SecretKey == null && options.MachineSecretKey == null)
                 return RequestState.SignedOut(AuthErrorReason.SECRET_KEY_MISSING);
 
-            verifyTokenOptions = new VerifyTokenOptions(secretKey: options.SecretKey);
+            verifyTokenOptions = new VerifyTokenOptions(
+                secretKey: options.SecretKey, 
+                machineSecretKey: options.MachineSecretKey
+            );
         }
         else
         {

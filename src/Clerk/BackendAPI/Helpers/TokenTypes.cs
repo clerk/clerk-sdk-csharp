@@ -9,6 +9,7 @@ public enum TokenType
 {
     SessionToken,
     MachineToken,
+    MachineTokenV2,
     OAuthToken,
     ApiKey
 }
@@ -19,6 +20,7 @@ public enum TokenType
 public static class TokenPrefix
 {
     public const string MachineToken = "mt_";
+    public const string MachineTokenV2 = "m2m_";
     public const string OAuthToken = "oat_";
     public const string ApiKey = "ak_";
 }
@@ -28,7 +30,7 @@ public static class TokenPrefix
 /// </summary>
 public static class TokenTypeHelper
 {
-    private static readonly string[] MachineTokenPrefixes = { TokenPrefix.MachineToken, TokenPrefix.OAuthToken, TokenPrefix.ApiKey };
+    private static readonly string[] MachineTokenPrefixes = { TokenPrefix.MachineToken, TokenPrefix.MachineTokenV2, TokenPrefix.OAuthToken, TokenPrefix.ApiKey };
 
     /// <summary>
     /// Determines if a token is a machine token (includes M2M, OAuth, and API key tokens)
@@ -62,6 +64,9 @@ public static class TokenTypeHelper
         if (token.StartsWith(TokenPrefix.MachineToken))
             return TokenType.MachineToken;
 
+        if (token.StartsWith(TokenPrefix.MachineTokenV2))
+            return TokenType.MachineTokenV2;
+
         if (token.StartsWith(TokenPrefix.ApiKey))
             return TokenType.ApiKey;
 
@@ -81,6 +86,7 @@ public static class TokenTypeHelper
         return tokenType switch
         {
             TokenType.MachineToken => "/m2m_tokens/verify",
+            TokenType.MachineTokenV2 => "/m2m_tokens/verify",
             TokenType.OAuthToken => "/oauth_applications/access_tokens/verify",
             TokenType.ApiKey => "/api_keys/verify",
             _ => throw new ArgumentException($"No verification endpoint for token type: {tokenType}")

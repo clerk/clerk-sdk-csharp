@@ -255,14 +255,16 @@ public static class VerifyToken
     /// <returns>ClaimsPrincipal containing token information</returns>
     private static async Task<ClaimsPrincipal> VerifyMachineTokenAsync(string token, VerifyTokenOptions options, TokenType tokenType)
     {
-        if (options.SecretKey == null)
+        if (options.SecretKey == null && options.MachineSecretKey == null)
             throw new TokenVerificationException(TokenVerificationErrorReason.SECRET_KEY_MISSING);
 
         var endpoint = TokenTypeHelper.GetVerificationEndpoint(tokenType);
         var verificationUrl = $"{options.ApiUrl}/{options.ApiVersion}{endpoint}";
 
         using var client = new HttpClient();
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.SecretKey);
+        
+        var authToken = options.SecretKey ?? options.MachineSecretKey;
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         var payload = new { secret = token };
