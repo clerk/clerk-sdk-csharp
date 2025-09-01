@@ -18,7 +18,7 @@ public class ClerkBeforeRequestHookTests
         var result = await hook.BeforeRequestAsync(hookCtx, request);
 
         Assert.True(result.Headers.Contains("Clerk-API-Version"));
-        Assert.Equal("2024-10-01", result.Headers.GetValues("Clerk-API-Version").First());
+        Assert.Equal("2025-04-10", result.Headers.GetValues("Clerk-API-Version").First());
     }
 
     [Fact]
