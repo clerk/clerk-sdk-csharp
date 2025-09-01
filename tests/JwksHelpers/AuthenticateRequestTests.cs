@@ -424,6 +424,7 @@ namespace JwksHelpers.Tests
 
         [Theory]
         [InlineData("mt_1234567890abcdef", TokenType.MachineToken)]
+        [InlineData("m2m_1234567890abcdef", TokenType.MachineTokenV2)]
         [InlineData("oat_1234567890abcdef", TokenType.OAuthToken)]
         [InlineData("ak_1234567890abcdef", TokenType.ApiKey)]
         [InlineData("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...", TokenType.SessionToken)]

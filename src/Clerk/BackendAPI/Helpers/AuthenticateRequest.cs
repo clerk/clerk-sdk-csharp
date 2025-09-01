@@ -49,7 +49,18 @@ public static class AuthenticateRequest
         // Check if token type is accepted
         if (!options.AcceptsToken.Contains("any") && !options.AcceptsToken.Contains(tokenTypeName))
         {
-            return RequestState.SignedOut(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED);
+            // Special case: if acceptsToken contains "machine_token", accept both MachineToken and MachineTokenV2
+            bool isAccepted = false;
+            if (options.AcceptsToken.Contains("machine_token") && 
+                (tokenType == TokenType.MachineToken || tokenType == TokenType.MachineTokenV2))
+            {
+                isAccepted = true;
+            }
+            
+            if (!isAccepted)
+            {
+                return RequestState.SignedOut(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED);
+            }
         }
 
         VerifyTokenOptions verifyTokenOptions;

@@ -29,6 +29,7 @@ namespace JwksHelpers.Tests
 
         [Theory]
         [InlineData("mt_1234567890abcdef", TokenType.MachineToken, true)]
+        [InlineData("m2m_1234567890abcdef", TokenType.MachineTokenV2, true)]
         [InlineData("oat_1234567890abcdef", TokenType.OAuthToken, true)]
         [InlineData("ak_1234567890abcdef", TokenType.ApiKey, true)]
         [InlineData("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...", TokenType.SessionToken, false)]
@@ -47,6 +48,7 @@ namespace JwksHelpers.Tests
 
         [Theory]
         [InlineData(TokenType.MachineToken, "/m2m_tokens/verify")]
+        [InlineData(TokenType.MachineTokenV2, "/m2m_tokens/verify")]
         [InlineData(TokenType.OAuthToken, "/oauth_applications/access_tokens/verify")]
         [InlineData(TokenType.ApiKey, "/api_keys/verify")]
         public void TestVerificationEndpoints(TokenType tokenType, string expectedEndpoint)
