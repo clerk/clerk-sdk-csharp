@@ -40,6 +40,7 @@ public static class AuthenticateRequest
         {
             TokenType.SessionToken => "session_token",
             TokenType.MachineToken => "machine_token",
+            TokenType.MachineTokenV2 => "m2m_token",
             TokenType.OAuthToken => "oauth_token",
             TokenType.ApiKey => "api_key",
             _ => tokenType.ToString().ToLowerInvariant()
@@ -48,18 +49,31 @@ public static class AuthenticateRequest
         // Check if token type is accepted
         if (!options.AcceptsToken.Contains("any") && !options.AcceptsToken.Contains(tokenTypeName))
         {
-            return RequestState.SignedOut(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED);
+            // Special case: if acceptsToken contains "machine_token", accept both MachineToken and MachineTokenV2
+            bool isAccepted = false;
+            if (options.AcceptsToken.Contains("machine_token") && 
+                (tokenType == TokenType.MachineToken || tokenType == TokenType.MachineTokenV2))
+            {
+                isAccepted = true;
+            }
+            
+            if (!isAccepted)
+            {
+                return RequestState.SignedOut(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED);
+            }
         }
 
         VerifyTokenOptions verifyTokenOptions;
 
         if (TokenTypeHelper.IsMachineToken(sessionToken))
         {
-            // Machine tokens require secret key for API verification
-            if (options.SecretKey == null)
+            if (options.SecretKey == null && options.MachineSecretKey == null)
                 return RequestState.SignedOut(AuthErrorReason.SECRET_KEY_MISSING);
 
-            verifyTokenOptions = new VerifyTokenOptions(secretKey: options.SecretKey);
+            verifyTokenOptions = new VerifyTokenOptions(
+                secretKey: options.SecretKey, 
+                machineSecretKey: options.MachineSecretKey
+            );
         }
         else
         {

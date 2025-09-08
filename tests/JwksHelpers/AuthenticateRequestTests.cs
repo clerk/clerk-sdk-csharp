@@ -424,6 +424,7 @@ namespace JwksHelpers.Tests
 
         [Theory]
         [InlineData("mt_1234567890abcdef", TokenType.MachineToken)]
+        [InlineData("m2m_1234567890abcdef", TokenType.MachineTokenV2)]
         [InlineData("oat_1234567890abcdef", TokenType.OAuthToken)]
         [InlineData("ak_1234567890abcdef", TokenType.ApiKey)]
         [InlineData("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...", TokenType.SessionToken)]
@@ -594,13 +595,58 @@ namespace JwksHelpers.Tests
             var httpContext = CreateHttpContextWithToken("mt_test_token");
             var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
 
-            // Should attempt verification (will fail due to no real HTTP client, but won't fail on secret key)
             Assert.NotEqual(AuthErrorReason.SECRET_KEY_MISSING, state.ErrorReason);
             Assert.NotEqual(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
         }
 
+        [Fact]
+        public async Task TestMachineTokenWithMachineSecretKey()
+        {
+            var arOptions = new AuthenticateRequestOptions(
+                machineSecretKey: "ms_test_machine_secret",
+                acceptsToken: new[] { "any" }
+            );
+
+            var httpContext = CreateHttpContextWithToken("mt_test_token");
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
+
+            Assert.NotEqual(AuthErrorReason.SECRET_KEY_MISSING, state.ErrorReason);
+            Assert.NotEqual(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+        }
+
+        [Fact]
+        public async Task TestMachineTokenWithBothKeys()
+        {
+            var arOptions = new AuthenticateRequestOptions(
+                secretKey: "sk_test_secret",
+                machineSecretKey: "ms_test_machine_secret",
+                acceptsToken: new[] { "any" }
+            );
+
+            var httpContext = CreateHttpContextWithToken("mt_test_token");
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
+
+            Assert.NotEqual(AuthErrorReason.SECRET_KEY_MISSING, state.ErrorReason);
+            Assert.NotEqual(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+        }
+
+        [Fact]
+        public async Task TestMachineTokenWithNoKeys()
+        {
+            var arOptions = new AuthenticateRequestOptions(
+                jwtKey: "test-jwt-key",
+                acceptsToken: new[] { "any" }
+            );
+
+            var httpContext = CreateHttpContextWithToken("mt_test_token");
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
+
+            Assert.Equal(AuthErrorReason.SECRET_KEY_MISSING, state.ErrorReason);
+        }
+
         [Theory]
         [InlineData("mt_machine_token_123")]
+        [InlineData("m2m_machine_token_123")]
         [InlineData("oat_oauth_token_123")]
         [InlineData("ak_api_key_123")]
         public async Task TestDifferentMachineTokenPrefixes(string token)
@@ -616,6 +662,109 @@ namespace JwksHelpers.Tests
             // All should be recognized as machine tokens and require secret key verification
             Assert.NotEqual(AuthErrorReason.SECRET_KEY_MISSING, state.ErrorReason);
             Assert.NotEqual(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+        }
+
+        [Fact]
+        public async Task TestM2MTokenWithSecretKey()
+        {
+            var arOptions = new AuthenticateRequestOptions(
+                secretKey: "sk_test_secret",
+                acceptsToken: new[] { "m2m_token" }
+            );
+
+            var httpContext = CreateHttpContextWithToken("m2m_test_token");
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
+
+            Assert.NotEqual(AuthErrorReason.SECRET_KEY_MISSING, state.ErrorReason);
+            Assert.NotEqual(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+        }
+
+        [Fact]
+        public async Task TestM2MTokenWithMachineSecretKey()
+        {
+            var arOptions = new AuthenticateRequestOptions(
+                machineSecretKey: "ms_test_machine_secret",
+                acceptsToken: new[] { "m2m_token" }
+            );
+
+            var httpContext = CreateHttpContextWithToken("m2m_test_token");
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
+
+            Assert.NotEqual(AuthErrorReason.SECRET_KEY_MISSING, state.ErrorReason);
+            Assert.NotEqual(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+        }
+
+        [Fact]
+        public async Task TestM2MTokenWithBothKeys()
+        {
+            var arOptions = new AuthenticateRequestOptions(
+                secretKey: "sk_test_secret",
+                machineSecretKey: "ms_test_machine_secret",
+                acceptsToken: new[] { "m2m_token" }
+            );
+
+            var httpContext = CreateHttpContextWithToken("m2m_test_token");
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
+
+            Assert.NotEqual(AuthErrorReason.SECRET_KEY_MISSING, state.ErrorReason);
+            Assert.NotEqual(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+        }
+
+        [Fact]
+        public async Task TestM2MTokenTypeAcceptance()
+        {
+            var arOptions = new AuthenticateRequestOptions(
+                secretKey: "sk_test_secret",
+                acceptsToken: new[] { "m2m_token" }
+            );
+
+            var httpContext = CreateHttpContextWithToken("m2m_test_token");
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
+
+            // Should not be rejected due to token type
+            Assert.NotEqual(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+        }
+
+        [Fact]
+        public async Task TestM2MTokenRejectedWhenNotAccepted()
+        {
+            var arOptions = new AuthenticateRequestOptions(
+                secretKey: "sk_test_secret",
+                acceptsToken: new[] { "session_token" }
+            );
+
+            var httpContext = CreateHttpContextWithToken("m2m_test_token");
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
+
+            Assert.True(state.IsSignedOut());
+            Assert.Equal(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+        }
+
+        [Theory]
+        [InlineData("m2m_test_token", new[] { "m2m_token" }, false)] // Should be accepted
+        [InlineData("m2m_test_token", new[] { "machine_token" }, false)] // Should be accepted (machine_token includes m2m_token)
+        [InlineData("m2m_test_token", new[] { "session_token" }, true)] // Should be rejected
+        [InlineData("m2m_test_token", new[] { "oauth_token", "api_key" }, true)] // Should be rejected
+        public async Task TestM2MTokenTypeFiltering(string token, string[] acceptedTypes, bool shouldBeRejected)
+        {
+            var arOptions = new AuthenticateRequestOptions(
+                secretKey: "sk_test_secret",
+                acceptsToken: acceptedTypes
+            );
+
+            var httpContext = CreateHttpContextWithToken(token);
+            var state = await AuthenticateRequest.AuthenticateRequestAsync(httpContext.Request, arOptions);
+
+            if (shouldBeRejected)
+            {
+                Assert.True(state.IsSignedOut());
+                Assert.Equal(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+            }
+            else
+            {
+                // Token type is accepted, but verification might still fail
+                Assert.NotEqual(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED, state.ErrorReason);
+            }
         }
 
         #endregion
