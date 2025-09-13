@@ -28,6 +28,16 @@ namespace Clerk.BackendAPI.Utils
             return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings(){ NullValueHandling = nullValueHandling, MissingMemberHandling = missingMemberHandling, Converters = Utilities.GetJsonDeserializers(typeof(T))});
         }
 
+        public static T DeserializeNotNull<T>(string json, NullValueHandling nullValueHandling=NullValueHandling.Ignore, MissingMemberHandling missingMemberHandling=MissingMemberHandling.Ignore)
+        {
+            var result = ResponseBodyDeserializer.Deserialize<T>(json, nullValueHandling, missingMemberHandling);
+            if (result == null)
+            {
+                throw new Exception($"Deserialization error: {typeof(T).Name} cannot be null.");
+            }
+            return result!;
+        }
+
         public sealed class MissingMemberException : Exception
         {
             public MissingMemberException() : base("Missing member.") { }

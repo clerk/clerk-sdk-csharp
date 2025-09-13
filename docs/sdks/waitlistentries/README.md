@@ -7,6 +7,7 @@
 
 * [List](#list) - List all waitlist entries
 * [Create](#create) - Create a waitlist entry
+* [Delete](#delete) - Delete a pending waitlist entry
 * [Invite](#invite) - Invite a waitlist entry
 * [Reject](#reject) - Reject a waitlist entry
 
@@ -89,6 +90,41 @@ var res = await sdk.WaitlistEntries.CreateAsync(req);
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## Delete
+
+Delete a pending waitlist entry.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="DeleteWaitlistEntry" method="delete" path="/waitlist_entries/{waitlist_entry_id}" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.WaitlistEntries.DeleteAsync(waitlistEntryId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                              | Type                                   | Required                               | Description                            |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| `WaitlistEntryId`                      | *string*                               | :heavy_check_mark:                     | The ID of the waitlist entry to delete |
+
+### Response
+
+**[DeleteWaitlistEntryResponse](../../Models/Operations/DeleteWaitlistEntryResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 409, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Invite

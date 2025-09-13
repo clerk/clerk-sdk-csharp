@@ -15,7 +15,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     /// <summary>
     /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
     /// 

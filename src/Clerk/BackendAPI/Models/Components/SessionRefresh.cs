@@ -17,17 +17,17 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class SessionRefreshType
     {
         private SessionRefreshType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static SessionRefreshType Token { get { return new SessionRefreshType("Token"); } }
-        
+
         public static SessionRefreshType Cookies { get { return new SessionRefreshType("Cookies"); } }
-        
+
         public static SessionRefreshType Null { get { return new SessionRefreshType("null"); } }
 
         public override string ToString() { return Value; }
@@ -60,8 +60,10 @@ namespace Clerk.BackendAPI.Models.Components
     /// Success
     /// </summary>
     [JsonConverter(typeof(SessionRefresh.SessionRefreshConverter))]
-    public class SessionRefresh {
-        public SessionRefresh(SessionRefreshType type) {
+    public class SessionRefresh
+    {
+        public SessionRefresh(SessionRefreshType type)
+        {
             Type = type;
         }
 
@@ -72,17 +74,16 @@ namespace Clerk.BackendAPI.Models.Components
         public Cookies? Cookies { get; set; }
 
         public SessionRefreshType Type { get; set; }
-
-
-        public static SessionRefresh CreateToken(Token token) {
+        public static SessionRefresh CreateToken(Token token)
+        {
             SessionRefreshType typ = SessionRefreshType.Token;
 
             SessionRefresh res = new SessionRefresh(typ);
             res.Token = token;
             return res;
         }
-
-        public static SessionRefresh CreateCookies(Cookies cookies) {
+        public static SessionRefresh CreateCookies(Cookies cookies)
+        {
             SessionRefreshType typ = SessionRefreshType.Cookies;
 
             SessionRefresh res = new SessionRefresh(typ);
@@ -90,7 +91,8 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static SessionRefresh CreateNull() {
+        public static SessionRefresh CreateNull()
+        {
             SessionRefreshType typ = SessionRefreshType.Null;
             return new SessionRefresh(typ);
         }
@@ -181,23 +183,25 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 SessionRefresh res = (SessionRefresh)value;
                 if (SessionRefreshType.FromString(res.Type).Equals(SessionRefreshType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Token != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Token));
                     return;
                 }
+
                 if (res.Cookies != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Cookies));
                     return;
                 }
-
             }
 
         }

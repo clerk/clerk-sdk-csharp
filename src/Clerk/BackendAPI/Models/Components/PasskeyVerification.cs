@@ -17,15 +17,15 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class PasskeyVerificationType
     {
         private PasskeyVerificationType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        
+
         public static PasskeyVerificationType VerificationPasskey { get { return new PasskeyVerificationType("verification_passkey"); } }
+
         public static PasskeyVerificationType Null { get { return new PasskeyVerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -54,8 +54,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(PasskeyVerification.PasskeyVerificationConverter))]
-    public class PasskeyVerification {
-        public PasskeyVerification(PasskeyVerificationType type) {
+    public class PasskeyVerification
+    {
+        public PasskeyVerification(PasskeyVerificationType type)
+        {
             Type = type;
         }
 
@@ -64,18 +66,18 @@ namespace Clerk.BackendAPI.Models.Components
 
         public PasskeyVerificationType Type { get; set; }
 
-
-        public static PasskeyVerification CreateVerificationPasskey(VerificationPasskey verificationPasskey) {
+        public static PasskeyVerification CreateVerificationPasskey(VerificationPasskey verificationPasskey)
+        {
             PasskeyVerificationType typ = PasskeyVerificationType.VerificationPasskey;
-        
             string typStr = PasskeyVerificationType.VerificationPasskey.ToString();
-            
             verificationPasskey.Object = VerificationPasskeyVerificationObjectExtension.ToEnum(PasskeyVerificationType.VerificationPasskey.ToString());
             PasskeyVerification res = new PasskeyVerification(typ);
             res.VerificationPasskey = verificationPasskey;
             return res;
         }
-        public static PasskeyVerification CreateNull() {
+
+        public static PasskeyVerification CreateNull()
+        {
             PasskeyVerificationType typ = PasskeyVerificationType.Null;
             return new PasskeyVerification(typ);
         }
@@ -93,8 +95,8 @@ namespace Clerk.BackendAPI.Models.Components
                 string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
                 if (discriminator == PasskeyVerificationType.VerificationPasskey.ToString())
                 {
-                    VerificationPasskey? verificationPasskey = ResponseBodyDeserializer.Deserialize<VerificationPasskey>(jo.ToString());
-                    return CreateVerificationPasskey(verificationPasskey!);
+                    VerificationPasskey verificationPasskey = ResponseBodyDeserializer.DeserializeNotNull<VerificationPasskey>(jo.ToString());
+                    return CreateVerificationPasskey(verificationPasskey);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
@@ -106,18 +108,19 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 PasskeyVerification res = (PasskeyVerification)value;
                 if (PasskeyVerificationType.FromString(res.Type).Equals(PasskeyVerificationType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.VerificationPasskey != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationPasskey));
                     return;
                 }
-
             }
 
         }

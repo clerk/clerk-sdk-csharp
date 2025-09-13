@@ -17,15 +17,15 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class VerificationErrorType
     {
         private VerificationErrorType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static VerificationErrorType VerificationSamlErrorClerkError { get { return new VerificationErrorType("verification_saml_error_ClerkError"); } }
-        
+
         public static VerificationErrorType Null { get { return new VerificationErrorType("null"); } }
 
         public override string ToString() { return Value; }
@@ -54,8 +54,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(VerificationError.VerificationErrorConverter))]
-    public class VerificationError {
-        public VerificationError(VerificationErrorType type) {
+    public class VerificationError
+    {
+        public VerificationError(VerificationErrorType type)
+        {
             Type = type;
         }
 
@@ -63,9 +65,8 @@ namespace Clerk.BackendAPI.Models.Components
         public VerificationSamlErrorClerkError? VerificationSamlErrorClerkError { get; set; }
 
         public VerificationErrorType Type { get; set; }
-
-
-        public static VerificationError CreateVerificationSamlErrorClerkError(VerificationSamlErrorClerkError verificationSamlErrorClerkError) {
+        public static VerificationError CreateVerificationSamlErrorClerkError(VerificationSamlErrorClerkError verificationSamlErrorClerkError)
+        {
             VerificationErrorType typ = VerificationErrorType.VerificationSamlErrorClerkError;
 
             VerificationError res = new VerificationError(typ);
@@ -73,7 +74,8 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static VerificationError CreateNull() {
+        public static VerificationError CreateNull()
+        {
             VerificationErrorType typ = VerificationErrorType.Null;
             return new VerificationError(typ);
         }
@@ -144,18 +146,19 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 VerificationError res = (VerificationError)value;
                 if (VerificationErrorType.FromString(res.Type).Equals(VerificationErrorType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.VerificationSamlErrorClerkError != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationSamlErrorClerkError));
                     return;
                 }
-
             }
 
         }

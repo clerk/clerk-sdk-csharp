@@ -17,17 +17,17 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class SchemasSAMLConnectionType
     {
         private SchemasSAMLConnectionType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static SchemasSAMLConnectionType One { get { return new SchemasSAMLConnectionType("1"); } }
-        
+
         public static SchemasSAMLConnectionType Two { get { return new SchemasSAMLConnectionType("2"); } }
-        
+
         public static SchemasSAMLConnectionType Null { get { return new SchemasSAMLConnectionType("null"); } }
 
         public override string ToString() { return Value; }
@@ -57,8 +57,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(SchemasSAMLConnection.SchemasSAMLConnectionConverter))]
-    public class SchemasSAMLConnection {
-        public SchemasSAMLConnection(SchemasSAMLConnectionType type) {
+    public class SchemasSAMLConnection
+    {
+        public SchemasSAMLConnection(SchemasSAMLConnectionType type)
+        {
             Type = type;
         }
 
@@ -69,17 +71,16 @@ namespace Clerk.BackendAPI.Models.Components
         public Models.Components.Two? Two { get; set; }
 
         public SchemasSAMLConnectionType Type { get; set; }
-
-
-        public static SchemasSAMLConnection CreateOne(Models.Components.One one) {
+        public static SchemasSAMLConnection CreateOne(Models.Components.One one)
+        {
             SchemasSAMLConnectionType typ = SchemasSAMLConnectionType.One;
 
             SchemasSAMLConnection res = new SchemasSAMLConnection(typ);
             res.One = one;
             return res;
         }
-
-        public static SchemasSAMLConnection CreateTwo(Models.Components.Two two) {
+        public static SchemasSAMLConnection CreateTwo(Models.Components.Two two)
+        {
             SchemasSAMLConnectionType typ = SchemasSAMLConnectionType.Two;
 
             SchemasSAMLConnection res = new SchemasSAMLConnection(typ);
@@ -87,7 +88,8 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static SchemasSAMLConnection CreateNull() {
+        public static SchemasSAMLConnection CreateNull()
+        {
             SchemasSAMLConnectionType typ = SchemasSAMLConnectionType.Null;
             return new SchemasSAMLConnection(typ);
         }
@@ -178,23 +180,25 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 SchemasSAMLConnection res = (SchemasSAMLConnection)value;
                 if (SchemasSAMLConnectionType.FromString(res.Type).Equals(SchemasSAMLConnectionType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.One != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.One));
                     return;
                 }
+
                 if (res.Two != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Two));
                     return;
                 }
-
             }
 
         }
