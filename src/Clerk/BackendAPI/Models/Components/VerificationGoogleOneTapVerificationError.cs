@@ -17,15 +17,15 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class VerificationGoogleOneTapVerificationErrorType
     {
         private VerificationGoogleOneTapVerificationErrorType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static VerificationGoogleOneTapVerificationErrorType VerificationGoogleOneTapErrorClerkError { get { return new VerificationGoogleOneTapVerificationErrorType("verification_google_one_tap_error_ClerkError"); } }
-        
+
         public static VerificationGoogleOneTapVerificationErrorType Null { get { return new VerificationGoogleOneTapVerificationErrorType("null"); } }
 
         public override string ToString() { return Value; }
@@ -54,8 +54,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(VerificationGoogleOneTapVerificationError.VerificationGoogleOneTapVerificationErrorConverter))]
-    public class VerificationGoogleOneTapVerificationError {
-        public VerificationGoogleOneTapVerificationError(VerificationGoogleOneTapVerificationErrorType type) {
+    public class VerificationGoogleOneTapVerificationError
+    {
+        public VerificationGoogleOneTapVerificationError(VerificationGoogleOneTapVerificationErrorType type)
+        {
             Type = type;
         }
 
@@ -63,9 +65,8 @@ namespace Clerk.BackendAPI.Models.Components
         public VerificationGoogleOneTapErrorClerkError? VerificationGoogleOneTapErrorClerkError { get; set; }
 
         public VerificationGoogleOneTapVerificationErrorType Type { get; set; }
-
-
-        public static VerificationGoogleOneTapVerificationError CreateVerificationGoogleOneTapErrorClerkError(VerificationGoogleOneTapErrorClerkError verificationGoogleOneTapErrorClerkError) {
+        public static VerificationGoogleOneTapVerificationError CreateVerificationGoogleOneTapErrorClerkError(VerificationGoogleOneTapErrorClerkError verificationGoogleOneTapErrorClerkError)
+        {
             VerificationGoogleOneTapVerificationErrorType typ = VerificationGoogleOneTapVerificationErrorType.VerificationGoogleOneTapErrorClerkError;
 
             VerificationGoogleOneTapVerificationError res = new VerificationGoogleOneTapVerificationError(typ);
@@ -73,7 +74,8 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static VerificationGoogleOneTapVerificationError CreateNull() {
+        public static VerificationGoogleOneTapVerificationError CreateNull()
+        {
             VerificationGoogleOneTapVerificationErrorType typ = VerificationGoogleOneTapVerificationErrorType.Null;
             return new VerificationGoogleOneTapVerificationError(typ);
         }
@@ -144,18 +146,19 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 VerificationGoogleOneTapVerificationError res = (VerificationGoogleOneTapVerificationError)value;
                 if (VerificationGoogleOneTapVerificationErrorType.FromString(res.Type).Equals(VerificationGoogleOneTapVerificationErrorType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.VerificationGoogleOneTapErrorClerkError != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationGoogleOneTapErrorClerkError));
                     return;
                 }
-
             }
 
         }

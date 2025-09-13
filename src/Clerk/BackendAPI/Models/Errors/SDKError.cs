@@ -6,28 +6,23 @@
 // the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 #nullable enable
 namespace Clerk.BackendAPI.Models.Errors
 {
     using System;
     using System.Net.Http;
 
-    public class SDKError : Exception
+    public class SDKError : SDKBaseError
     {
-
-        public override string Message { get; }
-        public HttpRequestMessage Request { get; set; }
-        public HttpResponseMessage Response { get; set; }
-        public SDKError(string message, HttpRequestMessage request, HttpResponseMessage response)
-        {
-            Message = message;
-            Request = request;
-            Response = response;
-        }
-
-        public override string ToString(){
-            return Message + ": Status " + Response.StatusCode;
-        }
-
+        /// <summary>
+        /// Default API exception.
+        /// </summary>
+        public SDKError(
+            string message,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            string body
+        ): base(message, request, response, body) {}
     }
 }

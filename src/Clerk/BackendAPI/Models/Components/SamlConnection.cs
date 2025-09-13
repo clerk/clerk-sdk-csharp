@@ -17,15 +17,15 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class SamlConnectionType
     {
         private SamlConnectionType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static SamlConnectionType SAMLConnectionSAMLConnection { get { return new SamlConnectionType("saml_connection_SAMLConnection"); } }
-        
+
         public static SamlConnectionType Null { get { return new SamlConnectionType("null"); } }
 
         public override string ToString() { return Value; }
@@ -54,8 +54,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(SamlConnection.SamlConnectionConverter))]
-    public class SamlConnection {
-        public SamlConnection(SamlConnectionType type) {
+    public class SamlConnection
+    {
+        public SamlConnection(SamlConnectionType type)
+        {
             Type = type;
         }
 
@@ -63,9 +65,8 @@ namespace Clerk.BackendAPI.Models.Components
         public SAMLConnectionSAMLConnection? SAMLConnectionSAMLConnection { get; set; }
 
         public SamlConnectionType Type { get; set; }
-
-
-        public static SamlConnection CreateSAMLConnectionSAMLConnection(SAMLConnectionSAMLConnection samlConnectionSAMLConnection) {
+        public static SamlConnection CreateSAMLConnectionSAMLConnection(SAMLConnectionSAMLConnection samlConnectionSAMLConnection)
+        {
             SamlConnectionType typ = SamlConnectionType.SAMLConnectionSAMLConnection;
 
             SamlConnection res = new SamlConnection(typ);
@@ -73,7 +74,8 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static SamlConnection CreateNull() {
+        public static SamlConnection CreateNull()
+        {
             SamlConnectionType typ = SamlConnectionType.Null;
             return new SamlConnection(typ);
         }
@@ -144,18 +146,19 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 SamlConnection res = (SamlConnection)value;
                 if (SamlConnectionType.FromString(res.Type).Equals(SamlConnectionType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.SAMLConnectionSAMLConnection != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.SAMLConnectionSAMLConnection));
                     return;
                 }
-
             }
 
         }

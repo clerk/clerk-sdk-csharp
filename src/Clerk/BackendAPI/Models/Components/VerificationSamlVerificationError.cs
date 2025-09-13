@@ -17,15 +17,15 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class VerificationSamlVerificationErrorType
     {
         private VerificationSamlVerificationErrorType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static VerificationSamlVerificationErrorType VerificationSAMLErrorSAMLAccountClerkError { get { return new VerificationSamlVerificationErrorType("verification_saml_error_SAMLAccount_ClerkError"); } }
-        
+
         public static VerificationSamlVerificationErrorType Null { get { return new VerificationSamlVerificationErrorType("null"); } }
 
         public override string ToString() { return Value; }
@@ -54,8 +54,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(VerificationSamlVerificationError.VerificationSamlVerificationErrorConverter))]
-    public class VerificationSamlVerificationError {
-        public VerificationSamlVerificationError(VerificationSamlVerificationErrorType type) {
+    public class VerificationSamlVerificationError
+    {
+        public VerificationSamlVerificationError(VerificationSamlVerificationErrorType type)
+        {
             Type = type;
         }
 
@@ -63,9 +65,8 @@ namespace Clerk.BackendAPI.Models.Components
         public VerificationSAMLErrorSAMLAccountClerkError? VerificationSAMLErrorSAMLAccountClerkError { get; set; }
 
         public VerificationSamlVerificationErrorType Type { get; set; }
-
-
-        public static VerificationSamlVerificationError CreateVerificationSAMLErrorSAMLAccountClerkError(VerificationSAMLErrorSAMLAccountClerkError verificationSAMLErrorSAMLAccountClerkError) {
+        public static VerificationSamlVerificationError CreateVerificationSAMLErrorSAMLAccountClerkError(VerificationSAMLErrorSAMLAccountClerkError verificationSAMLErrorSAMLAccountClerkError)
+        {
             VerificationSamlVerificationErrorType typ = VerificationSamlVerificationErrorType.VerificationSAMLErrorSAMLAccountClerkError;
 
             VerificationSamlVerificationError res = new VerificationSamlVerificationError(typ);
@@ -73,7 +74,8 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static VerificationSamlVerificationError CreateNull() {
+        public static VerificationSamlVerificationError CreateNull()
+        {
             VerificationSamlVerificationErrorType typ = VerificationSamlVerificationErrorType.Null;
             return new VerificationSamlVerificationError(typ);
         }
@@ -144,18 +146,19 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 VerificationSamlVerificationError res = (VerificationSamlVerificationError)value;
                 if (VerificationSamlVerificationErrorType.FromString(res.Type).Equals(VerificationSamlVerificationErrorType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.VerificationSAMLErrorSAMLAccountClerkError != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationSAMLErrorSAMLAccountClerkError));
                     return;
                 }
-
             }
 
         }

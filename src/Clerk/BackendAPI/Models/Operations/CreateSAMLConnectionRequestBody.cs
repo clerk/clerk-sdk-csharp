@@ -17,17 +17,17 @@ namespace Clerk.BackendAPI.Models.Operations
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class CreateSAMLConnectionRequestBodyType
     {
         private CreateSAMLConnectionRequestBodyType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static CreateSAMLConnectionRequestBodyType One { get { return new CreateSAMLConnectionRequestBodyType("1"); } }
-        
+
         public static CreateSAMLConnectionRequestBodyType Two { get { return new CreateSAMLConnectionRequestBodyType("2"); } }
-        
+
         public static CreateSAMLConnectionRequestBodyType Null { get { return new CreateSAMLConnectionRequestBodyType("null"); } }
 
         public override string ToString() { return Value; }
@@ -57,8 +57,10 @@ namespace Clerk.BackendAPI.Models.Operations
 
 
     [JsonConverter(typeof(CreateSAMLConnectionRequestBody.CreateSAMLConnectionRequestBodyConverter))]
-    public class CreateSAMLConnectionRequestBody {
-        public CreateSAMLConnectionRequestBody(CreateSAMLConnectionRequestBodyType type) {
+    public class CreateSAMLConnectionRequestBody
+    {
+        public CreateSAMLConnectionRequestBody(CreateSAMLConnectionRequestBodyType type)
+        {
             Type = type;
         }
 
@@ -69,17 +71,16 @@ namespace Clerk.BackendAPI.Models.Operations
         public Models.Operations.Two? Two { get; set; }
 
         public CreateSAMLConnectionRequestBodyType Type { get; set; }
-
-
-        public static CreateSAMLConnectionRequestBody CreateOne(Models.Operations.One one) {
+        public static CreateSAMLConnectionRequestBody CreateOne(Models.Operations.One one)
+        {
             CreateSAMLConnectionRequestBodyType typ = CreateSAMLConnectionRequestBodyType.One;
 
             CreateSAMLConnectionRequestBody res = new CreateSAMLConnectionRequestBody(typ);
             res.One = one;
             return res;
         }
-
-        public static CreateSAMLConnectionRequestBody CreateTwo(Models.Operations.Two two) {
+        public static CreateSAMLConnectionRequestBody CreateTwo(Models.Operations.Two two)
+        {
             CreateSAMLConnectionRequestBodyType typ = CreateSAMLConnectionRequestBodyType.Two;
 
             CreateSAMLConnectionRequestBody res = new CreateSAMLConnectionRequestBody(typ);
@@ -87,7 +88,8 @@ namespace Clerk.BackendAPI.Models.Operations
             return res;
         }
 
-        public static CreateSAMLConnectionRequestBody CreateNull() {
+        public static CreateSAMLConnectionRequestBody CreateNull()
+        {
             CreateSAMLConnectionRequestBodyType typ = CreateSAMLConnectionRequestBodyType.Null;
             return new CreateSAMLConnectionRequestBody(typ);
         }
@@ -178,23 +180,25 @@ namespace Clerk.BackendAPI.Models.Operations
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 CreateSAMLConnectionRequestBody res = (CreateSAMLConnectionRequestBody)value;
                 if (CreateSAMLConnectionRequestBodyType.FromString(res.Type).Equals(CreateSAMLConnectionRequestBodyType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.One != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.One));
                     return;
                 }
+
                 if (res.Two != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Two));
                     return;
                 }
-
             }
 
         }

@@ -15,17 +15,47 @@ namespace Clerk.BackendAPI.Models.Errors
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
-    /// <summary>
-    /// 403 Forbidden
-    /// </summary>
-    public class GetM2MTokensM2mResponseBody : Exception
-    {
+    using System.Net.Http;
 
+    public class GetM2MTokensM2mResponseBodyPayload
+    {
         [JsonProperty("errors")]
         public List<GetM2MTokensM2mErrors> Errors { get; set; } = default!;
 
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
     }
+
+    /// <summary>
+    /// 403 Forbidden
+    /// </summary>
+    public class GetM2MTokensM2mResponseBody : SDKBaseError
+    {
+        /// <summary>
+        ///  The original data that was passed to this exception.
+        /// </summary>
+        public GetM2MTokensM2mResponseBodyPayload Payload { get; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use GetM2MTokensM2mResponseBody.Payload.Errors instead.")]
+        public List<GetM2MTokensM2mErrors> Errors { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use GetM2MTokensM2mResponseBody.Payload.HttpMeta instead.")]
+        public HTTPMetadata HttpMeta { get; set; } = default!;
+
+        public GetM2MTokensM2mResponseBody(
+            GetM2MTokensM2mResponseBodyPayload payload,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            string body
+        ): base("API error occurred", request, response, body)
+        {
+           Payload = payload;
+
+           #pragma warning disable CS0618
+           Errors = payload.Errors;
+           HttpMeta = payload.HttpMeta;
+           #pragma warning restore CS0618
+        }
+    }
+
 }

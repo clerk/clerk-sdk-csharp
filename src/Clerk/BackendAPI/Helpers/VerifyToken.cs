@@ -262,7 +262,7 @@ public static class VerifyToken
         var verificationUrl = $"{options.ApiUrl}/{options.ApiVersion}{endpoint}";
 
         using var client = new HttpClient();
-        
+
         var authToken = options.SecretKey ?? options.MachineSecretKey;
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

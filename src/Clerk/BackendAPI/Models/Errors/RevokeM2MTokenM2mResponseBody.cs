@@ -15,17 +15,47 @@ namespace Clerk.BackendAPI.Models.Errors
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
-    /// <summary>
-    /// 404 Not Found
-    /// </summary>
-    public class RevokeM2MTokenM2mResponseBody : Exception
-    {
+    using System.Net.Http;
 
+    public class RevokeM2MTokenM2mResponseBodyPayload
+    {
         [JsonProperty("errors")]
         public List<RevokeM2MTokenM2mErrors> Errors { get; set; } = default!;
 
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
     }
+
+    /// <summary>
+    /// 404 Not Found
+    /// </summary>
+    public class RevokeM2MTokenM2mResponseBody : SDKBaseError
+    {
+        /// <summary>
+        ///  The original data that was passed to this exception.
+        /// </summary>
+        public RevokeM2MTokenM2mResponseBodyPayload Payload { get; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use RevokeM2MTokenM2mResponseBody.Payload.Errors instead.")]
+        public List<RevokeM2MTokenM2mErrors> Errors { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use RevokeM2MTokenM2mResponseBody.Payload.HttpMeta instead.")]
+        public HTTPMetadata HttpMeta { get; set; } = default!;
+
+        public RevokeM2MTokenM2mResponseBody(
+            RevokeM2MTokenM2mResponseBodyPayload payload,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            string body
+        ): base("API error occurred", request, response, body)
+        {
+           Payload = payload;
+
+           #pragma warning disable CS0618
+           Errors = payload.Errors;
+           HttpMeta = payload.HttpMeta;
+           #pragma warning restore CS0618
+        }
+    }
+
 }
