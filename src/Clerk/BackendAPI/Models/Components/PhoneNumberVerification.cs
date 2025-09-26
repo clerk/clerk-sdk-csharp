@@ -17,16 +17,17 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class PhoneNumberVerificationType
     {
         private PhoneNumberVerificationType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        
+
         public static PhoneNumberVerificationType VerificationOtp { get { return new PhoneNumberVerificationType("verification_otp"); } }
+
         public static PhoneNumberVerificationType VerificationAdmin { get { return new PhoneNumberVerificationType("verification_admin"); } }
+
         public static PhoneNumberVerificationType Null { get { return new PhoneNumberVerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -56,8 +57,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(PhoneNumberVerification.PhoneNumberVerificationConverter))]
-    public class PhoneNumberVerification {
-        public PhoneNumberVerification(PhoneNumberVerificationType type) {
+    public class PhoneNumberVerification
+    {
+        public PhoneNumberVerification(PhoneNumberVerificationType type)
+        {
             Type = type;
         }
 
@@ -69,52 +72,56 @@ namespace Clerk.BackendAPI.Models.Components
 
         public PhoneNumberVerificationType Type { get; set; }
 
-
-        public static PhoneNumberVerification CreateVerificationOtp(VerificationOTP verificationOtp) {
+        public static PhoneNumberVerification CreateVerificationOtp(VerificationOTP verificationOtp)
+        {
             PhoneNumberVerificationType typ = PhoneNumberVerificationType.VerificationOtp;
-        
             string typStr = PhoneNumberVerificationType.VerificationOtp.ToString();
-            
             verificationOtp.Object = VerificationOtpVerificationObjectExtension.ToEnum(PhoneNumberVerificationType.VerificationOtp.ToString());
             PhoneNumberVerification res = new PhoneNumberVerification(typ);
             res.VerificationOTP = verificationOtp;
             return res;
         }
-        public static PhoneNumberVerification CreateVerificationAdmin(VerificationAdmin verificationAdmin) {
+
+        public static PhoneNumberVerification CreateVerificationAdmin(VerificationAdmin verificationAdmin)
+        {
             PhoneNumberVerificationType typ = PhoneNumberVerificationType.VerificationAdmin;
-        
             string typStr = PhoneNumberVerificationType.VerificationAdmin.ToString();
-            
             verificationAdmin.Object = VerificationAdminVerificationPhoneNumberObjectExtension.ToEnum(PhoneNumberVerificationType.VerificationAdmin.ToString());
             PhoneNumberVerification res = new PhoneNumberVerification(typ);
             res.VerificationAdmin = verificationAdmin;
             return res;
         }
-        public static PhoneNumberVerification CreateNull() {
+
+        public static PhoneNumberVerification CreateNull()
+        {
             PhoneNumberVerificationType typ = PhoneNumberVerificationType.Null;
             return new PhoneNumberVerification(typ);
         }
 
         public class PhoneNumberVerificationConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(PhoneNumberVerification);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return null;
+                }
+
                 JObject jo = JObject.Load(reader);
                 string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
                 if (discriminator == PhoneNumberVerificationType.VerificationOtp.ToString())
                 {
-                    VerificationOTP? verificationOTP = ResponseBodyDeserializer.Deserialize<VerificationOTP>(jo.ToString());
-                    return CreateVerificationOtp(verificationOTP!);
+                    VerificationOTP verificationOTP = ResponseBodyDeserializer.DeserializeNotNull<VerificationOTP>(jo.ToString());
+                    return CreateVerificationOtp(verificationOTP);
                 }
                 if (discriminator == PhoneNumberVerificationType.VerificationAdmin.ToString())
                 {
-                    VerificationAdmin? verificationAdmin = ResponseBodyDeserializer.Deserialize<VerificationAdmin>(jo.ToString());
-                    return CreateVerificationAdmin(verificationAdmin!);
+                    VerificationAdmin verificationAdmin = ResponseBodyDeserializer.DeserializeNotNull<VerificationAdmin>(jo.ToString());
+                    return CreateVerificationAdmin(verificationAdmin);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
@@ -122,27 +129,30 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
+                if (value == null)
+                {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 PhoneNumberVerification res = (PhoneNumberVerification)value;
                 if (PhoneNumberVerificationType.FromString(res.Type).Equals(PhoneNumberVerificationType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.VerificationOTP != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationOTP));
                     return;
                 }
+
                 if (res.VerificationAdmin != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationAdmin));
                     return;
                 }
-
             }
 
         }

@@ -17,17 +17,17 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class SAMLConnectionSAMLConnectionType
     {
         private SAMLConnectionSAMLConnectionType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static SAMLConnectionSAMLConnectionType SAMLConnection1 { get { return new SAMLConnectionSAMLConnectionType("SAMLConnection_1"); } }
-        
+
         public static SAMLConnectionSAMLConnectionType SAMLConnection2 { get { return new SAMLConnectionSAMLConnectionType("SAMLConnection_2"); } }
-        
+
         public static SAMLConnectionSAMLConnectionType Null { get { return new SAMLConnectionSAMLConnectionType("null"); } }
 
         public override string ToString() { return Value; }
@@ -57,8 +57,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(SAMLConnectionSAMLConnection.SAMLConnectionSAMLConnectionConverter))]
-    public class SAMLConnectionSAMLConnection {
-        public SAMLConnectionSAMLConnection(SAMLConnectionSAMLConnectionType type) {
+    public class SAMLConnectionSAMLConnection
+    {
+        public SAMLConnectionSAMLConnection(SAMLConnectionSAMLConnectionType type)
+        {
             Type = type;
         }
 
@@ -69,17 +71,16 @@ namespace Clerk.BackendAPI.Models.Components
         public SAMLConnection2? SAMLConnection2 { get; set; }
 
         public SAMLConnectionSAMLConnectionType Type { get; set; }
-
-
-        public static SAMLConnectionSAMLConnection CreateSAMLConnection1(SAMLConnection1 samlConnection1) {
+        public static SAMLConnectionSAMLConnection CreateSAMLConnection1(SAMLConnection1 samlConnection1)
+        {
             SAMLConnectionSAMLConnectionType typ = SAMLConnectionSAMLConnectionType.SAMLConnection1;
 
             SAMLConnectionSAMLConnection res = new SAMLConnectionSAMLConnection(typ);
             res.SAMLConnection1 = samlConnection1;
             return res;
         }
-
-        public static SAMLConnectionSAMLConnection CreateSAMLConnection2(SAMLConnection2 samlConnection2) {
+        public static SAMLConnectionSAMLConnection CreateSAMLConnection2(SAMLConnection2 samlConnection2)
+        {
             SAMLConnectionSAMLConnectionType typ = SAMLConnectionSAMLConnectionType.SAMLConnection2;
 
             SAMLConnectionSAMLConnection res = new SAMLConnectionSAMLConnection(typ);
@@ -87,26 +88,26 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static SAMLConnectionSAMLConnection CreateNull() {
+        public static SAMLConnectionSAMLConnection CreateNull()
+        {
             SAMLConnectionSAMLConnectionType typ = SAMLConnectionSAMLConnectionType.Null;
             return new SAMLConnectionSAMLConnection(typ);
         }
 
         public class SAMLConnectionSAMLConnectionConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(SAMLConnectionSAMLConnection);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                if (reader.TokenType == JsonToken.Null)
                 {
                     return null;
                 }
 
+                var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
 
                 try
@@ -174,27 +175,30 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
+                if (value == null)
+                {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 SAMLConnectionSAMLConnection res = (SAMLConnectionSAMLConnection)value;
                 if (SAMLConnectionSAMLConnectionType.FromString(res.Type).Equals(SAMLConnectionSAMLConnectionType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.SAMLConnection1 != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.SAMLConnection1));
                     return;
                 }
+
                 if (res.SAMLConnection2 != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.SAMLConnection2));
                     return;
                 }
-
             }
 
         }

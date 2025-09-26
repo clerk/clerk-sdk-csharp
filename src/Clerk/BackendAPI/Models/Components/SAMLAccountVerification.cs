@@ -17,16 +17,17 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class SAMLAccountVerificationType
     {
         private SAMLAccountVerificationType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        
+
         public static SAMLAccountVerificationType VerificationSaml { get { return new SAMLAccountVerificationType("verification_saml"); } }
+
         public static SAMLAccountVerificationType VerificationTicket { get { return new SAMLAccountVerificationType("verification_ticket"); } }
+
         public static SAMLAccountVerificationType Null { get { return new SAMLAccountVerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -56,8 +57,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(SAMLAccountVerification.SAMLAccountVerificationConverter))]
-    public class SAMLAccountVerification {
-        public SAMLAccountVerification(SAMLAccountVerificationType type) {
+    public class SAMLAccountVerification
+    {
+        public SAMLAccountVerification(SAMLAccountVerificationType type)
+        {
             Type = type;
         }
 
@@ -69,52 +72,56 @@ namespace Clerk.BackendAPI.Models.Components
 
         public SAMLAccountVerificationType Type { get; set; }
 
-
-        public static SAMLAccountVerification CreateVerificationSaml(VerificationSAML verificationSaml) {
+        public static SAMLAccountVerification CreateVerificationSaml(VerificationSAML verificationSaml)
+        {
             SAMLAccountVerificationType typ = SAMLAccountVerificationType.VerificationSaml;
-        
             string typStr = SAMLAccountVerificationType.VerificationSaml.ToString();
-            
             verificationSaml.Object = VerificationSAMLVerificationSAMLAccountObjectExtension.ToEnum(SAMLAccountVerificationType.VerificationSaml.ToString());
             SAMLAccountVerification res = new SAMLAccountVerification(typ);
             res.VerificationSAML = verificationSaml;
             return res;
         }
-        public static SAMLAccountVerification CreateVerificationTicket(VerificationTicket verificationTicket) {
+
+        public static SAMLAccountVerification CreateVerificationTicket(VerificationTicket verificationTicket)
+        {
             SAMLAccountVerificationType typ = SAMLAccountVerificationType.VerificationTicket;
-        
             string typStr = SAMLAccountVerificationType.VerificationTicket.ToString();
-            
             verificationTicket.Object = VerificationTicketVerificationSAMLAccountObjectExtension.ToEnum(SAMLAccountVerificationType.VerificationTicket.ToString());
             SAMLAccountVerification res = new SAMLAccountVerification(typ);
             res.VerificationTicket = verificationTicket;
             return res;
         }
-        public static SAMLAccountVerification CreateNull() {
+
+        public static SAMLAccountVerification CreateNull()
+        {
             SAMLAccountVerificationType typ = SAMLAccountVerificationType.Null;
             return new SAMLAccountVerification(typ);
         }
 
         public class SAMLAccountVerificationConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(SAMLAccountVerification);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return null;
+                }
+
                 JObject jo = JObject.Load(reader);
                 string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
                 if (discriminator == SAMLAccountVerificationType.VerificationSaml.ToString())
                 {
-                    VerificationSAML? verificationSAML = ResponseBodyDeserializer.Deserialize<VerificationSAML>(jo.ToString());
-                    return CreateVerificationSaml(verificationSAML!);
+                    VerificationSAML verificationSAML = ResponseBodyDeserializer.DeserializeNotNull<VerificationSAML>(jo.ToString());
+                    return CreateVerificationSaml(verificationSAML);
                 }
                 if (discriminator == SAMLAccountVerificationType.VerificationTicket.ToString())
                 {
-                    VerificationTicket? verificationTicket = ResponseBodyDeserializer.Deserialize<VerificationTicket>(jo.ToString());
-                    return CreateVerificationTicket(verificationTicket!);
+                    VerificationTicket verificationTicket = ResponseBodyDeserializer.DeserializeNotNull<VerificationTicket>(jo.ToString());
+                    return CreateVerificationTicket(verificationTicket);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
@@ -122,27 +129,30 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
+                if (value == null)
+                {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 SAMLAccountVerification res = (SAMLAccountVerification)value;
                 if (SAMLAccountVerificationType.FromString(res.Type).Equals(SAMLAccountVerificationType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.VerificationSAML != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationSAML));
                     return;
                 }
+
                 if (res.VerificationTicket != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationTicket));
                     return;
                 }
-
             }
 
         }

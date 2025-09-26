@@ -17,15 +17,15 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class ErrorType
     {
         private ErrorType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static ErrorType ErrorClerkError { get { return new ErrorType("error_ClerkError"); } }
-        
+
         public static ErrorType Null { get { return new ErrorType("null"); } }
 
         public override string ToString() { return Value; }
@@ -54,8 +54,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(Error.ErrorConverter))]
-    public class Error {
-        public Error(ErrorType type) {
+    public class Error
+    {
+        public Error(ErrorType type)
+        {
             Type = type;
         }
 
@@ -63,9 +65,8 @@ namespace Clerk.BackendAPI.Models.Components
         public ErrorClerkError? ErrorClerkError { get; set; }
 
         public ErrorType Type { get; set; }
-
-
-        public static Error CreateErrorClerkError(ErrorClerkError errorClerkError) {
+        public static Error CreateErrorClerkError(ErrorClerkError errorClerkError)
+        {
             ErrorType typ = ErrorType.ErrorClerkError;
 
             Error res = new Error(typ);
@@ -73,26 +74,26 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static Error CreateNull() {
+        public static Error CreateNull()
+        {
             ErrorType typ = ErrorType.Null;
             return new Error(typ);
         }
 
         public class ErrorConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(Error);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                if (reader.TokenType == JsonToken.Null)
                 {
                     return null;
                 }
 
+                var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
 
                 try
@@ -140,22 +141,24 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
+                if (value == null)
+                {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 Error res = (Error)value;
                 if (ErrorType.FromString(res.Type).Equals(ErrorType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.ErrorClerkError != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ErrorClerkError));
                     return;
                 }
-
             }
 
         }

@@ -8,6 +8,7 @@
 * [ListPlans](#listplans) - List all commerce plans
 * [ListSubscriptionItems](#listsubscriptionitems) - List all subscription items
 * [CancelSubscriptionItem](#cancelsubscriptionitem) - Cancel a subscription item
+* [ExtendSubscriptionItemFreeTrial](#extendsubscriptionitemfreetrial) - Extend free trial for a subscription item
 
 ## ListPlans
 
@@ -126,6 +127,52 @@ var res = await sdk.Commerce.CancelSubscriptionItemAsync(
 ### Response
 
 **[CancelCommerceSubscriptionItemResponse](../../Models/Operations/CancelCommerceSubscriptionItemResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ExtendSubscriptionItemFreeTrial
+
+Extends the free trial period for a specific subscription item to the specified timestamp.
+The subscription item must be currently in a free trial period, and the plan must support free trials.
+The timestamp must be in the future and not more than 365 days from the end of the current trial period
+This operation is idempotent - repeated requests with the same timestamp will not change the trial period.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="ExtendCommerceSubscriptionItemFreeTrial" method="post" path="/billing/subscription_items/{subscription_item_id}/extend_free_trial" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using System;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Commerce.ExtendSubscriptionItemFreeTrialAsync(
+    subscriptionItemId: "<id>",
+    extendFreeTrialRequest: new ExtendFreeTrialRequest() {
+        ExtendTo = System.DateTime.Parse("2026-01-08T00:00:00Z"),
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `SubscriptionItemId`                                                        | *string*                                                                    | :heavy_check_mark:                                                          | The ID of the subscription item to extend the free trial for                |
+| `ExtendFreeTrialRequest`                                                    | [ExtendFreeTrialRequest](../../Models/Components/ExtendFreeTrialRequest.md) | :heavy_check_mark:                                                          | Parameters for extending the free trial                                     |
+
+### Response
+
+**[ExtendCommerceSubscriptionItemFreeTrialResponse](../../Models/Operations/ExtendCommerceSubscriptionItemFreeTrialResponse.md)**
 
 ### Errors
 

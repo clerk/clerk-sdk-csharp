@@ -15,17 +15,47 @@ namespace Clerk.BackendAPI.Models.Errors
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
-    /// <summary>
-    /// Request was not successful
-    /// </summary>
-    public class ClerkErrors : Exception
-    {
+    using System.Net.Http;
 
+    public class ClerkErrorsPayload
+    {
         [JsonProperty("errors")]
         public List<ClerkError> Errors { get; set; } = default!;
 
         [JsonProperty("meta")]
         public Models.Errors.Meta? Meta { get; set; }
     }
+
+    /// <summary>
+    /// Request was not successful
+    /// </summary>
+    public class ClerkErrors : SDKBaseError
+    {
+        /// <summary>
+        ///  The original data that was passed to this exception.
+        /// </summary>
+        public ClerkErrorsPayload Payload { get; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use ClerkErrors.Payload.Errors instead.")]
+        public List<ClerkError> Errors { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use ClerkErrors.Payload.Meta instead.")]
+        public Models.Errors.Meta? Meta { get; set; }
+
+        public ClerkErrors(
+            ClerkErrorsPayload payload,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            string body
+        ): base("API error occurred", request, response, body)
+        {
+           Payload = payload;
+
+           #pragma warning disable CS0618
+           Errors = payload.Errors;
+           Meta = payload.Meta;
+           #pragma warning restore CS0618
+        }
+    }
+
 }

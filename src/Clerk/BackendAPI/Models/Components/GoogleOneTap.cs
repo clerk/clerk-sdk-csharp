@@ -34,7 +34,7 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("verified_at_client")]
         public string? VerifiedAtClient { get; set; } = null;
 
-        [JsonProperty("error")]
+        [JsonProperty("error", NullValueHandling = NullValueHandling.Include)]
         public VerificationGoogleOneTapVerificationError? Error { get; set; } = null;
     }
 }

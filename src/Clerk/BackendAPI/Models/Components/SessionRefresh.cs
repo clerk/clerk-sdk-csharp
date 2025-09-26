@@ -17,18 +17,16 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class SessionRefreshType
     {
         private SessionRefreshType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static SessionRefreshType Token { get { return new SessionRefreshType("Token"); } }
-        
+
         public static SessionRefreshType Cookies { get { return new SessionRefreshType("Cookies"); } }
-        
-        public static SessionRefreshType Null { get { return new SessionRefreshType("null"); } }
 
         public override string ToString() { return Value; }
         public static implicit operator String(SessionRefreshType v) { return v.Value; }
@@ -36,7 +34,6 @@ namespace Clerk.BackendAPI.Models.Components
             switch(v) {
                 case "Token": return Token;
                 case "Cookies": return Cookies;
-                case "null": return Null;
                 default: throw new ArgumentException("Invalid value for SessionRefreshType");
             }
         }
@@ -60,8 +57,10 @@ namespace Clerk.BackendAPI.Models.Components
     /// Success
     /// </summary>
     [JsonConverter(typeof(SessionRefresh.SessionRefreshConverter))]
-    public class SessionRefresh {
-        public SessionRefresh(SessionRefreshType type) {
+    public class SessionRefresh
+    {
+        public SessionRefresh(SessionRefreshType type)
+        {
             Type = type;
         }
 
@@ -72,17 +71,16 @@ namespace Clerk.BackendAPI.Models.Components
         public Cookies? Cookies { get; set; }
 
         public SessionRefreshType Type { get; set; }
-
-
-        public static SessionRefresh CreateToken(Token token) {
+        public static SessionRefresh CreateToken(Token token)
+        {
             SessionRefreshType typ = SessionRefreshType.Token;
 
             SessionRefresh res = new SessionRefresh(typ);
             res.Token = token;
             return res;
         }
-
-        public static SessionRefresh CreateCookies(Cookies cookies) {
+        public static SessionRefresh CreateCookies(Cookies cookies)
+        {
             SessionRefreshType typ = SessionRefreshType.Cookies;
 
             SessionRefresh res = new SessionRefresh(typ);
@@ -90,26 +88,20 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static SessionRefresh CreateNull() {
-            SessionRefreshType typ = SessionRefreshType.Null;
-            return new SessionRefresh(typ);
-        }
-
         public class SessionRefreshConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(SessionRefresh);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                if (reader.TokenType == JsonToken.Null)
                 {
-                    return null;
+                    throw new InvalidOperationException("Received unexpected null JSON value");
                 }
 
+                var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
 
                 try
@@ -177,27 +169,25 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
-                    writer.WriteRawValue("null");
-                    return;
-                }
-                SessionRefresh res = (SessionRefresh)value;
-                if (SessionRefreshType.FromString(res.Type).Equals(SessionRefreshType.Null))
+                if (value == null)
                 {
-                    writer.WriteRawValue("null");
+                    throw new InvalidOperationException("Unexpected null JSON value.");
                     return;
                 }
+
+                SessionRefresh res = (SessionRefresh)value;
+
                 if (res.Token != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Token));
                     return;
                 }
+
                 if (res.Cookies != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Cookies));
                     return;
                 }
-
             }
 
         }

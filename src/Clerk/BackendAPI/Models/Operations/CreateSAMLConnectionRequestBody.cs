@@ -17,18 +17,16 @@ namespace Clerk.BackendAPI.Models.Operations
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class CreateSAMLConnectionRequestBodyType
     {
         private CreateSAMLConnectionRequestBodyType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static CreateSAMLConnectionRequestBodyType One { get { return new CreateSAMLConnectionRequestBodyType("1"); } }
-        
+
         public static CreateSAMLConnectionRequestBodyType Two { get { return new CreateSAMLConnectionRequestBodyType("2"); } }
-        
-        public static CreateSAMLConnectionRequestBodyType Null { get { return new CreateSAMLConnectionRequestBodyType("null"); } }
 
         public override string ToString() { return Value; }
         public static implicit operator String(CreateSAMLConnectionRequestBodyType v) { return v.Value; }
@@ -36,7 +34,6 @@ namespace Clerk.BackendAPI.Models.Operations
             switch(v) {
                 case "1": return One;
                 case "2": return Two;
-                case "null": return Null;
                 default: throw new ArgumentException("Invalid value for CreateSAMLConnectionRequestBodyType");
             }
         }
@@ -57,8 +54,10 @@ namespace Clerk.BackendAPI.Models.Operations
 
 
     [JsonConverter(typeof(CreateSAMLConnectionRequestBody.CreateSAMLConnectionRequestBodyConverter))]
-    public class CreateSAMLConnectionRequestBody {
-        public CreateSAMLConnectionRequestBody(CreateSAMLConnectionRequestBodyType type) {
+    public class CreateSAMLConnectionRequestBody
+    {
+        public CreateSAMLConnectionRequestBody(CreateSAMLConnectionRequestBodyType type)
+        {
             Type = type;
         }
 
@@ -69,17 +68,16 @@ namespace Clerk.BackendAPI.Models.Operations
         public Models.Operations.Two? Two { get; set; }
 
         public CreateSAMLConnectionRequestBodyType Type { get; set; }
-
-
-        public static CreateSAMLConnectionRequestBody CreateOne(Models.Operations.One one) {
+        public static CreateSAMLConnectionRequestBody CreateOne(Models.Operations.One one)
+        {
             CreateSAMLConnectionRequestBodyType typ = CreateSAMLConnectionRequestBodyType.One;
 
             CreateSAMLConnectionRequestBody res = new CreateSAMLConnectionRequestBody(typ);
             res.One = one;
             return res;
         }
-
-        public static CreateSAMLConnectionRequestBody CreateTwo(Models.Operations.Two two) {
+        public static CreateSAMLConnectionRequestBody CreateTwo(Models.Operations.Two two)
+        {
             CreateSAMLConnectionRequestBodyType typ = CreateSAMLConnectionRequestBodyType.Two;
 
             CreateSAMLConnectionRequestBody res = new CreateSAMLConnectionRequestBody(typ);
@@ -87,26 +85,20 @@ namespace Clerk.BackendAPI.Models.Operations
             return res;
         }
 
-        public static CreateSAMLConnectionRequestBody CreateNull() {
-            CreateSAMLConnectionRequestBodyType typ = CreateSAMLConnectionRequestBodyType.Null;
-            return new CreateSAMLConnectionRequestBody(typ);
-        }
-
         public class CreateSAMLConnectionRequestBodyConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(CreateSAMLConnectionRequestBody);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                if (reader.TokenType == JsonToken.Null)
                 {
-                    return null;
+                    throw new InvalidOperationException("Received unexpected null JSON value");
                 }
 
+                var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
 
                 try
@@ -174,27 +166,25 @@ namespace Clerk.BackendAPI.Models.Operations
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
-                    writer.WriteRawValue("null");
-                    return;
-                }
-                CreateSAMLConnectionRequestBody res = (CreateSAMLConnectionRequestBody)value;
-                if (CreateSAMLConnectionRequestBodyType.FromString(res.Type).Equals(CreateSAMLConnectionRequestBodyType.Null))
+                if (value == null)
                 {
-                    writer.WriteRawValue("null");
+                    throw new InvalidOperationException("Unexpected null JSON value.");
                     return;
                 }
+
+                CreateSAMLConnectionRequestBody res = (CreateSAMLConnectionRequestBody)value;
+
                 if (res.One != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.One));
                     return;
                 }
+
                 if (res.Two != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Two));
                     return;
                 }
-
             }
 
         }

@@ -11,6 +11,7 @@
 * [Update](#update) - Update a machine
 * [Delete](#delete) - Delete a machine
 * [GetSecretKey](#getsecretkey) - Retrieve a machine secret key
+* [RotateSecretKey](#rotatesecretkey) - Rotate a machine's secret key
 * [CreateScope](#createscope) - Create a machine scope
 * [DeleteScope](#deletescope) - Delete a machine scope
 
@@ -236,6 +237,50 @@ var res = await sdk.Machines.GetSecretKeyAsync(machineId: "<id>");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## RotateSecretKey
+
+Rotates the machine's secret key.
+When the secret key is rotated, make sure to update it in your machine/application.
+The previous secret key will remain valid for the duration specified by the previous_token_ttl parameter.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="RotateMachineSecretKey" method="post" path="/machines/{machine_id}/secret_key/rotate" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Machines.RotateSecretKeyAsync(
+    machineId: "<id>",
+    requestBody: new RotateMachineSecretKeyRequestBody() {
+        PreviousTokenTtl = 632625,
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `MachineId`                                                                                       | *string*                                                                                          | :heavy_check_mark:                                                                                | The ID of the machine to rotate the secret key for                                                |
+| `RequestBody`                                                                                     | [RotateMachineSecretKeyRequestBody](../../Models/Operations/RotateMachineSecretKeyRequestBody.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |
+
+### Response
+
+**[RotateMachineSecretKeyResponse](../../Models/Operations/RotateMachineSecretKeyResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## CreateScope

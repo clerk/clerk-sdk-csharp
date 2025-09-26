@@ -28,7 +28,7 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("external_verification_redirect_url")]
         public string? ExternalVerificationRedirectUrl { get; set; } = null;
 
-        [JsonProperty("error")]
+        [JsonProperty("error", NullValueHandling = NullValueHandling.Include)]
         public VerificationError? Error { get; set; } = null;
 
         [JsonProperty("expire_at")]

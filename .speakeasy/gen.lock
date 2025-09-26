@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: ab194aaac35b85c39087958a31695002
+  docChecksum: 8ef24b1f9d265d4fa6656befd3129775
   docVersion: "2025-04-10"
-  speakeasyVersion: 1.606.9
-  generationVersion: 2.687.13
-  releaseVersion: 0.12.0
-  configChecksum: 5f593d30475c29e31e803b49a3d30105
+  speakeasyVersion: 1.628.7
+  generationVersion: 2.716.9
+  releaseVersion: 0.13.0
+  configChecksum: 92b3f69e851c961fe2eb4efa602418bf
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 features:
@@ -14,24 +14,24 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.0.1
-    core: 3.12.0
+    core: 3.12.4
     deprecations: 2.81.2
     examples: 2.81.6
     flattening: 2.81.3
-    globalSecurity: 2.83.7
+    globalSecurity: 2.83.8
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
     groups: 2.81.2
     intellisenseMarkdownSupport: 0.1.0
-    methodArguments: 0.2.0
+    methodArguments: 0.2.1
     nameOverrides: 2.81.2
     nullables: 0.1.1
-    openEnums: 0.1.0
+    openEnums: 0.1.1
     responseFormat: 0.0.4
     retries: 0.0.1
     sdkHooks: 0.2.0
-    unions: 0.2.2
+    unions: 1.0.0
 generatedFiles:
   - .gitattributes
   - Clerk.BackendAPI.sln
@@ -94,6 +94,7 @@ generatedFiles:
   - docs/Models/Components/Error.md
   - docs/Models/Components/ErrorClerkError.md
   - docs/Models/Components/ErrorMeta.md
+  - docs/Models/Components/ExtendFreeTrialRequest.md
   - docs/Models/Components/ExternalAccount.md
   - docs/Models/Components/ExternalAccountWithVerification.md
   - docs/Models/Components/ExternalAccountWithVerificationObject.md
@@ -455,10 +456,14 @@ generatedFiles:
   - docs/Models/Operations/DeleteUserProfileImageResponse.md
   - docs/Models/Operations/DeleteUserRequest.md
   - docs/Models/Operations/DeleteUserResponse.md
+  - docs/Models/Operations/DeleteWaitlistEntryRequest.md
+  - docs/Models/Operations/DeleteWaitlistEntryResponse.md
   - docs/Models/Operations/DisableMFARequest.md
   - docs/Models/Operations/DisableMFAResponse.md
   - docs/Models/Operations/DisableMFAResponseBody.md
   - docs/Models/Operations/EnrollmentMode.md
+  - docs/Models/Operations/ExtendCommerceSubscriptionItemFreeTrialRequest.md
+  - docs/Models/Operations/ExtendCommerceSubscriptionItemFreeTrialResponse.md
   - docs/Models/Operations/File.md
   - docs/Models/Operations/Format.md
   - docs/Models/Operations/GenerateSvixAuthURLResponse.md
@@ -606,6 +611,9 @@ generatedFiles:
   - docs/Models/Operations/RevokeSessionResponse.md
   - docs/Models/Operations/RevokeSignInTokenRequest.md
   - docs/Models/Operations/RevokeSignInTokenResponse.md
+  - docs/Models/Operations/RotateMachineSecretKeyRequest.md
+  - docs/Models/Operations/RotateMachineSecretKeyRequestBody.md
+  - docs/Models/Operations/RotateMachineSecretKeyResponse.md
   - docs/Models/Operations/RotateOAuthApplicationSecretRequest.md
   - docs/Models/Operations/RotateOAuthApplicationSecretResponse.md
   - docs/Models/Operations/SetUserProfileImageRequest.md
@@ -839,6 +847,7 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Components/Error.cs
   - src/Clerk/BackendAPI/Models/Components/ErrorClerkError.cs
   - src/Clerk/BackendAPI/Models/Components/ErrorMeta.cs
+  - src/Clerk/BackendAPI/Models/Components/ExtendFreeTrialRequest.cs
   - src/Clerk/BackendAPI/Models/Components/ExternalAccount.cs
   - src/Clerk/BackendAPI/Models/Components/ExternalAccountWithVerification.cs
   - src/Clerk/BackendAPI/Models/Components/ExternalAccountWithVerificationObject.cs
@@ -1064,10 +1073,12 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseResponseBody.cs
   - src/Clerk/BackendAPI/Models/Errors/GetM2MTokensResponseBody.cs
   - src/Clerk/BackendAPI/Models/Errors/Meta.cs
+  - src/Clerk/BackendAPI/Models/Errors/ResponseValidationException.cs
   - src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenErrors.cs
   - src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenM2mErrors.cs
   - src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenM2mResponseBody.cs
   - src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenResponseBody.cs
+  - src/Clerk/BackendAPI/Models/Errors/SDKBaseError.cs
   - src/Clerk/BackendAPI/Models/Errors/SDKError.cs
   - src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenErrors.cs
   - src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenM2mErrors.cs
@@ -1201,10 +1212,14 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/DeleteUserProfileImageResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteUserRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/DeleteUserResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/DeleteWaitlistEntryRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/DeleteWaitlistEntryResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DisableMFARequest.cs
   - src/Clerk/BackendAPI/Models/Operations/DisableMFAResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/DisableMFAResponseBody.cs
   - src/Clerk/BackendAPI/Models/Operations/EnrollmentMode.cs
+  - src/Clerk/BackendAPI/Models/Operations/ExtendCommerceSubscriptionItemFreeTrialRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/ExtendCommerceSubscriptionItemFreeTrialResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/File.cs
   - src/Clerk/BackendAPI/Models/Operations/Format.cs
   - src/Clerk/BackendAPI/Models/Operations/GenerateSvixAuthURLResponse.cs
@@ -1352,6 +1367,9 @@ generatedFiles:
   - src/Clerk/BackendAPI/Models/Operations/RevokeSessionResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/RevokeSignInTokenRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/RevokeSignInTokenResponse.cs
+  - src/Clerk/BackendAPI/Models/Operations/RotateMachineSecretKeyRequest.cs
+  - src/Clerk/BackendAPI/Models/Operations/RotateMachineSecretKeyRequestBody.cs
+  - src/Clerk/BackendAPI/Models/Operations/RotateMachineSecretKeyResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/RotateOAuthApplicationSecretRequest.cs
   - src/Clerk/BackendAPI/Models/Operations/RotateOAuthApplicationSecretResponse.cs
   - src/Clerk/BackendAPI/Models/Operations/SetUserProfileImageRequest.cs
@@ -3317,29 +3335,47 @@ examples:
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
         "500":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  RotateMachineSecretKey:
+    speakeasy-default-rotate-machine-secret-key:
+      parameters:
+        path:
+          machine_id: "<id>"
+      requestBody:
+        application/json: {"previous_token_ttl": 632625}
+      responses:
+        "200":
+          application/json: {"object": "machine_secret_key", "secret": "<value>"}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  DeleteWaitlistEntry:
+    speakeasy-default-delete-waitlist-entry:
+      parameters:
+        path:
+          waitlist_entry_id: "<id>"
+      responses:
+        "200":
+          application/json: {"object": "deleted_object", "id": "deleted_object_id_example", "slug": "deleted-object-slug", "deleted": true}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+  ExtendCommerceSubscriptionItemFreeTrial:
+    speakeasy-default-extend-commerce-subscription-item-free-trial:
+      parameters:
+        path:
+          subscription_item_id: "<id>"
+      requestBody:
+        application/json: {"extend_to": "2026-01-08T00:00:00Z"}
+      responses:
+        "200":
+          application/json: {"object": "commerce_subscription_item", "id": "<id>", "instance_id": "<id>", "status": "incomplete", "plan_id": "<id>", "plan": {"object": "commerce_plan", "id": "<id>", "name": "<value>", "fee": {"amount": 246876, "amount_formatted": "<value>", "currency": "Afghani", "currency_symbol": "kr"}, "annual_monthly_fee": {"amount": 802114, "amount_formatted": "<value>", "currency": "Czech Koruna", "currency_symbol": "£"}, "annual_fee": {"amount": 35560, "amount_formatted": "<value>", "currency": "Lek", "currency_symbol": "$U"}, "amount": 547002, "amount_formatted": "<value>", "annual_monthly_amount": 229468, "annual_monthly_amount_formatted": "<value>", "annual_amount": 799095, "annual_amount_formatted": "<value>", "currency_symbol": "₭", "currency": "Cayman Islands Dollar", "description": "under for anenst finally", "product_id": "<id>", "is_default": false, "is_recurring": false, "publicly_visible": false, "has_base_fee": true, "payer_type": ["<value 1>", "<value 2>"], "for_payer_type": "<value>", "slug": "<value>", "avatar_url": "https://thorny-monocle.name", "features": [{"object": "feature", "id": "<id>", "name": "<value>", "description": "tiny among all hopelessly sympathetically up scar", "slug": "<value>", "avatar_url": "https://immediate-equal.com/"}]}, "plan_period": "month", "payment_source_id": "<id>", "payer_id": "<id>", "is_free_trial": false, "proration_date": "<value>", "created_at": 518769, "updated_at": 177754}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
+        "500":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request", "clerk_trace_id": "trace_123456789abcd"}], "meta": {}}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
-  ## SDK Changes Detected:
-  * `ClerkBackendApi.Users.Get()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.Update()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.UpdateMetadata()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.DeleteProfileImage()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.SetProfileImage()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.EmailAddresses.Create()`:  `response.verification.[verificationSaml]` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.EmailAddresses.Get()`:  `response.verification.[verificationSaml]` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.EmailAddresses.Update()`:  `response.verification.[verificationSaml]` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.List()`:  `response.[]` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.Ban()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.Unlock()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.Lock()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.Create()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.Unban()`:  `response` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.BulkBan()`:  `response.[]` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.BulkUnban()`:  `response.[]` **Changed** **Breaking** :warning:
-  * `ClerkBackendApi.Users.GetBillingSubscription()`: **Added**
-  * `ClerkBackendApi.Organizations.GetBillingSubscription()`: **Added**
-  * `ClerkBackendApi.Commerce.CancelSubscriptionItem()`: **Added**
-  * `ClerkBackendApi.WaitlistEntries.Reject()`: **Added**
-  * `ClerkBackendApi.WaitlistEntries.Invite()`: **Added**
-  * `ClerkBackendApi.Machines.List()`:  `request.orderBy` **Added**
+  ## Csharp SDK Changes Detected:
+  * `ClerkBackendApi.Machines.RotateSecretKey()`: **Added**
+  * `ClerkBackendApi.WaitlistEntries.Delete()`: **Added**
+  * `ClerkBackendApi.Commerce.ExtendSubscriptionItemFreeTrial()`: **Added**
+  * `ClerkBackendApi.Commerce.ListSubscriptionItems()`:  `request` **Changed**

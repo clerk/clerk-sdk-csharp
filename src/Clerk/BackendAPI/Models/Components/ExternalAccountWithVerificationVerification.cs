@@ -17,16 +17,17 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class ExternalAccountWithVerificationVerificationType
     {
         private ExternalAccountWithVerificationVerificationType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        
+
         public static ExternalAccountWithVerificationVerificationType VerificationOauth { get { return new ExternalAccountWithVerificationVerificationType("verification_oauth"); } }
+
         public static ExternalAccountWithVerificationVerificationType VerificationGoogleOneTap { get { return new ExternalAccountWithVerificationVerificationType("verification_google_one_tap"); } }
+
         public static ExternalAccountWithVerificationVerificationType Null { get { return new ExternalAccountWithVerificationVerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -56,8 +57,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(ExternalAccountWithVerificationVerification.ExternalAccountWithVerificationVerificationConverter))]
-    public class ExternalAccountWithVerificationVerification {
-        public ExternalAccountWithVerificationVerification(ExternalAccountWithVerificationVerificationType type) {
+    public class ExternalAccountWithVerificationVerification
+    {
+        public ExternalAccountWithVerificationVerification(ExternalAccountWithVerificationVerificationType type)
+        {
             Type = type;
         }
 
@@ -69,52 +72,56 @@ namespace Clerk.BackendAPI.Models.Components
 
         public ExternalAccountWithVerificationVerificationType Type { get; set; }
 
-
-        public static ExternalAccountWithVerificationVerification CreateVerificationOauth(Oauth verificationOauth) {
+        public static ExternalAccountWithVerificationVerification CreateVerificationOauth(Oauth verificationOauth)
+        {
             ExternalAccountWithVerificationVerificationType typ = ExternalAccountWithVerificationVerificationType.VerificationOauth;
-        
             string typStr = ExternalAccountWithVerificationVerificationType.VerificationOauth.ToString();
-            
             verificationOauth.Object = VerificationOauthVerificationObjectExtension.ToEnum(ExternalAccountWithVerificationVerificationType.VerificationOauth.ToString());
             ExternalAccountWithVerificationVerification res = new ExternalAccountWithVerificationVerification(typ);
             res.Oauth = verificationOauth;
             return res;
         }
-        public static ExternalAccountWithVerificationVerification CreateVerificationGoogleOneTap(GoogleOneTap verificationGoogleOneTap) {
+
+        public static ExternalAccountWithVerificationVerification CreateVerificationGoogleOneTap(GoogleOneTap verificationGoogleOneTap)
+        {
             ExternalAccountWithVerificationVerificationType typ = ExternalAccountWithVerificationVerificationType.VerificationGoogleOneTap;
-        
             string typStr = ExternalAccountWithVerificationVerificationType.VerificationGoogleOneTap.ToString();
-            
             verificationGoogleOneTap.Object = VerificationGoogleOneTapVerificationObjectExtension.ToEnum(ExternalAccountWithVerificationVerificationType.VerificationGoogleOneTap.ToString());
             ExternalAccountWithVerificationVerification res = new ExternalAccountWithVerificationVerification(typ);
             res.GoogleOneTap = verificationGoogleOneTap;
             return res;
         }
-        public static ExternalAccountWithVerificationVerification CreateNull() {
+
+        public static ExternalAccountWithVerificationVerification CreateNull()
+        {
             ExternalAccountWithVerificationVerificationType typ = ExternalAccountWithVerificationVerificationType.Null;
             return new ExternalAccountWithVerificationVerification(typ);
         }
 
         public class ExternalAccountWithVerificationVerificationConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(ExternalAccountWithVerificationVerification);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return null;
+                }
+
                 JObject jo = JObject.Load(reader);
                 string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
                 if (discriminator == ExternalAccountWithVerificationVerificationType.VerificationOauth.ToString())
                 {
-                    Oauth? oauth = ResponseBodyDeserializer.Deserialize<Oauth>(jo.ToString());
-                    return CreateVerificationOauth(oauth!);
+                    Oauth oauth = ResponseBodyDeserializer.DeserializeNotNull<Oauth>(jo.ToString());
+                    return CreateVerificationOauth(oauth);
                 }
                 if (discriminator == ExternalAccountWithVerificationVerificationType.VerificationGoogleOneTap.ToString())
                 {
-                    GoogleOneTap? googleOneTap = ResponseBodyDeserializer.Deserialize<GoogleOneTap>(jo.ToString());
-                    return CreateVerificationGoogleOneTap(googleOneTap!);
+                    GoogleOneTap googleOneTap = ResponseBodyDeserializer.DeserializeNotNull<GoogleOneTap>(jo.ToString());
+                    return CreateVerificationGoogleOneTap(googleOneTap);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
@@ -122,27 +129,30 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
+                if (value == null)
+                {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 ExternalAccountWithVerificationVerification res = (ExternalAccountWithVerificationVerification)value;
                 if (ExternalAccountWithVerificationVerificationType.FromString(res.Type).Equals(ExternalAccountWithVerificationVerificationType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Oauth != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Oauth));
                     return;
                 }
+
                 if (res.GoogleOneTap != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.GoogleOneTap));
                     return;
                 }
-
             }
 
         }
