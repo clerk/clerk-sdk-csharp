@@ -51,12 +51,12 @@ public static class AuthenticateRequest
         {
             // Special case: if acceptsToken contains "machine_token", accept both MachineToken and MachineTokenV2
             bool isAccepted = false;
-            if (options.AcceptsToken.Contains("machine_token") && 
+            if (options.AcceptsToken.Contains("machine_token") &&
                 (tokenType == TokenType.MachineToken || tokenType == TokenType.MachineTokenV2))
             {
                 isAccepted = true;
             }
-            
+
             if (!isAccepted)
             {
                 return RequestState.SignedOut(AuthErrorReason.TOKEN_TYPE_NOT_SUPPORTED);
@@ -71,7 +71,7 @@ public static class AuthenticateRequest
                 return RequestState.SignedOut(AuthErrorReason.SECRET_KEY_MISSING);
 
             verifyTokenOptions = new VerifyTokenOptions(
-                secretKey: options.SecretKey, 
+                secretKey: options.SecretKey,
                 machineSecretKey: options.MachineSecretKey
             );
         }

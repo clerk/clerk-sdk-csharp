@@ -80,5 +80,17 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
+
+        /// <summary>
+        /// Filter subscription items by user ID
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=user_id")]
+        public string? UserId { get; set; }
+
+        /// <summary>
+        /// Filter subscription items by organization ID
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=organization_id")]
+        public string? OrganizationId { get; set; }
     }
 }

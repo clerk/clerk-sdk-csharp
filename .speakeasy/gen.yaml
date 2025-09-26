@@ -16,12 +16,13 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.12.0
+  version: 0.13.0
   additionalDependencies:
     - package: Microsoft.AspNetCore
       version: 2.3.0
@@ -54,3 +55,4 @@ csharp:
   packageTags: Clerk SDK
   responseFormat: envelope-http
   sourceDirectory: src
+  useNodatime: true

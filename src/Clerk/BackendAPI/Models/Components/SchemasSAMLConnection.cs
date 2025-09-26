@@ -17,18 +17,16 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class SchemasSAMLConnectionType
     {
         private SchemasSAMLConnectionType(string value) { Value = value; }
 
         public string Value { get; private set; }
+
         public static SchemasSAMLConnectionType One { get { return new SchemasSAMLConnectionType("1"); } }
-        
+
         public static SchemasSAMLConnectionType Two { get { return new SchemasSAMLConnectionType("2"); } }
-        
-        public static SchemasSAMLConnectionType Null { get { return new SchemasSAMLConnectionType("null"); } }
 
         public override string ToString() { return Value; }
         public static implicit operator String(SchemasSAMLConnectionType v) { return v.Value; }
@@ -36,7 +34,6 @@ namespace Clerk.BackendAPI.Models.Components
             switch(v) {
                 case "1": return One;
                 case "2": return Two;
-                case "null": return Null;
                 default: throw new ArgumentException("Invalid value for SchemasSAMLConnectionType");
             }
         }
@@ -57,8 +54,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(SchemasSAMLConnection.SchemasSAMLConnectionConverter))]
-    public class SchemasSAMLConnection {
-        public SchemasSAMLConnection(SchemasSAMLConnectionType type) {
+    public class SchemasSAMLConnection
+    {
+        public SchemasSAMLConnection(SchemasSAMLConnectionType type)
+        {
             Type = type;
         }
 
@@ -69,17 +68,16 @@ namespace Clerk.BackendAPI.Models.Components
         public Models.Components.Two? Two { get; set; }
 
         public SchemasSAMLConnectionType Type { get; set; }
-
-
-        public static SchemasSAMLConnection CreateOne(Models.Components.One one) {
+        public static SchemasSAMLConnection CreateOne(Models.Components.One one)
+        {
             SchemasSAMLConnectionType typ = SchemasSAMLConnectionType.One;
 
             SchemasSAMLConnection res = new SchemasSAMLConnection(typ);
             res.One = one;
             return res;
         }
-
-        public static SchemasSAMLConnection CreateTwo(Models.Components.Two two) {
+        public static SchemasSAMLConnection CreateTwo(Models.Components.Two two)
+        {
             SchemasSAMLConnectionType typ = SchemasSAMLConnectionType.Two;
 
             SchemasSAMLConnection res = new SchemasSAMLConnection(typ);
@@ -87,26 +85,20 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static SchemasSAMLConnection CreateNull() {
-            SchemasSAMLConnectionType typ = SchemasSAMLConnectionType.Null;
-            return new SchemasSAMLConnection(typ);
-        }
-
         public class SchemasSAMLConnectionConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(SchemasSAMLConnection);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
-                var json = JRaw.Create(reader).ToString();
-                if (json == "null")
+                if (reader.TokenType == JsonToken.Null)
                 {
-                    return null;
+                    throw new InvalidOperationException("Received unexpected null JSON value");
                 }
 
+                var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
 
                 try
@@ -174,27 +166,25 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
-                    writer.WriteRawValue("null");
-                    return;
-                }
-                SchemasSAMLConnection res = (SchemasSAMLConnection)value;
-                if (SchemasSAMLConnectionType.FromString(res.Type).Equals(SchemasSAMLConnectionType.Null))
+                if (value == null)
                 {
-                    writer.WriteRawValue("null");
+                    throw new InvalidOperationException("Unexpected null JSON value.");
                     return;
                 }
+
+                SchemasSAMLConnection res = (SchemasSAMLConnection)value;
+
                 if (res.One != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.One));
                     return;
                 }
+
                 if (res.Two != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Two));
                     return;
                 }
-
             }
 
         }

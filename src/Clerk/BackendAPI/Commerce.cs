@@ -53,14 +53,26 @@ namespace Clerk.BackendAPI
         /// </remarks>
         /// </summary>
         Task<CancelCommerceSubscriptionItemResponse> CancelSubscriptionItemAsync(string subscriptionItemId, bool? endNow = false, RetryConfig? retryConfig = null);
+
+        /// <summary>
+        /// Extend free trial for a subscription item
+        /// 
+        /// <remarks>
+        /// Extends the free trial period for a specific subscription item to the specified timestamp.<br/>
+        /// The subscription item must be currently in a free trial period, and the plan must support free trials.<br/>
+        /// The timestamp must be in the future and not more than 365 days from the end of the current trial period<br/>
+        /// This operation is idempotent - repeated requests with the same timestamp will not change the trial period.
+        /// </remarks>
+        /// </summary>
+        Task<ExtendCommerceSubscriptionItemFreeTrialResponse> ExtendSubscriptionItemFreeTrialAsync(string subscriptionItemId, ExtendFreeTrialRequest extendFreeTrialRequest, RetryConfig? retryConfig = null);
     }
 
     public class Commerce: ICommerce
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.12.0";
-        private const string _sdkGenVersion = "2.687.13";
+        private const string _sdkVersion = "0.13.0";
+        private const string _sdkGenVersion = "2.716.9";
         private const string _openapiDocVersion = "2025-04-10";
 
         public Commerce(SDKConfig config)
@@ -161,7 +173,17 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<PaginatedCommercePlanResponse>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    PaginatedCommercePlanResponse obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<PaginatedCommercePlanResponse>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into PaginatedCommercePlanResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new GetCommercePlanListResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -174,38 +196,58 @@ namespace Clerk.BackendAPI
                     return response;
                 }
 
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(new List<int>{400, 401, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
-                    throw obj!;
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 500)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
-                    throw obj!;
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
         public async Task<GetCommerceSubscriptionItemListResponse> ListSubscriptionItemsAsync(GetCommerceSubscriptionItemListRequest? request = null, RetryConfig? retryConfig = null)
@@ -294,7 +336,17 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<PaginatedCommerceSubscriptionItemResponse>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    PaginatedCommerceSubscriptionItemResponse obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<PaginatedCommerceSubscriptionItemResponse>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into PaginatedCommerceSubscriptionItemResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new GetCommerceSubscriptionItemListResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -307,38 +359,58 @@ namespace Clerk.BackendAPI
                     return response;
                 }
 
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(new List<int>{400, 401, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
-                    throw obj!;
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 500)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
-                    throw obj!;
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
         public async Task<CancelCommerceSubscriptionItemResponse> CancelSubscriptionItemAsync(string subscriptionItemId, bool? endNow = false, RetryConfig? retryConfig = null)
@@ -432,7 +504,17 @@ namespace Clerk.BackendAPI
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<CommerceSubscriptionItem>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CommerceSubscriptionItem obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CommerceSubscriptionItem>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CommerceSubscriptionItem.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
                     var response = new CancelCommerceSubscriptionItemResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
@@ -445,38 +527,232 @@ namespace Clerk.BackendAPI
                     return response;
                 }
 
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(new List<int>{400, 401, 403, 404, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    throw obj!;
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode == 500)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ClerkErrors>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    throw obj!;
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
                 }
 
-                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
-                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse);
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
-            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse);
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+        public async Task<ExtendCommerceSubscriptionItemFreeTrialResponse> ExtendSubscriptionItemFreeTrialAsync(string subscriptionItemId, ExtendFreeTrialRequest extendFreeTrialRequest, RetryConfig? retryConfig = null)
+        {
+            var request = new ExtendCommerceSubscriptionItemFreeTrialRequest()
+            {
+                SubscriptionItemId = subscriptionItemId,
+                ExtendFreeTrialRequest = extendFreeTrialRequest,
+            };
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/billing/subscription_items/{subscription_item_id}/extend_free_trial", request);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "ExtendFreeTrialRequest", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "ExtendCommerceSubscriptionItemFreeTrial", new List<string> {  }, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CommerceSubscriptionItem obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CommerceSubscriptionItem>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CommerceSubscriptionItem.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ExtendCommerceSubscriptionItemFreeTrialResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.CommerceSubscriptionItem = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{400, 401, 403, 404, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
     }
 }

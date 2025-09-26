@@ -17,16 +17,17 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class Web3WalletVerificationType
     {
         private Web3WalletVerificationType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        
+
         public static Web3WalletVerificationType VerificationWeb3 { get { return new Web3WalletVerificationType("verification_web3"); } }
+
         public static Web3WalletVerificationType VerificationAdmin { get { return new Web3WalletVerificationType("verification_admin"); } }
+
         public static Web3WalletVerificationType Null { get { return new Web3WalletVerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -56,8 +57,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(Web3WalletVerification.Web3WalletVerificationConverter))]
-    public class Web3WalletVerification {
-        public Web3WalletVerification(Web3WalletVerificationType type) {
+    public class Web3WalletVerification
+    {
+        public Web3WalletVerification(Web3WalletVerificationType type)
+        {
             Type = type;
         }
 
@@ -69,52 +72,56 @@ namespace Clerk.BackendAPI.Models.Components
 
         public Web3WalletVerificationType Type { get; set; }
 
-
-        public static Web3WalletVerification CreateVerificationWeb3(Web3Signature verificationWeb3) {
+        public static Web3WalletVerification CreateVerificationWeb3(Web3Signature verificationWeb3)
+        {
             Web3WalletVerificationType typ = Web3WalletVerificationType.VerificationWeb3;
-        
             string typStr = Web3WalletVerificationType.VerificationWeb3.ToString();
-            
             verificationWeb3.Object = VerificationWeb3VerificationObjectExtension.ToEnum(Web3WalletVerificationType.VerificationWeb3.ToString());
             Web3WalletVerification res = new Web3WalletVerification(typ);
             res.Web3Signature = verificationWeb3;
             return res;
         }
-        public static Web3WalletVerification CreateVerificationAdmin(VerificationAdminVerificationAdmin verificationAdmin) {
+
+        public static Web3WalletVerification CreateVerificationAdmin(VerificationAdminVerificationAdmin verificationAdmin)
+        {
             Web3WalletVerificationType typ = Web3WalletVerificationType.VerificationAdmin;
-        
             string typStr = Web3WalletVerificationType.VerificationAdmin.ToString();
-            
             verificationAdmin.Object = VerificationAdminVerificationWeb3WalletObjectExtension.ToEnum(Web3WalletVerificationType.VerificationAdmin.ToString());
             Web3WalletVerification res = new Web3WalletVerification(typ);
             res.VerificationAdminVerificationAdmin = verificationAdmin;
             return res;
         }
-        public static Web3WalletVerification CreateNull() {
+
+        public static Web3WalletVerification CreateNull()
+        {
             Web3WalletVerificationType typ = Web3WalletVerificationType.Null;
             return new Web3WalletVerification(typ);
         }
 
         public class Web3WalletVerificationConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(Web3WalletVerification);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return null;
+                }
+
                 JObject jo = JObject.Load(reader);
                 string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
                 if (discriminator == Web3WalletVerificationType.VerificationWeb3.ToString())
                 {
-                    Web3Signature? web3Signature = ResponseBodyDeserializer.Deserialize<Web3Signature>(jo.ToString());
-                    return CreateVerificationWeb3(web3Signature!);
+                    Web3Signature web3Signature = ResponseBodyDeserializer.DeserializeNotNull<Web3Signature>(jo.ToString());
+                    return CreateVerificationWeb3(web3Signature);
                 }
                 if (discriminator == Web3WalletVerificationType.VerificationAdmin.ToString())
                 {
-                    VerificationAdminVerificationAdmin? verificationAdminVerificationAdmin = ResponseBodyDeserializer.Deserialize<VerificationAdminVerificationAdmin>(jo.ToString());
-                    return CreateVerificationAdmin(verificationAdminVerificationAdmin!);
+                    VerificationAdminVerificationAdmin verificationAdminVerificationAdmin = ResponseBodyDeserializer.DeserializeNotNull<VerificationAdminVerificationAdmin>(jo.ToString());
+                    return CreateVerificationAdmin(verificationAdminVerificationAdmin);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
@@ -122,27 +129,30 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
+                if (value == null)
+                {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 Web3WalletVerification res = (Web3WalletVerification)value;
                 if (Web3WalletVerificationType.FromString(res.Type).Equals(Web3WalletVerificationType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Web3Signature != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Web3Signature));
                     return;
                 }
+
                 if (res.VerificationAdminVerificationAdmin != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationAdminVerificationAdmin));
                     return;
                 }
-
             }
 
         }

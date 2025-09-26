@@ -204,6 +204,7 @@ public class MachineAuthentication
 * [ListPlans](docs/sdks/commerce/README.md#listplans) - List all commerce plans
 * [ListSubscriptionItems](docs/sdks/commerce/README.md#listsubscriptionitems) - List all subscription items
 * [CancelSubscriptionItem](docs/sdks/commerce/README.md#cancelsubscriptionitem) - Cancel a subscription item
+* [ExtendSubscriptionItemFreeTrial](docs/sdks/commerce/README.md#extendsubscriptionitemfreetrial) - Extend free trial for a subscription item
 
 ### [Domains](docs/sdks/domains/README.md)
 
@@ -277,6 +278,7 @@ public class MachineAuthentication
 * [Update](docs/sdks/machines/README.md#update) - Update a machine
 * [Delete](docs/sdks/machines/README.md#delete) - Delete a machine
 * [GetSecretKey](docs/sdks/machines/README.md#getsecretkey) - Retrieve a machine secret key
+* [RotateSecretKey](docs/sdks/machines/README.md#rotatesecretkey) - Rotate a machine's secret key
 * [CreateScope](docs/sdks/machines/README.md#createscope) - Create a machine scope
 * [DeleteScope](docs/sdks/machines/README.md#deletescope) - Delete a machine scope
 
@@ -424,6 +426,7 @@ public class MachineAuthentication
 
 * [List](docs/sdks/waitlistentries/README.md#list) - List all waitlist entries
 * [Create](docs/sdks/waitlistentries/README.md#create) - Create a waitlist entry
+* [Delete](docs/sdks/waitlistentries/README.md#delete) - Delete a pending waitlist entry
 * [Invite](docs/sdks/waitlistentries/README.md#invite) - Invite a waitlist entry
 * [Reject](docs/sdks/waitlistentries/README.md#reject) - Reject a waitlist entry
 
@@ -500,22 +503,15 @@ var res = await sdk.Miscellaneous.GetPublicInterstitialAsync(req);
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations. All operations return a response object or throw an exception.
-
-By default, an API error will raise a `Clerk.BackendAPI.Models.Errors.SDKError` exception, which has the following properties:
+[`SDKBaseError`](./src/Clerk/BackendAPI/Models/Errors/SDKBaseError.cs) is the base exception class for all HTTP error responses. It has the following properties:
 
 | Property      | Type                  | Description           |
 |---------------|-----------------------|-----------------------|
-| `Message`     | *string*              | The error message     |
-| `Request`     | *HttpRequestMessage*  | The HTTP request      |
-| `Response`    | *HttpResponseMessage* | The HTTP response     |
+| `Message`     | *string*              | Error message         |
+| `Request`     | *HttpRequestMessage*  | HTTP request object   |
+| `Response`    | *HttpResponseMessage* | HTTP response object  |
 
-When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `DeleteAsync` method throws the following exceptions:
-
-| Error Type                                 | Status Code        | Content Type     |
-| ------------------------------------------ | ------------------ | ---------------- |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404 | application/json |
-| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX           | \*/\*            |
+Some exceptions in this SDK include an additional `Payload` field, which will contain deserialized custom error data when present. Possible exceptions are listed in the [Error Classes](#error-classes) section.
 
 ### Example
 
@@ -523,6 +519,7 @@ When custom error responses are specified for an operation, the SDK may also thr
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Errors;
+using System.Collections.Generic;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
@@ -532,20 +529,63 @@ try
 
     // handle response
 }
-catch (Exception ex)
+catch (SDKBaseError ex)  // all SDK exceptions inherit from SDKBaseError
 {
-    if (ex is ClerkErrors)
+    // ex.ToString() provides a detailed error message
+    System.Console.WriteLine(ex);
+
+    // Base exception fields
+    HttpRequestMessage request = ex.Request;
+    HttpResponseMessage response = ex.Response;
+    var statusCode = (int)response.StatusCode;
+    var responseBody = ex.Body;
+
+    if (ex is ClerkErrors) // different exceptions may be thrown depending on the method
     {
-        // Handle exception data
-        throw;
+        // Check error data fields
+        ClerkErrorsPayload payload = ex.Payload;
+        List<ClerkError> Errors = payload.Errors;
+        Clerk.BackendAPI.Models.Errors.Meta Meta = payload.Meta;
     }
-    else if (ex is Clerk.BackendAPI.Models.Errors.SDKError)
+
+    // An underlying cause may be provided
+    if (ex.InnerException != null)
     {
-        // Handle default exception
-        throw;
+        Exception cause = ex.InnerException;
     }
 }
+catch (System.Net.Http.HttpRequestException ex)
+{
+    // Check ex.InnerException for Network connectivity errors
+}
 ```
+
+### Error Classes
+
+**Primary exceptions:**
+* [`SDKBaseError`](./src/Clerk/BackendAPI/Models/Errors/SDKBaseError.cs): The base class for HTTP error responses.
+  * [`ClerkErrors`](./src/Clerk/BackendAPI/Models/Errors/ClerkErrors.cs): Request was not successful. *
+
+<details><summary>Less common exceptions (13)</summary>
+
+* [`System.Net.Http.HttpRequestException`](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestexception): Network connectivity error. For more details about the underlying cause, inspect the `ex.InnerException`.
+
+* Inheriting from [`SDKBaseError`](./src/Clerk/BackendAPI/Models/Errors/SDKBaseError.cs):
+  * [`CreateM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 159 methods.*
+  * [`GetM2MTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 159 methods.*
+  * [`RevokeM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 159 methods.*
+  * [`VerifyM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 159 methods.*
+  * [`VerifyOAuthAccessTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 159 methods.*
+  * [`GetM2MTokensM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseBody.cs): 403 Forbidden. Status code `403`. Applicable to 1 of 159 methods.*
+  * [`GetM2MTokensM2mResponseResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 159 methods.*
+  * [`RevokeM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 159 methods.*
+  * [`VerifyM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 159 methods.*
+  * [`VerifyOAuthAccessTokenOauthAccessTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 159 methods.*
+  * [`CreateM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenM2mResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 159 methods.*
+  * [`ResponseValidationError`](./src/Clerk/BackendAPI/Models/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
+</details>
+
+\* Refer to the [relevant documentation](#available-resources-and-operations) to determine whether an exception applies to a specific operation.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

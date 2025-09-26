@@ -15,7 +15,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     [JsonConverter(typeof(OpenEnumConverter))]
     public class VerificationAdminVerificationWeb3WalletStrategy : IEquatable<VerificationAdminVerificationWeb3WalletStrategy>
     {

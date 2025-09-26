@@ -17,20 +17,25 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
     using System.Numerics;
     using System.Reflection;
-    
 
     public class VerificationType
     {
         private VerificationType(string value) { Value = value; }
 
         public string Value { get; private set; }
-        
+
         public static VerificationType VerificationOtp { get { return new VerificationType("verification_otp"); } }
+
         public static VerificationType VerificationAdmin { get { return new VerificationType("verification_admin"); } }
+
         public static VerificationType VerificationFromOauth { get { return new VerificationType("verification_from_oauth"); } }
+
         public static VerificationType VerificationTicket { get { return new VerificationType("verification_ticket"); } }
+
         public static VerificationType VerificationSaml { get { return new VerificationType("verification_saml"); } }
+
         public static VerificationType VerificationEmailLink { get { return new VerificationType("verification_email_link"); } }
+
         public static VerificationType Null { get { return new VerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -64,8 +69,10 @@ namespace Clerk.BackendAPI.Models.Components
 
 
     [JsonConverter(typeof(Verification.VerificationConverter))]
-    public class Verification {
-        public Verification(VerificationType type) {
+    public class Verification
+    {
+        public Verification(VerificationType type)
+        {
             Type = type;
         }
 
@@ -89,112 +96,116 @@ namespace Clerk.BackendAPI.Models.Components
 
         public VerificationType Type { get; set; }
 
-
-        public static Verification CreateVerificationOtp(Otp verificationOtp) {
+        public static Verification CreateVerificationOtp(Otp verificationOtp)
+        {
             VerificationType typ = VerificationType.VerificationOtp;
-        
             string typStr = VerificationType.VerificationOtp.ToString();
-            
             verificationOtp.Object = VerificationObjectExtension.ToEnum(VerificationType.VerificationOtp.ToString());
             Verification res = new Verification(typ);
             res.Otp = verificationOtp;
             return res;
         }
-        public static Verification CreateVerificationAdmin(Admin verificationAdmin) {
+
+        public static Verification CreateVerificationAdmin(Admin verificationAdmin)
+        {
             VerificationType typ = VerificationType.VerificationAdmin;
-        
             string typStr = VerificationType.VerificationAdmin.ToString();
-            
             verificationAdmin.Object = VerificationAdminVerificationObjectExtension.ToEnum(VerificationType.VerificationAdmin.ToString());
             Verification res = new Verification(typ);
             res.Admin = verificationAdmin;
             return res;
         }
-        public static Verification CreateVerificationFromOauth(FromOAuth verificationFromOauth) {
+
+        public static Verification CreateVerificationFromOauth(FromOAuth verificationFromOauth)
+        {
             VerificationType typ = VerificationType.VerificationFromOauth;
-        
             string typStr = VerificationType.VerificationFromOauth.ToString();
-            
             verificationFromOauth.Object = VerificationFromOauthVerificationObjectExtension.ToEnum(VerificationType.VerificationFromOauth.ToString());
             Verification res = new Verification(typ);
             res.FromOAuth = verificationFromOauth;
             return res;
         }
-        public static Verification CreateVerificationTicket(Ticket verificationTicket) {
+
+        public static Verification CreateVerificationTicket(Ticket verificationTicket)
+        {
             VerificationType typ = VerificationType.VerificationTicket;
-        
             string typStr = VerificationType.VerificationTicket.ToString();
-            
             verificationTicket.Object = VerificationTicketVerificationObjectExtension.ToEnum(VerificationType.VerificationTicket.ToString());
             Verification res = new Verification(typ);
             res.Ticket = verificationTicket;
             return res;
         }
-        public static Verification CreateVerificationSaml(Saml verificationSaml) {
+
+        public static Verification CreateVerificationSaml(Saml verificationSaml)
+        {
             VerificationType typ = VerificationType.VerificationSaml;
-        
             string typStr = VerificationType.VerificationSaml.ToString();
-            
             verificationSaml.Object = VerificationSamlVerificationObjectExtension.ToEnum(VerificationType.VerificationSaml.ToString());
             Verification res = new Verification(typ);
             res.Saml = verificationSaml;
             return res;
         }
-        public static Verification CreateVerificationEmailLink(EmailLink verificationEmailLink) {
+
+        public static Verification CreateVerificationEmailLink(EmailLink verificationEmailLink)
+        {
             VerificationType typ = VerificationType.VerificationEmailLink;
-        
             string typStr = VerificationType.VerificationEmailLink.ToString();
-            
             verificationEmailLink.Object = VerificationEmailLinkVerificationObjectExtension.ToEnum(VerificationType.VerificationEmailLink.ToString());
             Verification res = new Verification(typ);
             res.EmailLink = verificationEmailLink;
             return res;
         }
-        public static Verification CreateNull() {
+
+        public static Verification CreateNull()
+        {
             VerificationType typ = VerificationType.Null;
             return new Verification(typ);
         }
 
         public class VerificationConverter : JsonConverter
         {
-
             public override bool CanConvert(System.Type objectType) => objectType == typeof(Verification);
 
             public override bool CanRead => true;
 
             public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
             {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return null;
+                }
+
                 JObject jo = JObject.Load(reader);
                 string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
                 if (discriminator == VerificationType.VerificationOtp.ToString())
                 {
-                    Otp? otp = ResponseBodyDeserializer.Deserialize<Otp>(jo.ToString());
-                    return CreateVerificationOtp(otp!);
+                    Otp otp = ResponseBodyDeserializer.DeserializeNotNull<Otp>(jo.ToString());
+                    return CreateVerificationOtp(otp);
                 }
                 if (discriminator == VerificationType.VerificationAdmin.ToString())
                 {
-                    Admin? admin = ResponseBodyDeserializer.Deserialize<Admin>(jo.ToString());
-                    return CreateVerificationAdmin(admin!);
+                    Admin admin = ResponseBodyDeserializer.DeserializeNotNull<Admin>(jo.ToString());
+                    return CreateVerificationAdmin(admin);
                 }
                 if (discriminator == VerificationType.VerificationFromOauth.ToString())
                 {
-                    FromOAuth? fromOAuth = ResponseBodyDeserializer.Deserialize<FromOAuth>(jo.ToString());
-                    return CreateVerificationFromOauth(fromOAuth!);
+                    FromOAuth fromOAuth = ResponseBodyDeserializer.DeserializeNotNull<FromOAuth>(jo.ToString());
+                    return CreateVerificationFromOauth(fromOAuth);
                 }
                 if (discriminator == VerificationType.VerificationTicket.ToString())
                 {
-                    Ticket? ticket = ResponseBodyDeserializer.Deserialize<Ticket>(jo.ToString());
-                    return CreateVerificationTicket(ticket!);
+                    Ticket ticket = ResponseBodyDeserializer.DeserializeNotNull<Ticket>(jo.ToString());
+                    return CreateVerificationTicket(ticket);
                 }
                 if (discriminator == VerificationType.VerificationSaml.ToString())
                 {
-                    Saml? saml = ResponseBodyDeserializer.Deserialize<Saml>(jo.ToString());
-                    return CreateVerificationSaml(saml!);
+                    Saml saml = ResponseBodyDeserializer.DeserializeNotNull<Saml>(jo.ToString());
+                    return CreateVerificationSaml(saml);
                 }
                 if (discriminator == VerificationType.VerificationEmailLink.ToString())
                 {
-                    EmailLink? emailLink = ResponseBodyDeserializer.Deserialize<EmailLink>(jo.ToString());
-                    return CreateVerificationEmailLink(emailLink!);
+                    EmailLink emailLink = ResponseBodyDeserializer.DeserializeNotNull<EmailLink>(jo.ToString());
+                    return CreateVerificationEmailLink(emailLink);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
@@ -202,47 +213,54 @@ namespace Clerk.BackendAPI.Models.Components
 
             public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
             {
-                if (value == null) {
+                if (value == null)
+                {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 Verification res = (Verification)value;
                 if (VerificationType.FromString(res.Type).Equals(VerificationType.Null))
                 {
                     writer.WriteRawValue("null");
                     return;
                 }
+
                 if (res.Otp != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Otp));
                     return;
                 }
+
                 if (res.Admin != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Admin));
                     return;
                 }
+
                 if (res.FromOAuth != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.FromOAuth));
                     return;
                 }
+
                 if (res.Ticket != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Ticket));
                     return;
                 }
+
                 if (res.Saml != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.Saml));
                     return;
                 }
+
                 if (res.EmailLink != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.EmailLink));
                     return;
                 }
-
             }
 
         }

@@ -64,7 +64,7 @@ namespace Clerk.BackendAPI.Models.Components
             return Verification != null ? Verification.VerificationTicket : null;
         }
 
-        [JsonProperty("saml_connection")]
+        [JsonProperty("saml_connection", NullValueHandling = NullValueHandling.Include)]
         public SamlConnection? SamlConnection { get; set; } = null;
     }
 }

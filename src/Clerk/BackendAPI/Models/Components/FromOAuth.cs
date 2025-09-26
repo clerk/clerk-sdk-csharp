@@ -25,7 +25,7 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("strategy")]
         public string Strategy { get; set; } = default!;
 
-        [JsonProperty("error")]
+        [JsonProperty("error", NullValueHandling = NullValueHandling.Include)]
         public Error? Error { get; set; } = null;
 
         [JsonProperty("expire_at", NullValueHandling = NullValueHandling.Include)]
