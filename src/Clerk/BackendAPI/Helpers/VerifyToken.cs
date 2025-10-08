@@ -19,6 +19,7 @@ namespace Clerk.BackendAPI.Helpers.Jwks;
 
 public static class VerifyToken
 {
+    private static readonly Cache _jwkCache = new Cache();
     public static async Task<ClaimsPrincipal> VerifyTokenAsync(string token, VerifyTokenOptions options)
     {
         var tokenType = TokenTypeHelper.GetTokenType(token);
@@ -132,6 +133,23 @@ public static class VerifyToken
     {
         var kid = ParseKid(token);
 
+        // Check cache first
+        var cachedPem = _jwkCache.Get(kid);
+        if (cachedPem != null)
+        {
+            try
+            {
+                var rsa = RSA.Create();
+                rsa.ImportFromPem(cachedPem.ToCharArray());
+                return new RsaSecurityKey(rsa);
+            }
+            catch (Exception ex)
+            {
+                throw new TokenVerificationException(TokenVerificationErrorReason.JWK_FAILED_TO_RESOLVE, ex);
+            }
+        }
+
+        // Not in cache, fetch from API
         var jwks = await FetchJwksAsync(options);
         if (jwks.Keys == null) throw new TokenVerificationException(TokenVerificationErrorReason.JWK_REMOTE_INVALID);
 
@@ -149,6 +167,10 @@ public static class VerifyToken
                     };
                     var rsa = RSA.Create();
                     rsa.ImportParameters(rsaParameters);
+
+                    // Convert to PEM format and cache
+                    var pem = rsa.ExportRSAPublicKeyPem();
+                    _jwkCache.Set(kid, pem);
 
                     return new RsaSecurityKey(rsa);
                 }
