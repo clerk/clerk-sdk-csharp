@@ -133,22 +133,25 @@ public static class VerifyToken
     {
         var kid = ParseKid(token);
 
-        // Check cache first
-        var cachedPem = _jwkCache.Get(kid);
-        if (cachedPem != null)
+        if (!options.SkipJwksCache)
         {
-            try
+            // Check cache first
+            var cachedPem = _jwkCache.Get(kid);
+            if (cachedPem != null)
             {
-                var rsa = RSA.Create();
-                rsa.ImportFromPem(cachedPem.ToCharArray());
-                return new RsaSecurityKey(rsa);
-            }
-            catch (Exception ex)
-            {
-                throw new TokenVerificationException(TokenVerificationErrorReason.JWK_FAILED_TO_RESOLVE, ex);
+                try
+                {
+                    var rsa = RSA.Create();
+                    rsa.ImportFromPem(cachedPem.ToCharArray());
+                    return new RsaSecurityKey(rsa);
+                }
+                catch (Exception ex)
+                {
+                    throw new TokenVerificationException(TokenVerificationErrorReason.JWK_FAILED_TO_RESOLVE, ex);
+                }
             }
         }
-
+        
         // Not in cache, fetch from API
         var jwks = await FetchJwksAsync(options);
         if (jwks.Keys == null) throw new TokenVerificationException(TokenVerificationErrorReason.JWK_REMOTE_INVALID);
