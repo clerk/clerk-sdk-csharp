@@ -147,7 +147,8 @@ public static class VerifyToken
                 }
                 catch (Exception ex)
                 {
-                    throw new TokenVerificationException(TokenVerificationErrorReason.JWK_FAILED_TO_RESOLVE, ex);
+                    // Cached PEM is corrupted, remove it and fall through fetching from API
+                    _jwkCache.Remove(kid);
                 }
             }
         }
