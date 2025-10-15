@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Clerk.BackendAPI.Helpers.Jwks;
@@ -8,7 +9,7 @@ namespace Clerk.BackendAPI.Helpers.Jwks;
 /// </summary>
 public class Cache
 {
-    private readonly Dictionary<string, CacheEntry> _cache = new Dictionary<string, CacheEntry>();
+    private readonly ConcurrentDictionary<string, CacheEntry> _cache = new ConcurrentDictionary<string, CacheEntry>();
     private readonly int _expirationTimeSeconds = 300; // 5 minutes
 
     private class CacheEntry
@@ -55,9 +56,22 @@ public class Cache
             }
 
             // Expired, remove from cache
-            _cache.Remove(key);
+           Remove(key);
         }
 
         return null;
+    }
+    
+    /// <summary>
+    /// Removes a value from the cache.
+    /// </summary>
+    /// <param name="key">The cache key to remove.</param>
+    /// <returns>True if the key was found and removed, false otherwise.</returns>
+    public bool Remove(string? key)
+    {
+        if (key == null)
+            return false;
+
+        return _cache.TryRemove(key, out _);
     }
 }
