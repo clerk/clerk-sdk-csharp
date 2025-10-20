@@ -23,7 +23,7 @@ namespace Clerk.BackendAPI.Utils
     internal class ResponseBodyDeserializer
     {
 
-        public static T? Deserialize<T>(string json, NullValueHandling nullValueHandling=NullValueHandling.Ignore, MissingMemberHandling missingMemberHandling=MissingMemberHandling.Ignore)
+        public static T Deserialize<T>(string json, NullValueHandling nullValueHandling=NullValueHandling.Ignore, MissingMemberHandling missingMemberHandling=MissingMemberHandling.Ignore)
         {
             return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings(){ NullValueHandling = nullValueHandling, MissingMemberHandling = missingMemberHandling, Converters = Utilities.GetJsonDeserializers(typeof(T))});
         }
@@ -48,7 +48,7 @@ namespace Clerk.BackendAPI.Utils
             public DeserializationException(Type type) : base($"Could not deserialize into {type} type.") { }
         }
 
-        public static T? DeserializeUndiscriminatedUnionMember<T>(string json)
+        public static T DeserializeUndiscriminatedUnionMember<T>(string json)
         {
             try
             {

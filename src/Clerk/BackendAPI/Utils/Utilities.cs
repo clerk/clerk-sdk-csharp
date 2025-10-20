@@ -168,9 +168,9 @@ namespace Clerk.BackendAPI.Utils
         {
             Regex surroundingQuotesRegex = new Regex("^\"(.*)\"$");
             var match = surroundingQuotesRegex.Match(input);
-            if(match.Groups.Values.Count() == 2)
+            if (match.Groups.Count == 2)
             {
-                return match.Groups.Values.Last().ToString();
+                return match.Groups[1].Value;
             }
             return input;
         }
