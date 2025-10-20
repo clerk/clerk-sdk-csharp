@@ -60,8 +60,8 @@ namespace JwksHelpers.Tests
             );
 
             Assert.Equal(TokenVerificationErrorReason.JWK_LOCAL_INVALID, ex.Reason);
-            Assert.IsType<System.ArgumentException>(ex.InnerException);
-            Assert.Contains("No supported key formats were found.", ex.InnerException.Message);
+            Assert.IsType<System.FormatException>(ex.InnerException);
+            Assert.Contains("The input is not a valid Base-64 string", ex.InnerException.Message);
         }
 
         [Fact]

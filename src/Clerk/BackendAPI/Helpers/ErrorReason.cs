@@ -1,16 +1,17 @@
-namespace Clerk.BackendAPI.Helpers.Jwks;
-
-/// <summary>
-///     Represents the reason for a TokenVerificationException or AuthenticateRequestException.
-/// </summary>
-public class ErrorReason
+namespace Clerk.BackendAPI.Helpers.Jwks
 {
-    public readonly string Id;
-    public readonly string Message;
-
-    public ErrorReason(string id, string message)
+    /// <summary>
+    ///     Represents the reason for a TokenVerificationException or AuthenticateRequestException.
+    /// </summary>
+    public class ErrorReason
     {
-        Id = id;
-        Message = message;
+        public readonly string Id;
+        public readonly string Message;
+
+        public ErrorReason(string id, string message)
+        {
+            Id = id;
+            Message = message;
+        }
     }
 }

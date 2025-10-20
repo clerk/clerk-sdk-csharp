@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>Clerk.BackendAPI</PackageId>
     <Version>0.13.0</Version>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>netstandard2.1;net8.0</TargetFrameworks>
     <Authors>Clerk</Authors>
     <Copyright>Copyright (c) Clerk 2025</Copyright>
     <RepositoryUrl>https://github.com/clerk/clerk-sdk-csharp.git</RepositoryUrl>

@@ -16,25 +16,25 @@ namespace Clerk.BackendAPI.Utils
 
     public interface ISpeakeasyHttpClient
     {
-        /// <summary>
-        /// Sends an HTTP request asynchronously.
-        /// </summary>
-        /// <remarks>
-        /// When overriding this method, use HttpCompletionOption.ResponseHeadersRead to support streaming response bodies.
-        /// </remarks>
-        /// <param name="request">The HTTP request message to send.</param>
-        /// <returns>The value of the TResult parameter contains the HTTP response message.</returns>
+        /// <summary>  
+        /// Sends an HTTP request asynchronously.  
+        /// </summary>  
+        /// <remarks>  
+        /// When overriding this method, use HttpCompletionOption.ResponseHeadersRead to support streaming response bodies.  
+        /// </remarks>  
+        /// <param name="request">The HTTP request message to send.</param>  
+        /// <returns>The value of the TResult parameter contains the HTTP response message.</returns>  
         Task<HttpResponseMessage> SendAsync(HttpRequestMessage request);
 
-        /// <summary>
-        /// Clones an HTTP request asynchronously.
-        /// </summary>
-        /// <remarks>
-        /// This method is used in the context of Retries. It creates a new HttpRequestMessage instance
-        /// as a deep copy of the original request, including its method, URI, content, headers and options.
-        /// </remarks>
-        /// <param name="request">The HTTP request message to clone.</param>
-        /// <returns>The value of the TResult parameter contains the cloned HTTP request message.</returns>
+        /// <summary>  
+        /// Clones an HTTP request asynchronously.  
+        /// </summary>  
+        /// <remarks>  
+        /// This method is used in the context of Retries. It creates a new HttpRequestMessage instance  
+        /// as a deep copy of the original request, including its method, URI, content, and headers.  
+        /// </remarks>  
+        /// <param name="request">The HTTP request message to clone.</param>  
+        /// <returns>The value of the TResult parameter contains the cloned HTTP request message.</returns>  
         Task<HttpRequestMessage> CloneAsync(HttpRequestMessage request);
     }
 
@@ -73,10 +73,7 @@ namespace Clerk.BackendAPI.Utils
                 clone.Headers.TryAddWithoutValidation(header.Key, header.Value);
             }
 
-            foreach (KeyValuePair<string, object?> prop in request.Options)
-            {
-                clone.Options.TryAdd(prop.Key, prop.Value);
-            }
+            // Removed the problematic 'Options' property as it is not available in HttpRequestMessage in .NET Standard 2.1.  
 
             return clone;
         }
