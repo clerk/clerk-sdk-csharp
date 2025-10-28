@@ -13,6 +13,7 @@ public sealed class AuthenticateRequestOptions
     public readonly string? SecretKey;
     public readonly string? MachineSecretKey;
     public readonly IEnumerable<string> AcceptsToken;
+    public readonly bool SkipJwksCache;
 
     /// <summary>
     ///     Options to configure AuthenticateRequestAsync.
@@ -27,6 +28,7 @@ public sealed class AuthenticateRequestOptions
     ///     token) and the user's application server when validating a token. Defaults to 5000 ms.
     /// </param>
     /// <param name="acceptsToken">A list of token types to accept. Defaults to ["any"].</param>
+    /// <param name="skipJwksCache">Whether to skip the JWKS cache. Defaults to false.</param>
     public AuthenticateRequestOptions(
         string? secretKey = null,
         string? machineSecretKey = null,
@@ -34,7 +36,8 @@ public sealed class AuthenticateRequestOptions
         IEnumerable<string>? audiences = null,
         IEnumerable<string>? authorizedParties = null,
         long? clockSkewInMs = null,
-        IEnumerable<string>? acceptsToken = null)
+        IEnumerable<string>? acceptsToken = null,
+        bool skipJwksCache = false)
     {
         if (string.IsNullOrEmpty(secretKey) && string.IsNullOrEmpty(jwtKey) && string.IsNullOrEmpty(machineSecretKey))
             throw new AuthenticateRequestException(AuthErrorReason.SECRET_KEY_MISSING);
@@ -46,5 +49,6 @@ public sealed class AuthenticateRequestOptions
         AuthorizedParties = authorizedParties ?? new List<string>();
         ClockSkewInMs = clockSkewInMs ?? DEFAULT_CLOCK_SKEW_MS;
         AcceptsToken = acceptsToken ?? new[] { "any" };
+        SkipJwksCache = skipJwksCache;
     }
 }

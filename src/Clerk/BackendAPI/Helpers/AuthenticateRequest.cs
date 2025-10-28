@@ -72,7 +72,8 @@ public static class AuthenticateRequest
 
             verifyTokenOptions = new VerifyTokenOptions(
                 secretKey: options.SecretKey,
-                machineSecretKey: options.MachineSecretKey
+                machineSecretKey: options.MachineSecretKey,
+                skipJwksCache: options.SkipJwksCache
             );
         }
         else
@@ -83,14 +84,16 @@ public static class AuthenticateRequest
                     jwtKey: options.JwtKey,
                     audiences: options.Audiences,
                     authorizedParties: options.AuthorizedParties,
-                    clockSkewInMs: options.ClockSkewInMs
+                    clockSkewInMs: options.ClockSkewInMs,
+                    skipJwksCache: options.SkipJwksCache
                 );
             else if (options.SecretKey != null)
                 verifyTokenOptions = new VerifyTokenOptions(
                     options.SecretKey,
                     audiences: options.Audiences,
                     authorizedParties: options.AuthorizedParties,
-                    clockSkewInMs: options.ClockSkewInMs
+                    clockSkewInMs: options.ClockSkewInMs,
+                    skipJwksCache: options.SkipJwksCache
                 );
             else
                 return RequestState.SignedOut(AuthErrorReason.SECRET_KEY_MISSING);

@@ -12,8 +12,8 @@ public sealed class VerifyTokenOptions
     public readonly IEnumerable<string>? Audiences;
     public readonly IEnumerable<string>? AuthorizedParties;
     public readonly long ClockSkewInMs;
+    public readonly bool SkipJwksCache;
     public readonly string? JwtKey;
-
     public readonly string? SecretKey;
     public readonly string? MachineSecretKey;
 
@@ -29,6 +29,7 @@ public sealed class VerifyTokenOptions
     ///     Allowed time difference (in milliseconds) between the Clerk server (which generates the
     ///     token) and the clock of the user's application server when validating a token. Defaults to 5000 ms.
     /// </param>
+    /// <param name="skipJwksCache">Whether to skip the JWKS cache. Defaults to false.</param>
     /// <param name="apiUrl">The Clerk Backend API endpoint. Defaults to 'https://api.clerk.com'</param>
     /// <param name="apiVersion">The version passed to the Clerk API. Defaults to 'v1'</param>
     public VerifyTokenOptions(
@@ -39,7 +40,8 @@ public sealed class VerifyTokenOptions
         IEnumerable<string>? authorizedParties = null,
         long? clockSkewInMs = null,
         string? apiUrl = null,
-        string? apiVersion = null)
+        string? apiVersion = null,
+        bool skipJwksCache = false)
     {
         if (string.IsNullOrEmpty(secretKey) && string.IsNullOrEmpty(jwtKey) && string.IsNullOrEmpty(machineSecretKey))
             throw new TokenVerificationException(TokenVerificationErrorReason.SECRET_KEY_MISSING);
@@ -52,5 +54,6 @@ public sealed class VerifyTokenOptions
         ClockSkewInMs = clockSkewInMs ?? DEFAULT_CLOCK_SKEW_MS;
         ApiUrl = apiUrl ?? DEFAULT_API_URL;
         ApiVersion = apiVersion ?? DEFAULT_API_VERSION;
+        SkipJwksCache = skipJwksCache;
     }
 }
