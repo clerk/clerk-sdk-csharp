@@ -7,5 +7,5 @@ A list of commerce plans.
 
 | Field                                                         | Type                                                          | Required                                                      | Description                                                   |
 | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| `Data`                                                        | List<[CommercePlan](../../Models/Components/CommercePlan.md)> | :heavy_check_mark:                                            | Array of commerce plans.                                      |
-| `TotalCount`                                                  | *long*                                                        | :heavy_check_mark:                                            | Total number of commerce plans.                               |
+| `Data`                                                        | List<[CommercePlan](../../Models/Components/CommercePlan.md)> | :heavy_check_mark:                                            | Array of plans.                                               |
+| `TotalCount`                                                  | *long*                                                        | :heavy_check_mark:                                            | Total number of plans.                                        |

@@ -13,7 +13,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     
     /// <summary>
-    /// Current amount for this subscription.
+    /// Credit amount.
     /// </summary>
     public class Amount
     {

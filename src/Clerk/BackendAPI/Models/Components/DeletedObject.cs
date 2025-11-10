@@ -29,5 +29,8 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("deleted")]
         public bool Deleted { get; set; } = default!;
+
+        [JsonProperty("external_id")]
+        public string? ExternalId { get; set; }
     }
 }

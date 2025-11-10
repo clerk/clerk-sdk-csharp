@@ -77,13 +77,19 @@ namespace Clerk.BackendAPI.Models.Components
         public bool SyncUserAttributes { get; set; } = default!;
 
         [JsonProperty("allow_subdomains")]
-        public bool? AllowSubdomains { get; set; }
+        public bool AllowSubdomains { get; set; } = default!;
 
         [JsonProperty("allow_idp_initiated")]
-        public bool? AllowIdpInitiated { get; set; }
+        public bool AllowIdpInitiated { get; set; } = default!;
 
         [JsonProperty("disable_additional_identifications")]
-        public bool? DisableAdditionalIdentifications { get; set; }
+        public bool DisableAdditionalIdentifications { get; set; } = default!;
+
+        /// <summary>
+        /// Enable or deactivate ForceAuthn
+        /// </summary>
+        [JsonProperty("force_authn")]
+        public bool ForceAuthn { get; set; } = default!;
 
         /// <summary>
         /// Unix timestamp of creation.<br/>

@@ -1,0 +1,179 @@
+# Billing
+(*Billing*)
+
+## Overview
+
+### Available Operations
+
+* [ExtendSubscriptionItemFreeTrial](#extendsubscriptionitemfreetrial) - Extend free trial for a subscription item
+* [ListStatements](#liststatements) - List all billing statements
+* [GetStatement](#getstatement) - Retrieve a billing statement
+* [GetStatementPaymentAttempts](#getstatementpaymentattempts) - List payment attempts for a billing statement
+
+## ExtendSubscriptionItemFreeTrial
+
+Extends the free trial period for a specific subscription item to the specified timestamp.
+The subscription item must be currently in a free trial period, and the plan must support free trials.
+The timestamp must be in the future and not more than 365 days from the end of the current trial period
+This operation is idempotent - repeated requests with the same timestamp will not change the trial period.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="ExtendBillingSubscriptionItemFreeTrial" method="post" path="/billing/subscription_items/{subscription_item_id}/extend_free_trial" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using System;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Billing.ExtendSubscriptionItemFreeTrialAsync(
+    subscriptionItemId: "<id>",
+    extendFreeTrialRequest: new ExtendFreeTrialRequest() {
+        ExtendTo = System.DateTime.Parse("2026-01-08T00:00:00Z"),
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `SubscriptionItemId`                                                        | *string*                                                                    | :heavy_check_mark:                                                          | The ID of the subscription item to extend the free trial for                |
+| `ExtendFreeTrialRequest`                                                    | [ExtendFreeTrialRequest](../../Models/Components/ExtendFreeTrialRequest.md) | :heavy_check_mark:                                                          | Parameters for extending the free trial                                     |
+
+### Response
+
+**[ExtendBillingSubscriptionItemFreeTrialResponse](../../Models/Operations/ExtendBillingSubscriptionItemFreeTrialResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ListStatements
+
+Returns a list of all billing statements for the instance. The statements are returned sorted by creation date,
+with the newest statements appearing first. Pagination is supported.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetBillingStatementList" method="get" path="/billing/statements" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Billing.ListStatementsAsync(
+    limit: 20,
+    offset: 10
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `Paginated`                                                                                                                               | *bool*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Whether to paginate the results.<br/>If true, the results will be paginated.<br/>If false, the results will not be paginated.             |                                                                                                                                           |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
+
+### Response
+
+**[GetBillingStatementListResponse](../../Models/Operations/GetBillingStatementListResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetStatement
+
+Retrieves the details of a billing statement.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetBillingStatement" method="get" path="/billing/statements/{statementID}" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Billing.GetStatementAsync(statementID: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                            | Type                                 | Required                             | Description                          |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `StatementID`                        | *string*                             | :heavy_check_mark:                   | The ID of the statement to retrieve. |
+
+### Response
+
+**[GetBillingStatementResponse](../../Models/Operations/GetBillingStatementResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetStatementPaymentAttempts
+
+Returns a list of all payment attempts for a specific billing statement. The payment attempts are returned sorted by creation date,
+with the newest payment attempts appearing first. Pagination is supported.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetBillingStatementPaymentAttempts" method="get" path="/billing/statements/{statementID}/payment_attempts" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Billing.GetStatementPaymentAttemptsAsync(
+    statementID: "<id>",
+    limit: 20,
+    offset: 10
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `StatementID`                                                                                                                             | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | The ID of the statement to retrieve payment attempts for.                                                                                 |                                                                                                                                           |
+| `Paginated`                                                                                                                               | *bool*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Whether to paginate the results.<br/>If true, the results will be paginated.<br/>If false, the results will not be paginated.             |                                                                                                                                           |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
+
+### Response
+
+**[GetBillingStatementPaymentAttemptsResponse](../../Models/Operations/GetBillingStatementPaymentAttemptsResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

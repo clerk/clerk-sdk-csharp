@@ -104,6 +104,12 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("legal_accepted_at", NullValueHandling = NullValueHandling.Include)]
         public long? LegalAcceptedAt { get; set; }
 
+        /// <summary>
+        /// The user locale preference for the sign-up specified as a BCP-47 language tag.
+        /// </summary>
+        [JsonProperty("locale")]
+        public string? Locale { get; set; } = null;
+
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("external_account")]
         public SignUpExternalAccount? ExternalAccount { get; set; }

@@ -28,7 +28,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// </remarks>
         /// </summary>
         [JsonProperty("object")]
-        public ClientObject Object { get; set; } = default!;
+        public Models.Components.Object Object { get; set; } = default!;
 
         /// <summary>
         /// String representing the identifier of the session.<br/>
@@ -61,6 +61,16 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("last_active_session_id", NullValueHandling = NullValueHandling.Include)]
         public string? LastActiveSessionId { get; set; }
+
+        /// <summary>
+        /// The authentication strategy that was last used to authenticate the user on this client.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("last_authentication_strategy", NullValueHandling = NullValueHandling.Include)]
+        public string? LastAuthenticationStrategy { get; set; }
 
         /// <summary>
         /// Unix timestamp of last update.<br/>

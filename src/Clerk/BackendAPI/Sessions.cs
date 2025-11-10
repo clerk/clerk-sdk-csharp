@@ -88,10 +88,10 @@ namespace Clerk.BackendAPI
         Task<CreateSessionTokenResponse> CreateTokenAsync(string sessionId, CreateSessionTokenRequestBody? requestBody = null, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Create a session token from a jwt template
+        /// Create a session token from a JWT template
         /// 
         /// <remarks>
-        /// Creates a JSON Web Token(JWT) based on a session and a JWT Template name defined for your instance
+        /// Creates a JSON Web Token (JWT) based on a session and a JWT Template name defined for your instance
         /// </remarks>
         /// </summary>
         Task<CreateSessionTokenFromTemplateResponse> CreateTokenFromTemplateAsync(string sessionId, string templateName, CreateSessionTokenFromTemplateRequestBody? requestBody = null, RetryConfig? retryConfig = null);
@@ -101,9 +101,9 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.13.0";
-        private const string _sdkGenVersion = "2.716.9";
-        private const string _openapiDocVersion = "2025-04-10";
+        private const string _sdkVersion = "0.14.0";
+        private const string _sdkGenVersion = "2.748.0";
+        private const string _openapiDocVersion = "2025-11-10";
 
         public Sessions(SDKConfig config)
         {
@@ -123,7 +123,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetSessionList", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetSessionList", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -273,7 +273,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createSession", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createSession", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -420,7 +420,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetSession", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "GetSession", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -574,7 +574,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "RefreshSession", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "RefreshSession", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -721,7 +721,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "RevokeSession", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "RevokeSession", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -875,7 +875,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "CreateSessionToken", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "CreateSessionToken", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)
@@ -1030,7 +1030,7 @@ namespace Clerk.BackendAPI
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "CreateSessionTokenFromTemplate", new List<string> {  }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "CreateSessionTokenFromTemplate", null, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
             if (retryConfig == null)

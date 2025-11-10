@@ -32,11 +32,11 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? OrderBy { get; set; }
 
         /// <summary>
-        /// Returns users with the user ids specified. For each user id, the `+` and `-` can be<br/>
+        /// Returns users with the user IDs specified. For each user ID, the `+` and `-` can be<br/>
         /// 
         /// <remarks>
-        /// prepended to the id, which denote whether the respective user id should be included or<br/>
-        /// excluded from the result set. Accepts up to 100 user ids. Any user ids not found are ignored.
+        /// prepended to the ID, which denote whether the respective user ID should be included or<br/>
+        /// excluded from the result set. Accepts up to 100 user IDs. Any user IDs not found are ignored.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=user_id")]
@@ -70,7 +70,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// 
         /// <remarks>
         /// Accepts up to 100 web3 wallet addresses.<br/>
-        /// Any web3 wallet addressed not found are ignored.
+        /// Any web3 wallet addresses not found are ignored.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=web3_wallet")]
@@ -86,7 +86,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Returns users that match the given query.<br/>
         /// 
         /// <remarks>
-        /// For possible matches, we check the email addresses, phone numbers, usernames, web3 wallets, user ids, first and last names.<br/>
+        /// For possible matches, we check the email addresses, phone numbers, usernames, web3 wallets, user IDs, first and last names.<br/>
         /// The query value doesn&apos;t need to match the exact value you are looking for, it is capable of partial matches as well.
         /// </remarks>
         /// </summary>

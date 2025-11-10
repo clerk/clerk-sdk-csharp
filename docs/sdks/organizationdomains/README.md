@@ -120,7 +120,7 @@ var res = await sdk.OrganizationDomains.UpdateAsync(
 
 | Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
 | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `OrganizationId`                                                                                      | *string*                                                                                              | :heavy_check_mark:                                                                                    | The ID of the organization the domain belongs to                                                      |
+| `OrganizationId`                                                                                      | *string*                                                                                              | :heavy_check_mark:                                                                                    | The ID of the organization to which the domain belongs                                                |
 | `DomainId`                                                                                            | *string*                                                                                              | :heavy_check_mark:                                                                                    | The ID of the domain                                                                                  |
 | `RequestBody`                                                                                         | [UpdateOrganizationDomainRequestBody](../../Models/Operations/UpdateOrganizationDomainRequestBody.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
 
@@ -158,10 +158,10 @@ var res = await sdk.OrganizationDomains.DeleteAsync(
 
 ### Parameters
 
-| Parameter                                        | Type                                             | Required                                         | Description                                      |
-| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `OrganizationId`                                 | *string*                                         | :heavy_check_mark:                               | The ID of the organization the domain belongs to |
-| `DomainId`                                       | *string*                                         | :heavy_check_mark:                               | The ID of the domain                             |
+| Parameter                                              | Type                                                   | Required                                               | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `OrganizationId`                                       | *string*                                               | :heavy_check_mark:                                     | The ID of the organization to which the domain belongs |
+| `DomainId`                                             | *string*                                               | :heavy_check_mark:                                     | The ID of the domain                                   |
 
 ### Response
 

@@ -58,6 +58,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("domains_enabled")]
         public bool DomainsEnabled { get; set; } = default!;
 
+        [JsonProperty("slug_disabled")]
+        public bool? SlugDisabled { get; set; }
+
         [JsonProperty("domains_enrollment_modes")]
         public List<DomainsEnrollmentModes> DomainsEnrollmentModes { get; set; } = default!;
 
@@ -66,5 +69,11 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("domains_default_role")]
         public string DomainsDefaultRole { get; set; } = default!;
+
+        /// <summary>
+        /// The role set key that it will be used to create new organizations.
+        /// </summary>
+        [JsonProperty("initial_role_set_key")]
+        public string? InitialRoleSetKey { get; set; } = null;
     }
 }

@@ -27,7 +27,7 @@ namespace Clerk.BackendAPI.Models.Components
         public TokenObject Object { get; set; } = default!;
 
         /// <summary>
-        /// String representing the encoded jwt value.<br/>
+        /// String representing the encoded JSON Web Token (JWT) value.<br/>
         /// 
         /// <remarks>
         /// 

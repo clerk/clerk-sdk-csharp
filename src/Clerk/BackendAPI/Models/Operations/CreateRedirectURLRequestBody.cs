@@ -16,7 +16,7 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         /// <summary>
-        /// The full url value prefixed with `https://` or a custom scheme e.g. `&quot;https://my-app.com/oauth-callback&quot;` or `&quot;my-app://oauth-callback&quot;`
+        /// The full URL value prefixed with `https://` or a custom scheme e.g. `&quot;https://my-app.com/oauth-callback&quot;` or `&quot;my-app://oauth-callback&quot;`
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; } = default!;

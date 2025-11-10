@@ -17,12 +17,15 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
     hoistGlobalSecurity: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.13.0
+  version: 0.14.0
   additionalDependencies:
     - package: Microsoft.AspNetCore
       version: 2.3.0
@@ -34,6 +37,7 @@ csharp:
   defaultErrorName: SDKError
   disableNamespacePascalCasingApr2024: true
   dotnetVersion: net8.0
+  enableCancellationToken: false
   enableSourceLink: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first

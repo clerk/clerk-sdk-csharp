@@ -22,8 +22,8 @@ namespace Clerk.BackendAPI.Models.Components
     /// </summary>
     public enum Object
     {
-        [JsonProperty("aws_credential")]
-        AwsCredential,
+        [JsonProperty("client")]
+        Client,
     }
 
     public static class ObjectExtension

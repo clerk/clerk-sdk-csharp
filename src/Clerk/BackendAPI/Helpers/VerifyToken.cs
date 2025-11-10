@@ -152,7 +152,7 @@ public static class VerifyToken
                 }
             }
         }
-        
+
         // Not in cache, fetch from API
         var jwks = await FetchJwksAsync(options);
         if (jwks.Keys == null) throw new TokenVerificationException(TokenVerificationErrorReason.JWK_REMOTE_INVALID);

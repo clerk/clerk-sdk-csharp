@@ -31,7 +31,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string ExpiredToken { get; set; } = default!;
 
         /// <summary>
-        /// The JWT that is sent via the `__session` cookie from your frontend.
+        /// The refresh token from the `__refresh` cookie set via FAPI&apos;s handshake flow.
         /// </summary>
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; set; } = default!;

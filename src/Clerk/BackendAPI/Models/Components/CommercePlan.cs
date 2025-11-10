@@ -24,13 +24,13 @@ namespace Clerk.BackendAPI.Models.Components
         public CommercePlanObject Object { get; set; } = default!;
 
         /// <summary>
-        /// Unique identifier for the commerce plan.
+        /// Unique identifier for the plan.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// The name of the commerce plan.
+        /// The name of the plan.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
@@ -38,65 +38,17 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("fee")]
         public CommerceMoneyResponse Fee { get; set; } = default!;
 
-        [JsonProperty("annual_monthly_fee")]
-        public CommerceMoneyResponse AnnualMonthlyFee { get; set; } = default!;
+        [JsonProperty("annual_monthly_fee", NullValueHandling = NullValueHandling.Include)]
+        public AnnualMonthlyFee? AnnualMonthlyFee { get; set; }
 
-        [JsonProperty("annual_fee")]
-        public CommerceMoneyResponse AnnualFee { get; set; } = default!;
-
-        /// <summary>
-        /// The amount in cents for the plan.
-        /// </summary>
-        [JsonProperty("amount")]
-        public long Amount { get; set; } = default!;
+        [JsonProperty("annual_fee", NullValueHandling = NullValueHandling.Include)]
+        public AnnualFee? AnnualFee { get; set; }
 
         /// <summary>
-        /// The formatted amount as a string (e.g., &quot;$49.99&quot;).
+        /// The description of the plan.
         /// </summary>
-        [JsonProperty("amount_formatted")]
-        public string AmountFormatted { get; set; } = default!;
-
-        /// <summary>
-        /// The monthly amount in cents when billed annually.
-        /// </summary>
-        [JsonProperty("annual_monthly_amount")]
-        public long AnnualMonthlyAmount { get; set; } = default!;
-
-        /// <summary>
-        /// The formatted annual monthly amount as a string.
-        /// </summary>
-        [JsonProperty("annual_monthly_amount_formatted")]
-        public string AnnualMonthlyAmountFormatted { get; set; } = default!;
-
-        /// <summary>
-        /// The total annual amount in cents.
-        /// </summary>
-        [JsonProperty("annual_amount")]
-        public long AnnualAmount { get; set; } = default!;
-
-        /// <summary>
-        /// The formatted annual amount as a string.
-        /// </summary>
-        [JsonProperty("annual_amount_formatted")]
-        public string AnnualAmountFormatted { get; set; } = default!;
-
-        /// <summary>
-        /// The currency symbol (e.g., &quot;$&quot;).
-        /// </summary>
-        [JsonProperty("currency_symbol")]
-        public string CurrencySymbol { get; set; } = default!;
-
-        /// <summary>
-        /// The currency code (e.g., &quot;USD&quot;).
-        /// </summary>
-        [JsonProperty("currency")]
-        public string Currency { get; set; } = default!;
-
-        /// <summary>
-        /// The description of the commerce plan.
-        /// </summary>
-        [JsonProperty("description")]
-        public string Description { get; set; } = default!;
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Include)]
+        public string? Description { get; set; }
 
         /// <summary>
         /// The ID of the product this plan belongs to.
@@ -129,12 +81,6 @@ namespace Clerk.BackendAPI.Models.Components
         public bool HasBaseFee { get; set; } = default!;
 
         /// <summary>
-        /// The types of payers that can use this plan.
-        /// </summary>
-        [JsonProperty("payer_type")]
-        public List<string> PayerType { get; set; } = default!;
-
-        /// <summary>
         /// The payer type this plan is designed for.
         /// </summary>
         [JsonProperty("for_payer_type")]
@@ -149,37 +95,25 @@ namespace Clerk.BackendAPI.Models.Components
         /// <summary>
         /// The URL of the plan&apos;s avatar image.
         /// </summary>
-        [JsonProperty("avatar_url")]
-        public string AvatarUrl { get; set; } = default!;
-
-        /// <summary>
-        /// The billing period for the plan.
-        /// </summary>
-        [JsonProperty("period")]
-        public string? Period { get; set; }
-
-        /// <summary>
-        /// The billing interval.
-        /// </summary>
-        [JsonProperty("interval")]
-        public long? Interval { get; set; }
+        [JsonProperty("avatar_url", NullValueHandling = NullValueHandling.Include)]
+        public string? AvatarUrl { get; set; }
 
         /// <summary>
         /// The features included in this plan.
         /// </summary>
         [JsonProperty("features")]
-        public List<FeatureResponse> Features { get; set; } = default!;
+        public List<FeatureResponse>? Features { get; set; }
 
         /// <summary>
         /// Whether free trial is enabled for this plan.
         /// </summary>
         [JsonProperty("free_trial_enabled")]
-        public bool? FreeTrialEnabled { get; set; }
+        public bool FreeTrialEnabled { get; set; } = default!;
 
         /// <summary>
         /// Number of free trial days for this plan.
         /// </summary>
-        [JsonProperty("free_trial_days")]
-        public long? FreeTrialDays { get; set; } = null;
+        [JsonProperty("free_trial_days", NullValueHandling = NullValueHandling.Include)]
+        public long? FreeTrialDays { get; set; }
     }
 }

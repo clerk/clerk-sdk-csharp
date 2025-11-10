@@ -56,12 +56,12 @@ public class Cache
             }
 
             // Expired, remove from cache
-           Remove(key);
+            Remove(key);
         }
 
         return null;
     }
-    
+
     /// <summary>
     /// Removes a value from the cache.
     /// </summary>

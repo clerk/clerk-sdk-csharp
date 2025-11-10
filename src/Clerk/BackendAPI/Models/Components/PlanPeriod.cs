@@ -14,7 +14,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System;
     
     /// <summary>
-    /// The billing period for this subscription.
+    /// The billing period for this subscription item.
     /// </summary>
     public enum PlanPeriod
     {

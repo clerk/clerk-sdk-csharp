@@ -39,6 +39,12 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? LastName { get; set; } = null;
 
         /// <summary>
+        /// The locale to assign to the user (e.g., &quot;en-US&quot;, &quot;fr-FR&quot;)
+        /// </summary>
+        [JsonProperty("locale")]
+        public string? Locale { get; set; } = null;
+
+        /// <summary>
         /// Email addresses to add to the user.<br/>
         /// 
         /// <remarks>

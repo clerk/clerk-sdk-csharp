@@ -50,7 +50,8 @@ namespace Clerk.BackendAPI.Models.Operations
         /// 
         /// <remarks>
         /// Can contain only lowercase alphanumeric characters and the dash &quot;-&quot;.<br/>
-        /// Must be unique for the instance.
+        /// Must be unique for the instance.<br/>
+        /// This field should only be included when slugs are enabled in the organization settings, refer to our <a href="https://clerk.com/docs/guides/organizations/overview#organization-slugs">documentation</a>.
         /// </remarks>
         /// </summary>
         [JsonProperty("slug")]

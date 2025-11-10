@@ -28,6 +28,9 @@ namespace Clerk.BackendAPI.Models.Operations
         [JsonProperty("domains_enabled")]
         public bool? DomainsEnabled { get; set; } = null;
 
+        [JsonProperty("slug_disabled")]
+        public bool? SlugDisabled { get; set; } = null;
+
         /// <summary>
         /// Specify which enrollment modes to enable for your Organization Domains.<br/>
         /// 

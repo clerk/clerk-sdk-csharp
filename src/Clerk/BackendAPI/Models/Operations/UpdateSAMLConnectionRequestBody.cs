@@ -38,13 +38,13 @@ namespace Clerk.BackendAPI.Models.Operations
         public List<string>? Domains { get; set; } = null;
 
         /// <summary>
-        /// The entity id as provided by the IdP
+        /// The Entity ID as provided by the IdP
         /// </summary>
         [JsonProperty("idp_entity_id")]
         public string? IdpEntityId { get; set; } = null;
 
         /// <summary>
-        /// The SSO url as provided by the IdP
+        /// The SSO URL as provided by the IdP
         /// </summary>
         [JsonProperty("idp_sso_url")]
         public string? IdpSsoUrl { get; set; } = null;
@@ -74,7 +74,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? OrganizationId { get; set; } = null;
 
         /// <summary>
-        /// Define the atrtibute name mapping between Identity Provider and Clerk&apos;s user properties
+        /// Define the attribute name mapping between Identity Provider and Clerk&apos;s user properties
         /// </summary>
         [JsonProperty("attribute_mapping")]
         public AttributeMapping? AttributeMapping { get; set; } = null;
@@ -108,5 +108,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("disable_additional_identifications")]
         public bool? DisableAdditionalIdentifications { get; set; } = null;
+
+        /// <summary>
+        /// Enable or deactivate ForceAuthn
+        /// </summary>
+        [JsonProperty("force_authn")]
+        public bool? ForceAuthn { get; set; }
     }
 }

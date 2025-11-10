@@ -40,5 +40,8 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("identifier")]
         public string? Identifier { get; set; } = null;
+
+        [JsonProperty("username")]
+        public string? Username { get; set; } = null;
     }
 }

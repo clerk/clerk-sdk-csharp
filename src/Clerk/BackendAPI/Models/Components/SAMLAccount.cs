@@ -48,6 +48,16 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("provider_user_id")]
         public string? ProviderUserId { get; set; } = null;
 
+        /// <summary>
+        /// Unix timestamp of last authentication.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("last_authenticated_at")]
+        public long? LastAuthenticatedAt { get; set; } = null;
+
         [JsonProperty("public_metadata")]
         public Dictionary<string, object>? PublicMetadata { get; set; }
 

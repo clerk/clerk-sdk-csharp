@@ -84,5 +84,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("attribute_mapping")]
         public CreateSAMLConnectionRequestBodyAttributeMapping? AttributeMapping { get; set; } = null;
+
+        /// <summary>
+        /// Enable or deactivate ForceAuthn
+        /// </summary>
+        [JsonProperty("force_authn")]
+        public bool? ForceAuthn { get; set; }
     }
 }

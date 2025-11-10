@@ -38,10 +38,10 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Query { get; set; }
 
         /// <summary>
-        /// Returns organizations with the user ids specified. Any user ids not found are ignored.<br/>
+        /// Returns organizations that include any of the specified user IDs as members. Any user IDs not found are ignored.<br/>
         /// 
         /// <remarks>
-        /// For each user id, the `+` and `-` can be prepended to the id, which denote whether the<br/>
+        /// For each user ID, the `+` and `-` can be prepended to the ID, which denote whether the<br/>
         /// respective organization should be included or excluded from the result set.
         /// </remarks>
         /// </summary>
@@ -49,11 +49,11 @@ namespace Clerk.BackendAPI.Models.Operations
         public List<string>? UserId { get; set; }
 
         /// <summary>
-        /// Returns organizations with the organization ids specified. Any organization ids not found are ignored.<br/>
+        /// Returns organizations with the organization IDs specified. Any organization IDs not found are ignored.<br/>
         /// 
         /// <remarks>
-        /// For each organization id, the `+` and `-` can be prepended to the id, which denote whether the<br/>
-        /// respective organization should be included or excluded from the result set. Accepts up to 100 organization ids.<br/>
+        /// For each organization ID, the `+` and `-` can be prepended to the ID, which denote whether the<br/>
+        /// respective organization should be included or excluded from the result set. Accepts up to 100 organization IDs.<br/>
         /// Example: ?organization_id=+org_1&amp;organization_id=-org_2
         /// </remarks>
         /// </summary>

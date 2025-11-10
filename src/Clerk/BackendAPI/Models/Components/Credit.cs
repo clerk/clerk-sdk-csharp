@@ -23,7 +23,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// Credit amount.
         /// </summary>
         [JsonProperty("amount")]
-        public CommerceSubscriptionItemAmount? Amount { get; set; } = null;
+        public SchemasCommerceSubscriptionItemCreditAmount? Amount { get; set; } = null;
 
         /// <summary>
         /// Percentage of the billing cycle remaining.
