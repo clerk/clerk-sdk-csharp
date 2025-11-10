@@ -27,7 +27,7 @@ namespace Clerk.BackendAPI.Hooks
         public async Task<HttpRequestMessage> BeforeRequestAsync(BeforeRequestContext hookCtx, HttpRequestMessage request)
         {
             // Add the Clerk API version header
-            request.Headers.Add("Clerk-API-Version", "2025-04-10");
+            request.Headers.Add("Clerk-API-Version", "2025-11-10");
 
             // Add Origin header for session token creation operations if origin is specified
             if (!string.IsNullOrEmpty(_origin) &&
