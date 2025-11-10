@@ -16,7 +16,7 @@ namespace Clerk.BackendAPI.Models.Operations
     {
 
         /// <summary>
-        /// Use this parameter to override the JWT token lifetime.
+        /// Use this parameter to override the JWT lifetime.
         /// </summary>
         [JsonProperty("expires_in_seconds")]
         public long? ExpiresInSeconds { get; set; } = null;

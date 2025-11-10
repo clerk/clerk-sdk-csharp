@@ -22,7 +22,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string SessionId { get; set; } = default!;
 
         /// <summary>
-        /// The name of the JWT Template defined in your instance (e.g. `custom_hasura`).
+        /// The name of the JWT template defined in your instance (e.g. `custom_hasura`).
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=template_name")]
         public string TemplateName { get; set; } = default!;

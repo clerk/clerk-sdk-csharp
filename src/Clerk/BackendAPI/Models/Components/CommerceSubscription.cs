@@ -65,14 +65,14 @@ namespace Clerk.BackendAPI.Models.Components
         /// <summary>
         /// Unix timestamp (milliseconds) when the subscription became active.
         /// </summary>
-        [JsonProperty("active_at")]
-        public long? ActiveAt { get; set; } = null;
+        [JsonProperty("active_at", NullValueHandling = NullValueHandling.Include)]
+        public long? ActiveAt { get; set; }
 
         /// <summary>
         /// Unix timestamp (milliseconds) when the subscription became past due.
         /// </summary>
-        [JsonProperty("past_due_at")]
-        public long? PastDueAt { get; set; } = null;
+        [JsonProperty("past_due_at", NullValueHandling = NullValueHandling.Include)]
+        public long? PastDueAt { get; set; }
 
         /// <summary>
         /// Array of subscription items in this subscription.
@@ -87,6 +87,6 @@ namespace Clerk.BackendAPI.Models.Components
         /// Whether the payer is eligible for a free trial.
         /// </summary>
         [JsonProperty("eligible_for_free_trial")]
-        public bool? EligibleForFreeTrial { get; set; } = null;
+        public bool? EligibleForFreeTrial { get; set; }
     }
 }

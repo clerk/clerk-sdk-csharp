@@ -17,12 +17,6 @@ namespace Clerk.BackendAPI.Models.Components
     {
 
         /// <summary>
-        /// Unix timestamp (milliseconds) of the next payment.
-        /// </summary>
-        [JsonProperty("time")]
-        public long Time { get; set; } = default!;
-
-        /// <summary>
         /// Unix timestamp (milliseconds) of the next payment date.
         /// </summary>
         [JsonProperty("date")]

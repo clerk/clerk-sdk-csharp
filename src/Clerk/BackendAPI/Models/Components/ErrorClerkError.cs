@@ -27,8 +27,5 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("meta")]
         public ErrorMeta? Meta { get; set; }
-
-        [JsonProperty("clerk_trace_id")]
-        public string? ClerkTraceId { get; set; }
     }
 }

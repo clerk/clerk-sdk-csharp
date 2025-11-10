@@ -72,25 +72,9 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? IncludeFree { get; set; } = false;
 
         /// <summary>
-        /// Search query to filter subscription items by email, user first name, user last name, or organization name.<br/>
-        /// 
-        /// <remarks>
-        /// Supports partial matching.
-        /// </remarks>
+        /// Search query to filter subscription items
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
-
-        /// <summary>
-        /// Filter subscription items by user ID
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=user_id")]
-        public string? UserId { get; set; }
-
-        /// <summary>
-        /// Filter subscription items by organization ID
-        /// </summary>
-        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=organization_id")]
-        public string? OrganizationId { get; set; }
     }
 }

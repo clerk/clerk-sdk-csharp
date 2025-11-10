@@ -39,6 +39,12 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? LastName { get; set; } = null;
 
         /// <summary>
+        /// The locale to assign to the user (e.g., &quot;en-US&quot;, &quot;fr-FR&quot;)
+        /// </summary>
+        [JsonProperty("locale")]
+        public string? Locale { get; set; } = null;
+
+        /// <summary>
         /// The ID of the email address to set as primary.<br/>
         /// 
         /// <remarks>
@@ -201,7 +207,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? CreateOrganizationEnabled { get; set; } = null;
 
         /// <summary>
-        /// A custom timestamps denoting _when_ the user accepted legal requirements, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
+        /// A custom timestamp denoting _when_ the user accepted legal requirements, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
         /// </summary>
         [JsonProperty("legal_accepted_at")]
         public string? LegalAcceptedAt { get; set; } = null;

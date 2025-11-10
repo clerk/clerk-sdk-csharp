@@ -8,6 +8,8 @@ Current status of the subscription item.
 | Name         | Value        |
 | ------------ | ------------ |
 | `Active`     | active       |
+| `Canceled`   | canceled     |
+| `Expired`    | expired      |
 | `Ended`      | ended        |
 | `PastDue`    | past_due     |
 | `Upcoming`   | upcoming     |

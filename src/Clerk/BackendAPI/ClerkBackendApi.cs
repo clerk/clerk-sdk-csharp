@@ -39,7 +39,6 @@ namespace Clerk.BackendAPI
     {
         public IMiscellaneous Miscellaneous { get; }
         public IJwks Jwks { get; }
-        public IAwsCredentials AwsCredentials { get; }
         public IClients Clients { get; }
         public IEmailAddresses EmailAddresses { get; }
         public IPhoneNumbers PhoneNumbers { get; }
@@ -70,8 +69,8 @@ namespace Clerk.BackendAPI
         public ISamlConnections SamlConnections { get; }
         public ITestingTokens TestingTokens { get; }
         public IWaitlistEntries WaitlistEntries { get; }
-        public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; }
         public ICommerce Commerce { get; }
+        public IBilling Billing { get; }
         public IM2m M2m { get; }
         public IOauthAccessTokens OauthAccessTokens { get; }
     }
@@ -97,12 +96,11 @@ namespace Clerk.BackendAPI
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.13.0";
-        private const string _sdkGenVersion = "2.716.9";
-        private const string _openapiDocVersion = "2025-04-10";
+        private const string _sdkVersion = "0.14.0";
+        private const string _sdkGenVersion = "2.748.0";
+        private const string _openapiDocVersion = "2025-11-10";
         public IMiscellaneous Miscellaneous { get; private set; }
         public IJwks Jwks { get; private set; }
-        public IAwsCredentials AwsCredentials { get; private set; }
         public IClients Clients { get; private set; }
         public IEmailAddresses EmailAddresses { get; private set; }
         public IPhoneNumbers PhoneNumbers { get; private set; }
@@ -133,8 +131,8 @@ namespace Clerk.BackendAPI
         public ISamlConnections SamlConnections { get; private set; }
         public ITestingTokens TestingTokens { get; private set; }
         public IWaitlistEntries WaitlistEntries { get; private set; }
-        public IExperimentalAccountlessApplications ExperimentalAccountlessApplications { get; private set; }
         public ICommerce Commerce { get; private set; }
+        public IBilling Billing { get; private set; }
         public IM2m M2m { get; private set; }
         public IOauthAccessTokens OauthAccessTokens { get; private set; }
 
@@ -146,8 +144,6 @@ namespace Clerk.BackendAPI
             Miscellaneous = new Miscellaneous(SDKConfiguration);
 
             Jwks = new Jwks(SDKConfiguration);
-
-            AwsCredentials = new AwsCredentials(SDKConfiguration);
 
             Clients = new Clients(SDKConfiguration);
 
@@ -209,15 +205,26 @@ namespace Clerk.BackendAPI
 
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
 
-            ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(SDKConfiguration);
-
             Commerce = new Commerce(SDKConfiguration);
+
+            Billing = new Billing(SDKConfiguration);
 
             M2m = new M2m(SDKConfiguration);
 
             OauthAccessTokens = new OauthAccessTokens(SDKConfiguration);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the SDK with optional configuration parameters.
+        /// </summary>
+        /// <param name="bearerAuth">The security configuration to use for API requests. If provided, this will be used as a static security configuration.</param>
+        /// <param name="bearerAuthSource">A function that returns the security configuration dynamically. This takes precedence over the static security parameter if both are provided.</param>
+        /// <param name="serverIndex">The index of the server to use from the predefined server list. Must be between 0 and the length of the server list. Defaults to 0 if not specified.</param>
+        /// <param name="serverUrl">A custom server URL to use instead of the predefined server list. If provided with urlParams, the URL will be templated with the provided parameters.</param>
+        /// <param name="urlParams">A dictionary of parameters to use for templating the serverUrl. Only used when serverUrl is provided.</param>
+        /// <param name="client">A custom HTTP client implementation to use for making API requests. If not provided, the default SpeakeasyHttpClient will be used.</param>
+        /// <param name="retryConfig">Configuration for retry behavior when API requests fail. Defines retry strategies, backoff policies, and maximum retry attempts.</param>
+        /// <exception cref="Exception">Thrown when the serverIndex is out of range (less than 0 or greater than or equal to the server list length).</exception>
         public ClerkBackendApi(string? bearerAuth = null, Func<string>? bearerAuthSource = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
         {
             if (serverIndex != null)
@@ -260,8 +267,6 @@ namespace Clerk.BackendAPI
 
             Jwks = new Jwks(SDKConfiguration);
 
-            AwsCredentials = new AwsCredentials(SDKConfiguration);
-
             Clients = new Clients(SDKConfiguration);
 
             EmailAddresses = new EmailAddresses(SDKConfiguration);
@@ -322,9 +327,9 @@ namespace Clerk.BackendAPI
 
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
 
-            ExperimentalAccountlessApplications = new ExperimentalAccountlessApplications(SDKConfiguration);
-
             Commerce = new Commerce(SDKConfiguration);
+
+            Billing = new Billing(SDKConfiguration);
 
             M2m = new M2m(SDKConfiguration);
 

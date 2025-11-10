@@ -39,15 +39,15 @@ namespace Clerk.BackendAPI.Models.Operations
         public List<string>? PhoneNumber { get; set; }
 
         /// <summary>
-        /// Returns users with the specified external ids.<br/>
+        /// Returns users with the specified external IDs.<br/>
         /// 
         /// <remarks>
-        /// For each external id, the `+` and `-` can be<br/>
-        /// prepended to the id, which denote whether the<br/>
-        /// respective external id should be included or<br/>
+        /// For each external ID, the `+` and `-` can be<br/>
+        /// prepended to the ID, which denote whether the<br/>
+        /// respective external ID should be included or<br/>
         /// excluded from the result set.<br/>
-        /// Accepts up to 100 external ids.<br/>
-        /// Any external ids not found are ignored.
+        /// Accepts up to 100 external IDs.<br/>
+        /// Any external IDs not found are ignored.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=external_id")]
@@ -69,22 +69,22 @@ namespace Clerk.BackendAPI.Models.Operations
         /// 
         /// <remarks>
         /// Accepts up to 100 web3 wallet addresses.<br/>
-        /// Any web3 wallet addressed not found are ignored.
+        /// Any web3 wallet addresses not found are ignored.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=web3_wallet")]
         public List<string>? Web3Wallet { get; set; }
 
         /// <summary>
-        /// Returns users with the user ids specified.<br/>
+        /// Returns users with the user IDs specified.<br/>
         /// 
         /// <remarks>
-        /// For each user id, the `+` and `-` can be<br/>
-        /// prepended to the id, which denote whether the<br/>
-        /// respective user id should be included or<br/>
+        /// For each user ID, the `+` and `-` can be<br/>
+        /// prepended to the ID, which denote whether the<br/>
+        /// respective user ID should be included or<br/>
         /// excluded from the result set.<br/>
-        /// Accepts up to 100 user ids.<br/>
-        /// Any user ids not found are ignored.
+        /// Accepts up to 100 user IDs.<br/>
+        /// Any user IDs not found are ignored.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=user_id")]
@@ -95,11 +95,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// 
         /// <remarks>
         /// given organizations.<br/>
-        /// For each organization id, the `+` and `-` can be<br/>
-        /// prepended to the id, which denote whether the<br/>
+        /// For each organization ID, the `+` and `-` can be<br/>
+        /// prepended to the ID, which denote whether the<br/>
         /// respective organization should be included or<br/>
         /// excluded from the result set.<br/>
-        /// Accepts up to 100 organization ids.
+        /// Accepts up to 100 organization IDs.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=organization_id")]
@@ -109,7 +109,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Returns users that match the given query.<br/>
         /// 
         /// <remarks>
-        /// For possible matches, we check the email addresses, phone numbers, usernames, web3 wallets, user ids, first and last names.<br/>
+        /// For possible matches, we check the email addresses, phone numbers, usernames, web3 wallets, user IDs, first and last names.<br/>
         /// The query value doesn&apos;t need to match the exact value you are looking for, it is capable of partial matches as well.
         /// </remarks>
         /// </summary>

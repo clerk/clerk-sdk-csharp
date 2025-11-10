@@ -20,6 +20,10 @@ namespace Clerk.BackendAPI.Models.Components
     {
         [JsonProperty("active")]
         Active,
+        [JsonProperty("canceled")]
+        Canceled,
+        [JsonProperty("expired")]
+        Expired,
         [JsonProperty("ended")]
         Ended,
         [JsonProperty("past_due")]

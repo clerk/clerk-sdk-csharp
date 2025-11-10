@@ -23,7 +23,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// Amount for the next payment.
         /// </summary>
         [JsonProperty("amount")]
-        public CommerceSubscriptionItemNextPaymentAmount? Amount { get; set; } = null;
+        public CommerceSubscriptionItemAmount? Amount { get; set; } = null;
 
         /// <summary>
         /// Unix timestamp (in milliseconds) for the next payment date.

@@ -58,11 +58,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// 
         /// <remarks>
         /// given organizations.<br/>
-        /// For each organization id, the `+` and `-` can be<br/>
-        /// prepended to the id, which denote whether the<br/>
+        /// For each organization ID, the `+` and `-` can be<br/>
+        /// prepended to the ID, which denote whether the<br/>
         /// respective organization should be included or<br/>
         /// excluded from the result set.<br/>
-        /// Accepts up to 100 organization ids.
+        /// Accepts up to 100 organization IDs.
         /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=organization_id")]

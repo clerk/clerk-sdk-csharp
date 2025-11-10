@@ -172,7 +172,6 @@ namespace Clerk.BackendAPI.Models.Components
                 if (value == null)
                 {
                     throw new InvalidOperationException("Unexpected null JSON value.");
-                    return;
                 }
 
                 SessionRefresh res = (SessionRefresh)value;

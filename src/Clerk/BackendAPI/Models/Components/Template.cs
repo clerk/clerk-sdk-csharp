@@ -34,7 +34,7 @@ namespace Clerk.BackendAPI.Models.Components
         public TemplateObject? Object { get; set; }
 
         /// <summary>
-        /// The id of the instance to which this template belongs
+        /// The ID of the instance to which the template belongs
         /// </summary>
         [JsonProperty("instance_id")]
         public string? InstanceId { get; set; } = null;

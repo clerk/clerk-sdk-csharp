@@ -29,13 +29,13 @@ namespace Clerk.BackendAPI.Models.Operations
         public Models.Operations.Claims Claims { get; set; } = default!;
 
         /// <summary>
-        /// JWT token lifetime
+        /// JWT lifetime
         /// </summary>
         [JsonProperty("lifetime")]
         public long? Lifetime { get; set; } = null;
 
         /// <summary>
-        /// JWT token allowed clock skew
+        /// JWT allowed clock skew
         /// </summary>
         [JsonProperty("allowed_clock_skew")]
         public long? AllowedClockSkew { get; set; } = null;

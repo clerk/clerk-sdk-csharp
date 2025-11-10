@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using NodaTime;
     
     public class CommerceSubscriptionItem
     {
@@ -40,59 +41,32 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("status")]
         public CommerceSubscriptionItemStatus Status { get; set; } = default!;
 
-        /// <summary>
-        /// Credit information (only available in PaymentAttempt events).
-        /// </summary>
         [JsonProperty("credit")]
-        public Credit? Credit { get; set; } = null;
+        public CommerceSubscriptionCreditResponse? Credit { get; set; }
 
         /// <summary>
         /// Unique identifier for the associated plan.
         /// </summary>
-        [JsonProperty("plan_id")]
-        public string PlanId { get; set; } = default!;
+        [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Include)]
+        public string? PlanId { get; set; }
 
         /// <summary>
-        /// The associated commerce plan.
+        /// The associated plan.
         /// </summary>
-        [JsonProperty("plan", NullValueHandling = NullValueHandling.Include)]
-        public Plan? Plan { get; set; }
+        [JsonProperty("plan")]
+        public Plan? Plan { get; set; } = null;
 
         /// <summary>
-        /// The billing period for this subscription.
+        /// The billing period for this subscription item.
         /// </summary>
         [JsonProperty("plan_period")]
         public PlanPeriod PlanPeriod { get; set; } = default!;
 
-        /// <summary>
-        /// Unique identifier for the payment source.
-        /// </summary>
-        [JsonProperty("payment_source_id")]
-        public string PaymentSourceId { get; set; } = default!;
+        [JsonProperty("payment_method")]
+        public CommercePaymentMethodResponse? PaymentMethod { get; set; }
 
-        /// <summary>
-        /// The payment source associated with this subscription.
-        /// </summary>
-        [JsonProperty("payment_source")]
-        public PaymentSource? PaymentSource { get; set; } = null;
-
-        /// <summary>
-        /// Total amount paid over the lifetime of this subscription.
-        /// </summary>
         [JsonProperty("lifetime_paid")]
-        public LifetimePaid? LifetimePaid { get; set; } = null;
-
-        /// <summary>
-        /// Current amount for this subscription.
-        /// </summary>
-        [JsonProperty("amount")]
-        public Amount? Amount { get; set; } = null;
-
-        /// <summary>
-        /// Information about the next invoice.
-        /// </summary>
-        [JsonProperty("next_invoice")]
-        public NextInvoice? NextInvoice { get; set; } = null;
+        public CommerceMoneyResponse? LifetimePaid { get; set; }
 
         /// <summary>
         /// Information about the next payment.
@@ -106,14 +80,11 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("payer_id")]
         public string PayerId { get; set; } = default!;
 
-        /// <summary>
-        /// The payer associated with this subscription.
-        /// </summary>
         [JsonProperty("payer")]
-        public Payer? Payer { get; set; } = null;
+        public CommercePayerResponse? Payer { get; set; }
 
         /// <summary>
-        /// Whether this subscription is currently on a free trial.
+        /// Whether this subscription item includes a free trial.
         /// </summary>
         [JsonProperty("is_free_trial")]
         public bool IsFreeTrial { get; set; } = default!;
@@ -122,48 +93,48 @@ namespace Clerk.BackendAPI.Models.Components
         /// Unix timestamp (in milliseconds) when the current period started.
         /// </summary>
         [JsonProperty("period_start")]
-        public long? PeriodStart { get; set; } = null;
+        public long PeriodStart { get; set; } = default!;
 
         /// <summary>
         /// Unix timestamp (in milliseconds) when the current period ends.
         /// </summary>
-        [JsonProperty("period_end")]
-        public long? PeriodEnd { get; set; } = null;
+        [JsonProperty("period_end", NullValueHandling = NullValueHandling.Include)]
+        public long? PeriodEnd { get; set; }
 
         /// <summary>
-        /// Date used for proration calculations.
+        /// The day the subscription item was prorated from. Only available in some responses.
         /// </summary>
         [JsonProperty("proration_date")]
-        public string ProrationDate { get; set; } = default!;
+        public LocalDate? ProrationDate { get; set; }
 
         /// <summary>
-        /// Unix timestamp (in milliseconds) when the subscription was canceled.
+        /// Unix timestamp (in milliseconds) when the subscription item was canceled.
         /// </summary>
-        [JsonProperty("canceled_at")]
-        public long? CanceledAt { get; set; } = null;
+        [JsonProperty("canceled_at", NullValueHandling = NullValueHandling.Include)]
+        public long? CanceledAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp (in milliseconds) when the subscription became past due.
+        /// Unix timestamp (in milliseconds) when the subscription item became past due.
         /// </summary>
-        [JsonProperty("past_due_at")]
-        public long? PastDueAt { get; set; } = null;
+        [JsonProperty("past_due_at", NullValueHandling = NullValueHandling.Include)]
+        public long? PastDueAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp (in milliseconds) when the subscription ended.
+        /// Unix timestamp (in milliseconds) when the subscription item ended.
         /// </summary>
-        [JsonProperty("ended_at")]
-        public long? EndedAt { get; set; } = null;
+        [JsonProperty("ended_at", NullValueHandling = NullValueHandling.Include)]
+        public long? EndedAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp (in milliseconds) when the subscription was created.
+        /// Unix timestamp (in milliseconds) when the subscription item was created.
         /// </summary>
         [JsonProperty("created_at")]
-        public long CreatedAt { get; set; } = default!;
+        public long? CreatedAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp (in milliseconds) when the subscription was last updated.
+        /// Unix timestamp (in milliseconds) when the subscription item was last updated.
         /// </summary>
         [JsonProperty("updated_at")]
-        public long UpdatedAt { get; set; } = default!;
+        public long? UpdatedAt { get; set; }
     }
 }

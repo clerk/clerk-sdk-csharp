@@ -42,7 +42,7 @@ namespace Clerk.BackendAPI
             Client = client ?? new SpeakeasyHttpClient();
             ServerUrl = "";
             ServerIndex = 0;
-            UserAgent = "speakeasy-sdk/csharp 0.13.0 2.716.9 2025-04-10 Clerk.BackendAPI";
+            UserAgent = "speakeasy-sdk/csharp 0.14.0 2.748.0 2025-11-10 Clerk.BackendAPI";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

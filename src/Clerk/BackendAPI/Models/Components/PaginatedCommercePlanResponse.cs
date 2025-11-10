@@ -21,13 +21,13 @@ namespace Clerk.BackendAPI.Models.Components
     {
 
         /// <summary>
-        /// Array of commerce plans.
+        /// Array of plans.
         /// </summary>
         [JsonProperty("data")]
         public List<CommercePlan> Data { get; set; } = default!;
 
         /// <summary>
-        /// Total number of commerce plans.
+        /// Total number of plans.
         /// </summary>
         [JsonProperty("total_count")]
         public long TotalCount { get; set; } = default!;

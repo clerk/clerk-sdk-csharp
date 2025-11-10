@@ -55,6 +55,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("last_name", NullValueHandling = NullValueHandling.Include)]
         public string? LastName { get; set; }
 
+        [JsonProperty("locale")]
+        public string? Locale { get; set; } = null;
+
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("profile_image_url")]
         public string? ProfileImageUrl { get; set; }
