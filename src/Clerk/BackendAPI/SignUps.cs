@@ -48,8 +48,8 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
+        private const string _sdkVersion = "0.14.1";
+        private const string _sdkGenVersion = "2.755.6";
         private const string _openapiDocVersion = "2025-11-10";
 
         public SignUps(SDKConfig config)

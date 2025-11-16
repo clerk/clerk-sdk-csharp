@@ -184,6 +184,9 @@ public class MachineAuthentication
 
 ### [Billing](docs/sdks/billing/README.md)
 
+* [ListPlans](docs/sdks/billing/README.md#listplans) - List all billing plans
+* [ListSubscriptionItems](docs/sdks/billing/README.md#listsubscriptionitems) - List all subscription items
+* [CancelSubscriptionItem](docs/sdks/billing/README.md#cancelsubscriptionitem) - Cancel a subscription item
 * [ExtendSubscriptionItemFreeTrial](docs/sdks/billing/README.md#extendsubscriptionitemfreetrial) - Extend free trial for a subscription item
 * [ListStatements](docs/sdks/billing/README.md#liststatements) - List all billing statements
 * [GetStatement](docs/sdks/billing/README.md#getstatement) - Retrieve a billing statement
@@ -200,12 +203,6 @@ public class MachineAuthentication
 * [~~List~~](docs/sdks/clients/README.md#list) - List all clients :warning: **Deprecated**
 * [Verify](docs/sdks/clients/README.md#verify) - Verify a client
 * [Get](docs/sdks/clients/README.md#get) - Get a client
-
-### [Commerce](docs/sdks/commerce/README.md)
-
-* [ListPlans](docs/sdks/commerce/README.md#listplans) - List all commerce plans
-* [ListSubscriptionItems](docs/sdks/commerce/README.md#listsubscriptionitems) - List all subscription items
-* [CancelSubscriptionItem](docs/sdks/commerce/README.md#cancelsubscriptionitem) - Cancel a subscription item
 
 ### [Domains](docs/sdks/domains/README.md)
 

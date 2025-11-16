@@ -82,6 +82,9 @@ namespace Clerk.BackendAPI
         /// 
         /// <remarks>
         /// Creates new organization invitations in bulk and sends out emails to the provided email addresses with a link to accept the invitation and join the organization.<br/>
+        /// <br/>
+        /// This endpoint is limited to a maximum of 10 invitations per API call. If you need to send more invitations, please make multiple requests.<br/>
+        /// <br/>
         /// You can specify a different `role` for each invited organization member.<br/>
         /// New organization invitations get a &quot;pending&quot; status until they are revoked by an organization administrator or accepted by the invitee.<br/>
         /// The request body supports passing an optional `redirect_url` parameter for each invitation.<br/>
@@ -139,8 +142,8 @@ namespace Clerk.BackendAPI
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
+        private const string _sdkVersion = "0.14.1";
+        private const string _sdkGenVersion = "2.755.6";
         private const string _openapiDocVersion = "2025-11-10";
 
         public OrganizationInvitations(SDKConfig config)
