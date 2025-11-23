@@ -33,7 +33,7 @@ namespace Clerk.BackendAPI
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
     /// 
-    /// <see>https://clerk.com/docs}</see>
+    /// <see href="https://clerk.com/docs">https://clerk.com/docs</see>
     /// </summary>
     public interface IClerkBackendApi
     {
@@ -69,7 +69,6 @@ namespace Clerk.BackendAPI
         public ISamlConnections SamlConnections { get; }
         public ITestingTokens TestingTokens { get; }
         public IWaitlistEntries WaitlistEntries { get; }
-        public ICommerce Commerce { get; }
         public IBilling Billing { get; }
         public IM2m M2m { get; }
         public IOauthAccessTokens OauthAccessTokens { get; }
@@ -89,15 +88,15 @@ namespace Clerk.BackendAPI
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
     /// 
-    /// <see>https://clerk.com/docs}</see>
+    /// <see href="https://clerk.com/docs">https://clerk.com/docs</see>
     /// </summary>
     public class ClerkBackendApi: IClerkBackendApi
     {
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
+        private const string _sdkVersion = "0.14.1";
+        private const string _sdkGenVersion = "2.760.2";
         private const string _openapiDocVersion = "2025-11-10";
         public IMiscellaneous Miscellaneous { get; private set; }
         public IJwks Jwks { get; private set; }
@@ -131,7 +130,6 @@ namespace Clerk.BackendAPI
         public ISamlConnections SamlConnections { get; private set; }
         public ITestingTokens TestingTokens { get; private set; }
         public IWaitlistEntries WaitlistEntries { get; private set; }
-        public ICommerce Commerce { get; private set; }
         public IBilling Billing { get; private set; }
         public IM2m M2m { get; private set; }
         public IOauthAccessTokens OauthAccessTokens { get; private set; }
@@ -204,8 +202,6 @@ namespace Clerk.BackendAPI
             TestingTokens = new TestingTokens(SDKConfiguration);
 
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
-
-            Commerce = new Commerce(SDKConfiguration);
 
             Billing = new Billing(SDKConfiguration);
 
@@ -326,8 +322,6 @@ namespace Clerk.BackendAPI
             TestingTokens = new TestingTokens(SDKConfiguration);
 
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
-
-            Commerce = new Commerce(SDKConfiguration);
 
             Billing = new Billing(SDKConfiguration);
 

@@ -57,7 +57,6 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 UpdateInstanceRequestBody req = new UpdateInstanceRequestBody() {
     TestMode = true,
     Hibp = false,
-    EnhancedEmailDeliverability = true,
     SupportEmail = "support@example.com",
     ClerkJsVersion = "2.3.1",
     DevelopmentOrigin = "http://localhost:3000",
