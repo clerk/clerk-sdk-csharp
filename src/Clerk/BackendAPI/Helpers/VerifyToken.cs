@@ -40,82 +40,65 @@ public static class VerifyToken
 
     private static async Task<ClaimsPrincipal> VerifySessionTokenAsync(string token, VerifyTokenOptions options)
     {
-        RsaSecurityKey rsaKey;
-        RSA? rsaToDispose = null;
-        
-        if (options.JwtKey != null)
-        {
-            var (key, rsa) = GetLocalJwtKey(options.JwtKey);
-            rsaKey = key;
-            rsaToDispose = rsa;
-        }
-        else
-        {
-            var (key, rsa) = await GetRemoteJwtKeyAsync(token, options);
-            rsaKey = key;
-            rsaToDispose = rsa;
-        }
+        using var rsa = options.JwtKey != null
+            ? GetLocalJwtKey(options.JwtKey)
+            : await GetRemoteJwtKeyAsync(token, options);
 
+        var rsaKey = new RsaSecurityKey(rsa);
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        var validationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = options.Audiences != null,
+            ValidAudiences = options.Audiences,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = rsaKey,
+            ClockSkew = TimeSpan.FromMilliseconds(options.ClockSkewInMs)
+        };
+
+        ClaimsPrincipal claims;
         try
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var validationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = false,
-                ValidateAudience = options.Audiences != null,
-                ValidAudiences = options.Audiences,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = rsaKey,
-                ClockSkew = TimeSpan.FromMilliseconds(options.ClockSkewInMs)
-            };
-
-            ClaimsPrincipal claims;
-            try
-            {
-                claims = tokenHandler.ValidateToken(token, validationParameters, out var validatedToken);
-            }
-            catch (SecurityTokenExpiredException ex)
-            {
-                throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_EXPIRED, ex);
-            }
-            catch (SecurityTokenNotYetValidException ex)
-            {
-                throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_NOT_ACTIVE_YET, ex);
-            }
-            catch (SecurityTokenInvalidSignatureException ex)
-            {
-                throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID_SIGNATURE, ex);
-            }
-            catch (SecurityTokenInvalidAudienceException ex)
-            {
-                throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID_AUDIENCE, ex);
-            }
-            catch (Exception ex)
-            {
-                throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID, ex);
-            }
-
-            if (options.AuthorizedParties != null)
-            {
-                var azpClaim = claims.FindFirst("azp");
-                if (azpClaim != null && !options.AuthorizedParties.Contains(azpClaim.Value))
-                    throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID_AUTHORIZED_PARTIES);
-            }
-
-            var iatClaim = claims.FindFirst("iat");
-            if (iatClaim != null && long.Parse(iatClaim.Value) >
-                DateTimeOffset.UtcNow.ToUnixTimeSeconds() + options.ClockSkewInMs / 1000)
-                throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_IAT_IN_THE_FUTURE);
-
-            claims = OrganizationClaimsProcessor.ProcessOrganizationClaims(claims);
-            return claims;
+            claims = tokenHandler.ValidateToken(token, validationParameters, out var validatedToken);
         }
-        finally
+        catch (SecurityTokenExpiredException ex)
         {
-            rsaToDispose?.Dispose();
+            throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_EXPIRED, ex);
         }
+        catch (SecurityTokenNotYetValidException ex)
+        {
+            throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_NOT_ACTIVE_YET, ex);
+        }
+        catch (SecurityTokenInvalidSignatureException ex)
+        {
+            throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID_SIGNATURE, ex);
+        }
+        catch (SecurityTokenInvalidAudienceException ex)
+        {
+            throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID_AUDIENCE, ex);
+        }
+        catch (Exception ex)
+        {
+            throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID, ex);
+        }
+
+        if (options.AuthorizedParties != null)
+        {
+            var azpClaim = claims.FindFirst("azp");
+            if (azpClaim != null && !options.AuthorizedParties.Contains(azpClaim.Value))
+                throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_INVALID_AUTHORIZED_PARTIES);
+        }
+
+        var iatClaim = claims.FindFirst("iat");
+        if (iatClaim != null && long.Parse(iatClaim.Value) >
+            DateTimeOffset.UtcNow.ToUnixTimeSeconds() + options.ClockSkewInMs / 1000)
+            throw new TokenVerificationException(TokenVerificationErrorReason.TOKEN_IAT_IN_THE_FUTURE);
+
+        claims = OrganizationClaimsProcessor.ProcessOrganizationClaims(claims);
+        return claims;
     }
 
     /// <summary>
@@ -123,15 +106,15 @@ public static class VerifyToken
     ///     that can be used for networkless verification.
     /// </summary>
     /// <param name="jwtKey">The PEM formatted public key.</param>
-    /// <returns>A tuple containing the RSA public key and the underlying RSA object to dispose.</returns>
+    /// <returns>The underlying RSA object.</returns>
     /// <exception cref="TokenVerificationException">if the public key could not be resolved.</exception>
-    private static (RsaSecurityKey, RSA) GetLocalJwtKey(string jwtKey)
+    private static RSA GetLocalJwtKey(string jwtKey)
     {
         try
         {
             var rsa = RSA.Create();
             rsa.ImportFromPem(jwtKey.ToCharArray());
-            return (new RsaSecurityKey(rsa), rsa);
+            return rsa;
         }
         catch (Exception ex)
         {
@@ -144,9 +127,9 @@ public static class VerifyToken
     /// </summary>
     /// <param name="token">The token to parse.</param>
     /// <param name="options">The options used for token verification.</param>
-    /// <returns>A tuple containing the RSA public key and the underlying RSA object to dispose.</returns>
+    /// <returns>The underlying RSA object.</returns>
     /// <exception cref="TokenVerificationException">if the public key could not be resolved.</exception>
-    private static async Task<(RsaSecurityKey, RSA)> GetRemoteJwtKeyAsync(string token, VerifyTokenOptions options)
+    private static async Task<RSA> GetRemoteJwtKeyAsync(string token, VerifyTokenOptions options)
     {
         var kid = ParseKid(token);
 
@@ -160,7 +143,7 @@ public static class VerifyToken
                 {
                     var rsa = RSA.Create();
                     rsa.ImportFromPem(cachedPem.ToCharArray());
-                    return (new RsaSecurityKey(rsa), rsa);
+                    return rsa;
                 }
                 catch (Exception ex)
                 {
@@ -193,7 +176,7 @@ public static class VerifyToken
                     var pem = rsa.ExportRSAPublicKeyPem();
                     _jwkCache.Set(kid, pem);
 
-                    return (new RsaSecurityKey(rsa), rsa);
+                    return rsa;
                 }
                 catch (Exception ex)
                 {
