@@ -102,8 +102,8 @@ public static class VerifyToken
     }
 
     /// <summary>
-    ///     Converts a RSA PEM formatted public key to a RsaSecurityKey object
-    ///     that can be used for networkless verification.
+    ///     Converts a RSA PEM formatted public key to an <see cref="RSA"/> object
+    ///     that can be used for networkless verification
     /// </summary>
     /// <param name="jwtKey">The PEM formatted public key.</param>
     /// <returns>An RSA instance created from the provided PEM key.</returns>
@@ -123,7 +123,7 @@ public static class VerifyToken
     }
 
     /// <summary>
-    ///     Retrieves the RSA public key used to sign the token from Clerk's Backend API.
+    ///     Retrieve an <see cref="RSA"> object obtained from Clerk's Backend API.
     /// </summary>
     /// <param name="token">The token to parse.</param>
     /// <param name="options">The options used for token verification.</param>
