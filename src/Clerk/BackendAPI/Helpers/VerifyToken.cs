@@ -103,7 +103,7 @@ public static class VerifyToken
 
     /// <summary>
     ///     Converts a RSA PEM formatted public key to an <see cref="RSA"/> object
-    ///     that can be used for networkless verification
+    ///     that can be used for networkless verification.
     /// </summary>
     /// <param name="jwtKey">The PEM formatted public key.</param>
     /// <returns>An RSA instance created from the provided PEM key.</returns>
