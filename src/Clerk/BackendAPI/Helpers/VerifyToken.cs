@@ -106,7 +106,7 @@ public static class VerifyToken
     ///     that can be used for networkless verification.
     /// </summary>
     /// <param name="jwtKey">The PEM formatted public key.</param>
-    /// <returns>The underlying RSA object.</returns>
+    /// <returns>An RSA instance created from the provided PEM key.</returns>
     /// <exception cref="TokenVerificationException">if the public key could not be resolved.</exception>
     private static RSA GetLocalJwtKey(string jwtKey)
     {
