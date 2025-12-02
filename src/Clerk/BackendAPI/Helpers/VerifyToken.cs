@@ -127,7 +127,7 @@ public static class VerifyToken
     /// </summary>
     /// <param name="token">The token to parse.</param>
     /// <param name="options">The options used for token verification.</param>
-    /// <returns>The underlying RSA object.</returns>
+    /// <returns>An RSA instance retrieved using the provided token.</returns>
     /// <exception cref="TokenVerificationException">if the public key could not be resolved.</exception>
     private static async Task<RSA> GetRemoteJwtKeyAsync(string token, VerifyTokenOptions options)
     {
