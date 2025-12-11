@@ -40,11 +40,11 @@ public static class VerifyToken
 
     private static async Task<ClaimsPrincipal> VerifySessionTokenAsync(string token, VerifyTokenOptions options)
     {
-        RsaSecurityKey rsaKey;
-        if (options.JwtKey != null)
-            rsaKey = GetLocalJwtKey(options.JwtKey);
-        else
-            rsaKey = await GetRemoteJwtKeyAsync(token, options);
+        using var rsa = options.JwtKey != null
+            ? GetLocalJwtKey(options.JwtKey)
+            : await GetRemoteJwtKeyAsync(token, options);
+
+        var rsaKey = new RsaSecurityKey(rsa);
 
         var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -102,19 +102,19 @@ public static class VerifyToken
     }
 
     /// <summary>
-    ///     Converts a RSA PEM formatted public key to a RsaSecurityKey object
+    ///     Converts a RSA PEM formatted public key to an <see cref="RSA"/> object
     ///     that can be used for networkless verification.
     /// </summary>
     /// <param name="jwtKey">The PEM formatted public key.</param>
-    /// <returns>The RSA public key</returns>
+    /// <returns>An RSA instance created from the provided PEM key.</returns>
     /// <exception cref="TokenVerificationException">if the public key could not be resolved.</exception>
-    private static RsaSecurityKey GetLocalJwtKey(string jwtKey)
+    private static RSA GetLocalJwtKey(string jwtKey)
     {
         try
         {
             var rsa = RSA.Create();
             rsa.ImportFromPem(jwtKey.ToCharArray());
-            return new RsaSecurityKey(rsa);
+            return rsa;
         }
         catch (Exception ex)
         {
@@ -123,13 +123,13 @@ public static class VerifyToken
     }
 
     /// <summary>
-    ///     Retrieves the RSA public key used to sign the token from Clerk's Backend API.
+    ///     Retrieve an <see cref="RSA"> object obtained from Clerk's Backend API.
     /// </summary>
     /// <param name="token">The token to parse.</param>
     /// <param name="options">The options used for token verification.</param>
-    /// <returns>The RSA public key.</returns>
+    /// <returns>An RSA instance retrieved using the provided token.</returns>
     /// <exception cref="TokenVerificationException">if the public key could not be resolved.</exception>
-    private static async Task<RsaSecurityKey> GetRemoteJwtKeyAsync(string token, VerifyTokenOptions options)
+    private static async Task<RSA> GetRemoteJwtKeyAsync(string token, VerifyTokenOptions options)
     {
         var kid = ParseKid(token);
 
@@ -143,7 +143,7 @@ public static class VerifyToken
                 {
                     var rsa = RSA.Create();
                     rsa.ImportFromPem(cachedPem.ToCharArray());
-                    return new RsaSecurityKey(rsa);
+                    return rsa;
                 }
                 catch (Exception ex)
                 {
@@ -176,7 +176,7 @@ public static class VerifyToken
                     var pem = rsa.ExportRSAPublicKeyPem();
                     _jwkCache.Set(kid, pem);
 
-                    return new RsaSecurityKey(rsa);
+                    return rsa;
                 }
                 catch (Exception ex)
                 {
