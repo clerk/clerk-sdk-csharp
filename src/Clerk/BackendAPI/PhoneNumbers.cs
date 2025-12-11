@@ -65,10 +65,11 @@ namespace Clerk.BackendAPI
     public class PhoneNumbers: IPhoneNumbers
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public PhoneNumbers(SDKConfig config)
         {
@@ -232,7 +233,7 @@ namespace Clerk.BackendAPI
                 PhoneNumberId = phoneNumberId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/phone_numbers/{phone_number_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/phone_numbers/{phone_number_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -379,7 +380,7 @@ namespace Clerk.BackendAPI
                 PhoneNumberId = phoneNumberId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/phone_numbers/{phone_number_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/phone_numbers/{phone_number_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -527,7 +528,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/phone_numbers/{phone_number_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/phone_numbers/{phone_number_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

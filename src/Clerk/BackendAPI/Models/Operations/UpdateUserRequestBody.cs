@@ -233,5 +233,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("created_at")]
         public string? CreatedAt { get; set; } = null;
+
+        /// <summary>
+        /// When set to `true`, the user will bypass client trust checks during sign-in.
+        /// </summary>
+        [JsonProperty("bypass_client_trust")]
+        public bool? BypassClientTrust { get; set; } = null;
     }
 }

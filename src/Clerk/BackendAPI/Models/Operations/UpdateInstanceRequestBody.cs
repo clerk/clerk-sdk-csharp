@@ -33,16 +33,6 @@ namespace Clerk.BackendAPI.Models.Operations
         [JsonProperty("hibp")]
         public bool? Hibp { get; set; } = null;
 
-        /// <summary>
-        /// The &quot;enhanced_email_deliverability&quot; feature will send emails from &quot;verifications@clerk.dev&quot; instead of your domain.<br/>
-        /// 
-        /// <remarks>
-        /// This can be helpful if you do not have a high domain reputation.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("enhanced_email_deliverability")]
-        public bool? EnhancedEmailDeliverability { get; set; } = null;
-
         [JsonProperty("support_email")]
         public string? SupportEmail { get; set; } = null;
 

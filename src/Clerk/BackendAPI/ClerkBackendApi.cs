@@ -33,7 +33,7 @@ namespace Clerk.BackendAPI
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
     /// 
-    /// <see>https://clerk.com/docs}</see>
+    /// <see href="https://clerk.com/docs">https://clerk.com/docs</see>
     /// </summary>
     public interface IClerkBackendApi
     {
@@ -59,6 +59,7 @@ namespace Clerk.BackendAPI
         public IJwtTemplates JwtTemplates { get; }
         public IMachines Machines { get; }
         public IOrganizations Organizations { get; }
+        public IOrganizationRoles OrganizationRoles { get; }
         public IOrganizationMemberships OrganizationMemberships { get; }
         public IOrganizationDomains OrganizationDomains { get; }
         public IProxyChecks ProxyChecks { get; }
@@ -69,8 +70,13 @@ namespace Clerk.BackendAPI
         public ISamlConnections SamlConnections { get; }
         public ITestingTokens TestingTokens { get; }
         public IWaitlistEntries WaitlistEntries { get; }
-        public ICommerce Commerce { get; }
         public IBilling Billing { get; }
+        public IOrganizationPermissions OrganizationPermissions { get; }
+
+        /// <summary>
+        /// Endpoints for managing API Keys
+        /// </summary>
+        public IAPIKeys APIKeys { get; }
         public IM2m M2m { get; }
         public IOauthAccessTokens OauthAccessTokens { get; }
     }
@@ -89,16 +95,16 @@ namespace Clerk.BackendAPI
     /// Please see https://clerk.com/docs for more information.
     /// </remarks>
     /// 
-    /// <see>https://clerk.com/docs}</see>
+    /// <see href="https://clerk.com/docs">https://clerk.com/docs</see>
     /// </summary>
     public class ClerkBackendApi: IClerkBackendApi
     {
         public SDKConfig SDKConfiguration { get; private set; }
 
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
         public IMiscellaneous Miscellaneous { get; private set; }
         public IJwks Jwks { get; private set; }
         public IClients Clients { get; private set; }
@@ -121,6 +127,7 @@ namespace Clerk.BackendAPI
         public IJwtTemplates JwtTemplates { get; private set; }
         public IMachines Machines { get; private set; }
         public IOrganizations Organizations { get; private set; }
+        public IOrganizationRoles OrganizationRoles { get; private set; }
         public IOrganizationMemberships OrganizationMemberships { get; private set; }
         public IOrganizationDomains OrganizationDomains { get; private set; }
         public IProxyChecks ProxyChecks { get; private set; }
@@ -131,8 +138,9 @@ namespace Clerk.BackendAPI
         public ISamlConnections SamlConnections { get; private set; }
         public ITestingTokens TestingTokens { get; private set; }
         public IWaitlistEntries WaitlistEntries { get; private set; }
-        public ICommerce Commerce { get; private set; }
         public IBilling Billing { get; private set; }
+        public IOrganizationPermissions OrganizationPermissions { get; private set; }
+        public IAPIKeys APIKeys { get; private set; }
         public IM2m M2m { get; private set; }
         public IOauthAccessTokens OauthAccessTokens { get; private set; }
 
@@ -185,6 +193,8 @@ namespace Clerk.BackendAPI
 
             Organizations = new Organizations(SDKConfiguration);
 
+            OrganizationRoles = new OrganizationRoles(SDKConfiguration);
+
             OrganizationMemberships = new OrganizationMemberships(SDKConfiguration);
 
             OrganizationDomains = new OrganizationDomains(SDKConfiguration);
@@ -205,9 +215,11 @@ namespace Clerk.BackendAPI
 
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
 
-            Commerce = new Commerce(SDKConfiguration);
-
             Billing = new Billing(SDKConfiguration);
+
+            OrganizationPermissions = new OrganizationPermissions(SDKConfiguration);
+
+            APIKeys = new APIKeys(SDKConfiguration);
 
             M2m = new M2m(SDKConfiguration);
 
@@ -307,6 +319,8 @@ namespace Clerk.BackendAPI
 
             Organizations = new Organizations(SDKConfiguration);
 
+            OrganizationRoles = new OrganizationRoles(SDKConfiguration);
+
             OrganizationMemberships = new OrganizationMemberships(SDKConfiguration);
 
             OrganizationDomains = new OrganizationDomains(SDKConfiguration);
@@ -327,9 +341,11 @@ namespace Clerk.BackendAPI
 
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
 
-            Commerce = new Commerce(SDKConfiguration);
-
             Billing = new Billing(SDKConfiguration);
+
+            OrganizationPermissions = new OrganizationPermissions(SDKConfiguration);
+
+            APIKeys = new APIKeys(SDKConfiguration);
 
             M2m = new M2m(SDKConfiguration);
 

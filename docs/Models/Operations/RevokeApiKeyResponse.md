@@ -1,0 +1,9 @@
+# RevokeApiKeyResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                        | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                           | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `Object`                                                                                          | [Models.Operations.RevokeApiKeyResponseBody](../../Models/Operations/RevokeApiKeyResponseBody.md) | :heavy_minus_sign:                                                                                | 200 OK                                                                                            |

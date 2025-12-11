@@ -1,5 +1,4 @@
 # OrganizationDomains
-(*OrganizationDomains*)
 
 ## Overview
 

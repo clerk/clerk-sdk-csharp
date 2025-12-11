@@ -20,7 +20,7 @@ namespace Clerk.BackendAPI.Models.Errors
     public class CreateM2MTokenM2mResponseBodyPayload
     {
         [JsonProperty("errors")]
-        public List<CreateM2MTokenErrors> Errors { get; set; } = default!;
+        public List<CreateM2MTokenM2mErrors> Errors { get; set; } = default!;
 
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
@@ -37,7 +37,7 @@ namespace Clerk.BackendAPI.Models.Errors
         public CreateM2MTokenM2mResponseBodyPayload Payload { get; }
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use CreateM2MTokenM2mResponseBody.Payload.Errors instead.")]
-        public List<CreateM2MTokenErrors> Errors { get; set; } = default!;
+        public List<CreateM2MTokenM2mErrors> Errors { get; set; } = default!;
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use CreateM2MTokenM2mResponseBody.Payload.HttpMeta instead.")]
         public HTTPMetadata HttpMeta { get; set; } = default!;

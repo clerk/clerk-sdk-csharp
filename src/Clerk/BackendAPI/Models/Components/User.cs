@@ -121,11 +121,27 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("mfa_disabled_at", NullValueHandling = NullValueHandling.Include)]
         public long? MfaDisabledAt { get; set; }
 
+        /// <summary>
+        /// Unix timestamp of when the user&apos;s password was last updated.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("password_last_updated_at")]
+        public long? PasswordLastUpdatedAt { get; set; } = null;
+
         [JsonProperty("external_accounts")]
         public List<ExternalAccountWithVerification> ExternalAccounts { get; set; } = default!;
 
         [JsonProperty("saml_accounts")]
         public List<SAMLAccount> SamlAccounts { get; set; } = default!;
+
+        [JsonProperty("enterprise_accounts")]
+        public List<EnterpriseAccount> EnterpriseAccounts { get; set; } = default!;
+
+        [JsonProperty("organization_memberships")]
+        public List<OrganizationMembership>? OrganizationMemberships { get; set; }
 
         /// <summary>
         /// Unix timestamp of last sign-in.<br/>
@@ -246,5 +262,11 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("legal_accepted_at", NullValueHandling = NullValueHandling.Include)]
         public long? LegalAcceptedAt { get; set; }
+
+        /// <summary>
+        /// When set to `true`, the user will bypass client trust checks during sign-in.
+        /// </summary>
+        [JsonProperty("bypass_client_trust")]
+        public bool? BypassClientTrust { get; set; } = false;
     }
 }

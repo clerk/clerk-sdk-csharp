@@ -1,5 +1,7 @@
-# EmailSMSTemplates
-(*EmailSMSTemplates*)
+# ~~EmailSMSTemplates~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 

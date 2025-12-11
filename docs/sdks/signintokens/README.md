@@ -1,5 +1,4 @@
 # SignInTokens
-(*SignInTokens*)
 
 ## Overview
 

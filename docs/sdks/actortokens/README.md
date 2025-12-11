@@ -1,5 +1,4 @@
 # ActorTokens
-(*ActorTokens*)
 
 ## Overview
 

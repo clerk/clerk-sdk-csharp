@@ -1,5 +1,4 @@
 # ProxyChecks
-(*ProxyChecks*)
 
 ## Overview
 

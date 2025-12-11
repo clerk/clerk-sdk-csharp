@@ -1,5 +1,4 @@
 # OauthAccessTokens
-(*OauthAccessTokens*)
 
 ## Overview
 

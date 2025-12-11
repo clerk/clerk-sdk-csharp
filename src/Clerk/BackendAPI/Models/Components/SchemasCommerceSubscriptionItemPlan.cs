@@ -171,7 +171,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// The features included in this plan.
         /// </summary>
         [JsonProperty("features")]
-        public List<FeatureResponse> Features { get; set; } = default!;
+        public List<SchemasFeatureResponse> Features { get; set; } = default!;
 
         /// <summary>
         /// Whether free trial is enabled for this plan.

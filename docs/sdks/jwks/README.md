@@ -1,5 +1,4 @@
 # Jwks
-(*Jwks*)
 
 ## Overview
 

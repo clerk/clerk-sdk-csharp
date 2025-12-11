@@ -37,8 +37,8 @@ namespace Clerk.BackendAPI.Models.Components
         /// <summary>
         /// The description of the feature.
         /// </summary>
-        [JsonProperty("description")]
-        public string Description { get; set; } = default!;
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Include)]
+        public string? Description { get; set; }
 
         /// <summary>
         /// The URL-friendly slug for the feature.
@@ -49,7 +49,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// <summary>
         /// The URL of the feature&apos;s avatar image.
         /// </summary>
-        [JsonProperty("avatar_url")]
-        public string AvatarUrl { get; set; } = default!;
+        [JsonProperty("avatar_url", NullValueHandling = NullValueHandling.Include)]
+        public string? AvatarUrl { get; set; }
     }
 }

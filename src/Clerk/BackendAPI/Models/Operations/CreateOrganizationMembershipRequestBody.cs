@@ -11,6 +11,7 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
     
     public class CreateOrganizationMembershipRequestBody
     {
@@ -26,5 +27,17 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("role")]
         public string Role { get; set; } = default!;
+
+        /// <summary>
+        /// Metadata saved on the organization membership, that is visible to both your frontend and backend.
+        /// </summary>
+        [JsonProperty("public_metadata")]
+        public Dictionary<string, object>? PublicMetadata { get; set; } = null;
+
+        /// <summary>
+        /// Metadata saved on the organization membership that is only visible to your backend.
+        /// </summary>
+        [JsonProperty("private_metadata")]
+        public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
     }
 }

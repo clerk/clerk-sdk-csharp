@@ -1,5 +1,7 @@
-# EmailAndSmsTemplates
-(*EmailAndSmsTemplates*)
+# ~~EmailAndSmsTemplates~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 

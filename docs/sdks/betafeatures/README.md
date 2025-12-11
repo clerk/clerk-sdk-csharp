@@ -1,5 +1,4 @@
 # BetaFeatures
-(*BetaFeatures*)
 
 ## Overview
 
@@ -25,7 +24,6 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 UpdateInstanceAuthConfigRequestBody req = new UpdateInstanceAuthConfigRequestBody() {
     FromEmailAddress = "noreply",
     ProgressiveSignUp = true,
-    EnhancedEmailDeliverability = true,
     TestMode = true,
 };
 

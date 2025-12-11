@@ -79,7 +79,10 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Deletes the given organization.<br/>
         /// Please note that deleting an organization will also delete all memberships and invitations.<br/>
-        /// This is not reversible.
+        /// This is not reversible.<br/>
+        /// <br/>
+        /// After the organization is deleted, any user&apos;s active sessions that contain the deleted<br/>
+        /// organization will be cleared.
         /// </remarks>
         /// </summary>
         Task<DeleteOrganizationResponse> DeleteAsync(string organizationId, RetryConfig? retryConfig = null);
@@ -132,10 +135,11 @@ namespace Clerk.BackendAPI
     public class Organizations: IOrganizations
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Organizations(SDKConfig config)
         {
@@ -145,7 +149,7 @@ namespace Clerk.BackendAPI
         public async Task<ListOrganizationsResponse> ListAsync(ListOrganizationsRequest? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -444,7 +448,7 @@ namespace Clerk.BackendAPI
                 IncludeMissingMemberWithElevatedPermissions = includeMissingMemberWithElevatedPermissions,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -592,7 +596,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -745,7 +749,7 @@ namespace Clerk.BackendAPI
                 OrganizationId = organizationId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -893,7 +897,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/metadata", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/metadata", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1047,7 +1051,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/logo", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/logo", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1200,7 +1204,7 @@ namespace Clerk.BackendAPI
                 OrganizationId = organizationId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/logo", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/logo", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1347,7 +1351,7 @@ namespace Clerk.BackendAPI
                 OrganizationId = organizationId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/billing/subscription", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/billing/subscription", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

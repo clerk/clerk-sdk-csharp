@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
     
     public class CommercePlan
@@ -53,6 +54,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// <summary>
         /// The ID of the product this plan belongs to.
         /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("product_id")]
         public string ProductId { get; set; } = default!;
 

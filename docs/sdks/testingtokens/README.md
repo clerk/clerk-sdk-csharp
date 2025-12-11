@@ -1,5 +1,4 @@
 # TestingTokens
-(*TestingTokens*)
 
 ## Overview
 

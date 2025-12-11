@@ -1,5 +1,4 @@
 # RedirectUrls
-(*RedirectUrls*)
 
 ## Overview
 

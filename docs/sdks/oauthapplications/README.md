@@ -1,5 +1,4 @@
 # OauthApplications
-(*OauthApplications*)
 
 ## Overview
 
