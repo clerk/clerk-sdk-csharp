@@ -58,10 +58,11 @@ namespace Clerk.BackendAPI
     public class Clients: IClients
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Clients(SDKConfig config)
         {
@@ -78,7 +79,7 @@ namespace Clerk.BackendAPI
                 Offset = offset,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/clients", request);
+            var urlString = URLBuilder.Build(baseUrl, "/clients", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -375,7 +376,7 @@ namespace Clerk.BackendAPI
                 ClientId = clientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/clients/{client_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/clients/{client_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

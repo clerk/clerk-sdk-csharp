@@ -39,16 +39,6 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? ProgressiveSignUp { get; set; } = null;
 
         /// <summary>
-        /// The &quot;enhanced_email_deliverability&quot; feature will send emails from &quot;verifications@clerk.dev&quot; instead of your domain.<br/>
-        /// 
-        /// <remarks>
-        /// This can be helpful if you do not have a high domain reputation.
-        /// </remarks>
-        /// </summary>
-        [JsonProperty("enhanced_email_deliverability")]
-        public bool? EnhancedEmailDeliverability { get; set; } = null;
-
-        /// <summary>
         /// Toggles test mode for this instance, allowing the use of test email addresses and phone numbers.<br/>
         /// 
         /// <remarks>

@@ -116,10 +116,11 @@ namespace Clerk.BackendAPI
     public class Machines: IMachines
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Machines(SDKConfig config)
         {
@@ -136,7 +137,7 @@ namespace Clerk.BackendAPI
                 OrderBy = orderBy,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/machines", request);
+            var urlString = URLBuilder.Build(baseUrl, "/machines", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -433,7 +434,7 @@ namespace Clerk.BackendAPI
                 MachineId = machineId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -581,7 +582,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -734,7 +735,7 @@ namespace Clerk.BackendAPI
                 MachineId = machineId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -881,7 +882,7 @@ namespace Clerk.BackendAPI
                 MachineId = machineId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/secret_key", request);
+            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/secret_key", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1029,7 +1030,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/secret_key/rotate", request);
+            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/secret_key/rotate", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1183,7 +1184,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/scopes", request);
+            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/scopes", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1337,7 +1338,7 @@ namespace Clerk.BackendAPI
                 OtherMachineId = otherMachineId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/scopes/{other_machine_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/scopes/{other_machine_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

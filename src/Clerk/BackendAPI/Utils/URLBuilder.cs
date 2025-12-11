@@ -17,7 +17,7 @@ namespace Clerk.BackendAPI.Utils
 
     internal static class URLBuilder
     {
-        public static string Build(string baseUrl, string relativeUrl, object? request)
+        public static string Build(string baseUrl, string relativeUrl, object? request, List<string>? allowEmptyValue = null)
         {
             var url = baseUrl;
 
@@ -37,7 +37,7 @@ namespace Clerk.BackendAPI.Utils
             var parameters = GetPathParameters(request);
             url = ReplaceParameters(url, parameters);
 
-            var queryParams = SerializeQueryParams(TrySerializeQueryParams(request));
+            var queryParams = SerializeQueryParams(TrySerializeQueryParams(request, allowEmptyValue));
             if (queryParams != "")
             {
                 url += $"?{queryParams}";
@@ -90,10 +90,6 @@ namespace Clerk.BackendAPI.Utils
             {
                 var val = prop.GetValue(request);
 
-                if (val == null)
-                {
-                    continue;
-                }
 
                 if (prop.GetCustomAttribute<SpeakeasyMetadata>()?.GetRequestMetadata() != null)
                 {
@@ -104,6 +100,13 @@ namespace Clerk.BackendAPI.Utils
 
                 if (metadata == null)
                 {
+                    continue;
+                }
+
+                // Handle null values and empty arrays as empty query parameters
+                if (val == null || (Utilities.IsList(val) && ((IList)val).Count == 0))
+                {
+                    parameters.Add(metadata.Name ?? prop.Name, "");
                     continue;
                 }
 
@@ -147,7 +150,7 @@ namespace Clerk.BackendAPI.Utils
             return parameters;
         }
 
-        private static Dictionary<string, List<string>> TrySerializeQueryParams(object? request)
+        private static Dictionary<string, List<string>> TrySerializeQueryParams(object? request, List<string>? allowEmptyValue = null)
         {
             var parameters = new Dictionary<string, List<string>>();
 
@@ -161,9 +164,20 @@ namespace Clerk.BackendAPI.Utils
             foreach (var prop in props)
             {
                 var val = prop.GetValue(request);
-
+                var metadata = prop.GetCustomAttribute<SpeakeasyMetadata>()?.GetQueryParamMetadata();
+                
                 if (val == null)
                 {
+                    // If this parameter is in allowEmptyValue and val is null, include it as empty
+                    if (metadata != null && allowEmptyValue?.Contains(metadata.Name ?? prop.Name) == true)
+                    {
+                        var paramName = metadata.Name ?? prop.Name;
+                        if (!parameters.ContainsKey(paramName))
+                        {
+                            parameters.Add(paramName, new List<string>());
+                        }
+                        parameters[paramName].Add("");
+                    }
                     continue;
                 }
 
@@ -172,7 +186,6 @@ namespace Clerk.BackendAPI.Utils
                     continue;
                 }
 
-                var metadata = prop.GetCustomAttribute<SpeakeasyMetadata>()?.GetQueryParamMetadata();
                 if (metadata == null)
                 {
                     continue;
@@ -207,7 +220,8 @@ namespace Clerk.BackendAPI.Utils
                                 metadata.Name ?? prop.Name,
                                 val,
                                 metadata.Explode,
-                                ","
+                                ",",
+                                allowEmptyValue
                             );
                             foreach (var key in formParams.Keys)
                             {
@@ -245,7 +259,8 @@ namespace Clerk.BackendAPI.Utils
                                 metadata.Name ?? prop.Name,
                                 val,
                                 metadata.Explode,
-                                "|"
+                                "|",
+                                allowEmptyValue
                             );
                             foreach (var key in pipeParams.Keys)
                             {
@@ -358,7 +373,8 @@ namespace Clerk.BackendAPI.Utils
             string parentName,
             object value,
             bool explode,
-            string delimiter
+            string delimiter,
+            List<string>? allowEmptyValue = null
         )
         {
             var parameters = new Dictionary<string, List<string>>();
@@ -458,32 +474,45 @@ namespace Clerk.BackendAPI.Utils
             {
                 var values = new List<string>();
                 var items = new List<string>();
+                var list = (IList)value;
 
-                foreach (var item in (IList)value)
-                {
-                    if (explode)
-                    {
-                        values.Add(Utilities.ValueToString(item));
-                    }
-                    else
-                    {
-                        items.Add(Utilities.ValueToString(item));
-                    }
-                }
-
-                if (items.Count > 0)
-                {
-                    values.Add(string.Join(delimiter, items));
-                }
-
-                foreach (var val in values)
+                // Handle empty arrays - add empty parameter if allowEmptyValue includes this parameter
+                if (list.Count == 0 && allowEmptyValue?.Contains(parentName) == true)
                 {
                     if (!parameters.ContainsKey(parentName))
                     {
                         parameters.Add(parentName, new List<string>());
                     }
+                    parameters[parentName].Add("");
+                }
+                else
+                {
+                    foreach (var item in list)
+                    {
+                        if (explode)
+                        {
+                            values.Add(Utilities.ValueToString(item));
+                        }
+                        else
+                        {
+                            items.Add(Utilities.ValueToString(item));
+                        }
+                    }
 
-                    parameters[parentName].Add(val);
+                    if (items.Count > 0)
+                    {
+                        values.Add(string.Join(delimiter, items));
+                    }
+
+                    foreach (var val in values)
+                    {
+                        if (!parameters.ContainsKey(parentName))
+                        {
+                            parameters.Add(parentName, new List<string>());
+                        }
+
+                        parameters[parentName].Add(val);
+                    }
                 }
             }
             else
@@ -493,7 +522,16 @@ namespace Clerk.BackendAPI.Utils
                     parameters.Add(parentName, new List<string>());
                 }
 
-                parameters[parentName].Add(Utilities.ValueToString(value));
+                // Handle null values and empty strings for allowEmptyValue parameters
+                var stringValue = Utilities.ValueToString(value);
+                if ((value == null || stringValue == "") && allowEmptyValue?.Contains(parentName) == true)
+                {
+                    parameters[parentName].Add("");
+                }
+                else
+                {
+                    parameters[parentName].Add(stringValue);
+                }
             }
 
             return parameters;

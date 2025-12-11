@@ -45,6 +45,15 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("organization_id")]
         public string? OrganizationId { get; set; }
 
+        [JsonProperty("inviter_id", NullValueHandling = NullValueHandling.Include)]
+        public string? InviterId { get; set; }
+
+        /// <summary>
+        /// An organization inviter&apos;s public user data
+        /// </summary>
+        [JsonProperty("public_inviter_data", NullValueHandling = NullValueHandling.Include)]
+        public OrganizationInvitationPublicUserData? PublicInviterData { get; set; }
+
         [JsonProperty("status")]
         public string? Status { get; set; }
 

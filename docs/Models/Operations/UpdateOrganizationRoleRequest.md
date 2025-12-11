@@ -1,0 +1,9 @@
+# UpdateOrganizationRoleRequest
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `OrganizationRoleId`                                                                              | *string*                                                                                          | :heavy_check_mark:                                                                                | The ID of the organization role to update                                                         |
+| `RequestBody`                                                                                     | [UpdateOrganizationRoleRequestBody](../../Models/Operations/UpdateOrganizationRoleRequestBody.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |

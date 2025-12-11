@@ -1,5 +1,4 @@
 # OrganizationInvitations
-(*OrganizationInvitations*)
 
 ## Overview
 
@@ -178,6 +177,9 @@ var res = await sdk.OrganizationInvitations.ListAsync(req);
 ## BulkCreate
 
 Creates new organization invitations in bulk and sends out emails to the provided email addresses with a link to accept the invitation and join the organization.
+
+This endpoint is limited to a maximum of 10 invitations per API call. If you need to send more invitations, please make multiple requests.
+
 You can specify a different `role` for each invited organization member.
 New organization invitations get a "pending" status until they are revoked by an organization administrator or accepted by the invitee.
 The request body supports passing an optional `redirect_url` parameter for each invitation.

@@ -78,5 +78,15 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;
+
+        /// <summary>
+        /// Unix timestamp of last activity.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("last_active_at")]
+        public long? LastActiveAt { get; set; }
     }
 }

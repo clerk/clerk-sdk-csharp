@@ -91,6 +91,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("force_authn")]
         public bool ForceAuthn { get; set; } = default!;
 
+        [JsonProperty("enterprise_connection_id")]
+        public string? EnterpriseConnectionId { get; set; } = null;
+
         /// <summary>
         /// Unix timestamp of creation.<br/>
         /// 

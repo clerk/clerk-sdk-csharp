@@ -12,45 +12,184 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
     using System.Collections.Generic;
-    
+    using System.Numerics;
+    using System.Reflection;
+
+    public class VerifyOAuthAccessTokenResponseBodyType
+    {
+        private VerifyOAuthAccessTokenResponseBodyType(string value) { Value = value; }
+
+        public string Value { get; private set; }
+
+        public static VerifyOAuthAccessTokenResponseBodyType ResponseBody1 { get { return new VerifyOAuthAccessTokenResponseBodyType("responseBody_1"); } }
+
+        public static VerifyOAuthAccessTokenResponseBodyType ResponseBody2 { get { return new VerifyOAuthAccessTokenResponseBodyType("responseBody_2"); } }
+
+        public override string ToString() { return Value; }
+        public static implicit operator String(VerifyOAuthAccessTokenResponseBodyType v) { return v.Value; }
+        public static VerifyOAuthAccessTokenResponseBodyType FromString(string v) {
+            switch(v) {
+                case "responseBody_1": return ResponseBody1;
+                case "responseBody_2": return ResponseBody2;
+                default: throw new ArgumentException("Invalid value for VerifyOAuthAccessTokenResponseBodyType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((VerifyOAuthAccessTokenResponseBodyType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+
     /// <summary>
     /// 200 OK
     /// </summary>
+    [JsonConverter(typeof(VerifyOAuthAccessTokenResponseBody.VerifyOAuthAccessTokenResponseBodyConverter))]
     public class VerifyOAuthAccessTokenResponseBody
     {
+        public VerifyOAuthAccessTokenResponseBody(VerifyOAuthAccessTokenResponseBodyType type)
+        {
+            Type = type;
+        }
 
-        [JsonProperty("object")]
-        public VerifyOAuthAccessTokenObject Object { get; set; } = default!;
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseBody1? ResponseBody1 { get; set; }
 
-        [JsonProperty("id")]
-        public string Id { get; set; } = default!;
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseBody2? ResponseBody2 { get; set; }
 
-        [JsonProperty("client_id")]
-        public string ClientId { get; set; } = default!;
+        public VerifyOAuthAccessTokenResponseBodyType Type { get; set; }
+        public static VerifyOAuthAccessTokenResponseBody CreateResponseBody1(ResponseBody1 responseBody1)
+        {
+            VerifyOAuthAccessTokenResponseBodyType typ = VerifyOAuthAccessTokenResponseBodyType.ResponseBody1;
 
-        [JsonProperty("subject")]
-        public string Subject { get; set; } = default!;
+            VerifyOAuthAccessTokenResponseBody res = new VerifyOAuthAccessTokenResponseBody(typ);
+            res.ResponseBody1 = responseBody1;
+            return res;
+        }
+        public static VerifyOAuthAccessTokenResponseBody CreateResponseBody2(ResponseBody2 responseBody2)
+        {
+            VerifyOAuthAccessTokenResponseBodyType typ = VerifyOAuthAccessTokenResponseBodyType.ResponseBody2;
 
-        [JsonProperty("scopes")]
-        public List<string> Scopes { get; set; } = default!;
+            VerifyOAuthAccessTokenResponseBody res = new VerifyOAuthAccessTokenResponseBody(typ);
+            res.ResponseBody2 = responseBody2;
+            return res;
+        }
 
-        [JsonProperty("revoked")]
-        public bool Revoked { get; set; } = default!;
+        public class VerifyOAuthAccessTokenResponseBodyConverter : JsonConverter
+        {
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(VerifyOAuthAccessTokenResponseBody);
 
-        [JsonProperty("revocation_reason", NullValueHandling = NullValueHandling.Include)]
-        public string? RevocationReason { get; set; }
+            public override bool CanRead => true;
 
-        [JsonProperty("expired")]
-        public bool Expired { get; set; } = default!;
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    throw new InvalidOperationException("Received unexpected null JSON value");
+                }
 
-        [JsonProperty("expiration", NullValueHandling = NullValueHandling.Include)]
-        public double? Expiration { get; set; }
+                var json = JRaw.Create(reader).ToString();
+                var fallbackCandidates = new List<(System.Type, object, string)>();
 
-        [JsonProperty("created_at")]
-        public double CreatedAt { get; set; } = default!;
+                try
+                {
+                    return new VerifyOAuthAccessTokenResponseBody(VerifyOAuthAccessTokenResponseBodyType.ResponseBody2)
+                    {
+                        ResponseBody2 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ResponseBody2>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(ResponseBody2), new VerifyOAuthAccessTokenResponseBody(VerifyOAuthAccessTokenResponseBodyType.ResponseBody2), "ResponseBody2"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
-        [JsonProperty("updated_at")]
-        public double UpdatedAt { get; set; } = default!;
+                try
+                {
+                    return new VerifyOAuthAccessTokenResponseBody(VerifyOAuthAccessTokenResponseBodyType.ResponseBody1)
+                    {
+                        ResponseBody1 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ResponseBody1>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(ResponseBody1), new VerifyOAuthAccessTokenResponseBody(VerifyOAuthAccessTokenResponseBodyType.ResponseBody1), "ResponseBody1"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                if (fallbackCandidates.Count > 0)
+                {
+                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
+                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
+                    {
+                        try
+                        {
+                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
+                        }
+                        catch (ResponseBodyDeserializer.DeserializationException)
+                        {
+                            // try next fallback option
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                }
+
+                throw new InvalidOperationException("Could not deserialize into any supported types.");
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null)
+                {
+                    throw new InvalidOperationException("Unexpected null JSON value.");
+                }
+
+                VerifyOAuthAccessTokenResponseBody res = (VerifyOAuthAccessTokenResponseBody)value;
+
+                if (res.ResponseBody1 != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseBody1));
+                    return;
+                }
+
+                if (res.ResponseBody2 != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseBody2));
+                    return;
+                }
+            }
+
+        }
+
     }
 }

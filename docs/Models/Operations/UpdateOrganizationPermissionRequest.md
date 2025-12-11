@@ -1,0 +1,9 @@
+# UpdateOrganizationPermissionRequest
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `PermissionId`                                                                                                | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the permission to update                                                                            |
+| `RequestBody`                                                                                                 | [UpdateOrganizationPermissionRequestBody](../../Models/Operations/UpdateOrganizationPermissionRequestBody.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |

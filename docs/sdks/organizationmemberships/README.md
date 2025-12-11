@@ -1,5 +1,4 @@
 # OrganizationMemberships
-(*OrganizationMemberships*)
 
 ## Overview
 

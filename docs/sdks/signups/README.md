@@ -1,5 +1,4 @@
 # SignUps
-(*SignUps*)
 
 ## Overview
 

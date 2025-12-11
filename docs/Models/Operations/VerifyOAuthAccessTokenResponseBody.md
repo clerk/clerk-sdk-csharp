@@ -3,18 +3,16 @@
 200 OK
 
 
-## Fields
+## Supported Types
 
-| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             | Example                                                                                 |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `Object`                                                                                | [VerifyOAuthAccessTokenObject](../../Models/Operations/VerifyOAuthAccessTokenObject.md) | :heavy_check_mark:                                                                      | N/A                                                                                     | clerk_idp_oauth_access_token                                                            |
-| `Id`                                                                                    | *string*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     | oat_0ef5a7a33d87ed87ee7954c845d80450                                                    |
-| `ClientId`                                                                              | *string*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     | client_2xhFjEI5X2qWRvtV13BzSj8H6Dk                                                      |
-| `Subject`                                                                               | *string*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     | user_2xhFjEI5X2qWRvtV13BzSj8H6Dk                                                        |
-| `Scopes`                                                                                | List<*string*>                                                                          | :heavy_check_mark:                                                                      | N/A                                                                                     | [<br/>"read",<br/>"write"<br/>]                                                         |
-| `Revoked`                                                                               | *bool*                                                                                  | :heavy_check_mark:                                                                      | N/A                                                                                     | false                                                                                   |
-| `RevocationReason`                                                                      | *string*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     | Revoked by user                                                                         |
-| `Expired`                                                                               | *bool*                                                                                  | :heavy_check_mark:                                                                      | N/A                                                                                     | false                                                                                   |
-| `Expiration`                                                                            | *double*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     | 1716883200                                                                              |
-| `CreatedAt`                                                                             | *double*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     | 1716883200                                                                              |
-| `UpdatedAt`                                                                             | *double*                                                                                | :heavy_check_mark:                                                                      | N/A                                                                                     | 1716883200                                                                              |
+### ResponseBody1
+
+```csharp
+VerifyOAuthAccessTokenResponseBody.CreateResponseBody1(/* values here */);
+```
+
+### ResponseBody2
+
+```csharp
+VerifyOAuthAccessTokenResponseBody.CreateResponseBody2(/* values here */);
+```

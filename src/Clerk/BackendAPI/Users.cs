@@ -314,10 +314,11 @@ namespace Clerk.BackendAPI
     public class Users: IUsers
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Users(SDKConfig config)
         {
@@ -327,7 +328,7 @@ namespace Clerk.BackendAPI
         public async Task<GetUserListResponse> ListAsync(GetUserListRequest? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -620,7 +621,7 @@ namespace Clerk.BackendAPI
         public async Task<GetUsersCountResponse> CountAsync(GetUsersCountRequest? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/count", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/count", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -767,7 +768,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -915,7 +916,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1068,7 +1069,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1215,7 +1216,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/ban", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/ban", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1362,7 +1363,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/unban", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/unban", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1809,7 +1810,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/lock", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/lock", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1956,7 +1957,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/unlock", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/unlock", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -2104,7 +2105,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/profile_image", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/profile_image", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -2257,7 +2258,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/profile_image", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/profile_image", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -2405,7 +2406,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/metadata", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/metadata", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -2558,7 +2559,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/billing/subscription", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/billing/subscription", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -2721,7 +2722,7 @@ namespace Clerk.BackendAPI
         public async Task<GetOAuthAccessTokenResponse> GetOAuthAccessTokenAsync(GetOAuthAccessTokenRequest request, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/oauth_access_tokens/{provider}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/oauth_access_tokens/{provider}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -2870,7 +2871,7 @@ namespace Clerk.BackendAPI
                 Offset = offset,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/organization_memberships", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/organization_memberships", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -3020,7 +3021,7 @@ namespace Clerk.BackendAPI
                 Status = status,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/organization_invitations", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/organization_invitations", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -3168,7 +3169,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/verify_password", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/verify_password", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -3322,7 +3323,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/verify_totp", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/verify_totp", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -3475,7 +3476,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/mfa", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/mfa", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -3642,7 +3643,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/backup_code", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/backup_code", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -3810,7 +3811,7 @@ namespace Clerk.BackendAPI
                 PasskeyIdentificationId = passkeyIdentificationId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/passkeys/{passkey_identification_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/passkeys/{passkey_identification_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -3978,7 +3979,7 @@ namespace Clerk.BackendAPI
                 Web3WalletIdentificationId = web3WalletIdentificationId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/web3_wallets/{web3_wallet_identification_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/web3_wallets/{web3_wallet_identification_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -4145,7 +4146,7 @@ namespace Clerk.BackendAPI
                 UserId = userId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/totp", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/totp", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -4313,7 +4314,7 @@ namespace Clerk.BackendAPI
                 ExternalAccountId = externalAccountId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/external_accounts/{external_account_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/external_accounts/{external_account_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -4482,7 +4483,7 @@ namespace Clerk.BackendAPI
                 Offset = offset,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organization_memberships", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organization_memberships", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

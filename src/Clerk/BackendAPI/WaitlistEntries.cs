@@ -77,10 +77,11 @@ namespace Clerk.BackendAPI
     public class WaitlistEntries: IWaitlistEntries
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public WaitlistEntries(SDKConfig config)
         {
@@ -90,7 +91,7 @@ namespace Clerk.BackendAPI
         public async Task<ListWaitlistEntriesResponse> ListAsync(ListWaitlistEntriesRequest? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries", request);
+            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -367,7 +368,7 @@ namespace Clerk.BackendAPI
                 WaitlistEntryId = waitlistEntryId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -515,7 +516,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}/invite", request);
+            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}/invite", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -668,7 +669,7 @@ namespace Clerk.BackendAPI
                 WaitlistEntryId = waitlistEntryId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}/reject", request);
+            var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}/reject", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

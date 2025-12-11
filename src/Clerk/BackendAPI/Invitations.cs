@@ -52,7 +52,9 @@ namespace Clerk.BackendAPI
         /// Use this API operation to create multiple invitations for the provided email addresses. You can choose to send the<br/>
         /// invitations as emails by setting the `notify` parameter to `true`. There cannot be an existing invitation for any<br/>
         /// of the email addresses you provide unless you set `ignore_existing` to `true` for specific email addresses. Please<br/>
-        /// note that there must be no existing user for any of the email addresses you provide, and this rule cannot be bypassed.
+        /// note that there must be no existing user for any of the email addresses you provide, and this rule cannot be bypassed.<br/>
+        /// <br/>
+        /// This endpoint is limited to a maximum of 10 invitations per API call. If you need to send more invitations, please make multiple requests.
         /// </remarks>
         /// </summary>
         Task<CreateBulkInvitationsResponse> BulkCreateAsync(List<RequestBody>? request = null, RetryConfig? retryConfig = null);
@@ -73,10 +75,11 @@ namespace Clerk.BackendAPI
     public class Invitations: IInvitations
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Invitations(SDKConfig config)
         {
@@ -236,7 +239,7 @@ namespace Clerk.BackendAPI
         public async Task<ListInvitationsResponse> ListAsync(ListInvitationsRequest? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/invitations", request);
+            var urlString = URLBuilder.Build(baseUrl, "/invitations", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -513,7 +516,7 @@ namespace Clerk.BackendAPI
                 InvitationId = invitationId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/invitations/{invitation_id}/revoke", request);
+            var urlString = URLBuilder.Build(baseUrl, "/invitations/{invitation_id}/revoke", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

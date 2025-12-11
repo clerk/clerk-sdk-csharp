@@ -23,6 +23,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// 200 OK
         /// </summary>
-        public Models.Operations.VerifyOAuthAccessTokenResponseBody? Object { get; set; }
+        public Models.Operations.VerifyOAuthAccessTokenResponseBody? OneOf { get; set; }
     }
 }

@@ -100,10 +100,11 @@ namespace Clerk.BackendAPI
     public class Sessions: ISessions
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Sessions(SDKConfig config)
         {
@@ -113,7 +114,7 @@ namespace Clerk.BackendAPI
         public async Task<GetSessionListResponse> ListAsync(GetSessionListRequest? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sessions", request);
+            var urlString = URLBuilder.Build(baseUrl, "/sessions", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -410,7 +411,7 @@ namespace Clerk.BackendAPI
                 SessionId = sessionId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -558,7 +559,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/refresh", request);
+            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/refresh", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -711,7 +712,7 @@ namespace Clerk.BackendAPI
                 SessionId = sessionId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/revoke", request);
+            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/revoke", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -859,7 +860,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/tokens", request);
+            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/tokens", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1014,7 +1015,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/tokens/{template_name}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/tokens/{template_name}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

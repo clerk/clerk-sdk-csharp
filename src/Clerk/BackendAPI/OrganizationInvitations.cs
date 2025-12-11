@@ -82,6 +82,9 @@ namespace Clerk.BackendAPI
         /// 
         /// <remarks>
         /// Creates new organization invitations in bulk and sends out emails to the provided email addresses with a link to accept the invitation and join the organization.<br/>
+        /// <br/>
+        /// This endpoint is limited to a maximum of 10 invitations per API call. If you need to send more invitations, please make multiple requests.<br/>
+        /// <br/>
         /// You can specify a different `role` for each invited organization member.<br/>
         /// New organization invitations get a &quot;pending&quot; status until they are revoked by an organization administrator or accepted by the invitee.<br/>
         /// The request body supports passing an optional `redirect_url` parameter for each invitation.<br/>
@@ -138,10 +141,11 @@ namespace Clerk.BackendAPI
     public class OrganizationInvitations: IOrganizationInvitations
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public OrganizationInvitations(SDKConfig config)
         {
@@ -151,7 +155,7 @@ namespace Clerk.BackendAPI
         public async Task<ListInstanceOrganizationInvitationsResponse> GetAllAsync(ListInstanceOrganizationInvitationsRequest? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organization_invitations", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organization_invitations", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -319,7 +323,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -468,7 +472,7 @@ namespace Clerk.BackendAPI
         public async Task<ListOrganizationInvitationsResponse> ListAsync(ListOrganizationInvitationsRequest request, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -616,7 +620,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/bulk", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/bulk", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -772,7 +776,7 @@ namespace Clerk.BackendAPI
                 Offset = offset,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/pending", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/pending", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -920,7 +924,7 @@ namespace Clerk.BackendAPI
                 InvitationId = invitationId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/{invitation_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/{invitation_id}", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -1069,7 +1073,7 @@ namespace Clerk.BackendAPI
                 RequestBody = requestBody,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/{invitation_id}/revoke", request);
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/{invitation_id}/revoke", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);

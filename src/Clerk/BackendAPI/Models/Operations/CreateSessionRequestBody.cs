@@ -20,5 +20,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("user_id")]
         public string UserId { get; set; } = default!;
+
+        /// <summary>
+        /// The ID of the organization to set as active for this session
+        /// </summary>
+        [JsonProperty("active_organization_id")]
+        public string? ActiveOrganizationId { get; set; }
     }
 }

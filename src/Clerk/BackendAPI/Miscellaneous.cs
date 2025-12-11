@@ -38,10 +38,11 @@ namespace Clerk.BackendAPI
     public class Miscellaneous: IMiscellaneous
     {
         public SDKConfig SDKConfiguration { get; private set; }
-        private const string _language = "csharp";
-        private const string _sdkVersion = "0.14.0";
-        private const string _sdkGenVersion = "2.748.0";
-        private const string _openapiDocVersion = "2025-11-10";
+
+        private const string _language = Constants.Language;
+        private const string _sdkVersion = Constants.SdkVersion;
+        private const string _sdkGenVersion = Constants.SdkGenVersion;
+        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Miscellaneous(SDKConfig config)
         {
@@ -51,7 +52,7 @@ namespace Clerk.BackendAPI
         public async Task<GetPublicInterstitialResponse> GetPublicInterstitialAsync(GetPublicInterstitialRequest? request = null, RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/public/interstitial", request);
+            var urlString = URLBuilder.Build(baseUrl, "/public/interstitial", request, null);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
