@@ -218,6 +218,18 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? SkipLegalChecks { get; set; } = null;
 
         /// <summary>
+        /// When set to `true`, identification types are not enforced.<br/>
+        /// 
+        /// <remarks>
+        /// At least one identification type must be enabled and provided on your instance (email, phone, web3 wallet, or username).<br/>
+        /// Users created without required identification types cannot use those authentication strategies<br/>
+        /// It is not recommended to use this flag unless you need to allow Clerk UI components to prompt for required fields while BAPI creates users with minimal data, or for migration a user to Clerk.
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("skip_user_requirement")]
+        public bool? SkipUserRequirement { get; set; } = null;
+
+        /// <summary>
         /// If enabled, user can create organizations via FAPI.<br/>
         /// 
         /// <remarks>
