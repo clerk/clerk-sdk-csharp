@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: b17c4cfc58e3bf94b47b013ea220081f
+  docChecksum: 9bb73fc785e824b480ec1992964849fc
   docVersion: "2025-11-10"
-  speakeasyVersion: 1.675.4
-  generationVersion: 2.779.2
-  releaseVersion: 0.15.0
-  configChecksum: bf0cf9ede484f8c6169d48e5d23d8599
+  speakeasyVersion: 1.680.12
+  generationVersion: 2.788.15
+  releaseVersion: 0.15.1
+  configChecksum: eb82611d26f2bbe6b7df262fab3f6a5c
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 persistentEdits:
-  generation_id: 907a3163-6de3-4951-8d25-07dc7c97fd4a
-  pristine_commit_hash: 7aede185acc424c3b975a4d818e195044d5c18cb
-  pristine_tree_hash: b98903c2c38ae1775561836674c78689911f7341
+  generation_id: 8b55798e-6f70-44fd-acc3-4b06454e1c28
+  pristine_commit_hash: 3d4c86cc569d0b0b2ca7a67be884a0eac6e2a4c3
+  pristine_tree_hash: 66185e954fd854a1c3117b529bbd3d3d446e62d1
 features:
   csharp:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.0.1
-    core: 3.15.7
+    core: 3.15.8
     deprecations: 2.81.2
     examples: 2.81.6
     flattening: 2.81.3
@@ -47,8 +47,8 @@ trackedFiles:
     pristine_git_object: 42a8b313cbe1e12eb7dc11297fec3a8e411b8211
   NUGET.md:
     id: f4c8a442a6e5
-    last_write_checksum: sha1:bd57b943e44352d8e6bbfa79c55a844c49f48581
-    pristine_git_object: 0920031efd7e2cd2cc6f78c9d73de4ce821f7fca
+    last_write_checksum: sha1:f3ceeb7a1924de36582517bb4901a7313f0a0be7
+    pristine_git_object: 9771ecf8654a16bfd33f4a9f19e735e90da7e024
   USAGE.md:
     id: 3aed33ce6e6f
     last_write_checksum: sha1:16a0f17db9a8610ca0cddb07a5013cb7de336587
@@ -1759,8 +1759,8 @@ trackedFiles:
     pristine_git_object: 3c5bb19134095669e1a711227fe23e73060f54f7
   docs/Models/Operations/CreateMachineRequestBody.md:
     id: 220fc5392467
-    last_write_checksum: sha1:db6f6c639539b1ded1b8ec80c539cfaf54ea8b89
-    pristine_git_object: 9816b73ef5c537633b587d8775c42248a605bfa4
+    last_write_checksum: sha1:7b8811978338f108546550fc34cfcbb316152431
+    pristine_git_object: 2b1d6045d7292acff3645ec0b7c639b07256ad6a
   docs/Models/Operations/CreateMachineResponse.md:
     id: 158475cca0ab
     last_write_checksum: sha1:44fb1123b99a57da48d7e76a3d0aa5124e6a3056
@@ -1947,8 +1947,8 @@ trackedFiles:
     pristine_git_object: d0dd144f338df02a5d9a98b517b0dbda711281df
   docs/Models/Operations/CreateUserRequestBody.md:
     id: 1f74c33c7c3f
-    last_write_checksum: sha1:8090a3dfd6f6833d9eac1b3322d087251fcbd169
-    pristine_git_object: 9a06750b3e70ed7509ba5f1db49c515a24aed123
+    last_write_checksum: sha1:4c3f5de9d27d12dc775044ca6c34484f43959d73
+    pristine_git_object: 0a7c79fa1bed680c46527aef6e1ac7cfbd311544
   docs/Models/Operations/CreateUserResponse.md:
     id: 4490ee2fe986
     last_write_checksum: sha1:0854fe63ae23d2136a6e071a0a313a3d44612fb9
@@ -3511,8 +3511,8 @@ trackedFiles:
     pristine_git_object: 546e14d3685b2a5df6db0554ab5a00a42ea6f4f8
   docs/sdks/machines/README.md:
     id: ab83178bf481
-    last_write_checksum: sha1:67c0ef18644d1541d8629509700f586c520a910c
-    pristine_git_object: 38a966834889585df4a2178dfa8bbb592ccd2751
+    last_write_checksum: sha1:1ef01a56eb35b654791821ac9f2a8487678ecee5
+    pristine_git_object: ac9ab43ec5f04464020eeb72c2518a3ee2745ebc
   docs/sdks/miscellaneous/README.md:
     id: 897f13c5866e
     last_write_checksum: sha1:8301d4ad6cfff52ba6d83bc43351a4ecc0cc1ef1
@@ -3627,8 +3627,8 @@ trackedFiles:
     pristine_git_object: 6673f9729e0456e7673482196236bd81aea8f66f
   src/Clerk/BackendAPI/Clerk.BackendAPI.csproj:
     id: ccf41f9f81a0
-    last_write_checksum: sha1:92c9de21bb4d0f7702ace0b609c6caebe2b4dc34
-    pristine_git_object: 7d532827a5469e3f99f13fd113507a383f903f9b
+    last_write_checksum: sha1:2c8d3c06fa3bfd3aef5007942ed269d90575d54b
+    pristine_git_object: b8f078b89fb5bea2f4870d42d1215c61e6ee7a25
   src/Clerk/BackendAPI/ClerkBackendApi.cs:
     id: 9270b4820dab
     last_write_checksum: sha1:72389dcf4818cd03f4678ef011b010b22731a769
@@ -3683,8 +3683,8 @@ trackedFiles:
     pristine_git_object: a309dead2dd656f67b07d4b82802c0438c1ad60f
   src/Clerk/BackendAPI/Machines.cs:
     id: 6a07df4d6445
-    last_write_checksum: sha1:76975ba5864f9a6027f299e07927c0712350d8b6
-    pristine_git_object: 29beca86179b13093dcd5eaf73f1b1792217fd60
+    last_write_checksum: sha1:08d7b5b5ad9897ad48bd9a913f66aa930a45ba94
+    pristine_git_object: 878a41224f35bbca93ac69aca270103179b3c7d4
   src/Clerk/BackendAPI/Miscellaneous.cs:
     id: 419e08183166
     last_write_checksum: sha1:892eb8b64671a6323ad864eeaf6b9c17274ae1eb
@@ -5407,8 +5407,8 @@ trackedFiles:
     pristine_git_object: f8f4c9992947068a0e308a005d42cbf277baad96
   src/Clerk/BackendAPI/Models/Operations/CreateMachineRequestBody.cs:
     id: 44098b5a5121
-    last_write_checksum: sha1:e8ccd69810f36a7d799809501a7bcf43fa7505e8
-    pristine_git_object: 59cc4e555965fd097ce853c9f2c7847448ac8bf0
+    last_write_checksum: sha1:969b6675e8cfbab0b6f30ee3162f2715f8d97a1a
+    pristine_git_object: e6f7efbad1d4fd590d3f2a9a74a42fd8368ed6fc
   src/Clerk/BackendAPI/Models/Operations/CreateMachineResponse.cs:
     id: 7aa0549ca86c
     last_write_checksum: sha1:5779cdbc57b57a694958da8f87f736ae3df1c708
@@ -5595,8 +5595,8 @@ trackedFiles:
     pristine_git_object: 6a5b55c77e5132121eaeaf64bb8c012501df5d74
   src/Clerk/BackendAPI/Models/Operations/CreateUserRequestBody.cs:
     id: 563c257dde72
-    last_write_checksum: sha1:b17d4a8e4452f09e7f2c7a84b5e6edfaf04bf705
-    pristine_git_object: 5926f1090fb5fe25807353ad4675b2b977cdeeb7
+    last_write_checksum: sha1:aceb413b0c91ba515902cd87b681a8c16c44c87b
+    pristine_git_object: a0a759a732340d3cec1763010f13b7397bf75d93
   src/Clerk/BackendAPI/Models/Operations/CreateUserResponse.cs:
     id: 5bdc969571dc
     last_write_checksum: sha1:f260c23b2738b2e81f60cf83b7b5b5bd4f70f670
@@ -7139,8 +7139,8 @@ trackedFiles:
     pristine_git_object: 2f2badc578213eae0b57789830ab1c515b5e2340
   src/Clerk/BackendAPI/SDKConfig.cs:
     id: 2c8fac1123d6
-    last_write_checksum: sha1:49bcbd3f506fb87ce58e7ee55f661b6091abc393
-    pristine_git_object: 3a889dd8e89bbb2477e8b764d2434d1cadbd2b3f
+    last_write_checksum: sha1:0fd31d9485c25a74e7fa90fc5528aac7e62f9d6a
+    pristine_git_object: 81dbf8028f89c3880992d31b4118beff4990ddfb
   src/Clerk/BackendAPI/SamlConnections.cs:
     id: 547d61012934
     last_write_checksum: sha1:e9888d5149dabd72f9b94fb783e9f5c3b5794a28
@@ -7179,8 +7179,8 @@ trackedFiles:
     pristine_git_object: 6f5e7c0679eaf01c8213e9e6d8b175615a82301a
   src/Clerk/BackendAPI/Utils/Constants.cs:
     id: cbaa176f33c6
-    last_write_checksum: sha1:2fb2b4ff879f62fa69a9ca60b478d9f0e4eec4d0
-    pristine_git_object: 33099c1821abdf31581810a059aaab61ef92148e
+    last_write_checksum: sha1:374633a3ecfef7ab3e46b900764b1b5ca20aa2c8
+    pristine_git_object: 1ce0d1d830a8bb427630470b9cd9e1200d2136fe
   src/Clerk/BackendAPI/Utils/DecimalStrConverter.cs:
     id: 2025c1d60dea
     last_write_checksum: sha1:5418f1eb375056aa7f1175271f6c48a7b536d947
@@ -9388,7 +9388,7 @@ examples:
           application/json: {"errors": [{"message": "some details about the error", "long_message": "some details about the error", "code": "some_error_code"}]}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Csharp SDK Changes:\n* `ClerkBackendApi.Users.GetBillingSubscription()`:  `response.subscriptionItems.[].Plan.Features.[]` **Changed** **Breaking** :warning:\n* `ClerkBackendApi.BetaFeatures.UpdateInstanceSettings()`: \n  *  `request.EnhancedEmailDeliverability` **Removed** **Breaking** :warning:\n* `ClerkBackendApi.InstanceSettings.Update()`: \n  *  `request.EnhancedEmailDeliverability` **Removed** **Breaking** :warning:\n* `ClerkBackendApi.Organizations.GetBillingSubscription()`:  `response.subscriptionItems.[].Plan.Features.[]` **Changed** **Breaking** :warning:\n* `ClerkBackendApi.OauthAccessTokens.Verify()`:  `response` **Changed** **Breaking** :warning:\n* `ClerkBackendApi.Users.Ban()`:  `response` **Changed**\n* `ClerkBackendApi.Users.BulkUnban()`:  `response.[]` **Changed**\n* `ClerkBackendApi.OrganizationRoles.Get()`: **Added**\n* `ClerkBackendApi.OrganizationRoles.Update()`: **Added**\n* `ClerkBackendApi.OrganizationRoles.Delete()`: **Added**\n* `ClerkBackendApi.OrganizationRoles.AssignPermission()`: **Added**\n* `ClerkBackendApi.OrganizationRoles.RemovePermission()`: **Added**\n* `ClerkBackendApi.Billing.ListPlans()`: **Added**\n* `ClerkBackendApi.Billing.ListSubscriptionItems()`: **Added**\n* `ClerkBackendApi.Billing.CancelSubscriptionItem()`: **Added**\n* `ClerkBackendApi.OrganizationPermissions.List()`: **Added**\n* `ClerkBackendApi.OrganizationPermissions.Create()`: **Added**\n* `ClerkBackendApi.OrganizationPermissions.Get()`: **Added**\n* `ClerkBackendApi.OrganizationPermissions.Update()`: **Added**\n* `ClerkBackendApi.OrganizationPermissions.Delete()`: **Added**\n* `ClerkBackendApi.ApiKeys.CreateApiKey()`: **Added**\n* `ClerkBackendApi.ApiKeys.GetApiKeys()`: **Added**\n* `ClerkBackendApi.Users.BulkBan()`:  `response.[]` **Changed**\n* `ClerkBackendApi.ApiKeys.UpdateApiKey()`: **Added**\n* `ClerkBackendApi.ApiKeys.DeleteApiKey()`: **Added**\n* `ClerkBackendApi.ApiKeys.GetApiKeySecret()`: **Added**\n* `ClerkBackendApi.ApiKeys.RevokeApiKey()`: **Added**\n* `ClerkBackendApi.ApiKeys.VerifyApiKey()`: **Added**\n* `ClerkBackendApi.Commerce.ListPlans()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.Commerce.ListSubscriptionItems()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.Commerce.CancelSubscriptionItem()`: **Deleted** **Breaking** :warning:\n* `ClerkBackendApi.Sessions.Create()`: \n  *  `request.ActiveOrganizationId` **Added**\n* `ClerkBackendApi.Users.List()`:  `response.[]` **Changed**\n* `ClerkBackendApi.Users.Create()`: \n  *  `request.BypassClientTrust` **Added**\n  *  `response` **Changed**\n* `ClerkBackendApi.Users.Get()`:  `response` **Changed**\n* `ClerkBackendApi.Users.Update()`: \n  *  `requestBody.BypassClientTrust` **Added**\n  *  `response` **Changed**\n* `ClerkBackendApi.OrganizationRoles.List()`: **Added**\n* `ClerkBackendApi.OrganizationRoles.Create()`: **Added**\n* `ClerkBackendApi.Users.Unban()`:  `response` **Changed**\n* `ClerkBackendApi.ApiKeys.GetApiKey()`: **Added**\n* `ClerkBackendApi.Users.Lock()`:  `response` **Changed**\n* `ClerkBackendApi.Users.Unlock()`:  `response` **Changed**\n* `ClerkBackendApi.Users.SetProfileImage()`:  `response` **Changed**\n* `ClerkBackendApi.Users.DeleteProfileImage()`:  `response` **Changed**\n* `ClerkBackendApi.Users.UpdateMetadata()`:  `response` **Changed**\n* `ClerkBackendApi.Users.GetOrganizationMemberships()`:  `response.data.[].Organization.LastActiveAt` **Added**\n* `ClerkBackendApi.Users.GetOrganizationInvitations()`:  `response.data.[]` **Changed**\n* `ClerkBackendApi.Users.GetInstanceOrganizationMemberships()`:  `response.data.[].Organization.LastActiveAt` **Added**\n* `ClerkBackendApi.OrganizationInvitations.GetAll()`:  `response.data.[]` **Changed**\n* `ClerkBackendApi.OrganizationInvitations.Create()`:  `response` **Changed**\n* `ClerkBackendApi.OrganizationInvitations.List()`:  `response.data.[]` **Changed**\n* `ClerkBackendApi.OrganizationInvitations.BulkCreate()`:  `response.data.[]` **Changed**\n* `ClerkBackendApi.OrganizationInvitations.ListPending()`:  `response.data.[]` **Changed**\n* `ClerkBackendApi.OrganizationInvitations.Get()`:  `response` **Changed**\n* `ClerkBackendApi.OrganizationInvitations.Revoke()`:  `response` **Changed**\n* `ClerkBackendApi.InstanceSettings.UpdateOrganizationSettings()`:  `response.maxRoleSetsAllowed` **Added**\n* `ClerkBackendApi.Organizations.List()`:  `response.data.[].LastActiveAt` **Added**\n* `ClerkBackendApi.Organizations.Create()`:  `response.lastActiveAt` **Added**\n* `ClerkBackendApi.Organizations.Get()`:  `response.lastActiveAt` **Added**\n* `ClerkBackendApi.Organizations.Update()`:  `response.lastActiveAt` **Added**\n* `ClerkBackendApi.Organizations.MergeMetadata()`:  `response.lastActiveAt` **Added**\n* `ClerkBackendApi.Organizations.UploadLogo()`:  `response.lastActiveAt` **Added**\n* `ClerkBackendApi.Organizations.DeleteLogo()`:  `response.lastActiveAt` **Added**\n* `ClerkBackendApi.OrganizationMemberships.Create()`: \n  *  `requestBody` **Changed**\n  *  `response.organization.LastActiveAt` **Added**\n* `ClerkBackendApi.OrganizationMemberships.List()`:  `response.data.[].Organization.LastActiveAt` **Added**\n* `ClerkBackendApi.OrganizationMemberships.Update()`:  `response.organization.LastActiveAt` **Added**\n* `ClerkBackendApi.OrganizationMemberships.Delete()`:  `response.organization.LastActiveAt` **Added**\n* `ClerkBackendApi.OrganizationMemberships.UpdateMetadata()`:  `response.organization.LastActiveAt` **Added**\n* `ClerkBackendApi.SamlConnections.List()`:  `response.data.[]` **Changed**\n* `ClerkBackendApi.SamlConnections.Create()`:  `response` **Changed**\n* `ClerkBackendApi.SamlConnections.Get()`:  `response` **Changed**\n* `ClerkBackendApi.SamlConnections.Update()`:  `response` **Changed**\n"
+releaseNotes: "## Csharp SDK Changes:\n* `ClerkBackendApi.Users.Create()`: \n  *  `request.SkipUserRequirement` **Added**\n"
 generatedFiles:
   - .gitattributes
   - Clerk.BackendAPI.sln
