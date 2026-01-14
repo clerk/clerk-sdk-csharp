@@ -72,6 +72,7 @@ namespace Clerk.BackendAPI
         public IWaitlistEntries WaitlistEntries { get; }
         public IBilling Billing { get; }
         public IOrganizationPermissions OrganizationPermissions { get; }
+        public IRoleSets RoleSets { get; }
 
         /// <summary>
         /// Endpoints for managing API Keys
@@ -140,6 +141,7 @@ namespace Clerk.BackendAPI
         public IWaitlistEntries WaitlistEntries { get; private set; }
         public IBilling Billing { get; private set; }
         public IOrganizationPermissions OrganizationPermissions { get; private set; }
+        public IRoleSets RoleSets { get; private set; }
         public IAPIKeys APIKeys { get; private set; }
         public IM2m M2m { get; private set; }
         public IOauthAccessTokens OauthAccessTokens { get; private set; }
@@ -218,6 +220,8 @@ namespace Clerk.BackendAPI
             Billing = new Billing(SDKConfiguration);
 
             OrganizationPermissions = new OrganizationPermissions(SDKConfiguration);
+
+            RoleSets = new RoleSets(SDKConfiguration);
 
             APIKeys = new APIKeys(SDKConfiguration);
 
@@ -344,6 +348,8 @@ namespace Clerk.BackendAPI
             Billing = new Billing(SDKConfiguration);
 
             OrganizationPermissions = new OrganizationPermissions(SDKConfiguration);
+
+            RoleSets = new RoleSets(SDKConfiguration);
 
             APIKeys = new APIKeys(SDKConfiguration);
 

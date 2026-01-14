@@ -53,18 +53,30 @@ namespace Clerk.BackendAPI.Models.Operations
         [JsonProperty("expired")]
         public bool Expired { get; set; } = default!;
 
+        /// <summary>
+        /// The timestamp for when the API key will expire, in milliseconds
+        /// </summary>
         [JsonProperty("expiration", NullValueHandling = NullValueHandling.Include)]
         public double? Expiration { get; set; }
 
         [JsonProperty("created_by", NullValueHandling = NullValueHandling.Include)]
         public string? CreatedBy { get; set; }
 
+        /// <summary>
+        /// The timestamp for when the API key was last used, in milliseconds
+        /// </summary>
         [JsonProperty("last_used_at", NullValueHandling = NullValueHandling.Include)]
         public double? LastUsedAt { get; set; }
 
+        /// <summary>
+        /// The timestamp for when the API key was created, in milliseconds
+        /// </summary>
         [JsonProperty("created_at")]
         public double CreatedAt { get; set; } = default!;
 
+        /// <summary>
+        /// The timestamp for when the API key was last updated, in milliseconds
+        /// </summary>
         [JsonProperty("updated_at")]
         public double UpdatedAt { get; set; } = default!;
     }

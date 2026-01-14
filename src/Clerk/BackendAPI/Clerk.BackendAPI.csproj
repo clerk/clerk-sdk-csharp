@@ -3,10 +3,10 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>Clerk.BackendAPI</PackageId>
-    <Version>0.15.0</Version>
+    <Version>0.15.1</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Clerk</Authors>
-    <Copyright>Copyright (c) Clerk 2025</Copyright>
+    <Copyright>Copyright (c) Clerk 2026</Copyright>
     <RepositoryUrl>https://github.com/clerk/clerk-sdk-csharp.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Clerk SDK</PackageTags>
@@ -56,7 +56,7 @@ Please see https://clerk.com/docs for more information.</Description>
   <ItemGroup>
     <PackageReference Include="newtonsoft.json" Version="13.0.3" />
     <PackageReference Include="nodatime" Version="3.1.9" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.2.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
   </ItemGroup>

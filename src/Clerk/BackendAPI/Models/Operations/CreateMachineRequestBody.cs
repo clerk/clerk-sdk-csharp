@@ -23,7 +23,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// Array of machine IDs that this machine will have access to. Maximum of 25 scopes per machine.
+        /// Array of machine IDs that this machine will have access to. Maximum of 150 scopes per machine.
         /// </summary>
         [JsonProperty("scoped_machines")]
         public List<string>? ScopedMachines { get; set; }

@@ -1,0 +1,10 @@
+# AddRolesToRoleSetRequestBody
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `RoleKeys`                                                                                           | List<*string*>                                                                                       | :heavy_check_mark:                                                                                   | Array of role keys to add to the role set.<br/>Must contain at least one role and no more than 10 roles. |
+| `DefaultRoleKey`                                                                                     | *string*                                                                                             | :heavy_minus_sign:                                                                                   | Optionally update the default role to one of the newly added roles.                                  |
+| `CreatorRoleKey`                                                                                     | *string*                                                                                             | :heavy_minus_sign:                                                                                   | Optionally update the creator role to one of the newly added roles.                                  |
