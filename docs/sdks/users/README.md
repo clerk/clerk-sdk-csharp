@@ -31,6 +31,8 @@
 * [DeleteWeb3Wallet](#deleteweb3wallet) - Delete a user web3 wallet
 * [DeleteTOTP](#deletetotp) - Delete all the user's TOTPs
 * [DeleteExternalAccount](#deleteexternalaccount) - Delete External Account
+* [SetPasswordCompromised](#setpasswordcompromised) - Set a user's password as compromised
+* [UnsetPasswordCompromised](#unsetpasswordcompromised) - Unmark a user's password as compromised
 * [GetInstanceOrganizationMemberships](#getinstanceorganizationmemberships) - Get a list of all organization memberships within an instance.
 
 ## List
@@ -1230,6 +1232,77 @@ var res = await sdk.Users.DeleteExternalAccountAsync(
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## SetPasswordCompromised
+
+Sets the given user's password as compromised, which means that they will be prompted to reset their password on their next sign in.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="SetUserPasswordCompromised" method="post" path="/users/{user_id}/password/set_compromised" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.SetPasswordCompromisedAsync(userId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `UserId`                                                                                                  | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The ID of the user to set the password as compromised                                                     |
+| `RequestBody`                                                                                             | [SetUserPasswordCompromisedRequestBody](../../Models/Operations/SetUserPasswordCompromisedRequestBody.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
+
+### Response
+
+**[SetUserPasswordCompromisedResponse](../../Models/Operations/SetUserPasswordCompromisedResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## UnsetPasswordCompromised
+
+Removes the compromised status from the given user's password. The user will no longer be prompted to reset their password on their next sign in.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="UnsetUserPasswordCompromised" method="post" path="/users/{user_id}/password/unset_compromised" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.UnsetPasswordCompromisedAsync(userId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                              | Type                                                   | Required                                               | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `UserId`                                               | *string*                                               | :heavy_check_mark:                                     | The ID of the user to unset the compromised status for |
+
+### Response
+
+**[UnsetUserPasswordCompromisedResponse](../../Models/Operations/UnsetUserPasswordCompromisedResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## GetInstanceOrganizationMemberships

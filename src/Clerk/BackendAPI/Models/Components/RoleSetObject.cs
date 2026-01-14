@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace Clerk.BackendAPI.Models.Operations
+namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
     
-    public enum VerifyOAuthAccessTokenObject
+    public enum RoleSetObject
     {
-        [JsonProperty("clerk_idp_oauth_access_token")]
-        ClerkIdpOauthAccessToken,
+        [JsonProperty("role_set")]
+        RoleSet,
     }
 
-    public static class VerifyOAuthAccessTokenObjectExtension
+    public static class RoleSetObjectExtension
     {
-        public static string Value(this VerifyOAuthAccessTokenObject value)
+        public static string Value(this RoleSetObject value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static VerifyOAuthAccessTokenObject ToEnum(this string value)
+        public static RoleSetObject ToEnum(this string value)
         {
-            foreach(var field in typeof(VerifyOAuthAccessTokenObject).GetFields())
+            foreach(var field in typeof(RoleSetObject).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -41,14 +41,14 @@ namespace Clerk.BackendAPI.Models.Operations
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is VerifyOAuthAccessTokenObject)
+                    if (enumVal is RoleSetObject)
                     {
-                        return (VerifyOAuthAccessTokenObject)enumVal;
+                        return (RoleSetObject)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum VerifyOAuthAccessTokenObject");
+            throw new Exception($"Unknown value {value} for enum RoleSetObject");
         }
     }
 

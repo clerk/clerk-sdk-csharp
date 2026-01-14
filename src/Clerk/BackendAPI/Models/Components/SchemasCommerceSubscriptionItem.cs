@@ -56,6 +56,12 @@ namespace Clerk.BackendAPI.Models.Components
         public string PlanId { get; set; } = default!;
 
         /// <summary>
+        /// Unique identifier for the associated price
+        /// </summary>
+        [JsonProperty("price_id")]
+        public string? PriceId { get; set; }
+
+        /// <summary>
         /// The associated commerce plan.
         /// </summary>
         [JsonProperty("plan", NullValueHandling = NullValueHandling.Include)]
