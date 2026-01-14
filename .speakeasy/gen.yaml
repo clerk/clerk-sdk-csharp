@@ -28,7 +28,7 @@ generation:
 csharp:
   version: 0.15.0
   additionalDependencies:
-    - package: Microsoft.AspNetCore
+    - package: Microsoft.AspNetCore.Http
       version: 2.3.0
     - package: System.IdentityModel.Tokens.Jwt
       version: 8.2.0
