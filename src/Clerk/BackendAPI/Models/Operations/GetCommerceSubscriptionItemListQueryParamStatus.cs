@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// Filter subscription items by status
+    /// Filter subscription items by status.
     /// </summary>
     public enum GetCommerceSubscriptionItemListQueryParamStatus
     {
@@ -62,5 +62,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum GetCommerceSubscriptionItemListQueryParamStatus");
         }
     }
-
 }

@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class VerifyTOTPRequestBody
     {
-
         /// <summary>
-        /// The TOTP or backup code to verify
+        /// The TOTP or backup code to verify.
         /// </summary>
         [JsonProperty("code")]
         public string Code { get; set; } = default!;

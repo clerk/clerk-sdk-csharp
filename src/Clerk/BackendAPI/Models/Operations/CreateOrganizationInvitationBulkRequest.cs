@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using System.Collections.Generic;
-    
+
     public class CreateOrganizationInvitationBulkRequest
     {
-
         /// <summary>
         /// The organization ID.
         /// </summary>

@@ -11,22 +11,18 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateWaitlistEntryRequestBody
     {
-
         /// <summary>
-        /// The email address to add to the waitlist
+        /// The email address to add to the waitlist.
         /// </summary>
         [JsonProperty("email_address")]
         public string EmailAddress { get; set; } = default!;
 
         /// <summary>
         /// Optional flag which denotes whether a confirmation email should be sent to the given email address.<br/>
-        /// 
-        /// <remarks>
         /// Defaults to `true`.
-        /// </remarks>
         /// </summary>
         [JsonProperty("notify")]
         public bool? Notify { get; set; } = true;

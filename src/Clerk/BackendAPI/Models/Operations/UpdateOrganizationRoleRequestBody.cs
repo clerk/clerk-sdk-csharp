@@ -12,24 +12,23 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UpdateOrganizationRoleRequestBody
     {
-
         /// <summary>
-        /// The new name for the organization role
+        /// The new name for the organization role.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
 
         /// <summary>
-        /// A unique key for the organization role. Must start with &apos;org:&apos; and contain only lowercase alphanumeric characters and underscores.
+        /// A unique key for the organization role. Must start with 'org:' and contain only lowercase alphanumeric characters and underscores.
         /// </summary>
         [JsonProperty("key")]
         public string? Key { get; set; } = null;
 
         /// <summary>
-        /// Optional description for the role
+        /// Optional description for the role.
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; } = null;

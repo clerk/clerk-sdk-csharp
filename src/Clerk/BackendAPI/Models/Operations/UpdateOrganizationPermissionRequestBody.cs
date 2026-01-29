@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateOrganizationPermissionRequestBody
     {
-
         /// <summary>
         /// The name of the permission.
         /// </summary>
@@ -22,7 +21,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Name { get; set; }
 
         /// <summary>
-        /// The key of the permission. Must have the format &quot;org:feature:action&quot; where feature and action are segments consisting of lowercase letters, digits, or underscores. Cannot begin with &quot;org:sys_&quot; as that prefix is reserved for system permissions.
+        /// The key of the permission. Must have the format "org:feature:action" where feature and action are segments consisting of lowercase letters, digits, or underscores. Cannot begin with "org:sys_" as that prefix is reserved for system permissions.
         /// </summary>
         [JsonProperty("key")]
         public string? Key { get; set; }

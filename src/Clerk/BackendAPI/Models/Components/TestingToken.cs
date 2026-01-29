@@ -12,13 +12,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// A Testing Token
+    /// A Testing Token.
     /// </summary>
     public class TestingToken
     {
-
         [JsonProperty("object")]
         public TestingTokenObject Object { get; set; } = default!;
 
@@ -29,11 +28,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string Token { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of the token&apos;s expiration time.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of the token's expiration time.
         /// </summary>
         [JsonProperty("expires_at")]
         public long ExpiresAt { get; set; } = default!;

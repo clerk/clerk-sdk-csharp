@@ -13,13 +13,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// A list of commerce subscription items.
     /// </summary>
     public class PaginatedCommerceSubscriptionItemResponse
     {
-
         /// <summary>
         /// Array of subscription items.
         /// </summary>

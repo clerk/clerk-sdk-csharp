@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DisableMFARequest
     {
-
         /// <summary>
-        /// The ID of the user whose MFA methods are to be disabled
+        /// The ID of the user whose MFA methods are to be disabled.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;

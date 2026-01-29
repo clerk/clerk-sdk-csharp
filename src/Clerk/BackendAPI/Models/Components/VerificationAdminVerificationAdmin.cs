@@ -16,10 +16,9 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public class VerificationAdminVerificationAdmin
     {
-
         [JsonProperty("object")]
         public VerificationAdminVerificationWeb3WalletObject? Object { get; set; }
 

@@ -11,13 +11,12 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Successful operation.
     /// </summary>
     public class DeleteTOTPResponseBody
     {
-
         [JsonProperty("user_id")]
         public string? UserId { get; set; }
     }

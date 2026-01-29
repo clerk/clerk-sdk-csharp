@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateRedirectURLRequestBody
     {
-
         /// <summary>
-        /// The full URL value prefixed with `https://` or a custom scheme e.g. `&quot;https://my-app.com/oauth-callback&quot;` or `&quot;my-app://oauth-callback&quot;`
+        /// The full URL value prefixed with `https://` or a custom scheme e.g. `"https://my-app.com/oauth-callback"` or `"my-app://oauth-callback"`
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; } = default!;

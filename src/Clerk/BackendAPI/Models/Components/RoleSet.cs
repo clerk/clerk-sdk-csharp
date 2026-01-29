@@ -13,78 +13,77 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// A role set defines a collection of roles that can be assigned to organization members
+    /// A role set defines a collection of roles that can be assigned to organization members.
     /// </summary>
     public class RoleSet
     {
-
         [JsonProperty("object")]
         public RoleSetObject Object { get; set; } = default!;
 
         /// <summary>
-        /// The unique identifier of the role set
+        /// The unique identifier of the role set.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// The name of the role set
+        /// The name of the role set.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// A unique key for the role set (e.g., &quot;role_set:default&quot;)
+        /// A unique key for the role set (e.g., "role_set:default").
         /// </summary>
         [JsonProperty("key")]
         public string Key { get; set; } = default!;
 
         /// <summary>
-        /// Optional description of the role set
+        /// Optional description of the role set.
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Include)]
         public string? Description { get; set; }
 
         /// <summary>
-        /// The list of roles in this role set
+        /// The list of roles in this role set.
         /// </summary>
         [JsonProperty("roles")]
         public List<RoleSetItem> Roles { get; set; } = default!;
 
         /// <summary>
-        /// The default role assigned to new organization members
+        /// The default role assigned to new organization members.
         /// </summary>
         [JsonProperty("default_role")]
         public DefaultRole? DefaultRole { get; set; } = null;
 
         /// <summary>
-        /// The role assigned to the creator of an organization
+        /// The role assigned to the creator of an organization.
         /// </summary>
         [JsonProperty("creator_role")]
         public CreatorRole? CreatorRole { get; set; } = null;
 
         /// <summary>
-        /// The type of the role set (&quot;initial&quot; or &quot;custom&quot;)
+        /// The type of the role set ("initial" or "custom").
         /// </summary>
         [JsonProperty("type")]
         public Models.Components.Type Type { get; set; } = default!;
 
         /// <summary>
-        /// Active migration information, only present when status is &quot;enqueued&quot; or &quot;in_progress&quot;
+        /// Active migration information, only present when status is "enqueued" or "in_progress"
         /// </summary>
         [JsonProperty("role_set_migration")]
         public RoleSetMigration? RoleSetMigration { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp of role set creation
+        /// Unix timestamp of role set creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last role set update
+        /// Unix timestamp of last role set update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

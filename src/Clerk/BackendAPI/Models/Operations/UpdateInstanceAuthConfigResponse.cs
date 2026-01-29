@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateInstanceAuthConfigResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// InstanceSettings Server API
+        /// InstanceSettings Server API.
         /// </summary>
         public Models.Components.InstanceSettings? InstanceSettings { get; set; }
     }

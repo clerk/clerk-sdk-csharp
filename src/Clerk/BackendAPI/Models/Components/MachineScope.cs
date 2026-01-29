@@ -12,13 +12,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Machine scope created successfully for a machine
+    /// Machine scope created successfully for a machine.
     /// </summary>
     public class MachineScope
     {
-
         [JsonProperty("object")]
         public MachineScopeObject Object { get; set; } = default!;
 

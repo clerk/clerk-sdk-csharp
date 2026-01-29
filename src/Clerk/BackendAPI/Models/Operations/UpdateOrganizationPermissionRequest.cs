@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdateOrganizationPermissionRequest
     {
-
         /// <summary>
-        /// The ID of the permission to update
+        /// The ID of the permission to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=permission_id")]
         public string PermissionId { get; set; } = default!;

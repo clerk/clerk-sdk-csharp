@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetRoleSetRequest
     {
-
         /// <summary>
-        /// The key or ID of the role set
+        /// The key or ID of the role set.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=role_set_key_or_id")]
         public string RoleSetKeyOrId { get; set; } = default!;

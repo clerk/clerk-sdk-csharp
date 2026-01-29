@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeletePhoneNumberRequest
     {
-
         /// <summary>
-        /// The ID of the phone number to delete
+        /// The ID of the phone number to delete.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=phone_number_id")]
         public string PhoneNumberId { get; set; } = default!;

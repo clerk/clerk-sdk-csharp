@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UpdateInstanceOrganizationSettingsRequestBody
     {
-
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; } = null;
 
@@ -33,10 +32,7 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Specify which enrollment modes to enable for your Organization Domains.<br/>
-        /// 
-        /// <remarks>
-        /// Supported modes are &apos;automatic_invitation&apos; &amp; &apos;automatic_suggestion&apos;.
-        /// </remarks>
+        /// Supported modes are 'automatic_invitation' &amp; 'automatic_suggestion'.
         /// </summary>
         [JsonProperty("domains_enrollment_modes")]
         public List<string>? DomainsEnrollmentModes { get; set; }

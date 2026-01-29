@@ -11,23 +11,19 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class ChangeProductionInstanceDomainRequestBody
     {
-
         /// <summary>
-        /// The new home URL of the production instance e.g. https://www.example.com
+        /// The new home URL of the production instance e.g. https://www.example.com.
         /// </summary>
         [JsonProperty("home_url")]
         public string? HomeUrl { get; set; }
 
         /// <summary>
         /// Whether this is a domain for a secondary app, meaning that any subdomain provided is significant and<br/>
-        /// 
-        /// <remarks>
         /// will be stored as part of the domain. This is useful for supporting multiple apps (one primary and<br/>
         /// multiple secondaries) on the same root domain (eTLD+1).
-        /// </remarks>
         /// </summary>
         [JsonProperty("is_secondary")]
         public bool? IsSecondary { get; set; }

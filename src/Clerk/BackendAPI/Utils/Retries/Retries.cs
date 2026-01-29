@@ -15,12 +15,22 @@ namespace Clerk.BackendAPI.Utils.Retries
     using System.Threading.Tasks;
     using Models.Errors;
 
+    /// <summary>
+    /// Handles retry logic for HTTP requests with configurable backoff strategies.
+    /// </summary>
     public class Retries
     {
         private Func<Task<HttpResponseMessage>> action;
         private RetryConfig retryConfig;
         private List<string> statusCodes;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Retries"/> class.
+        /// </summary>
+        /// <param name="action">The HTTP action to execute and potentially retry.</param>
+        /// <param name="retryConfig">The retry configuration specifying strategy and backoff parameters.</param>
+        /// <param name="statusCodes">The list of HTTP status codes that should trigger retries.</param>
+        /// <exception cref="ArgumentException">Thrown when the statusCodes list is empty.</exception>
         public Retries(Func<Task<HttpResponseMessage>> action, RetryConfig retryConfig, List<string> statusCodes)
         {
             this.action = action;
@@ -33,11 +43,17 @@ namespace Clerk.BackendAPI.Utils.Retries
             }
         }
 
+        /// <summary>
+        /// Exception indicating a non-retryable error that should be immediately propagated.
+        /// </summary>
         public sealed class PermanentException : Exception
         {
             public PermanentException(Exception innerException) : base("NonRetryable error.", innerException) { }
         }
 
+        /// <summary>
+        /// Exception indicating a retryable error that may succeed on subsequent attempts.
+        /// </summary>
         public sealed class RetryableException : Exception
         {
             public HttpResponseMessage? Response = null;
@@ -49,6 +65,11 @@ namespace Clerk.BackendAPI.Utils.Retries
             public RetryableException(Exception innerException) : base("An error occurred.", innerException) { }
         }
 
+        /// <summary>
+        /// Executes the configured HTTP action with retry logic based on the retry strategy.
+        /// </summary>
+        /// <returns>The HTTP response message from the successful request.</returns>
+        /// <exception cref="ArgumentException">Thrown when the retry strategy is invalid.</exception>
         public async Task<HttpResponseMessage> Run()
         {
             switch(retryConfig.Strategy) {

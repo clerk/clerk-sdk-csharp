@@ -11,13 +11,12 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// An organization inviter&apos;s public user data
+    /// An organization inviter's public user data.
     /// </summary>
     public class OrganizationInvitationPublicUserData
     {
-
         [JsonProperty("user_id")]
         public string UserId { get; set; } = default!;
 

@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class ReplaceRoleInRoleSetRequestBody
     {
-
         /// <summary>
-        /// The key of the role to remove from the role set
+        /// The key of the role to remove from the role set.
         /// </summary>
         [JsonProperty("role_key")]
         public string RoleKey { get; set; } = default!;
 
         /// <summary>
-        /// The key of the role to reassign members to
+        /// The key of the role to reassign members to.
         /// </summary>
         [JsonProperty("to_role_key")]
         public string ToRoleKey { get; set; } = default!;

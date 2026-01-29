@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateOrganizationDomainRequestBody
     {
-
         /// <summary>
         /// The enrollment_mode for the new domain. This can be `automatic_invitation`, `automatic_suggestion` or `manual_invitation`
         /// </summary>
@@ -22,7 +21,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? EnrollmentMode { get; set; } = null;
 
         /// <summary>
-        /// The status of the domain&apos;s verification
+        /// The status of the domain's verification.
         /// </summary>
         [JsonProperty("verified")]
         public bool? Verified { get; set; } = null;
