@@ -10,18 +10,17 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class AssignPermissionToOrganizationRoleRequest
     {
-
         /// <summary>
-        /// The ID of the organization role
+        /// The ID of the organization role.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_role_id")]
         public string OrganizationRoleId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the permission to assign
+        /// The ID of the permission to assign.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=permission_id")]
         public string PermissionId { get; set; } = default!;

@@ -14,10 +14,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class One
     {
-
         [JsonProperty("object")]
         public SchemasSAMLConnectionObject Object { get; set; } = default!;
 
@@ -86,7 +85,7 @@ namespace Clerk.BackendAPI.Models.Components
         public bool DisableAdditionalIdentifications { get; set; } = default!;
 
         /// <summary>
-        /// Enable or deactivate ForceAuthn
+        /// Enable or deactivate ForceAuthn.
         /// </summary>
         [JsonProperty("force_authn")]
         public bool ForceAuthn { get; set; } = default!;
@@ -95,21 +94,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string? EnterpriseConnectionId { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

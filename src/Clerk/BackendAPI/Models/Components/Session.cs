@@ -13,16 +13,11 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class Session
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public SessionObject Object { get; set; } = default!;
@@ -52,41 +47,25 @@ namespace Clerk.BackendAPI.Models.Components
         public SessionActivityResponse? LatestActivity { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp of expiration.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of expiration.
         /// </summary>
         [JsonProperty("expire_at")]
         public long ExpireAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of abandonment.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of abandonment.
         /// </summary>
         [JsonProperty("abandon_at")]
         public long AbandonAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;

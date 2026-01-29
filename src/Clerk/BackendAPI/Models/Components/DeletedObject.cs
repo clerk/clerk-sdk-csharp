@@ -11,13 +11,12 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Deleted Object
+    /// Deleted Object.
     /// </summary>
     public class DeletedObject
     {
-
         [JsonProperty("object")]
         public string Object { get; set; } = default!;
 

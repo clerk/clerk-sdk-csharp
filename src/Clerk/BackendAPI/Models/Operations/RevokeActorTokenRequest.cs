@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class RevokeActorTokenRequest
     {
-
         /// <summary>
         /// The ID of the actor token to be revoked.
         /// </summary>

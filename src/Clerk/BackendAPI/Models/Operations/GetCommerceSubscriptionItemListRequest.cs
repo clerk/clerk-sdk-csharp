@@ -11,68 +11,58 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetCommerceSubscriptionItemListRequest
     {
-
         /// <summary>
         /// Whether to paginate the results.<br/>
-        /// 
-        /// <remarks>
         /// If true, the results will be paginated.<br/>
         /// If false, the results will not be paginated.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=paginated")]
         public bool? Paginated { get; set; }
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
 
         /// <summary>
-        /// Filter subscription items by status
+        /// Filter subscription items by status.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
         public GetCommerceSubscriptionItemListQueryParamStatus? Status { get; set; }
 
         /// <summary>
-        /// Filter subscription items by payer type
+        /// Filter subscription items by payer type.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=payer_type")]
         public QueryParamPayerType? PayerType { get; set; }
 
         /// <summary>
-        /// Filter subscription items by plan ID
+        /// Filter subscription items by plan ID.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=plan_id")]
         public string? PlanId { get; set; }
 
         /// <summary>
-        /// Whether to include free plan subscription items
+        /// Whether to include free plan subscription items.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include_free")]
         public bool? IncludeFree { get; set; } = false;
 
         /// <summary>
-        /// Search query to filter subscription items
+        /// Search query to filter subscription items.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }

@@ -13,29 +13,20 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class Client
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public Models.Components.Object Object { get; set; } = default!;
 
         /// <summary>
-        /// String representing the identifier of the session.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the identifier of the session.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
@@ -53,41 +44,25 @@ namespace Clerk.BackendAPI.Models.Components
         public string? SignUpId { get; set; }
 
         /// <summary>
-        /// Last active session_id.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Last active session_id.
         /// </summary>
         [JsonProperty("last_active_session_id", NullValueHandling = NullValueHandling.Include)]
         public string? LastActiveSessionId { get; set; }
 
         /// <summary>
-        /// The authentication strategy that was last used to authenticate the user on this client.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// The authentication strategy that was last used to authenticate the user on this client.
         /// </summary>
         [JsonProperty("last_authentication_strategy", NullValueHandling = NullValueHandling.Include)]
         public string? LastAuthenticationStrategy { get; set; }
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;

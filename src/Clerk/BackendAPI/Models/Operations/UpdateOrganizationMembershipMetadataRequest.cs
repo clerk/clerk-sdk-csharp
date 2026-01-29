@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdateOrganizationMembershipMetadataRequest
     {
-
         /// <summary>
-        /// The ID of the organization to which this membership belongs
+        /// The ID of the organization to which this membership belongs.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_id")]
         public string OrganizationId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the user to which this membership belongs
+        /// The ID of the user to which this membership belongs.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;

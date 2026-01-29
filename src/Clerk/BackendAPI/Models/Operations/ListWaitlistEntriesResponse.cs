@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListWaitlistEntriesResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// List of waitlist entries
+        /// List of waitlist entries.
         /// </summary>
         public Models.Components.WaitlistEntries? WaitlistEntries { get; set; }
     }

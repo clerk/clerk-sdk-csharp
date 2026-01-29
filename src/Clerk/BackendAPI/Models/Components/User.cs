@@ -14,22 +14,17 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class User
     {
-
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public UserObject Object { get; set; } = default!;
@@ -102,31 +97,19 @@ namespace Clerk.BackendAPI.Models.Components
         public bool BackupCodeEnabled { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of when MFA was last enabled for this user. It should be noted that this field is not nullified if MFA is disabled.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of when MFA was last enabled for this user. It should be noted that this field is not nullified if MFA is disabled.
         /// </summary>
         [JsonProperty("mfa_enabled_at", NullValueHandling = NullValueHandling.Include)]
         public long? MfaEnabledAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp of when MFA was last disabled for this user. It should be noted that this field is not nullified if MFA is enabled again.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of when MFA was last disabled for this user. It should be noted that this field is not nullified if MFA is enabled again.
         /// </summary>
         [JsonProperty("mfa_disabled_at", NullValueHandling = NullValueHandling.Include)]
         public long? MfaDisabledAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp of when the user&apos;s password was last updated.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of when the user's password was last updated.
         /// </summary>
         [JsonProperty("password_last_updated_at")]
         public long? PasswordLastUpdatedAt { get; set; } = null;
@@ -144,121 +127,73 @@ namespace Clerk.BackendAPI.Models.Components
         public List<OrganizationMembership>? OrganizationMemberships { get; set; }
 
         /// <summary>
-        /// Unix timestamp of last sign-in.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last sign-in.
         /// </summary>
         [JsonProperty("last_sign_in_at", NullValueHandling = NullValueHandling.Include)]
         public long? LastSignInAt { get; set; }
 
         /// <summary>
-        /// Flag to denote whether user is banned or not.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Flag to denote whether user is banned or not.
         /// </summary>
         [JsonProperty("banned")]
         public bool Banned { get; set; } = default!;
 
         /// <summary>
-        /// Flag to denote whether user is currently locked, i.e. restricted from signing in or not.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Flag to denote whether user is currently locked, i.e. restricted from signing in or not.
         /// </summary>
         [JsonProperty("locked")]
         public bool Locked { get; set; } = default!;
 
         /// <summary>
-        /// The number of seconds remaining until the lockout period expires for a locked user. A null value for a locked user indicates that lockout never expires.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// The number of seconds remaining until the lockout period expires for a locked user. A null value for a locked user indicates that lockout never expires.
         /// </summary>
         [JsonProperty("lockout_expires_in_seconds", NullValueHandling = NullValueHandling.Include)]
         public long? LockoutExpiresInSeconds { get; set; }
 
         /// <summary>
-        /// The number of verification attempts remaining until the user is locked. Null if account lockout is not enabled. Note: if a user is locked explicitly via the Backend API, they may still have verification attempts remaining.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// The number of verification attempts remaining until the user is locked. Null if account lockout is not enabled. Note: if a user is locked explicitly via the Backend API, they may still have verification attempts remaining.
         /// </summary>
         [JsonProperty("verification_attempts_remaining", NullValueHandling = NullValueHandling.Include)]
         public long? VerificationAttemptsRemaining { get; set; }
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// If enabled, user can delete themselves via FAPI.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// If enabled, user can delete themselves via FAPI.
         /// </summary>
         [JsonProperty("delete_self_enabled")]
         public bool DeleteSelfEnabled { get; set; } = default!;
 
         /// <summary>
-        /// If enabled, user can create organizations via FAPI.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// If enabled, user can create organizations via FAPI.
         /// </summary>
         [JsonProperty("create_organization_enabled")]
         public bool CreateOrganizationEnabled { get; set; } = default!;
 
         /// <summary>
-        /// The maximum number of organizations the user can create. 0 means unlimited.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// The maximum number of organizations the user can create. 0 means unlimited.
         /// </summary>
         [JsonProperty("create_organizations_limit")]
         public long? CreateOrganizationsLimit { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp of the latest session activity, with day precision.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of the latest session activity, with day precision.
         /// </summary>
         [JsonProperty("last_active_at", NullValueHandling = NullValueHandling.Include)]
         public long? LastActiveAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp of when the user accepted the legal requirements.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of when the user accepted the legal requirements.
         /// </summary>
         [JsonProperty("legal_accepted_at", NullValueHandling = NullValueHandling.Include)]
         public long? LegalAcceptedAt { get; set; }

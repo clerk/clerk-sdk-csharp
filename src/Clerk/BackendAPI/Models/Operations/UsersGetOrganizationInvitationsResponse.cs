@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UsersGetOrganizationInvitationsResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of organization invitations with public organization data
+        /// A list of organization invitations with public organization data.
         /// </summary>
         public OrganizationInvitationsWithPublicOrganizationData? OrganizationInvitationsWithPublicOrganizationData { get; set; }
     }

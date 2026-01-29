@@ -55,7 +55,6 @@ namespace Clerk.BackendAPI.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(SAMLConnectionSAMLConnection.SAMLConnectionSAMLConnectionConverter))]
     public class SAMLConnectionSAMLConnection
     {

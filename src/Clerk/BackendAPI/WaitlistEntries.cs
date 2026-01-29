@@ -24,71 +24,129 @@ namespace Clerk.BackendAPI
 
     public interface IWaitlistEntries
     {
-
         /// <summary>
-        /// List all waitlist entries
-        /// 
+        /// List all waitlist entries.
+        /// </summary>
         /// <remarks>
         /// Retrieve a list of waitlist entries for the instance.<br/>
         /// Entries are ordered by creation date in descending order by default.<br/>
         /// Supports filtering by email address or status and pagination with limit and offset parameters.
         /// </remarks>
-        /// </summary>
-        Task<ListWaitlistEntriesResponse> ListAsync(ListWaitlistEntriesRequest? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="ListWaitlistEntriesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListWaitlistEntriesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListWaitlistEntriesResponse> ListAsync(
+            ListWaitlistEntriesRequest? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a waitlist entry
-        /// 
+        /// Create a waitlist entry.
+        /// </summary>
         /// <remarks>
         /// Creates a new waitlist entry for the given email address.<br/>
         /// If the email address is already on the waitlist, no new entry will be created and the existing waitlist entry will be returned.
         /// </remarks>
-        /// </summary>
-        Task<CreateWaitlistEntryResponse> CreateAsync(CreateWaitlistEntryRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="CreateWaitlistEntryRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWaitlistEntryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateWaitlistEntryResponse> CreateAsync(
+            CreateWaitlistEntryRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete a pending waitlist entry
-        /// 
+        /// Delete a pending waitlist entry.
+        /// </summary>
         /// <remarks>
         /// Delete a pending waitlist entry.
         /// </remarks>
-        /// </summary>
-        Task<DeleteWaitlistEntryResponse> DeleteAsync(string waitlistEntryId, RetryConfig? retryConfig = null);
+        /// <param name="waitlistEntryId">The ID of the waitlist entry to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteWaitlistEntryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="waitlistEntryId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404, 409 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteWaitlistEntryResponse> DeleteAsync(string waitlistEntryId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Invite a waitlist entry
-        /// 
+        /// Invite a waitlist entry.
+        /// </summary>
         /// <remarks>
         /// Send an invite to the email address in a waitlist entry.
         /// </remarks>
-        /// </summary>
-        Task<InviteWaitlistEntryResponse> InviteAsync(string waitlistEntryId, InviteWaitlistEntryRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="waitlistEntryId">The ID of the waitlist entry to invite.</param>
+        /// <param name="requestBody">A <see cref="InviteWaitlistEntryRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="InviteWaitlistEntryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="waitlistEntryId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404, 409 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<InviteWaitlistEntryResponse> InviteAsync(
+            string waitlistEntryId,
+            InviteWaitlistEntryRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Reject a waitlist entry
-        /// 
+        /// Reject a waitlist entry.
+        /// </summary>
         /// <remarks>
         /// Reject a waitlist entry.
         /// </remarks>
-        /// </summary>
-        Task<RejectWaitlistEntryResponse> RejectAsync(string waitlistEntryId, RetryConfig? retryConfig = null);
+        /// <param name="waitlistEntryId">The ID of the waitlist entry to reject.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RejectWaitlistEntryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="waitlistEntryId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404, 409 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RejectWaitlistEntryResponse> RejectAsync(string waitlistEntryId, RetryConfig? retryConfig = null);
     }
 
     public class WaitlistEntries: IWaitlistEntries
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public WaitlistEntries(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListWaitlistEntriesResponse> ListAsync(ListWaitlistEntriesRequest? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// List all waitlist entries.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of waitlist entries for the instance.<br/>
+        /// Entries are ordered by creation date in descending order by default.<br/>
+        /// Supports filtering by email address or status and pagination with limit and offset parameters.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListWaitlistEntriesRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListWaitlistEntriesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListWaitlistEntriesResponse> ListAsync(
+            ListWaitlistEntriesRequest? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries", request, null);
@@ -211,10 +269,27 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateWaitlistEntryResponse> CreateAsync(CreateWaitlistEntryRequestBody? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create a waitlist entry.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new waitlist entry for the given email address.<br/>
+        /// If the email address is already on the waitlist, no new entry will be created and the existing waitlist entry will be returned.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateWaitlistEntryRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateWaitlistEntryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateWaitlistEntryResponse> CreateAsync(
+            CreateWaitlistEntryRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/waitlist_entries";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -274,7 +349,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -361,12 +436,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteWaitlistEntryResponse> DeleteAsync(string waitlistEntryId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a pending waitlist entry.
+        /// </summary>
+        /// <remarks>
+        /// Delete a pending waitlist entry.
+        /// </remarks>
+        /// <param name="waitlistEntryId">The ID of the waitlist entry to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteWaitlistEntryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="waitlistEntryId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404, 409 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteWaitlistEntryResponse> DeleteAsync(
+            string waitlistEntryId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (waitlistEntryId == null) throw new ArgumentNullException(nameof(waitlistEntryId));
+
             var request = new DeleteWaitlistEntryRequest()
             {
                 WaitlistEntryId = waitlistEntryId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}", request, null);
 
@@ -421,7 +517,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 409 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -508,13 +604,36 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<InviteWaitlistEntryResponse> InviteAsync(string waitlistEntryId, InviteWaitlistEntryRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Invite a waitlist entry.
+        /// </summary>
+        /// <remarks>
+        /// Send an invite to the email address in a waitlist entry.
+        /// </remarks>
+        /// <param name="waitlistEntryId">The ID of the waitlist entry to invite.</param>
+        /// <param name="requestBody">A <see cref="InviteWaitlistEntryRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="InviteWaitlistEntryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="waitlistEntryId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404, 409 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<InviteWaitlistEntryResponse> InviteAsync(
+            string waitlistEntryId,
+            InviteWaitlistEntryRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (waitlistEntryId == null) throw new ArgumentNullException(nameof(waitlistEntryId));
+
             var request = new InviteWaitlistEntryRequest()
             {
                 WaitlistEntryId = waitlistEntryId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}/invite", request, null);
 
@@ -575,7 +694,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 409 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -662,12 +781,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RejectWaitlistEntryResponse> RejectAsync(string waitlistEntryId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Reject a waitlist entry.
+        /// </summary>
+        /// <remarks>
+        /// Reject a waitlist entry.
+        /// </remarks>
+        /// <param name="waitlistEntryId">The ID of the waitlist entry to reject.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RejectWaitlistEntryResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="waitlistEntryId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404, 409 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RejectWaitlistEntryResponse> RejectAsync(
+            string waitlistEntryId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (waitlistEntryId == null) throw new ArgumentNullException(nameof(waitlistEntryId));
+
             var request = new RejectWaitlistEntryRequest()
             {
                 WaitlistEntryId = waitlistEntryId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/waitlist_entries/{waitlist_entry_id}/reject", request, null);
 
@@ -722,7 +862,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 409 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -808,5 +948,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

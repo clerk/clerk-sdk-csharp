@@ -13,10 +13,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ResponseBody1
     {
-
         [JsonProperty("object")]
         public ResponseBodyObject Object { get; set; } = default!;
 

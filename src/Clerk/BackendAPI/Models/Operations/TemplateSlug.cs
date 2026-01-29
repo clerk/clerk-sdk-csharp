@@ -12,7 +12,7 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// The slug of the email template to use for the invitation email.
     /// </summary>
@@ -56,5 +56,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum TemplateSlug");
         }
     }
-
 }

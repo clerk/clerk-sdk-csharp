@@ -10,7 +10,7 @@
 namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
-    
+
     /// <summary>
     /// The subscription item associated with this payment attempt.
     /// </summary>

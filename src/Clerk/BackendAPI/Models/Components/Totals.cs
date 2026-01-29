@@ -12,13 +12,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Totals for the statement.
     /// </summary>
     public class Totals
     {
-
         [JsonProperty("grand_total")]
         public CommerceMoneyResponse GrandTotal { get; set; } = default!;
 

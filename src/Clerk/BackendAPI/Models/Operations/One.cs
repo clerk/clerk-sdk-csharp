@@ -14,12 +14,11 @@ namespace Clerk.BackendAPI.Models.Operations
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class One
     {
-
         /// <summary>
-        /// The name to use as a label for this SAML Connection
+        /// The name to use as a label for this SAML Connection.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
@@ -44,49 +43,49 @@ namespace Clerk.BackendAPI.Models.Operations
         public Provider Provider { get; set; } = default!;
 
         /// <summary>
-        /// The Entity ID as provided by the IdP
+        /// The Entity ID as provided by the IdP.
         /// </summary>
         [JsonProperty("idp_entity_id")]
         public string? IdpEntityId { get; set; } = null;
 
         /// <summary>
-        /// The Single-Sign On URL as provided by the IdP
+        /// The Single-Sign On URL as provided by the IdP.
         /// </summary>
         [JsonProperty("idp_sso_url")]
         public string? IdpSsoUrl { get; set; } = null;
 
         /// <summary>
-        /// The X.509 certificate as provided by the IdP
+        /// The X.509 certificate as provided by the IdP.
         /// </summary>
         [JsonProperty("idp_certificate")]
         public string? IdpCertificate { get; set; } = null;
 
         /// <summary>
-        /// The URL which serves the IdP metadata. If present, it takes priority over the corresponding individual properties
+        /// The URL which serves the IdP metadata. If present, it takes priority over the corresponding individual properties.
         /// </summary>
         [JsonProperty("idp_metadata_url")]
         public string? IdpMetadataUrl { get; set; } = null;
 
         /// <summary>
-        /// The XML content of the IdP metadata file. If present, it takes priority over the corresponding individual properties
+        /// The XML content of the IdP metadata file. If present, it takes priority over the corresponding individual properties.
         /// </summary>
         [JsonProperty("idp_metadata")]
         public string? IdpMetadata { get; set; } = null;
 
         /// <summary>
-        /// The ID of the organization to which users of this SAML Connection will be added
+        /// The ID of the organization to which users of this SAML Connection will be added.
         /// </summary>
         [JsonProperty("organization_id")]
         public string? OrganizationId { get; set; } = null;
 
         /// <summary>
-        /// Define the attribute name mapping between Identity Provider and Clerk&apos;s user properties
+        /// Define the attribute name mapping between Identity Provider and Clerk's user properties.
         /// </summary>
         [JsonProperty("attribute_mapping")]
         public CreateSAMLConnectionRequestBodyAttributeMapping? AttributeMapping { get; set; } = null;
 
         /// <summary>
-        /// Enable or deactivate ForceAuthn
+        /// Enable or deactivate ForceAuthn.
         /// </summary>
         [JsonProperty("force_authn")]
         public bool? ForceAuthn { get; set; }

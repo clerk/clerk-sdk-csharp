@@ -8,6 +8,7 @@
 * [ListSubscriptionItems](#listsubscriptionitems) - List all subscription items
 * [CancelSubscriptionItem](#cancelsubscriptionitem) - Cancel a subscription item
 * [ExtendSubscriptionItemFreeTrial](#extendsubscriptionitemfreetrial) - Extend free trial for a subscription item
+* [CreatePriceTransition](#createpricetransition) - Create a price transition for a subscription item
 * [ListStatements](#liststatements) - List all billing statements
 * [GetStatement](#getstatement) - Retrieve a billing statement
 * [GetStatementPaymentAttempts](#getstatementpaymentattempts) - List payment attempts for a billing statement
@@ -181,6 +182,50 @@ var res = await sdk.Billing.ExtendSubscriptionItemFreeTrialAsync(
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## CreatePriceTransition
+
+Creates a price transition for the specified subscription item.
+This may create an upcoming subscription item or activate immediately depending on plan and payer rules.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="CreateBillingPriceTransition" method="post" path="/billing/subscription_items/{subscription_item_id}/price_transition" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Billing.CreatePriceTransitionAsync(
+    subscriptionItemId: "<id>",
+    priceTransitionRequest: new PriceTransitionRequest() {
+        FromPriceId = "<id>",
+        ToPriceId = "<id>",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `SubscriptionItemId`                                                        | *string*                                                                    | :heavy_check_mark:                                                          | The ID of the subscription item to transition                               |
+| `PriceTransitionRequest`                                                    | [PriceTransitionRequest](../../Models/Components/PriceTransitionRequest.md) | :heavy_check_mark:                                                          | Parameters for the price transition                                         |
+
+### Response
+
+**[CreateBillingPriceTransitionResponse](../../Models/Operations/CreateBillingPriceTransitionResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 409, 422               | application/json                           |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 

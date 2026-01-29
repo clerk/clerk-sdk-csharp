@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetClientRequest
     {
-
         /// <summary>
         /// Client ID.
         /// </summary>

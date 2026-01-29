@@ -11,38 +11,28 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateDomainRequestBody
     {
-
         /// <summary>
         /// The new domain name. For development instances, can contain the port,<br/>
-        /// 
-        /// <remarks>
         /// i.e `myhostname:3000`. For production instances, must be a valid FQDN,<br/>
         /// i.e `mysite.com`. Cannot contain protocol scheme.
-        /// </remarks>
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
 
         /// <summary>
-        /// The full URL of the proxy that will forward requests to Clerk&apos;s Frontend API.<br/>
-        /// 
-        /// <remarks>
+        /// The full URL of the proxy that will forward requests to Clerk's Frontend API.<br/>
         /// Can only be updated for production instances.
-        /// </remarks>
         /// </summary>
         [JsonProperty("proxy_url")]
         public string? ProxyUrl { get; set; } = null;
 
         /// <summary>
         /// Whether this is a domain for a secondary app, meaning that any subdomain provided is significant and<br/>
-        /// 
-        /// <remarks>
         /// will be stored as part of the domain. This is useful for supporting multiple apps (one primary and<br/>
         /// multiple secondaries) on the same root domain (eTLD+1).
-        /// </remarks>
         /// </summary>
         [JsonProperty("is_secondary")]
         public bool? IsSecondary { get; set; } = null;
