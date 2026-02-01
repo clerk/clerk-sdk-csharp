@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class InviteWaitlistEntryRequest
     {
-
         /// <summary>
-        /// The ID of the waitlist entry to invite
+        /// The ID of the waitlist entry to invite.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=waitlist_entry_id")]
         public string WaitlistEntryId { get; set; } = default!;

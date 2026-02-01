@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateOrganizationMembershipRequestBody
     {
-
         /// <summary>
         /// The new role of the given membership.
         /// </summary>

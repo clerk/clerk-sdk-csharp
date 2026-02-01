@@ -12,13 +12,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Health check information about a domain&apos;s proxy configuration validation attempt.
+    /// Health check information about a domain's proxy configuration validation attempt.
     /// </summary>
     public class ProxyCheck
     {
-
         [JsonProperty("object")]
         public ProxyCheckObject Object { get; set; } = default!;
 
@@ -29,11 +28,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string DomainId { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last run.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last run.
         /// </summary>
         [JsonProperty("last_run_at", NullValueHandling = NullValueHandling.Include)]
         public long? LastRunAt { get; set; }
@@ -45,21 +40,13 @@ namespace Clerk.BackendAPI.Models.Components
         public bool Successful { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

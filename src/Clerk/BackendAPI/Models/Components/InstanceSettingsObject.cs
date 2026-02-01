@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// String representing the object&apos;s type. Objects of the same type share the same value.
+    /// String representing the object's type. Objects of the same type share the same value.
     /// </summary>
     public enum InstanceSettingsObject
     {
@@ -54,5 +54,4 @@ namespace Clerk.BackendAPI.Models.Components
             throw new Exception($"Unknown value {value} for enum InstanceSettingsObject");
         }
     }
-
 }

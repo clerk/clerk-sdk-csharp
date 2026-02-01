@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteTOTPRequest
     {
-
         /// <summary>
-        /// The ID of the user whose TOTPs are to be deleted
+        /// The ID of the user whose TOTPs are to be deleted.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;

@@ -13,25 +13,21 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Refresh session parameters
+    /// Refresh session parameters.
     /// </summary>
     public class RefreshSessionRequestBody
     {
-
         /// <summary>
         /// The JWT that is sent via the `__session` cookie from your frontend.<br/>
-        /// 
-        /// <remarks>
         /// Note: this JWT must be associated with the supplied session ID.
-        /// </remarks>
         /// </summary>
         [JsonProperty("expired_token")]
         public string ExpiredToken { get; set; } = default!;
 
         /// <summary>
-        /// The refresh token from the `__refresh` cookie set via FAPI&apos;s handshake flow.
+        /// The refresh token from the `__refresh` cookie set via FAPI's handshake flow.
         /// </summary>
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; set; } = default!;

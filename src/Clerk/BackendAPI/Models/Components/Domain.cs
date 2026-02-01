@@ -13,10 +13,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class Domain
     {
-
         [JsonProperty("object")]
         public DomainObject Object { get; set; } = default!;
 
@@ -33,11 +32,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string FrontendApiUrl { get; set; } = default!;
 
         /// <summary>
-        /// Null for satellite domains.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Null for satellite domains.
         /// </summary>
         [JsonProperty("accounts_portal_url")]
         public string? AccountsPortalUrl { get; set; } = null;

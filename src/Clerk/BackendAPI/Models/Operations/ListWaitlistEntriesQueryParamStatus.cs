@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// Filter waitlist entries by their status
+    /// Filter waitlist entries by their status.
     /// </summary>
     public enum ListWaitlistEntriesQueryParamStatus
     {
@@ -60,5 +60,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum ListWaitlistEntriesQueryParamStatus");
         }
     }
-
 }

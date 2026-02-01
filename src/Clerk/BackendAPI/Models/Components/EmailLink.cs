@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class EmailLink
     {
-
         [JsonProperty("object")]
         public VerificationEmailLinkVerificationObject? Object { get; set; }
 

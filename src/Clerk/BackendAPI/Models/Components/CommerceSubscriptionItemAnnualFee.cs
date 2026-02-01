@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CommerceSubscriptionItemAnnualFee
     {
-
         /// <summary>
         /// The amount in cents.
         /// </summary>
@@ -22,19 +21,19 @@ namespace Clerk.BackendAPI.Models.Components
         public long Amount { get; set; } = default!;
 
         /// <summary>
-        /// The formatted amount as a string (e.g., &quot;$49.99&quot;).
+        /// The formatted amount as a string (e.g., "$49.99").
         /// </summary>
         [JsonProperty("amount_formatted")]
         public string AmountFormatted { get; set; } = default!;
 
         /// <summary>
-        /// The currency code (e.g., &quot;USD&quot;).
+        /// The currency code (e.g., "USD").
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; } = default!;
 
         /// <summary>
-        /// The currency symbol (e.g., &quot;$&quot;).
+        /// The currency symbol (e.g., "$").
         /// </summary>
         [JsonProperty("currency_symbol")]
         public string CurrencySymbol { get; set; } = default!;

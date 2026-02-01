@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class VerifyDomainProxyResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// Health check information about a domain&apos;s proxy configuration validation attempt.
+        /// Health check information about a domain's proxy configuration validation attempt.
         /// </summary>
         public ProxyCheck? ProxyCheck { get; set; }
     }

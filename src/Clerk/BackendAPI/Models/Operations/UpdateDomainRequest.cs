@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdateDomainRequest
     {
-
         /// <summary>
         /// The ID of the domain that will be updated.
         /// </summary>

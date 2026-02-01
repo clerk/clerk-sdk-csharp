@@ -12,36 +12,35 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class CreateOrganizationRoleRequestBody
     {
-
         /// <summary>
-        /// The name of the new organization role
+        /// The name of the new organization role.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// A unique key for the organization role. Must start with &apos;org:&apos; and contain only lowercase alphanumeric characters and underscores.
+        /// A unique key for the organization role. Must start with 'org:' and contain only lowercase alphanumeric characters and underscores.
         /// </summary>
         [JsonProperty("key")]
         public string Key { get; set; } = default!;
 
         /// <summary>
-        /// Optional description for the role
+        /// Optional description for the role.
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; } = null;
 
         /// <summary>
-        /// Array of permission IDs to assign to the role
+        /// Array of permission IDs to assign to the role.
         /// </summary>
         [JsonProperty("permissions")]
         public List<string>? Permissions { get; set; } = null;
 
         /// <summary>
-        /// Whether this role should be included in the initial role set
+        /// Whether this role should be included in the initial role set.
         /// </summary>
         [JsonProperty("include_in_initial_role_set")]
         public bool? IncludeInInitialRoleSet { get; set; } = null;

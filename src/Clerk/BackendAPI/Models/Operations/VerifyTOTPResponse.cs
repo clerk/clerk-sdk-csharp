@@ -13,10 +13,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class VerifyTOTPResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 

@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdateUserRequest
     {
-
         /// <summary>
-        /// The ID of the user to update
+        /// The ID of the user to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;

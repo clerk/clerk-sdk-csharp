@@ -10,18 +10,17 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteExternalAccountRequest
     {
-
         /// <summary>
-        /// The ID of the user&apos;s external account
+        /// The ID of the user's external account.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the external account to delete
+        /// The ID of the external account to delete.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=external_account_id")]
         public string ExternalAccountId { get; set; } = default!;

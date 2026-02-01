@@ -11,13 +11,24 @@ namespace Clerk.BackendAPI.Utils.Retries
 {
     public class RetryConfig
     {
+        /// <summary>
+        /// Available retry strategies.
+        /// </summary>
         public enum RetryStrategy
         {
+            /// <summary>Exponential backoff strategy.</summary>
             BACKOFF,
+            /// <summary>Disabled (no retries).</summary>
             NONE
         }
+
+        /// <summary>The retry strategy.</summary>
         public readonly RetryStrategy Strategy;
+
+        /// <summary>The backoff strategy configuration (if applicable).</summary>
         public readonly BackoffStrategy? Backoff;
+
+        /// <summary>Whether to retry on connection errors.</summary>
         public readonly bool RetryConnectionErrors;
 
         /// <summary>

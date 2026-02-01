@@ -11,26 +11,19 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateAllowlistIdentifierRequestBody
     {
-
         /// <summary>
         /// The identifier to be added in the allow-list.<br/>
-        /// 
-        /// <remarks>
         /// This can be an email address, a phone number, or a web3 wallet.
-        /// </remarks>
         /// </summary>
         [JsonProperty("identifier")]
         public string Identifier { get; set; } = default!;
 
         /// <summary>
         /// This flag denotes whether the given identifier will receive an invitation to join the application.<br/>
-        /// 
-        /// <remarks>
         /// Note that this only works for email address and phone number identifiers.
-        /// </remarks>
         /// </summary>
         [JsonProperty("notify")]
         public bool? Notify { get; set; } = false;

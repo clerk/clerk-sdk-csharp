@@ -13,13 +13,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Get the JSON Web Key Set
+    /// Get the JSON Web Key Set.
     /// </summary>
     public class Jwks
     {
-
         [JsonProperty("keys")]
         public List<Keys>? Keys { get; set; }
     }

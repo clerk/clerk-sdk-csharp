@@ -13,68 +13,52 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class CreateRoleSetRequestBody
     {
-
         /// <summary>
-        /// The name of the new role set
+        /// The name of the new role set.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// A unique key for the role set. Must start with &apos;role_set:&apos; and contain only lowercase alphanumeric characters and underscores.<br/>
-        /// 
-        /// <remarks>
+        /// A unique key for the role set. Must start with 'role_set:' and contain only lowercase alphanumeric characters and underscores.<br/>
         /// If not provided, a key will be generated from the name.
-        /// </remarks>
         /// </summary>
         [JsonProperty("key")]
         public string? Key { get; set; }
 
         /// <summary>
-        /// Optional description for the role set
+        /// Optional description for the role set.
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; } = null;
 
         /// <summary>
         /// The key of the role to use as the default role for new organization members.<br/>
-        /// 
-        /// <remarks>
         /// Must be one of the roles in the `roles` array.
-        /// </remarks>
         /// </summary>
         [JsonProperty("default_role_key")]
         public string DefaultRoleKey { get; set; } = default!;
 
         /// <summary>
         /// The key of the role to assign to organization creators.<br/>
-        /// 
-        /// <remarks>
         /// Must be one of the roles in the `roles` array.
-        /// </remarks>
         /// </summary>
         [JsonProperty("creator_role_key")]
         public string CreatorRoleKey { get; set; } = default!;
 
         /// <summary>
-        /// The type of the role set. &quot;initial&quot; role sets are the default for new organizations.<br/>
-        /// 
-        /// <remarks>
-        /// Only one role set can be &quot;initial&quot; per instance.
-        /// </remarks>
+        /// The type of the role set. "initial" role sets are the default for new organizations.<br/>
+        /// Only one role set can be "initial" per instance.
         /// </summary>
         [JsonProperty("type")]
         public Models.Operations.Type? Type { get; set; }
 
         /// <summary>
         /// Array of role keys to include in the role set.<br/>
-        /// 
-        /// <remarks>
         /// Must contain at least one role and no more than 10 roles.
-        /// </remarks>
         /// </summary>
         [JsonProperty("roles")]
         public List<string> Roles { get; set; } = default!;

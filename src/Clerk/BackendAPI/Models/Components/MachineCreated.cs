@@ -13,13 +13,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class MachineCreated
     {
-
         [JsonProperty("object")]
         public MachineCreatedObject Object { get; set; } = default!;
 

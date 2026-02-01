@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class SetUserPasswordCompromisedRequest
     {
-
         /// <summary>
-        /// The ID of the user to set the password as compromised
+        /// The ID of the user to set the password as compromised.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;

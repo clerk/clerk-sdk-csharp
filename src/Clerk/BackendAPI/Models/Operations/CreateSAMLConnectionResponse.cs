@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateSAMLConnectionResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A SAML Connection
+        /// A SAML Connection.
         /// </summary>
         public SchemasSAMLConnection? SchemasSAMLConnection { get; set; }
     }

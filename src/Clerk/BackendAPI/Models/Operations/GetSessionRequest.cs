@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetSessionRequest
     {
-
         /// <summary>
-        /// The ID of the session
+        /// The ID of the session.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=session_id")]
         public string SessionId { get; set; } = default!;

@@ -11,27 +11,20 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class ListWaitlistEntriesRequest
     {
-
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
@@ -43,21 +36,18 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Query { get; set; }
 
         /// <summary>
-        /// Filter waitlist entries by their status
+        /// Filter waitlist entries by their status.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
         public ListWaitlistEntriesQueryParamStatus? Status { get; set; }
 
         /// <summary>
         /// Specify the order of results. Supported values are:<br/>
-        /// 
-        /// <remarks>
         /// - `created_at`<br/>
         /// - `email_address`<br/>
         /// - `invited_at`<br/>
         /// <br/>
         /// Use `+` for ascending or `-` for descending order. Defaults to `-created_at`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
         public string? OrderBy { get; set; } = "-created_at";

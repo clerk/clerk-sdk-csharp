@@ -13,13 +13,12 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// 200 OK
+    /// 200 OK.
     /// </summary>
     public class GetM2MTokensResponseBody
     {
-
         [JsonProperty("m2m_tokens")]
         public List<M2mTokens> M2mTokens { get; set; } = default!;
 

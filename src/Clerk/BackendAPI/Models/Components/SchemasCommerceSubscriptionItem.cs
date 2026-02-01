@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// A commerce subscription item.
     /// </summary>
     public class SchemasCommerceSubscriptionItem
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public SchemasCommerceSubscriptionItemObject Object { get; set; } = default!;
@@ -56,7 +55,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string PlanId { get; set; } = default!;
 
         /// <summary>
-        /// Unique identifier for the associated price
+        /// Unique identifier for the associated price.
         /// </summary>
         [JsonProperty("price_id")]
         public string? PriceId { get; set; }

@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdateOrganizationDomainRequest
     {
-
         /// <summary>
-        /// The ID of the organization to which the domain belongs
+        /// The ID of the organization to which the domain belongs.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_id")]
         public string OrganizationId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the domain
+        /// The ID of the domain.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=domain_id")]
         public string DomainId { get; set; } = default!;
