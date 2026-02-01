@@ -13,28 +13,24 @@ namespace Clerk.BackendAPI.Models.Operations
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class CreateOAuthApplicationRequestBody
     {
-
         /// <summary>
         /// The name of the new OAuth application.<br/>
-        /// 
-        /// <remarks>
-        /// Max length: 256
-        /// </remarks>
+        /// Max length: 256.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// An array of redirect URIs of the new OAuth application
+        /// An array of redirect URIs of the new OAuth application.
         /// </summary>
         [JsonProperty("redirect_uris")]
         public List<string>? RedirectUris { get; set; } = null;
 
         /// <summary>
-        /// The callback URL of the new OAuth application
+        /// The callback URL of the new OAuth application.
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("callback_url")]

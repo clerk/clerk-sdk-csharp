@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateInstanceAuthConfigRequestBody
     {
-
         /// <summary>
         /// Whether sign up is restricted to email addresses, phone numbers and usernames that are on the allowlist.
         /// </summary>
@@ -23,11 +22,8 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// The local part of the email address from which authentication-related emails (e.g. OTP code, magic links) will be sent.<br/>
-        /// 
-        /// <remarks>
         /// Only alphanumeric values are allowed.<br/>
         /// Note that this value should contain only the local part of the address (e.g. `foo` for `foo@example.com`).
-        /// </remarks>
         /// </summary>
         [JsonProperty("from_email_address")]
         public string? FromEmailAddress { get; set; } = null;
@@ -40,10 +36,7 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Toggles test mode for this instance, allowing the use of test email addresses and phone numbers.<br/>
-        /// 
-        /// <remarks>
         /// Defaults to true for development instances.
-        /// </remarks>
         /// </summary>
         [JsonProperty("test_mode")]
         public bool? TestMode { get; set; } = null;

@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListOAuthApplicationsResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of OAuth applications
+        /// A list of OAuth applications.
         /// </summary>
         public OAuthApplications? OAuthApplications { get; set; }
     }

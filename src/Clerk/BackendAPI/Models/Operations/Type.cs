@@ -12,13 +12,10 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The type of the role set. &quot;initial&quot; role sets are the default for new organizations.<br/>
-    /// 
-    /// <remarks>
-    /// Only one role set can be &quot;initial&quot; per instance.
-    /// </remarks>
+    /// The type of the role set. "initial" role sets are the default for new organizations.<br/>
+    /// Only one role set can be "initial" per instance.
     /// </summary>
     public enum Type
     {
@@ -60,5 +57,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum Type");
         }
     }
-
 }

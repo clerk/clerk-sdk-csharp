@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class RevokeM2MTokenRequest
     {
-
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=m2m_token_id")]
         public string M2mTokenId { get; set; } = default!;
 

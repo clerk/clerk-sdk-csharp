@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The type of template to update
+    /// The type of template to update.
     /// </summary>
     public enum UpsertTemplatePathParamTemplateType
     {
@@ -56,5 +56,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum UpsertTemplatePathParamTemplateType");
         }
     }
-
 }

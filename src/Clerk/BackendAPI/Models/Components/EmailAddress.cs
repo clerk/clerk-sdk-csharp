@@ -16,22 +16,17 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class EmailAddress
     {
-
         [JsonProperty("id")]
         public string? Id { get; set; }
 
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public EmailAddressObject Object { get; set; } = default!;
@@ -79,31 +74,19 @@ namespace Clerk.BackendAPI.Models.Components
         public List<IdentificationLink> LinkedTo { get; set; } = default!;
 
         /// <summary>
-        /// Indicates whether this email address domain matches an active enterprise connection.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Indicates whether this email address domain matches an active enterprise connection.
         /// </summary>
         [JsonProperty("matches_sso_connection")]
         public bool? MatchesSsoConnection { get; set; }
 
         /// <summary>
-        /// Unix timestamp of creation<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of creation<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

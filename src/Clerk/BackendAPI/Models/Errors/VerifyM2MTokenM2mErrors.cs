@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Errors
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class VerifyM2MTokenM2mErrors
     {
-
         [JsonProperty("message")]
         public string Message { get; set; } = default!;
 

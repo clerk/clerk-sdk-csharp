@@ -52,7 +52,6 @@ namespace Clerk.BackendAPI.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(PasskeyVerification.PasskeyVerificationConverter))]
     public class PasskeyVerification
     {

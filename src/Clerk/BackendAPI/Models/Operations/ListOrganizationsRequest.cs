@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using System.Collections.Generic;
-    
+
     public class ListOrganizationsRequest
     {
-
         /// <summary>
         /// Flag to denote whether the member counts of each organization should be included in the response or not.
         /// </summary>
@@ -29,68 +28,50 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Returns organizations with ID, name, or slug that match the given query.<br/>
-        /// 
-        /// <remarks>
         /// Uses exact match for organization ID and partial match for name and slug.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
 
         /// <summary>
         /// Returns organizations that include any of the specified user IDs as members. Any user IDs not found are ignored.<br/>
-        /// 
-        /// <remarks>
         /// For each user ID, the `+` and `-` can be prepended to the ID, which denote whether the<br/>
         /// respective organization should be included or excluded from the result set.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=user_id")]
         public List<string>? UserId { get; set; }
 
         /// <summary>
         /// Returns organizations with the organization IDs specified. Any organization IDs not found are ignored.<br/>
-        /// 
-        /// <remarks>
         /// For each organization ID, the `+` and `-` can be prepended to the ID, which denote whether the<br/>
         /// respective organization should be included or excluded from the result set. Accepts up to 100 organization IDs.<br/>
-        /// Example: ?organization_id=+org_1&amp;organization_id=-org_2
-        /// </remarks>
+        /// Example: ?organization_id=+org_1&amp;organization_id=-org_2.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=organization_id")]
         public List<string>? OrganizationId { get; set; }
 
         /// <summary>
         /// Allows to return organizations in a particular order.<br/>
-        /// 
-        /// <remarks>
         /// At the moment, you can order the returned organizations either by their `name`, `created_at` or `members_count`.<br/>
         /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
         /// For example, if you want organizations to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
-        /// If you don&apos;t use `+` or `-`, then `+` is implied.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied.<br/>
         /// Defaults to `-created_at`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
         public string? OrderBy { get; set; } = "-created_at";
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;

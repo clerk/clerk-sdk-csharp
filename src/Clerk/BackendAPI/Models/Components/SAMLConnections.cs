@@ -13,22 +13,17 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// A list of SAML Connections
+    /// A list of SAML Connections.
     /// </summary>
     public class SAMLConnections
     {
-
         [JsonProperty("data")]
         public List<SchemasSAMLConnection> Data { get; set; } = default!;
 
         /// <summary>
-        /// Total number of SAML Connections<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Total number of SAML Connections.
         /// </summary>
         [JsonProperty("total_count")]
         public long TotalCount { get; set; } = default!;

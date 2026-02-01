@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class RotateMachineSecretKeyRequest
     {
-
         /// <summary>
-        /// The ID of the machine to rotate the secret key for
+        /// The ID of the machine to rotate the secret key for.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=machine_id")]
         public string MachineId { get; set; } = default!;

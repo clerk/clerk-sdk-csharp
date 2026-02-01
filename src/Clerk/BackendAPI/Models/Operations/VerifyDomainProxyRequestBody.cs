@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class VerifyDomainProxyRequestBody
     {
-
         /// <summary>
         /// The ID of the domain that will be updated.
         /// </summary>
@@ -22,7 +21,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? DomainId { get; set; }
 
         /// <summary>
-        /// The full URL of the proxy which will forward requests to the Clerk Frontend API for this domain. e.g. https://example.com/__clerk
+        /// The full URL of the proxy which will forward requests to the Clerk Frontend API for this domain. e.g. https://example.com/__clerk.
         /// </summary>
         [JsonProperty("proxy_url")]
         public string? ProxyUrl { get; set; }

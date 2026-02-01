@@ -12,13 +12,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Information about the next payment.
     /// </summary>
     public class SchemasCommerceSubscriptionItemNextPayment
     {
-
         /// <summary>
         /// Amount for the next payment.
         /// </summary>

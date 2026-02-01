@@ -11,16 +11,12 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class RevokeOrganizationInvitationRequestBody
     {
-
         /// <summary>
         /// The ID of the user that revokes the invitation.<br/>
-        /// 
-        /// <remarks>
         /// Must be an administrator in the organization.
-        /// </remarks>
         /// </summary>
         [JsonProperty("requesting_user_id")]
         public string? RequestingUserId { get; set; } = null;

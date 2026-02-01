@@ -12,36 +12,35 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateJWTTemplateRequestBody
     {
-
         /// <summary>
-        /// JWT template name
+        /// JWT template name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// JWT template claims in JSON format
+        /// JWT template claims in JSON format.
         /// </summary>
         [JsonProperty("claims")]
         public UpdateJWTTemplateClaims Claims { get; set; } = default!;
 
         /// <summary>
-        /// JWT lifetime
+        /// JWT lifetime.
         /// </summary>
         [JsonProperty("lifetime")]
         public long? Lifetime { get; set; } = null;
 
         /// <summary>
-        /// JWT allowed clock skew
+        /// JWT allowed clock skew.
         /// </summary>
         [JsonProperty("allowed_clock_skew")]
         public long? AllowedClockSkew { get; set; } = null;
 
         /// <summary>
-        /// Whether a custom signing key/algorithm is also provided for this template
+        /// Whether a custom signing key/algorithm is also provided for this template.
         /// </summary>
         [JsonProperty("custom_signing_key")]
         public bool? CustomSigningKey { get; set; }

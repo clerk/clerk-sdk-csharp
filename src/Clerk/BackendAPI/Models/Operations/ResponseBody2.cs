@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class ResponseBody2
     {
-
         /// <summary>
-        /// Indicates that a JWT access token is not active (expired)
+        /// Indicates that a JWT access token is not active (expired).
         /// </summary>
         [JsonProperty("active")]
         public bool Active { get; set; } = default!;

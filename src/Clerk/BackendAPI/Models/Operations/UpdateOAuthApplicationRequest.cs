@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdateOAuthApplicationRequest
     {
-
         /// <summary>
-        /// The ID of the OAuth application to update
+        /// The ID of the OAuth application to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=oauth_application_id")]
         public string OauthApplicationId { get; set; } = default!;

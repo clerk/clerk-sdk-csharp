@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class SessionTask
     {
-
         [JsonProperty("key")]
         public string Key { get; set; } = default!;
     }

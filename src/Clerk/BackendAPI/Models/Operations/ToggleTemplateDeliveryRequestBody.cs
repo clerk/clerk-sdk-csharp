@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class ToggleTemplateDeliveryRequestBody
     {
-
         /// <summary>
-        /// Whether Clerk should deliver emails or SMS messages based on the current template
+        /// Whether Clerk should deliver emails or SMS messages based on the current template.
         /// </summary>
         [JsonProperty("delivered_by_clerk")]
         public bool? DeliveredByClerk { get; set; }

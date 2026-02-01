@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class CreateOrganizationInvitationRequest
     {
-
         /// <summary>
-        /// The ID of the organization for which to send the invitation
+        /// The ID of the organization for which to send the invitation.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_id")]
         public string OrganizationId { get; set; } = default!;

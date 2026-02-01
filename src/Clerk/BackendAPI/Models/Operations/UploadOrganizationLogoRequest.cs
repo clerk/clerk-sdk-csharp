@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UploadOrganizationLogoRequest
     {
-
         /// <summary>
-        /// The ID of the organization for which to upload a logo
+        /// The ID of the organization for which to upload a logo.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_id")]
         public string OrganizationId { get; set; } = default!;

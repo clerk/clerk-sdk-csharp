@@ -12,54 +12,44 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateRoleSetRequestBody
     {
-
         /// <summary>
-        /// The new name for the role set
+        /// The new name for the role set.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
 
         /// <summary>
-        /// A unique key for the role set. Must start with &apos;role_set:&apos; and contain only lowercase alphanumeric characters and underscores.
+        /// A unique key for the role set. Must start with 'role_set:' and contain only lowercase alphanumeric characters and underscores.
         /// </summary>
         [JsonProperty("key")]
         public string? Key { get; set; } = null;
 
         /// <summary>
-        /// Optional description for the role set
+        /// Optional description for the role set.
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; } = null;
 
         /// <summary>
-        /// Set to &quot;initial&quot; to make this the default role set for new organizations.<br/>
-        /// 
-        /// <remarks>
-        /// Only one role set can be &quot;initial&quot; per instance; setting this will change any existing initial role set to &quot;custom&quot;.
-        /// </remarks>
+        /// Set to "initial" to make this the default role set for new organizations.<br/>
+        /// Only one role set can be "initial" per instance; setting this will change any existing initial role set to "custom".
         /// </summary>
         [JsonProperty("type")]
         public UpdateRoleSetType? Type { get; set; } = null;
 
         /// <summary>
         /// The key of the role to use as the default role for new organization members.<br/>
-        /// 
-        /// <remarks>
         /// Must be an existing role in the role set.
-        /// </remarks>
         /// </summary>
         [JsonProperty("default_role_key")]
         public string? DefaultRoleKey { get; set; } = null;
 
         /// <summary>
         /// The key of the role to assign to organization creators.<br/>
-        /// 
-        /// <remarks>
         /// Must be an existing role in the role set.
-        /// </remarks>
         /// </summary>
         [JsonProperty("creator_role_key")]
         public string? CreatorRoleKey { get; set; } = null;

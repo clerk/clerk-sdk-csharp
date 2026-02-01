@@ -13,13 +13,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// A list of billing payment attempts.
     /// </summary>
     public class PaginatedBillingPaymentAttemptResponse
     {
-
         /// <summary>
         /// Array of billing payment attempts.
         /// </summary>

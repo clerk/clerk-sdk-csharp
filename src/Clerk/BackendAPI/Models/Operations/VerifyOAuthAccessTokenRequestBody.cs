@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public class VerifyOAuthAccessTokenRequestBody
     {
-
         /// <summary>
         /// The access token to verify.
         /// </summary>

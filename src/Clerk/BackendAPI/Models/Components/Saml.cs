@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class Saml
     {
-
         [JsonProperty("object")]
         public VerificationSamlVerificationObject? Object { get; set; }
 

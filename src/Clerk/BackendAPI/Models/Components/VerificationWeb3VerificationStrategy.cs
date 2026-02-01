@@ -12,7 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum VerificationWeb3VerificationStrategy
     {
         [JsonProperty("web3_metamask_signature")]
@@ -59,5 +59,4 @@ namespace Clerk.BackendAPI.Models.Components
             throw new Exception($"Unknown value {value} for enum VerificationWeb3VerificationStrategy");
         }
     }
-
 }

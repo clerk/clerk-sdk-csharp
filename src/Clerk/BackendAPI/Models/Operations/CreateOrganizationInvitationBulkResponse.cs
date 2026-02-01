@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateOrganizationInvitationBulkResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of organization invitations
+        /// A list of organization invitations.
         /// </summary>
         public Models.Components.OrganizationInvitations? OrganizationInvitations { get; set; }
     }

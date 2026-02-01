@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class AddDomainRequestBody
     {
-
         /// <summary>
         /// The new domain name. Can contain the port for development instances.
         /// </summary>

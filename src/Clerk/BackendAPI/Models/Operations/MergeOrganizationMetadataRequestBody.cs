@@ -12,26 +12,19 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class MergeOrganizationMetadataRequestBody
     {
-
         /// <summary>
         /// Metadata saved on the organization, that is visible to both your frontend and backend.<br/>
-        /// 
-        /// <remarks>
         /// The new object will be merged with the existing value.
-        /// </remarks>
         /// </summary>
         [JsonProperty("public_metadata")]
         public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
         /// Metadata saved on the organization that is only visible to your backend.<br/>
-        /// 
-        /// <remarks>
         /// The new object will be merged with the existing value.
-        /// </remarks>
         /// </summary>
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; }
