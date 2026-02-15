@@ -12,60 +12,59 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// The default role assigned to new organization members
+    /// The default role assigned to new organization members.
     /// </summary>
     public class DefaultRole
     {
-
         [JsonProperty("object")]
         public RoleSetDefaultRoleObject Object { get; set; } = default!;
 
         /// <summary>
-        /// The unique identifier of the role
+        /// The unique identifier of the role.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// The name of the role
+        /// The name of the role.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// The key of the role (e.g., &quot;org:admin&quot;, &quot;org:member&quot;)
+        /// The key of the role (e.g., "org:admin", "org:member").
         /// </summary>
         [JsonProperty("key")]
         public string Key { get; set; } = default!;
 
         /// <summary>
-        /// Optional description of the role
+        /// Optional description of the role.
         /// </summary>
         [JsonProperty("description", NullValueHandling = NullValueHandling.Include)]
         public string? Description { get; set; }
 
         /// <summary>
-        /// The number of members assigned to this role within the role set
+        /// The number of members assigned to this role within the role set.
         /// </summary>
         [JsonProperty("members_count")]
         public long? MembersCount { get; set; } = null;
 
         /// <summary>
-        /// Whether this role has any members assigned within the role set
+        /// Whether this role has any members assigned within the role set.
         /// </summary>
         [JsonProperty("has_members")]
         public bool? HasMembers { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp of role creation
+        /// Unix timestamp of role creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last role update
+        /// Unix timestamp of last role update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

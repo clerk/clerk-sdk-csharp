@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UserPasskeyDeleteResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// Deleted Object
+        /// Deleted Object.
         /// </summary>
         public DeletedObject? DeletedObject { get; set; }
     }

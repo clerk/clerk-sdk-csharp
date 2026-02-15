@@ -52,9 +52,8 @@ namespace Clerk.BackendAPI.Models.Operations
         }
     }
 
-
     /// <summary>
-    /// 200 OK
+    /// 200 OK.
     /// </summary>
     [JsonConverter(typeof(VerifyOAuthAccessTokenResponseBody.VerifyOAuthAccessTokenResponseBodyConverter))]
     public class VerifyOAuthAccessTokenResponseBody

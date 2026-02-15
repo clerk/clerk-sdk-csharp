@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetRedirectURLRequest
     {
-
         /// <summary>
-        /// The ID of the redirect URL
+        /// The ID of the redirect URL.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=id")]
         public string Id { get; set; } = default!;

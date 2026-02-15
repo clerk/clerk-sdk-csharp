@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// Filter by verification status
+    /// Filter by verification status.
     /// </summary>
     public enum Verified
     {
@@ -56,5 +56,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum Verified");
         }
     }
-
 }

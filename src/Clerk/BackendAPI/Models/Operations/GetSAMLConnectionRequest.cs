@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetSAMLConnectionRequest
     {
-
         /// <summary>
-        /// The ID of the SAML Connection
+        /// The ID of the SAML Connection.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=saml_connection_id")]
         public string SamlConnectionId { get; set; } = default!;

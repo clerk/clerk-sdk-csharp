@@ -55,7 +55,6 @@ namespace Clerk.BackendAPI.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(ExternalAccountWithVerificationVerification.ExternalAccountWithVerificationVerificationConverter))]
     public class ExternalAccountWithVerificationVerification
     {

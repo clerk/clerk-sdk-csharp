@@ -12,17 +12,13 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// The actor payload. It needs to include a sub property which should contain the ID of the actor.<br/>
-    /// 
-    /// <remarks>
     /// This whole payload will be also included in the JWT session token.
-    /// </remarks>
     /// </summary>
     public class Actor
     {
-
         /// <summary>
         /// The ID of the actor.
         /// </summary>

@@ -24,10 +24,9 @@ namespace Clerk.BackendAPI
 
     public interface IProxyChecks
     {
-
         /// <summary>
-        /// Verify the proxy configuration for your domain
-        /// 
+        /// Verify the proxy configuration for your domain.
+        /// </summary>
         /// <remarks>
         /// This endpoint can be used to validate that a proxy-enabled domain is operational.<br/>
         /// It tries to verify that the proxy URL provided in the parameters maps to a functional proxy that can reach the Clerk Frontend API.<br/>
@@ -35,31 +34,61 @@ namespace Clerk.BackendAPI
         /// You can use this endpoint before you set a proxy URL for a domain. This way you can ensure that switching to proxy-based<br/>
         /// configuration will not lead to downtime for your instance.<br/>
         /// <br/>
-        /// The `proxy_url` parameter allows for testing proxy configurations for domains that don&apos;t have a proxy URL yet, or operate on<br/>
+        /// The `proxy_url` parameter allows for testing proxy configurations for domains that don't have a proxy URL yet, or operate on<br/>
         /// a different proxy URL than the one provided. It can also be used to re-validate a domain that is already configured to work with a proxy.
         /// </remarks>
-        /// </summary>
-        Task<VerifyDomainProxyResponse> VerifyAsync(VerifyDomainProxyRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="VerifyDomainProxyRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="VerifyDomainProxyResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<VerifyDomainProxyResponse> VerifyAsync(
+            VerifyDomainProxyRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class ProxyChecks: IProxyChecks
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public ProxyChecks(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<VerifyDomainProxyResponse> VerifyAsync(VerifyDomainProxyRequestBody? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Verify the proxy configuration for your domain.
+        /// </summary>
+        /// <remarks>
+        /// This endpoint can be used to validate that a proxy-enabled domain is operational.<br/>
+        /// It tries to verify that the proxy URL provided in the parameters maps to a functional proxy that can reach the Clerk Frontend API.<br/>
+        /// <br/>
+        /// You can use this endpoint before you set a proxy URL for a domain. This way you can ensure that switching to proxy-based<br/>
+        /// configuration will not lead to downtime for your instance.<br/>
+        /// <br/>
+        /// The `proxy_url` parameter allows for testing proxy configurations for domains that don't have a proxy URL yet, or operate on<br/>
+        /// a different proxy URL than the one provided. It can also be used to re-validate a domain that is already configured to work with a proxy.
+        /// </remarks>
+        /// <param name="request">A <see cref="VerifyDomainProxyRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="VerifyDomainProxyResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<VerifyDomainProxyResponse> VerifyAsync(
+            VerifyDomainProxyRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/proxy_checks";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -119,7 +148,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -128,9 +157,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -205,5 +234,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetTemplateRequest
     {
-
         /// <summary>
-        /// The type of templates to retrieve (email or SMS)
+        /// The type of templates to retrieve (email or SMS).
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=template_type")]
         public PathParamTemplateType TemplateType { get; set; } = default!;
 
         /// <summary>
-        /// The slug (i.e. machine-friendly name) of the template to retrieve
+        /// The slug (i.e. machine-friendly name) of the template to retrieve.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=slug")]
         public string Slug { get; set; } = default!;

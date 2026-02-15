@@ -24,30 +24,46 @@ namespace Clerk.BackendAPI
 
     public interface IInvitations
     {
-
         /// <summary>
-        /// Create an invitation
-        /// 
+        /// Create an invitation.
+        /// </summary>
         /// <remarks>
         /// Creates a new invitation for the given email address and sends the invitation email.<br/>
         /// Keep in mind that you cannot create an invitation if there is already one for the given email address.<br/>
         /// Also, trying to create an invitation for an email address that already exists in your application will result to an error.
         /// </remarks>
-        /// </summary>
-        Task<CreateInvitationResponse> CreateAsync(CreateInvitationRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">Required parameters.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateInvitationResponse> CreateAsync(
+            CreateInvitationRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// List all invitations
-        /// 
+        /// List all invitations.
+        /// </summary>
         /// <remarks>
-        /// Returns all non-revoked invitations for your application, sorted by creation date
+        /// Returns all non-revoked invitations for your application, sorted by creation date.
         /// </remarks>
-        /// </summary>
-        Task<ListInvitationsResponse> ListAsync(ListInvitationsRequest? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="ListInvitationsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListInvitationsResponse> ListAsync(
+            ListInvitationsRequest? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create multiple invitations
-        /// 
+        /// Create multiple invitations.
+        /// </summary>
         /// <remarks>
         /// Use this API operation to create multiple invitations for the provided email addresses. You can choose to send the<br/>
         /// invitations as emails by setting the `notify` parameter to `true`. There cannot be an existing invitation for any<br/>
@@ -56,40 +72,72 @@ namespace Clerk.BackendAPI
         /// <br/>
         /// This endpoint is limited to a maximum of 10 invitations per API call. If you need to send more invitations, please make multiple requests.
         /// </remarks>
-        /// </summary>
-        Task<CreateBulkInvitationsResponse> BulkCreateAsync(List<RequestBody>? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">Required parameters.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateBulkInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateBulkInvitationsResponse> BulkCreateAsync(
+            List<RequestBody>? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Revokes an invitation
-        /// 
+        /// Revokes an invitation.
+        /// </summary>
         /// <remarks>
         /// Revokes the given invitation.<br/>
         /// Revoking an invitation will prevent the user from using the invitation link that was sent to them.<br/>
-        /// However, it doesn&apos;t prevent the user from signing up if they follow the sign up flow.<br/>
+        /// However, it doesn't prevent the user from signing up if they follow the sign up flow.<br/>
         /// Only active (i.e. non-revoked) invitations can be revoked.
         /// </remarks>
-        /// </summary>
-        Task<RevokeInvitationResponse> RevokeAsync(string invitationId, RetryConfig? retryConfig = null);
+        /// <param name="invitationId">The ID of the invitation to be revoked.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RevokeInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="invitationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RevokeInvitationResponse> RevokeAsync(string invitationId, RetryConfig? retryConfig = null);
     }
 
     public class Invitations: IInvitations
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Invitations(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<CreateInvitationResponse> CreateAsync(CreateInvitationRequestBody? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Create an invitation.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new invitation for the given email address and sends the invitation email.<br/>
+        /// Keep in mind that you cannot create an invitation if there is already one for the given email address.<br/>
+        /// Also, trying to create an invitation for an email address that already exists in your application will result to an error.
+        /// </remarks>
+        /// <param name="request">Required parameters.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateInvitationResponse> CreateAsync(
+            CreateInvitationRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/invitations";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -149,7 +197,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -158,9 +206,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -236,7 +284,23 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListInvitationsResponse> ListAsync(ListInvitationsRequest? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// List all invitations.
+        /// </summary>
+        /// <remarks>
+        /// Returns all non-revoked invitations for your application, sorted by creation date.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListInvitationsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListInvitationsResponse> ListAsync(
+            ListInvitationsRequest? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/invitations", request, null);
@@ -301,9 +365,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -359,10 +423,31 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateBulkInvitationsResponse> BulkCreateAsync(List<RequestBody>? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create multiple invitations.
+        /// </summary>
+        /// <remarks>
+        /// Use this API operation to create multiple invitations for the provided email addresses. You can choose to send the<br/>
+        /// invitations as emails by setting the `notify` parameter to `true`. There cannot be an existing invitation for any<br/>
+        /// of the email addresses you provide unless you set `ignore_existing` to `true` for specific email addresses. Please<br/>
+        /// note that there must be no existing user for any of the email addresses you provide, and this rule cannot be bypassed.<br/>
+        /// <br/>
+        /// This endpoint is limited to a maximum of 10 invitations per API call. If you need to send more invitations, please make multiple requests.
+        /// </remarks>
+        /// <param name="request">Required parameters.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateBulkInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateBulkInvitationsResponse> BulkCreateAsync(
+            List<RequestBody>? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/invitations/bulk";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -422,7 +507,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -431,9 +516,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -509,12 +594,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RevokeInvitationResponse> RevokeAsync(string invitationId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Revokes an invitation.
+        /// </summary>
+        /// <remarks>
+        /// Revokes the given invitation.<br/>
+        /// Revoking an invitation will prevent the user from using the invitation link that was sent to them.<br/>
+        /// However, it doesn't prevent the user from signing up if they follow the sign up flow.<br/>
+        /// Only active (i.e. non-revoked) invitations can be revoked.
+        /// </remarks>
+        /// <param name="invitationId">The ID of the invitation to be revoked.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RevokeInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="invitationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RevokeInvitationResponse> RevokeAsync(string invitationId, RetryConfig? retryConfig = null)
         {
+            if (invitationId == null) throw new ArgumentNullException(nameof(invitationId));
+
             var request = new RevokeInvitationRequest()
             {
                 InvitationId = invitationId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/invitations/{invitation_id}/revoke", request, null);
 
@@ -569,7 +675,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -578,9 +684,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -655,5 +761,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

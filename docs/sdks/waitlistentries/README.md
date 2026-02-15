@@ -6,6 +6,7 @@
 
 * [List](#list) - List all waitlist entries
 * [Create](#create) - Create a waitlist entry
+* [BulkCreate](#bulkcreate) - Create multiple waitlist entries
 * [Delete](#delete) - Delete a pending waitlist entry
 * [Invite](#invite) - Invite a waitlist entry
 * [Reject](#reject) - Reject a waitlist entry
@@ -83,6 +84,52 @@ var res = await sdk.WaitlistEntries.CreateAsync(req);
 ### Response
 
 **[CreateWaitlistEntryResponse](../../Models/Operations/CreateWaitlistEntryResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## BulkCreate
+
+Creates multiple waitlist entries for the provided email addresses.
+You can choose whether to send confirmation emails by setting the `notify` parameter to `true` or `false` for each entry.
+If the `notify` parameter is omitted, it defaults to `true`.
+
+If an email address is already on the waitlist, no new entry will be created and the existing waitlist entry will be returned.
+Duplicate email addresses within the same request are not allowed.
+
+This endpoint is limited to a maximum of 50 entries per API call. If you need to add more entries, please make multiple requests.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="CreateBulkWaitlistEntries" method="post" path="/waitlist_entries/bulk" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+using System.Collections.Generic;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+List<CreateBulkWaitlistEntriesRequestBody>? req = null;
+
+var res = await sdk.WaitlistEntries.BulkCreateAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                     | List<[CreateBulkWaitlistEntriesRequestBody](../../Models/Operations/CreateBulkWaitlistEntriesRequestBody.md)> | :heavy_check_mark:                                                                                            | The request object to use for the request.                                                                    |
+
+### Response
+
+**[CreateBulkWaitlistEntriesResponse](../../Models/Operations/CreateBulkWaitlistEntriesResponse.md)**
 
 ### Errors
 

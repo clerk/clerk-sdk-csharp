@@ -13,6 +13,7 @@ generation:
     requestResponseComponentNamesFeb2024: true
     securityFeb2025: false
     sharedErrorComponentsApr2025: false
+    sharedNestedComponentsJan2026: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
@@ -20,13 +21,14 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  versioningStrategy: automatic
   persistentEdits: {}
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.15.1
+  version: 0.15.2
   additionalDependencies:
     - package: Microsoft.AspNetCore.Http
       version: 2.3.0
@@ -60,6 +62,7 @@ csharp:
   outputModelSuffix: output
   packageName: Clerk.BackendAPI
   packageTags: Clerk SDK
+  respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
   sourceDirectory: src
   useNodatime: true

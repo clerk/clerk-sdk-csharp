@@ -13,13 +13,12 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// 200 OK
+    /// 200 OK.
     /// </summary>
     public class GetApiKeysResponseBody
     {
-
         [JsonProperty("data")]
         public List<Data> Data { get; set; } = default!;
 

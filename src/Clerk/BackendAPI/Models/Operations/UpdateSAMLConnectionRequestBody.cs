@@ -14,105 +14,110 @@ namespace Clerk.BackendAPI.Models.Operations
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class UpdateSAMLConnectionRequestBody
     {
-
         /// <summary>
-        /// The name of the new SAML Connection
+        /// The name of the new SAML Connection.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
 
         /// <summary>
-        /// The domain to use for the new SAML Connection
+        /// The domain to use for the new SAML Connection.
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("domain")]
         public string? Domain { get; set; } = null;
 
         /// <summary>
-        /// A list of the domains on use for the SAML connection
+        /// A list of the domains on use for the SAML connection.
         /// </summary>
         [JsonProperty("domains")]
         public List<string>? Domains { get; set; } = null;
 
         /// <summary>
-        /// The Entity ID as provided by the IdP
+        /// The Entity ID as provided by the IdP.
         /// </summary>
         [JsonProperty("idp_entity_id")]
         public string? IdpEntityId { get; set; } = null;
 
         /// <summary>
-        /// The SSO URL as provided by the IdP
+        /// The SSO URL as provided by the IdP.
         /// </summary>
         [JsonProperty("idp_sso_url")]
         public string? IdpSsoUrl { get; set; } = null;
 
         /// <summary>
-        /// The x509 certificated as provided by the IdP
+        /// The x509 certificated as provided by the IdP.
         /// </summary>
         [JsonProperty("idp_certificate")]
         public string? IdpCertificate { get; set; } = null;
 
         /// <summary>
-        /// The URL which serves the IdP metadata. If present, it takes priority over the corresponding individual properties and replaces them
+        /// The URL which serves the IdP metadata. If present, it takes priority over the corresponding individual properties and replaces them.
         /// </summary>
         [JsonProperty("idp_metadata_url")]
         public string? IdpMetadataUrl { get; set; } = null;
 
         /// <summary>
-        /// The XML content of the IdP metadata file. If present, it takes priority over the corresponding individual properties
+        /// The XML content of the IdP metadata file. If present, it takes priority over the corresponding individual properties.
         /// </summary>
         [JsonProperty("idp_metadata")]
         public string? IdpMetadata { get; set; } = null;
 
         /// <summary>
-        /// The ID of the organization to which users of this SAML Connection will be added
+        /// The ID of the organization to which users of this SAML Connection will be added.
         /// </summary>
         [JsonProperty("organization_id")]
         public string? OrganizationId { get; set; } = null;
 
         /// <summary>
-        /// Define the attribute name mapping between Identity Provider and Clerk&apos;s user properties
+        /// Define the attribute name mapping between Identity Provider and Clerk's user properties.
         /// </summary>
         [JsonProperty("attribute_mapping")]
         public AttributeMapping? AttributeMapping { get; set; } = null;
 
         /// <summary>
-        /// Activate or de-activate the SAML Connection
+        /// Activate or de-activate the SAML Connection.
         /// </summary>
         [JsonProperty("active")]
         public bool? Active { get; set; } = null;
 
         /// <summary>
-        /// Controls whether to update the user&apos;s attributes in each sign-in
+        /// Controls whether to update the user's attributes in each sign-in.
         /// </summary>
         [JsonProperty("sync_user_attributes")]
         public bool? SyncUserAttributes { get; set; } = null;
 
         /// <summary>
-        /// Allow users with an email address subdomain to use this connection in order to authenticate
+        /// Allow users with an email address subdomain to use this connection in order to authenticate.
         /// </summary>
         [JsonProperty("allow_subdomains")]
         public bool? AllowSubdomains { get; set; } = null;
 
         /// <summary>
-        /// Enable or deactivate IdP-initiated flows
+        /// Enable or deactivate IdP-initiated flows.
         /// </summary>
         [JsonProperty("allow_idp_initiated")]
         public bool? AllowIdpInitiated { get; set; } = null;
 
         /// <summary>
-        /// Enable or deactivate additional identifications
+        /// Enable or deactivate additional identifications.
         /// </summary>
         [JsonProperty("disable_additional_identifications")]
         public bool? DisableAdditionalIdentifications { get; set; } = null;
 
         /// <summary>
-        /// Enable or deactivate ForceAuthn
+        /// Enable or deactivate ForceAuthn.
         /// </summary>
         [JsonProperty("force_authn")]
         public bool? ForceAuthn { get; set; }
+
+        /// <summary>
+        /// When enabling the connection, controls behavior when verified domains used for enrollment modes like automatic invitation or automatic suggestion already exist for the same domain. If true, those verified domains are removed and the connection is enabled. If false or omitted, the request fails when any such verified domain exists.
+        /// </summary>
+        [JsonProperty("consent_verified_domains_deletion")]
+        public bool? ConsentVerifiedDomainsDeletion { get; set; } = null;
     }
 }

@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class Permission
     {
-
         [JsonProperty("object")]
         public PermissionObject Object { get; set; } = default!;
 
@@ -35,21 +34,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string Type { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

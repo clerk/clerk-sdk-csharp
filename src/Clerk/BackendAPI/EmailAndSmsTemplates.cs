@@ -24,40 +24,77 @@ namespace Clerk.BackendAPI
 
     public interface IEmailAndSmsTemplates
     {
-
         /// <summary>
-        /// Update a template for a given type and slug
-        /// 
-        /// <remarks>
-        /// Updates the existing template of the given type and slug
-        /// </remarks>
+        /// Update a template for a given type and slug.
         /// </summary>
-        Task<UpsertTemplateResponse> UpsertAsync(UpsertTemplatePathParamTemplateType templateType, string slug, UpsertTemplateRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Updates the existing template of the given type and slug.
+        /// </remarks>
+        /// <param name="templateType">The type of template to update.</param>
+        /// <param name="slug">The slug of the template to update.</param>
+        /// <param name="requestBody">A <see cref="UpsertTemplateRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpsertTemplateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="slug"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
+        public  Task<UpsertTemplateResponse> UpsertAsync(
+            UpsertTemplatePathParamTemplateType templateType,
+            string slug,
+            UpsertTemplateRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class EmailAndSmsTemplates: IEmailAndSmsTemplates
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public EmailAndSmsTemplates(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
+        /// <summary>
+        /// Update a template for a given type and slug.
+        /// </summary>
+        /// <remarks>
+        /// Updates the existing template of the given type and slug.
+        /// </remarks>
+        /// <param name="templateType">The type of template to update.</param>
+        /// <param name="slug">The slug of the template to update.</param>
+        /// <param name="requestBody">A <see cref="UpsertTemplateRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpsertTemplateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="slug"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
-        public async Task<UpsertTemplateResponse> UpsertAsync(UpsertTemplatePathParamTemplateType templateType, string slug, UpsertTemplateRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+        public async  Task<UpsertTemplateResponse> UpsertAsync(
+            UpsertTemplatePathParamTemplateType templateType,
+            string slug,
+            UpsertTemplateRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (slug == null) throw new ArgumentNullException(nameof(slug));
+
             var request = new UpsertTemplateRequest()
             {
                 TemplateType = templateType,
                 Slug = slug,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/templates/{template_type}/{slug}", request, null);
 
@@ -118,7 +155,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 402 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -127,9 +164,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -204,5 +241,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

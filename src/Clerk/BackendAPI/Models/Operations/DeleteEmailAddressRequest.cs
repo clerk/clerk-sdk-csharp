@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteEmailAddressRequest
     {
-
         /// <summary>
-        /// The ID of the email address to delete
+        /// The ID of the email address to delete.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=email_address_id")]
         public string EmailAddressId { get; set; } = default!;

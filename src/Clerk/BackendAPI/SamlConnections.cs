@@ -24,70 +24,130 @@ namespace Clerk.BackendAPI
 
     public interface ISamlConnections
     {
-
         /// <summary>
-        /// Get a list of SAML Connections for an instance
-        /// 
+        /// Get a list of SAML Connections for an instance.
+        /// </summary>
         /// <remarks>
         /// Returns the list of SAML Connections for an instance.<br/>
         /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
         /// The SAML Connections are ordered by descending creation date and the most recent will be returned first.
         /// </remarks>
-        /// </summary>
-        Task<ListSAMLConnectionsResponse> ListAsync(ListSAMLConnectionsRequest? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="ListSAMLConnectionsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListSAMLConnectionsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListSAMLConnectionsResponse> ListAsync(
+            ListSAMLConnectionsRequest? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a SAML Connection
-        /// 
+        /// Create a SAML Connection.
+        /// </summary>
         /// <remarks>
         /// Create a new SAML Connection.
         /// </remarks>
-        /// </summary>
-        Task<CreateSAMLConnectionResponse> CreateAsync(CreateSAMLConnectionRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateSAMLConnectionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateSAMLConnectionResponse> CreateAsync(
+            CreateSAMLConnectionRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve a SAML Connection by ID
-        /// 
+        /// Retrieve a SAML Connection by ID.
+        /// </summary>
         /// <remarks>
         /// Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path.
         /// </remarks>
-        /// </summary>
-        Task<GetSAMLConnectionResponse> GetAsync(string samlConnectionId, RetryConfig? retryConfig = null);
+        /// <param name="samlConnectionId">The ID of the SAML Connection.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetSAMLConnectionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="samlConnectionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetSAMLConnectionResponse> GetAsync(string samlConnectionId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update a SAML Connection
-        /// 
+        /// Update a SAML Connection.
+        /// </summary>
         /// <remarks>
         /// Updates the SAML Connection whose ID matches the provided `id` in the path.
         /// </remarks>
-        /// </summary>
-        Task<UpdateSAMLConnectionResponse> UpdateAsync(string samlConnectionId, UpdateSAMLConnectionRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="samlConnectionId">The ID of the SAML Connection to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateSAMLConnectionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateSAMLConnectionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="samlConnectionId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateSAMLConnectionResponse> UpdateAsync(
+            string samlConnectionId,
+            UpdateSAMLConnectionRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete a SAML Connection
-        /// 
+        /// Delete a SAML Connection.
+        /// </summary>
         /// <remarks>
         /// Deletes the SAML Connection whose ID matches the provided `id` in the path.
         /// </remarks>
-        /// </summary>
-        Task<DeleteSAMLConnectionResponse> DeleteAsync(string samlConnectionId, RetryConfig? retryConfig = null);
+        /// <param name="samlConnectionId">The ID of the SAML Connection to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteSAMLConnectionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="samlConnectionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteSAMLConnectionResponse> DeleteAsync(string samlConnectionId, RetryConfig? retryConfig = null);
     }
 
     public class SamlConnections: ISamlConnections
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public SamlConnections(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListSAMLConnectionsResponse> ListAsync(ListSAMLConnectionsRequest? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Get a list of SAML Connections for an instance.
+        /// </summary>
+        /// <remarks>
+        /// Returns the list of SAML Connections for an instance.<br/>
+        /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
+        /// The SAML Connections are ordered by descending creation date and the most recent will be returned first.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListSAMLConnectionsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListSAMLConnectionsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListSAMLConnectionsResponse> ListAsync(
+            ListSAMLConnectionsRequest? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/saml_connections", request, null);
@@ -143,7 +203,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 402 || _statusCode == 403 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -152,9 +212,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -230,10 +290,26 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateSAMLConnectionResponse> CreateAsync(CreateSAMLConnectionRequestBody? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create a SAML Connection.
+        /// </summary>
+        /// <remarks>
+        /// Create a new SAML Connection.
+        /// </remarks>
+        /// <param name="request">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateSAMLConnectionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateSAMLConnectionResponse> CreateAsync(
+            CreateSAMLConnectionRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/saml_connections";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -293,7 +369,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 402 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -302,9 +378,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -380,12 +456,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetSAMLConnectionResponse> GetAsync(string samlConnectionId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a SAML Connection by ID.
+        /// </summary>
+        /// <remarks>
+        /// Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path.
+        /// </remarks>
+        /// <param name="samlConnectionId">The ID of the SAML Connection.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetSAMLConnectionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="samlConnectionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetSAMLConnectionResponse> GetAsync(string samlConnectionId, RetryConfig? retryConfig = null)
         {
+            if (samlConnectionId == null) throw new ArgumentNullException(nameof(samlConnectionId));
+
             var request = new GetSAMLConnectionRequest()
             {
                 SamlConnectionId = samlConnectionId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/saml_connections/{saml_connection_id}", request, null);
 
@@ -440,7 +534,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 402 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -449,9 +543,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -527,13 +621,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateSAMLConnectionResponse> UpdateAsync(string samlConnectionId, UpdateSAMLConnectionRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update a SAML Connection.
+        /// </summary>
+        /// <remarks>
+        /// Updates the SAML Connection whose ID matches the provided `id` in the path.
+        /// </remarks>
+        /// <param name="samlConnectionId">The ID of the SAML Connection to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateSAMLConnectionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateSAMLConnectionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="samlConnectionId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateSAMLConnectionResponse> UpdateAsync(
+            string samlConnectionId,
+            UpdateSAMLConnectionRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (samlConnectionId == null) throw new ArgumentNullException(nameof(samlConnectionId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new UpdateSAMLConnectionRequest()
             {
                 SamlConnectionId = samlConnectionId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/saml_connections/{saml_connection_id}", request, null);
 
@@ -594,7 +712,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 402 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -603,9 +721,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -681,12 +799,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteSAMLConnectionResponse> DeleteAsync(string samlConnectionId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a SAML Connection.
+        /// </summary>
+        /// <remarks>
+        /// Deletes the SAML Connection whose ID matches the provided `id` in the path.
+        /// </remarks>
+        /// <param name="samlConnectionId">The ID of the SAML Connection to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteSAMLConnectionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="samlConnectionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteSAMLConnectionResponse> DeleteAsync(
+            string samlConnectionId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (samlConnectionId == null) throw new ArgumentNullException(nameof(samlConnectionId));
+
             var request = new DeleteSAMLConnectionRequest()
             {
                 SamlConnectionId = samlConnectionId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/saml_connections/{saml_connection_id}", request, null);
 
@@ -741,7 +880,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 402 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -750,9 +889,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -827,5 +966,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

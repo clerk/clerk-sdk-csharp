@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UpdateOrganizationRequestBody
     {
-
         /// <summary>
         /// Metadata saved on the organization, that is visible to both your frontend and backend.
         /// </summary>
@@ -30,23 +29,20 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// The new name of the organization.<br/>
-        /// 
-        /// <remarks>
         /// May not contain URLs or HTML.<br/>
-        /// Max length: 256
-        /// </remarks>
+        /// Max length: 256.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; } = null;
 
         /// <summary>
-        /// The new slug of the organization, which needs to be unique in the instance
+        /// The new slug of the organization, which needs to be unique in the instance.
         /// </summary>
         [JsonProperty("slug")]
         public string? Slug { get; set; } = null;
 
         /// <summary>
-        /// The maximum number of memberships allowed for this organization
+        /// The maximum number of memberships allowed for this organization.
         /// </summary>
         [JsonProperty("max_allowed_memberships")]
         public long? MaxAllowedMemberships { get; set; } = null;
@@ -62,5 +58,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("created_at")]
         public string? CreatedAt { get; set; } = null;
+
+        /// <summary>
+        /// The key of the <a href="https://clerk.com/docs/guides/organizations/control-access/role-sets">role set</a> to assign to this organization.
+        /// </summary>
+        [JsonProperty("role_set_key")]
+        public string? RoleSetKey { get; set; } = null;
     }
 }

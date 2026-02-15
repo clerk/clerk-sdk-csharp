@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class RefreshSessionRequest
     {
-
         /// <summary>
-        /// The ID of the session
+        /// The ID of the session.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=session_id")]
         public string SessionId { get; set; } = default!;
 
         /// <summary>
-        /// Refresh session parameters
+        /// Refresh session parameters.
         /// </summary>
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public RefreshSessionRequestBody? RequestBody { get; set; }

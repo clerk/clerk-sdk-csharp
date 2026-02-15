@@ -23,33 +23,53 @@ namespace Clerk.BackendAPI
 
     public interface IMiscellaneous
     {
-
         /// <summary>
-        /// Returns the markup for the interstitial page
-        /// 
-        /// <remarks>
-        /// The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the user&apos;s authentication state.<br/>
-        /// It is used by Clerk SDKs when the user&apos;s authentication state cannot be immediately determined.
-        /// </remarks>
+        /// Returns the markup for the interstitial page.
         /// </summary>
-        Task<GetPublicInterstitialResponse> GetPublicInterstitialAsync(GetPublicInterstitialRequest? request = null, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the user's authentication state.<br/>
+        /// It is used by Clerk SDKs when the user's authentication state cannot be immediately determined.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetPublicInterstitialRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPublicInterstitialResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetPublicInterstitialResponse> GetPublicInterstitialAsync(
+            GetPublicInterstitialRequest? request = null,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class Miscellaneous: IMiscellaneous
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Miscellaneous(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetPublicInterstitialResponse> GetPublicInterstitialAsync(GetPublicInterstitialRequest? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Returns the markup for the interstitial page.
+        /// </summary>
+        /// <remarks>
+        /// The Clerk interstitial endpoint serves an html page that loads clerk.js in order to check the user's authentication state.<br/>
+        /// It is used by Clerk SDKs when the user's authentication state cannot be immediately determined.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetPublicInterstitialRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPublicInterstitialResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetPublicInterstitialResponse> GetPublicInterstitialAsync(
+            GetPublicInterstitialRequest? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/public/interstitial", request, null);
@@ -100,7 +120,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -109,9 +129,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -137,16 +157,17 @@ namespace Clerk.BackendAPI
                     }
                 };
             }
-            else if(responseStatusCode == 400 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 500 || responseStatusCode >= 500 && responseStatusCode < 600)
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetBillingStatementRequest
     {
-
         /// <summary>
         /// The ID of the statement to retrieve.
         /// </summary>

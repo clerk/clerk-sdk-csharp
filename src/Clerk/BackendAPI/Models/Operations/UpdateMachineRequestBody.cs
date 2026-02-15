@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateMachineRequestBody
     {
-
         /// <summary>
-        /// The name of the machine
+        /// The name of the machine.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }

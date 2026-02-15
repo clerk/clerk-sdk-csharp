@@ -11,16 +11,12 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateSignUpRequestBody
     {
-
         /// <summary>
         /// The ID of the guest attempting to sign up as used in your external systems or your previous authentication solution.<br/>
-        /// 
-        /// <remarks>
         /// This will be copied to the resulting user when the sign-up is completed.
-        /// </remarks>
         /// </summary>
         [JsonProperty("external_id")]
         public string? ExternalId { get; set; } = null;

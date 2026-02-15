@@ -24,84 +24,198 @@ namespace Clerk.BackendAPI
 
     public interface IOauthApplications
     {
-
         /// <summary>
-        /// Get a list of OAuth applications for an instance
-        /// 
+        /// Get a list of OAuth applications for an instance.
+        /// </summary>
         /// <remarks>
         /// This request returns the list of OAuth applications for an instance.<br/>
         /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
         /// The OAuth applications are ordered by descending creation date.<br/>
         /// Most recent OAuth applications will be returned first.
         /// </remarks>
-        /// </summary>
-        Task<ListOAuthApplicationsResponse> ListAsync(long? limit = 10, long? offset = 0, string? orderBy = "+created_at", string? nameQuery = null, RetryConfig? retryConfig = null);
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="orderBy">
+        /// Allows to return OAuth applications in a particular order.<br/>
+        /// At the moment, you can order the returned OAuth applications by their `created_at` and `name`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want OAuth applications to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied. We only support one `order_by` parameter, and if multiple `order_by` parameters are provided, we will only keep the first one. For example,<br/>
+        /// if you pass `order_by=name&amp;order_by=created_at`, we will consider only the first `order_by` parameter, which is `name`. The `created_at` parameter will be ignored in this case.
+        /// </param>
+        /// <param name="nameQuery">Returns OAuth applications with names that match the given query, via case-insensitive partial match.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOAuthApplicationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListOAuthApplicationsResponse> ListAsync(
+            long? limit = 10,
+            long? offset = 0,
+            string? orderBy = "+created_at",
+            string? nameQuery = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create an OAuth application
-        /// 
+        /// Create an OAuth application.
+        /// </summary>
         /// <remarks>
         /// Creates a new OAuth application with the given name and callback URL for an instance.<br/>
         /// The callback URL must be a valid URL.<br/>
         /// All URL schemes are allowed such as `http://`, `https://`, `myapp://`, etc...
         /// </remarks>
-        /// </summary>
-        Task<CreateOAuthApplicationResponse> CreateAsync(CreateOAuthApplicationRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="CreateOAuthApplicationRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOAuthApplicationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateOAuthApplicationResponse> CreateAsync(
+            CreateOAuthApplicationRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve an OAuth application by ID
-        /// 
+        /// Retrieve an OAuth application by ID.
+        /// </summary>
         /// <remarks>
         /// Fetches the OAuth application whose ID matches the provided `id` in the path.
         /// </remarks>
-        /// </summary>
-        Task<GetOAuthApplicationResponse> GetAsync(string oauthApplicationId, RetryConfig? retryConfig = null);
+        /// <param name="oauthApplicationId">The ID of the OAuth application.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOAuthApplicationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="oauthApplicationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetOAuthApplicationResponse> GetAsync(string oauthApplicationId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update an OAuth application
-        /// 
+        /// Update an OAuth application.
+        /// </summary>
         /// <remarks>
-        /// Updates an existing OAuth application
+        /// Updates an existing OAuth application.
         /// </remarks>
-        /// </summary>
-        Task<UpdateOAuthApplicationResponse> UpdateAsync(string oauthApplicationId, UpdateOAuthApplicationRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="oauthApplicationId">The ID of the OAuth application to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateOAuthApplicationRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateOAuthApplicationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="oauthApplicationId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateOAuthApplicationResponse> UpdateAsync(
+            string oauthApplicationId,
+            UpdateOAuthApplicationRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete an OAuth application
-        /// 
+        /// Delete an OAuth application.
+        /// </summary>
         /// <remarks>
         /// Deletes the given OAuth application.<br/>
         /// This is not reversible.
         /// </remarks>
-        /// </summary>
-        Task<DeleteOAuthApplicationResponse> DeleteAsync(string oauthApplicationId, RetryConfig? retryConfig = null);
+        /// <param name="oauthApplicationId">The ID of the OAuth application to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteOAuthApplicationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="oauthApplicationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteOAuthApplicationResponse> DeleteAsync(
+            string oauthApplicationId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Rotate the client secret of the given OAuth application
-        /// 
+        /// Rotate the client secret of the given OAuth application.
+        /// </summary>
         /// <remarks>
-        /// Rotates the OAuth application&apos;s client secret.<br/>
+        /// Rotates the OAuth application's client secret.<br/>
         /// When the client secret is rotated, make sure to update it in authorized OAuth clients.
         /// </remarks>
-        /// </summary>
-        Task<RotateOAuthApplicationSecretResponse> RotateSecretAsync(string oauthApplicationId, RetryConfig? retryConfig = null);
+        /// <param name="oauthApplicationId">The ID of the OAuth application for which to rotate the client secret.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RotateOAuthApplicationSecretResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="oauthApplicationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RotateOAuthApplicationSecretResponse> RotateSecretAsync(
+            string oauthApplicationId,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class OauthApplications: IOauthApplications
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public OauthApplications(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListOAuthApplicationsResponse> ListAsync(long? limit = 10, long? offset = 0, string? orderBy = "+created_at", string? nameQuery = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Get a list of OAuth applications for an instance.
+        /// </summary>
+        /// <remarks>
+        /// This request returns the list of OAuth applications for an instance.<br/>
+        /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
+        /// The OAuth applications are ordered by descending creation date.<br/>
+        /// Most recent OAuth applications will be returned first.
+        /// </remarks>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="orderBy">
+        /// Allows to return OAuth applications in a particular order.<br/>
+        /// At the moment, you can order the returned OAuth applications by their `created_at` and `name`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want OAuth applications to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied. We only support one `order_by` parameter, and if multiple `order_by` parameters are provided, we will only keep the first one. For example,<br/>
+        /// if you pass `order_by=name&amp;order_by=created_at`, we will consider only the first `order_by` parameter, which is `name`. The `created_at` parameter will be ignored in this case.
+        /// </param>
+        /// <param name="nameQuery">Returns OAuth applications with names that match the given query, via case-insensitive partial match.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOAuthApplicationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListOAuthApplicationsResponse> ListAsync(
+            long? limit = 10,
+            long? offset = 0,
+            string? orderBy = "+created_at",
+            string? nameQuery = null,
+            RetryConfig? retryConfig = null
+        )
         {
             var request = new ListOAuthApplicationsRequest()
             {
@@ -110,6 +224,7 @@ namespace Clerk.BackendAPI
                 OrderBy = orderBy,
                 NameQuery = nameQuery,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/oauth_applications", request, null);
 
@@ -164,7 +279,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -173,9 +288,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -251,10 +366,28 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateOAuthApplicationResponse> CreateAsync(CreateOAuthApplicationRequestBody? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create an OAuth application.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new OAuth application with the given name and callback URL for an instance.<br/>
+        /// The callback URL must be a valid URL.<br/>
+        /// All URL schemes are allowed such as `http://`, `https://`, `myapp://`, etc...
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateOAuthApplicationRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOAuthApplicationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateOAuthApplicationResponse> CreateAsync(
+            CreateOAuthApplicationRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/oauth_applications";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -314,7 +447,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -323,9 +456,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -401,12 +534,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetOAuthApplicationResponse> GetAsync(string oauthApplicationId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve an OAuth application by ID.
+        /// </summary>
+        /// <remarks>
+        /// Fetches the OAuth application whose ID matches the provided `id` in the path.
+        /// </remarks>
+        /// <param name="oauthApplicationId">The ID of the OAuth application.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOAuthApplicationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="oauthApplicationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetOAuthApplicationResponse> GetAsync(
+            string oauthApplicationId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (oauthApplicationId == null) throw new ArgumentNullException(nameof(oauthApplicationId));
+
             var request = new GetOAuthApplicationRequest()
             {
                 OauthApplicationId = oauthApplicationId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/oauth_applications/{oauth_application_id}", request, null);
 
@@ -461,7 +615,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -470,9 +624,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -548,13 +702,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateOAuthApplicationResponse> UpdateAsync(string oauthApplicationId, UpdateOAuthApplicationRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update an OAuth application.
+        /// </summary>
+        /// <remarks>
+        /// Updates an existing OAuth application.
+        /// </remarks>
+        /// <param name="oauthApplicationId">The ID of the OAuth application to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateOAuthApplicationRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateOAuthApplicationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="oauthApplicationId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateOAuthApplicationResponse> UpdateAsync(
+            string oauthApplicationId,
+            UpdateOAuthApplicationRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (oauthApplicationId == null) throw new ArgumentNullException(nameof(oauthApplicationId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new UpdateOAuthApplicationRequest()
             {
                 OauthApplicationId = oauthApplicationId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/oauth_applications/{oauth_application_id}", request, null);
 
@@ -615,7 +793,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -624,9 +802,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -702,12 +880,34 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteOAuthApplicationResponse> DeleteAsync(string oauthApplicationId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete an OAuth application.
+        /// </summary>
+        /// <remarks>
+        /// Deletes the given OAuth application.<br/>
+        /// This is not reversible.
+        /// </remarks>
+        /// <param name="oauthApplicationId">The ID of the OAuth application to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteOAuthApplicationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="oauthApplicationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteOAuthApplicationResponse> DeleteAsync(
+            string oauthApplicationId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (oauthApplicationId == null) throw new ArgumentNullException(nameof(oauthApplicationId));
+
             var request = new DeleteOAuthApplicationRequest()
             {
                 OauthApplicationId = oauthApplicationId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/oauth_applications/{oauth_application_id}", request, null);
 
@@ -762,7 +962,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -771,9 +971,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -849,12 +1049,34 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RotateOAuthApplicationSecretResponse> RotateSecretAsync(string oauthApplicationId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Rotate the client secret of the given OAuth application.
+        /// </summary>
+        /// <remarks>
+        /// Rotates the OAuth application's client secret.<br/>
+        /// When the client secret is rotated, make sure to update it in authorized OAuth clients.
+        /// </remarks>
+        /// <param name="oauthApplicationId">The ID of the OAuth application for which to rotate the client secret.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RotateOAuthApplicationSecretResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="oauthApplicationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RotateOAuthApplicationSecretResponse> RotateSecretAsync(
+            string oauthApplicationId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (oauthApplicationId == null) throw new ArgumentNullException(nameof(oauthApplicationId));
+
             var request = new RotateOAuthApplicationSecretRequest()
             {
                 OauthApplicationId = oauthApplicationId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/oauth_applications/{oauth_application_id}/rotate_secret", request, null);
 
@@ -909,7 +1131,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -918,9 +1140,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -995,5 +1217,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

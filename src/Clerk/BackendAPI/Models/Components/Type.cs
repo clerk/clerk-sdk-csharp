@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The type of the role set (&quot;initial&quot; or &quot;custom&quot;)
+    /// The type of the role set ("initial" or "custom").
     /// </summary>
     public enum Type
     {
@@ -56,5 +56,4 @@ namespace Clerk.BackendAPI.Models.Components
             throw new Exception($"Unknown value {value} for enum Type");
         }
     }
-
 }

@@ -13,10 +13,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class Role
     {
-
         [JsonProperty("object")]
         public RoleObject Object { get; set; } = default!;
 
@@ -33,7 +32,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? Description { get; set; }
 
         /// <summary>
-        /// Whether this role is eligible to be an organization creator role
+        /// Whether this role is eligible to be an organization creator role.
         /// </summary>
         [JsonProperty("is_creator_eligible")]
         public bool IsCreatorEligible { get; set; } = default!;
@@ -42,21 +41,13 @@ namespace Clerk.BackendAPI.Models.Components
         public List<Permission> Permissions { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

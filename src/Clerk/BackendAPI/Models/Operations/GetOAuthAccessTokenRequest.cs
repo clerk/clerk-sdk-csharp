@@ -10,50 +10,40 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetOAuthAccessTokenRequest
     {
-
         /// <summary>
-        /// The ID of the user for which to retrieve the OAuth access token
+        /// The ID of the user for which to retrieve the OAuth access token.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the OAuth provider (e.g. `oauth_google`)
+        /// The ID of the OAuth provider (e.g. `oauth_google`).
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=provider")]
         public string Provider { get; set; } = default!;
 
         /// <summary>
         /// Whether to paginate the results.<br/>
-        /// 
-        /// <remarks>
         /// If true, the results will be paginated.<br/>
         /// If false, the results will not be paginated.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=paginated")]
         public bool? Paginated { get; set; }
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;

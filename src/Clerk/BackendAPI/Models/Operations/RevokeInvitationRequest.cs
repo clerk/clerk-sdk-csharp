@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class RevokeInvitationRequest
     {
-
         /// <summary>
-        /// The ID of the invitation to be revoked
+        /// The ID of the invitation to be revoked.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=invitation_id")]
         public string InvitationId { get; set; } = default!;

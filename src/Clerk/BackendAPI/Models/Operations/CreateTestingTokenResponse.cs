@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateTestingTokenResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A Testing Token
+        /// A Testing Token.
         /// </summary>
         public TestingToken? TestingToken { get; set; }
     }

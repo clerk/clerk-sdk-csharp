@@ -27,7 +27,7 @@ namespace Clerk.BackendAPI.Models.Errors
     }
 
     /// <summary>
-    /// Request was not successful
+    /// Request was not successful.
     /// </summary>
     public class ClerkErrors : SDKBaseError
     {
@@ -57,5 +57,4 @@ namespace Clerk.BackendAPI.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

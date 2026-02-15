@@ -12,7 +12,7 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum GetM2MTokensObject
     {
         [JsonProperty("machine_to_machine_token")]
@@ -51,5 +51,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum GetM2MTokensObject");
         }
     }
-
 }
