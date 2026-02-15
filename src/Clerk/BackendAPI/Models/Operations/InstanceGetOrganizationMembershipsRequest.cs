@@ -10,38 +10,28 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class InstanceGetOrganizationMembershipsRequest
     {
-
         /// <summary>
         /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
-        /// 
-        /// <remarks>
         /// By prepending one of those values with + or -,<br/>
         /// we can choose to sort in ascending (ASC) or descending (DESC) order.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
         public string? OrderBy { get; set; }
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;

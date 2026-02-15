@@ -13,18 +13,17 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// List of waitlist entries
+    /// List of waitlist entries.
     /// </summary>
     public class WaitlistEntries
     {
-
         [JsonProperty("data")]
         public List<WaitlistEntry> Data { get; set; } = default!;
 
         /// <summary>
-        /// Total number of waitlist entries
+        /// Total number of waitlist entries.
         /// </summary>
         [JsonProperty("total_count")]
         public long TotalCount { get; set; } = default!;

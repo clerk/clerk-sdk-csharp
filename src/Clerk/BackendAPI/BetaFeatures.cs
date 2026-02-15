@@ -24,48 +24,80 @@ namespace Clerk.BackendAPI
 
     public interface IBetaFeatures
     {
-
         /// <summary>
-        /// Update instance settings
-        /// 
-        /// <remarks>
-        /// Updates the settings of an instance
-        /// </remarks>
+        /// Update instance settings.
         /// </summary>
-        Task<UpdateInstanceAuthConfigResponse> UpdateInstanceSettingsAsync(UpdateInstanceAuthConfigRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Updates the settings of an instance.
+        /// </remarks>
+        /// <param name="request">A <see cref="UpdateInstanceAuthConfigRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateInstanceAuthConfigResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateInstanceAuthConfigResponse> UpdateInstanceSettingsAsync(
+            UpdateInstanceAuthConfigRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Update production instance domain
-        /// 
+        /// Update production instance domain.
+        /// </summary>
         /// <remarks>
         /// Change the domain of a production instance.<br/>
         /// <br/>
-        /// Changing the domain requires updating the <a href="https://clerk.com/docs/deployments/overview#dns-records">DNS records</a> accordingly, deploying new <a href="https://clerk.com/docs/deployments/overview#deploy-certificates">SSL certificates</a>, updating your Social Connection&apos;s redirect URLs and setting the new keys in your code.<br/>
+        /// Changing the domain requires updating the <a href="https://clerk.com/docs/deployments/overview#dns-records">DNS records</a> accordingly, deploying new <a href="https://clerk.com/docs/deployments/overview#deploy-certificates">SSL certificates</a>, updating your Social Connection's redirect URLs and setting the new keys in your code.<br/>
         /// <br/>
         /// WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur.
         /// </remarks>
-        /// </summary>
-        Task<UpdateProductionInstanceDomainResponse> UpdateProductionInstanceDomainAsync(UpdateProductionInstanceDomainRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="UpdateProductionInstanceDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateProductionInstanceDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
+        public  Task<UpdateProductionInstanceDomainResponse> UpdateProductionInstanceDomainAsync(
+            UpdateProductionInstanceDomainRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class BetaFeatures: IBetaFeatures
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public BetaFeatures(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<UpdateInstanceAuthConfigResponse> UpdateInstanceSettingsAsync(UpdateInstanceAuthConfigRequestBody? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Update instance settings.
+        /// </summary>
+        /// <remarks>
+        /// Updates the settings of an instance.
+        /// </remarks>
+        /// <param name="request">A <see cref="UpdateInstanceAuthConfigRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateInstanceAuthConfigResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateInstanceAuthConfigResponse> UpdateInstanceSettingsAsync(
+            UpdateInstanceAuthConfigRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/beta_features/instance_settings";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
@@ -125,7 +157,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 402 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -134,9 +166,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -212,11 +244,31 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
+
+        /// <summary>
+        /// Update production instance domain.
+        /// </summary>
+        /// <remarks>
+        /// Change the domain of a production instance.<br/>
+        /// <br/>
+        /// Changing the domain requires updating the <a href="https://clerk.com/docs/deployments/overview#dns-records">DNS records</a> accordingly, deploying new <a href="https://clerk.com/docs/deployments/overview#deploy-certificates">SSL certificates</a>, updating your Social Connection's redirect URLs and setting the new keys in your code.<br/>
+        /// <br/>
+        /// WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur.
+        /// </remarks>
+        /// <param name="request">A <see cref="UpdateProductionInstanceDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateProductionInstanceDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
-        public async Task<UpdateProductionInstanceDomainResponse> UpdateProductionInstanceDomainAsync(UpdateProductionInstanceDomainRequestBody? request = null, RetryConfig? retryConfig = null)
+        public async  Task<UpdateProductionInstanceDomainResponse> UpdateProductionInstanceDomainAsync(
+            UpdateProductionInstanceDomainRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/beta_features/domain";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
@@ -276,7 +328,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -285,9 +337,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -344,5 +396,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

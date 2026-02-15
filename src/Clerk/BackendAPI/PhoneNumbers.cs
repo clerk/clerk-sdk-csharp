@@ -24,62 +24,110 @@ namespace Clerk.BackendAPI
 
     public interface IPhoneNumbers
     {
+        /// <summary>
+        /// Create a phone number.
+        /// </summary>
+        /// <remarks>
+        /// Create a new phone number.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreatePhoneNumberRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreatePhoneNumberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreatePhoneNumberResponse> CreateAsync(
+            CreatePhoneNumberRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a phone number
-        /// 
-        /// <remarks>
-        /// Create a new phone number
-        /// </remarks>
+        /// Retrieve a phone number.
         /// </summary>
-        Task<CreatePhoneNumberResponse> CreateAsync(CreatePhoneNumberRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Returns the details of a phone number.
+        /// </remarks>
+        /// <param name="phoneNumberId">The ID of the phone number to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPhoneNumberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="phoneNumberId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetPhoneNumberResponse> GetAsync(string phoneNumberId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Retrieve a phone number
-        /// 
-        /// <remarks>
-        /// Returns the details of a phone number
-        /// </remarks>
+        /// Delete a phone number.
         /// </summary>
-        Task<GetPhoneNumberResponse> GetAsync(string phoneNumberId, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Delete the phone number with the given ID.
+        /// </remarks>
+        /// <param name="phoneNumberId">The ID of the phone number to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeletePhoneNumberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="phoneNumberId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeletePhoneNumberResponse> DeleteAsync(string phoneNumberId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Delete a phone number
-        /// 
-        /// <remarks>
-        /// Delete the phone number with the given ID
-        /// </remarks>
+        /// Update a phone number.
         /// </summary>
-        Task<DeletePhoneNumberResponse> DeleteAsync(string phoneNumberId, RetryConfig? retryConfig = null);
-
-        /// <summary>
-        /// Update a phone number
-        /// 
         /// <remarks>
-        /// Updates a phone number
+        /// Updates a phone number.
         /// </remarks>
-        /// </summary>
-        Task<UpdatePhoneNumberResponse> UpdateAsync(string phoneNumberId, UpdatePhoneNumberRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="phoneNumberId">The ID of the phone number to update.</param>
+        /// <param name="requestBody">A <see cref="UpdatePhoneNumberRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdatePhoneNumberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="phoneNumberId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdatePhoneNumberResponse> UpdateAsync(
+            string phoneNumberId,
+            UpdatePhoneNumberRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class PhoneNumbers: IPhoneNumbers
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public PhoneNumbers(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<CreatePhoneNumberResponse> CreateAsync(CreatePhoneNumberRequestBody? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Create a phone number.
+        /// </summary>
+        /// <remarks>
+        /// Create a new phone number.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreatePhoneNumberRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreatePhoneNumberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreatePhoneNumberResponse> CreateAsync(
+            CreatePhoneNumberRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/phone_numbers";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -139,7 +187,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -148,9 +196,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -226,12 +274,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetPhoneNumberResponse> GetAsync(string phoneNumberId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a phone number.
+        /// </summary>
+        /// <remarks>
+        /// Returns the details of a phone number.
+        /// </remarks>
+        /// <param name="phoneNumberId">The ID of the phone number to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetPhoneNumberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="phoneNumberId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetPhoneNumberResponse> GetAsync(string phoneNumberId, RetryConfig? retryConfig = null)
         {
+            if (phoneNumberId == null) throw new ArgumentNullException(nameof(phoneNumberId));
+
             var request = new GetPhoneNumberRequest()
             {
                 PhoneNumberId = phoneNumberId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/phone_numbers/{phone_number_id}", request, null);
 
@@ -286,7 +352,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -295,9 +361,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -373,12 +439,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeletePhoneNumberResponse> DeleteAsync(string phoneNumberId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a phone number.
+        /// </summary>
+        /// <remarks>
+        /// Delete the phone number with the given ID.
+        /// </remarks>
+        /// <param name="phoneNumberId">The ID of the phone number to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeletePhoneNumberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="phoneNumberId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeletePhoneNumberResponse> DeleteAsync(string phoneNumberId, RetryConfig? retryConfig = null)
         {
+            if (phoneNumberId == null) throw new ArgumentNullException(nameof(phoneNumberId));
+
             var request = new DeletePhoneNumberRequest()
             {
                 PhoneNumberId = phoneNumberId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/phone_numbers/{phone_number_id}", request, null);
 
@@ -433,7 +517,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -442,9 +526,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -520,13 +604,36 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdatePhoneNumberResponse> UpdateAsync(string phoneNumberId, UpdatePhoneNumberRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update a phone number.
+        /// </summary>
+        /// <remarks>
+        /// Updates a phone number.
+        /// </remarks>
+        /// <param name="phoneNumberId">The ID of the phone number to update.</param>
+        /// <param name="requestBody">A <see cref="UpdatePhoneNumberRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdatePhoneNumberResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="phoneNumberId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdatePhoneNumberResponse> UpdateAsync(
+            string phoneNumberId,
+            UpdatePhoneNumberRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (phoneNumberId == null) throw new ArgumentNullException(nameof(phoneNumberId));
+
             var request = new UpdatePhoneNumberRequest()
             {
                 PhoneNumberId = phoneNumberId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/phone_numbers/{phone_number_id}", request, null);
 
@@ -587,7 +694,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -596,9 +703,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -673,5 +780,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

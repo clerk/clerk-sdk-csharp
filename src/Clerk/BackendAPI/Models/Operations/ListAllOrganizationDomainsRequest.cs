@@ -12,74 +12,65 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using System.Collections.Generic;
-    
+
     public class ListAllOrganizationDomainsRequest
     {
-
         /// <summary>
-        /// The ID of the organization to filter domains by
+        /// The ID of the organization to filter domains by.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=organization_id")]
         public string? OrganizationId { get; set; }
 
         /// <summary>
-        /// Filter by verification status
+        /// Filter by verification status.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=verified")]
         public Verified? Verified { get; set; }
 
         /// <summary>
-        /// Filter by enrollment mode
+        /// Filter by enrollment mode.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=false,name=enrollment_mode")]
         public List<Models.Operations.EnrollmentMode>? EnrollmentMode { get; set; }
 
         /// <summary>
         /// Search domains by name or organization ID.<br/>
-        /// 
-        /// <remarks>
-        /// If the query starts with &quot;org_&quot;, it will search by exact organization ID match.<br/>
+        /// If the query starts with "org_", it will search by exact organization ID match.<br/>
         /// Otherwise, it performs a case-insensitive partial match on the domain name.<br/>
         /// <br/>
-        /// Note: An empty string or whitespace-only value is not allowed and will result in a validation error.<br/>
-        /// 
-        /// </remarks>
+        /// Note: An empty string or whitespace-only value is not allowed and will result in a validation error.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
 
         /// <summary>
+        /// Filter by exact domain names. Accepts multiple values (e.g. domains=example.com&amp;domains=test.org).
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=domains")]
+        public List<string>? Domains { get; set; }
+
+        /// <summary>
         /// Allows to return organization domains in a particular order.<br/>
-        /// 
-        /// <remarks>
         /// At the moment, you can order the returned domains by their `name` or `created_at`.<br/>
         /// In order to specify the direction, you can use the `+/-` symbols prepended to the property to order by.<br/>
         /// For example, if you want domains to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
-        /// If you don&apos;t use `+` or `-`, then `+` is implied.<br/>
-        /// Defaults to `-created_at`.<br/>
-        /// 
-        /// </remarks>
+        /// If you don't use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
         public string? OrderBy { get; set; } = "-created_at";
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;

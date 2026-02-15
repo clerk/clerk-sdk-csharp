@@ -5,9 +5,12 @@
 ### Available Operations
 
 * [ListPlans](#listplans) - List all billing plans
+* [ListPrices](#listprices) - List all billing prices
+* [CreatePrice](#createprice) - Create a custom billing price
 * [ListSubscriptionItems](#listsubscriptionitems) - List all subscription items
 * [CancelSubscriptionItem](#cancelsubscriptionitem) - Cancel a subscription item
 * [ExtendSubscriptionItemFreeTrial](#extendsubscriptionitemfreetrial) - Extend free trial for a subscription item
+* [CreatePriceTransition](#createpricetransition) - Create a price transition for a subscription item
 * [ListStatements](#liststatements) - List all billing statements
 * [GetStatement](#getstatement) - Retrieve a billing statement
 * [GetStatementPaymentAttempts](#getstatementpaymentattempts) - List payment attempts for a billing statement
@@ -52,6 +55,91 @@ var res = await sdk.Billing.ListPlansAsync(
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ListPrices
+
+Returns a list of all prices for the instance. The prices are returned sorted by amount ascending,
+then by creation date descending. This includes both default and custom prices. Pagination is supported.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetBillingPriceList" method="get" path="/billing/prices" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Billing.ListPricesAsync(
+    limit: 20,
+    offset: 10
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                                                 | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               | Example                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `Paginated`                                                                                                                               | *bool*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Whether to paginate the results.<br/>If true, the results will be paginated.<br/>If false, the results will not be paginated.             |                                                                                                                                           |
+| `Limit`                                                                                                                                   | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Applies a limit to the number of results returned.<br/>Can be used for paginating the results together with `offset`.                     | 20                                                                                                                                        |
+| `Offset`                                                                                                                                  | *long*                                                                                                                                    | :heavy_minus_sign:                                                                                                                        | Skip the first `offset` results when paginating.<br/>Needs to be an integer greater or equal to zero.<br/>To be used in conjunction with `limit`. | 10                                                                                                                                        |
+| `PlanId`                                                                                                                                  | *string*                                                                                                                                  | :heavy_minus_sign:                                                                                                                        | Filter prices by plan ID                                                                                                                  |                                                                                                                                           |
+
+### Response
+
+**[GetBillingPriceListResponse](../../Models/Operations/GetBillingPriceListResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## CreatePrice
+
+Creates a custom price for a billing plan. Custom prices allow you to offer different pricing
+to specific customers while maintaining the same plan structure.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="CreateBillingPrice" method="post" path="/billing/prices" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+CreateBillingPriceRequest req = new CreateBillingPriceRequest() {
+    PlanId = "<id>",
+    Amount = 826545,
+};
+
+var res = await sdk.Billing.CreatePriceAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `request`                                                                         | [CreateBillingPriceRequest](../../Models/Components/CreateBillingPriceRequest.md) | :heavy_check_mark:                                                                | The request object to use for the request.                                        |
+
+### Response
+
+**[CreateBillingPriceResponse](../../Models/Operations/CreateBillingPriceResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
@@ -181,6 +269,50 @@ var res = await sdk.Billing.ExtendSubscriptionItemFreeTrialAsync(
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## CreatePriceTransition
+
+Creates a price transition for the specified subscription item.
+This may create an upcoming subscription item or activate immediately depending on plan and payer rules.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="CreateBillingPriceTransition" method="post" path="/billing/subscription_items/{subscription_item_id}/price_transition" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Billing.CreatePriceTransitionAsync(
+    subscriptionItemId: "<id>",
+    priceTransitionRequest: new PriceTransitionRequest() {
+        FromPriceId = "<id>",
+        ToPriceId = "<id>",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `SubscriptionItemId`                                                        | *string*                                                                    | :heavy_check_mark:                                                          | The ID of the subscription item to transition                               |
+| `PriceTransitionRequest`                                                    | [PriceTransitionRequest](../../Models/Components/PriceTransitionRequest.md) | :heavy_check_mark:                                                          | Parameters for the price transition                                         |
+
+### Response
+
+**[CreateBillingPriceTransitionResponse](../../Models/Operations/CreateBillingPriceTransitionResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 409, 422               | application/json                           |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 

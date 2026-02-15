@@ -13,22 +13,17 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Hello world
+    /// A user's membership in an organization.
     /// </summary>
     public class OrganizationMembership
     {
-
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public OrganizationMembershipObject Object { get; set; } = default!;
@@ -43,13 +38,13 @@ namespace Clerk.BackendAPI.Models.Components
         public List<string> Permissions { get; set; } = default!;
 
         /// <summary>
-        /// Metadata saved on the organization membership, accessible from both Frontend and Backend APIs
+        /// Metadata saved on the organization membership, accessible from both Frontend and Backend APIs.
         /// </summary>
         [JsonProperty("public_metadata")]
         public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
         /// <summary>
-        /// Metadata saved on the organization membership, accessible only from the Backend API
+        /// Metadata saved on the organization membership, accessible only from the Backend API.
         /// </summary>
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; }
@@ -58,7 +53,7 @@ namespace Clerk.BackendAPI.Models.Components
         public OrganizationMembershipOrganization Organization { get; set; } = default!;
 
         /// <summary>
-        /// An organization membership with public user data populated
+        /// An organization membership with public user data populated.
         /// </summary>
         [JsonProperty("public_user_data")]
         public OrganizationMembershipPublicUserData? PublicUserData { get; set; }

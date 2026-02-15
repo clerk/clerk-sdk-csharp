@@ -52,7 +52,6 @@ namespace Clerk.BackendAPI.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(EnterpriseConnection.EnterpriseConnectionConverter))]
     public class EnterpriseConnection
     {

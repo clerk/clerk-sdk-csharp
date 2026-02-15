@@ -19,133 +19,282 @@ namespace Clerk.BackendAPI
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-
     /// <summary>
     /// Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend servers.<br/>
-    /// 
-    /// <remarks>
     /// <br/>
     /// ### Versions<br/>
     /// <br/>
-    /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
+    /// When the API changes in a way that isn't compatible with older versions, a new version is released.<br/>
     /// Each version is identified by its release date, e.g. `2025-04-10`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
-    /// Please see https://clerk.com/docs for more information.
-    /// </remarks>
-    /// 
+    /// Please see https://clerk.com/docs for more information.<br/>
     /// <see href="https://clerk.com/docs">https://clerk.com/docs</see>
     /// </summary>
     public interface IClerkBackendApi
     {
         public IMiscellaneous Miscellaneous { get; }
+
         public IJwks Jwks { get; }
+
         public IClients Clients { get; }
+
         public IEmailAddresses EmailAddresses { get; }
+
         public IPhoneNumbers PhoneNumbers { get; }
+
         public ISessions Sessions { get; }
+
         public IEmailSMSTemplates EmailSMSTemplates { get; }
+
         public IEmailAndSmsTemplates EmailAndSmsTemplates { get; }
+
         public ITemplates Templates { get; }
+
         public IUsers Users { get; }
+
         public IInvitations Invitations { get; }
+
         public IOrganizationInvitations OrganizationInvitations { get; }
+
         public IAllowlistIdentifiers AllowlistIdentifiers { get; }
+
         public IBlocklistIdentifiers BlocklistIdentifiers { get; }
+
         public IBetaFeatures BetaFeatures { get; }
+
         public IActorTokens ActorTokens { get; }
+
         public IDomains Domains { get; }
+
+        /// <summary>
+        /// Modify the settings of your instance.
+        /// </summary>
         public IInstanceSettings InstanceSettings { get; }
+
         public IWebhooks Webhooks { get; }
+
         public IJwtTemplates JwtTemplates { get; }
+
         public IMachines Machines { get; }
+
         public IOrganizations Organizations { get; }
+
         public IOrganizationRoles OrganizationRoles { get; }
+
         public IOrganizationMemberships OrganizationMemberships { get; }
+
         public IOrganizationDomains OrganizationDomains { get; }
+
         public IProxyChecks ProxyChecks { get; }
+
         public IRedirectUrls RedirectUrls { get; }
+
         public ISignInTokens SignInTokens { get; }
+
         public ISignUps SignUps { get; }
+
         public IOauthApplications OauthApplications { get; }
+
         public ISamlConnections SamlConnections { get; }
+
         public ITestingTokens TestingTokens { get; }
+
         public IWaitlistEntries WaitlistEntries { get; }
+
         public IBilling Billing { get; }
+
         public IOrganizationPermissions OrganizationPermissions { get; }
+
         public IRoleSets RoleSets { get; }
 
         /// <summary>
-        /// Endpoints for managing API Keys
+        /// Endpoints for managing API Keys.
         /// </summary>
         public IAPIKeys APIKeys { get; }
+
         public IM2m M2m { get; }
+
         public IOauthAccessTokens OauthAccessTokens { get; }
     }
 
-
     /// <summary>
     /// Clerk Backend API: The Clerk REST Backend API, meant to be accessed by backend servers.<br/>
-    /// 
-    /// <remarks>
     /// <br/>
     /// ### Versions<br/>
     /// <br/>
-    /// When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
+    /// When the API changes in a way that isn't compatible with older versions, a new version is released.<br/>
     /// Each version is identified by its release date, e.g. `2025-04-10`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
     /// <br/>
-    /// Please see https://clerk.com/docs for more information.
-    /// </remarks>
-    /// 
+    /// Please see https://clerk.com/docs for more information.<br/>
     /// <see href="https://clerk.com/docs">https://clerk.com/docs</see>
     /// </summary>
     public class ClerkBackendApi: IClerkBackendApi
     {
+        /// <summary>
+        /// The main SDK Configuration.
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
+        /// <summary>
+        /// The Miscellaneous sub-SDK.
+        /// </summary>
         public IMiscellaneous Miscellaneous { get; private set; }
+        /// <summary>
+        /// The Jwks sub-SDK.
+        /// </summary>
         public IJwks Jwks { get; private set; }
+        /// <summary>
+        /// The Clients sub-SDK.
+        /// </summary>
         public IClients Clients { get; private set; }
+        /// <summary>
+        /// The EmailAddresses sub-SDK.
+        /// </summary>
         public IEmailAddresses EmailAddresses { get; private set; }
+        /// <summary>
+        /// The PhoneNumbers sub-SDK.
+        /// </summary>
         public IPhoneNumbers PhoneNumbers { get; private set; }
+        /// <summary>
+        /// The Sessions sub-SDK.
+        /// </summary>
         public ISessions Sessions { get; private set; }
+        /// <summary>
+        /// The EmailSMSTemplates sub-SDK.
+        /// </summary>
         public IEmailSMSTemplates EmailSMSTemplates { get; private set; }
+        /// <summary>
+        /// The EmailAndSmsTemplates sub-SDK.
+        /// </summary>
         public IEmailAndSmsTemplates EmailAndSmsTemplates { get; private set; }
+        /// <summary>
+        /// The Templates sub-SDK.
+        /// </summary>
         public ITemplates Templates { get; private set; }
+        /// <summary>
+        /// The Users sub-SDK.
+        /// </summary>
         public IUsers Users { get; private set; }
+        /// <summary>
+        /// The Invitations sub-SDK.
+        /// </summary>
         public IInvitations Invitations { get; private set; }
+        /// <summary>
+        /// The OrganizationInvitations sub-SDK.
+        /// </summary>
         public IOrganizationInvitations OrganizationInvitations { get; private set; }
+        /// <summary>
+        /// The AllowlistIdentifiers sub-SDK.
+        /// </summary>
         public IAllowlistIdentifiers AllowlistIdentifiers { get; private set; }
+        /// <summary>
+        /// The BlocklistIdentifiers sub-SDK.
+        /// </summary>
         public IBlocklistIdentifiers BlocklistIdentifiers { get; private set; }
+        /// <summary>
+        /// The BetaFeatures sub-SDK.
+        /// </summary>
         public IBetaFeatures BetaFeatures { get; private set; }
+        /// <summary>
+        /// The ActorTokens sub-SDK.
+        /// </summary>
         public IActorTokens ActorTokens { get; private set; }
+        /// <summary>
+        /// The Domains sub-SDK.
+        /// </summary>
         public IDomains Domains { get; private set; }
+        /// <summary>
+        /// The InstanceSettings sub-SDK.
+        /// </summary>
         public IInstanceSettings InstanceSettings { get; private set; }
+        /// <summary>
+        /// The Webhooks sub-SDK.
+        /// </summary>
         public IWebhooks Webhooks { get; private set; }
+        /// <summary>
+        /// The JwtTemplates sub-SDK.
+        /// </summary>
         public IJwtTemplates JwtTemplates { get; private set; }
+        /// <summary>
+        /// The Machines sub-SDK.
+        /// </summary>
         public IMachines Machines { get; private set; }
+        /// <summary>
+        /// The Organizations sub-SDK.
+        /// </summary>
         public IOrganizations Organizations { get; private set; }
+        /// <summary>
+        /// The OrganizationRoles sub-SDK.
+        /// </summary>
         public IOrganizationRoles OrganizationRoles { get; private set; }
+        /// <summary>
+        /// The OrganizationMemberships sub-SDK.
+        /// </summary>
         public IOrganizationMemberships OrganizationMemberships { get; private set; }
+        /// <summary>
+        /// The OrganizationDomains sub-SDK.
+        /// </summary>
         public IOrganizationDomains OrganizationDomains { get; private set; }
+        /// <summary>
+        /// The ProxyChecks sub-SDK.
+        /// </summary>
         public IProxyChecks ProxyChecks { get; private set; }
+        /// <summary>
+        /// The RedirectUrls sub-SDK.
+        /// </summary>
         public IRedirectUrls RedirectUrls { get; private set; }
+        /// <summary>
+        /// The SignInTokens sub-SDK.
+        /// </summary>
         public ISignInTokens SignInTokens { get; private set; }
+        /// <summary>
+        /// The SignUps sub-SDK.
+        /// </summary>
         public ISignUps SignUps { get; private set; }
+        /// <summary>
+        /// The OauthApplications sub-SDK.
+        /// </summary>
         public IOauthApplications OauthApplications { get; private set; }
+        /// <summary>
+        /// The SamlConnections sub-SDK.
+        /// </summary>
         public ISamlConnections SamlConnections { get; private set; }
+        /// <summary>
+        /// The TestingTokens sub-SDK.
+        /// </summary>
         public ITestingTokens TestingTokens { get; private set; }
+        /// <summary>
+        /// The WaitlistEntries sub-SDK.
+        /// </summary>
         public IWaitlistEntries WaitlistEntries { get; private set; }
+        /// <summary>
+        /// The Billing sub-SDK.
+        /// </summary>
         public IBilling Billing { get; private set; }
+        /// <summary>
+        /// The OrganizationPermissions sub-SDK.
+        /// </summary>
         public IOrganizationPermissions OrganizationPermissions { get; private set; }
+        /// <summary>
+        /// The RoleSets sub-SDK.
+        /// </summary>
         public IRoleSets RoleSets { get; private set; }
+        /// <summary>
+        /// The APIKeys sub-SDK.
+        /// </summary>
         public IAPIKeys APIKeys { get; private set; }
+        /// <summary>
+        /// The M2m sub-SDK.
+        /// </summary>
         public IM2m M2m { get; private set; }
+        /// <summary>
+        /// The OauthAccessTokens sub-SDK.
+        /// </summary>
         public IOauthAccessTokens OauthAccessTokens { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the SDK based on a <see cref="SDKConfig"/> configuration object.
+        /// </summary>
+        /// <param name="config">The SDK configuration object.</param>
         public ClerkBackendApi(SDKConfig config)
         {
             SDKConfiguration = config;
@@ -240,14 +389,22 @@ namespace Clerk.BackendAPI
         /// <param name="urlParams">A dictionary of parameters to use for templating the serverUrl. Only used when serverUrl is provided.</param>
         /// <param name="client">A custom HTTP client implementation to use for making API requests. If not provided, the default SpeakeasyHttpClient will be used.</param>
         /// <param name="retryConfig">Configuration for retry behavior when API requests fail. Defines retry strategies, backoff policies, and maximum retry attempts.</param>
-        /// <exception cref="Exception">Thrown when the serverIndex is out of range (less than 0 or greater than or equal to the server list length).</exception>
-        public ClerkBackendApi(string? bearerAuth = null, Func<string>? bearerAuthSource = null, int? serverIndex = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
+        /// <exception cref="ArgumentOutOfRangeException">Invalid value provided for <paramref name="serverIndex"/>: must be between 0 (inclusive) and 1 (exclusive).</exception>
+        public ClerkBackendApi(
+            string? bearerAuth = null,
+            Func<string>? bearerAuthSource = null,
+            int? serverIndex = null,
+            string? serverUrl = null,
+            Dictionary<string, string>? urlParams = null,
+            ISpeakeasyHttpClient? client = null,
+            RetryConfig? retryConfig = null
+        )
         {
             if (serverIndex != null)
             {
                 if (serverIndex.Value < 0 || serverIndex.Value >= SDKConfig.ServerList.Length)
                 {
-                    throw new Exception($"Invalid server index {serverIndex.Value}");
+                    throw new ArgumentOutOfRangeException($"Invalid server index {serverIndex}: must be between 0 (inclusive) and {SDKConfig.ServerList.Length} (exclusive)." );
                 }
             }
 
@@ -371,22 +528,31 @@ namespace Clerk.BackendAPI
             SDKConfiguration = config;
         }
 
+        /// <summary>
+        /// Builder class for constructing an instance of the SDK.
+        /// </summary>
         public class SDKBuilder
         {
             private SDKConfig _sdkConfig = new SDKConfig(client: new SpeakeasyHttpClient());
 
             public SDKBuilder() { }
 
+            /// <summary>
+            /// Overrides the default server by index.
+            /// </summary>
             public SDKBuilder WithServerIndex(int serverIndex)
             {
                 if (serverIndex < 0 || serverIndex >= SDKConfig.ServerList.Length)
                 {
-                    throw new Exception($"Invalid server index {serverIndex}");
+                    throw new ArgumentOutOfRangeException($"Invalid server index {serverIndex}: must be between 0 (inclusive) and {SDKConfig.ServerList.Length} (exclusive)." );
                 }
                 _sdkConfig.ServerIndex = serverIndex;
                 return this;
             }
 
+            /// <summary>
+            /// Overrides the default server URL for the SDK.
+            /// </summary>
             public SDKBuilder WithServerUrl(string serverUrl, Dictionary<string, string>? serverVariables = null)
             {
                 if (serverVariables != null)
@@ -397,30 +563,45 @@ namespace Clerk.BackendAPI
                 return this;
             }
 
+            /// <summary>
+            /// Sets the bearerAuthSource security parameter for the SDK.
+            /// </summary>
             public SDKBuilder WithBearerAuthSource(Func<string> bearerAuthSource)
             {
                 _sdkConfig.SecuritySource = () => new Clerk.BackendAPI.Models.Components.Security() { BearerAuth = bearerAuthSource() };
                 return this;
             }
 
+            /// <summary>
+            /// Sets the bearerAuth security parameter for the SDK.
+            /// </summary>
             public SDKBuilder WithBearerAuth(string bearerAuth)
             {
                 _sdkConfig.SecuritySource = () => new Clerk.BackendAPI.Models.Components.Security() { BearerAuth = bearerAuth };
                 return this;
             }
 
+            /// <summary>
+            /// Sets a custom HTTP client to be used by the SDK.
+            /// </summary>
             public SDKBuilder WithClient(ISpeakeasyHttpClient client)
             {
                 _sdkConfig.Client = client;
                 return this;
             }
 
+            /// <summary>
+            /// Sets the retry configuration for the SDK.
+            /// </summary>
             public SDKBuilder WithRetryConfig(RetryConfig retryConfig)
             {
                 _sdkConfig.RetryConfig = retryConfig;
                 return this;
             }
 
+            /// <summary>
+            /// Builds and returns the SDK instance.
+            /// </summary>
             public ClerkBackendApi Build()
             {
               return new ClerkBackendApi(_sdkConfig);

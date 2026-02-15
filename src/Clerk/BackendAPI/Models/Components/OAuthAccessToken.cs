@@ -13,30 +13,29 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class OAuthAccessToken
     {
-
         [JsonProperty("object")]
         public OAuthAccessTokenObject Object { get; set; } = default!;
 
         /// <summary>
-        /// External account ID
+        /// External account ID.
         /// </summary>
         [JsonProperty("external_account_id")]
         public string ExternalAccountId { get; set; } = default!;
 
         /// <summary>
-        /// The unique ID of the user in the external provider&apos;s system
+        /// The unique ID of the user in the external provider's system.
         /// </summary>
         [JsonProperty("provider_user_id")]
         public string ProviderUserId { get; set; } = default!;
 
         /// <summary>
-        /// The access token
+        /// The access token.
         /// </summary>
         [JsonProperty("token")]
         public string Token { get; set; } = default!;
@@ -48,7 +47,7 @@ namespace Clerk.BackendAPI.Models.Components
         public long? ExpiresAt { get; set; }
 
         /// <summary>
-        /// The ID of the provider
+        /// The ID of the provider.
         /// </summary>
         [JsonProperty("provider")]
         public string Provider { get; set; } = default!;
@@ -64,6 +63,12 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("scopes")]
         public List<string>? Scopes { get; set; }
+
+        /// <summary>
+        /// The ID token retrieved from the OIDC provider. Only present for OIDC-compliant OAuth 2.0 providers when available.
+        /// </summary>
+        [JsonProperty("id_token")]
+        public string? IdToken { get; set; }
 
         /// <summary>
         /// The token secret. Only present for OAuth 1.0 tokens.

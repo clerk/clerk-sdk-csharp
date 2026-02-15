@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class RotateOAuthApplicationSecretRequest
     {
-
         /// <summary>
-        /// The ID of the OAuth application for which to rotate the client secret
+        /// The ID of the OAuth application for which to rotate the client secret.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=oauth_application_id")]
         public string OauthApplicationId { get; set; } = default!;

@@ -11,16 +11,12 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateBlocklistIdentifierRequestBody
     {
-
         /// <summary>
         /// The identifier to be added in the block-list.<br/>
-        /// 
-        /// <remarks>
         /// This can be an email address, a phone number, or a web3 wallet.
-        /// </remarks>
         /// </summary>
         [JsonProperty("identifier")]
         public string Identifier { get; set; } = default!;

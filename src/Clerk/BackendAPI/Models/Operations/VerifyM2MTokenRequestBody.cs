@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class VerifyM2MTokenRequestBody
     {
-
         [JsonProperty("token")]
         public string Token { get; set; } = default!;
     }

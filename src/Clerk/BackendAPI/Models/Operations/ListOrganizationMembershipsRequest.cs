@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using System.Collections.Generic;
-    
+
     public class ListOrganizationMembershipsRequest
     {
-
         /// <summary>
         /// The organization ID.
         /// </summary>
@@ -23,21 +22,15 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
-        /// 
-        /// <remarks>
-        /// By prepending one of those values with + or -, we can choose to sort in ascending (ASC) or descending (DESC) order.&quot;
-        /// </remarks>
+        /// By prepending one of those values with + or -, we can choose to sort in ascending (ASC) or descending (DESC) order."
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
         public string? OrderBy { get; set; }
 
         /// <summary>
         /// Returns users with the user IDs specified. For each user ID, the `+` and `-` can be<br/>
-        /// 
-        /// <remarks>
         /// prepended to the ID, which denote whether the respective user ID should be included or<br/>
         /// excluded from the result set. Accepts up to 100 user IDs. Any user IDs not found are ignored.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=user_id")]
         public List<string>? UserId { get; set; }
@@ -56,22 +49,16 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Returns users with the specified usernames.<br/>
-        /// 
-        /// <remarks>
         /// Accepts up to 100 usernames.<br/>
         /// Any usernames not found are ignored.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=username")]
         public List<string>? Username { get; set; }
 
         /// <summary>
         /// Returns users with the specified web3 wallet addresses.<br/>
-        /// 
-        /// <remarks>
         /// Accepts up to 100 web3 wallet addresses.<br/>
         /// Any web3 wallet addresses not found are ignored.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=web3_wallet")]
         public List<string>? Web3Wallet { get; set; }
@@ -84,41 +71,29 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Returns users that match the given query.<br/>
-        /// 
-        /// <remarks>
         /// For possible matches, we check the email addresses, phone numbers, usernames, web3 wallets, user IDs, first and last names.<br/>
-        /// The query value doesn&apos;t need to match the exact value you are looking for, it is capable of partial matches as well.
-        /// </remarks>
+        /// The query value doesn't need to match the exact value you are looking for, it is capable of partial matches as well.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
 
         /// <summary>
         /// Returns users with emails that match the given query, via case-insensitive partial match.<br/>
-        /// 
-        /// <remarks>
         /// For example, `email_address_query=ello` will match a user with the email `HELLO@example.com`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=email_address_query")]
         public string? EmailAddressQuery { get; set; }
 
         /// <summary>
         /// Returns users with phone numbers that match the given query, via case-insensitive partial match.<br/>
-        /// 
-        /// <remarks>
         /// For example, `phone_number_query=555` will match a user with the phone number `+1555xxxxxxx`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=phone_number_query")]
         public string? PhoneNumberQuery { get; set; }
 
         /// <summary>
         /// Returns users with usernames that match the given query, via case-insensitive partial match.<br/>
-        /// 
-        /// <remarks>
         /// For example, `username_query=CoolUser` will match a user with the username `SomeCoolUser`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=username_query")]
         public string? UsernameQuery { get; set; }
@@ -131,61 +106,43 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Returns users whose last session activity was before the given date (with millisecond precision).<br/>
-        /// 
-        /// <remarks>
         /// Example: use 1700690400000 to retrieve users whose last session activity was before 2023-11-23.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_before")]
         public long? LastActiveAtBefore { get; set; }
 
         /// <summary>
         /// Returns users whose last session activity was after the given date (with millisecond precision).<br/>
-        /// 
-        /// <remarks>
         /// Example: use 1700690400000 to retrieve users whose last session activity was after 2023-11-23.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=last_active_at_after")]
         public long? LastActiveAtAfter { get; set; }
 
         /// <summary>
         /// Returns users who have been created before the given date (with millisecond precision).<br/>
-        /// 
-        /// <remarks>
         /// Example: use 1730160000000 to retrieve users who have been created before 2024-10-29.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=created_at_before")]
         public long? CreatedAtBefore { get; set; }
 
         /// <summary>
         /// Returns users who have been created after the given date (with millisecond precision).<br/>
-        /// 
-        /// <remarks>
         /// Example: use 1730160000000 to retrieve users who have been created after 2024-10-29.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=created_at_after")]
         public long? CreatedAtAfter { get; set; }
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;

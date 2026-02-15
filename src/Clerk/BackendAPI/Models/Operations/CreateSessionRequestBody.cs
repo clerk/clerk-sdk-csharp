@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateSessionRequestBody
     {
-
         /// <summary>
-        /// The ID representing the user
+        /// The ID representing the user.
         /// </summary>
         [JsonProperty("user_id")]
         public string UserId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the organization to set as active for this session
+        /// The ID of the organization to set as active for this session.
         /// </summary>
         [JsonProperty("active_organization_id")]
         public string? ActiveOrganizationId { get; set; }

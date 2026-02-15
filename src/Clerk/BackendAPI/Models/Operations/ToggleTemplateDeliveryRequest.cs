@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class ToggleTemplateDeliveryRequest
     {
-
         /// <summary>
-        /// The type of template to toggle delivery for
+        /// The type of template to toggle delivery for.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=template_type")]
         public ToggleTemplateDeliveryPathParamTemplateType TemplateType { get; set; } = default!;
 
         /// <summary>
-        /// The slug of the template for which to toggle delivery
+        /// The slug of the template for which to toggle delivery.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=slug")]
         public string Slug { get; set; } = default!;

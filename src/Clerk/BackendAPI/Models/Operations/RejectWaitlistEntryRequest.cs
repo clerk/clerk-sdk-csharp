@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class RejectWaitlistEntryRequest
     {
-
         /// <summary>
-        /// The ID of the waitlist entry to reject
+        /// The ID of the waitlist entry to reject.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=waitlist_entry_id")]
         public string WaitlistEntryId { get; set; } = default!;

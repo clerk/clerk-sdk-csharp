@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The type of templates to retrieve (email or SMS)
+    /// The type of templates to retrieve (email or SMS).
     /// </summary>
     public enum PathParamTemplateType
     {
@@ -56,5 +56,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum PathParamTemplateType");
         }
     }
-
 }

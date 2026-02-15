@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class FromOAuth
     {
-
         [JsonProperty("object")]
         public VerificationFromOauthVerificationObject? Object { get; set; }
 

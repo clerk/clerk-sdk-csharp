@@ -12,12 +12,11 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CommercePayerResponse
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public CommercePayerResponseObject Object { get; set; } = default!;
@@ -71,10 +70,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string? OrganizationName { get; set; } = null;
 
         /// <summary>
-        /// URL of the payer&apos;s image/avatar.
+        /// URL of the payer's image/avatar.
         /// </summary>
         [JsonProperty("image_url")]
         public string? ImageUrl { get; set; }
+
+        [JsonProperty("credits_balance")]
+        public CommerceMoneyResponse? CreditsBalance { get; set; }
 
         /// <summary>
         /// Unix timestamp (in milliseconds) when the payer was created.

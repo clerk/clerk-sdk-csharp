@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteAllowlistIdentifierRequest
     {
-
         /// <summary>
-        /// The ID of the identifier to delete from the allow-list
+        /// The ID of the identifier to delete from the allow-list.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=identifier_id")]
         public string IdentifierId { get; set; } = default!;

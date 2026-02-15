@@ -24,29 +24,37 @@ namespace Clerk.BackendAPI
 
     public interface IOrganizationInvitations
     {
-
         /// <summary>
-        /// Get a list of organization invitations for the current instance
-        /// 
+        /// Get a list of organization invitations for the current instance.
+        /// </summary>
         /// <remarks>
         /// This request returns the list of organization invitations for the instance.<br/>
         /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
-        /// You can filter them by providing the &apos;status&apos; query parameter, that accepts multiple values.<br/>
-        /// You can change the order by providing the &apos;order&apos; query parameter, that accepts multiple values.<br/>
+        /// You can filter them by providing the 'status' query parameter, that accepts multiple values.<br/>
+        /// You can change the order by providing the 'order' query parameter, that accepts multiple values.<br/>
         /// You can filter by the invited user email address providing the `query` query parameter.<br/>
         /// The organization invitations are ordered by descending creation date by default.
         /// </remarks>
-        /// </summary>
-        Task<ListInstanceOrganizationInvitationsResponse> GetAllAsync(ListInstanceOrganizationInvitationsRequest? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="ListInstanceOrganizationInvitationsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListInstanceOrganizationInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListInstanceOrganizationInvitationsResponse> GetAllAsync(
+            ListInstanceOrganizationInvitationsRequest? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create and send an organization invitation
-        /// 
+        /// Create and send an organization invitation.
+        /// </summary>
         /// <remarks>
         /// Creates a new organization invitation and sends an email to the provided `email_address` with a link to accept the invitation and join the organization.<br/>
         /// You can specify the `role` for the invited organization member.<br/>
         /// <br/>
-        /// New organization invitations get a &quot;pending&quot; status until they are revoked by an organization administrator or accepted by the invitee.<br/>
+        /// New organization invitations get a "pending" status until they are revoked by an organization administrator or accepted by the invitee.<br/>
         /// <br/>
         /// The request body supports passing an optional `redirect_url` parameter.<br/>
         /// When the invited user clicks the link to accept the invitation, they will be redirected to the URL provided.<br/>
@@ -54,105 +62,207 @@ namespace Clerk.BackendAPI
         /// <br/>
         /// You can specify the ID of the user that will send the invitation with the `inviter_user_id` parameter.<br/>
         /// That user must be a member with administrator privileges in the organization.<br/>
-        /// Only &quot;admin&quot; members can create organization invitations.<br/>
+        /// Only "admin" members can create organization invitations.<br/>
         /// <br/>
         /// You can optionally provide public and private metadata for the organization invitation.<br/>
         /// The public metadata are visible by both the Frontend and the Backend whereas the private ones only by the Backend.<br/>
         /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
         /// </remarks>
-        /// </summary>
-        Task<CreateOrganizationInvitationResponse> CreateAsync(string organizationId, CreateOrganizationInvitationRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="organizationId">The ID of the organization for which to send the invitation.</param>
+        /// <param name="requestBody">A <see cref="CreateOrganizationInvitationRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateOrganizationInvitationResponse> CreateAsync(
+            string organizationId,
+            CreateOrganizationInvitationRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Get a list of organization invitations
-        /// 
+        /// Get a list of organization invitations.
+        /// </summary>
         /// <remarks>
         /// This request returns the list of organization invitations.<br/>
         /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
-        /// You can filter them by providing the &apos;status&apos; query parameter, that accepts multiple values.<br/>
+        /// You can filter them by providing the 'status' query parameter, that accepts multiple values.<br/>
         /// The organization invitations are ordered by descending creation date.<br/>
         /// Most recent invitations will be returned first.<br/>
         /// Any invitations created as a result of an Organization Domain are not included in the results.
         /// </remarks>
-        /// </summary>
-        Task<ListOrganizationInvitationsResponse> ListAsync(ListOrganizationInvitationsRequest request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="ListOrganizationInvitationsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListOrganizationInvitationsResponse> ListAsync(
+            ListOrganizationInvitationsRequest request,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Bulk create and send organization invitations
-        /// 
+        /// Bulk create and send organization invitations.
+        /// </summary>
         /// <remarks>
         /// Creates new organization invitations in bulk and sends out emails to the provided email addresses with a link to accept the invitation and join the organization.<br/>
         /// <br/>
         /// This endpoint is limited to a maximum of 10 invitations per API call. If you need to send more invitations, please make multiple requests.<br/>
         /// <br/>
         /// You can specify a different `role` for each invited organization member.<br/>
-        /// New organization invitations get a &quot;pending&quot; status until they are revoked by an organization administrator or accepted by the invitee.<br/>
+        /// New organization invitations get a "pending" status until they are revoked by an organization administrator or accepted by the invitee.<br/>
         /// The request body supports passing an optional `redirect_url` parameter for each invitation.<br/>
         /// When the invited user clicks the link to accept the invitation, they will be redirected to the provided URL.<br/>
         /// Use this parameter to implement a custom invitation acceptance flow.<br/>
         /// You can specify the ID of the user that will send the invitation with the `inviter_user_id` parameter. Each invitation<br/>
         /// can have a different inviter user.<br/>
         /// Inviter users must be members with administrator privileges in the organization.<br/>
-        /// Only &quot;admin&quot; members can create organization invitations.<br/>
+        /// Only "admin" members can create organization invitations.<br/>
         /// You can optionally provide public and private metadata for each organization invitation. The public metadata are visible<br/>
         /// by both the Frontend and the Backend, whereas the private metadata are only visible by the Backend.<br/>
         /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
         /// </remarks>
-        /// </summary>
-        Task<CreateOrganizationInvitationBulkResponse> BulkCreateAsync(string organizationId, List<CreateOrganizationInvitationBulkRequestBody> requestBody, RetryConfig? retryConfig = null);
+        /// <param name="organizationId">The organization ID.</param>
+        /// <param name="requestBody">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationInvitationBulkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateOrganizationInvitationBulkResponse> BulkCreateAsync(
+            string organizationId,
+            List<CreateOrganizationInvitationBulkRequestBody> requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Get a list of pending organization invitations
-        /// 
+        /// Get a list of pending organization invitations.
+        /// </summary>
         /// <remarks>
-        /// This request returns the list of organization invitations with &quot;pending&quot; status.<br/>
+        /// This request returns the list of organization invitations with "pending" status.<br/>
         /// These are the organization invitations that can still be used to join the organization, but have not been accepted by the invited user yet.<br/>
         /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
         /// The organization invitations are ordered by descending creation date.<br/>
         /// Most recent invitations will be returned first.<br/>
         /// Any invitations created as a result of an Organization Domain are not included in the results.
         /// </remarks>
-        /// </summary>
-        Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        /// <param name="organizationId">The organization ID.</param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListPendingOrganizationInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
+        public  Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(
+            string organizationId,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve an organization invitation by ID
-        /// 
+        /// Retrieve an organization invitation by ID.
+        /// </summary>
         /// <remarks>
         /// Use this request to get an existing organization invitation by ID.
         /// </remarks>
-        /// </summary>
-        Task<GetOrganizationInvitationResponse> GetAsync(string organizationId, string invitationId, RetryConfig? retryConfig = null);
+        /// <param name="organizationId">The organization ID.</param>
+        /// <param name="invitationId">The organization invitation ID.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOrganizationInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="invitationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetOrganizationInvitationResponse> GetAsync(
+            string organizationId,
+            string invitationId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Revoke a pending organization invitation
-        /// 
+        /// Revoke a pending organization invitation.
+        /// </summary>
         /// <remarks>
         /// Use this request to revoke a previously issued organization invitation.<br/>
         /// Revoking an organization invitation makes it invalid; the invited user will no longer be able to join the organization with the revoked invitation.<br/>
-        /// Only organization invitations with &quot;pending&quot; status can be revoked.<br/>
+        /// Only organization invitations with "pending" status can be revoked.<br/>
         /// The request accepts the `requesting_user_id` parameter to specify the user which revokes the invitation.<br/>
-        /// Only users with &quot;admin&quot; role can revoke invitations.
+        /// Only users with "admin" role can revoke invitations.
         /// </remarks>
-        /// </summary>
-        Task<RevokeOrganizationInvitationResponse> RevokeAsync(string organizationId, string invitationId, RevokeOrganizationInvitationRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="organizationId">The organization ID.</param>
+        /// <param name="invitationId">The organization invitation ID.</param>
+        /// <param name="requestBody">A <see cref="RevokeOrganizationInvitationRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RevokeOrganizationInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="invitationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RevokeOrganizationInvitationResponse> RevokeAsync(
+            string organizationId,
+            string invitationId,
+            RevokeOrganizationInvitationRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class OrganizationInvitations: IOrganizationInvitations
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public OrganizationInvitations(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListInstanceOrganizationInvitationsResponse> GetAllAsync(ListInstanceOrganizationInvitationsRequest? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Get a list of organization invitations for the current instance.
+        /// </summary>
+        /// <remarks>
+        /// This request returns the list of organization invitations for the instance.<br/>
+        /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
+        /// You can filter them by providing the 'status' query parameter, that accepts multiple values.<br/>
+        /// You can change the order by providing the 'order' query parameter, that accepts multiple values.<br/>
+        /// You can filter by the invited user email address providing the `query` query parameter.<br/>
+        /// The organization invitations are ordered by descending creation date by default.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListInstanceOrganizationInvitationsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListInstanceOrganizationInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListInstanceOrganizationInvitationsResponse> GetAllAsync(
+            ListInstanceOrganizationInvitationsRequest? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_invitations", request, null);
@@ -208,7 +318,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -217,9 +327,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -315,13 +425,51 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateOrganizationInvitationResponse> CreateAsync(string organizationId, CreateOrganizationInvitationRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create and send an organization invitation.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new organization invitation and sends an email to the provided `email_address` with a link to accept the invitation and join the organization.<br/>
+        /// You can specify the `role` for the invited organization member.<br/>
+        /// <br/>
+        /// New organization invitations get a "pending" status until they are revoked by an organization administrator or accepted by the invitee.<br/>
+        /// <br/>
+        /// The request body supports passing an optional `redirect_url` parameter.<br/>
+        /// When the invited user clicks the link to accept the invitation, they will be redirected to the URL provided.<br/>
+        /// Use this parameter to implement a custom invitation acceptance flow.<br/>
+        /// <br/>
+        /// You can specify the ID of the user that will send the invitation with the `inviter_user_id` parameter.<br/>
+        /// That user must be a member with administrator privileges in the organization.<br/>
+        /// Only "admin" members can create organization invitations.<br/>
+        /// <br/>
+        /// You can optionally provide public and private metadata for the organization invitation.<br/>
+        /// The public metadata are visible by both the Frontend and the Backend whereas the private ones only by the Backend.<br/>
+        /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
+        /// </remarks>
+        /// <param name="organizationId">The ID of the organization for which to send the invitation.</param>
+        /// <param name="requestBody">A <see cref="CreateOrganizationInvitationRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateOrganizationInvitationResponse> CreateAsync(
+            string organizationId,
+            CreateOrganizationInvitationRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+
             var request = new CreateOrganizationInvitationRequest()
             {
                 OrganizationId = organizationId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations", request, null);
 
@@ -382,7 +530,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -391,9 +539,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -469,8 +617,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListOrganizationInvitationsResponse> ListAsync(ListOrganizationInvitationsRequest request, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Get a list of organization invitations.
+        /// </summary>
+        /// <remarks>
+        /// This request returns the list of organization invitations.<br/>
+        /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
+        /// You can filter them by providing the 'status' query parameter, that accepts multiple values.<br/>
+        /// The organization invitations are ordered by descending creation date.<br/>
+        /// Most recent invitations will be returned first.<br/>
+        /// Any invitations created as a result of an Organization Domain are not included in the results.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListOrganizationInvitationsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListOrganizationInvitationsResponse> ListAsync(
+            ListOrganizationInvitationsRequest request,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations", request, null);
 
@@ -525,7 +698,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -534,9 +707,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -612,13 +785,52 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateOrganizationInvitationBulkResponse> BulkCreateAsync(string organizationId, List<CreateOrganizationInvitationBulkRequestBody> requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Bulk create and send organization invitations.
+        /// </summary>
+        /// <remarks>
+        /// Creates new organization invitations in bulk and sends out emails to the provided email addresses with a link to accept the invitation and join the organization.<br/>
+        /// <br/>
+        /// This endpoint is limited to a maximum of 10 invitations per API call. If you need to send more invitations, please make multiple requests.<br/>
+        /// <br/>
+        /// You can specify a different `role` for each invited organization member.<br/>
+        /// New organization invitations get a "pending" status until they are revoked by an organization administrator or accepted by the invitee.<br/>
+        /// The request body supports passing an optional `redirect_url` parameter for each invitation.<br/>
+        /// When the invited user clicks the link to accept the invitation, they will be redirected to the provided URL.<br/>
+        /// Use this parameter to implement a custom invitation acceptance flow.<br/>
+        /// You can specify the ID of the user that will send the invitation with the `inviter_user_id` parameter. Each invitation<br/>
+        /// can have a different inviter user.<br/>
+        /// Inviter users must be members with administrator privileges in the organization.<br/>
+        /// Only "admin" members can create organization invitations.<br/>
+        /// You can optionally provide public and private metadata for each organization invitation. The public metadata are visible<br/>
+        /// by both the Frontend and the Backend, whereas the private metadata are only visible by the Backend.<br/>
+        /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
+        /// </remarks>
+        /// <param name="organizationId">The organization ID.</param>
+        /// <param name="requestBody">Description not available.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationInvitationBulkResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateOrganizationInvitationBulkResponse> BulkCreateAsync(
+            string organizationId,
+            List<CreateOrganizationInvitationBulkRequestBody> requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new CreateOrganizationInvitationBulkRequest()
             {
                 OrganizationId = organizationId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/bulk", request, null);
 
@@ -679,7 +891,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -688,9 +900,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -766,15 +978,52 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
+
+        /// <summary>
+        /// Get a list of pending organization invitations.
+        /// </summary>
+        /// <remarks>
+        /// This request returns the list of organization invitations with "pending" status.<br/>
+        /// These are the organization invitations that can still be used to join the organization, but have not been accepted by the invited user yet.<br/>
+        /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
+        /// The organization invitations are ordered by descending creation date.<br/>
+        /// Most recent invitations will be returned first.<br/>
+        /// Any invitations created as a result of an Organization Domain are not included in the results.
+        /// </remarks>
+        /// <param name="organizationId">The organization ID.</param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListPendingOrganizationInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
-        public async Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(string organizationId, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+        public async  Task<ListPendingOrganizationInvitationsResponse> ListPendingAsync(
+            string organizationId,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+
             var request = new ListPendingOrganizationInvitationsRequest()
             {
                 OrganizationId = organizationId,
                 Limit = limit,
                 Offset = offset,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/pending", request, null);
 
@@ -829,7 +1078,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -838,9 +1087,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -916,13 +1165,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetOrganizationInvitationResponse> GetAsync(string organizationId, string invitationId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve an organization invitation by ID.
+        /// </summary>
+        /// <remarks>
+        /// Use this request to get an existing organization invitation by ID.
+        /// </remarks>
+        /// <param name="organizationId">The organization ID.</param>
+        /// <param name="invitationId">The organization invitation ID.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOrganizationInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="invitationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetOrganizationInvitationResponse> GetAsync(
+            string organizationId,
+            string invitationId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+            if (invitationId == null) throw new ArgumentNullException(nameof(invitationId));
+
             var request = new GetOrganizationInvitationRequest()
             {
                 OrganizationId = organizationId,
                 InvitationId = invitationId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/{invitation_id}", request, null);
 
@@ -977,7 +1250,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -986,9 +1259,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1064,14 +1337,44 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RevokeOrganizationInvitationResponse> RevokeAsync(string organizationId, string invitationId, RevokeOrganizationInvitationRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Revoke a pending organization invitation.
+        /// </summary>
+        /// <remarks>
+        /// Use this request to revoke a previously issued organization invitation.<br/>
+        /// Revoking an organization invitation makes it invalid; the invited user will no longer be able to join the organization with the revoked invitation.<br/>
+        /// Only organization invitations with "pending" status can be revoked.<br/>
+        /// The request accepts the `requesting_user_id` parameter to specify the user which revokes the invitation.<br/>
+        /// Only users with "admin" role can revoke invitations.
+        /// </remarks>
+        /// <param name="organizationId">The organization ID.</param>
+        /// <param name="invitationId">The organization invitation ID.</param>
+        /// <param name="requestBody">A <see cref="RevokeOrganizationInvitationRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RevokeOrganizationInvitationResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="invitationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RevokeOrganizationInvitationResponse> RevokeAsync(
+            string organizationId,
+            string invitationId,
+            RevokeOrganizationInvitationRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+            if (invitationId == null) throw new ArgumentNullException(nameof(invitationId));
+
             var request = new RevokeOrganizationInvitationRequest()
             {
                 OrganizationId = organizationId,
                 InvitationId = invitationId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/invitations/{invitation_id}/revoke", request, null);
 
@@ -1132,7 +1435,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1141,9 +1444,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1218,5 +1521,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

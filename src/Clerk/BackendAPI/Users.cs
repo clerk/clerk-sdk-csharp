@@ -24,20 +24,25 @@ namespace Clerk.BackendAPI
 
     public interface IUsers
     {
-
         /// <summary>
-        /// List all users
-        /// 
+        /// List all users.
+        /// </summary>
         /// <remarks>
         /// Returns a list of all users.<br/>
         /// The users are returned sorted by creation date, with the newest users appearing first.
         /// </remarks>
-        /// </summary>
-        Task<GetUserListResponse> ListAsync(GetUserListRequest? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="GetUserListRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetUserListResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetUserListResponse> ListAsync(GetUserListRequest? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Create a new user
-        /// 
+        /// Create a new user.
+        /// </summary>
         /// <remarks>
         /// Creates a new user. Your user management settings determine how you should setup your user model.<br/>
         /// <br/>
@@ -45,136 +50,242 @@ namespace Clerk.BackendAPI
         /// <br/>
         /// Note: If you are performing a migration, check out our guide on <a href="https://clerk.com/docs/deployments/migrate-overview">zero downtime migrations</a>.<br/>
         /// <br/>
-        /// The following rate limit rules apply to this endpoint: 1000 requests per 10 seconds for production instances and 100 requests per 10 seconds for development instances
+        /// The following rate limit rules apply to this endpoint: 1000 requests per 10 seconds for production instances and 100 requests per 10 seconds for development instances.
         /// </remarks>
-        /// </summary>
-        Task<CreateUserResponse> CreateAsync(CreateUserRequestBody request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="CreateUserRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateUserResponse> CreateAsync(CreateUserRequestBody request, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Count users
-        /// 
+        /// Count users.
+        /// </summary>
         /// <remarks>
         /// Returns a total count of all users that match the given filtering criteria.
         /// </remarks>
-        /// </summary>
-        Task<GetUsersCountResponse> CountAsync(GetUsersCountRequest? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="GetUsersCountRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetUsersCountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Invalid request parameters. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetUsersCountResponse> CountAsync(
+            GetUsersCountRequest? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve a user
-        /// 
+        /// Retrieve a user.
+        /// </summary>
         /// <remarks>
-        /// Retrieve the details of a user
+        /// Retrieve the details of a user.
         /// </remarks>
-        /// </summary>
-        Task<GetUserResponse> GetAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetUserResponse> GetAsync(string userId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update a user
-        /// 
+        /// Update a user.
+        /// </summary>
         /// <remarks>
-        /// Update a user&apos;s attributes.<br/>
+        /// Update a user's attributes.<br/>
         /// <br/>
-        /// You can set the user&apos;s primary contact identifiers (email address and phone numbers) by updating the `primary_email_address_id` and `primary_phone_number_id` attributes respectively.<br/>
+        /// You can set the user's primary contact identifiers (email address and phone numbers) by updating the `primary_email_address_id` and `primary_phone_number_id` attributes respectively.<br/>
         /// Both IDs should correspond to verified identifications that belong to the user.<br/>
         /// <br/>
-        /// You can remove a user&apos;s username by setting the username attribute to null or the blank string &quot;&quot;.<br/>
+        /// You can remove a user's username by setting the username attribute to null or the blank string "".<br/>
         /// This is a destructive action; the identification will be deleted forever.<br/>
-        /// Usernames can be removed only if they are optional in your instance settings and there&apos;s at least one other identifier which can be used for authentication.<br/>
+        /// Usernames can be removed only if they are optional in your instance settings and there's at least one other identifier which can be used for authentication.<br/>
         /// <br/>
-        /// This endpoint allows changing a user&apos;s password. When passing the `password` parameter directly you have two further options.<br/>
+        /// This endpoint allows changing a user's password. When passing the `password` parameter directly you have two further options.<br/>
         /// You can ignore the password policy checks for your instance by setting the `skip_password_checks` parameter to `true`.<br/>
         /// You can also choose to sign the user out of all their active sessions on any device once the password is updated. Just set `sign_out_of_other_sessions` to `true`.
         /// </remarks>
-        /// </summary>
-        Task<UpdateUserResponse> UpdateAsync(string userId, UpdateUserRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateUserRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateUserResponse> UpdateAsync(
+            string userId,
+            UpdateUserRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete a user
-        /// 
+        /// Delete a user.
+        /// </summary>
         /// <remarks>
-        /// Delete the specified user
+        /// Delete the specified user.
         /// </remarks>
-        /// </summary>
-        Task<DeleteUserResponse> DeleteAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteUserResponse> DeleteAsync(string userId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Ban a user
-        /// 
+        /// Ban a user.
+        /// </summary>
         /// <remarks>
         /// Marks the given user as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
         /// </remarks>
-        /// </summary>
-        Task<BanUserResponse> BanAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user to ban.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="BanUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<BanUserResponse> BanAsync(string userId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Unban a user
-        /// 
+        /// Unban a user.
+        /// </summary>
         /// <remarks>
         /// Removes the ban mark from the given user.
         /// </remarks>
-        /// </summary>
-        Task<UnbanUserResponse> UnbanAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user to unban.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UnbanUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UnbanUserResponse> UnbanAsync(string userId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Ban multiple users
-        /// 
+        /// Ban multiple users.
+        /// </summary>
         /// <remarks>
         /// Marks multiple users as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
         /// </remarks>
-        /// </summary>
-        Task<UsersBanResponse> BulkBanAsync(UsersBanRequestBody request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="UsersBanRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UsersBanResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UsersBanResponse> BulkBanAsync(UsersBanRequestBody request, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Unban multiple users
-        /// 
+        /// Unban multiple users.
+        /// </summary>
         /// <remarks>
         /// Removes the ban mark from multiple users.
         /// </remarks>
-        /// </summary>
-        Task<UsersUnbanResponse> BulkUnbanAsync(UsersUnbanRequestBody request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="UsersUnbanRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UsersUnbanResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UsersUnbanResponse> BulkUnbanAsync(UsersUnbanRequestBody request, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Lock a user
-        /// 
+        /// Lock a user.
+        /// </summary>
         /// <remarks>
         /// Marks the given user as locked, which means they are not allowed to sign in again until the lock expires.<br/>
-        /// Lock duration can be configured in the instance&apos;s restrictions settings.
+        /// Lock duration can be configured in the instance's restrictions settings.
         /// </remarks>
-        /// </summary>
-        Task<LockUserResponse> LockAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user to lock.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="LockUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<LockUserResponse> LockAsync(string userId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Unlock a user
-        /// 
+        /// Unlock a user.
+        /// </summary>
         /// <remarks>
         /// Removes the lock from the given user.
         /// </remarks>
-        /// </summary>
-        Task<UnlockUserResponse> UnlockAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user to unlock.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UnlockUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UnlockUserResponse> UnlockAsync(string userId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Set user profile image
-        /// 
+        /// Set user profile image.
+        /// </summary>
         /// <remarks>
-        /// Update a user&apos;s profile image
+        /// Update a user's profile image.
         /// </remarks>
-        /// </summary>
-        Task<SetUserProfileImageResponse> SetProfileImageAsync(string userId, SetUserProfileImageRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user to update the profile image for.</param>
+        /// <param name="requestBody">A <see cref="SetUserProfileImageRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="SetUserProfileImageResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<SetUserProfileImageResponse> SetProfileImageAsync(
+            string userId,
+            SetUserProfileImageRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete user profile image
-        /// 
+        /// Delete user profile image.
+        /// </summary>
         /// <remarks>
-        /// Delete a user&apos;s profile image
+        /// Delete a user's profile image.
         /// </remarks>
-        /// </summary>
-        Task<DeleteUserProfileImageResponse> DeleteProfileImageAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user to delete the profile image for.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteUserProfileImageResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteUserProfileImageResponse> DeleteProfileImageAsync(
+            string userId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Merge and update a user&apos;s metadata
-        /// 
+        /// Merge and update a user's metadata.
+        /// </summary>
         /// <remarks>
-        /// Update a user&apos;s metadata attributes by merging existing values with the provided parameters.<br/>
+        /// Update a user's metadata attributes by merging existing values with the provided parameters.<br/>
         /// <br/>
         /// This endpoint behaves differently than the *Update a user* endpoint.<br/>
         /// Metadata values will not be replaced entirely.<br/>
@@ -183,167 +294,386 @@ namespace Clerk.BackendAPI
         /// <br/>
         /// You can remove metadata keys at any level by setting their value to `null`.
         /// </remarks>
-        /// </summary>
-        Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user whose metadata will be updated and merged.</param>
+        /// <param name="requestBody">A <see cref="UpdateUserMetadataRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateUserMetadataResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateUserMetadataResponse> UpdateMetadataAsync(
+            string userId,
+            UpdateUserMetadataRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve a user&apos;s billing subscription
-        /// 
+        /// Retrieve a user's billing subscription.
+        /// </summary>
         /// <remarks>
         /// Retrieves the billing subscription for the specified user.<br/>
         /// This includes subscription details, active plans, billing information, and payment status.<br/>
         /// The subscription contains subscription items which represent the individual plans the user is subscribed to.
         /// </remarks>
-        /// </summary>
-        Task<GetUserBillingSubscriptionResponse> GetBillingSubscriptionAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user whose subscription to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetUserBillingSubscriptionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetUserBillingSubscriptionResponse> GetBillingSubscriptionAsync(
+            string userId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve the OAuth access token of a user
-        /// 
+        /// Retrieve the OAuth access token of a user.
+        /// </summary>
         /// <remarks>
         /// Fetch the corresponding OAuth access token for a user that has previously authenticated with a particular OAuth provider.<br/>
         /// For OAuth 2.0, if the access token has expired and we have a corresponding refresh token, the access token will be refreshed transparently the new one will be returned.
         /// </remarks>
-        /// </summary>
-        Task<GetOAuthAccessTokenResponse> GetOAuthAccessTokenAsync(GetOAuthAccessTokenRequest request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="GetOAuthAccessTokenRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOAuthAccessTokenResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetOAuthAccessTokenResponse> GetOAuthAccessTokenAsync(
+            GetOAuthAccessTokenRequest request,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve all memberships for a user
-        /// 
+        /// Retrieve all memberships for a user.
+        /// </summary>
         /// <remarks>
-        /// Retrieve a paginated list of the user&apos;s organization memberships
+        /// Retrieve a paginated list of the user's organization memberships.
         /// </remarks>
-        /// </summary>
-        Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user whose organization memberships we want to retrieve.</param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UsersGetOrganizationMembershipsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(
+            string userId,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve all invitations for a user
-        /// 
+        /// Retrieve all invitations for a user.
+        /// </summary>
         /// <remarks>
-        /// Retrieve a paginated list of the user&apos;s organization invitations
+        /// Retrieve a paginated list of the user's organization invitations.
         /// </remarks>
-        /// </summary>
-        Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, long? limit = 10, long? offset = 0, QueryParamStatus? status = null, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user whose organization invitations we want to retrieve.</param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="status">Filter organization invitations based on their status.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UsersGetOrganizationInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(
+            string userId,
+            long? limit = 10,
+            long? offset = 0,
+            QueryParamStatus? status = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Verify the password of a user
-        /// 
+        /// Verify the password of a user.
+        /// </summary>
         /// <remarks>
-        /// Check that the user&apos;s password matches the supplied input.<br/>
+        /// Check that the user's password matches the supplied input.<br/>
         /// Useful for custom auth flows and re-verification.
         /// </remarks>
-        /// </summary>
-        Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user for whom to verify the password.</param>
+        /// <param name="requestBody">A <see cref="VerifyPasswordRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="VerifyPasswordResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<VerifyPasswordResponse> VerifyPasswordAsync(
+            string userId,
+            VerifyPasswordRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Verify a TOTP or backup code for a user
-        /// 
+        /// Verify a TOTP or backup code for a user.
+        /// </summary>
         /// <remarks>
         /// Verify that the provided TOTP or backup code is valid for the user.<br/>
         /// Verifying a backup code will result it in being consumed (i.e. it will<br/>
         /// become invalid).<br/>
         /// Useful for custom auth flows and re-verification.
         /// </remarks>
-        /// </summary>
-        Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user for whom to verify the TOTP.</param>
+        /// <param name="requestBody">A <see cref="VerifyTOTPRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="VerifyTOTPResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<VerifyTOTPResponse> VerifyTotpAsync(
+            string userId,
+            VerifyTOTPRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Disable a user&apos;s MFA methods
-        /// 
+        /// Disable a user's MFA methods.
+        /// </summary>
         /// <remarks>
-        /// Disable all of a user&apos;s MFA methods (e.g. OTP sent via SMS, TOTP on their authenticator app) at once.
+        /// Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authenticator app) at once.
         /// </remarks>
-        /// </summary>
-        Task<DisableMFAResponse> DisableMfaAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user whose MFA methods are to be disabled.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DisableMFAResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DisableMFAResponse> DisableMfaAsync(string userId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Disable all user&apos;s Backup codes
-        /// 
+        /// Disable all user's Backup codes.
+        /// </summary>
         /// <remarks>
-        /// Disable all of a user&apos;s backup codes.
+        /// Disable all of a user's backup codes.
         /// </remarks>
-        /// </summary>
-        Task<DeleteBackupCodeResponse> DeleteBackupCodesAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user whose backup codes are to be deleted.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteBackupCodeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteBackupCodeResponse> DeleteBackupCodesAsync(string userId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Delete a user passkey
-        /// 
+        /// Delete a user passkey.
+        /// </summary>
         /// <remarks>
         /// Delete the passkey identification for a given user and notify them through email.
         /// </remarks>
-        /// </summary>
-        Task<UserPasskeyDeleteResponse> DeletePasskeyAsync(string userId, string passkeyIdentificationId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user that owns the passkey identity.</param>
+        /// <param name="passkeyIdentificationId">The ID of the passkey identity to be deleted.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UserPasskeyDeleteResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="passkeyIdentificationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403, 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UserPasskeyDeleteResponse> DeletePasskeyAsync(
+            string userId,
+            string passkeyIdentificationId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete a user web3 wallet
-        /// 
+        /// Delete a user web3 wallet.
+        /// </summary>
         /// <remarks>
         /// Delete the web3 wallet identification for a given user.
         /// </remarks>
-        /// </summary>
-        Task<UserWeb3WalletDeleteResponse> DeleteWeb3WalletAsync(string userId, string web3WalletIdentificationId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user that owns the web3 wallet.</param>
+        /// <param name="web3WalletIdentificationId">The ID of the web3 wallet identity to be deleted.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UserWeb3WalletDeleteResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="web3WalletIdentificationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UserWeb3WalletDeleteResponse> DeleteWeb3WalletAsync(
+            string userId,
+            string web3WalletIdentificationId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete all the user&apos;s TOTPs
-        /// 
+        /// Delete all the user's TOTPs.
+        /// </summary>
         /// <remarks>
-        /// Deletes all of the user&apos;s TOTPs.
+        /// Deletes all of the user's TOTPs.
         /// </remarks>
-        /// </summary>
-        Task<DeleteTOTPResponse> DeleteTOTPAsync(string userId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user whose TOTPs are to be deleted.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteTOTPResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteTOTPResponse> DeleteTOTPAsync(string userId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Delete External Account
-        /// 
+        /// Delete External Account.
+        /// </summary>
         /// <remarks>
         /// Delete an external account by ID.
         /// </remarks>
-        /// </summary>
-        Task<DeleteExternalAccountResponse> DeleteExternalAccountAsync(string userId, string externalAccountId, RetryConfig? retryConfig = null);
+        /// <param name="userId">The ID of the user's external account.</param>
+        /// <param name="externalAccountId">The ID of the external account to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteExternalAccountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="externalAccountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteExternalAccountResponse> DeleteExternalAccountAsync(
+            string userId,
+            string externalAccountId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Set a user&apos;s password as compromised
-        /// 
-        /// <remarks>
-        /// Sets the given user&apos;s password as compromised, which means that they will be prompted to reset their password on their next sign in.
-        /// </remarks>
+        /// Set a user's password as compromised.
         /// </summary>
-        Task<SetUserPasswordCompromisedResponse> SetPasswordCompromisedAsync(string userId, SetUserPasswordCompromisedRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to set the password as compromised.</param>
+        /// <param name="requestBody">A <see cref="SetUserPasswordCompromisedRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="SetUserPasswordCompromisedResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<SetUserPasswordCompromisedResponse> SetPasswordCompromisedAsync(
+            string userId,
+            SetUserPasswordCompromisedRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Unmark a user&apos;s password as compromised
-        /// 
-        /// <remarks>
-        /// Removes the compromised status from the given user&apos;s password. The user will no longer be prompted to reset their password on their next sign in.
-        /// </remarks>
+        /// Unset a user's password as compromised.
         /// </summary>
-        Task<UnsetUserPasswordCompromisedResponse> UnsetPasswordCompromisedAsync(string userId, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to unset the compromised status for.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UnsetUserPasswordCompromisedResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UnsetUserPasswordCompromisedResponse> UnsetPasswordCompromisedAsync(
+            string userId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
         /// Get a list of all organization memberships within an instance.
-        /// 
+        /// </summary>
         /// <remarks>
         /// Retrieves all organization user memberships for the given instance.
         /// </remarks>
-        /// </summary>
-        Task<InstanceGetOrganizationMembershipsResponse> GetInstanceOrganizationMembershipsAsync(string? orderBy = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        /// <param name="orderBy">
+        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
+        /// By prepending one of those values with + or -,<br/>
+        /// we can choose to sort in ascending (ASC) or descending (DESC) order.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="InstanceGetOrganizationMembershipsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<InstanceGetOrganizationMembershipsResponse> GetInstanceOrganizationMembershipsAsync(
+            string? orderBy = null,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class Users: IUsers
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Users(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetUserListResponse> ListAsync(GetUserListRequest? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// List all users.
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of all users.<br/>
+        /// The users are returned sorted by creation date, with the newest users appearing first.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetUserListRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetUserListResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetUserListResponse> ListAsync(
+            GetUserListRequest? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users", request, null);
@@ -399,7 +729,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -408,9 +738,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -486,10 +816,35 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateUserResponse> CreateAsync(CreateUserRequestBody request, RetryConfig? retryConfig = null)
-        {
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+        /// <summary>
+        /// Create a new user.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new user. Your user management settings determine how you should setup your user model.<br/>
+        /// <br/>
+        /// Any email address and phone number created using this method will be marked as verified.<br/>
+        /// <br/>
+        /// Note: If you are performing a migration, check out our guide on <a href="https://clerk.com/docs/deployments/migrate-overview">zero downtime migrations</a>.<br/>
+        /// <br/>
+        /// The following rate limit rules apply to this endpoint: 1000 requests per 10 seconds for production instances and 100 requests per 10 seconds for development instances.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateUserRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateUserResponse> CreateAsync(
+            CreateUserRequestBody request,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/users";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -549,7 +904,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -558,9 +913,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -636,7 +991,24 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetUsersCountResponse> CountAsync(GetUsersCountRequest? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Count users.
+        /// </summary>
+        /// <remarks>
+        /// Returns a total count of all users that match the given filtering criteria.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetUsersCountRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetUsersCountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Invalid request parameters. Thrown when the API returns a 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetUsersCountResponse> CountAsync(
+            GetUsersCountRequest? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/count", request, null);
@@ -692,7 +1064,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -701,9 +1073,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -779,12 +1151,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetUserResponse> GetAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a user.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve the details of a user.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetUserResponse> GetAsync(string userId, RetryConfig? retryConfig = null)
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new GetUserRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}", request, null);
 
@@ -839,7 +1229,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -848,9 +1238,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -926,13 +1316,48 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateUserResponse> UpdateAsync(string userId, UpdateUserRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update a user.
+        /// </summary>
+        /// <remarks>
+        /// Update a user's attributes.<br/>
+        /// <br/>
+        /// You can set the user's primary contact identifiers (email address and phone numbers) by updating the `primary_email_address_id` and `primary_phone_number_id` attributes respectively.<br/>
+        /// Both IDs should correspond to verified identifications that belong to the user.<br/>
+        /// <br/>
+        /// You can remove a user's username by setting the username attribute to null or the blank string "".<br/>
+        /// This is a destructive action; the identification will be deleted forever.<br/>
+        /// Usernames can be removed only if they are optional in your instance settings and there's at least one other identifier which can be used for authentication.<br/>
+        /// <br/>
+        /// This endpoint allows changing a user's password. When passing the `password` parameter directly you have two further options.<br/>
+        /// You can ignore the password policy checks for your instance by setting the `skip_password_checks` parameter to `true`.<br/>
+        /// You can also choose to sign the user out of all their active sessions on any device once the password is updated. Just set `sign_out_of_other_sessions` to `true`.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateUserRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateUserResponse> UpdateAsync(
+            string userId,
+            UpdateUserRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new UpdateUserRequest()
             {
                 UserId = userId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}", request, null);
 
@@ -993,7 +1418,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1002,9 +1427,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1080,12 +1505,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteUserResponse> DeleteAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a user.
+        /// </summary>
+        /// <remarks>
+        /// Delete the specified user.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteUserResponse> DeleteAsync(string userId, RetryConfig? retryConfig = null)
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new DeleteUserRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}", request, null);
 
@@ -1140,7 +1583,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1149,9 +1592,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1227,12 +1670,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<BanUserResponse> BanAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Ban a user.
+        /// </summary>
+        /// <remarks>
+        /// Marks the given user as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to ban.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="BanUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<BanUserResponse> BanAsync(string userId, RetryConfig? retryConfig = null)
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new BanUserRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/ban", request, null);
 
@@ -1287,7 +1748,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 402 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1296,9 +1757,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1374,12 +1835,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UnbanUserResponse> UnbanAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Unban a user.
+        /// </summary>
+        /// <remarks>
+        /// Removes the ban mark from the given user.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to unban.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UnbanUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UnbanUserResponse> UnbanAsync(string userId, RetryConfig? retryConfig = null)
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new UnbanUserRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/unban", request, null);
 
@@ -1434,7 +1913,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 402 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1443,9 +1922,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1521,10 +2000,26 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UsersBanResponse> BulkBanAsync(UsersBanRequestBody request, RetryConfig? retryConfig = null)
-        {
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+        /// <summary>
+        /// Ban multiple users.
+        /// </summary>
+        /// <remarks>
+        /// Marks multiple users as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
+        /// </remarks>
+        /// <param name="request">A <see cref="UsersBanRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UsersBanResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UsersBanResponse> BulkBanAsync(UsersBanRequestBody request, RetryConfig? retryConfig = null)
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/users/ban";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -1584,7 +2079,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 402 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1593,9 +2088,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1671,10 +2166,29 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UsersUnbanResponse> BulkUnbanAsync(UsersUnbanRequestBody request, RetryConfig? retryConfig = null)
-        {
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+        /// <summary>
+        /// Unban multiple users.
+        /// </summary>
+        /// <remarks>
+        /// Removes the ban mark from multiple users.
+        /// </remarks>
+        /// <param name="request">A <see cref="UsersUnbanRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UsersUnbanResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UsersUnbanResponse> BulkUnbanAsync(
+            UsersUnbanRequestBody request,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/users/unban";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -1734,7 +2248,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 402 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1743,9 +2257,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1821,12 +2335,31 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<LockUserResponse> LockAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Lock a user.
+        /// </summary>
+        /// <remarks>
+        /// Marks the given user as locked, which means they are not allowed to sign in again until the lock expires.<br/>
+        /// Lock duration can be configured in the instance's restrictions settings.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to lock.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="LockUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<LockUserResponse> LockAsync(string userId, RetryConfig? retryConfig = null)
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new LockUserRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/lock", request, null);
 
@@ -1881,7 +2414,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1890,9 +2423,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1968,12 +2501,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UnlockUserResponse> UnlockAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Unlock a user.
+        /// </summary>
+        /// <remarks>
+        /// Removes the lock from the given user.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to unlock.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UnlockUserResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UnlockUserResponse> UnlockAsync(string userId, RetryConfig? retryConfig = null)
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new UnlockUserRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/unlock", request, null);
 
@@ -2028,7 +2579,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -2037,9 +2588,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -2115,13 +2666,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<SetUserProfileImageResponse> SetProfileImageAsync(string userId, SetUserProfileImageRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Set user profile image.
+        /// </summary>
+        /// <remarks>
+        /// Update a user's profile image.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to update the profile image for.</param>
+        /// <param name="requestBody">A <see cref="SetUserProfileImageRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="SetUserProfileImageResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<SetUserProfileImageResponse> SetProfileImageAsync(
+            string userId,
+            SetUserProfileImageRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new SetUserProfileImageRequest()
             {
                 UserId = userId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/profile_image", request, null);
 
@@ -2182,7 +2757,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -2191,9 +2766,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -2269,12 +2844,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteUserProfileImageResponse> DeleteProfileImageAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete user profile image.
+        /// </summary>
+        /// <remarks>
+        /// Delete a user's profile image.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to delete the profile image for.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteUserProfileImageResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteUserProfileImageResponse> DeleteProfileImageAsync(
+            string userId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new DeleteUserProfileImageRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/profile_image", request, null);
 
@@ -2329,7 +2925,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -2338,9 +2934,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -2416,13 +3012,43 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateUserMetadataResponse> UpdateMetadataAsync(string userId, UpdateUserMetadataRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Merge and update a user's metadata.
+        /// </summary>
+        /// <remarks>
+        /// Update a user's metadata attributes by merging existing values with the provided parameters.<br/>
+        /// <br/>
+        /// This endpoint behaves differently than the *Update a user* endpoint.<br/>
+        /// Metadata values will not be replaced entirely.<br/>
+        /// Instead, a deep merge will be performed.<br/>
+        /// Deep means that any nested JSON objects will be merged as well.<br/>
+        /// <br/>
+        /// You can remove metadata keys at any level by setting their value to `null`.
+        /// </remarks>
+        /// <param name="userId">The ID of the user whose metadata will be updated and merged.</param>
+        /// <param name="requestBody">A <see cref="UpdateUserMetadataRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateUserMetadataResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateUserMetadataResponse> UpdateMetadataAsync(
+            string userId,
+            UpdateUserMetadataRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new UpdateUserMetadataRequest()
             {
                 UserId = userId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/metadata", request, null);
 
@@ -2483,7 +3109,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -2492,9 +3118,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -2570,12 +3196,35 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetUserBillingSubscriptionResponse> GetBillingSubscriptionAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a user's billing subscription.
+        /// </summary>
+        /// <remarks>
+        /// Retrieves the billing subscription for the specified user.<br/>
+        /// This includes subscription details, active plans, billing information, and payment status.<br/>
+        /// The subscription contains subscription items which represent the individual plans the user is subscribed to.
+        /// </remarks>
+        /// <param name="userId">The ID of the user whose subscription to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetUserBillingSubscriptionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetUserBillingSubscriptionResponse> GetBillingSubscriptionAsync(
+            string userId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new GetUserBillingSubscriptionRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/billing/subscription", request, null);
 
@@ -2630,7 +3279,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -2639,9 +3288,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -2737,8 +3386,29 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetOAuthAccessTokenResponse> GetOAuthAccessTokenAsync(GetOAuthAccessTokenRequest request, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve the OAuth access token of a user.
+        /// </summary>
+        /// <remarks>
+        /// Fetch the corresponding OAuth access token for a user that has previously authenticated with a particular OAuth provider.<br/>
+        /// For OAuth 2.0, if the access token has expired and we have a corresponding refresh token, the access token will be refreshed transparently the new one will be returned.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetOAuthAccessTokenRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOAuthAccessTokenResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetOAuthAccessTokenResponse> GetOAuthAccessTokenAsync(
+            GetOAuthAccessTokenRequest request,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/oauth_access_tokens/{provider}", request, null);
 
@@ -2793,7 +3463,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -2802,9 +3472,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -2880,14 +3550,46 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(string userId, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve all memberships for a user.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a paginated list of the user's organization memberships.
+        /// </remarks>
+        /// <param name="userId">The ID of the user whose organization memberships we want to retrieve.</param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UsersGetOrganizationMembershipsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 403 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UsersGetOrganizationMembershipsResponse> GetOrganizationMembershipsAsync(
+            string userId,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new UsersGetOrganizationMembershipsRequest()
             {
                 UserId = userId,
                 Limit = limit,
                 Offset = offset,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/organization_memberships", request, null);
 
@@ -2942,7 +3644,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -2951,9 +3653,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -3029,8 +3731,41 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(string userId, long? limit = 10, long? offset = 0, QueryParamStatus? status = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve all invitations for a user.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a paginated list of the user's organization invitations.
+        /// </remarks>
+        /// <param name="userId">The ID of the user whose organization invitations we want to retrieve.</param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="status">Filter organization invitations based on their status.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UsersGetOrganizationInvitationsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UsersGetOrganizationInvitationsResponse> GetOrganizationInvitationsAsync(
+            string userId,
+            long? limit = 10,
+            long? offset = 0,
+            QueryParamStatus? status = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new UsersGetOrganizationInvitationsRequest()
             {
                 UserId = userId,
@@ -3038,6 +3773,7 @@ namespace Clerk.BackendAPI
                 Offset = offset,
                 Status = status,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/organization_invitations", request, null);
 
@@ -3092,7 +3828,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -3101,9 +3837,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -3179,13 +3915,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<VerifyPasswordResponse> VerifyPasswordAsync(string userId, VerifyPasswordRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Verify the password of a user.
+        /// </summary>
+        /// <remarks>
+        /// Check that the user's password matches the supplied input.<br/>
+        /// Useful for custom auth flows and re-verification.
+        /// </remarks>
+        /// <param name="userId">The ID of the user for whom to verify the password.</param>
+        /// <param name="requestBody">A <see cref="VerifyPasswordRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="VerifyPasswordResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<VerifyPasswordResponse> VerifyPasswordAsync(
+            string userId,
+            VerifyPasswordRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new VerifyPasswordRequest()
             {
                 UserId = userId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/verify_password", request, null);
 
@@ -3246,7 +4006,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -3255,9 +4015,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -3321,7 +4081,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400 || responseStatusCode == 404 || responseStatusCode == 422 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -3333,13 +4093,39 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<VerifyTOTPResponse> VerifyTotpAsync(string userId, VerifyTOTPRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Verify a TOTP or backup code for a user.
+        /// </summary>
+        /// <remarks>
+        /// Verify that the provided TOTP or backup code is valid for the user.<br/>
+        /// Verifying a backup code will result it in being consumed (i.e. it will<br/>
+        /// become invalid).<br/>
+        /// Useful for custom auth flows and re-verification.
+        /// </remarks>
+        /// <param name="userId">The ID of the user for whom to verify the TOTP.</param>
+        /// <param name="requestBody">A <see cref="VerifyTOTPRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="VerifyTOTPResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<VerifyTOTPResponse> VerifyTotpAsync(
+            string userId,
+            VerifyTOTPRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new VerifyTOTPRequest()
             {
                 UserId = userId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/verify_totp", request, null);
 
@@ -3400,7 +4186,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -3409,9 +4195,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -3475,7 +4261,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(responseStatusCode == 400 || responseStatusCode == 404 || responseStatusCode == 422 || responseStatusCode >= 400 && responseStatusCode < 500)
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
             {
                 throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
@@ -3487,12 +4273,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DisableMFAResponse> DisableMfaAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Disable a user's MFA methods.
+        /// </summary>
+        /// <remarks>
+        /// Disable all of a user's MFA methods (e.g. OTP sent via SMS, TOTP on their authenticator app) at once.
+        /// </remarks>
+        /// <param name="userId">The ID of the user whose MFA methods are to be disabled.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DisableMFAResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DisableMFAResponse> DisableMfaAsync(string userId, RetryConfig? retryConfig = null)
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new DisableMFARequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/mfa", request, null);
 
@@ -3547,7 +4351,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -3556,9 +4360,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -3654,12 +4458,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteBackupCodeResponse> DeleteBackupCodesAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Disable all user's Backup codes.
+        /// </summary>
+        /// <remarks>
+        /// Disable all of a user's backup codes.
+        /// </remarks>
+        /// <param name="userId">The ID of the user whose backup codes are to be deleted.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteBackupCodeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteBackupCodeResponse> DeleteBackupCodesAsync(
+            string userId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new DeleteBackupCodeRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/backup_code", request, null);
 
@@ -3714,7 +4539,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -3723,9 +4548,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -3821,13 +4646,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UserPasskeyDeleteResponse> DeletePasskeyAsync(string userId, string passkeyIdentificationId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a user passkey.
+        /// </summary>
+        /// <remarks>
+        /// Delete the passkey identification for a given user and notify them through email.
+        /// </remarks>
+        /// <param name="userId">The ID of the user that owns the passkey identity.</param>
+        /// <param name="passkeyIdentificationId">The ID of the passkey identity to be deleted.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UserPasskeyDeleteResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="passkeyIdentificationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403, 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UserPasskeyDeleteResponse> DeletePasskeyAsync(
+            string userId,
+            string passkeyIdentificationId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+            if (passkeyIdentificationId == null) throw new ArgumentNullException(nameof(passkeyIdentificationId));
+
             var request = new UserPasskeyDeleteRequest()
             {
                 UserId = userId,
                 PasskeyIdentificationId = passkeyIdentificationId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/passkeys/{passkey_identification_id}", request, null);
 
@@ -3882,7 +4731,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -3891,9 +4740,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -3989,13 +4838,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UserWeb3WalletDeleteResponse> DeleteWeb3WalletAsync(string userId, string web3WalletIdentificationId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a user web3 wallet.
+        /// </summary>
+        /// <remarks>
+        /// Delete the web3 wallet identification for a given user.
+        /// </remarks>
+        /// <param name="userId">The ID of the user that owns the web3 wallet.</param>
+        /// <param name="web3WalletIdentificationId">The ID of the web3 wallet identity to be deleted.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UserWeb3WalletDeleteResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="web3WalletIdentificationId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UserWeb3WalletDeleteResponse> DeleteWeb3WalletAsync(
+            string userId,
+            string web3WalletIdentificationId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+            if (web3WalletIdentificationId == null) throw new ArgumentNullException(nameof(web3WalletIdentificationId));
+
             var request = new UserWeb3WalletDeleteRequest()
             {
                 UserId = userId,
                 Web3WalletIdentificationId = web3WalletIdentificationId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/web3_wallets/{web3_wallet_identification_id}", request, null);
 
@@ -4050,7 +4923,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -4059,9 +4932,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -4157,12 +5030,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteTOTPResponse> DeleteTOTPAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete all the user's TOTPs.
+        /// </summary>
+        /// <remarks>
+        /// Deletes all of the user's TOTPs.
+        /// </remarks>
+        /// <param name="userId">The ID of the user whose TOTPs are to be deleted.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteTOTPResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteTOTPResponse> DeleteTOTPAsync(string userId, RetryConfig? retryConfig = null)
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new DeleteTOTPRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/totp", request, null);
 
@@ -4217,7 +5108,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -4226,9 +5117,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -4324,13 +5215,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteExternalAccountResponse> DeleteExternalAccountAsync(string userId, string externalAccountId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete External Account.
+        /// </summary>
+        /// <remarks>
+        /// Delete an external account by ID.
+        /// </remarks>
+        /// <param name="userId">The ID of the user's external account.</param>
+        /// <param name="externalAccountId">The ID of the external account to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteExternalAccountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="externalAccountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteExternalAccountResponse> DeleteExternalAccountAsync(
+            string userId,
+            string externalAccountId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+            if (externalAccountId == null) throw new ArgumentNullException(nameof(externalAccountId));
+
             var request = new DeleteExternalAccountRequest()
             {
                 UserId = userId,
                 ExternalAccountId = externalAccountId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/external_accounts/{external_account_id}", request, null);
 
@@ -4385,7 +5300,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -4394,9 +5309,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -4492,13 +5407,36 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<SetUserPasswordCompromisedResponse> SetPasswordCompromisedAsync(string userId, SetUserPasswordCompromisedRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Set a user's password as compromised.
+        /// </summary>
+        /// <remarks>
+        /// Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to set the password as compromised.</param>
+        /// <param name="requestBody">A <see cref="SetUserPasswordCompromisedRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="SetUserPasswordCompromisedResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<SetUserPasswordCompromisedResponse> SetPasswordCompromisedAsync(
+            string userId,
+            SetUserPasswordCompromisedRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new SetUserPasswordCompromisedRequest()
             {
                 UserId = userId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/password/set_compromised", request, null);
 
@@ -4559,7 +5497,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -4568,9 +5506,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -4646,12 +5584,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UnsetUserPasswordCompromisedResponse> UnsetPasswordCompromisedAsync(string userId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Unset a user's password as compromised.
+        /// </summary>
+        /// <remarks>
+        /// Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in.
+        /// </remarks>
+        /// <param name="userId">The ID of the user to unset the compromised status for.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UnsetUserPasswordCompromisedResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UnsetUserPasswordCompromisedResponse> UnsetPasswordCompromisedAsync(
+            string userId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
             var request = new UnsetUserPasswordCompromisedRequest()
             {
                 UserId = userId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/password/unset_compromised", request, null);
 
@@ -4706,7 +5665,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -4715,9 +5674,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -4793,7 +5752,39 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<InstanceGetOrganizationMembershipsResponse> GetInstanceOrganizationMembershipsAsync(string? orderBy = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Get a list of all organization memberships within an instance.
+        /// </summary>
+        /// <remarks>
+        /// Retrieves all organization user memberships for the given instance.
+        /// </remarks>
+        /// <param name="orderBy">
+        /// Sorts organizations memberships by phone_number, email_address, created_at, first_name, last_name or username.<br/>
+        /// By prepending one of those values with + or -,<br/>
+        /// we can choose to sort in ascending (ASC) or descending (DESC) order.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="InstanceGetOrganizationMembershipsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<InstanceGetOrganizationMembershipsResponse> GetInstanceOrganizationMembershipsAsync(
+            string? orderBy = null,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        )
         {
             var request = new InstanceGetOrganizationMembershipsRequest()
             {
@@ -4801,6 +5792,7 @@ namespace Clerk.BackendAPI
                 Limit = limit,
                 Offset = offset,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_memberships", request, null);
 
@@ -4855,7 +5847,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -4864,9 +5856,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -4961,5 +5953,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

@@ -14,12 +14,11 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class ExternalAccountWithVerification
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public ExternalAccountWithVerificationObject Object { get; set; } = default!;
@@ -34,7 +33,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string IdentificationId { get; set; } = default!;
 
         /// <summary>
-        /// The unique ID of the user in the external provider&apos;s system
+        /// The unique ID of the user in the external provider's system.
         /// </summary>
         [JsonProperty("provider_user_id")]
         public string ProviderUserId { get; set; } = default!;
@@ -45,6 +44,12 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("email_address")]
         public string EmailAddress { get; set; } = default!;
 
+        /// <summary>
+        /// Whether the email was verified by the OAuth provider at creation time. null = unknown (pre-migration data or custom OAuth providers), true = provider confirmed email was verified, false = provider confirmed email was NOT verified.
+        /// </summary>
+        [JsonProperty("email_address_verified")]
+        public bool? EmailAddressVerified { get; set; } = null;
+
         [JsonProperty("first_name")]
         public string FirstName { get; set; } = default!;
 
@@ -52,7 +57,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string LastName { get; set; } = default!;
 
         /// <summary>
-        /// Please use `image_url` instead
+        /// Please use `image_url` instead.
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("avatar_url")]
@@ -74,21 +79,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string? Label { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp of creation<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of creation<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

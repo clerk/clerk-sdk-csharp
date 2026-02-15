@@ -11,47 +11,37 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Required parameters
+    /// Required parameters.
     /// </summary>
     public class PreviewTemplateRequestBody
     {
-
         /// <summary>
         /// The email subject.<br/>
-        /// 
-        /// <remarks>
         /// Applicable only to email templates.
-        /// </remarks>
         /// </summary>
         [JsonProperty("subject")]
         public string? Subject { get; set; } = null;
 
         /// <summary>
-        /// The template body before variable interpolation
+        /// The template body before variable interpolation.
         /// </summary>
         [JsonProperty("body")]
         public string? Body { get; set; }
 
         /// <summary>
         /// The local part of the From email address that will be used for emails.<br/>
-        /// 
-        /// <remarks>
-        /// For example, in the address &apos;hello@example.com&apos;, the local part is &apos;hello&apos;.<br/>
+        /// For example, in the address 'hello@example.com', the local part is 'hello'.<br/>
         /// Applicable only to email templates.
-        /// </remarks>
         /// </summary>
         [JsonProperty("from_email_name")]
         public string? FromEmailName { get; set; }
 
         /// <summary>
         /// The local part of the Reply To email address that will be used for emails.<br/>
-        /// 
-        /// <remarks>
-        /// For example, in the address &apos;hello@example.com&apos;, the local part is &apos;hello&apos;.<br/>
+        /// For example, in the address 'hello@example.com', the local part is 'hello'.<br/>
         /// Applicable only to email templates.
-        /// </remarks>
         /// </summary>
         [JsonProperty("reply_to_email_name")]
         public string? ReplyToEmailName { get; set; }

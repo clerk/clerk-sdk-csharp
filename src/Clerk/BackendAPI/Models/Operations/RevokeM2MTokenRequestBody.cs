@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class RevokeM2MTokenRequestBody
     {
-
         [JsonProperty("revocation_reason")]
         public string? RevocationReason { get; set; } = null;
     }

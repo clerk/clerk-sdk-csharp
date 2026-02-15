@@ -12,27 +12,26 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class MachineDeleted
     {
-
         /// <summary>
-        /// String representing the object&apos;s type.
+        /// String representing the object's type.
         /// </summary>
         [JsonProperty("object")]
         public MachineDeletedObject Object { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the deleted machine
+        /// The ID of the deleted machine.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// Whether the machine was successfully deleted
+        /// Whether the machine was successfully deleted.
         /// </summary>
         [JsonProperty("deleted")]
         public bool Deleted { get; set; } = default!;

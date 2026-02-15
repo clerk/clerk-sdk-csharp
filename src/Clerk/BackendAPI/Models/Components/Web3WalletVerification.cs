@@ -55,7 +55,6 @@ namespace Clerk.BackendAPI.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(Web3WalletVerification.Web3WalletVerificationConverter))]
     public class Web3WalletVerification
     {
