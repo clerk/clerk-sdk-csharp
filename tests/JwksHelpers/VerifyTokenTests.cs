@@ -128,30 +128,18 @@ namespace JwksHelpers.Tests
         {
             var (token, jwtKey) = Utils.GenerateTokenKeyPair();
 
-            // Simulate the CryptoProviderFactory caching bug (#75):
-            // Pre-populate the global CryptoProviderFactory.Default cache with a
-            // SignatureProvider that wraps an RSA key, then dispose that RSA.
-            // Without the fix, VerifyTokenAsync uses CryptoProviderFactory.Default,
-            // which returns the cached provider holding the now-disposed RSA object,
-            // causing alternating success/failure on consecutive calls.
+            // Poison the global CryptoProviderFactory cache with a disposed RSA key (#75)
             var rsa = RSA.Create();
             rsa.ImportFromPem(jwtKey.ToCharArray());
             var staleKey = new RsaSecurityKey(rsa);
-
-            // Warm the global cache: create and cache a SignatureProvider for this key
             var factory = CryptoProviderFactory.Default;
             var cachedProvider = factory.CreateForVerifying(staleKey, SecurityAlgorithms.RsaSha256);
-
-            // Dispose the underlying RSA — the cached provider now holds a stale reference
             rsa.Dispose();
 
             try
             {
                 var vtOptions = new VerifyTokenOptions(jwtKey: jwtKey);
 
-                // With the fix (per-call CryptoProviderFactory with CacheSignatureProviders=false),
-                // each call creates its own provider and ignores the poisoned global cache.
-                // Without the fix, the global cache returns the stale provider → failure.
                 for (int i = 0; i < 5; i++)
                 {
                     var claims = await VerifyToken.VerifyTokenAsync(token, vtOptions);
@@ -160,8 +148,6 @@ namespace JwksHelpers.Tests
             }
             finally
             {
-                // Clean up: remove the stale entry from the global cache so we don't
-                // pollute other tests.
                 factory.ReleaseSignatureProvider(cachedProvider);
             }
         }
