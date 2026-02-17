@@ -10,18 +10,17 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class CancelCommerceSubscriptionItemRequest
     {
-
         /// <summary>
-        /// The ID of the subscription item to cancel
+        /// The ID of the subscription item to cancel.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=subscription_item_id")]
         public string SubscriptionItemId { get; set; } = default!;
 
         /// <summary>
-        /// Whether to cancel the subscription immediately (true) or at the end of the current billing period (false, default)
+        /// Whether to cancel the subscription immediately (true) or at the end of the current billing period (false, default).
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=end_now")]
         public bool? EndNow { get; set; } = false;

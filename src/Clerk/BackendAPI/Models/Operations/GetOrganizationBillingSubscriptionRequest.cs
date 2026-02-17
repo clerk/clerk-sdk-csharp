@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetOrganizationBillingSubscriptionRequest
     {
-
         /// <summary>
-        /// The ID of the organization whose subscription to retrieve
+        /// The ID of the organization whose subscription to retrieve.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_id")]
         public string OrganizationId { get; set; } = default!;

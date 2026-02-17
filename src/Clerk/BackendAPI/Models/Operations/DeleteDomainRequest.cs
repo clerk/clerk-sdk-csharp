@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteDomainRequest
     {
-
         /// <summary>
         /// The ID of the domain that will be deleted. Must be a satellite domain.
         /// </summary>

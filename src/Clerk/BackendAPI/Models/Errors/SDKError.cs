@@ -13,6 +13,9 @@ namespace Clerk.BackendAPI.Models.Errors
     using System;
     using System.Net.Http;
 
+    /// <summary>
+    /// Default API Exception.
+    /// </summary>
     public class SDKError : SDKBaseError
     {
         /// <summary>

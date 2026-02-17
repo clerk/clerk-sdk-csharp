@@ -24,70 +24,174 @@ namespace Clerk.BackendAPI
 
     public interface IOrganizationPermissions
     {
-
         /// <summary>
-        /// Get a list of all organization permissions
-        /// 
+        /// Get a list of all organization permissions.
+        /// </summary>
         /// <remarks>
         /// Retrieves all organization permissions for the given instance.
         /// </remarks>
-        /// </summary>
-        Task<ListOrganizationPermissionsResponse> ListAsync(string? query = null, string? orderBy = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        /// <param name="query">
+        /// Returns organization permissions with ID, name, or key that match the given query.<br/>
+        /// Uses exact match for permission ID and partial match for name and key.
+        /// </param>
+        /// <param name="orderBy">
+        /// Allows to return organization permissions in a particular order.<br/>
+        /// At the moment, you can order the returned permissions by their `created_at`, `name`, or `key`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want permissions to be returned in descending order according to their `created_at` property, you can use `-created_at`.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationPermissionsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListOrganizationPermissionsResponse> ListAsync(
+            string? query = null,
+            string? orderBy = null,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a new organization permission
-        /// 
+        /// Create a new organization permission.
+        /// </summary>
         /// <remarks>
         /// Creates a new organization permission for the given instance.
         /// </remarks>
-        /// </summary>
-        Task<CreateOrganizationPermissionResponse> CreateAsync(CreateOrganizationPermissionRequestBody request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="CreateOrganizationPermissionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationPermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateOrganizationPermissionResponse> CreateAsync(
+            CreateOrganizationPermissionRequestBody request,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Get an organization permission
-        /// 
+        /// Get an organization permission.
+        /// </summary>
         /// <remarks>
         /// Retrieves the details of an organization permission.
         /// </remarks>
-        /// </summary>
-        Task<GetOrganizationPermissionResponse> GetAsync(string permissionId, RetryConfig? retryConfig = null);
+        /// <param name="permissionId">The ID of the permission to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOrganizationPermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="permissionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetOrganizationPermissionResponse> GetAsync(string permissionId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update an organization permission
-        /// 
+        /// Update an organization permission.
+        /// </summary>
         /// <remarks>
         /// Updates the properties of an existing organization permission.<br/>
         /// System permissions cannot be updated.
         /// </remarks>
-        /// </summary>
-        Task<UpdateOrganizationPermissionResponse> UpdateAsync(string permissionId, UpdateOrganizationPermissionRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="permissionId">The ID of the permission to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateOrganizationPermissionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateOrganizationPermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="permissionId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateOrganizationPermissionResponse> UpdateAsync(
+            string permissionId,
+            UpdateOrganizationPermissionRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete an organization permission
-        /// 
+        /// Delete an organization permission.
+        /// </summary>
         /// <remarks>
         /// Deletes an organization permission.<br/>
         /// System permissions cannot be deleted.
         /// </remarks>
-        /// </summary>
-        Task<DeleteOrganizationPermissionResponse> DeleteAsync(string permissionId, RetryConfig? retryConfig = null);
+        /// <param name="permissionId">The ID of the permission to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteOrganizationPermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="permissionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteOrganizationPermissionResponse> DeleteAsync(
+            string permissionId,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class OrganizationPermissions: IOrganizationPermissions
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public OrganizationPermissions(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListOrganizationPermissionsResponse> ListAsync(string? query = null, string? orderBy = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Get a list of all organization permissions.
+        /// </summary>
+        /// <remarks>
+        /// Retrieves all organization permissions for the given instance.
+        /// </remarks>
+        /// <param name="query">
+        /// Returns organization permissions with ID, name, or key that match the given query.<br/>
+        /// Uses exact match for permission ID and partial match for name and key.
+        /// </param>
+        /// <param name="orderBy">
+        /// Allows to return organization permissions in a particular order.<br/>
+        /// At the moment, you can order the returned permissions by their `created_at`, `name`, or `key`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want permissions to be returned in descending order according to their `created_at` property, you can use `-created_at`.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationPermissionsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListOrganizationPermissionsResponse> ListAsync(
+            string? query = null,
+            string? orderBy = null,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        )
         {
             var request = new ListOrganizationPermissionsRequest()
             {
@@ -96,6 +200,7 @@ namespace Clerk.BackendAPI
                 Limit = limit,
                 Offset = offset,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_permissions", request, null);
 
@@ -150,7 +255,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -159,9 +264,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -237,10 +342,29 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateOrganizationPermissionResponse> CreateAsync(CreateOrganizationPermissionRequestBody request, RetryConfig? retryConfig = null)
-        {
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+        /// <summary>
+        /// Create a new organization permission.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new organization permission for the given instance.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateOrganizationPermissionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationPermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateOrganizationPermissionResponse> CreateAsync(
+            CreateOrganizationPermissionRequestBody request,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/organization_permissions";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -300,7 +424,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 402 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -309,9 +433,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -387,12 +511,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetOrganizationPermissionResponse> GetAsync(string permissionId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Get an organization permission.
+        /// </summary>
+        /// <remarks>
+        /// Retrieves the details of an organization permission.
+        /// </remarks>
+        /// <param name="permissionId">The ID of the permission to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOrganizationPermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="permissionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetOrganizationPermissionResponse> GetAsync(
+            string permissionId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (permissionId == null) throw new ArgumentNullException(nameof(permissionId));
+
             var request = new GetOrganizationPermissionRequest()
             {
                 PermissionId = permissionId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_permissions/{permission_id}", request, null);
 
@@ -447,7 +592,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -456,9 +601,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -534,13 +679,38 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateOrganizationPermissionResponse> UpdateAsync(string permissionId, UpdateOrganizationPermissionRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update an organization permission.
+        /// </summary>
+        /// <remarks>
+        /// Updates the properties of an existing organization permission.<br/>
+        /// System permissions cannot be updated.
+        /// </remarks>
+        /// <param name="permissionId">The ID of the permission to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateOrganizationPermissionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateOrganizationPermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="permissionId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateOrganizationPermissionResponse> UpdateAsync(
+            string permissionId,
+            UpdateOrganizationPermissionRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (permissionId == null) throw new ArgumentNullException(nameof(permissionId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new UpdateOrganizationPermissionRequest()
             {
                 PermissionId = permissionId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_permissions/{permission_id}", request, null);
 
@@ -601,7 +771,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -610,9 +780,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -688,12 +858,34 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteOrganizationPermissionResponse> DeleteAsync(string permissionId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete an organization permission.
+        /// </summary>
+        /// <remarks>
+        /// Deletes an organization permission.<br/>
+        /// System permissions cannot be deleted.
+        /// </remarks>
+        /// <param name="permissionId">The ID of the permission to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteOrganizationPermissionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="permissionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteOrganizationPermissionResponse> DeleteAsync(
+            string permissionId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (permissionId == null) throw new ArgumentNullException(nameof(permissionId));
+
             var request = new DeleteOrganizationPermissionRequest()
             {
                 PermissionId = permissionId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_permissions/{permission_id}", request, null);
 
@@ -748,7 +940,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -757,9 +949,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -834,5 +1026,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

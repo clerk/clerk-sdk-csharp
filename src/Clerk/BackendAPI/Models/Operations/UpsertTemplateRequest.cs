@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpsertTemplateRequest
     {
-
         /// <summary>
-        /// The type of template to update
+        /// The type of template to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=template_type")]
         public UpsertTemplatePathParamTemplateType TemplateType { get; set; } = default!;
 
         /// <summary>
-        /// The slug of the template to update
+        /// The slug of the template to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=slug")]
         public string Slug { get; set; } = default!;

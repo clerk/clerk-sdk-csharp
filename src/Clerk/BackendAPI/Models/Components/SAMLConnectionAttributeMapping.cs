@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class SAMLConnectionAttributeMapping
     {
-
         [JsonProperty("user_id")]
         public string UserId { get; set; } = default!;
 

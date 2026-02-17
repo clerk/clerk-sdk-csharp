@@ -11,49 +11,48 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using System;
-    
+
     public class GetPublicInterstitialRequest
     {
-
         /// <summary>
-        /// Please use `frontend_api` instead
+        /// Please use `frontend_api` instead.
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=frontendApi")]
         public string? FrontendApiQueryParameter { get; set; }
 
         /// <summary>
-        /// The Frontend API key of your instance
+        /// The Frontend API key of your instance.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=frontend_api")]
         public string? FrontendApiQueryParameter1 { get; set; }
 
         /// <summary>
-        /// The publishable key of your instance
+        /// The publishable key of your instance.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=publishable_key")]
         public string? PublishableKey { get; set; }
 
         /// <summary>
-        /// The proxy URL of your instance
+        /// The proxy URL of your instance.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=proxy_url")]
         public string? ProxyUrl { get; set; }
 
         /// <summary>
-        /// The domain of your instance
+        /// The domain of your instance.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=domain")]
         public string? Domain { get; set; }
 
         /// <summary>
-        /// The sign in URL of your instance
+        /// The sign in URL of your instance.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=sign_in_url")]
         public string? SignInUrl { get; set; }
 
         /// <summary>
-        /// Whether to use the domain for the script URL
+        /// Whether to use the domain for the script URL.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=use_domain_for_script")]
         public bool? UseDomainForScript { get; set; }

@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetMachineRequest
     {
-
         /// <summary>
-        /// The ID of the machine to retrieve
+        /// The ID of the machine to retrieve.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=machine_id")]
         public string MachineId { get; set; } = default!;

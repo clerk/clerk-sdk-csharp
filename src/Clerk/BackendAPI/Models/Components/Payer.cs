@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The payer associated with this subscription.
     /// </summary>
     public class Payer
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public SchemasCommerceSubscriptionItemPayerObject Object { get; set; } = default!;
@@ -74,10 +73,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string? OrganizationName { get; set; }
 
         /// <summary>
-        /// URL of the payer&apos;s image/avatar.
+        /// URL of the payer's image/avatar.
         /// </summary>
         [JsonProperty("image_url")]
         public string ImageUrl { get; set; } = default!;
+
+        [JsonProperty("credits_balance")]
+        public CommerceMoneyResponse? CreditsBalance { get; set; }
 
         /// <summary>
         /// Unix timestamp (in milliseconds) when the payer was created.

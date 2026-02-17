@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// Filter sessions by the provided status
+    /// Filter sessions by the provided status.
     /// </summary>
     public enum Status
     {
@@ -66,5 +66,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum Status");
         }
     }
-
 }

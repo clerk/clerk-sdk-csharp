@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdateJWTTemplateRequest
     {
-
         /// <summary>
-        /// The ID of the JWT template to update
+        /// The ID of the JWT template to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=template_id")]
         public string TemplateId { get; set; } = default!;

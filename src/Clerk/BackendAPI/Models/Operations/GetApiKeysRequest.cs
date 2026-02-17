@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetApiKeysRequest
     {
-
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")]
         public string? Type { get; set; } = "api_key";
 

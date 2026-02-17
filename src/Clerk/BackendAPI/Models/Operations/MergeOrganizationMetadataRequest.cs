@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class MergeOrganizationMetadataRequest
     {
-
         /// <summary>
-        /// The ID of the organization for which metadata will be merged or updated
+        /// The ID of the organization for which metadata will be merged or updated.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_id")]
         public string OrganizationId { get; set; } = default!;

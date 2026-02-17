@@ -12,16 +12,12 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class AddRolesToRoleSetRequestBody
     {
-
         /// <summary>
         /// Array of role keys to add to the role set.<br/>
-        /// 
-        /// <remarks>
         /// Must contain at least one role and no more than 10 roles.
-        /// </remarks>
         /// </summary>
         [JsonProperty("role_keys")]
         public List<string> RoleKeys { get; set; } = default!;

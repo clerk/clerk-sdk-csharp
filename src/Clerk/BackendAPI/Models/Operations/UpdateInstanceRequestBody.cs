@@ -13,22 +13,18 @@ namespace Clerk.BackendAPI.Models.Operations
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class UpdateInstanceRequestBody
     {
-
         /// <summary>
         /// Toggles test mode for this instance, allowing the use of test email addresses and phone numbers.<br/>
-        /// 
-        /// <remarks>
         /// Defaults to true for development instances.
-        /// </remarks>
         /// </summary>
         [JsonProperty("test_mode")]
         public bool? TestMode { get; set; } = null;
 
         /// <summary>
-        /// Whether the instance should be using the HIBP service to check passwords for breaches
+        /// Whether the instance should be using the HIBP service to check passwords for breaches.
         /// </summary>
         [JsonProperty("hibp")]
         public bool? Hibp { get; set; } = null;
@@ -50,10 +46,7 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Whether the instance should operate in cookieless development mode (i.e. without third-party cookies).<br/>
-        /// 
-        /// <remarks>
         /// Deprecated: Please use `url_based_session_syncing` instead.
-        /// </remarks>
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("cookieless_dev")]

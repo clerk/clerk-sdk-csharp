@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateSvixAppResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// Response that contains a temporary Svix URL to access management dashboard
+        /// Response that contains a temporary Svix URL to access management dashboard.
         /// </summary>
         public SvixURL? SvixURL { get; set; }
     }

@@ -13,22 +13,17 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// A list of OAuth applications
+    /// A list of OAuth applications.
     /// </summary>
     public class OAuthApplications
     {
-
         [JsonProperty("data")]
         public List<OAuthApplication> Data { get; set; } = default!;
 
         /// <summary>
-        /// Total number of OAuth applications<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Total number of OAuth applications.
         /// </summary>
         [JsonProperty("total_count")]
         public long TotalCount { get; set; } = default!;

@@ -13,112 +13,107 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class Template
     {
-
         [JsonProperty("id")]
         public string? Id { get; set; }
 
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public TemplateObject? Object { get; set; }
 
         /// <summary>
-        /// The ID of the instance to which the template belongs
+        /// The ID of the instance to which the template belongs.
         /// </summary>
         [JsonProperty("instance_id")]
         public string? InstanceId { get; set; } = null;
 
         /// <summary>
-        /// whether this is a system (default) or user overridden) template
+        /// whether this is a system (default) or user overridden) template.
         /// </summary>
         [JsonProperty("resource_type")]
         public string? ResourceType { get; set; }
 
         /// <summary>
-        /// whether this is an email or SMS template
+        /// whether this is an email or SMS template.
         /// </summary>
         [JsonProperty("template_type")]
         public string? TemplateType { get; set; }
 
         /// <summary>
-        /// user-friendly name of the template
+        /// user-friendly name of the template.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// machine-friendly name of the template
+        /// machine-friendly name of the template.
         /// </summary>
         [JsonProperty("slug")]
         public string? Slug { get; set; }
 
         /// <summary>
-        /// position with the listing of templates
+        /// position with the listing of templates.
         /// </summary>
         [JsonProperty("position")]
         public long? Position { get; set; }
 
         /// <summary>
-        /// whether this template can be reverted to the corresponding system default
+        /// whether this template can be reverted to the corresponding system default.
         /// </summary>
         [JsonProperty("can_revert")]
         public bool? CanRevert { get; set; }
 
         /// <summary>
-        /// whether this template can be deleted
+        /// whether this template can be deleted.
         /// </summary>
         [JsonProperty("can_delete")]
         public bool? CanDelete { get; set; }
 
         /// <summary>
-        /// whether the body of this template can be edited
+        /// whether the body of this template can be edited.
         /// </summary>
         [JsonProperty("can_edit_body")]
         public bool? CanEditBody { get; set; }
 
         /// <summary>
-        /// whether this template can be enabled or disabled, true only for notification SMS templates
+        /// whether this template can be enabled or disabled, true only for notification SMS templates.
         /// </summary>
         [JsonProperty("can_toggle")]
         public bool? CanToggle { get; set; }
 
         /// <summary>
-        /// email subject
+        /// email subject.
         /// </summary>
         [JsonProperty("subject")]
         public string? Subject { get; set; } = null;
 
         /// <summary>
-        /// the editor markup used to generate the body of the template
+        /// the editor markup used to generate the body of the template.
         /// </summary>
         [JsonProperty("markup")]
         public string? Markup { get; set; }
 
         /// <summary>
-        /// the template body before variable interpolation
+        /// the template body before variable interpolation.
         /// </summary>
         [JsonProperty("body")]
         public string? Body { get; set; }
 
         /// <summary>
-        /// list of variables that are available for use in the template body
+        /// list of variables that are available for use in the template body.
         /// </summary>
         [JsonProperty("available_variables")]
         public List<string>? AvailableVariables { get; set; }
 
         /// <summary>
-        /// list of variables that must be contained in the template body
+        /// list of variables that must be contained in the template body.
         /// </summary>
         [JsonProperty("required_variables")]
         public List<string>? RequiredVariables { get; set; }
@@ -139,21 +134,13 @@ namespace Clerk.BackendAPI.Models.Components
         public bool? FlaggedAsSuspicious { get; set; }
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long? UpdatedAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long? CreatedAt { get; set; }

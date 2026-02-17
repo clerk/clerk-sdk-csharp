@@ -12,19 +12,14 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class AllowlistIdentifier
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public AllowlistIdentifierObject? Object { get; set; }
@@ -36,11 +31,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? InvitationId { get; set; }
 
         /// <summary>
-        /// An email address or a phone number.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// An email address or a phone number.
         /// </summary>
         [JsonProperty("identifier")]
         public string? Identifier { get; set; }
@@ -52,21 +43,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string? InstanceId { get; set; }
 
         /// <summary>
-        /// Unix timestamp of creation<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long? CreatedAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long? UpdatedAt { get; set; }

@@ -12,13 +12,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Credit information (only available in PaymentAttempt events).
     /// </summary>
     public class Credit
     {
-
         /// <summary>
         /// Credit amount.
         /// </summary>

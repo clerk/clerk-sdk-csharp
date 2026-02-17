@@ -17,6 +17,9 @@ namespace Clerk.BackendAPI
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Main configuration for the SDK.
+    /// </summary>
     public struct SDKConfig
     {
         /// <summary>
@@ -42,7 +45,7 @@ namespace Clerk.BackendAPI
             Client = client ?? new SpeakeasyHttpClient();
             ServerUrl = "";
             ServerIndex = 0;
-            UserAgent = "speakeasy-sdk/csharp 0.15.1 2.794.1 2025-11-10 Clerk.BackendAPI";
+            UserAgent = "speakeasy-sdk/csharp 0.15.2 2.824.1 2025-11-10 Clerk.BackendAPI";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

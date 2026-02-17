@@ -11,13 +11,12 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Response that contains a temporary Svix URL to access management dashboard
+    /// Response that contains a temporary Svix URL to access management dashboard.
     /// </summary>
     public class SvixURL
     {
-
         [JsonProperty("svix_url")]
         public string SvixUrl { get; set; } = default!;
     }

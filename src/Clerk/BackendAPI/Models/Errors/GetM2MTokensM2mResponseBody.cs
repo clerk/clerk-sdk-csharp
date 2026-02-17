@@ -27,7 +27,7 @@ namespace Clerk.BackendAPI.Models.Errors
     }
 
     /// <summary>
-    /// 403 Forbidden
+    /// 403 Forbidden.
     /// </summary>
     public class GetM2MTokensM2mResponseBody : SDKBaseError
     {
@@ -57,5 +57,4 @@ namespace Clerk.BackendAPI.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

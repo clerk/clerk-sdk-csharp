@@ -12,133 +12,105 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UpdateUserRequestBody
     {
-
         /// <summary>
         /// The ID of the user as used in your external systems or your previous authentication solution.<br/>
-        /// 
-        /// <remarks>
         /// Must be unique across your instance.
-        /// </remarks>
         /// </summary>
         [JsonProperty("external_id")]
         public string? ExternalId { get; set; } = null;
 
         /// <summary>
-        /// The first name to assign to the user
+        /// The first name to assign to the user.
         /// </summary>
         [JsonProperty("first_name")]
         public string? FirstName { get; set; } = null;
 
         /// <summary>
-        /// The last name to assign to the user
+        /// The last name to assign to the user.
         /// </summary>
         [JsonProperty("last_name")]
         public string? LastName { get; set; } = null;
 
         /// <summary>
-        /// The locale to assign to the user (e.g., &quot;en-US&quot;, &quot;fr-FR&quot;)
+        /// The locale to assign to the user (e.g., "en-US", "fr-FR").
         /// </summary>
         [JsonProperty("locale")]
         public string? Locale { get; set; } = null;
 
         /// <summary>
         /// The ID of the email address to set as primary.<br/>
-        /// 
-        /// <remarks>
         /// It must be verified, and present on the current user.
-        /// </remarks>
         /// </summary>
         [JsonProperty("primary_email_address_id")]
         public string? PrimaryEmailAddressId { get; set; } = null;
 
         /// <summary>
         /// If set to `true`, the user will be notified that their primary email address has changed.<br/>
-        /// 
-        /// <remarks>
         /// By default, no notification is sent.
-        /// </remarks>
         /// </summary>
         [JsonProperty("notify_primary_email_address_changed")]
         public bool? NotifyPrimaryEmailAddressChanged { get; set; } = false;
 
         /// <summary>
         /// The ID of the phone number to set as primary.<br/>
-        /// 
-        /// <remarks>
         /// It must be verified, and present on the current user.
-        /// </remarks>
         /// </summary>
         [JsonProperty("primary_phone_number_id")]
         public string? PrimaryPhoneNumberId { get; set; } = null;
 
         /// <summary>
         /// The ID of the web3 wallets to set as primary.<br/>
-        /// 
-        /// <remarks>
         /// It must be verified, and present on the current user.
-        /// </remarks>
         /// </summary>
         [JsonProperty("primary_web3_wallet_id")]
         public string? PrimaryWeb3WalletId { get; set; } = null;
 
         /// <summary>
         /// The username to give to the user.<br/>
-        /// 
-        /// <remarks>
         /// It must be unique across your instance.
-        /// </remarks>
         /// </summary>
         [JsonProperty("username")]
         public string? Username { get; set; } = null;
 
         /// <summary>
-        /// The ID of the image to set as the user&apos;s profile image
+        /// The ID of the image to set as the user's profile image.
         /// </summary>
         [JsonProperty("profile_image_id")]
         public string? ProfileImageId { get; set; } = null;
 
         /// <summary>
         /// The plaintext password to give the user.<br/>
-        /// 
-        /// <remarks>
         /// Must be at least 8 characters long, and cannot be in any list of hacked passwords.
-        /// </remarks>
         /// </summary>
         [JsonProperty("password")]
         public string? Password { get; set; } = null;
 
         /// <summary>
         /// In case you already have the password digests and not the passwords, you can use them for the newly created user via this property.<br/>
-        /// 
-        /// <remarks>
         /// The digests should be generated with one of the supported algorithms.<br/>
         /// The hashing algorithm can be specified using the `password_hasher` property.
-        /// </remarks>
         /// </summary>
         [JsonProperty("password_digest")]
         public string? PasswordDigest { get; set; }
 
         /// <summary>
         /// The hashing algorithm that was used to generate the password digest.<br/>
-        /// 
-        /// <remarks>
         /// <br/>
         /// The algorithms we support at the moment are <a href="https://en.wikipedia.org/wiki/Bcrypt">`bcrypt`</a>, <a href="https://docs.djangoproject.com/en/4.0/topics/auth/passwords/">`bcrypt_sha256_django`</a>, <a href="https://en.wikipedia.org/wiki/MD5">`md5`</a>, `pbkdf2_sha1`, `pbkdf2_sha256`, <a href="https://docs.djangoproject.com/en/4.0/topics/auth/passwords/">`pbkdf2_sha256_django`</a>,<br/>
         /// <a href="https://www.openwall.com/phpass/">`phpass`</a>, `md5_phpass`, <a href="https://firebaseopensource.com/projects/firebase/scrypt/">`scrypt_firebase`</a>,<br/>
         /// <a href="https://werkzeug.palletsprojects.com/en/3.0.x/utils/#werkzeug.security.generate_password_hash">`scrypt_werkzeug`</a>, <a href="https://en.wikipedia.org/wiki/SHA-2">`sha256`</a>,<br/>
-        /// <a href="https://www.openldap.org/faq/data/cache/347.html">`ldap_ssha`</a> and the <a href="https://argon2.online/">`argon2`</a> variants: `argon2i` and `argon2id`.<br/>
+        /// <a href="https://www.openldap.org/faq/data/cache/347.html">`ldap_ssha`</a>, the <a href="https://argon2.online/">`argon2`</a> variants: `argon2i` and `argon2id`, and `sha512_symfony`, the SHA-512 variant of the <a href="https://symfony.com/doc/current/security/passwords.html">Symfony</a> legacy hasher.<br/>
         /// <br/>
         /// Each of the supported hashers expects the incoming digest to be in a particular format. See the <a href="https://clerk.com/docs/references/backend/user/create-user">Clerk docs</a> for more information.
-        /// </remarks>
         /// </summary>
         [JsonProperty("password_hasher")]
         public string? PasswordHasher { get; set; }
 
         /// <summary>
-        /// Set it to `true` if you&apos;re updating the user&apos;s password and want to skip any password policy settings check. This parameter can only be used when providing a `password`.
+        /// Set it to `true` if you're updating the user's password and want to skip any password policy settings check. This parameter can only be used when providing a `password`.
         /// </summary>
         [JsonProperty("skip_password_checks")]
         public bool? SkipPasswordChecks { get; set; } = null;
@@ -151,45 +123,36 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// In case TOTP is configured on the instance, you can provide the secret to enable it on the specific user without the need to reset it.<br/>
-        /// 
-        /// <remarks>
         /// Please note that currently the supported options are:<br/>
         /// * Period: 30 seconds<br/>
         /// * Code length: 6 digits<br/>
-        /// * Algorithm: SHA1
-        /// </remarks>
+        /// * Algorithm: SHA1.
         /// </summary>
         [JsonProperty("totp_secret")]
         public string? TotpSecret { get; set; } = null;
 
         /// <summary>
         /// If Backup Codes are configured on the instance, you can provide them to enable it on the specific user without the need to reset them.<br/>
-        /// 
-        /// <remarks>
         /// You must provide the backup codes in plain format or the corresponding bcrypt digest.
-        /// </remarks>
         /// </summary>
         [JsonProperty("backup_codes")]
         public List<string>? BackupCodes { get; set; }
 
         /// <summary>
-        /// Metadata saved on the user, that is visible to both your Frontend and Backend APIs
+        /// Metadata saved on the user, that is visible to both your Frontend and Backend APIs.
         /// </summary>
         [JsonProperty("public_metadata")]
         public Dictionary<string, object>? PublicMetadata { get; set; } = null;
 
         /// <summary>
-        /// Metadata saved on the user, that is only visible to your Backend API
+        /// Metadata saved on the user, that is only visible to your Backend API.
         /// </summary>
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
 
         /// <summary>
         /// Metadata saved on the user, that can be updated from both the Frontend and Backend APIs.<br/>
-        /// 
-        /// <remarks>
         /// Note: Since this data can be modified from the frontend, it is not guaranteed to be safe.
-        /// </remarks>
         /// </summary>
         [JsonProperty("unsafe_metadata")]
         public Dictionary<string, object>? UnsafeMetadata { get; set; } = null;
@@ -214,10 +177,7 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// When set to `true` all legal checks are skipped.<br/>
-        /// 
-        /// <remarks>
         /// It is not recommended to skip legal checks unless you are migrating a user to Clerk.
-        /// </remarks>
         /// </summary>
         [JsonProperty("skip_legal_checks")]
         public bool? SkipLegalChecks { get; set; } = null;

@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreatePhoneNumberRequestBody
     {
-
         /// <summary>
-        /// The ID representing the user
+        /// The ID representing the user.
         /// </summary>
         [JsonProperty("user_id")]
         public string UserId { get; set; } = default!;
@@ -41,10 +40,7 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Create this phone number as reserved for multi-factor authentication. The phone number must also be verified.<br/>
-        /// 
-        /// <remarks>
         /// If there are no other reserved second factors, the phone number will be set as the default second factor.
-        /// </remarks>
         /// </summary>
         [JsonProperty("reserved_for_second_factor")]
         public bool? ReservedForSecondFactor { get; set; } = null;

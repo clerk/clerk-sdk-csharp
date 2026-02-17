@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdateEmailAddressRequest
     {
-
         /// <summary>
-        /// The ID of the email address to update
+        /// The ID of the email address to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=email_address_id")]
         public string EmailAddressId { get; set; } = default!;

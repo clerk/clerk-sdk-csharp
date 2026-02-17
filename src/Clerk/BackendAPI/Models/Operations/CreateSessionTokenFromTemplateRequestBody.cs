@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateSessionTokenFromTemplateRequestBody
     {
-
         /// <summary>
         /// Use this parameter to override the JWT lifetime.
         /// </summary>

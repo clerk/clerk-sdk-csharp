@@ -12,16 +12,11 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class BlocklistIdentifier
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public BlocklistIdentifierObject? Object { get; set; }
@@ -30,11 +25,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? Id { get; set; }
 
         /// <summary>
-        /// An email address, email domain, phone number or web3 wallet.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// An email address, email domain, phone number or web3 wallet.
         /// </summary>
         [JsonProperty("identifier")]
         public string? Identifier { get; set; }
@@ -46,21 +37,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string? InstanceId { get; set; }
 
         /// <summary>
-        /// Unix timestamp of creation<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long? CreatedAt { get; set; }
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long? UpdatedAt { get; set; }

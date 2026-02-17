@@ -27,7 +27,7 @@ namespace Clerk.BackendAPI.Models.Errors
     }
 
     /// <summary>
-    /// 400 Bad Request
+    /// 400 Bad Request.
     /// </summary>
     public class GetApiKeySecretResponseBody : SDKBaseError
     {
@@ -57,5 +57,4 @@ namespace Clerk.BackendAPI.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

@@ -13,10 +13,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class Machine
     {
-
         [JsonProperty("object")]
         public MachineObject Object { get; set; } = default!;
 

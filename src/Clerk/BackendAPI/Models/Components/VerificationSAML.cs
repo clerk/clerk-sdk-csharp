@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class VerificationSAML
     {
-
         [JsonProperty("object")]
         public VerificationSAMLVerificationSAMLAccountObject? Object { get; set; }
 

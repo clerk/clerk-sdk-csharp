@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class Security
     {
-
         [SpeakeasyMetadata("security:scheme=true,type=http,subType=bearer,name=Authorization")]
         public string? BearerAuth { get; set; }
     }

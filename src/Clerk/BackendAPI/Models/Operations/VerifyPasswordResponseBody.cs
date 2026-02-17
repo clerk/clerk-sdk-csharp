@@ -11,13 +11,12 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// The provided password was correct.
     /// </summary>
     public class VerifyPasswordResponseBody
     {
-
         [JsonProperty("verified")]
         public bool? Verified { get; set; }
     }

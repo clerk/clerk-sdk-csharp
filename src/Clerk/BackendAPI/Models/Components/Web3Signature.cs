@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class Web3Signature
     {
-
         [JsonProperty("object")]
         public VerificationWeb3VerificationObject? Object { get; set; }
 

@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class Keys
     {
-
         [JsonProperty("use")]
         public string? Use { get; set; }
 

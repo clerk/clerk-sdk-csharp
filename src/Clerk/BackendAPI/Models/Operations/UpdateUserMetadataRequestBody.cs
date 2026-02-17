@@ -12,38 +12,28 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UpdateUserMetadataRequestBody
     {
-
         /// <summary>
         /// Metadata saved on the user, that is visible to both your frontend and backend.<br/>
-        /// 
-        /// <remarks>
         /// The new object will be merged with the existing value.
-        /// </remarks>
         /// </summary>
         [JsonProperty("public_metadata")]
         public Dictionary<string, object>? PublicMetadata { get; set; }
 
         /// <summary>
         /// Metadata saved on the user that is only visible to your backend.<br/>
-        /// 
-        /// <remarks>
         /// The new object will be merged with the existing value.
-        /// </remarks>
         /// </summary>
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; }
 
         /// <summary>
         /// Metadata saved on the user, that can be updated from both the Frontend and Backend APIs.<br/>
-        /// 
-        /// <remarks>
         /// The new object will be merged with the existing value.<br/>
         /// <br/>
         /// Note: Since this data can be modified from the frontend, it is not guaranteed to be safe.
-        /// </remarks>
         /// </summary>
         [JsonProperty("unsafe_metadata")]
         public Dictionary<string, object>? UnsafeMetadata { get; set; }

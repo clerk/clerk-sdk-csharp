@@ -27,7 +27,7 @@ namespace Clerk.BackendAPI.Models.Errors
     }
 
     /// <summary>
-    /// 409 Conflict
+    /// 409 Conflict.
     /// </summary>
     public class CreateAPIKeyAPIKeysResponseBody : SDKBaseError
     {
@@ -57,5 +57,4 @@ namespace Clerk.BackendAPI.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

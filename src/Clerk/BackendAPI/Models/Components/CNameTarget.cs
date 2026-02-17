@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CNameTarget
     {
-
         [JsonProperty("host")]
         public string Host { get; set; } = default!;
 
@@ -22,11 +21,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string Value { get; set; } = default!;
 
         /// <summary>
-        /// Denotes whether this CNAME target is required to be set in order for the domain to be considered deployed.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Denotes whether this CNAME target is required to be set in order for the domain to be considered deployed.
         /// </summary>
         [JsonProperty("required")]
         public bool Required { get; set; } = default!;

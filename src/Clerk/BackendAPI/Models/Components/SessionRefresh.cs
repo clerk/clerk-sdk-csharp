@@ -52,9 +52,8 @@ namespace Clerk.BackendAPI.Models.Components
         }
     }
 
-
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     [JsonConverter(typeof(SessionRefresh.SessionRefreshConverter))]
     public class SessionRefresh

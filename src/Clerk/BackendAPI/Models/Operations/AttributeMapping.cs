@@ -11,13 +11,12 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Define the attribute name mapping between Identity Provider and Clerk&apos;s user properties
+    /// Define the attribute name mapping between Identity Provider and Clerk's user properties.
     /// </summary>
     public class AttributeMapping
     {
-
         [JsonProperty("user_id")]
         public string? UserId { get; set; }
 

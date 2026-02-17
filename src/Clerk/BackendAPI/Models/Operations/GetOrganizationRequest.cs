@@ -10,18 +10,17 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetOrganizationRequest
     {
-
         /// <summary>
-        /// The ID or slug of the organization
+        /// The ID or slug of the organization.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_id")]
         public string OrganizationId { get; set; } = default!;
 
         /// <summary>
-        /// Flag to denote whether or not the organization&apos;s members count should be included in the response.
+        /// Flag to denote whether or not the organization's members count should be included in the response.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=include_members_count")]
         public bool? IncludeMembersCount { get; set; }

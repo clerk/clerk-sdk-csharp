@@ -24,80 +24,157 @@ namespace Clerk.BackendAPI
 
     public interface IOrganizationDomains
     {
-
         /// <summary>
         /// Create a new organization domain.
-        /// 
+        /// </summary>
         /// <remarks>
         /// Creates a new organization domain. By default the domain is verified, but can be optionally set to unverified.
         /// </remarks>
-        /// </summary>
-        Task<CreateOrganizationDomainResponse> CreateAsync(string organizationId, CreateOrganizationDomainRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="organizationId">The ID of the organization where the new domain will be created.</param>
+        /// <param name="requestBody">A <see cref="CreateOrganizationDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateOrganizationDomainResponse> CreateAsync(
+            string organizationId,
+            CreateOrganizationDomainRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
         /// Get a list of all domains of an organization.
-        /// 
+        /// </summary>
         /// <remarks>
         /// Get a list of all domains of an organization.
         /// </remarks>
-        /// </summary>
-        Task<ListOrganizationDomainsResponse> ListAsync(ListOrganizationDomainsRequest request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="ListOrganizationDomainsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationDomainsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListOrganizationDomainsResponse> ListAsync(
+            ListOrganizationDomainsRequest request,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
         /// Update an organization domain.
-        /// 
+        /// </summary>
         /// <remarks>
         /// Updates the properties of an existing organization domain.
         /// </remarks>
-        /// </summary>
-        Task<UpdateOrganizationDomainResponse> UpdateAsync(string organizationId, string domainId, UpdateOrganizationDomainRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="organizationId">The ID of the organization to which the domain belongs.</param>
+        /// <param name="domainId">The ID of the domain.</param>
+        /// <param name="requestBody">A <see cref="UpdateOrganizationDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateOrganizationDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/>, <paramref name="domainId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateOrganizationDomainResponse> UpdateAsync(
+            string organizationId,
+            string domainId,
+            UpdateOrganizationDomainRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
         /// Remove a domain from an organization.
-        /// 
+        /// </summary>
         /// <remarks>
         /// Removes the given domain from the organization.
         /// </remarks>
-        /// </summary>
-        Task<DeleteOrganizationDomainResponse> DeleteAsync(string organizationId, string domainId, RetryConfig? retryConfig = null);
+        /// <param name="organizationId">The ID of the organization to which the domain belongs.</param>
+        /// <param name="domainId">The ID of the domain.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteOrganizationDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="domainId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteOrganizationDomainResponse> DeleteAsync(
+            string organizationId,
+            string domainId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// List all organization domains
-        /// 
+        /// List all organization domains.
+        /// </summary>
         /// <remarks>
         /// Retrieves a list of all organization domains within the current instance.<br/>
         /// This endpoint can be used to list all domains across all organizations<br/>
         /// or filter domains by organization, verification status, enrollment mode, or search query.<br/>
         /// <br/>
         /// The response includes pagination information and details about each domain<br/>
-        /// including its verification status, enrollment mode, and associated counts.<br/>
-        /// 
+        /// including its verification status, enrollment mode, and associated counts.
         /// </remarks>
-        /// </summary>
-        Task<ListAllOrganizationDomainsResponse> ListAllAsync(ListAllOrganizationDomainsRequest? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="ListAllOrganizationDomainsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListAllOrganizationDomainsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListAllOrganizationDomainsResponse> ListAllAsync(
+            ListAllOrganizationDomainsRequest? request = null,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class OrganizationDomains: IOrganizationDomains
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public OrganizationDomains(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<CreateOrganizationDomainResponse> CreateAsync(string organizationId, CreateOrganizationDomainRequestBody requestBody, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Create a new organization domain.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new organization domain. By default the domain is verified, but can be optionally set to unverified.
+        /// </remarks>
+        /// <param name="organizationId">The ID of the organization where the new domain will be created.</param>
+        /// <param name="requestBody">A <see cref="CreateOrganizationDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateOrganizationDomainResponse> CreateAsync(
+            string organizationId,
+            CreateOrganizationDomainRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new CreateOrganizationDomainRequest()
             {
                 OrganizationId = organizationId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/domains", request, null);
 
@@ -158,7 +235,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -167,9 +244,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -245,8 +322,28 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListOrganizationDomainsResponse> ListAsync(ListOrganizationDomainsRequest request, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Get a list of all domains of an organization.
+        /// </summary>
+        /// <remarks>
+        /// Get a list of all domains of an organization.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListOrganizationDomainsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationDomainsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListOrganizationDomainsResponse> ListAsync(
+            ListOrganizationDomainsRequest request,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/domains", request, null);
 
@@ -301,7 +398,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -310,9 +407,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -388,14 +485,41 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateOrganizationDomainResponse> UpdateAsync(string organizationId, string domainId, UpdateOrganizationDomainRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update an organization domain.
+        /// </summary>
+        /// <remarks>
+        /// Updates the properties of an existing organization domain.
+        /// </remarks>
+        /// <param name="organizationId">The ID of the organization to which the domain belongs.</param>
+        /// <param name="domainId">The ID of the domain.</param>
+        /// <param name="requestBody">A <see cref="UpdateOrganizationDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateOrganizationDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/>, <paramref name="domainId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateOrganizationDomainResponse> UpdateAsync(
+            string organizationId,
+            string domainId,
+            UpdateOrganizationDomainRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+            if (domainId == null) throw new ArgumentNullException(nameof(domainId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new UpdateOrganizationDomainRequest()
             {
                 OrganizationId = organizationId,
                 DomainId = domainId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/domains/{domain_id}", request, null);
 
@@ -456,7 +580,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -465,9 +589,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -543,13 +667,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteOrganizationDomainResponse> DeleteAsync(string organizationId, string domainId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Remove a domain from an organization.
+        /// </summary>
+        /// <remarks>
+        /// Removes the given domain from the organization.
+        /// </remarks>
+        /// <param name="organizationId">The ID of the organization to which the domain belongs.</param>
+        /// <param name="domainId">The ID of the domain.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteOrganizationDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="domainId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteOrganizationDomainResponse> DeleteAsync(
+            string organizationId,
+            string domainId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+            if (domainId == null) throw new ArgumentNullException(nameof(domainId));
+
             var request = new DeleteOrganizationDomainRequest()
             {
                 OrganizationId = organizationId,
                 DomainId = domainId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/domains/{domain_id}", request, null);
 
@@ -604,7 +752,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -613,9 +761,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -691,7 +839,29 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ListAllOrganizationDomainsResponse> ListAllAsync(ListAllOrganizationDomainsRequest? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// List all organization domains.
+        /// </summary>
+        /// <remarks>
+        /// Retrieves a list of all organization domains within the current instance.<br/>
+        /// This endpoint can be used to list all domains across all organizations<br/>
+        /// or filter domains by organization, verification status, enrollment mode, or search query.<br/>
+        /// <br/>
+        /// The response includes pagination information and details about each domain<br/>
+        /// including its verification status, enrollment mode, and associated counts.
+        /// </remarks>
+        /// <param name="request">A <see cref="ListAllOrganizationDomainsRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListAllOrganizationDomainsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListAllOrganizationDomainsResponse> ListAllAsync(
+            ListAllOrganizationDomainsRequest? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_domains", request, null);
@@ -747,7 +917,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 403 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -756,9 +926,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -833,5 +1003,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

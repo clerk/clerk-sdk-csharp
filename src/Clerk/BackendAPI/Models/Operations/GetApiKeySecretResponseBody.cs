@@ -11,13 +11,12 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// 200 OK
+    /// 200 OK.
     /// </summary>
     public class GetApiKeySecretResponseBody
     {
-
         [JsonProperty("secret")]
         public string Secret { get; set; } = default!;
     }

@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class CreateApiKeyRequestBody
     {
-
         [JsonProperty("type")]
         public string? Type { get; set; } = "api_key";
 

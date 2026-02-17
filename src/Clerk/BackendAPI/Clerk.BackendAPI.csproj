@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>Clerk.BackendAPI</PackageId>
-    <Version>0.15.1</Version>
+    <Version>0.15.2</Version>
     <TargetFramework>net8.0</TargetFramework>
     <Authors>Clerk</Authors>
     <Copyright>Copyright (c) Clerk 2026</Copyright>
@@ -15,7 +15,7 @@
 <br/>
 ### Versions<br/>
 <br/>
-When the API changes in a way that isn&apos;t compatible with older versions, a new version is released.<br/>
+When the API changes in a way that isn't compatible with older versions, a new version is released.<br/>
 Each version is identified by its release date, e.g. `2025-04-10`. For more information, please see <a href="https://clerk.com/docs/versioning/available-versions">Clerk API Versions</a>.<br/>
 <br/>
 Please see https://clerk.com/docs for more information.</Description>

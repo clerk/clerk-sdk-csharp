@@ -12,26 +12,17 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class Token
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public TokenObject Object { get; set; } = default!;
 
         /// <summary>
-        /// String representing the encoded JSON Web Token (JWT) value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the encoded JSON Web Token (JWT) value.
         /// </summary>
         [JsonProperty("jwt")]
         public string Jwt { get; set; } = default!;

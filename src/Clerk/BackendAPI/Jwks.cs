@@ -23,35 +23,47 @@ namespace Clerk.BackendAPI
 
     public interface IJwks
     {
-
         /// <summary>
-        /// Retrieve the JSON Web Key Set of the instance
-        /// 
-        /// <remarks>
-        /// Retrieve the JSON Web Key Set of the instance
-        /// </remarks>
+        /// Retrieve the JSON Web Key Set of the instance.
         /// </summary>
-        Task<GetJWKSResponse> GetJWKSAsync(RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Retrieve the JSON Web Key Set of the instance.
+        /// </remarks>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetJWKSResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetJWKSResponse> GetJWKSAsync(RetryConfig? retryConfig = null);
     }
 
     public class Jwks: IJwks
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Jwks(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetJWKSResponse> GetJWKSAsync(RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Retrieve the JSON Web Key Set of the instance.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve the JSON Web Key Set of the instance.
+        /// </remarks>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetJWKSResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetJWKSResponse> GetJWKSAsync(RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/jwks";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
@@ -114,9 +126,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -171,5 +183,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

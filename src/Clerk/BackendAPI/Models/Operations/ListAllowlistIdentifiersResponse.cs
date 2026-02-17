@@ -13,15 +13,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ListAllowlistIdentifiersResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// Success
+        /// Success.
         /// </summary>
         public List<AllowlistIdentifier>? AllowlistIdentifierList { get; set; }
     }

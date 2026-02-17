@@ -11,56 +11,46 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetSessionListRequest
     {
-
         /// <summary>
-        /// List sessions for the given client
+        /// List sessions for the given client.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=client_id")]
         public string? ClientId { get; set; }
 
         /// <summary>
-        /// List sessions for the given user
+        /// List sessions for the given user.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=user_id")]
         public string? UserId { get; set; }
 
         /// <summary>
-        /// Filter sessions by the provided status
+        /// Filter sessions by the provided status.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
         public Models.Operations.Status? Status { get; set; }
 
         /// <summary>
         /// Whether to paginate the results.<br/>
-        /// 
-        /// <remarks>
         /// If true, the results will be paginated.<br/>
         /// If false, the results will not be paginated.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=paginated")]
         public bool? Paginated { get; set; }
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;

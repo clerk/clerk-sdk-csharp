@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteSAMLConnectionRequest
     {
-
         /// <summary>
-        /// The ID of the SAML Connection to delete
+        /// The ID of the SAML Connection to delete.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=saml_connection_id")]
         public string SamlConnectionId { get; set; } = default!;

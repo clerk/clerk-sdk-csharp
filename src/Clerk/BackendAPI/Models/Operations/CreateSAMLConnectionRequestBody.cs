@@ -52,7 +52,6 @@ namespace Clerk.BackendAPI.Models.Operations
         }
     }
 
-
     [JsonConverter(typeof(CreateSAMLConnectionRequestBody.CreateSAMLConnectionRequestBodyConverter))]
     public class CreateSAMLConnectionRequestBody
     {

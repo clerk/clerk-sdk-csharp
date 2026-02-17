@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class RevertTemplateRequest
     {
-
         /// <summary>
-        /// The type of template to revert
+        /// The type of template to revert.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=template_type")]
         public RevertTemplatePathParamTemplateType TemplateType { get; set; } = default!;
 
         /// <summary>
-        /// The slug of the template to revert
+        /// The slug of the template to revert.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=slug")]
         public string Slug { get; set; } = default!;

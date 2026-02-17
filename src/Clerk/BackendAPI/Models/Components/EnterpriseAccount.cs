@@ -13,29 +13,20 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class EnterpriseAccount
     {
-
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public EnterpriseAccountObject Object { get; set; } = default!;
 
         /// <summary>
-        /// The authentication protocol used to sign in.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// The authentication protocol used to sign in.
         /// </summary>
         [JsonProperty("protocol")]
         public Protocol? Protocol { get; set; }
@@ -56,7 +47,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? LastName { get; set; } = null;
 
         /// <summary>
-        /// The unique ID of the user in the external provider&apos;s system
+        /// The unique ID of the user in the external provider's system.
         /// </summary>
         [JsonProperty("provider_user_id")]
         public string? ProviderUserId { get; set; } = null;
@@ -89,11 +80,7 @@ namespace Clerk.BackendAPI.Models.Components
         public EnterpriseConnection? EnterpriseConnection { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp of last authentication.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last authentication.
         /// </summary>
         [JsonProperty("last_authenticated_at")]
         public long? LastAuthenticatedAt { get; set; } = null;

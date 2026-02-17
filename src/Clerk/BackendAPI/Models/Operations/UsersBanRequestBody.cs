@@ -12,12 +12,11 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UsersBanRequestBody
     {
-
         /// <summary>
-        /// Array of user IDs to ban
+        /// Array of user IDs to ban.
         /// </summary>
         [JsonProperty("user_ids")]
         public List<string> UserIds { get; set; } = default!;

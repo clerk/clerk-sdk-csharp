@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteOrganizationPermissionRequest
     {
-
         /// <summary>
-        /// The ID of the permission to delete
+        /// The ID of the permission to delete.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=permission_id")]
         public string PermissionId { get; set; } = default!;

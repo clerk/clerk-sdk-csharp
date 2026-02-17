@@ -12,13 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The authentication protocol used to sign in.<br/>
-    /// 
-    /// <remarks>
-    /// 
-    /// </remarks>
+    /// The authentication protocol used to sign in.
     /// </summary>
     public enum Protocol
     {
@@ -60,5 +56,4 @@ namespace Clerk.BackendAPI.Models.Components
             throw new Exception($"Unknown value {value} for enum Protocol");
         }
     }
-
 }

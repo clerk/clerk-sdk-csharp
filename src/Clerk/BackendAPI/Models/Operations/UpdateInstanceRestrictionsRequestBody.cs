@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateInstanceRestrictionsRequestBody
     {
-
         [JsonProperty("allowlist")]
         public bool? Allowlist { get; set; } = null;
 

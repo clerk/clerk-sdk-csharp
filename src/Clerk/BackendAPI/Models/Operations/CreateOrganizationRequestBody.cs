@@ -12,53 +12,46 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class CreateOrganizationRequestBody
     {
-
         /// <summary>
         /// The name of the new organization.<br/>
-        /// 
-        /// <remarks>
         /// May not contain URLs or HTML.<br/>
-        /// Max length: 256
-        /// </remarks>
+        /// Max length: 256.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the User who will become the administrator for the new organization
+        /// The ID of the User who will become the administrator for the new organization.
         /// </summary>
         [JsonProperty("created_by")]
         public string? CreatedBy { get; set; } = null;
 
         /// <summary>
-        /// Metadata saved on the organization, accessible only from the Backend API
+        /// Metadata saved on the organization, accessible only from the Backend API.
         /// </summary>
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
 
         /// <summary>
-        /// Metadata saved on the organization, read-only from the Frontend API and fully accessible (read/write) from the Backend API
+        /// Metadata saved on the organization, read-only from the Frontend API and fully accessible (read/write) from the Backend API.
         /// </summary>
         [JsonProperty("public_metadata")]
         public Dictionary<string, object>? PublicMetadata { get; set; } = null;
 
         /// <summary>
         /// A slug for the new organization.<br/>
-        /// 
-        /// <remarks>
-        /// Can contain only lowercase alphanumeric characters and the dash &quot;-&quot;.<br/>
+        /// Can contain only lowercase alphanumeric characters and the dash "-".<br/>
         /// Must be unique for the instance.<br/>
         /// This field should only be included when slugs are enabled in the organization settings, refer to our <a href="https://clerk.com/docs/guides/organizations/overview#organization-slugs">documentation</a>.
-        /// </remarks>
         /// </summary>
         [JsonProperty("slug")]
         public string? Slug { get; set; } = null;
 
         /// <summary>
-        /// The maximum number of memberships allowed for this organization
+        /// The maximum number of memberships allowed for this organization.
         /// </summary>
         [JsonProperty("max_allowed_memberships")]
         public long? MaxAllowedMemberships { get; set; } = null;
@@ -68,5 +61,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("created_at")]
         public string? CreatedAt { get; set; } = null;
+
+        /// <summary>
+        /// The key of the <a href="https://clerk.com/docs/guides/organizations/control-access/role-sets">role set</a> to assign to this organization.
+        /// </summary>
+        [JsonProperty("role_set_key")]
+        public string? RoleSetKey { get; set; } = null;
     }
 }

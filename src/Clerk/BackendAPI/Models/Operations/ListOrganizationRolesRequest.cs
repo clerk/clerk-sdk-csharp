@@ -10,51 +10,38 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class ListOrganizationRolesRequest
     {
-
         /// <summary>
         /// Returns organization roles with ID, name, or key that match the given query.<br/>
-        /// 
-        /// <remarks>
         /// Uses exact match for organization role ID and partial match for name and key.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
 
         /// <summary>
         /// Allows to return organization roles in a particular order.<br/>
-        /// 
-        /// <remarks>
         /// At the moment, you can order the returned organization roles by their `created_at`, `name`, or `key`.<br/>
         /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
         /// For example, if you want organization roles to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
-        /// If you don&apos;t use `+` or `-`, then `+` is implied.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied.<br/>
         /// Defaults to `-created_at`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
         public string? OrderBy { get; set; } = "-created_at";
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;

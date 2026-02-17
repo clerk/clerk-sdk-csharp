@@ -13,19 +13,14 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// An organization invitation with public organization data populated
+    /// An organization invitation with public organization data populated.
     /// </summary>
     public class OrganizationInvitationWithPublicOrganizationData
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public OrganizationInvitationWithPublicOrganizationDataObject Object { get; set; } = default!;
@@ -49,7 +44,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string? InviterId { get; set; }
 
         /// <summary>
-        /// An organization inviter&apos;s public user data
+        /// An organization inviter's public user data.
         /// </summary>
         [JsonProperty("public_inviter_data", NullValueHandling = NullValueHandling.Include)]
         public OrganizationInvitationPublicUserData? PublicInviterData { get; set; }

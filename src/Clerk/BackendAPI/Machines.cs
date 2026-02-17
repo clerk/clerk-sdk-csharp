@@ -24,110 +24,253 @@ namespace Clerk.BackendAPI
 
     public interface IMachines
     {
-
         /// <summary>
-        /// Get a list of machines for an instance
-        /// 
+        /// Get a list of machines for an instance.
+        /// </summary>
         /// <remarks>
         /// This request returns the list of machines for an instance. The machines are<br/>
         /// ordered by descending creation date (i.e. most recent machines will be<br/>
-        /// returned first)
+        /// returned first).
         /// </remarks>
-        /// </summary>
-        Task<ListMachinesResponse> ListAsync(long? limit = 10, long? offset = 0, string? query = null, string? orderBy = "-created_at", RetryConfig? retryConfig = null);
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="query">Returns machines with ID or name that match the given query. Uses exact match for machine ID and partial match for name.</param>
+        /// <param name="orderBy">
+        /// Allows to return machines in a particular order.<br/>
+        /// You can order the returned machines by their `name` or `created_at`.<br/>
+        /// To specify the direction, use the `+` or `-` symbols prepended to the property to order by.<br/>
+        /// For example, to return machines in descending order by `created_at`, use `-created_at`.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListMachinesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListMachinesResponse> ListAsync(
+            long? limit = 10,
+            long? offset = 0,
+            string? query = null,
+            string? orderBy = "-created_at",
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a machine
-        /// 
+        /// Create a machine.
+        /// </summary>
         /// <remarks>
         /// Creates a new machine.
         /// </remarks>
-        /// </summary>
-        Task<CreateMachineResponse> CreateAsync(CreateMachineRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="CreateMachineRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateMachineResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateMachineResponse> CreateAsync(
+            CreateMachineRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve a machine
-        /// 
+        /// Retrieve a machine.
+        /// </summary>
         /// <remarks>
         /// Returns the details of a machine.
         /// </remarks>
-        /// </summary>
-        Task<GetMachineResponse> GetAsync(string machineId, RetryConfig? retryConfig = null);
+        /// <param name="machineId">The ID of the machine to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetMachineResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetMachineResponse> GetAsync(string machineId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update a machine
-        /// 
+        /// Update a machine.
+        /// </summary>
         /// <remarks>
         /// Updates an existing machine.<br/>
         /// Only the provided fields will be updated.
         /// </remarks>
-        /// </summary>
-        Task<UpdateMachineResponse> UpdateAsync(string machineId, UpdateMachineRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="machineId">The ID of the machine to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateMachineRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateMachineResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateMachineResponse> UpdateAsync(
+            string machineId,
+            UpdateMachineRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete a machine
-        /// 
+        /// Delete a machine.
+        /// </summary>
         /// <remarks>
         /// Deletes a machine.
         /// </remarks>
-        /// </summary>
-        Task<DeleteMachineResponse> DeleteAsync(string machineId, RetryConfig? retryConfig = null);
+        /// <param name="machineId">The ID of the machine to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteMachineResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteMachineResponse> DeleteAsync(string machineId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Retrieve a machine secret key
-        /// 
+        /// Retrieve a machine secret key.
+        /// </summary>
         /// <remarks>
         /// Returns the secret key for a machine.
         /// </remarks>
-        /// </summary>
-        Task<GetMachineSecretKeyResponse> GetSecretKeyAsync(string machineId, RetryConfig? retryConfig = null);
+        /// <param name="machineId">The ID of the machine to retrieve the secret key for.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetMachineSecretKeyResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetMachineSecretKeyResponse> GetSecretKeyAsync(string machineId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Rotate a machine&apos;s secret key
-        /// 
+        /// Rotate a machine's secret key.
+        /// </summary>
         /// <remarks>
-        /// Rotates the machine&apos;s secret key.<br/>
+        /// Rotates the machine's secret key.<br/>
         /// When the secret key is rotated, make sure to update it in your machine/application.<br/>
         /// The previous secret key will remain valid for the duration specified by the previous_token_ttl parameter.
         /// </remarks>
-        /// </summary>
-        Task<RotateMachineSecretKeyResponse> RotateSecretKeyAsync(string machineId, RotateMachineSecretKeyRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="machineId">The ID of the machine to rotate the secret key for.</param>
+        /// <param name="requestBody">A <see cref="RotateMachineSecretKeyRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RotateMachineSecretKeyResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="machineId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RotateMachineSecretKeyResponse> RotateSecretKeyAsync(
+            string machineId,
+            RotateMachineSecretKeyRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a machine scope
-        /// 
+        /// Create a machine scope.
+        /// </summary>
         /// <remarks>
         /// Creates a new machine scope, allowing the specified machine to access another machine.<br/>
         /// Maximum of 150 scopes per machine.
         /// </remarks>
-        /// </summary>
-        Task<CreateMachineScopeResponse> CreateScopeAsync(string machineId, CreateMachineScopeRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="machineId">The ID of the machine that will have access to another machine.</param>
+        /// <param name="requestBody">A <see cref="CreateMachineScopeRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateMachineScopeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 409 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateMachineScopeResponse> CreateScopeAsync(
+            string machineId,
+            CreateMachineScopeRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete a machine scope
-        /// 
+        /// Delete a machine scope.
+        /// </summary>
         /// <remarks>
         /// Deletes a machine scope, removing access from one machine to another.
         /// </remarks>
-        /// </summary>
-        Task<DeleteMachineScopeResponse> DeleteScopeAsync(string machineId, string otherMachineId, RetryConfig? retryConfig = null);
+        /// <param name="machineId">The ID of the machine that has access to another machine.</param>
+        /// <param name="otherMachineId">The ID of the machine that is being accessed.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteMachineScopeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="machineId"/> or <paramref name="otherMachineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteMachineScopeResponse> DeleteScopeAsync(
+            string machineId,
+            string otherMachineId,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class Machines: IMachines
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Machines(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListMachinesResponse> ListAsync(long? limit = 10, long? offset = 0, string? query = null, string? orderBy = "-created_at", RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Get a list of machines for an instance.
+        /// </summary>
+        /// <remarks>
+        /// This request returns the list of machines for an instance. The machines are<br/>
+        /// ordered by descending creation date (i.e. most recent machines will be<br/>
+        /// returned first).
+        /// </remarks>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="query">Returns machines with ID or name that match the given query. Uses exact match for machine ID and partial match for name.</param>
+        /// <param name="orderBy">
+        /// Allows to return machines in a particular order.<br/>
+        /// You can order the returned machines by their `name` or `created_at`.<br/>
+        /// To specify the direction, use the `+` or `-` symbols prepended to the property to order by.<br/>
+        /// For example, to return machines in descending order by `created_at`, use `-created_at`.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListMachinesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListMachinesResponse> ListAsync(
+            long? limit = 10,
+            long? offset = 0,
+            string? query = null,
+            string? orderBy = "-created_at",
+            RetryConfig? retryConfig = null
+        )
         {
             var request = new ListMachinesRequest()
             {
@@ -136,6 +279,7 @@ namespace Clerk.BackendAPI
                 Query = query,
                 OrderBy = orderBy,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/machines", request, null);
 
@@ -190,7 +334,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -199,9 +343,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -277,10 +421,26 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateMachineResponse> CreateAsync(CreateMachineRequestBody? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create a machine.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new machine.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateMachineRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateMachineResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateMachineResponse> CreateAsync(
+            CreateMachineRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/machines";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -340,7 +500,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -349,9 +509,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -427,12 +587,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetMachineResponse> GetAsync(string machineId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a machine.
+        /// </summary>
+        /// <remarks>
+        /// Returns the details of a machine.
+        /// </remarks>
+        /// <param name="machineId">The ID of the machine to retrieve.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetMachineResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetMachineResponse> GetAsync(string machineId, RetryConfig? retryConfig = null)
         {
+            if (machineId == null) throw new ArgumentNullException(nameof(machineId));
+
             var request = new GetMachineRequest()
             {
                 MachineId = machineId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}", request, null);
 
@@ -487,7 +665,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -496,9 +674,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -574,13 +752,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateMachineResponse> UpdateAsync(string machineId, UpdateMachineRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update a machine.
+        /// </summary>
+        /// <remarks>
+        /// Updates an existing machine.<br/>
+        /// Only the provided fields will be updated.
+        /// </remarks>
+        /// <param name="machineId">The ID of the machine to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateMachineRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateMachineResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateMachineResponse> UpdateAsync(
+            string machineId,
+            UpdateMachineRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (machineId == null) throw new ArgumentNullException(nameof(machineId));
+
             var request = new UpdateMachineRequest()
             {
                 MachineId = machineId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}", request, null);
 
@@ -641,7 +843,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -650,9 +852,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -728,12 +930,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteMachineResponse> DeleteAsync(string machineId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a machine.
+        /// </summary>
+        /// <remarks>
+        /// Deletes a machine.
+        /// </remarks>
+        /// <param name="machineId">The ID of the machine to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteMachineResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteMachineResponse> DeleteAsync(string machineId, RetryConfig? retryConfig = null)
         {
+            if (machineId == null) throw new ArgumentNullException(nameof(machineId));
+
             var request = new DeleteMachineRequest()
             {
                 MachineId = machineId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}", request, null);
 
@@ -788,7 +1008,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -797,9 +1017,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -875,12 +1095,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetMachineSecretKeyResponse> GetSecretKeyAsync(string machineId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a machine secret key.
+        /// </summary>
+        /// <remarks>
+        /// Returns the secret key for a machine.
+        /// </remarks>
+        /// <param name="machineId">The ID of the machine to retrieve the secret key for.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetMachineSecretKeyResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetMachineSecretKeyResponse> GetSecretKeyAsync(
+            string machineId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (machineId == null) throw new ArgumentNullException(nameof(machineId));
+
             var request = new GetMachineSecretKeyRequest()
             {
                 MachineId = machineId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/secret_key", request, null);
 
@@ -935,7 +1176,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -944,9 +1185,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1022,13 +1263,39 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RotateMachineSecretKeyResponse> RotateSecretKeyAsync(string machineId, RotateMachineSecretKeyRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Rotate a machine's secret key.
+        /// </summary>
+        /// <remarks>
+        /// Rotates the machine's secret key.<br/>
+        /// When the secret key is rotated, make sure to update it in your machine/application.<br/>
+        /// The previous secret key will remain valid for the duration specified by the previous_token_ttl parameter.
+        /// </remarks>
+        /// <param name="machineId">The ID of the machine to rotate the secret key for.</param>
+        /// <param name="requestBody">A <see cref="RotateMachineSecretKeyRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RotateMachineSecretKeyResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="machineId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RotateMachineSecretKeyResponse> RotateSecretKeyAsync(
+            string machineId,
+            RotateMachineSecretKeyRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (machineId == null) throw new ArgumentNullException(nameof(machineId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new RotateMachineSecretKeyRequest()
             {
                 MachineId = machineId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/secret_key/rotate", request, null);
 
@@ -1089,7 +1356,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1098,9 +1365,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1176,13 +1443,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateMachineScopeResponse> CreateScopeAsync(string machineId, CreateMachineScopeRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create a machine scope.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new machine scope, allowing the specified machine to access another machine.<br/>
+        /// Maximum of 150 scopes per machine.
+        /// </remarks>
+        /// <param name="machineId">The ID of the machine that will have access to another machine.</param>
+        /// <param name="requestBody">A <see cref="CreateMachineScopeRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateMachineScopeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="machineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 409 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateMachineScopeResponse> CreateScopeAsync(
+            string machineId,
+            CreateMachineScopeRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (machineId == null) throw new ArgumentNullException(nameof(machineId));
+
             var request = new CreateMachineScopeRequest()
             {
                 MachineId = machineId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/scopes", request, null);
 
@@ -1243,7 +1534,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 409 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1252,9 +1543,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1330,13 +1621,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteMachineScopeResponse> DeleteScopeAsync(string machineId, string otherMachineId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a machine scope.
+        /// </summary>
+        /// <remarks>
+        /// Deletes a machine scope, removing access from one machine to another.
+        /// </remarks>
+        /// <param name="machineId">The ID of the machine that has access to another machine.</param>
+        /// <param name="otherMachineId">The ID of the machine that is being accessed.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteMachineScopeResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="machineId"/> or <paramref name="otherMachineId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteMachineScopeResponse> DeleteScopeAsync(
+            string machineId,
+            string otherMachineId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (machineId == null) throw new ArgumentNullException(nameof(machineId));
+            if (otherMachineId == null) throw new ArgumentNullException(nameof(otherMachineId));
+
             var request = new DeleteMachineScopeRequest()
             {
                 MachineId = machineId,
                 OtherMachineId = otherMachineId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/machines/{machine_id}/scopes/{other_machine_id}", request, null);
 
@@ -1391,7 +1706,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1400,9 +1715,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1477,5 +1792,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

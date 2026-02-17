@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// Mode of enrollment for the domain
+    /// Mode of enrollment for the domain.
     /// </summary>
     public enum EnrollmentMode
     {
@@ -58,5 +58,4 @@ namespace Clerk.BackendAPI.Models.Components
             throw new Exception($"Unknown value {value} for enum EnrollmentMode");
         }
     }
-
 }

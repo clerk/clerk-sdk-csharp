@@ -12,9 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// Filter subscription items by payer type
+    /// Filter subscription items by payer type.
     /// </summary>
     public enum QueryParamPayerType
     {
@@ -56,5 +56,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum QueryParamPayerType");
         }
     }
-
 }

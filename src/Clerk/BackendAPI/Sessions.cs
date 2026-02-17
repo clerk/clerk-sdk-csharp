@@ -24,94 +24,181 @@ namespace Clerk.BackendAPI
 
     public interface ISessions
     {
-
         /// <summary>
-        /// List all sessions
-        /// 
+        /// List all sessions.
+        /// </summary>
         /// <remarks>
         /// Returns a list of all sessions.<br/>
         /// The sessions are returned sorted by creation date, with the newest sessions appearing first.<br/>
         /// **Deprecation Notice (2024-01-01):** All parameters were initially considered optional, however<br/>
         /// moving forward at least one of `client_id` or `user_id` parameters should be provided.
         /// </remarks>
-        /// </summary>
-        Task<GetSessionListResponse> ListAsync(GetSessionListRequest? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="GetSessionListRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetSessionListResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetSessionListResponse> ListAsync(
+            GetSessionListRequest? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a new active session
-        /// 
+        /// Create a new active session.
+        /// </summary>
         /// <remarks>
         /// Create a new active session for the provided user ID.<br/>
         /// <br/>
         /// **This operation is intended only for use in testing, and is not available for production instances.** If you are looking to generate a user session from the backend,<br/>
         /// we recommend using the <a href="https://clerk.com/docs/reference/backend-api/tag/Sign-in-Tokens#operation/CreateSignInToken">Sign-in Tokens</a> resource instead.
         /// </remarks>
-        /// </summary>
-        Task<CreateSessionResponse> CreateAsync(CreateSessionRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="CreateSessionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateSessionResponse> CreateAsync(
+            CreateSessionRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve a session
-        /// 
+        /// Retrieve a session.
+        /// </summary>
         /// <remarks>
-        /// Retrieve the details of a session
+        /// Retrieve the details of a session.
         /// </remarks>
-        /// </summary>
-        Task<GetSessionResponse> GetAsync(string sessionId, RetryConfig? retryConfig = null);
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="sessionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetSessionResponse> GetAsync(string sessionId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Refresh a session
-        /// 
+        /// Refresh a session.
+        /// </summary>
         /// <remarks>
         /// Refreshes a session by creating a new session token. A 401 is returned when there<br/>
         /// are validation errors, which signals the SDKs to fall back to the handshake flow.
         /// </remarks>
-        /// </summary>
-        Task<RefreshSessionResponse> RefreshAsync(string sessionId, RefreshSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="requestBody">Refresh session parameters.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RefreshSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="sessionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 401 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RefreshSessionResponse> RefreshAsync(
+            string sessionId,
+            RefreshSessionRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Revoke a session
-        /// 
+        /// Revoke a session.
+        /// </summary>
         /// <remarks>
-        /// Sets the status of a session as &quot;revoked&quot;, which is an unauthenticated state.<br/>
+        /// Sets the status of a session as "revoked", which is an unauthenticated state.<br/>
         /// In multi-session mode, a revoked session will still be returned along with its client object, however the user will need to sign in again.
         /// </remarks>
-        /// </summary>
-        Task<RevokeSessionResponse> RevokeAsync(string sessionId, RetryConfig? retryConfig = null);
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RevokeSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="sessionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RevokeSessionResponse> RevokeAsync(string sessionId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Create a session token
-        /// 
+        /// Create a session token.
+        /// </summary>
         /// <remarks>
         /// Creates a session JSON Web Token (JWT) based on a session.
         /// </remarks>
-        /// </summary>
-        Task<CreateSessionTokenResponse> CreateTokenAsync(string sessionId, CreateSessionTokenRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="requestBody">A <see cref="CreateSessionTokenRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateSessionTokenResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="sessionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateSessionTokenResponse> CreateTokenAsync(
+            string sessionId,
+            CreateSessionTokenRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a session token from a JWT template
-        /// 
-        /// <remarks>
-        /// Creates a JSON Web Token (JWT) based on a session and a JWT Template name defined for your instance
-        /// </remarks>
+        /// Create a session token from a JWT template.
         /// </summary>
-        Task<CreateSessionTokenFromTemplateResponse> CreateTokenFromTemplateAsync(string sessionId, string templateName, CreateSessionTokenFromTemplateRequestBody? requestBody = null, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Creates a JSON Web Token (JWT) based on a session and a JWT Template name defined for your instance.
+        /// </remarks>
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="templateName">The name of the JWT template defined in your instance (e.g. `custom_hasura`).</param>
+        /// <param name="requestBody">A <see cref="CreateSessionTokenFromTemplateRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateSessionTokenFromTemplateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="sessionId"/> or <paramref name="templateName"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateSessionTokenFromTemplateResponse> CreateTokenFromTemplateAsync(
+            string sessionId,
+            string templateName,
+            CreateSessionTokenFromTemplateRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class Sessions: ISessions
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Sessions(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<GetSessionListResponse> ListAsync(GetSessionListRequest? request = null, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// List all sessions.
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of all sessions.<br/>
+        /// The sessions are returned sorted by creation date, with the newest sessions appearing first.<br/>
+        /// **Deprecation Notice (2024-01-01):** All parameters were initially considered optional, however<br/>
+        /// moving forward at least one of `client_id` or `user_id` parameters should be provided.
+        /// </remarks>
+        /// <param name="request">A <see cref="GetSessionListRequest"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetSessionListResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetSessionListResponse> ListAsync(
+            GetSessionListRequest? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/sessions", request, null);
@@ -167,7 +254,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -176,9 +263,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -254,10 +341,29 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateSessionResponse> CreateAsync(CreateSessionRequestBody? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create a new active session.
+        /// </summary>
+        /// <remarks>
+        /// Create a new active session for the provided user ID.<br/>
+        /// <br/>
+        /// **This operation is intended only for use in testing, and is not available for production instances.** If you are looking to generate a user session from the backend,<br/>
+        /// we recommend using the <a href="https://clerk.com/docs/reference/backend-api/tag/Sign-in-Tokens#operation/CreateSignInToken">Sign-in Tokens</a> resource instead.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateSessionRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateSessionResponse> CreateAsync(
+            CreateSessionRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/sessions";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -317,7 +423,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -326,9 +432,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -404,12 +510,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetSessionResponse> GetAsync(string sessionId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a session.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve the details of a session.
+        /// </remarks>
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="sessionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetSessionResponse> GetAsync(string sessionId, RetryConfig? retryConfig = null)
         {
+            if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
+
             var request = new GetSessionRequest()
             {
                 SessionId = sessionId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}", request, null);
 
@@ -464,7 +588,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -473,9 +597,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -551,13 +675,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RefreshSessionResponse> RefreshAsync(string sessionId, RefreshSessionRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Refresh a session.
+        /// </summary>
+        /// <remarks>
+        /// Refreshes a session by creating a new session token. A 401 is returned when there<br/>
+        /// are validation errors, which signals the SDKs to fall back to the handshake flow.
+        /// </remarks>
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="requestBody">Refresh session parameters.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RefreshSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="sessionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 401 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RefreshSessionResponse> RefreshAsync(
+            string sessionId,
+            RefreshSessionRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
+
             var request = new RefreshSessionRequest()
             {
                 SessionId = sessionId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/refresh", request, null);
 
@@ -618,7 +766,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -627,9 +775,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -705,12 +853,31 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RevokeSessionResponse> RevokeAsync(string sessionId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Revoke a session.
+        /// </summary>
+        /// <remarks>
+        /// Sets the status of a session as "revoked", which is an unauthenticated state.<br/>
+        /// In multi-session mode, a revoked session will still be returned along with its client object, however the user will need to sign in again.
+        /// </remarks>
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RevokeSessionResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="sessionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RevokeSessionResponse> RevokeAsync(string sessionId, RetryConfig? retryConfig = null)
         {
+            if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
+
             var request = new RevokeSessionRequest()
             {
                 SessionId = sessionId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/revoke", request, null);
 
@@ -765,7 +932,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -774,9 +941,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -852,13 +1019,36 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateSessionTokenResponse> CreateTokenAsync(string sessionId, CreateSessionTokenRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create a session token.
+        /// </summary>
+        /// <remarks>
+        /// Creates a session JSON Web Token (JWT) based on a session.
+        /// </remarks>
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="requestBody">A <see cref="CreateSessionTokenRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateSessionTokenResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="sessionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateSessionTokenResponse> CreateTokenAsync(
+            string sessionId,
+            CreateSessionTokenRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
+
             var request = new CreateSessionTokenRequest()
             {
                 SessionId = sessionId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/tokens", request, null);
 
@@ -919,7 +1109,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -928,9 +1118,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1006,14 +1196,40 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateSessionTokenFromTemplateResponse> CreateTokenFromTemplateAsync(string sessionId, string templateName, CreateSessionTokenFromTemplateRequestBody? requestBody = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create a session token from a JWT template.
+        /// </summary>
+        /// <remarks>
+        /// Creates a JSON Web Token (JWT) based on a session and a JWT Template name defined for your instance.
+        /// </remarks>
+        /// <param name="sessionId">The ID of the session.</param>
+        /// <param name="templateName">The name of the JWT template defined in your instance (e.g. `custom_hasura`).</param>
+        /// <param name="requestBody">A <see cref="CreateSessionTokenFromTemplateRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateSessionTokenFromTemplateResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="sessionId"/> or <paramref name="templateName"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateSessionTokenFromTemplateResponse> CreateTokenFromTemplateAsync(
+            string sessionId,
+            string templateName,
+            CreateSessionTokenFromTemplateRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (sessionId == null) throw new ArgumentNullException(nameof(sessionId));
+            if (templateName == null) throw new ArgumentNullException(nameof(templateName));
+
             var request = new CreateSessionTokenFromTemplateRequest()
             {
                 SessionId = sessionId,
                 TemplateName = templateName,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/sessions/{session_id}/tokens/{template_name}", request, null);
 
@@ -1074,7 +1290,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1083,9 +1299,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1160,5 +1376,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

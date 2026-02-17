@@ -10,7 +10,7 @@
 namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
-    
+
     /// <summary>
     /// The payee associated with this payment attempt.
     /// </summary>

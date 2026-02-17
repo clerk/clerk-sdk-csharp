@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateEmailAddressRequestBody
     {
-
         /// <summary>
         /// The email address will be marked as verified.
         /// </summary>

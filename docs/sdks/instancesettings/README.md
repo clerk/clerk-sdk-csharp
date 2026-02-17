@@ -2,6 +2,8 @@
 
 ## Overview
 
+Modify the settings of your instance.
+
 ### Available Operations
 
 * [Get](#get) - Fetch the current instance
@@ -9,6 +11,8 @@
 * [UpdateRestrictions](#updaterestrictions) - Update instance restrictions
 * [ChangeDomain](#changedomain) - Update production instance domain
 * [UpdateOrganizationSettings](#updateorganizationsettings) - Update instance organization settings
+* [GetInstanceProtect](#getinstanceprotect) - Get instance protect settings
+* [UpdateInstanceProtect](#updateinstanceprotect) - Update instance protect settings
 
 ## Get
 
@@ -224,4 +228,70 @@ var res = await sdk.InstanceSettings.UpdateOrganizationSettingsAsync(req);
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetInstanceProtect
+
+Get instance protect settings
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetInstanceProtect" method="get" path="/instance/protect" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.InstanceSettings.GetInstanceProtectAsync();
+
+// handle response
+```
+
+### Response
+
+**[GetInstanceProtectResponse](../../Models/Operations/GetInstanceProtectResponse.md)**
+
+### Errors
+
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| Clerk.BackendAPI.Models.Errors.SDKError | 4XX, 5XX                                | \*/\*                                   |
+
+## UpdateInstanceProtect
+
+Update instance protect settings
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="UpdateInstanceProtect" method="patch" path="/instance/protect" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+UpdateInstanceProtectRequestBody? req = null;
+
+var res = await sdk.InstanceSettings.UpdateInstanceProtectAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `request`                                                                                       | [UpdateInstanceProtectRequestBody](../../Models/Operations/UpdateInstanceProtectRequestBody.md) | :heavy_check_mark:                                                                              | The request object to use for the request.                                                      |
+
+### Response
+
+**[UpdateInstanceProtectResponse](../../Models/Operations/UpdateInstanceProtectResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 422                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

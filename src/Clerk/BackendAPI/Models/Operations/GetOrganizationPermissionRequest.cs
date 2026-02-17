@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetOrganizationPermissionRequest
     {
-
         /// <summary>
-        /// The ID of the permission to retrieve
+        /// The ID of the permission to retrieve.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=permission_id")]
         public string PermissionId { get; set; } = default!;

@@ -32,7 +32,7 @@
 * [DeleteTOTP](#deletetotp) - Delete all the user's TOTPs
 * [DeleteExternalAccount](#deleteexternalaccount) - Delete External Account
 * [SetPasswordCompromised](#setpasswordcompromised) - Set a user's password as compromised
-* [UnsetPasswordCompromised](#unsetpasswordcompromised) - Unmark a user's password as compromised
+* [UnsetPasswordCompromised](#unsetpasswordcompromised) - Unset a user's password as compromised
 * [GetInstanceOrganizationMemberships](#getinstanceorganizationmemberships) - Get a list of all organization memberships within an instance.
 
 ## List
@@ -79,6 +79,8 @@ GetUserListRequest req = new GetUserListRequest() {
     LastActiveAtSince = 1700690400000,
     CreatedAtBefore = 1730160000000,
     CreatedAtAfter = 1730160000000,
+    LastSignInAtBefore = 1700690400000,
+    LastSignInAtAfter = 1700690400000,
     Limit = 20,
     Offset = 10,
 };
@@ -227,6 +229,8 @@ GetUsersCountRequest req = new GetUsersCountRequest() {
     LastActiveAtSince = 1700690400000,
     CreatedAtBefore = 1730160000000,
     CreatedAtAfter = 1730160000000,
+    LastSignInAtBefore = 1700690400000,
+    LastSignInAtAfter = 1700690400000,
 };
 
 var res = await sdk.Users.CountAsync(req);
@@ -1236,7 +1240,7 @@ var res = await sdk.Users.DeleteExternalAccountAsync(
 
 ## SetPasswordCompromised
 
-Sets the given user's password as compromised, which means that they will be prompted to reset their password on their next sign in.
+Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.
 
 ### Example Usage
 
@@ -1272,7 +1276,7 @@ var res = await sdk.Users.SetPasswordCompromisedAsync(userId: "<id>");
 
 ## UnsetPasswordCompromised
 
-Removes the compromised status from the given user's password. The user will no longer be prompted to reset their password on their next sign in.
+Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in.
 
 ### Example Usage
 

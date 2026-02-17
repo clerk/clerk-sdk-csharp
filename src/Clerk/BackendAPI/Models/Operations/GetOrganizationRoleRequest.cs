@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetOrganizationRoleRequest
     {
-
         /// <summary>
-        /// The ID of the organization role
+        /// The ID of the organization role.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=organization_role_id")]
         public string OrganizationRoleId { get; set; } = default!;

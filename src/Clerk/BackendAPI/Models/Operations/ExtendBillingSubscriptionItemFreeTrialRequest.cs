@@ -11,18 +11,17 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
-    
+
     public class ExtendBillingSubscriptionItemFreeTrialRequest
     {
-
         /// <summary>
-        /// The ID of the subscription item to extend the free trial for
+        /// The ID of the subscription item to extend the free trial for.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=subscription_item_id")]
         public string SubscriptionItemId { get; set; } = default!;
 
         /// <summary>
-        /// Parameters for extending the free trial
+        /// Parameters for extending the free trial.
         /// </summary>
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public ExtendFreeTrialRequest ExtendFreeTrialRequest { get; set; } = default!;

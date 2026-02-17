@@ -12,33 +12,32 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Machine scope deleted successfully for a machine
+    /// Machine scope deleted successfully for a machine.
     /// </summary>
     public class MachineScopeDeleted
     {
-
         /// <summary>
-        /// String representing the object&apos;s type.
+        /// String representing the object's type.
         /// </summary>
         [JsonProperty("object")]
         public MachineScopeDeletedObject Object { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the machine that had access to the target machine
+        /// The ID of the machine that had access to the target machine.
         /// </summary>
         [JsonProperty("from_machine_id")]
         public string FromMachineId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the machine that was being accessed
+        /// The ID of the machine that was being accessed.
         /// </summary>
         [JsonProperty("to_machine_id")]
         public string ToMachineId { get; set; } = default!;
 
         /// <summary>
-        /// Whether the machine scope was successfully deleted
+        /// Whether the machine scope was successfully deleted.
         /// </summary>
         [JsonProperty("deleted")]
         public bool Deleted { get; set; } = default!;

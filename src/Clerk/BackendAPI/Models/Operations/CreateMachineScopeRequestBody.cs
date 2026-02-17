@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateMachineScopeRequestBody
     {
-
         /// <summary>
-        /// The ID of the machine that will be scoped to the current machine
+        /// The ID of the machine that will be scoped to the current machine.
         /// </summary>
         [JsonProperty("to_machine_id")]
         public string ToMachineId { get; set; } = default!;
