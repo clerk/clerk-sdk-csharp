@@ -124,6 +124,35 @@ namespace JwksHelpers.Tests
         }
 
         [Fact]
+        public async Task TestVerifyTokenConsecutiveCallsWithSameKey()
+        {
+            var (token, jwtKey) = Utils.GenerateTokenKeyPair();
+
+            // Poison the global CryptoProviderFactory cache with a disposed RSA key (#75)
+            var rsa = RSA.Create();
+            rsa.ImportFromPem(jwtKey.ToCharArray());
+            var staleKey = new RsaSecurityKey(rsa);
+            var factory = CryptoProviderFactory.Default;
+            var cachedProvider = factory.CreateForVerifying(staleKey, SecurityAlgorithms.RsaSha256);
+            rsa.Dispose();
+
+            try
+            {
+                var vtOptions = new VerifyTokenOptions(jwtKey: jwtKey);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    var claims = await VerifyToken.VerifyTokenAsync(token, vtOptions);
+                    Assert.NotNull(claims);
+                }
+            }
+            finally
+            {
+                factory.ReleaseSignatureProvider(cachedProvider);
+            }
+        }
+
+        [Fact]
         public async Task TestVerifyTokenExpired()
         {
             var (token, jwtKey) = Utils.GenerateTokenKeyPair(
