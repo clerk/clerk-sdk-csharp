@@ -56,7 +56,8 @@ public static class VerifyToken
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = rsaKey,
-            ClockSkew = TimeSpan.FromMilliseconds(options.ClockSkewInMs)
+            ClockSkew = TimeSpan.FromMilliseconds(options.ClockSkewInMs),
+            CryptoProviderFactory = new CryptoProviderFactory { CacheSignatureProviders = false }
         };
 
         ClaimsPrincipal claims;
