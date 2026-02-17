@@ -28,7 +28,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.15.2
+  version: 0.15.3
   additionalDependencies:
     - package: Microsoft.AspNetCore.Http
       version: 2.3.0
