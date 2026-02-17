@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetM2MTokensRequest
     {
-
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=subject")]
         public string Subject { get; set; } = default!;
 

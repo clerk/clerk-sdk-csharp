@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class CreateOrganizationDomainRequest
     {
-
         /// <summary>
         /// The ID of the organization where the new domain will be created.
         /// </summary>

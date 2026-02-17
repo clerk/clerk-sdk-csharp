@@ -24,75 +24,113 @@ namespace Clerk.BackendAPI
 
     public interface IDomains
     {
-
         /// <summary>
-        /// List all instance domains
-        /// 
+        /// List all instance domains.
+        /// </summary>
         /// <remarks>
         /// Use this endpoint to get a list of all domains for an instance.<br/>
         /// The response will contain the primary domain for the instance and any satellite domains. Each domain in the response contains information about the URLs where Clerk operates and the required CNAME targets.
         /// </remarks>
-        /// </summary>
-        Task<ListDomainsResponse> ListAsync(RetryConfig? retryConfig = null);
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListDomainsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListDomainsResponse> ListAsync(RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Add a domain
-        /// 
+        /// Add a domain.
+        /// </summary>
         /// <remarks>
         /// Add a new domain for your instance.<br/>
         /// Useful in the case of multi-domain instances, allows adding satellite domains to an instance.<br/>
         /// The new domain must have a `name`. The domain name can contain the port for development instances, like `localhost:3000`.<br/>
         /// At the moment, instances can have only one primary domain, so the `is_satellite` parameter must be set to `true`.<br/>
-        /// If you&apos;re planning to configure the new satellite domain to run behind a proxy, pass the `proxy_url` parameter accordingly.
+        /// If you're planning to configure the new satellite domain to run behind a proxy, pass the `proxy_url` parameter accordingly.
         /// </remarks>
-        /// </summary>
-        Task<AddDomainResponse> AddAsync(AddDomainRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="AddDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AddDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 402 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<AddDomainResponse> AddAsync(AddDomainRequestBody? request = null, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Delete a satellite domain
-        /// 
+        /// Delete a satellite domain.
+        /// </summary>
         /// <remarks>
         /// Deletes a satellite domain for the instance.<br/>
-        /// It is currently not possible to delete the instance&apos;s primary domain.
+        /// It is currently not possible to delete the instance's primary domain.
         /// </remarks>
-        /// </summary>
-        Task<DeleteDomainResponse> DeleteAsync(string domainId, RetryConfig? retryConfig = null);
+        /// <param name="domainId">The ID of the domain that will be deleted. Must be a satellite domain.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="domainId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteDomainResponse> DeleteAsync(string domainId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update a domain
-        /// 
+        /// Update a domain.
+        /// </summary>
         /// <remarks>
         /// The `proxy_url` can be updated only for production instances.<br/>
-        /// Update one of the instance&apos;s domains. Both primary and satellite domains can be updated.<br/>
+        /// Update one of the instance's domains. Both primary and satellite domains can be updated.<br/>
         /// If you choose to use Clerk via proxy, use this endpoint to specify the `proxy_url`.<br/>
-        /// Whenever you decide you&apos;d rather switch to DNS setup for Clerk, simply set `proxy_url`<br/>
-        /// to `null` for the domain. When you update a production instance&apos;s primary domain name,<br/>
-        /// you have to make sure that you&apos;ve completed all the necessary setup steps for DNS and<br/>
-        /// emails to work. Expect downtime otherwise. Updating a primary domain&apos;s name will also<br/>
-        /// update the instance&apos;s home origin, affecting the default application paths.
+        /// Whenever you decide you'd rather switch to DNS setup for Clerk, simply set `proxy_url`<br/>
+        /// to `null` for the domain. When you update a production instance's primary domain name,<br/>
+        /// you have to make sure that you've completed all the necessary setup steps for DNS and<br/>
+        /// emails to work. Expect downtime otherwise. Updating a primary domain's name will also<br/>
+        /// update the instance's home origin, affecting the default application paths.
         /// </remarks>
-        /// </summary>
-        Task<UpdateDomainResponse> UpdateAsync(string domainId, UpdateDomainRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="domainId">The ID of the domain that will be updated.</param>
+        /// <param name="requestBody">A <see cref="UpdateDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="domainId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateDomainResponse> UpdateAsync(
+            string domainId,
+            UpdateDomainRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class Domains: IDomains
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public Domains(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListDomainsResponse> ListAsync(RetryConfig? retryConfig = null)
+        /// <summary>
+        /// List all instance domains.
+        /// </summary>
+        /// <remarks>
+        /// Use this endpoint to get a list of all domains for an instance.<br/>
+        /// The response will contain the primary domain for the instance and any satellite domains. Each domain in the response contains information about the URLs where Clerk operates and the required CNAME targets.
+        /// </remarks>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListDomainsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListDomainsResponse> ListAsync(RetryConfig? retryConfig = null)
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/domains";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
@@ -155,9 +193,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -213,10 +251,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<AddDomainResponse> AddAsync(AddDomainRequestBody? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Add a domain.
+        /// </summary>
+        /// <remarks>
+        /// Add a new domain for your instance.<br/>
+        /// Useful in the case of multi-domain instances, allows adding satellite domains to an instance.<br/>
+        /// The new domain must have a `name`. The domain name can contain the port for development instances, like `localhost:3000`.<br/>
+        /// At the moment, instances can have only one primary domain, so the `is_satellite` parameter must be set to `true`.<br/>
+        /// If you're planning to configure the new satellite domain to run behind a proxy, pass the `proxy_url` parameter accordingly.
+        /// </remarks>
+        /// <param name="request">A <see cref="AddDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AddDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 402 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<AddDomainResponse> AddAsync(
+            AddDomainRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/domains";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -276,7 +334,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 402 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -285,9 +343,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -363,12 +421,31 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteDomainResponse> DeleteAsync(string domainId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a satellite domain.
+        /// </summary>
+        /// <remarks>
+        /// Deletes a satellite domain for the instance.<br/>
+        /// It is currently not possible to delete the instance's primary domain.
+        /// </remarks>
+        /// <param name="domainId">The ID of the domain that will be deleted. Must be a satellite domain.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="domainId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteDomainResponse> DeleteAsync(string domainId, RetryConfig? retryConfig = null)
         {
+            if (domainId == null) throw new ArgumentNullException(nameof(domainId));
+
             var request = new DeleteDomainRequest()
             {
                 DomainId = domainId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/domains/{domain_id}", request, null);
 
@@ -423,7 +500,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -432,9 +509,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -510,13 +587,44 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateDomainResponse> UpdateAsync(string domainId, UpdateDomainRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update a domain.
+        /// </summary>
+        /// <remarks>
+        /// The `proxy_url` can be updated only for production instances.<br/>
+        /// Update one of the instance's domains. Both primary and satellite domains can be updated.<br/>
+        /// If you choose to use Clerk via proxy, use this endpoint to specify the `proxy_url`.<br/>
+        /// Whenever you decide you'd rather switch to DNS setup for Clerk, simply set `proxy_url`<br/>
+        /// to `null` for the domain. When you update a production instance's primary domain name,<br/>
+        /// you have to make sure that you've completed all the necessary setup steps for DNS and<br/>
+        /// emails to work. Expect downtime otherwise. Updating a primary domain's name will also<br/>
+        /// update the instance's home origin, affecting the default application paths.
+        /// </remarks>
+        /// <param name="domainId">The ID of the domain that will be updated.</param>
+        /// <param name="requestBody">A <see cref="UpdateDomainRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateDomainResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="domainId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateDomainResponse> UpdateAsync(
+            string domainId,
+            UpdateDomainRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (domainId == null) throw new ArgumentNullException(nameof(domainId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new UpdateDomainRequest()
             {
                 DomainId = domainId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/domains/{domain_id}", request, null);
 
@@ -577,7 +685,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -586,9 +694,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -663,5 +771,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

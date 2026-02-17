@@ -12,22 +12,18 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ReplaceRoleSetRequestBody
     {
-
         /// <summary>
-        /// The key of the destination role set
+        /// The key of the destination role set.
         /// </summary>
         [JsonProperty("dest_role_set_key")]
         public string DestRoleSetKey { get; set; } = default!;
 
         /// <summary>
         /// Mappings from source role keys to destination role keys.<br/>
-        /// 
-        /// <remarks>
         /// Required if members have roles that need to be reassigned.
-        /// </remarks>
         /// </summary>
         [JsonProperty("reassignment_mappings")]
         public Dictionary<string, string>? ReassignmentMappings { get; set; }

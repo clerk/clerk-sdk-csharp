@@ -13,18 +13,17 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class RoleSets
     {
-
         [JsonProperty("data")]
         public List<RoleSet> Data { get; set; } = default!;
 
         /// <summary>
-        /// Total number of role sets
+        /// Total number of role sets.
         /// </summary>
         [JsonProperty("total_count")]
         public long TotalCount { get; set; } = default!;

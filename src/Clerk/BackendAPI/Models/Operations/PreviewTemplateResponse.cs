@@ -13,15 +13,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class PreviewTemplateResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// OK
+        /// OK.
         /// </summary>
         public PreviewTemplateResponseBody? Object { get; set; }
     }

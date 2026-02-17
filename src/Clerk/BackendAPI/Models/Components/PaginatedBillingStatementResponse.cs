@@ -13,13 +13,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// A list of billing statements.
     /// </summary>
     public class PaginatedBillingStatementResponse
     {
-
         /// <summary>
         /// Array of billing statements.
         /// </summary>

@@ -24,50 +24,119 @@ namespace Clerk.BackendAPI
 
     public interface IAllowlistIdentifiers
     {
+        /// <summary>
+        /// List all identifiers on the allow-list.
+        /// </summary>
+        /// <remarks>
+        /// Get a list of all identifiers allowed to sign up to an instance.
+        /// </remarks>
+        /// <param name="paginated">
+        /// Whether to paginate the results.<br/>
+        /// If true, the results will be paginated.<br/>
+        /// If false, the results will not be paginated.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListAllowlistIdentifiersResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListAllowlistIdentifiersResponse> ListAsync(
+            bool? paginated = null,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// List all identifiers on the allow-list
-        /// 
-        /// <remarks>
-        /// Get a list of all identifiers allowed to sign up to an instance
-        /// </remarks>
+        /// Add identifier to the allow-list.
         /// </summary>
-        Task<ListAllowlistIdentifiersResponse> ListAsync(bool? paginated = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Create an identifier allowed to sign up to an instance.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateAllowlistIdentifierRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateAllowlistIdentifierResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 402 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateAllowlistIdentifierResponse> CreateAsync(
+            CreateAllowlistIdentifierRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Add identifier to the allow-list
-        /// 
-        /// <remarks>
-        /// Create an identifier allowed to sign up to an instance
-        /// </remarks>
+        /// Delete identifier from allow-list.
         /// </summary>
-        Task<CreateAllowlistIdentifierResponse> CreateAsync(CreateAllowlistIdentifierRequestBody? request = null, RetryConfig? retryConfig = null);
-
-        /// <summary>
-        /// Delete identifier from allow-list
-        /// 
         /// <remarks>
-        /// Delete an identifier from the instance allow-list
+        /// Delete an identifier from the instance allow-list.
         /// </remarks>
-        /// </summary>
-        Task<DeleteAllowlistIdentifierResponse> DeleteAsync(string identifierId, RetryConfig? retryConfig = null);
+        /// <param name="identifierId">The ID of the identifier to delete from the allow-list.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteAllowlistIdentifierResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="identifierId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteAllowlistIdentifierResponse> DeleteAsync(string identifierId, RetryConfig? retryConfig = null);
     }
 
     public class AllowlistIdentifiers: IAllowlistIdentifiers
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public AllowlistIdentifiers(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListAllowlistIdentifiersResponse> ListAsync(bool? paginated = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// List all identifiers on the allow-list.
+        /// </summary>
+        /// <remarks>
+        /// Get a list of all identifiers allowed to sign up to an instance.
+        /// </remarks>
+        /// <param name="paginated">
+        /// Whether to paginate the results.<br/>
+        /// If true, the results will be paginated.<br/>
+        /// If false, the results will not be paginated.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListAllowlistIdentifiersResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401 or 402 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListAllowlistIdentifiersResponse> ListAsync(
+            bool? paginated = null,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        )
         {
             var request = new ListAllowlistIdentifiersRequest()
             {
@@ -75,6 +144,7 @@ namespace Clerk.BackendAPI
                 Limit = limit,
                 Offset = offset,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/allowlist_identifiers", request, null);
 
@@ -129,7 +199,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 402 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -138,9 +208,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -216,10 +286,26 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateAllowlistIdentifierResponse> CreateAsync(CreateAllowlistIdentifierRequestBody? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Add identifier to the allow-list.
+        /// </summary>
+        /// <remarks>
+        /// Create an identifier allowed to sign up to an instance.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateAllowlistIdentifierRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateAllowlistIdentifierResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 402 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateAllowlistIdentifierResponse> CreateAsync(
+            CreateAllowlistIdentifierRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/allowlist_identifiers";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -279,7 +365,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 402 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -288,9 +374,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -366,12 +452,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteAllowlistIdentifierResponse> DeleteAsync(string identifierId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete identifier from allow-list.
+        /// </summary>
+        /// <remarks>
+        /// Delete an identifier from the instance allow-list.
+        /// </remarks>
+        /// <param name="identifierId">The ID of the identifier to delete from the allow-list.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteAllowlistIdentifierResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="identifierId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteAllowlistIdentifierResponse> DeleteAsync(
+            string identifierId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (identifierId == null) throw new ArgumentNullException(nameof(identifierId));
+
             var request = new DeleteAllowlistIdentifierRequest()
             {
                 IdentifierId = identifierId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/allowlist_identifiers/{identifier_id}", request, null);
 
@@ -426,7 +533,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 402 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -435,9 +542,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -512,5 +619,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

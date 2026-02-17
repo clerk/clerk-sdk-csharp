@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class IdentificationLink
     {
-
         [JsonProperty("type")]
         public string Type { get; set; } = default!;
 

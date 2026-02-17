@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class MachineSecretKey
     {
-
         /// <summary>
-        /// String representing the object&apos;s type.
+        /// String representing the object's type.
         /// </summary>
         [JsonProperty("object")]
         public MachineSecretKeyObject Object { get; set; } = default!;

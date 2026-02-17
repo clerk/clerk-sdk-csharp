@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateEmailAddressRequestBody
     {
-
         /// <summary>
-        /// The ID representing the user
+        /// The ID representing the user.
         /// </summary>
         [JsonProperty("user_id")]
         public string UserId { get; set; } = default!;
@@ -35,10 +34,7 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Create this email address as the primary email address for the user.<br/>
-        /// 
-        /// <remarks>
         /// Default: false, unless it is the first email address.
-        /// </remarks>
         /// </summary>
         [JsonProperty("primary")]
         public bool? Primary { get; set; } = null;

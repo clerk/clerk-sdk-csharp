@@ -58,7 +58,6 @@ namespace Clerk.BackendAPI.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(EnterpriseAccountVerification.EnterpriseAccountVerificationConverter))]
     public class EnterpriseAccountVerification
     {

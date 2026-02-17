@@ -14,10 +14,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class OAuthApplication
     {
-
         [JsonProperty("object")]
         public OAuthApplicationObject Object { get; set; } = default!;
 
@@ -58,11 +57,7 @@ namespace Clerk.BackendAPI.Models.Components
         public List<string> RedirectUris { get; set; } = default!;
 
         /// <summary>
-        /// Deprecated: Use redirect_uris instead.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Deprecated: Use redirect_uris instead.
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("callback_url")]
@@ -84,21 +79,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string TokenIntrospectionUrl { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

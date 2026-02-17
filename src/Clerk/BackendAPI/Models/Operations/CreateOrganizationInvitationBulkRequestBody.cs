@@ -12,48 +12,38 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class CreateOrganizationInvitationBulkRequestBody
     {
-
         /// <summary>
-        /// The email address of the new member that is going to be invited to the organization
+        /// The email address of the new member that is going to be invited to the organization.
         /// </summary>
         [JsonProperty("email_address")]
         public string EmailAddress { get; set; } = default!;
 
         /// <summary>
         /// The ID of the user that invites the new member to the organization.<br/>
-        /// 
-        /// <remarks>
         /// Must be an administrator in the organization.
-        /// </remarks>
         /// </summary>
         [JsonProperty("inviter_user_id")]
         public string? InviterUserId { get; set; } = null;
 
         /// <summary>
-        /// The role of the new member in the organization
+        /// The role of the new member in the organization.
         /// </summary>
         [JsonProperty("role")]
         public string Role { get; set; } = default!;
 
         /// <summary>
         /// Metadata saved on the organization invitation, read-only from the Frontend API and fully accessible (read/write) from the Backend API.<br/>
-        /// 
-        /// <remarks>
         /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
-        /// </remarks>
         /// </summary>
         [JsonProperty("public_metadata")]
         public Dictionary<string, object>? PublicMetadata { get; set; } = null;
 
         /// <summary>
         /// Metadata saved on the organization invitation, fully accessible (read/write) from the Backend API but not visible from the Frontend API.<br/>
-        /// 
-        /// <remarks>
         /// When the organization invitation is accepted, the metadata will be transferred to the newly created organization membership.
-        /// </remarks>
         /// </summary>
         [JsonProperty("private_metadata")]
         public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
@@ -69,5 +59,12 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("expires_in_days")]
         public long? ExpiresInDays { get; set; } = null;
+
+        /// <summary>
+        /// Optional flag which denotes whether an email invitation should be sent to the given email address.<br/>
+        /// Defaults to `true`.
+        /// </summary>
+        [JsonProperty("notify")]
+        public bool? Notify { get; set; } = true;
     }
 }

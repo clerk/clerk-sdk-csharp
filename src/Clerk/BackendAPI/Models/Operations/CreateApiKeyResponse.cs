@@ -13,15 +13,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateApiKeyResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// 200 OK
+        /// 200 OK.
         /// </summary>
         public Models.Operations.CreateApiKeyResponseBody? Object { get; set; }
     }

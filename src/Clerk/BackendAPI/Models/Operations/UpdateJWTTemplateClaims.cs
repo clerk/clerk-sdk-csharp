@@ -10,9 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     /// <summary>
-    /// JWT template claims in JSON format
+    /// JWT template claims in JSON format.
     /// </summary>
     public class UpdateJWTTemplateClaims
     {

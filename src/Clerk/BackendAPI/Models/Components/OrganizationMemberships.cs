@@ -13,22 +13,17 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// A list of organization memberships
+    /// A list of organization memberships.
     /// </summary>
     public class OrganizationMemberships
     {
-
         [JsonProperty("data")]
         public List<OrganizationMembership> Data { get; set; } = default!;
 
         /// <summary>
-        /// Total number of organization memberships<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Total number of organization memberships.
         /// </summary>
         [JsonProperty("total_count")]
         public long TotalCount { get; set; } = default!;

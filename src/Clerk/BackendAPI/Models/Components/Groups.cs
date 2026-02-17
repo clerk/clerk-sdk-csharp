@@ -13,27 +13,26 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// A statement group.
     /// </summary>
     public class Groups
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public BillingStatementGroupsObject Object { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp (in milliseconds) of the date the group&apos;s payment attempts were created
+        /// Unix timestamp (in milliseconds) of the date the group's payment attempts were created.
         /// </summary>
         [JsonProperty("timestamp")]
         public long Timestamp { get; set; } = default!;
 
         /// <summary>
-        /// The payment attempts included in the group
+        /// The payment attempts included in the group.
         /// </summary>
         [JsonProperty("items")]
         public List<BillingPaymentAttempt> Items { get; set; } = default!;

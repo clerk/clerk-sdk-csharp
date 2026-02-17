@@ -13,15 +13,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class ListJWTTemplatesResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// List of JWT templates
+        /// List of JWT templates.
         /// </summary>
         public List<JWTTemplate>? JWTTemplateList { get; set; }
     }

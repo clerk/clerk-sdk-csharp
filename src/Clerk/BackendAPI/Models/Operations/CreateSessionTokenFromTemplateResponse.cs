@@ -13,15 +13,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateSessionTokenFromTemplateResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// OK
+        /// OK.
         /// </summary>
         public CreateSessionTokenFromTemplateResponseBody? Object { get; set; }
     }

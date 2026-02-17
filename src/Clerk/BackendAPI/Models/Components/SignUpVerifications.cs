@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class SignUpVerifications
     {
-
         [JsonProperty("email_address", NullValueHandling = NullValueHandling.Include)]
         public SignUpVerification? EmailAddress { get; set; }
 

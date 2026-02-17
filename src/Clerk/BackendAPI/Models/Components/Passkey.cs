@@ -12,19 +12,14 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class Passkey
     {
-
         [JsonProperty("id")]
         public string? Id { get; set; }
 
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public PasskeyObject Object { get; set; } = default!;
@@ -33,11 +28,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of when the passkey was last used.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of when the passkey was last used.
         /// </summary>
         [JsonProperty("last_used_at")]
         public long LastUsedAt { get; set; } = default!;

@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateM2MTokenRequestBody
     {
-
         [JsonProperty("seconds_until_expiration")]
         public double? SecondsUntilExpiration { get; set; } = null;
 

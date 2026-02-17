@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class ListAllOrganizationDomainsResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A list of organization domains
+        /// A list of organization domains.
         /// </summary>
         public Models.Components.OrganizationDomains? OrganizationDomains { get; set; }
     }

@@ -12,7 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum IdentifierType
     {
         [JsonProperty("email_address")]
@@ -55,5 +55,4 @@ namespace Clerk.BackendAPI.Models.Components
             throw new Exception($"Unknown value {value} for enum IdentifierType");
         }
     }
-
 }

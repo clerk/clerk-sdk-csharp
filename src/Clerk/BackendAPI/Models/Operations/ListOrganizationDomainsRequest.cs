@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class ListOrganizationDomainsRequest
     {
-
         /// <summary>
         /// The organization ID.
         /// </summary>
@@ -27,28 +26,22 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Verified { get; set; }
 
         /// <summary>
-        /// Filter domains by their enrollment mode
+        /// Filter domains by their enrollment mode.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=enrollment_mode")]
         public string? EnrollmentMode { get; set; }
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;

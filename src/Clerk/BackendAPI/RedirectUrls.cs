@@ -24,59 +24,133 @@ namespace Clerk.BackendAPI
 
     public interface IRedirectUrls
     {
+        /// <summary>
+        /// List all redirect URLs.
+        /// </summary>
+        /// <remarks>
+        /// Lists all whitelisted redirect_urls for the instance.
+        /// </remarks>
+        /// <param name="paginated">
+        /// Whether to paginate the results.<br/>
+        /// If true, the results will be paginated.<br/>
+        /// If false, the results will not be paginated.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListRedirectURLsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListRedirectURLsResponse> ListAsync(
+            bool? paginated = null,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// List all redirect URLs
-        /// 
-        /// <remarks>
-        /// Lists all whitelisted redirect_urls for the instance
-        /// </remarks>
+        /// Create a redirect URL.
         /// </summary>
-        Task<ListRedirectURLsResponse> ListAsync(bool? paginated = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Create a redirect URL.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateRedirectURLRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateRedirectURLResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateRedirectURLResponse> CreateAsync(
+            CreateRedirectURLRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a redirect URL
-        /// 
-        /// <remarks>
-        /// Create a redirect URL
-        /// </remarks>
+        /// Retrieve a redirect URL.
         /// </summary>
-        Task<CreateRedirectURLResponse> CreateAsync(CreateRedirectURLRequestBody? request = null, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Retrieve the details of the redirect URL with the given ID.
+        /// </remarks>
+        /// <param name="id">The ID of the redirect URL.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetRedirectURLResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetRedirectURLResponse> GetAsync(string id, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Retrieve a redirect URL
-        /// 
-        /// <remarks>
-        /// Retrieve the details of the redirect URL with the given ID
-        /// </remarks>
+        /// Delete a redirect URL.
         /// </summary>
-        Task<GetRedirectURLResponse> GetAsync(string id, RetryConfig? retryConfig = null);
-
-        /// <summary>
-        /// Delete a redirect URL
-        /// 
         /// <remarks>
-        /// Remove the selected redirect URL from the whitelist of the instance
+        /// Remove the selected redirect URL from the whitelist of the instance.
         /// </remarks>
-        /// </summary>
-        Task<DeleteRedirectURLResponse> DeleteAsync(string id, RetryConfig? retryConfig = null);
+        /// <param name="id">The ID of the redirect URL.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteRedirectURLResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteRedirectURLResponse> DeleteAsync(string id, RetryConfig? retryConfig = null);
     }
 
     public class RedirectUrls: IRedirectUrls
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public RedirectUrls(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListRedirectURLsResponse> ListAsync(bool? paginated = null, long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// List all redirect URLs.
+        /// </summary>
+        /// <remarks>
+        /// Lists all whitelisted redirect_urls for the instance.
+        /// </remarks>
+        /// <param name="paginated">
+        /// Whether to paginate the results.<br/>
+        /// If true, the results will be paginated.<br/>
+        /// If false, the results will not be paginated.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListRedirectURLsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListRedirectURLsResponse> ListAsync(
+            bool? paginated = null,
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        )
         {
             var request = new ListRedirectURLsRequest()
             {
@@ -84,6 +158,7 @@ namespace Clerk.BackendAPI
                 Limit = limit,
                 Offset = offset,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/redirect_urls", request, null);
 
@@ -147,9 +222,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -205,10 +280,26 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateRedirectURLResponse> CreateAsync(CreateRedirectURLRequestBody? request = null, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Create a redirect URL.
+        /// </summary>
+        /// <remarks>
+        /// Create a redirect URL.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateRedirectURLRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateRedirectURLResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateRedirectURLResponse> CreateAsync(
+            CreateRedirectURLRequestBody? request = null,
+            RetryConfig? retryConfig = null
+        )
         {
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
             var urlString = baseUrl + "/redirect_urls";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -268,7 +359,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -277,9 +368,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -355,12 +446,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetRedirectURLResponse> GetAsync(string id, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a redirect URL.
+        /// </summary>
+        /// <remarks>
+        /// Retrieve the details of the redirect URL with the given ID.
+        /// </remarks>
+        /// <param name="id">The ID of the redirect URL.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetRedirectURLResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetRedirectURLResponse> GetAsync(string id, RetryConfig? retryConfig = null)
         {
+            if (id == null) throw new ArgumentNullException(nameof(id));
+
             var request = new GetRedirectURLRequest()
             {
                 Id = id,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/redirect_urls/{id}", request, null);
 
@@ -415,7 +524,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -424,9 +533,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -502,12 +611,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteRedirectURLResponse> DeleteAsync(string id, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete a redirect URL.
+        /// </summary>
+        /// <remarks>
+        /// Remove the selected redirect URL from the whitelist of the instance.
+        /// </remarks>
+        /// <param name="id">The ID of the redirect URL.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteRedirectURLResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="id"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteRedirectURLResponse> DeleteAsync(string id, RetryConfig? retryConfig = null)
         {
+            if (id == null) throw new ArgumentNullException(nameof(id));
+
             var request = new DeleteRedirectURLRequest()
             {
                 Id = id,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/redirect_urls/{id}", request, null);
 
@@ -562,7 +689,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -571,9 +698,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -648,5 +775,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

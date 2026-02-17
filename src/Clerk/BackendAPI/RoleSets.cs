@@ -24,96 +24,232 @@ namespace Clerk.BackendAPI
 
     public interface IRoleSets
     {
-
         /// <summary>
-        /// Get a list of role sets
-        /// 
+        /// Get a list of role sets.
+        /// </summary>
         /// <remarks>
         /// Returns a list of role sets for the instance.<br/>
         /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
         /// The role sets are ordered by descending creation date by default.
         /// </remarks>
-        /// </summary>
-        Task<ListRoleSetsResponse> ListAsync(string? query = null, string? orderBy = "-created_at", long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        /// <param name="query">
+        /// Returns role sets with ID, name, or key that match the given query.<br/>
+        /// Uses exact match for role set ID and partial match for name and key.
+        /// </param>
+        /// <param name="orderBy">
+        /// Allows to return role sets in a particular order.<br/>
+        /// At the moment, you can order the returned role sets by their `created_at`, `name`, or `key`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want role sets to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListRoleSetsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListRoleSetsResponse> ListAsync(
+            string? query = null,
+            string? orderBy = "-created_at",
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create a role set
-        /// 
+        /// Create a role set.
+        /// </summary>
         /// <remarks>
         /// Creates a new role set with the given name and roles.<br/>
-        /// The key must be unique for the instance and start with the &apos;role_set:&apos; prefix, followed by lowercase alphanumeric characters and underscores only.<br/>
+        /// The key must be unique for the instance and start with the 'role_set:' prefix, followed by lowercase alphanumeric characters and underscores only.<br/>
         /// You must provide at least one role and specify a default role key and creator role key.
         /// </remarks>
-        /// </summary>
-        Task<CreateRoleSetResponse> CreateAsync(CreateRoleSetRequestBody request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="CreateRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateRoleSetResponse> CreateAsync(
+            CreateRoleSetRequestBody request,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve a role set
-        /// 
+        /// Retrieve a role set.
+        /// </summary>
         /// <remarks>
         /// Retrieves an existing role set by its key or ID.
         /// </remarks>
-        /// </summary>
-        Task<GetRoleSetResponse> GetAsync(string roleSetKeyOrId, RetryConfig? retryConfig = null);
+        /// <param name="roleSetKeyOrId">The key or ID of the role set.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="roleSetKeyOrId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetRoleSetResponse> GetAsync(string roleSetKeyOrId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update a role set
-        /// 
+        /// Update a role set.
+        /// </summary>
         /// <remarks>
         /// Updates an existing role set.<br/>
         /// You can update the name, key, description, type, default role, or creator role.<br/>
         /// All parameters are optional - you can update only the fields you want to change.
         /// </remarks>
-        /// </summary>
-        Task<UpdateRoleSetResponse> UpdateAsync(string roleSetKeyOrId, UpdateRoleSetRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="roleSetKeyOrId">The key or ID of the role set to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="roleSetKeyOrId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateRoleSetResponse> UpdateAsync(
+            string roleSetKeyOrId,
+            UpdateRoleSetRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Replace a role set
-        /// 
+        /// Replace a role set.
+        /// </summary>
         /// <remarks>
         /// Replaces a role set with another role set. This is functionally equivalent to deleting<br/>
         /// the role set but allows for atomic replacement with migration support.<br/>
         /// Organizations using this role set will be migrated to the destination role set.
         /// </remarks>
-        /// </summary>
-        Task<ReplaceRoleSetResponse> ReplaceAsync(string roleSetKeyOrId, ReplaceRoleSetRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="roleSetKeyOrId">The key or ID of the role set to replace.</param>
+        /// <param name="requestBody">A <see cref="ReplaceRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ReplaceRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="roleSetKeyOrId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ReplaceRoleSetResponse> ReplaceAsync(
+            string roleSetKeyOrId,
+            ReplaceRoleSetRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Add roles to a role set
-        /// 
+        /// Add roles to a role set.
+        /// </summary>
         /// <remarks>
         /// Adds one or more roles to an existing role set.<br/>
         /// You can optionally update the default role or creator role when adding new roles.
         /// </remarks>
-        /// </summary>
-        Task<AddRolesToRoleSetResponse> AddRolesAsync(string roleSetKeyOrId, AddRolesToRoleSetRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="roleSetKeyOrId">The key or ID of the role set.</param>
+        /// <param name="requestBody">A <see cref="AddRolesToRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AddRolesToRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="roleSetKeyOrId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<AddRolesToRoleSetResponse> AddRolesAsync(
+            string roleSetKeyOrId,
+            AddRolesToRoleSetRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Replace a role in a role set
-        /// 
+        /// Replace a role in a role set.
+        /// </summary>
         /// <remarks>
         /// Replaces a role in a role set with another role. This atomically removes<br/>
         /// the source role and reassigns any members to the destination role.
         /// </remarks>
-        /// </summary>
-        Task<ReplaceRoleInRoleSetResponse> ReplaceRoleAsync(string roleSetKeyOrId, ReplaceRoleInRoleSetRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="roleSetKeyOrId">The key or ID of the role set.</param>
+        /// <param name="requestBody">A <see cref="ReplaceRoleInRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ReplaceRoleInRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="roleSetKeyOrId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ReplaceRoleInRoleSetResponse> ReplaceRoleAsync(
+            string roleSetKeyOrId,
+            ReplaceRoleInRoleSetRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class RoleSets: IRoleSets
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public RoleSets(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListRoleSetsResponse> ListAsync(string? query = null, string? orderBy = "-created_at", long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Get a list of role sets.
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of role sets for the instance.<br/>
+        /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
+        /// The role sets are ordered by descending creation date by default.
+        /// </remarks>
+        /// <param name="query">
+        /// Returns role sets with ID, name, or key that match the given query.<br/>
+        /// Uses exact match for role set ID and partial match for name and key.
+        /// </param>
+        /// <param name="orderBy">
+        /// Allows to return role sets in a particular order.<br/>
+        /// At the moment, you can order the returned role sets by their `created_at`, `name`, or `key`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want role sets to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListRoleSetsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListRoleSetsResponse> ListAsync(
+            string? query = null,
+            string? orderBy = "-created_at",
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        )
         {
             var request = new ListRoleSetsRequest()
             {
@@ -122,6 +258,7 @@ namespace Clerk.BackendAPI
                 Limit = limit,
                 Offset = offset,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/role_sets", request, null);
 
@@ -176,7 +313,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -185,9 +322,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -263,10 +400,31 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateRoleSetResponse> CreateAsync(CreateRoleSetRequestBody request, RetryConfig? retryConfig = null)
-        {
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+        /// <summary>
+        /// Create a role set.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new role set with the given name and roles.<br/>
+        /// The key must be unique for the instance and start with the 'role_set:' prefix, followed by lowercase alphanumeric characters and underscores only.<br/>
+        /// You must provide at least one role and specify a default role key and creator role key.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateRoleSetResponse> CreateAsync(
+            CreateRoleSetRequestBody request,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/role_sets";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -326,7 +484,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 402 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -335,9 +493,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -413,12 +571,30 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetRoleSetResponse> GetAsync(string roleSetKeyOrId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve a role set.
+        /// </summary>
+        /// <remarks>
+        /// Retrieves an existing role set by its key or ID.
+        /// </remarks>
+        /// <param name="roleSetKeyOrId">The key or ID of the role set.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="roleSetKeyOrId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetRoleSetResponse> GetAsync(string roleSetKeyOrId, RetryConfig? retryConfig = null)
         {
+            if (roleSetKeyOrId == null) throw new ArgumentNullException(nameof(roleSetKeyOrId));
+
             var request = new GetRoleSetRequest()
             {
                 RoleSetKeyOrId = roleSetKeyOrId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/role_sets/{role_set_key_or_id}", request, null);
 
@@ -473,7 +649,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -482,9 +658,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -560,13 +736,39 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateRoleSetResponse> UpdateAsync(string roleSetKeyOrId, UpdateRoleSetRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update a role set.
+        /// </summary>
+        /// <remarks>
+        /// Updates an existing role set.<br/>
+        /// You can update the name, key, description, type, default role, or creator role.<br/>
+        /// All parameters are optional - you can update only the fields you want to change.
+        /// </remarks>
+        /// <param name="roleSetKeyOrId">The key or ID of the role set to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="roleSetKeyOrId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateRoleSetResponse> UpdateAsync(
+            string roleSetKeyOrId,
+            UpdateRoleSetRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (roleSetKeyOrId == null) throw new ArgumentNullException(nameof(roleSetKeyOrId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new UpdateRoleSetRequest()
             {
                 RoleSetKeyOrId = roleSetKeyOrId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/role_sets/{role_set_key_or_id}", request, null);
 
@@ -627,7 +829,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -636,9 +838,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -714,13 +916,39 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ReplaceRoleSetResponse> ReplaceAsync(string roleSetKeyOrId, ReplaceRoleSetRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Replace a role set.
+        /// </summary>
+        /// <remarks>
+        /// Replaces a role set with another role set. This is functionally equivalent to deleting<br/>
+        /// the role set but allows for atomic replacement with migration support.<br/>
+        /// Organizations using this role set will be migrated to the destination role set.
+        /// </remarks>
+        /// <param name="roleSetKeyOrId">The key or ID of the role set to replace.</param>
+        /// <param name="requestBody">A <see cref="ReplaceRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ReplaceRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="roleSetKeyOrId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ReplaceRoleSetResponse> ReplaceAsync(
+            string roleSetKeyOrId,
+            ReplaceRoleSetRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (roleSetKeyOrId == null) throw new ArgumentNullException(nameof(roleSetKeyOrId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new ReplaceRoleSetRequest()
             {
                 RoleSetKeyOrId = roleSetKeyOrId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/role_sets/{role_set_key_or_id}/replace", request, null);
 
@@ -781,7 +1009,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -790,9 +1018,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -868,13 +1096,38 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<AddRolesToRoleSetResponse> AddRolesAsync(string roleSetKeyOrId, AddRolesToRoleSetRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Add roles to a role set.
+        /// </summary>
+        /// <remarks>
+        /// Adds one or more roles to an existing role set.<br/>
+        /// You can optionally update the default role or creator role when adding new roles.
+        /// </remarks>
+        /// <param name="roleSetKeyOrId">The key or ID of the role set.</param>
+        /// <param name="requestBody">A <see cref="AddRolesToRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AddRolesToRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="roleSetKeyOrId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<AddRolesToRoleSetResponse> AddRolesAsync(
+            string roleSetKeyOrId,
+            AddRolesToRoleSetRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (roleSetKeyOrId == null) throw new ArgumentNullException(nameof(roleSetKeyOrId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new AddRolesToRoleSetRequest()
             {
                 RoleSetKeyOrId = roleSetKeyOrId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/role_sets/{role_set_key_or_id}/roles", request, null);
 
@@ -935,7 +1188,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -944,9 +1197,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1022,13 +1275,38 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<ReplaceRoleInRoleSetResponse> ReplaceRoleAsync(string roleSetKeyOrId, ReplaceRoleInRoleSetRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Replace a role in a role set.
+        /// </summary>
+        /// <remarks>
+        /// Replaces a role in a role set with another role. This atomically removes<br/>
+        /// the source role and reassigns any members to the destination role.
+        /// </remarks>
+        /// <param name="roleSetKeyOrId">The key or ID of the role set.</param>
+        /// <param name="requestBody">A <see cref="ReplaceRoleInRoleSetRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ReplaceRoleInRoleSetResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="roleSetKeyOrId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ReplaceRoleInRoleSetResponse> ReplaceRoleAsync(
+            string roleSetKeyOrId,
+            ReplaceRoleInRoleSetRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (roleSetKeyOrId == null) throw new ArgumentNullException(nameof(roleSetKeyOrId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new ReplaceRoleInRoleSetRequest()
             {
                 RoleSetKeyOrId = roleSetKeyOrId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/role_sets/{role_set_key_or_id}/roles/replace", request, null);
 
@@ -1089,7 +1367,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1098,9 +1376,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1175,5 +1453,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

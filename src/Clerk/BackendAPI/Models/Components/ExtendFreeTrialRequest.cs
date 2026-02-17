@@ -12,16 +12,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public class ExtendFreeTrialRequest
     {
-
         /// <summary>
         /// RFC3339 timestamp to extend the free trial to.<br/>
-        /// 
-        /// <remarks>
         /// Must be in the future and not more than 365 days from now.
-        /// </remarks>
         /// </summary>
         [JsonProperty("extend_to")]
         public DateTime ExtendTo { get; set; } = default!;

@@ -11,24 +11,23 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class PreviewTemplateRequest
     {
-
         /// <summary>
-        /// The type of template to preview
+        /// The type of template to preview.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=template_type")]
         public string TemplateType { get; set; } = default!;
 
         /// <summary>
-        /// The slug of the template to preview
+        /// The slug of the template to preview.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=slug")]
         public string Slug { get; set; } = default!;
 
         /// <summary>
-        /// Required parameters
+        /// Required parameters.
         /// </summary>
         [SpeakeasyMetadata("request:mediaType=application/json")]
         public PreviewTemplateRequestBody? RequestBody { get; set; }

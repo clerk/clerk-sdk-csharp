@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// InstanceSettings Server API
+    /// InstanceSettings Server API.
     /// </summary>
     public class InstanceSettings
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public InstanceSettingsObject? Object { get; set; }

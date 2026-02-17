@@ -12,12 +12,11 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class FeatureResponse
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public FeatureResponseObject Object { get; set; } = default!;
@@ -47,7 +46,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string Slug { get; set; } = default!;
 
         /// <summary>
-        /// The URL of the feature&apos;s avatar image.
+        /// The URL of the feature's avatar image.
         /// </summary>
         [JsonProperty("avatar_url", NullValueHandling = NullValueHandling.Include)]
         public string? AvatarUrl { get; set; }

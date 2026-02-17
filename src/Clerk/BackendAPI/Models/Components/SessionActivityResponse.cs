@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Components
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class SessionActivityResponse
     {
-
         [JsonProperty("object")]
         public string Object { get; set; } = default!;
 

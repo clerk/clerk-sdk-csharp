@@ -14,10 +14,9 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public class OrganizationWithLogo
     {
-
         [JsonProperty("object")]
         public OrganizationWithLogoObject Object { get; set; } = default!;
 
@@ -61,34 +60,28 @@ namespace Clerk.BackendAPI.Models.Components
         public string? CreatedBy { get; set; }
 
         /// <summary>
-        /// Unix timestamp of creation.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last update.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last activity.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp of last activity.
         /// </summary>
         [JsonProperty("last_active_at")]
         public long? LastActiveAt { get; set; }
+
+        /// <summary>
+        /// The key of the <a href="https://clerk.com/docs/guides/organizations/control-access/role-sets">role set</a> assigned to this organization.
+        /// </summary>
+        [JsonProperty("role_set_key")]
+        public string? RoleSetKey { get; set; } = null;
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("logo_url")]

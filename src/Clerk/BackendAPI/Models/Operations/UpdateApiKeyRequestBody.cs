@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UpdateApiKeyRequestBody
     {
-
         [JsonProperty("claims")]
         public object? Claims { get; set; } = null;
 

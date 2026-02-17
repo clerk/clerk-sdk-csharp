@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class DeleteMachineScopeResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// Machine scope deleted successfully for a machine
+        /// Machine scope deleted successfully for a machine.
         /// </summary>
         public MachineScopeDeleted? MachineScopeDeleted { get; set; }
     }

@@ -13,22 +13,17 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// A list of domains
+    /// A list of domains.
     /// </summary>
     public class Domains
     {
-
         [JsonProperty("data")]
         public List<Domain> Data { get; set; } = default!;
 
         /// <summary>
-        /// Total number of domains<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Total number of domains.
         /// </summary>
         [JsonProperty("total_count")]
         public long TotalCount { get; set; } = default!;

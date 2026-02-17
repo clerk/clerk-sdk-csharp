@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class RevokeOrganizationInvitationRequest
     {
-
         /// <summary>
         /// The organization ID.
         /// </summary>

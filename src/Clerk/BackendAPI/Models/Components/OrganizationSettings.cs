@@ -14,15 +14,14 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class OrganizationSettings
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public OrganizationSettingsObject Object { get; set; } = default!;
@@ -40,7 +39,7 @@ namespace Clerk.BackendAPI.Models.Components
         public long? MaxRoleSetsAllowed { get; set; }
 
         /// <summary>
-        /// max_allowed_permissions is now a no-op, as permissions are now unlimited
+        /// max_allowed_permissions is now a no-op, as permissions are now unlimited.
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("max_allowed_permissions")]

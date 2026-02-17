@@ -13,15 +13,14 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// The associated commerce plan.
     /// </summary>
     public class SchemasCommerceSubscriptionItemPlan
     {
-
         /// <summary>
-        /// String representing the object&apos;s type. Objects of the same type share the same value.
+        /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
         public SchemasCommerceSubscriptionItemPlanObject Object { get; set; } = default!;
@@ -54,7 +53,7 @@ namespace Clerk.BackendAPI.Models.Components
         public long Amount { get; set; } = default!;
 
         /// <summary>
-        /// The formatted amount as a string (e.g., &quot;$49.99&quot;).
+        /// The formatted amount as a string (e.g., "$49.99").
         /// </summary>
         [JsonProperty("amount_formatted")]
         public string AmountFormatted { get; set; } = default!;
@@ -84,13 +83,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string AnnualAmountFormatted { get; set; } = default!;
 
         /// <summary>
-        /// The currency symbol (e.g., &quot;$&quot;).
+        /// The currency symbol (e.g., "$").
         /// </summary>
         [JsonProperty("currency_symbol")]
         public string CurrencySymbol { get; set; } = default!;
 
         /// <summary>
-        /// The currency code (e.g., &quot;USD&quot;).
+        /// The currency code (e.g., "USD").
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; } = default!;
@@ -150,7 +149,7 @@ namespace Clerk.BackendAPI.Models.Components
         public string Slug { get; set; } = default!;
 
         /// <summary>
-        /// The URL of the plan&apos;s avatar image.
+        /// The URL of the plan's avatar image.
         /// </summary>
         [JsonProperty("avatar_url")]
         public string AvatarUrl { get; set; } = default!;

@@ -12,15 +12,14 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class GetJWKSResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// Get the JSON Web Key Set
+        /// Get the JSON Web Key Set.
         /// </summary>
         public Models.Components.Jwks? Jwks { get; set; }
     }

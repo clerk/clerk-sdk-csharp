@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class GetJWTTemplateRequest
     {
-
         /// <summary>
-        /// JWT Template ID
+        /// JWT Template ID.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=template_id")]
         public string TemplateId { get; set; } = default!;

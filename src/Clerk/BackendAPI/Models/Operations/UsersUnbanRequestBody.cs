@@ -12,12 +12,11 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class UsersUnbanRequestBody
     {
-
         /// <summary>
-        /// Array of user IDs to unban
+        /// Array of user IDs to unban.
         /// </summary>
         [JsonProperty("user_ids")]
         public List<string> UserIds { get; set; } = default!;

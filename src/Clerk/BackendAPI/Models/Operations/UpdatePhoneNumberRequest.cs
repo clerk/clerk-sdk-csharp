@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdatePhoneNumberRequest
     {
-
         /// <summary>
-        /// The ID of the phone number to update
+        /// The ID of the phone number to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=phone_number_id")]
         public string PhoneNumberId { get; set; } = default!;

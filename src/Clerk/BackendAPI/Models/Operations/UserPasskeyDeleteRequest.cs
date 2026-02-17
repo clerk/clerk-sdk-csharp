@@ -10,18 +10,17 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class UserPasskeyDeleteRequest
     {
-
         /// <summary>
-        /// The ID of the user that owns the passkey identity
+        /// The ID of the user that owns the passkey identity.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the passkey identity to be deleted
+        /// The ID of the passkey identity to be deleted.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=passkey_identification_id")]
         public string PasskeyIdentificationId { get; set; } = default!;

@@ -12,7 +12,7 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum IncludeInvalid
     {
         [JsonProperty("true")]
@@ -53,5 +53,4 @@ namespace Clerk.BackendAPI.Models.Operations
             throw new Exception($"Unknown value {value} for enum IncludeInvalid");
         }
     }
-
 }

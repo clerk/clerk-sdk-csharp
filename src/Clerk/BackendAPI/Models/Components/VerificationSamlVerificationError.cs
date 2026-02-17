@@ -52,7 +52,6 @@ namespace Clerk.BackendAPI.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(VerificationSamlVerificationError.VerificationSamlVerificationErrorConverter))]
     public class VerificationSamlVerificationError
     {

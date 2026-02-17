@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateSessionTokenRequestBody
     {
-
         /// <summary>
         /// Use this parameter to override the default session token lifetime.
         /// </summary>

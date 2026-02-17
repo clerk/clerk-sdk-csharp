@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UpdateApiKeyRequest
     {
-
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=apiKeyID")]
         public string ApiKeyID { get; set; } = default!;
 

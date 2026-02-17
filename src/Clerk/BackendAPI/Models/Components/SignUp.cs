@@ -14,13 +14,12 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Success
+    /// Success.
     /// </summary>
     public class SignUp
     {
-
         [JsonProperty("object")]
         public SignUpObject Object { get; set; } = default!;
 
@@ -85,21 +84,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string? CreatedUserId { get; set; }
 
         /// <summary>
-        /// Unix timestamp at which the user abandoned the sign up attempt.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp at which the user abandoned the sign up attempt.
         /// </summary>
         [JsonProperty("abandon_at")]
         public long AbandonAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp at which the user accepted the legal requirements.<br/>
-        /// 
-        /// <remarks>
-        /// 
-        /// </remarks>
+        /// Unix timestamp at which the user accepted the legal requirements.
         /// </summary>
         [JsonProperty("legal_accepted_at", NullValueHandling = NullValueHandling.Include)]
         public long? LegalAcceptedAt { get; set; }

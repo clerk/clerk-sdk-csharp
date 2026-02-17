@@ -13,90 +13,89 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// Active migration information, only present when status is &quot;enqueued&quot; or &quot;in_progress&quot;
+    /// Active migration information, only present when status is "enqueued" or "in_progress"
     /// </summary>
     public class RoleSetMigration
     {
-
         [JsonProperty("object")]
         public RoleSetRoleSetMigrationObject Object { get; set; } = default!;
 
         /// <summary>
-        /// The unique identifier of the migration
+        /// The unique identifier of the migration.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// The organization ID if the migration is scoped to a specific organization
+        /// The organization ID if the migration is scoped to a specific organization.
         /// </summary>
         [JsonProperty("organization_id")]
         public string? OrganizationId { get; set; } = null;
 
         /// <summary>
-        /// The instance ID this migration belongs to
+        /// The instance ID this migration belongs to.
         /// </summary>
         [JsonProperty("instance_id")]
         public string InstanceId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the source role set being migrated from
+        /// The ID of the source role set being migrated from.
         /// </summary>
         [JsonProperty("source_role_set_id")]
         public string SourceRoleSetId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the destination role set being migrated to
+        /// The ID of the destination role set being migrated to.
         /// </summary>
         [JsonProperty("dest_role_set_id")]
         public string? DestRoleSetId { get; set; } = null;
 
         /// <summary>
-        /// What triggered this migration (e.g., &quot;role_set_deletion&quot;, &quot;role_removal&quot;)
+        /// What triggered this migration (e.g., "role_set_deletion", "role_removal").
         /// </summary>
         [JsonProperty("trigger_type")]
         public string TriggerType { get; set; } = default!;
 
         /// <summary>
-        /// Current status of the migration (e.g., &quot;enqueued&quot;, &quot;in_progress&quot;, &quot;completed&quot;)
+        /// Current status of the migration (e.g., "enqueued", "in_progress", "completed").
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; } = default!;
 
         /// <summary>
-        /// Number of members that have been migrated so far
+        /// Number of members that have been migrated so far.
         /// </summary>
         [JsonProperty("migrated_members")]
         public long MigratedMembers { get; set; } = default!;
 
         /// <summary>
-        /// Role key mappings from source to destination roles
+        /// Role key mappings from source to destination roles.
         /// </summary>
         [JsonProperty("mappings")]
         public Dictionary<string, string>? Mappings { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp when the migration started
+        /// Unix timestamp when the migration started.
         /// </summary>
         [JsonProperty("started_at")]
         public long? StartedAt { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp when the migration completed
+        /// Unix timestamp when the migration completed.
         /// </summary>
         [JsonProperty("completed_at")]
         public long? CompletedAt { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp of migration creation
+        /// Unix timestamp of migration creation.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp of last migration update
+        /// Unix timestamp of last migration update.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;

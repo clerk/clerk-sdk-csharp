@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class CreateOrganizationDomainRequestBody
     {
-
         /// <summary>
-        /// The name of the new domain
+        /// The name of the new domain.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }
@@ -28,7 +27,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? EnrollmentMode { get; set; }
 
         /// <summary>
-        /// The status of domain&apos;s verification. Defaults to true
+        /// The status of domain's verification. Defaults to true.
         /// </summary>
         [JsonProperty("verified")]
         public bool? Verified { get; set; } = null;

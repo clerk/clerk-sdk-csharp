@@ -11,39 +11,32 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UsersGetOrganizationInvitationsRequest
     {
-
         /// <summary>
-        /// The ID of the user whose organization invitations we want to retrieve
+        /// The ID of the user whose organization invitations we want to retrieve.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;
 
         /// <summary>
         /// Applies a limit to the number of results returned.<br/>
-        /// 
-        /// <remarks>
         /// Can be used for paginating the results together with `offset`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=limit")]
         public long? Limit { get; set; } = 10;
 
         /// <summary>
         /// Skip the first `offset` results when paginating.<br/>
-        /// 
-        /// <remarks>
         /// Needs to be an integer greater or equal to zero.<br/>
         /// To be used in conjunction with `limit`.
-        /// </remarks>
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=offset")]
         public long? Offset { get; set; } = 0;
 
         /// <summary>
-        /// Filter organization invitations based on their status
+        /// Filter organization invitations based on their status.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
         public QueryParamStatus? Status { get; set; }

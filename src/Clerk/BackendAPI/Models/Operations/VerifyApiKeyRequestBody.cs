@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class VerifyApiKeyRequestBody
     {
-
         [JsonProperty("secret")]
         public string Secret { get; set; } = default!;
     }

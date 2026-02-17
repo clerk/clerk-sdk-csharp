@@ -12,7 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// Current status of the subscription item.
     /// </summary>
@@ -68,5 +68,4 @@ namespace Clerk.BackendAPI.Models.Components
             throw new Exception($"Unknown value {value} for enum CommerceSubscriptionItemStatus");
         }
     }
-
 }

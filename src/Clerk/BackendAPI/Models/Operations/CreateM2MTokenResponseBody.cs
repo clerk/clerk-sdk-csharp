@@ -13,13 +13,12 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
-    /// 201 Created
+    /// 201 Created.
     /// </summary>
     public class CreateM2MTokenResponseBody
     {
-
         [JsonProperty("object")]
         public CreateM2MTokenObject Object { get; set; } = default!;
 
@@ -48,25 +47,25 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool Expired { get; set; } = default!;
 
         /// <summary>
-        /// The timestamp for when the token will expire, in milliseconds
+        /// The timestamp for when the token will expire, in milliseconds.
         /// </summary>
         [JsonProperty("expiration", NullValueHandling = NullValueHandling.Include)]
         public double? Expiration { get; set; }
 
         /// <summary>
-        /// The timestamp for when the token was last used, in milliseconds
+        /// The timestamp for when the token was last used, in milliseconds.
         /// </summary>
         [JsonProperty("last_used_at", NullValueHandling = NullValueHandling.Include)]
         public double? LastUsedAt { get; set; }
 
         /// <summary>
-        /// The timestamp for when the token was created, in milliseconds
+        /// The timestamp for when the token was created, in milliseconds.
         /// </summary>
         [JsonProperty("created_at")]
         public double CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// The timestamp for when the token was last updated, in milliseconds
+        /// The timestamp for when the token was last updated, in milliseconds.
         /// </summary>
         [JsonProperty("updated_at")]
         public double UpdatedAt { get; set; } = default!;

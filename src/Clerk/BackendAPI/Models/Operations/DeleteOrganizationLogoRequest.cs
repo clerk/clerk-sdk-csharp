@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteOrganizationLogoRequest
     {
-
         /// <summary>
         /// The ID of the organization for which the logo will be deleted.
         /// </summary>

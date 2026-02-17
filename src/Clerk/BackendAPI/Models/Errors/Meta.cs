@@ -10,7 +10,7 @@
 namespace Clerk.BackendAPI.Models.Errors
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class Meta
     {
     }

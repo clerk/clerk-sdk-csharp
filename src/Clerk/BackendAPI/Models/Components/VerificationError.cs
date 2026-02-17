@@ -52,7 +52,6 @@ namespace Clerk.BackendAPI.Models.Components
         }
     }
 
-
     [JsonConverter(typeof(VerificationError.VerificationErrorConverter))]
     public class VerificationError
     {

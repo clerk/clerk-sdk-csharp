@@ -10,18 +10,17 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class UserWeb3WalletDeleteRequest
     {
-
         /// <summary>
-        /// The ID of the user that owns the web3 wallet
+        /// The ID of the user that owns the web3 wallet.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the web3 wallet identity to be deleted
+        /// The ID of the web3 wallet identity to be deleted.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=web3_wallet_identification_id")]
         public string Web3WalletIdentificationId { get; set; } = default!;

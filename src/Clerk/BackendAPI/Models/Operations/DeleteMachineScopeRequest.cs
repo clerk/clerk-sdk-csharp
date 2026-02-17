@@ -10,18 +10,17 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteMachineScopeRequest
     {
-
         /// <summary>
-        /// The ID of the machine that has access to another machine
+        /// The ID of the machine that has access to another machine.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=machine_id")]
         public string MachineId { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the machine that is being accessed
+        /// The ID of the machine that is being accessed.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=other_machine_id")]
         public string OtherMachineId { get; set; } = default!;

@@ -12,10 +12,9 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class CreateOrganizationMembershipRequestBody
     {
-
         /// <summary>
         /// The ID of the user that will be added as a member in the organization.
         /// </summary>

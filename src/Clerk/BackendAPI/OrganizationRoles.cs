@@ -24,96 +24,231 @@ namespace Clerk.BackendAPI
 
     public interface IOrganizationRoles
     {
-
         /// <summary>
-        /// Get a list of organization roles
-        /// 
+        /// Get a list of organization roles.
+        /// </summary>
         /// <remarks>
         /// This request returns the list of organization roles for the instance.<br/>
         /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
         /// The organization roles are ordered by descending creation date.<br/>
         /// Most recent roles will be returned first.
         /// </remarks>
-        /// </summary>
-        Task<ListOrganizationRolesResponse> ListAsync(string? query = null, string? orderBy = "-created_at", long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null);
+        /// <param name="query">
+        /// Returns organization roles with ID, name, or key that match the given query.<br/>
+        /// Uses exact match for organization role ID and partial match for name and key.
+        /// </param>
+        /// <param name="orderBy">
+        /// Allows to return organization roles in a particular order.<br/>
+        /// At the moment, you can order the returned organization roles by their `created_at`, `name`, or `key`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want organization roles to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationRolesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListOrganizationRolesResponse> ListAsync(
+            string? query = null,
+            string? orderBy = "-created_at",
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Create an organization role
-        /// 
+        /// Create an organization role.
+        /// </summary>
         /// <remarks>
         /// Creates a new organization role with the given name and permissions for an instance.<br/>
-        /// The key must be unique for the instance and start with the &apos;org:&apos; prefix, followed by lowercase alphanumeric characters and underscores only.<br/>
+        /// The key must be unique for the instance and start with the 'org:' prefix, followed by lowercase alphanumeric characters and underscores only.<br/>
         /// You can optionally provide a description for the role and specify whether it should be included in the initial role set.<br/>
         /// Organization roles support permissions that can be assigned to control access within the organization.
         /// </remarks>
-        /// </summary>
-        Task<CreateOrganizationRoleResponse> CreateAsync(CreateOrganizationRoleRequestBody request, RetryConfig? retryConfig = null);
+        /// <param name="request">A <see cref="CreateOrganizationRoleRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<CreateOrganizationRoleResponse> CreateAsync(
+            CreateOrganizationRoleRequestBody request,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Retrieve an organization role
-        /// 
+        /// Retrieve an organization role.
+        /// </summary>
         /// <remarks>
         /// Use this request to retrieve an existing organization role by its ID.
         /// </remarks>
-        /// </summary>
-        Task<GetOrganizationRoleResponse> GetAsync(string organizationRoleId, RetryConfig? retryConfig = null);
+        /// <param name="organizationRoleId">The ID of the organization role.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationRoleId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<GetOrganizationRoleResponse> GetAsync(string organizationRoleId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update an organization role
-        /// 
+        /// Update an organization role.
+        /// </summary>
         /// <remarks>
         /// Updates an existing organization role.<br/>
         /// You can update the name, key, description, and permissions of the role.<br/>
         /// All parameters are optional - you can update only the fields you want to change.<br/>
         /// If the role is used as a creator role or domain default role, updating the key will cascade the update to the organization settings.
         /// </remarks>
-        /// </summary>
-        Task<UpdateOrganizationRoleResponse> UpdateAsync(string organizationRoleId, UpdateOrganizationRoleRequestBody requestBody, RetryConfig? retryConfig = null);
+        /// <param name="organizationRoleId">The ID of the organization role to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateOrganizationRoleRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationRoleId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<UpdateOrganizationRoleResponse> UpdateAsync(
+            string organizationRoleId,
+            UpdateOrganizationRoleRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Delete an organization role
-        /// 
+        /// Delete an organization role.
+        /// </summary>
         /// <remarks>
         /// Deletes the organization role.<br/>
         /// The role cannot be deleted if it is currently used as the default creator role, domain default role, assigned to any members, or exists in any invitations.
         /// </remarks>
-        /// </summary>
-        Task<DeleteOrganizationRoleResponse> DeleteAsync(string organizationRoleId, RetryConfig? retryConfig = null);
+        /// <param name="organizationRoleId">The ID of the organization role to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationRoleId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<DeleteOrganizationRoleResponse> DeleteAsync(
+            string organizationRoleId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Assign a permission to an organization role
-        /// 
-        /// <remarks>
-        /// Assigns a permission to an organization role
-        /// </remarks>
+        /// Assign a permission to an organization role.
         /// </summary>
-        Task<AssignPermissionToOrganizationRoleResponse> AssignPermissionAsync(string organizationRoleId, string permissionId, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Assigns a permission to an organization role.
+        /// </remarks>
+        /// <param name="organizationRoleId">The ID of the organization role.</param>
+        /// <param name="permissionId">The ID of the permission to assign.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AssignPermissionToOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationRoleId"/> or <paramref name="permissionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 404 or 409 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<AssignPermissionToOrganizationRoleResponse> AssignPermissionAsync(
+            string organizationRoleId,
+            string permissionId,
+            RetryConfig? retryConfig = null
+        );
 
         /// <summary>
-        /// Remove a permission from an organization role
-        /// 
-        /// <remarks>
-        /// Removes a permission from an organization role
-        /// </remarks>
+        /// Remove a permission from an organization role.
         /// </summary>
-        Task<RemovePermissionFromOrganizationRoleResponse> RemovePermissionAsync(string organizationRoleId, string permissionId, RetryConfig? retryConfig = null);
+        /// <remarks>
+        /// Removes a permission from an organization role.
+        /// </remarks>
+        /// <param name="organizationRoleId">The ID of the organization role.</param>
+        /// <param name="permissionId">The ID of the permission to remove.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RemovePermissionFromOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationRoleId"/> or <paramref name="permissionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RemovePermissionFromOrganizationRoleResponse> RemovePermissionAsync(
+            string organizationRoleId,
+            string permissionId,
+            RetryConfig? retryConfig = null
+        );
     }
 
     public class OrganizationRoles: IOrganizationRoles
     {
+        /// <summary>
+        /// SDK Configuration.
+        /// <see cref="SDKConfig"/>
+        /// </summary>
         public SDKConfig SDKConfiguration { get; private set; }
-
-        private const string _language = Constants.Language;
-        private const string _sdkVersion = Constants.SdkVersion;
-        private const string _sdkGenVersion = Constants.SdkGenVersion;
-        private const string _openapiDocVersion = Constants.OpenApiDocVersion;
 
         public OrganizationRoles(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ListOrganizationRolesResponse> ListAsync(string? query = null, string? orderBy = "-created_at", long? limit = 10, long? offset = 0, RetryConfig? retryConfig = null)
+        /// <summary>
+        /// Get a list of organization roles.
+        /// </summary>
+        /// <remarks>
+        /// This request returns the list of organization roles for the instance.<br/>
+        /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
+        /// The organization roles are ordered by descending creation date.<br/>
+        /// Most recent roles will be returned first.
+        /// </remarks>
+        /// <param name="query">
+        /// Returns organization roles with ID, name, or key that match the given query.<br/>
+        /// Uses exact match for organization role ID and partial match for name and key.
+        /// </param>
+        /// <param name="orderBy">
+        /// Allows to return organization roles in a particular order.<br/>
+        /// At the moment, you can order the returned organization roles by their `created_at`, `name`, or `key`.<br/>
+        /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
+        /// For example, if you want organization roles to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
+        /// If you don't use `+` or `-`, then `+` is implied.<br/>
+        /// Defaults to `-created_at`.
+        /// </param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `offset`.
+        /// </param>
+        /// <param name="offset">
+        /// Skip the first `offset` results when paginating.<br/>
+        /// Needs to be an integer greater or equal to zero.<br/>
+        /// To be used in conjunction with `limit`.
+        /// </param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListOrganizationRolesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListOrganizationRolesResponse> ListAsync(
+            string? query = null,
+            string? orderBy = "-created_at",
+            long? limit = 10,
+            long? offset = 0,
+            RetryConfig? retryConfig = null
+        )
         {
             var request = new ListOrganizationRolesRequest()
             {
@@ -122,6 +257,7 @@ namespace Clerk.BackendAPI
                 Limit = limit,
                 Offset = offset,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_roles", request, null);
 
@@ -176,7 +312,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -185,9 +321,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -263,10 +399,32 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<CreateOrganizationRoleResponse> CreateAsync(CreateOrganizationRoleRequestBody request, RetryConfig? retryConfig = null)
-        {
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
+        /// <summary>
+        /// Create an organization role.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new organization role with the given name and permissions for an instance.<br/>
+        /// The key must be unique for the instance and start with the 'org:' prefix, followed by lowercase alphanumeric characters and underscores only.<br/>
+        /// You can optionally provide a description for the role and specify whether it should be included in the initial role set.<br/>
+        /// Organization roles support permissions that can be assigned to control access within the organization.
+        /// </remarks>
+        /// <param name="request">A <see cref="CreateOrganizationRoleRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="CreateOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<CreateOrganizationRoleResponse> CreateAsync(
+            CreateOrganizationRoleRequestBody request,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = baseUrl + "/organization_roles";
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
@@ -326,7 +484,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 402 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -335,9 +493,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -413,12 +571,33 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<GetOrganizationRoleResponse> GetAsync(string organizationRoleId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Retrieve an organization role.
+        /// </summary>
+        /// <remarks>
+        /// Use this request to retrieve an existing organization role by its ID.
+        /// </remarks>
+        /// <param name="organizationRoleId">The ID of the organization role.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="GetOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationRoleId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<GetOrganizationRoleResponse> GetAsync(
+            string organizationRoleId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationRoleId == null) throw new ArgumentNullException(nameof(organizationRoleId));
+
             var request = new GetOrganizationRoleRequest()
             {
                 OrganizationRoleId = organizationRoleId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_roles/{organization_role_id}", request, null);
 
@@ -473,7 +652,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -482,9 +661,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -560,13 +739,40 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<UpdateOrganizationRoleResponse> UpdateAsync(string organizationRoleId, UpdateOrganizationRoleRequestBody requestBody, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Update an organization role.
+        /// </summary>
+        /// <remarks>
+        /// Updates an existing organization role.<br/>
+        /// You can update the name, key, description, and permissions of the role.<br/>
+        /// All parameters are optional - you can update only the fields you want to change.<br/>
+        /// If the role is used as a creator role or domain default role, updating the key will cascade the update to the organization settings.
+        /// </remarks>
+        /// <param name="organizationRoleId">The ID of the organization role to update.</param>
+        /// <param name="requestBody">A <see cref="UpdateOrganizationRoleRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="UpdateOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationRoleId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<UpdateOrganizationRoleResponse> UpdateAsync(
+            string organizationRoleId,
+            UpdateOrganizationRoleRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationRoleId == null) throw new ArgumentNullException(nameof(organizationRoleId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
             var request = new UpdateOrganizationRoleRequest()
             {
                 OrganizationRoleId = organizationRoleId,
                 RequestBody = requestBody,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_roles/{organization_role_id}", request, null);
 
@@ -627,7 +833,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -636,9 +842,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -714,12 +920,34 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<DeleteOrganizationRoleResponse> DeleteAsync(string organizationRoleId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Delete an organization role.
+        /// </summary>
+        /// <remarks>
+        /// Deletes the organization role.<br/>
+        /// The role cannot be deleted if it is currently used as the default creator role, domain default role, assigned to any members, or exists in any invitations.
+        /// </remarks>
+        /// <param name="organizationRoleId">The ID of the organization role to delete.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="DeleteOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="organizationRoleId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<DeleteOrganizationRoleResponse> DeleteAsync(
+            string organizationRoleId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationRoleId == null) throw new ArgumentNullException(nameof(organizationRoleId));
+
             var request = new DeleteOrganizationRoleRequest()
             {
                 OrganizationRoleId = organizationRoleId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_roles/{organization_role_id}", request, null);
 
@@ -774,7 +1002,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -783,9 +1011,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -861,13 +1089,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<AssignPermissionToOrganizationRoleResponse> AssignPermissionAsync(string organizationRoleId, string permissionId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Assign a permission to an organization role.
+        /// </summary>
+        /// <remarks>
+        /// Assigns a permission to an organization role.
+        /// </remarks>
+        /// <param name="organizationRoleId">The ID of the organization role.</param>
+        /// <param name="permissionId">The ID of the permission to assign.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="AssignPermissionToOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationRoleId"/> or <paramref name="permissionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 404 or 409 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<AssignPermissionToOrganizationRoleResponse> AssignPermissionAsync(
+            string organizationRoleId,
+            string permissionId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationRoleId == null) throw new ArgumentNullException(nameof(organizationRoleId));
+            if (permissionId == null) throw new ArgumentNullException(nameof(permissionId));
+
             var request = new AssignPermissionToOrganizationRoleRequest()
             {
                 OrganizationRoleId = organizationRoleId,
                 PermissionId = permissionId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_roles/{organization_role_id}/permissions/{permission_id}", request, null);
 
@@ -922,7 +1174,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 409 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -931,9 +1183,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1009,13 +1261,37 @@ namespace Clerk.BackendAPI
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
 
-        public async Task<RemovePermissionFromOrganizationRoleResponse> RemovePermissionAsync(string organizationRoleId, string permissionId, RetryConfig? retryConfig = null)
+
+        /// <summary>
+        /// Remove a permission from an organization role.
+        /// </summary>
+        /// <remarks>
+        /// Removes a permission from an organization role.
+        /// </remarks>
+        /// <param name="organizationRoleId">The ID of the organization role.</param>
+        /// <param name="permissionId">The ID of the permission to remove.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RemovePermissionFromOrganizationRoleResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationRoleId"/> or <paramref name="permissionId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RemovePermissionFromOrganizationRoleResponse> RemovePermissionAsync(
+            string organizationRoleId,
+            string permissionId,
+            RetryConfig? retryConfig = null
+        )
         {
+            if (organizationRoleId == null) throw new ArgumentNullException(nameof(organizationRoleId));
+            if (permissionId == null) throw new ArgumentNullException(nameof(permissionId));
+
             var request = new RemovePermissionFromOrganizationRoleRequest()
             {
                 OrganizationRoleId = organizationRoleId,
                 PermissionId = permissionId,
             };
+
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/organization_roles/{organization_role_id}/permissions/{permission_id}", request, null);
 
@@ -1070,7 +1346,7 @@ namespace Clerk.BackendAPI
                 httpResponse = await retries.Run();
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode == 422 || _statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -1079,9 +1355,9 @@ namespace Clerk.BackendAPI
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception _hookError)
             {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
                 if (_httpResponse != null)
                 {
                     httpResponse = _httpResponse;
@@ -1156,5 +1432,6 @@ namespace Clerk.BackendAPI
 
             throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
         }
+
     }
 }

@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class UploadOrganizationLogoFile
     {
-
         [SpeakeasyMetadata("multipartForm:name=fileName")]
         public string FileName { get; set; } = default!;
 

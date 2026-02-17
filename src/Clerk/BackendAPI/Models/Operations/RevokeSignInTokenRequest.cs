@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class RevokeSignInTokenRequest
     {
-
         /// <summary>
-        /// The ID of the sign-in token to be revoked
+        /// The ID of the sign-in token to be revoked.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=sign_in_token_id")]
         public string SignInTokenId { get; set; } = default!;

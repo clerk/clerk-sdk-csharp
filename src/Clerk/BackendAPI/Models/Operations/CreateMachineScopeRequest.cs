@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class CreateMachineScopeRequest
     {
-
         /// <summary>
-        /// The ID of the machine that will have access to another machine
+        /// The ID of the machine that will have access to another machine.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=machine_id")]
         public string MachineId { get; set; } = default!;

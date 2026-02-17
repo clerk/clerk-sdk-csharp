@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class SetUserPasswordCompromisedRequestBody
     {
-
         [JsonProperty("revoke_all_sessions")]
         public bool? RevokeAllSessions { get; set; } = null;
     }

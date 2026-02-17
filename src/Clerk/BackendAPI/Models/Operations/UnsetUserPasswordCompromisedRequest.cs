@@ -10,12 +10,11 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class UnsetUserPasswordCompromisedRequest
     {
-
         /// <summary>
-        /// The ID of the user to unset the compromised status for
+        /// The ID of the user to unset the compromised status for.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=user_id")]
         public string UserId { get; set; } = default!;

@@ -13,23 +13,19 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class RequestBody
     {
-
         /// <summary>
-        /// The email address the invitation will be sent to
+        /// The email address the invitation will be sent to.
         /// </summary>
         [JsonProperty("email_address")]
         public string EmailAddress { get; set; } = default!;
 
         /// <summary>
         /// Metadata that will be attached to the newly created invitation.<br/>
-        /// 
-        /// <remarks>
         /// The value of this property should be a well-formed JSON object.<br/>
-        /// Once the user accepts the invitation and signs up, these metadata will end up in the user&apos;s public metadata.
-        /// </remarks>
+        /// Once the user accepts the invitation and signs up, these metadata will end up in the user's public metadata.
         /// </summary>
         [JsonProperty("public_metadata")]
         public Dictionary<string, object>? PublicMetadata { get; set; } = null;
@@ -42,20 +38,14 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Optional flag which denotes whether an email invitation should be sent to the given email address.<br/>
-        /// 
-        /// <remarks>
         /// Defaults to true.
-        /// </remarks>
         /// </summary>
         [JsonProperty("notify")]
         public bool? Notify { get; set; } = true;
 
         /// <summary>
         /// Whether an invitation should be created if there is already an existing invitation for this email<br/>
-        /// 
-        /// <remarks>
-        /// address, or it&apos;s claimed by another user.
-        /// </remarks>
+        /// address, or it's claimed by another user.
         /// </summary>
         [JsonProperty("ignore_existing")]
         public bool? IgnoreExisting { get; set; } = false;

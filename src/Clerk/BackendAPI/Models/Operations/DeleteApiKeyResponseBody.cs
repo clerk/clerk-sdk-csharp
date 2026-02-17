@@ -12,13 +12,12 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
-    /// 200 OK
+    /// 200 OK.
     /// </summary>
     public class DeleteApiKeyResponseBody
     {
-
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 

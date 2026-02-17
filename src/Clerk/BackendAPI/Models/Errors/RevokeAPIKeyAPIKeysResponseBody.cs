@@ -27,7 +27,7 @@ namespace Clerk.BackendAPI.Models.Errors
     }
 
     /// <summary>
-    /// 404 Not Found
+    /// 404 Not Found.
     /// </summary>
     public class RevokeAPIKeyAPIKeysResponseBody : SDKBaseError
     {
@@ -57,5 +57,4 @@ namespace Clerk.BackendAPI.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

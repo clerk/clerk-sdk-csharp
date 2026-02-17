@@ -10,10 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     public class DeleteBackupCodeRequest
     {
-
         /// <summary>
         /// The ID of the user whose backup codes are to be deleted.
         /// </summary>

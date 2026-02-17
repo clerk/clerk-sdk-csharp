@@ -11,12 +11,11 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    
+
     public class InviteWaitlistEntryRequestBody
     {
-
         /// <summary>
-        /// Whether an invitation should be created if there is already an existing invitation for this email address, or it&apos;s claimed by another user.
+        /// Whether an invitation should be created if there is already an existing invitation for this email address, or it's claimed by another user.
         /// </summary>
         [JsonProperty("ignore_existing")]
         public bool? IgnoreExisting { get; set; } = false;

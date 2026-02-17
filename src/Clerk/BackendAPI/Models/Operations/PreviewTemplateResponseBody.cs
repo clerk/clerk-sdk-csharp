@@ -10,9 +10,9 @@
 namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
-    
+
     /// <summary>
-    /// OK
+    /// OK.
     /// </summary>
     public class PreviewTemplateResponseBody
     {

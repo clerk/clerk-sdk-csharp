@@ -12,7 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum RoleSetRoleSetMigrationObject
     {
         [JsonProperty("role_set_migration")]
@@ -51,5 +51,4 @@ namespace Clerk.BackendAPI.Models.Components
             throw new Exception($"Unknown value {value} for enum RoleSetRoleSetMigrationObject");
         }
     }
-
 }

@@ -11,10 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
-    
+
     public class UploadOrganizationLogoRequestBody
     {
-
         /// <summary>
         /// The ID of the user that will be credited with the image upload.
         /// </summary>
