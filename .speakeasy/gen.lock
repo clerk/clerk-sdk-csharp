@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: 76ecc6d3dc9a8677486af22d66a5f591
+  docChecksum: 386c249906125edf0e6eeae042be5f1d
   docVersion: "2025-11-10"
-  speakeasyVersion: 1.722.0
-  generationVersion: 2.829.1
-  releaseVersion: 0.15.3
-  configChecksum: 4e411d5a29d98ecaf7ece6fb1a3ed278
+  speakeasyVersion: 1.723.0
+  generationVersion: 2.835.2
+  releaseVersion: 0.16.0
+  configChecksum: 378095b6a29dde05995dff9e7204b202
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   published: true
 persistentEdits:
-  generation_id: a3ee32ab-b92c-44d9-909f-7ca623931684
-  pristine_commit_hash: 1f94b8105cf4a4ff90373d24647fede2850a2fe8
-  pristine_tree_hash: d87078ddb81e561d4d2ca2a248864486f4e41f61
+  generation_id: eab765e6-7d97-4550-bf44-0e6099409912
+  pristine_commit_hash: cff5f311be1baecbaa451eb61dc4cd7d24a062ac
+  pristine_tree_hash: 2c61da82b24a2c71f1164394a62b3d34e66f74f4
 features:
   csharp:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.1
     constsAndDefaults: 0.0.2
-    core: 3.15.13
+    core: 3.15.14
     deprecations: 2.81.2
     examples: 2.81.6
     flattening: 2.81.3
@@ -27,9 +27,10 @@ features:
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.83.0
     groups: 2.81.3
+    ignores: 2.81.1
     intellisenseMarkdownSupport: 0.1.0
     methodArguments: 0.2.1
-    nameOverrides: 2.81.2
+    nameOverrides: 2.81.4
     nullables: 0.1.1
     openEnums: 0.1.1
     responseFormat: 0.0.4
@@ -111,8 +112,8 @@ trackedFiles:
     pristine_git_object: ea9585d3f76cf197bac2680c60f3efeb765d3441
   docs/Models/Components/BillingPriceResponse.md:
     id: 62bdb5fcf60f
-    last_write_checksum: sha1:cd590499fa742701d31f3768780068ed67ed6fb6
-    pristine_git_object: f5cf151a695385314fa1518cf12d5bee044ca86a
+    last_write_checksum: sha1:aad7f8ce7de9ffbfd72fc35bdf32d512c2403fe7
+    pristine_git_object: 7597abcc0b9eb978dcd2026670eeb4760c268cf2
   docs/Models/Components/BillingPriceResponseObject.md:
     id: 2ffa9d7fc263
     last_write_checksum: sha1:2579f0798b1fc7780de23eac9db87c3be425f021
@@ -1887,8 +1888,8 @@ trackedFiles:
     pristine_git_object: cfb9f3fd0de2a07a44468547d0a52388a1cccad2
   docs/Models/Operations/CreateM2MTokenRequestBody.md:
     id: d564d0f0f184
-    last_write_checksum: sha1:3835442c99d7bff90b0be5eb667d5ada50fa331e
-    pristine_git_object: 6621bce93bb4a676111abbb5baf148b2e3d9aba0
+    last_write_checksum: sha1:2ef30754c0a88b066934073412880a238f795d09
+    pristine_git_object: 956d4553f964005cee8634bb06c2cb74e02b9c53
   docs/Models/Operations/CreateM2MTokenResponse.md:
     id: afd2ea67e01f
     last_write_checksum: sha1:7fceb0b07404f97c4f96e1429bf7fcba7dba6ae7
@@ -2751,8 +2752,8 @@ trackedFiles:
     pristine_git_object: 673bb62bd64ad8fefba9c4e4e81f016f02792106
   docs/Models/Operations/ListInstanceOrganizationInvitationsQueryParamStatus.md:
     id: a44edd6f2209
-    last_write_checksum: sha1:3e03f471361aa06c9b08b3699bda03c63cb02475
-    pristine_git_object: ffb0710a855f42190ff9b824dddb52c4a90f8c1c
+    last_write_checksum: sha1:bbb4493bfc4f48459fdbc4b437990e672591e575
+    pristine_git_object: 04b4ef9811c08afed7a589890220587ad26f267b
   docs/Models/Operations/ListInstanceOrganizationInvitationsRequest.md:
     id: 0cc7817424ed
     last_write_checksum: sha1:125240b247c2b30a313d70dfc7a82c59617b89c0
@@ -2807,8 +2808,8 @@ trackedFiles:
     pristine_git_object: 6abb6e10cf8bbc8583be6c1afd6b3f4fa365ce92
   docs/Models/Operations/ListOrganizationInvitationsQueryParamStatus.md:
     id: cfc5fcb1f34f
-    last_write_checksum: sha1:8b89a453bf7197d4bde803e2304ddedd0fe61d04
-    pristine_git_object: 6595bfe39354bafeda5e7e87ceeae2d6a9dcc1f6
+    last_write_checksum: sha1:f31e77b277e7b646a17fd1cfdb041eeb7eec9b04
+    pristine_git_object: 89227532396e44e53c5a2c24dc72dd054fa6d3ac
   docs/Models/Operations/ListOrganizationInvitationsRequest.md:
     id: 703c0752eea5
     last_write_checksum: sha1:aa87d5b85cef8b27fb37c3c41cf42d756dbde7cd
@@ -2959,8 +2960,8 @@ trackedFiles:
     pristine_git_object: e58877f569064b5b672046eef29448bae792a0a8
   docs/Models/Operations/QueryParamStatus.md:
     id: b986ce963a0a
-    last_write_checksum: sha1:2965c5aab147385c50fd1ae503fc373d910228df
-    pristine_git_object: 191debf3afb88609c5bc8feb782483c95c9c9472
+    last_write_checksum: sha1:5b1fb931fef44b06d833493013b385fdfde6da30
+    pristine_git_object: 1680e3c837a61504c42d4f2f1f76978076a70023
   docs/Models/Operations/RefreshSessionRequest.md:
     id: 6a4c79fc08d6
     last_write_checksum: sha1:af000e34380d1215f51a786d62839b8ef6d57859
@@ -3205,6 +3206,10 @@ trackedFiles:
     id: f65490791683
     last_write_checksum: sha1:ae8efca7775026c07d1304310e58dee516805481
     pristine_git_object: b74d4aa6d96a83d6e67b6c41a59672d30adf117e
+  docs/Models/Operations/TokenFormat.md:
+    id: ab438f69bbcb
+    last_write_checksum: sha1:08428ebe8d65e26348f4f691c250a79c16696f98
+    pristine_git_object: ecf28a06391cb57cd275a25f8f38790a96386289
   docs/Models/Operations/Two.md:
     id: 89abbd16aa62
     last_write_checksum: sha1:bc2523e2399ce30f3c41c17e8966aeb6f5048efc
@@ -3727,8 +3732,8 @@ trackedFiles:
     pristine_git_object: 6d0ade5cc0857f2a609014b87aebd98c7c0e2357
   docs/sdks/emailaddresses/README.md:
     id: f5fd208070d3
-    last_write_checksum: sha1:3db3c2e6bed3f280f6fe4750f34fa3dfac9cd4f1
-    pristine_git_object: e7f817df86047107b422313efa60f4a73b3c17ec
+    last_write_checksum: sha1:754a55bbe338b3bcdae54561a9f7bf7b0a53654e
+    pristine_git_object: cb117f964c01c216f4c9765e7bbb754220e8babc
   docs/sdks/emailandsmstemplates/README.md:
     id: f97f5a6195f4
     last_write_checksum: sha1:c71b88a97f9d9472d124e0113d980e2e97e4494d
@@ -3839,8 +3844,8 @@ trackedFiles:
     pristine_git_object: f38067376b56a36ce364a6632253dd4d8456dab3
   docs/sdks/users/README.md:
     id: 5d80027045fe
-    last_write_checksum: sha1:32bf283507f1a5765a2b0d71edd431e711fb1393
-    pristine_git_object: 200e9d6aead2427ad058e37bd17ded9d5b97413a
+    last_write_checksum: sha1:c34e1fd25c58c44cba38862aed6aa41dc24c3620
+    pristine_git_object: 8e1a7539539763fac89bfb66938d9677dc2d39b0
   docs/sdks/waitlistentries/README.md:
     id: a4b511c18a9a
     last_write_checksum: sha1:eb01c050a86b2cb38a99f576a2245ccab11b9c4d
@@ -3879,8 +3884,8 @@ trackedFiles:
     pristine_git_object: 52d83b399bb83a14c037c8741fccc0fa57c0d9ab
   src/Clerk/BackendAPI/Clerk.BackendAPI.csproj:
     id: ccf41f9f81a0
-    last_write_checksum: sha1:372a86069acaaedda5c84b27bab9a8199344e111
-    pristine_git_object: 41867cde4f0168cb39418f655188bc56f4a42c65
+    last_write_checksum: sha1:5534cb08b9c422a15e02c513053cdae96c4fdf2c
+    pristine_git_object: 9a8678e815fa284cd95e43ad3b1e1002a41b0a0c
   src/Clerk/BackendAPI/ClerkBackendApi.cs:
     id: 9270b4820dab
     last_write_checksum: sha1:804f6ed4bd2b15c080ef8d20a3c5b50adb10dd83
@@ -3895,8 +3900,8 @@ trackedFiles:
     pristine_git_object: 3009bcd650ab61becef863d59c3778d999678ed1
   src/Clerk/BackendAPI/EmailAddresses.cs:
     id: 4381d531ef12
-    last_write_checksum: sha1:952a527090e3f461a32eb86f4cb65aa8caafa58c
-    pristine_git_object: 2cf660de0bad40901c1343b3d616a0b1520590d6
+    last_write_checksum: sha1:a113b4a87f03654d5d05d8b40d650b4c3ea9b576
+    pristine_git_object: 1d8f675c5fa013104c61be8c6605ee78df39b2a9
   src/Clerk/BackendAPI/EmailAndSmsTemplates.cs:
     id: dd5be98d8c7f
     last_write_checksum: sha1:423c0558e1589d8a2cd45f8ad9c56cd11b0fdc61
@@ -3999,8 +4004,8 @@ trackedFiles:
     pristine_git_object: 435844f6d98829238252bb8224c015bf9f14daf6
   src/Clerk/BackendAPI/Models/Components/BillingPriceResponse.cs:
     id: be78e4275fc7
-    last_write_checksum: sha1:4ecdeb127a25cc7ba66b7e60eac2ce3521d1e9fd
-    pristine_git_object: 54b7bae913520e3cc722e8ca754ed5bac75be31b
+    last_write_checksum: sha1:276007384efd9e1ed024858af70f98c223cb855c
+    pristine_git_object: 6847ddc97fad560cf175ba0963e2b11bbb241e3a
   src/Clerk/BackendAPI/Models/Components/BillingPriceResponseObject.cs:
     id: 51e821037c4e
     last_write_checksum: sha1:167de113fef8e56c00b97f920bffcde7b766976c
@@ -5787,8 +5792,8 @@ trackedFiles:
     pristine_git_object: b599d96e49d7db9d3d0056ecf53978bcb6b151c6
   src/Clerk/BackendAPI/Models/Operations/CreateM2MTokenRequestBody.cs:
     id: dae4f52c0751
-    last_write_checksum: sha1:9211b3e1a71d249c664f283553f16dcd81ca2f0c
-    pristine_git_object: 08e116b2868a6e7713b3c55594fe903506bec80a
+    last_write_checksum: sha1:14e49ce00b0c1ca97ae511f562c274996804c451
+    pristine_git_object: 508931ec68dbc36ba49896f45d3c08faaf25c894
   src/Clerk/BackendAPI/Models/Operations/CreateM2MTokenResponse.cs:
     id: 6cf3f971b582
     last_write_checksum: sha1:bb2c1cfe3d511c422816fb9a0d66e82cbbe74836
@@ -6651,8 +6656,8 @@ trackedFiles:
     pristine_git_object: cde31da2e0541246737437881a45911319c9243d
   src/Clerk/BackendAPI/Models/Operations/ListInstanceOrganizationInvitationsQueryParamStatus.cs:
     id: f282e6d878fb
-    last_write_checksum: sha1:ec33df75eae937b79ed974373edde9ce6ae654c5
-    pristine_git_object: 467925d1fdaf7f159c5282ec0855d3d94bd2ec86
+    last_write_checksum: sha1:990e09ffeb72de163b85945fdd4cf0026e7dc360
+    pristine_git_object: 917b9cf0f6e7ccea48417a0b26397ca96ddf7281
   src/Clerk/BackendAPI/Models/Operations/ListInstanceOrganizationInvitationsRequest.cs:
     id: ff4cbce78001
     last_write_checksum: sha1:0650582a85a4582d7669301931ce2b7269973f16
@@ -6707,8 +6712,8 @@ trackedFiles:
     pristine_git_object: 031ada0b223f78eb4d724a18acf078fbfc253d39
   src/Clerk/BackendAPI/Models/Operations/ListOrganizationInvitationsQueryParamStatus.cs:
     id: 310db9ff44f5
-    last_write_checksum: sha1:e057a95f7102b729bab20ed6ff311fba42709a48
-    pristine_git_object: 3c712e6b31fdfe8daa34c9495bae6d33a8d9528c
+    last_write_checksum: sha1:280c7ee91ab2a0d570886c683494e6a09632827c
+    pristine_git_object: 4a545238e2568cc764cccb24b0720dc418c878e6
   src/Clerk/BackendAPI/Models/Operations/ListOrganizationInvitationsRequest.cs:
     id: 57a80b206d86
     last_write_checksum: sha1:03fc2c2247edf94ccd85b99e4e00456076ac9af8
@@ -6859,8 +6864,8 @@ trackedFiles:
     pristine_git_object: 2151b4d5c9e664ff0c3d0cb5069366b9f82bf7ae
   src/Clerk/BackendAPI/Models/Operations/QueryParamStatus.cs:
     id: edb736298010
-    last_write_checksum: sha1:67b172f9c192f3903907bd65b758d4297b9bd605
-    pristine_git_object: bb9878a61a50b8ae2bdf8ad94885a9cb13e8a409
+    last_write_checksum: sha1:62f5b93d7109d67d3b99b9e4f28ba00fcfc1048b
+    pristine_git_object: 7dcadccb64d12302813f21b4a8d1ab4e9b3daa70
   src/Clerk/BackendAPI/Models/Operations/RefreshSessionRequest.cs:
     id: 687bb60b4c27
     last_write_checksum: sha1:a309abfa43e56842449f3dc2046b08904ab1a511
@@ -7105,6 +7110,10 @@ trackedFiles:
     id: d9d033036482
     last_write_checksum: sha1:0902bcafe32c83ac5846e0e29e9fe8fccb5153e9
     pristine_git_object: 8b83a1dc06bad74dd7571b01f6a1b58514f49ac6
+  src/Clerk/BackendAPI/Models/Operations/TokenFormat.cs:
+    id: 162037997f03
+    last_write_checksum: sha1:897d4c97a285aaf1b561556279e11879ced8c991
+    pristine_git_object: 5216ffc8b882e2ff5b5596804fbe92d00a896be2
   src/Clerk/BackendAPI/Models/Operations/Two.cs:
     id: 7bb25435f4ea
     last_write_checksum: sha1:3a651098ec9a7d4365d44899defc9ee72ff119ba
@@ -7643,8 +7652,8 @@ trackedFiles:
     pristine_git_object: 80d59891990e1dceb13e501cdf25564a949c150a
   src/Clerk/BackendAPI/SDKConfig.cs:
     id: 2c8fac1123d6
-    last_write_checksum: sha1:de2d062ccc45ef8f057cb9bc9a06953c60b0e34b
-    pristine_git_object: fb9e57989e7134dcf852e4e096af42c8325ea239
+    last_write_checksum: sha1:39f757f4fa20e140f38853b7d440c4838d649048
+    pristine_git_object: 241dbef4f0722f8b7d11cb4e0bec3fa0faaf78d8
   src/Clerk/BackendAPI/SamlConnections.cs:
     id: 547d61012934
     last_write_checksum: sha1:349eaa3855400aefca20314cf9895ea038922581
@@ -7671,8 +7680,8 @@ trackedFiles:
     pristine_git_object: 19bdeb837b2a52233ee2dfedbfc45f8ce73424d2
   src/Clerk/BackendAPI/Users.cs:
     id: 8ede30d1a547
-    last_write_checksum: sha1:2e9967b6a99bbf6d657823fccfc46f75267d8306
-    pristine_git_object: 32bd0daaa73a249e45d063b3d497c55efe7ea02b
+    last_write_checksum: sha1:8d4db91a00cc5fa7478f1ed9ac1959ea5d1edb7c
+    pristine_git_object: dd8b6e48ea430906c0900afe465a4eed4188be77
   src/Clerk/BackendAPI/Utils/AnyDeserializer.cs:
     id: de2e9db9a176
     last_write_checksum: sha1:dd645dfbbf782ed6a17d0aa4c830a1d077d504bd
@@ -7683,8 +7692,8 @@ trackedFiles:
     pristine_git_object: 6f5e7c0679eaf01c8213e9e6d8b175615a82301a
   src/Clerk/BackendAPI/Utils/Constants.cs:
     id: cbaa176f33c6
-    last_write_checksum: sha1:d21a5f3c0ba47571f288c5690111edad72b0da65
-    pristine_git_object: 72cf3a515dbee2f4e5a71e655719eaa55900fda1
+    last_write_checksum: sha1:746ae0a3374f3c8202c08c16d71a5693bd34c304
+    pristine_git_object: 165ca7aa31472764ba2f733990e05f522c02049c
   src/Clerk/BackendAPI/Utils/DecimalStrConverter.cs:
     id: 2025c1d60dea
     last_write_checksum: sha1:5418f1eb375056aa7f1175271f6c48a7b536d947
@@ -9452,7 +9461,7 @@ examples:
   createM2MToken:
     speakeasy-default-create-m2-M-token:
       requestBody:
-        application/json: {}
+        application/json: {"token_format": "opaque"}
       responses:
         "201":
           application/json: {"object": "machine_to_machine_token", "id": "mt_f7f0ba8c3b4843ce7d85fcdd5e71853e", "subject": "mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "claims": {"important_metadata": "Some useful data"}, "scopes": ["mch_2xhFjEI5X2qWRvtV13BzSj8H6Dk", "mch_2yGkLpQ7Y3rXSwtU24CzTk9I7Em"], "token": "mt_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "revoked": false, "revocation_reason": "Revoked by user", "expired": false, "expiration": 1716883200, "last_used_at": 1716883200, "created_at": 1716883200, "updated_at": 1716883200}
@@ -10031,7 +10040,7 @@ examples:
         application/json: {"plan_id": "<id>", "currency": "USD", "amount": 826545}
       responses:
         "200":
-          application/json: {"object": "commerce_price", "id": "<id>", "plan_id": "<id>", "instance_id": "<id>", "currency": "Ouguiya", "currency_symbol": "Bs", "amount": 908898, "annual_monthly_amount": 821422, "fee": {"amount": 993761, "amount_formatted": "<value>", "currency": "Somoni", "currency_symbol": "kr"}, "annual_monthly_fee": {"amount": 474674, "amount_formatted": "<value>", "currency": "Egyptian Pound", "currency_symbol": "$"}, "created_at": 69176}
+          application/json: {"object": "commerce_price", "id": "<id>", "plan_id": "<id>", "instance_id": "<id>", "currency": "Ouguiya", "currency_symbol": "Bs", "amount": 908898, "annual_monthly_amount": 821422, "fee": {"amount": 993761, "amount_formatted": "<value>", "currency": "Somoni", "currency_symbol": "kr"}, "annual_monthly_fee": {"amount": 474674, "amount_formatted": "<value>", "currency": "Egyptian Pound", "currency_symbol": "$"}, "is_default": false, "created_at": 69176}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request"}], "meta": {}}
         "500":
@@ -10045,13 +10054,14 @@ examples:
         application/json: {"from_price_id": "<id>", "to_price_id": "<id>"}
       responses:
         "200":
-          application/json: {"object": "commerce_price_transition", "subscription_item": {"object": "commerce_subscription_item", "id": "<id>", "instance_id": "<id>", "status": "past_due", "plan_id": "<id>", "plan": {"object": "commerce_plan", "id": "<id>", "name": "<value>", "fee": {"amount": 635940, "amount_formatted": "<value>", "currency": "Liberian Dollar", "currency_symbol": "$"}, "annual_monthly_fee": {"amount": 49311, "amount_formatted": "<value>", "currency": "Pound Sterling", "currency_symbol": "S"}, "annual_fee": {"amount": 798728, "amount_formatted": "<value>", "currency": "Egyptian Pound", "currency_symbol": "Nu"}, "amount": 290472, "amount_formatted": "<value>", "annual_monthly_amount": 101991, "annual_monthly_amount_formatted": "<value>", "annual_amount": 633599, "annual_amount_formatted": "<value>", "currency_symbol": "C$", "currency": "Kyat", "description": "outfit whoever ha vast", "product_id": "<id>", "is_default": true, "is_recurring": true, "publicly_visible": false, "has_base_fee": true, "payer_type": ["<value 1>", "<value 2>"], "for_payer_type": "<value>", "slug": "<value>", "avatar_url": "https://zealous-bench.name", "features": [{"object": "feature", "id": "<id>", "name": "<value>", "description": "on outside oh outrun chip rigidly opposite diligently lowball why", "slug": "<value>", "avatar_url": "https://fond-schedule.info/"}]}, "plan_period": "annual", "payment_source_id": "<id>", "payer_id": "<id>", "is_free_trial": true, "proration_date": "<value>", "created_at": 313511, "updated_at": 593206}, "transition": {"previous_plan": {"object": "commerce_plan", "id": "<id>", "name": "<value>", "fee": {"amount": 635940, "amount_formatted": "<value>", "currency": "Liberian Dollar", "currency_symbol": "$"}, "annual_monthly_fee": {"amount": 49311, "amount_formatted": "<value>", "currency": "Pound Sterling", "currency_symbol": "S"}, "annual_fee": {"amount": 798728, "amount_formatted": "<value>", "currency": "Egyptian Pound", "currency_symbol": "Nu"}, "amount": 751825, "amount_formatted": "<value>", "annual_monthly_amount": 784555, "annual_monthly_amount_formatted": "<value>", "annual_amount": 306710, "annual_amount_formatted": "<value>", "currency_symbol": "C$", "currency": "Euro", "description": "since skateboard boohoo neaten mammoth fireplace near sneaky", "product_id": "<id>", "is_default": true, "is_recurring": true, "publicly_visible": false, "has_base_fee": false, "payer_type": ["<value 1>", "<value 2>"], "for_payer_type": "<value>", "slug": "<value>", "avatar_url": "https://cultivated-apricot.net/", "features": [{"object": "feature", "id": "<id>", "name": "<value>", "description": "on outside oh outrun chip rigidly opposite diligently lowball why", "slug": "<value>", "avatar_url": "https://fond-schedule.info/"}]}, "previous_price": {"object": "commerce_price", "id": "<id>", "plan_id": "<id>", "instance_id": "<id>", "currency": "Lebanese Pound", "currency_symbol": "$", "amount": 681080, "annual_monthly_amount": 939768, "fee": {"amount": 635940, "amount_formatted": "<value>", "currency": "Liberian Dollar", "currency_symbol": "$"}, "annual_monthly_fee": {"amount": 49311, "amount_formatted": "<value>", "currency": "Pound Sterling", "currency_symbol": "S"}, "created_at": 567741}, "effective_at": 534415, "effective_mode": "immediate", "charged_immediately": true, "previous_subscription_item_status": "abandoned", "previous_subscription_item_id": "<id>"}}
+          application/json: {"object": "commerce_price_transition", "subscription_item": {"object": "commerce_subscription_item", "id": "<id>", "instance_id": "<id>", "status": "past_due", "plan_id": "<id>", "plan": {"object": "commerce_plan", "id": "<id>", "name": "<value>", "fee": {"amount": 635940, "amount_formatted": "<value>", "currency": "Liberian Dollar", "currency_symbol": "$"}, "annual_monthly_fee": {"amount": 49311, "amount_formatted": "<value>", "currency": "Pound Sterling", "currency_symbol": "S"}, "annual_fee": {"amount": 798728, "amount_formatted": "<value>", "currency": "Egyptian Pound", "currency_symbol": "Nu"}, "amount": 290472, "amount_formatted": "<value>", "annual_monthly_amount": 101991, "annual_monthly_amount_formatted": "<value>", "annual_amount": 633599, "annual_amount_formatted": "<value>", "currency_symbol": "C$", "currency": "Kyat", "description": "outfit whoever ha vast", "product_id": "<id>", "is_default": true, "is_recurring": true, "publicly_visible": false, "has_base_fee": true, "payer_type": ["<value 1>", "<value 2>"], "for_payer_type": "<value>", "slug": "<value>", "avatar_url": "https://zealous-bench.name", "features": [{"object": "feature", "id": "<id>", "name": "<value>", "description": "on outside oh outrun chip rigidly opposite diligently lowball why", "slug": "<value>", "avatar_url": "https://fond-schedule.info/"}]}, "plan_period": "annual", "payment_source_id": "<id>", "payer_id": "<id>", "is_free_trial": true, "proration_date": "<value>", "created_at": 313511, "updated_at": 593206}, "transition": {"previous_plan": {"object": "commerce_plan", "id": "<id>", "name": "<value>", "fee": {"amount": 635940, "amount_formatted": "<value>", "currency": "Liberian Dollar", "currency_symbol": "$"}, "annual_monthly_fee": {"amount": 49311, "amount_formatted": "<value>", "currency": "Pound Sterling", "currency_symbol": "S"}, "annual_fee": {"amount": 798728, "amount_formatted": "<value>", "currency": "Egyptian Pound", "currency_symbol": "Nu"}, "amount": 751825, "amount_formatted": "<value>", "annual_monthly_amount": 784555, "annual_monthly_amount_formatted": "<value>", "annual_amount": 306710, "annual_amount_formatted": "<value>", "currency_symbol": "C$", "currency": "Euro", "description": "since skateboard boohoo neaten mammoth fireplace near sneaky", "product_id": "<id>", "is_default": true, "is_recurring": true, "publicly_visible": false, "has_base_fee": false, "payer_type": ["<value 1>", "<value 2>"], "for_payer_type": "<value>", "slug": "<value>", "avatar_url": "https://cultivated-apricot.net/", "features": [{"object": "feature", "id": "<id>", "name": "<value>", "description": "on outside oh outrun chip rigidly opposite diligently lowball why", "slug": "<value>", "avatar_url": "https://fond-schedule.info/"}]}, "previous_price": {"object": "commerce_price", "id": "<id>", "plan_id": "<id>", "instance_id": "<id>", "currency": "Lebanese Pound", "currency_symbol": "$", "amount": 681080, "annual_monthly_amount": 939768, "fee": {"amount": 635940, "amount_formatted": "<value>", "currency": "Liberian Dollar", "currency_symbol": "$"}, "annual_monthly_fee": {"amount": 49311, "amount_formatted": "<value>", "currency": "Pound Sterling", "currency_symbol": "S"}, "is_default": true, "created_at": 567741}, "effective_at": 534415, "effective_mode": "immediate", "charged_immediately": true, "previous_subscription_item_status": "abandoned", "previous_subscription_item_id": "<id>"}}
         "400":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request"}], "meta": {}}
         "500":
           application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request"}], "meta": {}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Csharp SDK Changes:\n* `ClerkBackendApi.EmailAddresses.Create()`:  `error.status[409]` **Added**\n* `ClerkBackendApi.EmailAddresses.Update()`:  `error.status[409]` **Added**\n* `ClerkBackendApi.Users.Update()`:  `error.status[409]` **Added**\n* `ClerkBackendApi.Users.GetOrganizationInvitations()`:  `request.status` **Changed**\n* `ClerkBackendApi.OrganizationInvitations.GetAll()`: \n  *  `request.Status` **Changed**\n* `ClerkBackendApi.OrganizationInvitations.List()`: \n  *  `request.Status` **Changed**\n* `ClerkBackendApi.Billing.ListPrices()`:  `response.data[].IsDefault` **Added**\n* `ClerkBackendApi.Billing.CreatePrice()`:  `response.isDefault` **Added**\n* `ClerkBackendApi.Billing.CreatePriceTransition()`:  `response.transition.PreviousPrice.IsDefault` **Added**\n* `ClerkBackendApi.M2m.CreateToken()`: \n  *  `request.TokenFormat` **Added**\n"
 generatedFiles:
   - .gitattributes
   - Clerk.BackendAPI.sln
