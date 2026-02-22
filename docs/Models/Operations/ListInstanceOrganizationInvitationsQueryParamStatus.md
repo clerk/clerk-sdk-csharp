@@ -10,3 +10,4 @@ Filter organization invitations based on their status
 | `Pending`  | pending    |
 | `Accepted` | accepted   |
 | `Revoked`  | revoked    |
+| `Expired`  | expired    |

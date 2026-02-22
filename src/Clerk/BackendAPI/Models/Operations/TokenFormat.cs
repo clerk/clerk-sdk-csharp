@@ -13,31 +13,24 @@ namespace Clerk.BackendAPI.Models.Operations
     using Newtonsoft.Json;
     using System;
 
-    /// <summary>
-    /// Filter organization invitations based on their status.
-    /// </summary>
-    public enum ListOrganizationInvitationsQueryParamStatus
+    public enum TokenFormat
     {
-        [JsonProperty("pending")]
-        Pending,
-        [JsonProperty("accepted")]
-        Accepted,
-        [JsonProperty("revoked")]
-        Revoked,
-        [JsonProperty("expired")]
-        Expired,
+        [JsonProperty("opaque")]
+        Opaque,
+        [JsonProperty("jwt")]
+        Jwt,
     }
 
-    public static class ListOrganizationInvitationsQueryParamStatusExtension
+    public static class TokenFormatExtension
     {
-        public static string Value(this ListOrganizationInvitationsQueryParamStatus value)
+        public static string Value(this TokenFormat value)
         {
             return ((JsonPropertyAttribute)value.GetType().GetMember(value.ToString())[0].GetCustomAttributes(typeof(JsonPropertyAttribute), false)[0]).PropertyName ?? value.ToString();
         }
 
-        public static ListOrganizationInvitationsQueryParamStatus ToEnum(this string value)
+        public static TokenFormat ToEnum(this string value)
         {
-            foreach(var field in typeof(ListOrganizationInvitationsQueryParamStatus).GetFields())
+            foreach(var field in typeof(TokenFormat).GetFields())
             {
                 var attributes = field.GetCustomAttributes(typeof(JsonPropertyAttribute), false);
                 if (attributes.Length == 0)
@@ -50,14 +43,14 @@ namespace Clerk.BackendAPI.Models.Operations
                 {
                     var enumVal = field.GetValue(null);
 
-                    if (enumVal is ListOrganizationInvitationsQueryParamStatus)
+                    if (enumVal is TokenFormat)
                     {
-                        return (ListOrganizationInvitationsQueryParamStatus)enumVal;
+                        return (TokenFormat)enumVal;
                     }
                 }
             }
 
-            throw new Exception($"Unknown value {value} for enum ListOrganizationInvitationsQueryParamStatus");
+            throw new Exception($"Unknown value {value} for enum TokenFormat");
         }
     }
 }

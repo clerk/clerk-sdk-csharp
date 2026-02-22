@@ -120,7 +120,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="requestBody"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404, 409 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<UpdateUserResponse> UpdateAsync(
             string userId,
@@ -1341,7 +1341,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ArgumentNullException">One of <paramref name="userId"/> or <paramref name="requestBody"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404, 409 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<UpdateUserResponse> UpdateAsync(
             string userId,
@@ -1473,7 +1473,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 401, 404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{400, 401, 404, 409, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

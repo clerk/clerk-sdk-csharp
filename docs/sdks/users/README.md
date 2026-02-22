@@ -370,7 +370,7 @@ var res = await sdk.Users.UpdateAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 409, 422                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Delete
