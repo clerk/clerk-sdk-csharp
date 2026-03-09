@@ -44,6 +44,12 @@ namespace Clerk.BackendAPI.Models.Components
         public CommerceSubscriptionCreditResponse? Credit { get; set; }
 
         /// <summary>
+        /// Unified credits breakdown for this subscription item.
+        /// </summary>
+        [JsonProperty("credits")]
+        public Credits? Credits { get; set; } = null;
+
+        /// <summary>
         /// Unique identifier for the associated plan.
         /// </summary>
         [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Include)]
@@ -141,5 +147,17 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("updated_at")]
         public long? UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Seat quantity for seat-based billing.
+        /// </summary>
+        [JsonProperty("seats")]
+        public Seats? Seats { get; set; } = null;
+
+        /// <summary>
+        /// Totals for this subscription item.
+        /// </summary>
+        [JsonProperty("totals")]
+        public Totals? Totals { get; set; } = null;
     }
 }

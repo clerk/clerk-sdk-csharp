@@ -2,6 +2,14 @@
 
 Filter organization invitations based on their status
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Operations;
+
+var value = QueryParamStatus.Pending;
+```
+
 
 ## Values
 
@@ -10,3 +18,4 @@ Filter organization invitations based on their status
 | `Pending`  | pending    |
 | `Accepted` | accepted   |
 | `Revoked`  | revoked    |
+| `Expired`  | expired    |

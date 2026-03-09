@@ -2,6 +2,14 @@
 
 The payment method type.
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Components;
+
+var value = PaymentMethod.Card;
+```
+
 
 ## Values
 

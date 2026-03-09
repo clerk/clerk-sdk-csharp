@@ -127,6 +127,27 @@ namespace Clerk.BackendAPI.Utils.Retries
             }
         }
 
+        private static long RetryAfterMs(HttpResponseMessage response)
+        {
+            if (response.Headers.TryGetValues("Retry-After", out var values))
+            {
+                var retryAfter = System.Linq.Enumerable.FirstOrDefault(values);
+                if (!string.IsNullOrEmpty(retryAfter))
+                {
+                    if (long.TryParse(retryAfter, out var seconds) && seconds >= 0)
+                    {
+                        return seconds * 1000;
+                    }
+                    if (DateTimeOffset.TryParse(retryAfter, out var retryDate))
+                    {
+                        var deltaMs = (long)(retryDate - DateTimeOffset.UtcNow).TotalMilliseconds;
+                        return deltaMs > 0 ? deltaMs : 0;
+                    }
+                }
+            }
+            return 0;
+        }
+
         private async Task<HttpResponseMessage> retryWithBackoff(bool retryConnectionErrors)
         {
             var backoff = retryConfig.Backoff;
@@ -159,10 +180,16 @@ namespace Clerk.BackendAPI.Utils.Retries
                         throw;
                     }
 
-                    var intervalMs = backoff.InitialIntervalMs * Math.Pow(backoff.BaseFactor, numAttempts);
-                    var jitterMs = backoff.JitterFactor * intervalMs;
-                    intervalMs = intervalMs - jitterMs + new Random().NextDouble() * (2 * jitterMs + 1);
-                    intervalMs = Math.Min(intervalMs, backoff.MaxIntervalMs);
+                    long intervalMs = ex.Response != null ? RetryAfterMs(ex.Response) : 0;
+
+                    if (intervalMs <= 0)
+                    {
+                        var computed = backoff.InitialIntervalMs * Math.Pow(backoff.BaseFactor, numAttempts);
+                        var jitterMs = backoff.JitterFactor * computed;
+                        computed = computed - jitterMs + new Random().NextDouble() * (2 * jitterMs + 1);
+                        computed = Math.Min(computed, backoff.MaxIntervalMs);
+                        intervalMs = (long)computed;
+                    }
 
                     await Task.Delay((int)intervalMs);
                     numAttempts += 1;

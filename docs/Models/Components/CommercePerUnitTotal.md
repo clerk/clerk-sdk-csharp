@@ -1,0 +1,10 @@
+# CommercePerUnitTotal
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `Name`                                                                                | *string*                                                                              | :heavy_check_mark:                                                                    | Name of the billable unit (for example, seats)                                        |
+| `BlockSize`                                                                           | *long*                                                                                | :heavy_check_mark:                                                                    | Number of units included in each pricing block                                        |
+| `Tiers`                                                                               | List<[CommercePerUnitTotalTier](../../Models/Components/CommercePerUnitTotalTier.md)> | :heavy_check_mark:                                                                    | Computed totals for each pricing tier                                                 |

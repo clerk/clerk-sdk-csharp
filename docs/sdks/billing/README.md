@@ -246,7 +246,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 var res = await sdk.Billing.ExtendSubscriptionItemFreeTrialAsync(
     subscriptionItemId: "<id>",
     extendFreeTrialRequest: new ExtendFreeTrialRequest() {
-        ExtendTo = System.DateTime.Parse("2026-01-08T00:00:00Z"),
+        ExtendTo = System.DateTime.Parse("2026-01-08T00:00:00Z").ToUniversalTime(),
     }
 );
 

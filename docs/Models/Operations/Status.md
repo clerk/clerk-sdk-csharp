@@ -2,6 +2,14 @@
 
 Filter sessions by the provided status
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Operations;
+
+var value = Status.Abandoned;
+```
+
 
 ## Values
 

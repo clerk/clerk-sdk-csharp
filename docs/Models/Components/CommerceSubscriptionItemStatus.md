@@ -2,6 +2,14 @@
 
 Current status of the subscription item.
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Components;
+
+var value = CommerceSubscriptionItemStatus.Active;
+```
+
 
 ## Values
 

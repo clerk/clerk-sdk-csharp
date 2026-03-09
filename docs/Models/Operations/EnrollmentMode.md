@@ -1,5 +1,13 @@
 # EnrollmentMode
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Operations;
+
+var value = EnrollmentMode.ManualInvitation;
+```
+
 
 ## Values
 

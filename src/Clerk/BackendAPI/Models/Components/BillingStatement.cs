@@ -53,7 +53,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// Totals for the statement.
         /// </summary>
         [JsonProperty("totals")]
-        public Totals Totals { get; set; } = default!;
+        public BillingStatementTotals Totals { get; set; } = default!;
 
         /// <summary>
         /// Array of statement groups.

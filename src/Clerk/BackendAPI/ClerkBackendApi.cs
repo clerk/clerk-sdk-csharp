@@ -99,6 +99,8 @@ namespace Clerk.BackendAPI
 
         public ITestingTokens TestingTokens { get; }
 
+        public IAgentTasks AgentTasks { get; }
+
         public IWaitlistEntries WaitlistEntries { get; }
 
         public IBilling Billing { get; }
@@ -263,6 +265,10 @@ namespace Clerk.BackendAPI
         /// </summary>
         public ITestingTokens TestingTokens { get; private set; }
         /// <summary>
+        /// The AgentTasks sub-SDK.
+        /// </summary>
+        public IAgentTasks AgentTasks { get; private set; }
+        /// <summary>
         /// The WaitlistEntries sub-SDK.
         /// </summary>
         public IWaitlistEntries WaitlistEntries { get; private set; }
@@ -363,6 +369,8 @@ namespace Clerk.BackendAPI
             SamlConnections = new SamlConnections(SDKConfiguration);
 
             TestingTokens = new TestingTokens(SDKConfiguration);
+
+            AgentTasks = new AgentTasks(SDKConfiguration);
 
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
 
@@ -499,6 +507,8 @@ namespace Clerk.BackendAPI
             SamlConnections = new SamlConnections(SDKConfiguration);
 
             TestingTokens = new TestingTokens(SDKConfiguration);
+
+            AgentTasks = new AgentTasks(SDKConfiguration);
 
             WaitlistEntries = new WaitlistEntries(SDKConfiguration);
 

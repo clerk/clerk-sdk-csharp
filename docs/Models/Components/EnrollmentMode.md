@@ -2,6 +2,14 @@
 
 Mode of enrollment for the domain
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Components;
+
+var value = EnrollmentMode.ManualInvitation;
+```
+
 
 ## Values
 

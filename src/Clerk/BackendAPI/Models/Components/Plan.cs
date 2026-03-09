@@ -119,5 +119,11 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("free_trial_days", NullValueHandling = NullValueHandling.Include)]
         public long? FreeTrialDays { get; set; }
+
+        /// <summary>
+        /// Per-unit pricing tiers for this plan (for example, seats).
+        /// </summary>
+        [JsonProperty("unit_prices")]
+        public List<CommercePlanUnitPrice>? UnitPrices { get; set; }
     }
 }

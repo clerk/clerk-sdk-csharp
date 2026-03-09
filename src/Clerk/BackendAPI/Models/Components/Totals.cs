@@ -12,19 +12,29 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     /// <summary>
-    /// Totals for the statement.
+    /// Totals for this subscription item.
     /// </summary>
     public class Totals
     {
-        [JsonProperty("grand_total")]
-        public CommerceMoneyResponse GrandTotal { get; set; } = default!;
-
         [JsonProperty("subtotal")]
         public CommerceMoneyResponse Subtotal { get; set; } = default!;
 
+        [JsonProperty("base_fee")]
+        public CommerceMoneyResponse BaseFee { get; set; } = default!;
+
         [JsonProperty("tax_total")]
         public CommerceMoneyResponse TaxTotal { get; set; } = default!;
+
+        [JsonProperty("grand_total")]
+        public CommerceMoneyResponse GrandTotal { get; set; } = default!;
+
+        [JsonProperty("per_unit_totals")]
+        public List<CommercePerUnitTotal>? PerUnitTotals { get; set; }
+
+        [JsonProperty("credits")]
+        public CommerceSubscriptionItemCredits? Credits { get; set; } = null;
     }
 }

@@ -76,6 +76,12 @@ namespace Clerk.BackendAPI.Models.Components
         public string? Description { get; set; } = null;
 
         /// <summary>
+        /// Whether this price is the default price for its plan.
+        /// </summary>
+        [JsonProperty("is_default")]
+        public bool IsDefault { get; set; } = default!;
+
+        /// <summary>
         /// Unix timestamp (milliseconds) of creation.
         /// </summary>
         [JsonProperty("created_at")]

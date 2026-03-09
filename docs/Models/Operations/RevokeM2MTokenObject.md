@@ -1,5 +1,13 @@
 # RevokeM2MTokenObject
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Operations;
+
+var value = RevokeM2MTokenObject.MachineToMachineToken;
+```
+
 
 ## Values
 

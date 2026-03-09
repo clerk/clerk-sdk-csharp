@@ -1,5 +1,13 @@
 # CreateM2MTokenObject
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Operations;
+
+var value = CreateM2MTokenObject.MachineToMachineToken;
+```
+
 
 ## Values
 

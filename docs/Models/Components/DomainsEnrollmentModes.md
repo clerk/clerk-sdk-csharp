@@ -1,5 +1,13 @@
 # DomainsEnrollmentModes
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Components;
+
+var value = DomainsEnrollmentModes.ManualInvitation;
+```
+
 
 ## Values
 

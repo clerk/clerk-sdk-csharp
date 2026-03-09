@@ -9,11 +9,15 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
 
     public class CreateM2MTokenRequestBody
     {
+        [JsonProperty("token_format")]
+        public TokenFormat? TokenFormat { get; set; } = Clerk.BackendAPI.Models.Operations.TokenFormat.Opaque;
+
         [JsonProperty("seconds_until_expiration")]
         public double? SecondsUntilExpiration { get; set; } = null;
 

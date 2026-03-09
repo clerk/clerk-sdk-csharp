@@ -1,5 +1,13 @@
 # ResponseBodyObject
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Operations;
+
+var value = ResponseBodyObject.ClerkIdpOauthAccessToken;
+```
+
 
 ## Values
 

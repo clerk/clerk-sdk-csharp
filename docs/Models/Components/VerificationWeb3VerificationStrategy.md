@@ -1,5 +1,13 @@
 # VerificationWeb3VerificationStrategy
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Components;
+
+var value = VerificationWeb3VerificationStrategy.Web3MetamaskSignature;
+```
+
 
 ## Values
 

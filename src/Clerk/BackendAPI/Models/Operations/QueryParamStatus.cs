@@ -24,6 +24,8 @@ namespace Clerk.BackendAPI.Models.Operations
         Accepted,
         [JsonProperty("revoked")]
         Revoked,
+        [JsonProperty("expired")]
+        Expired,
     }
 
     public static class QueryParamStatusExtension
