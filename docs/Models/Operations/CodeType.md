@@ -1,5 +1,13 @@
 # CodeType
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Operations;
+
+var value = CodeType.Totp;
+```
+
 
 ## Values
 

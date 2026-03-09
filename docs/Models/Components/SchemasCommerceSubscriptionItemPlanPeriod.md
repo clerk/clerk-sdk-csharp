@@ -2,6 +2,14 @@
 
 The billing period for this subscription.
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Components;
+
+var value = SchemasCommerceSubscriptionItemPlanPeriod.Month;
+```
+
 
 ## Values
 

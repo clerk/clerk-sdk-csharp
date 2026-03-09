@@ -9,6 +9,8 @@ Modify the settings of your instance.
 * [Get](#get) - Fetch the current instance
 * [Update](#update) - Update instance settings
 * [UpdateRestrictions](#updaterestrictions) - Update instance restrictions
+* [GetOAuthApplicationSettings](#getoauthapplicationsettings) - Get OAuth application settings
+* [UpdateOAuthApplicationSettings](#updateoauthapplicationsettings) - Update OAuth application settings
 * [ChangeDomain](#changedomain) - Update production instance domain
 * [UpdateOrganizationSettings](#updateorganizationsettings) - Update instance organization settings
 * [GetInstanceProtect](#getinstanceprotect) - Get instance protect settings
@@ -134,6 +136,72 @@ var res = await sdk.InstanceSettings.UpdateRestrictionsAsync(req);
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetOAuthApplicationSettings
+
+Retrieves the settings for OAuth applications for the instance (dynamic client registration, JWT access tokens, etc.).
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetInstanceOAuthApplicationSettings" method="get" path="/instance/oauth_application_settings" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.InstanceSettings.GetOAuthApplicationSettingsAsync();
+
+// handle response
+```
+
+### Response
+
+**[GetInstanceOAuthApplicationSettingsResponse](../../Models/Operations/GetInstanceOAuthApplicationSettingsResponse.md)**
+
+### Errors
+
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| Clerk.BackendAPI.Models.Errors.SDKError | 4XX, 5XX                                | \*/\*                                   |
+
+## UpdateOAuthApplicationSettings
+
+Updates the OAuth application settings for the instance.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="UpdateInstanceOAuthApplicationSettings" method="patch" path="/instance/oauth_application_settings" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+UpdateInstanceOAuthApplicationSettingsRequestBody? req = null;
+
+var res = await sdk.InstanceSettings.UpdateOAuthApplicationSettingsAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                         | [UpdateInstanceOAuthApplicationSettingsRequestBody](../../Models/Operations/UpdateInstanceOAuthApplicationSettingsRequestBody.md) | :heavy_check_mark:                                                                                                                | The request object to use for the request.                                                                                        |
+
+### Response
+
+**[UpdateInstanceOAuthApplicationSettingsResponse](../../Models/Operations/UpdateInstanceOAuthApplicationSettingsResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 422                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## ChangeDomain

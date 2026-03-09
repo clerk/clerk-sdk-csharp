@@ -2,6 +2,14 @@
 
 Filter invitations based on their status
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Operations;
+
+var value = ListInvitationsQueryParamStatus.Pending;
+```
+
 
 ## Values
 

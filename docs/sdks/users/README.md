@@ -20,6 +20,8 @@
 * [DeleteProfileImage](#deleteprofileimage) - Delete user profile image
 * [UpdateMetadata](#updatemetadata) - Merge and update a user's metadata
 * [GetBillingSubscription](#getbillingsubscription) - Retrieve a user's billing subscription
+* [GetBillingCreditBalance](#getbillingcreditbalance) - Retrieve a user's credit balance
+* [AdjustBillingCreditBalance](#adjustbillingcreditbalance) - Adjust a user's credit balance
 * [GetOAuthAccessToken](#getoauthaccesstoken) - Retrieve the OAuth access token of a user
 * [GetOrganizationMemberships](#getorganizationmemberships) - Retrieve all memberships for a user
 * [GetOrganizationInvitations](#getorganizationinvitations) - Retrieve all invitations for a user
@@ -370,7 +372,7 @@ var res = await sdk.Users.UpdateAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 409, 422                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Delete
@@ -792,6 +794,89 @@ var res = await sdk.Users.GetBillingSubscriptionAsync(userId: "<id>");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetBillingCreditBalance
+
+Retrieves the current credit balance for the specified user.
+Credits can be applied during checkout to reduce the charge or automatically applied to upcoming recurring charges
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetUserBillingCreditBalance" method="get" path="/users/{user_id}/billing/credits" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.GetBillingCreditBalanceAsync(userId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                           | Type                                                | Required                                            | Description                                         |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| `UserId`                                            | *string*                                            | :heavy_check_mark:                                  | The ID of the user whose credit balance to retrieve |
+
+### Response
+
+**[GetUserBillingCreditBalanceResponse](../../Models/Operations/GetUserBillingCreditBalanceResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## AdjustBillingCreditBalance
+
+Increases or decreases the credit balance for the specified user.
+Each adjustment is recorded as a ledger entry. The idempotency_key parameter
+ensures that duplicate requests are safely handled.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="AdjustUserBillingCreditBalance" method="post" path="/users/{user_id}/billing/credits" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.AdjustBillingCreditBalanceAsync(
+    userId: "<id>",
+    adjustCreditBalanceRequest: new AdjustCreditBalanceRequest() {
+        Amount = 562473,
+        Action = Action.Decrease,
+        IdempotencyKey = "<value>",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `UserId`                                                                            | *string*                                                                            | :heavy_check_mark:                                                                  | The ID of the user whose credit balance to adjust                                   |
+| `AdjustCreditBalanceRequest`                                                        | [AdjustCreditBalanceRequest](../../Models/Components/AdjustCreditBalanceRequest.md) | :heavy_check_mark:                                                                  | Parameters for the credit balance adjustment                                        |
+
+### Response
+
+**[AdjustUserBillingCreditBalanceResponse](../../Models/Operations/AdjustUserBillingCreditBalanceResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 409, 422               | application/json                           |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 

@@ -1,5 +1,13 @@
 # Status
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Components;
+
+var value = Status.Active;
+```
+
 
 ## Values
 

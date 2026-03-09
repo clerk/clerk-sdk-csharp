@@ -1,0 +1,15 @@
+# BillingPaymentAttemptTotals
+
+Totals breakdown for this payment attempt.
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `Subtotal`                                                                              | [CommerceMoneyResponse](../../Models/Components/CommerceMoneyResponse.md)               | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `BaseFee`                                                                               | [CommerceMoneyResponse](../../Models/Components/CommerceMoneyResponse.md)               | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `TaxTotal`                                                                              | [CommerceMoneyResponse](../../Models/Components/CommerceMoneyResponse.md)               | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `GrandTotal`                                                                            | [CommerceMoneyResponse](../../Models/Components/CommerceMoneyResponse.md)               | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `PerUnitTotals`                                                                         | List<[CommercePerUnitTotal](../../Models/Components/CommercePerUnitTotal.md)>           | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `Credits`                                                                               | [BillingPaymentAttemptCredits](../../Models/Components/BillingPaymentAttemptCredits.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |

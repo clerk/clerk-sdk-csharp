@@ -82,6 +82,12 @@ namespace Clerk.BackendAPI.Models.Components
         public CommerceMoneyResponse Amount { get; set; } = default!;
 
         /// <summary>
+        /// Totals breakdown for this payment attempt.
+        /// </summary>
+        [JsonProperty("totals")]
+        public BillingPaymentAttemptTotals? Totals { get; set; } = null;
+
+        /// <summary>
         /// Unique identifier for the payment method.
         /// </summary>
         [JsonProperty("payment_method_id")]

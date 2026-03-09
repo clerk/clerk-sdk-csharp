@@ -1,0 +1,13 @@
+# AgentTask
+
+Success
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `Object`                                                                                                       | [AgentTaskObject](../../Models/Components/AgentTaskObject.md)                                                  | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `AgentId`                                                                                                      | *string*                                                                                                       | :heavy_check_mark:                                                                                             | A stable identifier for the agent, unique per agent_name within an instance.<br/>                              |
+| `TaskId`                                                                                                       | *string*                                                                                                       | :heavy_check_mark:                                                                                             | A unique identifier for this agent task.<br/>                                                                  |
+| `Url`                                                                                                          | *string*                                                                                                       | :heavy_minus_sign:                                                                                             | The URL that, when visited, creates a session for the user. Only present in the response to a create request.<br/> |

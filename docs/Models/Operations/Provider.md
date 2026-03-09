@@ -2,6 +2,14 @@
 
 The IdP provider of the connection.
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Operations;
+
+var value = Provider.SamlCustom;
+```
+
 
 ## Values
 

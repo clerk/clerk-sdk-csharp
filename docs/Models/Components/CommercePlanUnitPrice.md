@@ -1,0 +1,10 @@
+# CommercePlanUnitPrice
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `Name`                                                                                  | *string*                                                                                | :heavy_check_mark:                                                                      | Name of the billable unit (for example, seats)                                          |
+| `BlockSize`                                                                             | *long*                                                                                  | :heavy_check_mark:                                                                      | Number of units included in each pricing block                                          |
+| `Tiers`                                                                                 | List<[CommercePlanUnitPriceTier](../../Models/Components/CommercePlanUnitPriceTier.md)> | :heavy_check_mark:                                                                      | Tiered pricing configuration for this unit                                              |

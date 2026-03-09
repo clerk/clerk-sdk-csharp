@@ -13,6 +13,8 @@
 * [UploadLogo](#uploadlogo) - Upload a logo for the organization
 * [DeleteLogo](#deletelogo) - Delete the organization's logo.
 * [GetBillingSubscription](#getbillingsubscription) - Retrieve an organization's billing subscription
+* [GetBillingCreditBalance](#getbillingcreditbalance) - Retrieve an organization's credit balance
+* [AdjustBillingCreditBalance](#adjustbillingcreditbalance) - Adjust an organization's credit balance
 
 ## List
 
@@ -211,7 +213,7 @@ var res = await sdk.Organizations.UpdateAsync(
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 403, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402, 403, 404, 422                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Delete
@@ -424,5 +426,88 @@ var res = await sdk.Organizations.GetBillingSubscriptionAsync(organizationId: "<
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetBillingCreditBalance
+
+Retrieves the current credit balance for the specified organization.
+Credits can be applied during checkout to reduce the charge or automatically applied to upcoming recurring charges.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetOrganizationBillingCreditBalance" method="get" path="/organizations/{organization_id}/billing/credits" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Organizations.GetBillingCreditBalanceAsync(organizationId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `OrganizationId`                                            | *string*                                                    | :heavy_check_mark:                                          | The ID of the organization whose credit balance to retrieve |
+
+### Response
+
+**[GetOrganizationBillingCreditBalanceResponse](../../Models/Operations/GetOrganizationBillingCreditBalanceResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## AdjustBillingCreditBalance
+
+Increases or decreases the credit balance for the specified organization.
+Each adjustment is recorded as a ledger entry. The idempotency_key parameter
+ensures that duplicate requests are safely handled.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="AdjustOrganizationBillingCreditBalance" method="post" path="/organizations/{organization_id}/billing/credits" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Organizations.AdjustBillingCreditBalanceAsync(
+    organizationId: "<id>",
+    adjustCreditBalanceRequest: new AdjustCreditBalanceRequest() {
+        Amount = 245081,
+        Action = Action.Increase,
+        IdempotencyKey = "<value>",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                    | *string*                                                                            | :heavy_check_mark:                                                                  | The ID of the organization whose credit balance to adjust                           |
+| `AdjustCreditBalanceRequest`                                                        | [AdjustCreditBalanceRequest](../../Models/Components/AdjustCreditBalanceRequest.md) | :heavy_check_mark:                                                                  | Parameters for the credit balance adjustment                                        |
+
+### Response
+
+**[AdjustOrganizationBillingCreditBalanceResponse](../../Models/Operations/AdjustOrganizationBillingCreditBalanceResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 409, 422               | application/json                           |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

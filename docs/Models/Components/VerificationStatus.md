@@ -1,5 +1,13 @@
 # VerificationStatus
 
+## Example Usage
+
+```csharp
+using Clerk.BackendAPI.Models.Components;
+
+var value = VerificationStatus.Unverified;
+```
+
 
 ## Values
 

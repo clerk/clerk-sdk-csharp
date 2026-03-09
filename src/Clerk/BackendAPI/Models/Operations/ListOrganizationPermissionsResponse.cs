@@ -21,6 +21,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// Success.
         /// </summary>
-        public Permissions? Permissions { get; set; }
+        public Models.Components.Permissions? Permissions { get; set; }
     }
 }

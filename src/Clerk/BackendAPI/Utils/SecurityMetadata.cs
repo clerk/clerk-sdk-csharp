@@ -99,6 +99,26 @@ namespace Clerk.BackendAPI.Utils
 
         private void ParseOption(object option)
         {
+            // Check if the option itself IS a basic auth scheme (e.g. UserPassAuth where
+            // fields directly contain username/password with full basic auth metadata).
+            // This is distinct from an option that CONTAINS a basic auth scheme as a
+            // nested class (e.g. SchemeBasicAuth) - that case is handled by ParseScheme.
+            foreach (var prop in option.GetType().GetProperties())
+            {
+                var value = prop.GetValue(option, null);
+                if (value == null)
+                {
+                    continue;
+                }
+
+                var secMetadata = prop.GetCustomAttribute<SpeakeasyMetadata>()?.GetSecurityMetadata();
+                if (secMetadata != null && secMetadata.Scheme && secMetadata.Type == "http" && secMetadata.SubType == "basic" && !Utilities.IsClass(value))
+                {
+                    ParseBasicAuthScheme(option);
+                    return;
+                }
+            }
+
             foreach (var prop in option.GetType().GetProperties())
             {
                 var value = prop.GetValue(option, null);

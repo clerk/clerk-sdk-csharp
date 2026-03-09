@@ -282,7 +282,7 @@ namespace Clerk.BackendAPI.Utils
                             string fieldName = (metadata.Name ?? prop.Name) + "[]";
 
                             var fileContent = new ByteArrayContent(content);
-                            fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                            fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(GetMimeType(fileName));
                             formData.Add(fileContent, fieldName, fileName);
                         }
                     }
@@ -294,7 +294,7 @@ namespace Clerk.BackendAPI.Utils
                         string fieldName = metadata.Name;
 
                         var fileContent = new ByteArrayContent(content);
-                        fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                        fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(GetMimeType(fileName));
                         formData.Add(fileContent, fieldName, fileName);
                     }
                     else
@@ -550,6 +550,27 @@ namespace Clerk.BackendAPI.Utils
             }
 
             return (fileName, content);
+        }
+
+        private static string GetMimeType(string fileName)
+        {
+            var ext = System.IO.Path.GetExtension(fileName)?.ToLowerInvariant();
+            return ext switch
+            {
+                ".json" => "application/json",
+                ".xml" => "application/xml",
+                ".txt" => "text/plain",
+                ".csv" => "text/csv",
+                ".html" or ".htm" => "text/html",
+                ".pdf" => "application/pdf",
+                ".zip" => "application/zip",
+                ".png" => "image/png",
+                ".jpg" or ".jpeg" => "image/jpeg",
+                ".gif" => "image/gif",
+                ".svg" => "image/svg+xml",
+                ".webp" => "image/webp",
+                _ => "application/octet-stream",
+            };
         }
 
         private static PropertyInfo? GetPropertyInfo(object value, string propertyName)

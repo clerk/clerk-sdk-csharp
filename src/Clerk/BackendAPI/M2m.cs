@@ -50,6 +50,8 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Fetches M2M tokens for a specific machine.<br/>
         /// <br/>
+        /// Only tokens created with the opaque token format are returned by this endpoint. JWT-format M2M tokens are stateless and are not stored.<br/>
+        /// <br/>
         /// This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key.<br/>
         /// <br/>
         /// - When fetching M2M tokens with a Machine Secret Key, only tokens associated with the authenticated machine can be retrieved.<br/>
@@ -72,6 +74,8 @@ namespace Clerk.BackendAPI
         /// </summary>
         /// <remarks>
         /// Revokes a M2M Token.<br/>
+        /// <br/>
+        /// This endpoint only revokes stored opaque-format M2M tokens. JWT-format M2M tokens are stateless and cannot be revoked.<br/>
         /// <br/>
         /// This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key.<br/>
         /// <br/>
@@ -160,6 +164,11 @@ namespace Clerk.BackendAPI
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
 
             var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, false);
             if (serializedBody != null)
@@ -341,6 +350,8 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Fetches M2M tokens for a specific machine.<br/>
         /// <br/>
+        /// Only tokens created with the opaque token format are returned by this endpoint. JWT-format M2M tokens are stateless and are not stored.<br/>
+        /// <br/>
         /// This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key.<br/>
         /// <br/>
         /// - When fetching M2M tokens with a Machine Secret Key, only tokens associated with the authenticated machine can be retrieved.<br/>
@@ -368,6 +379,11 @@ namespace Clerk.BackendAPI
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
 
             if (SDKConfiguration.SecuritySource != null)
             {
@@ -569,6 +585,8 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Revokes a M2M Token.<br/>
         /// <br/>
+        /// This endpoint only revokes stored opaque-format M2M tokens. JWT-format M2M tokens are stateless and cannot be revoked.<br/>
+        /// <br/>
         /// This endpoint can be authenticated by either a Machine Secret Key or by a Clerk Secret Key.<br/>
         /// <br/>
         /// - When revoking a M2M Token with a Machine Secret Key, the token must managed by the Machine associated with the Machine Secret Key.<br/>
@@ -604,6 +622,11 @@ namespace Clerk.BackendAPI
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
 
             var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
             if (serializedBody != null)
@@ -811,6 +834,11 @@ namespace Clerk.BackendAPI
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
 
             var serializedBody = RequestBodySerializer.Serialize(request, "Request", "json", false, false);
             if (serializedBody != null)
