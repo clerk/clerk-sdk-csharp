@@ -32,7 +32,7 @@ namespace Clerk.BackendAPI.Models.Components
         public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 
         [JsonProperty("revoked")]
-        public bool? Revoked { get; set; }
+        public bool Revoked { get; } = true;
 
         [JsonProperty("status")]
         public InvitationRevokedStatus Status { get; set; } = default!;

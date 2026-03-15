@@ -14,7 +14,7 @@ namespace Clerk.BackendAPI.Models.Operations
     using System;
 
     /// <summary>
-    /// The IdP provider of the connection.
+    /// The identity provider (e.g. saml_custom, oidc_custom).
     /// </summary>
     public enum Provider
     {
@@ -26,6 +26,8 @@ namespace Clerk.BackendAPI.Models.Operations
         SamlGoogle,
         [JsonProperty("saml_microsoft")]
         SamlMicrosoft,
+        [JsonProperty("oidc_custom")]
+        OidcCustom,
     }
 
     public static class ProviderExtension

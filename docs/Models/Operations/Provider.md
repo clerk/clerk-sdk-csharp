@@ -1,6 +1,6 @@
 # Provider
 
-The IdP provider of the connection.
+The identity provider (e.g. saml_custom, oidc_custom)
 
 ## Example Usage
 
@@ -19,3 +19,4 @@ var value = Provider.SamlCustom;
 | `SamlOkta`      | saml_okta       |
 | `SamlGoogle`    | saml_google     |
 | `SamlMicrosoft` | saml_microsoft  |
+| `OidcCustom`    | oidc_custom     |

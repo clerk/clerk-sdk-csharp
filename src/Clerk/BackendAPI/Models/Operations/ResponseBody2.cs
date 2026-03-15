@@ -18,6 +18,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Indicates that a JWT access token is not active (expired).
         /// </summary>
         [JsonProperty("active")]
-        public bool Active { get; set; } = default!;
+        public bool Active { get; } = false;
     }
 }

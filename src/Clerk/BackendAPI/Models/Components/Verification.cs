@@ -88,7 +88,7 @@ namespace Clerk.BackendAPI.Models.Components
         public Ticket? Ticket { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public Saml? Saml { get; set; }
+        public Models.Components.Saml? Saml { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public EmailLink? EmailLink { get; set; }
@@ -135,7 +135,7 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static Verification CreateVerificationSaml(Saml verificationSaml)
+        public static Verification CreateVerificationSaml(Models.Components.Saml verificationSaml)
         {
             VerificationType typ = VerificationType.VerificationSaml;
             string typStr = VerificationType.VerificationSaml.ToString();
@@ -198,7 +198,7 @@ namespace Clerk.BackendAPI.Models.Components
                 }
                 if (discriminator == VerificationType.VerificationSaml.ToString())
                 {
-                    Saml saml = ResponseBodyDeserializer.DeserializeNotNull<Saml>(jo.ToString());
+                    Models.Components.Saml saml = ResponseBodyDeserializer.DeserializeNotNull<Models.Components.Saml>(jo.ToString());
                     return CreateVerificationSaml(saml);
                 }
                 if (discriminator == VerificationType.VerificationEmailLink.ToString())

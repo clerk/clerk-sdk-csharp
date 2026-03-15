@@ -60,7 +60,7 @@ namespace Clerk.BackendAPI.Models.Components
             return Verification != null ? Verification.Ticket : null;
         }
 
-        public Saml? GetVerificationVerificationSaml()
+        public Models.Components.Saml? GetVerificationVerificationSaml()
         {
             return Verification != null ? Verification.Saml : null;
         }

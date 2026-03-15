@@ -1,0 +1,9 @@
+# UpdateEnterpriseConnectionRequest
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `EnterpriseConnectionId`                                                                                  | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The ID of the enterprise connection to update                                                             |
+| `RequestBody`                                                                                             | [UpdateEnterpriseConnectionRequestBody](../../Models/Operations/UpdateEnterpriseConnectionRequestBody.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |

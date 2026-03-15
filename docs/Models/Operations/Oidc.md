@@ -1,0 +1,16 @@
+# Oidc
+
+OIDC connection-specific properties. Only applied when the enterprise connection uses OIDC (e.g. provider is oidc_custom).
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ClientId`                                                                       | *string*                                                                         | :heavy_minus_sign:                                                               | OIDC client ID                                                                   |
+| `ClientSecret`                                                                   | *string*                                                                         | :heavy_minus_sign:                                                               | OIDC client secret                                                               |
+| `DiscoveryUrl`                                                                   | *string*                                                                         | :heavy_minus_sign:                                                               | OIDC discovery URL                                                               |
+| `AuthUrl`                                                                        | *string*                                                                         | :heavy_minus_sign:                                                               | OIDC authorization URL                                                           |
+| `TokenUrl`                                                                       | *string*                                                                         | :heavy_minus_sign:                                                               | OIDC token URL                                                                   |
+| `UserInfoUrl`                                                                    | *string*                                                                         | :heavy_minus_sign:                                                               | OIDC userinfo URL                                                                |
+| `RequiresPkce`                                                                   | *bool*                                                                           | :heavy_minus_sign:                                                               | Whether PKCE is required (must be true for public clients with no client secret) |
