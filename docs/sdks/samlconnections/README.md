@@ -1,20 +1,26 @@
-# SamlConnections
+# ~~SamlConnections~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [List](#list) - Get a list of SAML Connections for an instance
-* [Create](#create) - Create a SAML Connection
-* [Get](#get) - Retrieve a SAML Connection by ID
-* [Update](#update) - Update a SAML Connection
-* [Delete](#delete) - Delete a SAML Connection
+* [~~List~~](#list) - Get a list of SAML Connections for an instance :warning: **Deprecated**
+* [~~Create~~](#create) - Create a SAML Connection :warning: **Deprecated**
+* [~~Get~~](#get) - Retrieve a SAML Connection by ID :warning: **Deprecated**
+* [~~Update~~](#update) - Update a SAML Connection :warning: **Deprecated**
+* [~~Delete~~](#delete) - Delete a SAML Connection :warning: **Deprecated**
 
-## List
+## ~~List~~
 
 Returns the list of SAML Connections for an instance.
 Results can be paginated using the optional `limit` and `offset` query parameters.
 The SAML Connections are ordered by descending creation date and the most recent will be returned first.
+Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -53,9 +59,12 @@ var res = await sdk.SamlConnections.ListAsync(req);
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 403, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## Create
+## ~~Create~~
 
 Create a new SAML Connection.
+Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -71,7 +80,7 @@ CreateSAMLConnectionRequestBody req = CreateSAMLConnectionRequestBody.CreateOne(
     new Clerk.BackendAPI.Models.Operations.One() {
         Name = "My SAML Connection",
         Domain = "example.org",
-        Provider = Provider.SamlCustom,
+        Provider = CreateSAMLConnectionRequestBodyProvider.SamlCustom,
         IdpEntityId = "http://idp.example.org/",
         IdpSsoUrl = "http://idp.example.org/sso",
         IdpCertificate = "MIIDdzCCAl+gAwIBAgIJAKcyBaiiz+DT...",
@@ -108,9 +117,12 @@ var res = await sdk.SamlConnections.CreateAsync(req);
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 403, 404, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## Get
+## ~~Get~~
 
 Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path.
+Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -143,9 +155,12 @@ var res = await sdk.SamlConnections.GetAsync(samlConnectionId: "saml_conn_123");
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 403, 404                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## Update
+## ~~Update~~
 
 Updates the SAML Connection whose ID matches the provided `id` in the path.
+Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -200,9 +215,12 @@ var res = await sdk.SamlConnections.UpdateAsync(
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 403, 404, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## Delete
+## ~~Delete~~
 
 Deletes the SAML Connection whose ID matches the provided `id` in the path.
+Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

@@ -58,7 +58,6 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 AddDomainRequestBody req = new AddDomainRequestBody() {
     Name = "example.com",
-    IsSatellite = true,
     ProxyUrl = "https://proxy.example.com",
 };
 

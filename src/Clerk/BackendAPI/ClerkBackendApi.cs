@@ -97,6 +97,8 @@ namespace Clerk.BackendAPI
 
         public ISamlConnections SamlConnections { get; }
 
+        public IEnterpriseConnections EnterpriseConnections { get; }
+
         public ITestingTokens TestingTokens { get; }
 
         public IAgentTasks AgentTasks { get; }
@@ -261,6 +263,10 @@ namespace Clerk.BackendAPI
         /// </summary>
         public ISamlConnections SamlConnections { get; private set; }
         /// <summary>
+        /// The EnterpriseConnections sub-SDK.
+        /// </summary>
+        public IEnterpriseConnections EnterpriseConnections { get; private set; }
+        /// <summary>
         /// The TestingTokens sub-SDK.
         /// </summary>
         public ITestingTokens TestingTokens { get; private set; }
@@ -367,6 +373,8 @@ namespace Clerk.BackendAPI
             OauthApplications = new OauthApplications(SDKConfiguration);
 
             SamlConnections = new SamlConnections(SDKConfiguration);
+
+            EnterpriseConnections = new EnterpriseConnections(SDKConfiguration);
 
             TestingTokens = new TestingTokens(SDKConfiguration);
 
@@ -505,6 +513,8 @@ namespace Clerk.BackendAPI
             OauthApplications = new OauthApplications(SDKConfiguration);
 
             SamlConnections = new SamlConnections(SDKConfiguration);
+
+            EnterpriseConnections = new EnterpriseConnections(SDKConfiguration);
 
             TestingTokens = new TestingTokens(SDKConfiguration);
 

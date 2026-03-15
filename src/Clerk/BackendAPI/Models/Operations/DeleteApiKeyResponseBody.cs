@@ -25,6 +25,6 @@ namespace Clerk.BackendAPI.Models.Operations
         public DeleteApiKeyObject Object { get; set; } = default!;
 
         [JsonProperty("deleted")]
-        public bool Deleted { get; set; } = default!;
+        public bool Deleted { get; } = true;
     }
 }

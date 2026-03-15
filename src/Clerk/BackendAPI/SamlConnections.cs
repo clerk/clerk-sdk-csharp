@@ -30,7 +30,8 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Returns the list of SAML Connections for an instance.<br/>
         /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
-        /// The SAML Connections are ordered by descending creation date and the most recent will be returned first.
+        /// The SAML Connections are ordered by descending creation date and the most recent will be returned first.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="request">A <see cref="ListSAMLConnectionsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -39,6 +40,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public  Task<ListSAMLConnectionsResponse> ListAsync(
             ListSAMLConnectionsRequest? request = null,
             RetryConfig? retryConfig = null
@@ -48,7 +50,8 @@ namespace Clerk.BackendAPI
         /// Create a SAML Connection.
         /// </summary>
         /// <remarks>
-        /// Create a new SAML Connection.
+        /// Create a new SAML Connection.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="request">Description not available.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -57,6 +60,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403, 404 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public  Task<CreateSAMLConnectionResponse> CreateAsync(
             CreateSAMLConnectionRequestBody? request = null,
             RetryConfig? retryConfig = null
@@ -66,7 +70,8 @@ namespace Clerk.BackendAPI
         /// Retrieve a SAML Connection by ID.
         /// </summary>
         /// <remarks>
-        /// Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path.
+        /// Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="samlConnectionId">The ID of the SAML Connection.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -76,13 +81,15 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 404 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public  Task<GetSAMLConnectionResponse> GetAsync(string samlConnectionId, RetryConfig? retryConfig = null);
 
         /// <summary>
         /// Update a SAML Connection.
         /// </summary>
         /// <remarks>
-        /// Updates the SAML Connection whose ID matches the provided `id` in the path.
+        /// Updates the SAML Connection whose ID matches the provided `id` in the path.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="samlConnectionId">The ID of the SAML Connection to update.</param>
         /// <param name="requestBody">A <see cref="UpdateSAMLConnectionRequestBody"/> parameter.</param>
@@ -93,6 +100,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403, 404 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public  Task<UpdateSAMLConnectionResponse> UpdateAsync(
             string samlConnectionId,
             UpdateSAMLConnectionRequestBody requestBody,
@@ -103,7 +111,8 @@ namespace Clerk.BackendAPI
         /// Delete a SAML Connection.
         /// </summary>
         /// <remarks>
-        /// Deletes the SAML Connection whose ID matches the provided `id` in the path.
+        /// Deletes the SAML Connection whose ID matches the provided `id` in the path.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="samlConnectionId">The ID of the SAML Connection to delete.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -113,6 +122,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 404 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public  Task<DeleteSAMLConnectionResponse> DeleteAsync(string samlConnectionId, RetryConfig? retryConfig = null);
     }
 
@@ -135,7 +145,8 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Returns the list of SAML Connections for an instance.<br/>
         /// Results can be paginated using the optional `limit` and `offset` query parameters.<br/>
-        /// The SAML Connections are ordered by descending creation date and the most recent will be returned first.
+        /// The SAML Connections are ordered by descending creation date and the most recent will be returned first.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="request">A <see cref="ListSAMLConnectionsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -144,6 +155,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public async  Task<ListSAMLConnectionsResponse> ListAsync(
             ListSAMLConnectionsRequest? request = null,
             RetryConfig? retryConfig = null
@@ -300,7 +312,8 @@ namespace Clerk.BackendAPI
         /// Create a SAML Connection.
         /// </summary>
         /// <remarks>
-        /// Create a new SAML Connection.
+        /// Create a new SAML Connection.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="request">Description not available.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -309,6 +322,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403, 404 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public async  Task<CreateSAMLConnectionResponse> CreateAsync(
             CreateSAMLConnectionRequestBody? request = null,
             RetryConfig? retryConfig = null
@@ -471,7 +485,8 @@ namespace Clerk.BackendAPI
         /// Retrieve a SAML Connection by ID.
         /// </summary>
         /// <remarks>
-        /// Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path.
+        /// Fetches the SAML Connection whose ID matches the provided `saml_connection_id` in the path.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="samlConnectionId">The ID of the SAML Connection.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -481,6 +496,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 404 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public async  Task<GetSAMLConnectionResponse> GetAsync(string samlConnectionId, RetryConfig? retryConfig = null)
         {
             if (samlConnectionId == null) throw new ArgumentNullException(nameof(samlConnectionId));
@@ -641,7 +657,8 @@ namespace Clerk.BackendAPI
         /// Update a SAML Connection.
         /// </summary>
         /// <remarks>
-        /// Updates the SAML Connection whose ID matches the provided `id` in the path.
+        /// Updates the SAML Connection whose ID matches the provided `id` in the path.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="samlConnectionId">The ID of the SAML Connection to update.</param>
         /// <param name="requestBody">A <see cref="UpdateSAMLConnectionRequestBody"/> parameter.</param>
@@ -652,6 +669,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403, 404 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public async  Task<UpdateSAMLConnectionResponse> UpdateAsync(
             string samlConnectionId,
             UpdateSAMLConnectionRequestBody requestBody,
@@ -824,7 +842,8 @@ namespace Clerk.BackendAPI
         /// Delete a SAML Connection.
         /// </summary>
         /// <remarks>
-        /// Deletes the SAML Connection whose ID matches the provided `id` in the path.
+        /// Deletes the SAML Connection whose ID matches the provided `id` in the path.<br/>
+        /// Deprecated: Use the Enterprise Connections API instead. This endpoint will be removed in future versions.
         /// </remarks>
         /// <param name="samlConnectionId">The ID of the SAML Connection to delete.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -834,6 +853,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
         /// <exception cref="ClerkErrors">Payment required. Thrown when the API returns a 402, 403 or 404 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        [Obsolete("This method will be removed in a future release, please migrate away from it as soon as possible")]
         public async  Task<DeleteSAMLConnectionResponse> DeleteAsync(
             string samlConnectionId,
             RetryConfig? retryConfig = null

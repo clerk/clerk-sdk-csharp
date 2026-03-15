@@ -248,6 +248,14 @@ public class MachineAuthentication
 * [~~Revert~~](docs/sdks/emailsmstemplates/README.md#revert) - Revert a template :warning: **Deprecated**
 * [~~ToggleTemplateDelivery~~](docs/sdks/emailsmstemplates/README.md#toggletemplatedelivery) - Toggle the delivery by Clerk for a template of a given type and slug :warning: **Deprecated**
 
+### [EnterpriseConnections](docs/sdks/enterpriseconnections/README.md)
+
+* [List](docs/sdks/enterpriseconnections/README.md#list) - List enterprise connections
+* [Create](docs/sdks/enterpriseconnections/README.md#create) - Create an enterprise connection
+* [Get](docs/sdks/enterpriseconnections/README.md#get) - Retrieve an enterprise connection
+* [Update](docs/sdks/enterpriseconnections/README.md#update) - Update an enterprise connection
+* [Delete](docs/sdks/enterpriseconnections/README.md#delete) - Delete an enterprise connection
+
 ### [InstanceSettings](docs/sdks/instancesettings/README.md)
 
 * [Get](docs/sdks/instancesettings/README.md#get) - Fetch the current instance
@@ -401,13 +409,13 @@ public class MachineAuthentication
 * [AddRoles](docs/sdks/rolesets/README.md#addroles) - Add roles to a role set
 * [ReplaceRole](docs/sdks/rolesets/README.md#replacerole) - Replace a role in a role set
 
-### [SamlConnections](docs/sdks/samlconnections/README.md)
+### [~~SamlConnections~~](docs/sdks/samlconnections/README.md)
 
-* [List](docs/sdks/samlconnections/README.md#list) - Get a list of SAML Connections for an instance
-* [Create](docs/sdks/samlconnections/README.md#create) - Create a SAML Connection
-* [Get](docs/sdks/samlconnections/README.md#get) - Retrieve a SAML Connection by ID
-* [Update](docs/sdks/samlconnections/README.md#update) - Update a SAML Connection
-* [Delete](docs/sdks/samlconnections/README.md#delete) - Delete a SAML Connection
+* [~~List~~](docs/sdks/samlconnections/README.md#list) - Get a list of SAML Connections for an instance :warning: **Deprecated**
+* [~~Create~~](docs/sdks/samlconnections/README.md#create) - Create a SAML Connection :warning: **Deprecated**
+* [~~Get~~](docs/sdks/samlconnections/README.md#get) - Retrieve a SAML Connection by ID :warning: **Deprecated**
+* [~~Update~~](docs/sdks/samlconnections/README.md#update) - Update a SAML Connection :warning: **Deprecated**
+* [~~Delete~~](docs/sdks/samlconnections/README.md#delete) - Delete a SAML Connection :warning: **Deprecated**
 
 ### [Sessions](docs/sdks/sessions/README.md)
 
@@ -627,33 +635,33 @@ catch (System.Net.Http.HttpRequestException ex)
 * [`System.Net.Http.HttpRequestException`](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestexception): Network connectivity error. For more details about the underlying cause, inspect the `ex.InnerException`.
 
 * Inheriting from [`SDKBaseError`](./src/Clerk/BackendAPI/Models/Errors/SDKBaseError.cs):
-  * [`CreateApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`GetApiKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeysResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`GetApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`UpdateApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/UpdateApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`DeleteApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/DeleteApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`GetApiKeySecretResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeySecretResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`RevokeApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`VerifyApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`CreateM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`GetM2MTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`RevokeM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`VerifyM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`VerifyOAuthAccessTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 201 methods.*
-  * [`GetM2MTokensM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseBody.cs): 403 Forbidden. Status code `403`. Applicable to 1 of 201 methods.*
-  * [`GetAPIKeysAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeysAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`GetAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`UpdateAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/UpdateAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`DeleteAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/DeleteAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`GetAPIKeySecretAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeySecretAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`RevokeAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`VerifyAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`GetM2MTokensM2mResponseResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`RevokeM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`VerifyM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`VerifyOAuthAccessTokenOauthAccessTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 201 methods.*
-  * [`CreateAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAPIKeyAPIKeysResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 201 methods.*
-  * [`CreateM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenM2mResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 201 methods.*
+  * [`CreateApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`GetApiKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeysResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`GetApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`UpdateApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/UpdateApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`DeleteApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/DeleteApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`GetApiKeySecretResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeySecretResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`RevokeApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`VerifyApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`CreateM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`GetM2MTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`RevokeM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`VerifyM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`VerifyOAuthAccessTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 206 methods.*
+  * [`GetM2MTokensM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseBody.cs): 403 Forbidden. Status code `403`. Applicable to 1 of 206 methods.*
+  * [`GetAPIKeysAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeysAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`GetAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`UpdateAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/UpdateAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`DeleteAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/DeleteAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`GetAPIKeySecretAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeySecretAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`RevokeAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`VerifyAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`GetM2MTokensM2mResponseResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`RevokeM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`VerifyM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`VerifyOAuthAccessTokenOauthAccessTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 206 methods.*
+  * [`CreateAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAPIKeyAPIKeysResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 206 methods.*
+  * [`CreateM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenM2mResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 206 methods.*
   * [`ResponseValidationError`](./src/Clerk/BackendAPI/Models/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
 </details>
 

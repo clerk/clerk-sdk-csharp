@@ -34,6 +34,6 @@ namespace Clerk.BackendAPI.Models.Components
         /// Whether the machine was successfully deleted.
         /// </summary>
         [JsonProperty("deleted")]
-        public bool Deleted { get; set; } = default!;
+        public bool Deleted { get; } = true;
     }
 }
