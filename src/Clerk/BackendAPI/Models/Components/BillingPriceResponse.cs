@@ -63,11 +63,11 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("annual_monthly_amount")]
         public long AnnualMonthlyAmount { get; set; } = default!;
 
-        [JsonProperty("fee")]
-        public CommerceMoneyResponse Fee { get; set; } = default!;
+        [JsonProperty("fee", NullValueHandling = NullValueHandling.Include)]
+        public BillingPriceResponseFee? Fee { get; set; }
 
-        [JsonProperty("annual_monthly_fee")]
-        public CommerceMoneyResponse AnnualMonthlyFee { get; set; } = default!;
+        [JsonProperty("annual_monthly_fee", NullValueHandling = NullValueHandling.Include)]
+        public BillingPriceResponseAnnualMonthlyFee? AnnualMonthlyFee { get; set; }
 
         /// <summary>
         /// The description of the price.
@@ -86,5 +86,11 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
+
+        /// <summary>
+        /// Which billing periods this price supports.
+        /// </summary>
+        [JsonProperty("supported_billing_periods")]
+        public SupportedBillingPeriods SupportedBillingPeriods { get; set; } = default!;
     }
 }

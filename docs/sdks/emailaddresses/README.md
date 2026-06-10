@@ -8,6 +8,9 @@
 * [Get](#get) - Retrieve an email address
 * [Delete](#delete) - Delete an email address
 * [Update](#update) - Update an email address
+* [PrepareVerification](#prepareverification) - Send a verification code to an email address
+* [AttemptVerification](#attemptverification) - Verify a code sent to an email address
+* [ReplaceForUser](#replaceforuser) - Replace a user's email address
 
 ## Create
 
@@ -119,7 +122,7 @@ var res = await sdk.EmailAddresses.DeleteAsync(emailAddressId: "email_address_id
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 409                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Update
@@ -163,4 +166,144 @@ var res = await sdk.EmailAddresses.UpdateAsync(
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 409                    | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## PrepareVerification
+
+Sends a one-time code to the given email address so that a backend can
+verify the user controls it (for example, in a custom, backend-driven
+sign-in flow). The code is tracked on its own verification; confirm it
+with attempt_verification.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="PrepareEmailAddressVerification" method="post" path="/email_addresses/{email_address_id}/prepare_verification" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.EmailAddresses.PrepareVerificationAsync(emailAddressId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `EmailAddressId`                                             | *string*                                                     | :heavy_check_mark:                                           | The ID of the email address to send the verification code to |
+
+### Response
+
+**[PrepareEmailAddressVerificationResponse](../../Models/Operations/PrepareEmailAddressVerificationResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## AttemptVerification
+
+Checks a one-time code against the verification identified by
+verification_id, and returns the verification with its updated status
+(`verified`, `unverified`, `expired`, or `failed`) and attempt count, so a
+backend driving its own frontend can react on every attempt — an incorrect
+or expired code is reported through the status, not as an error. Resubmitting
+a verification whose code was already accepted is rejected with a
+`verification_already_verified` error. If the code
+is correct and the email address is not already verified, it is also marked
+as verified as a side effect (just as it would be in a frontend verification
+flow); an already verified email address is left unchanged. It never creates
+a session; to sign the user in afterwards, mint a sign-in token.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="AttemptEmailAddressVerification" method="post" path="/email_addresses/{email_address_id}/attempt_verification" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.EmailAddresses.AttemptVerificationAsync(
+    emailAddressId: "<id>",
+    requestBody: new AttemptEmailAddressVerificationRequestBody() {
+        VerificationId = "<id>",
+        Code = "<value>",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `EmailAddressId`                                                                                                    | *string*                                                                                                            | :heavy_check_mark:                                                                                                  | The ID of the email address whose code is being verified                                                            |
+| `RequestBody`                                                                                                       | [AttemptEmailAddressVerificationRequestBody](../../Models/Operations/AttemptEmailAddressVerificationRequestBody.md) | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
+
+### Response
+
+**[AttemptEmailAddressVerificationResponse](../../Models/Operations/AttemptEmailAddressVerificationResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ReplaceForUser
+
+Replaces all of the user's email addresses with a single primary email address.
+By default the new email address is created verified, with the admin verification strategy.
+When `identification_status` is `reserved` it is created reserved instead: unverified but usable
+for sign-in and locked so no other user can claim it. Any existing email addresses are deleted.
+If an existing email address is linked to a connected account, the request is rejected; remove
+the connected account first.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="ReplaceUserEmailAddress" method="put" path="/users/{user_id}/email_address" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.EmailAddresses.ReplaceForUserAsync(
+    userId: "<id>",
+    requestBody: new ReplaceUserEmailAddressRequestBody() {
+        EmailAddress = "Ines83@gmail.com",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `UserId`                                                                                            | *string*                                                                                            | :heavy_check_mark:                                                                                  | The ID of the user whose email address to replace                                                   |
+| `RequestBody`                                                                                       | [ReplaceUserEmailAddressRequestBody](../../Models/Operations/ReplaceUserEmailAddressRequestBody.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+
+### Response
+
+**[ReplaceUserEmailAddressResponse](../../Models/Operations/ReplaceUserEmailAddressResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404, 422                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

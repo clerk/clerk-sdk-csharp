@@ -38,6 +38,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("max_role_sets_allowed")]
         public long? MaxRoleSetsAllowed { get; set; }
 
+        [JsonProperty("max_allowed_domains")]
+        public long MaxAllowedDomains { get; set; } = default!;
+
         /// <summary>
         /// max_allowed_permissions is now a no-op, as permissions are now unlimited.
         /// </summary>

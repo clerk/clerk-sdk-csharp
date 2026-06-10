@@ -23,7 +23,9 @@ using Clerk.BackendAPI.Models.Operations;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
-CreateM2MTokenRequestBody req = new CreateM2MTokenRequestBody() {};
+CreateM2MTokenRequestBody req = new CreateM2MTokenRequestBody() {
+    MinRemainingTtlSeconds = 240,
+};
 
 var res = await sdk.M2m.CreateTokenAsync(req);
 

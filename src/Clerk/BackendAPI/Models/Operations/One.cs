@@ -40,7 +40,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The IdP provider of the connection.
         /// </summary>
         [JsonProperty("provider")]
-        public Provider Provider { get; set; } = default!;
+        public CreateSAMLConnectionRequestBodyProvider Provider { get; set; } = default!;
 
         /// <summary>
         /// The Entity ID as provided by the IdP.

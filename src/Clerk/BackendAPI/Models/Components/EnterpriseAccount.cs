@@ -77,7 +77,7 @@ namespace Clerk.BackendAPI.Models.Components
         }
 
         [JsonProperty("enterprise_connection", NullValueHandling = NullValueHandling.Include)]
-        public EnterpriseConnection? EnterpriseConnection { get; set; } = null;
+        public EnterpriseAccountEnterpriseConnection? EnterpriseConnection { get; set; } = null;
 
         /// <summary>
         /// Unix timestamp of last authentication.

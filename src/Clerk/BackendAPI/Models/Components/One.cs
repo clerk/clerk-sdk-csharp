@@ -18,7 +18,7 @@ namespace Clerk.BackendAPI.Models.Components
     public class One
     {
         [JsonProperty("object")]
-        public SchemasSAMLConnectionObject Object { get; set; } = default!;
+        public SAMLConnectionObject Object { get; set; } = default!;
 
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
@@ -83,6 +83,9 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("disable_additional_identifications")]
         public bool DisableAdditionalIdentifications { get; set; } = default!;
+
+        [JsonProperty("allow_organization_account_linking")]
+        public bool AllowOrganizationAccountLinking { get; set; } = default!;
 
         /// <summary>
         /// Enable or deactivate ForceAuthn.

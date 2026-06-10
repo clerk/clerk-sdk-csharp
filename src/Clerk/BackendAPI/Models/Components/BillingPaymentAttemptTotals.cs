@@ -32,9 +32,15 @@ namespace Clerk.BackendAPI.Models.Components
         public CommerceMoneyResponse GrandTotal { get; set; } = default!;
 
         [JsonProperty("per_unit_totals")]
-        public List<CommercePerUnitTotal>? PerUnitTotals { get; set; }
+        public List<SchemasCommercePerUnitTotal>? PerUnitTotals { get; set; }
 
         [JsonProperty("credits")]
         public BillingPaymentAttemptCredits? Credits { get; set; } = null;
+
+        /// <summary>
+        /// Information about the discounts applied to the payment.
+        /// </summary>
+        [JsonProperty("discounts")]
+        public BillingPaymentAttemptDiscounts? Discounts { get; set; } = null;
     }
 }

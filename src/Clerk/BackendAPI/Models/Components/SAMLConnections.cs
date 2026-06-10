@@ -20,7 +20,7 @@ namespace Clerk.BackendAPI.Models.Components
     public class SAMLConnections
     {
         [JsonProperty("data")]
-        public List<SchemasSAMLConnection> Data { get; set; } = default!;
+        public List<SAMLConnection> Data { get; set; } = default!;
 
         /// <summary>
         /// Total number of SAML Connections.

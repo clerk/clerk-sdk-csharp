@@ -35,8 +35,8 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
-        [JsonProperty("fee")]
-        public CommerceMoneyResponse Fee { get; set; } = default!;
+        [JsonProperty("fee", NullValueHandling = NullValueHandling.Include)]
+        public Fee? Fee { get; set; }
 
         [JsonProperty("annual_monthly_fee", NullValueHandling = NullValueHandling.Include)]
         public AnnualMonthlyFee? AnnualMonthlyFee { get; set; }

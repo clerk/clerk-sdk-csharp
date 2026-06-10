@@ -145,6 +145,12 @@ namespace Clerk.BackendAPI.Models.Components
         public bool Locked { get; set; } = default!;
 
         /// <summary>
+        /// Flag to denote whether user has been deprovisioned and is restricted from signing in.
+        /// </summary>
+        [JsonProperty("deprovisioned")]
+        public bool? Deprovisioned { get; set; }
+
+        /// <summary>
         /// The number of seconds remaining until the lockout period expires for a locked user. A null value for a locked user indicates that lockout never expires.
         /// </summary>
         [JsonProperty("lockout_expires_in_seconds", NullValueHandling = NullValueHandling.Include)]
@@ -203,5 +209,8 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("bypass_client_trust")]
         public bool? BypassClientTrust { get; set; } = false;
+
+        [JsonProperty("scim")]
+        public Scim? Scim { get; set; } = null;
     }
 }

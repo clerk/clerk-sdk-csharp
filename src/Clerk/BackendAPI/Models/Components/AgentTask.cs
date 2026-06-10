@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
 
     /// <summary>
     /// Success.
@@ -30,6 +31,13 @@ namespace Clerk.BackendAPI.Models.Components
         /// <summary>
         /// A unique identifier for this agent task.
         /// </summary>
+        [JsonProperty("agent_task_id")]
+        public string AgentTaskId { get; set; } = default!;
+
+        /// <summary>
+        /// A unique identifier for this agent task. Deprecated: use agent_task_id instead.
+        /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("task_id")]
         public string TaskId { get; set; } = default!;
 

@@ -97,6 +97,8 @@ namespace Clerk.BackendAPI
 
         public ISamlConnections SamlConnections { get; }
 
+        public IEnterpriseConnections EnterpriseConnections { get; }
+
         public ITestingTokens TestingTokens { get; }
 
         public IAgentTasks AgentTasks { get; }
@@ -108,6 +110,8 @@ namespace Clerk.BackendAPI
         public IOrganizationPermissions OrganizationPermissions { get; }
 
         public IRoleSets RoleSets { get; }
+
+        public IAdminPortalLinkTokens AdminPortalLinkTokens { get; }
 
         /// <summary>
         /// Endpoints for managing API Keys.
@@ -261,6 +265,10 @@ namespace Clerk.BackendAPI
         /// </summary>
         public ISamlConnections SamlConnections { get; private set; }
         /// <summary>
+        /// The EnterpriseConnections sub-SDK.
+        /// </summary>
+        public IEnterpriseConnections EnterpriseConnections { get; private set; }
+        /// <summary>
         /// The TestingTokens sub-SDK.
         /// </summary>
         public ITestingTokens TestingTokens { get; private set; }
@@ -284,6 +292,10 @@ namespace Clerk.BackendAPI
         /// The RoleSets sub-SDK.
         /// </summary>
         public IRoleSets RoleSets { get; private set; }
+        /// <summary>
+        /// The AdminPortalLinkTokens sub-SDK.
+        /// </summary>
+        public IAdminPortalLinkTokens AdminPortalLinkTokens { get; private set; }
         /// <summary>
         /// The APIKeys sub-SDK.
         /// </summary>
@@ -368,6 +380,8 @@ namespace Clerk.BackendAPI
 
             SamlConnections = new SamlConnections(SDKConfiguration);
 
+            EnterpriseConnections = new EnterpriseConnections(SDKConfiguration);
+
             TestingTokens = new TestingTokens(SDKConfiguration);
 
             AgentTasks = new AgentTasks(SDKConfiguration);
@@ -379,6 +393,8 @@ namespace Clerk.BackendAPI
             OrganizationPermissions = new OrganizationPermissions(SDKConfiguration);
 
             RoleSets = new RoleSets(SDKConfiguration);
+
+            AdminPortalLinkTokens = new AdminPortalLinkTokens(SDKConfiguration);
 
             APIKeys = new APIKeys(SDKConfiguration);
 
@@ -506,6 +522,8 @@ namespace Clerk.BackendAPI
 
             SamlConnections = new SamlConnections(SDKConfiguration);
 
+            EnterpriseConnections = new EnterpriseConnections(SDKConfiguration);
+
             TestingTokens = new TestingTokens(SDKConfiguration);
 
             AgentTasks = new AgentTasks(SDKConfiguration);
@@ -517,6 +535,8 @@ namespace Clerk.BackendAPI
             OrganizationPermissions = new OrganizationPermissions(SDKConfiguration);
 
             RoleSets = new RoleSets(SDKConfiguration);
+
+            AdminPortalLinkTokens = new AdminPortalLinkTokens(SDKConfiguration);
 
             APIKeys = new APIKeys(SDKConfiguration);
 

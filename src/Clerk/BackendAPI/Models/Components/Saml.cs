@@ -9,34 +9,21 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
-    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// SAML-specific metadata, present for SAML connections.
+    /// </summary>
     public class Saml
     {
-        [JsonProperty("object")]
-        public VerificationSamlVerificationObject? Object { get; set; }
+        [JsonProperty("saml_request")]
+        public string? SamlRequest { get; set; }
 
-        [JsonProperty("status")]
-        public VerificationSamlVerificationStatus Status { get; set; } = default!;
+        [JsonProperty("saml_response")]
+        public string? SamlResponse { get; set; }
 
-        [JsonProperty("strategy")]
-        public VerificationSamlVerificationStrategy Strategy { get; set; } = default!;
-
-        [JsonProperty("external_verification_redirect_url")]
-        public string? ExternalVerificationRedirectUrl { get; set; } = null;
-
-        [JsonProperty("error", NullValueHandling = NullValueHandling.Include)]
-        public VerificationError? Error { get; set; } = null;
-
-        [JsonProperty("expire_at")]
-        public long? ExpireAt { get; set; } = null;
-
-        [JsonProperty("attempts", NullValueHandling = NullValueHandling.Include)]
-        public long? Attempts { get; set; }
-
-        [JsonProperty("verified_at_client")]
-        public string? VerifiedAtClient { get; set; } = null;
+        [JsonProperty("relay_state")]
+        public string? RelayState { get; set; }
     }
 }

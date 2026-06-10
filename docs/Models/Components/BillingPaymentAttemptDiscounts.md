@@ -1,0 +1,11 @@
+# BillingPaymentAttemptDiscounts
+
+Information about the discounts applied to the payment
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `Proration`                                                                                             | [BillingPaymentAttemptTotalsProration](../../Models/Components/BillingPaymentAttemptTotalsProration.md) | :heavy_check_mark:                                                                                      | Proration details from passed subscription time                                                         |
+| `Total`                                                                                                 | [CommerceMoneyResponse](../../Models/Components/CommerceMoneyResponse.md)                               | :heavy_check_mark:                                                                                      | N/A                                                                                                     |

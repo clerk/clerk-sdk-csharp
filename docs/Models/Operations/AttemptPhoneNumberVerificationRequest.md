@@ -1,0 +1,9 @@
+# AttemptPhoneNumberVerificationRequest
+
+
+## Fields
+
+| Field                                                                                                             | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `PhoneNumberId`                                                                                                   | *string*                                                                                                          | :heavy_check_mark:                                                                                                | The ID of the phone number whose code is being verified                                                           |
+| `RequestBody`                                                                                                     | [AttemptPhoneNumberVerificationRequestBody](../../Models/Operations/AttemptPhoneNumberVerificationRequestBody.md) | :heavy_check_mark:                                                                                                | N/A                                                                                                               |

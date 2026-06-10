@@ -38,3 +38,9 @@ Verification.CreateVerificationSaml(/* values here */);
 ```csharp
 Verification.CreateVerificationEmailLink(/* values here */);
 ```
+
+### VerificationScim
+
+```csharp
+Verification.CreateVerificationScim(/* values here */);
+```

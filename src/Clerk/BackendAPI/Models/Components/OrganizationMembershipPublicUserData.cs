@@ -42,5 +42,8 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("username")]
         public string? Username { get; set; } = null;
+
+        [JsonProperty("banned")]
+        public bool? Banned { get; set; }
     }
 }

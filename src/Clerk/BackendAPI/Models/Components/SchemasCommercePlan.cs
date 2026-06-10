@@ -34,14 +34,14 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
 
-        [JsonProperty("fee")]
-        public CommerceMoneyResponse Fee { get; set; } = default!;
+        [JsonProperty("fee", NullValueHandling = NullValueHandling.Include)]
+        public SchemasCommercePlanFee? Fee { get; set; }
 
-        [JsonProperty("annual_monthly_fee")]
-        public CommerceMoneyResponse AnnualMonthlyFee { get; set; } = default!;
+        [JsonProperty("annual_monthly_fee", NullValueHandling = NullValueHandling.Include)]
+        public SchemasCommercePlanAnnualMonthlyFee? AnnualMonthlyFee { get; set; }
 
-        [JsonProperty("annual_fee")]
-        public CommerceMoneyResponse AnnualFee { get; set; } = default!;
+        [JsonProperty("annual_fee", NullValueHandling = NullValueHandling.Include)]
+        public SchemasCommercePlanAnnualFee? AnnualFee { get; set; }
 
         /// <summary>
         /// The amount in cents for the plan.

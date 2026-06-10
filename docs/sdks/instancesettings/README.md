@@ -9,9 +9,12 @@ Modify the settings of your instance.
 * [Get](#get) - Fetch the current instance
 * [Update](#update) - Update instance settings
 * [UpdateRestrictions](#updaterestrictions) - Update instance restrictions
+* [GetCommunication](#getcommunication) - Get instance communication settings
+* [UpdateCommunication](#updatecommunication) - Update instance communication settings
 * [GetOAuthApplicationSettings](#getoauthapplicationsettings) - Get OAuth application settings
 * [UpdateOAuthApplicationSettings](#updateoauthapplicationsettings) - Update OAuth application settings
 * [ChangeDomain](#changedomain) - Update production instance domain
+* [GetOrganizationSettings](#getorganizationsettings) - Get instance organization settings
 * [UpdateOrganizationSettings](#updateorganizationsettings) - Update instance organization settings
 * [GetInstanceProtect](#getinstanceprotect) - Get instance protect settings
 * [UpdateInstanceProtect](#updateinstanceprotect) - Update instance protect settings
@@ -138,6 +141,76 @@ var res = await sdk.InstanceSettings.UpdateRestrictionsAsync(req);
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 422                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
+## GetCommunication
+
+Retrieves the per-instance SMS communication settings, including the SMS country blocklist.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetInstanceCommunication" method="get" path="/instance/communication" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.InstanceSettings.GetCommunicationAsync();
+
+// handle response
+```
+
+### Response
+
+**[GetInstanceCommunicationResponse](../../Models/Operations/GetInstanceCommunicationResponse.md)**
+
+### Errors
+
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| Clerk.BackendAPI.Models.Errors.SDKError | 4XX, 5XX                                | \*/\*                                   |
+
+## UpdateCommunication
+
+Replaces the SMS country blocklist for this instance. Pass the full set of ISO 3166-1
+alpha-2 country codes that should be blocked; codes that aren't recognized as SMS-tier
+countries are silently dropped from the persisted list. Omitting `blocked_country_codes`
+is a no-op.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="UpdateInstanceCommunication" method="patch" path="/instance/communication" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+UpdateInstanceCommunicationRequestBody? req = null;
+
+var res = await sdk.InstanceSettings.UpdateCommunicationAsync(req);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                   | [UpdateInstanceCommunicationRequestBody](../../Models/Operations/UpdateInstanceCommunicationRequestBody.md) | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
+
+### Response
+
+**[UpdateInstanceCommunicationResponse](../../Models/Operations/UpdateInstanceCommunicationResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 422                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
 ## GetOAuthApplicationSettings
 
 Retrieves the settings for OAuth applications for the instance (dynamic client registration, JWT access tokens, etc.).
@@ -248,6 +321,35 @@ var res = await sdk.InstanceSettings.ChangeDomainAsync(req);
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 422                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
+## GetOrganizationSettings
+
+Retrieves the organization settings of the instance
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetInstanceOrganizationSettings" method="get" path="/instance/organization_settings" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.InstanceSettings.GetOrganizationSettingsAsync();
+
+// handle response
+```
+
+### Response
+
+**[GetInstanceOrganizationSettingsResponse](../../Models/Operations/GetInstanceOrganizationSettingsResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 402, 404, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
 ## UpdateOrganizationSettings
 
 Updates the organization settings of the instance
@@ -295,7 +397,7 @@ var res = await sdk.InstanceSettings.UpdateOrganizationSettingsAsync(req);
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402, 403, 404, 422                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## GetInstanceProtect

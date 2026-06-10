@@ -9,6 +9,7 @@
 * [Get](#get) - Retrieve an OAuth application by ID
 * [Update](#update) - Update an OAuth application
 * [Delete](#delete) - Delete an OAuth application
+* [UploadLogo](#uploadlogo) - Upload a logo for the OAuth application
 * [RotateSecret](#rotatesecret) - Rotate the client secret of the given OAuth application
 
 ## List
@@ -212,6 +213,45 @@ var res = await sdk.OauthApplications.DeleteAsync(oauthApplicationId: "oauth_app
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## UploadLogo
+
+Set or replace an OAuth application's logo by uploading an image file.
+This endpoint uses the `multipart/form-data` request content type and accepts a file of image type.
+The file size cannot exceed 10MB.
+Only the following file content types are supported: `image/jpeg`, `image/png`, `image/gif`, `image/webp`.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="UploadOAuthApplicationLogo" method="put" path="/oauth_applications/{oauth_application_id}/logo" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.OauthApplications.UploadLogoAsync(oauthApplicationId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `OauthApplicationId`                                                                                      | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The ID of the OAuth application for which to upload a logo                                                |
+| `RequestBody`                                                                                             | [UploadOAuthApplicationLogoRequestBody](../../Models/Operations/UploadOAuthApplicationLogoRequestBody.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
+
+### Response
+
+**[UploadOAuthApplicationLogoResponse](../../Models/Operations/UploadOAuthApplicationLogoResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404, 413                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## RotateSecret

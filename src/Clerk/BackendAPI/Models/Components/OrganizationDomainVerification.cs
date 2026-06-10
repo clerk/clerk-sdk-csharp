@@ -9,20 +9,21 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
-    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
 
     /// <summary>
-    /// Verification details for the domain.
+    /// Deprecated alias for `affiliation_verification`. Kept for backward compatibility on the current API version; will be removed in the next API version. Prefer `affiliation_verification`.
     /// </summary>
+    [Obsolete("This will be removed in a future release, please migrate away from it as soon as possible")]
     public class OrganizationDomainVerification
     {
         /// <summary>
-        /// Status of the verification. It can be `unverified` or `verified`
+        /// Status of the verification. It can be `unverified`, `verified`, `failed`, or `expired`.
         /// </summary>
         [JsonProperty("status")]
-        public OrganizationDomainStatus Status { get; set; } = default!;
+        public string Status { get; set; } = default!;
 
         /// <summary>
         /// Name of the strategy used to verify the domain.
@@ -41,5 +42,11 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("expire_at", NullValueHandling = NullValueHandling.Include)]
         public long? ExpireAt { get; set; }
+
+        /// <summary>
+        /// Unix timestamp of when ownership was verified. Only populated on `ownership_verification`; null on `affiliation_verification`.
+        /// </summary>
+        [JsonProperty("verified_at", NullValueHandling = NullValueHandling.Include)]
+        public long? VerifiedAt { get; set; }
     }
 }

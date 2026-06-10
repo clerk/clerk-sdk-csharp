@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Information about the next payment.
@@ -19,7 +20,7 @@ namespace Clerk.BackendAPI.Models.Components
     public class SchemasCommerceSubscriptionItemNextPayment
     {
         /// <summary>
-        /// Amount for the next payment.
+        /// Base plan fee for the next payment. Does not include per-unit (e.g. seat) charges; see `totals.grand_total` for the full amount.
         /// </summary>
         [JsonProperty("amount")]
         public SchemasCommerceSubscriptionItemNextPaymentAmount? Amount { get; set; } = null;
@@ -29,5 +30,17 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("date")]
         public long? Date { get; set; } = null;
+
+        /// <summary>
+        /// Per-unit total breakdown (for example, seats) for the next payment.
+        /// </summary>
+        [JsonProperty("per_unit_totals")]
+        public List<CommercePerUnitTotal>? PerUnitTotals { get; set; }
+
+        /// <summary>
+        /// Breakdown of the recurring amount that will be billed at renewal (base fee + per-unit charges). Tax and credits are not previewed.
+        /// </summary>
+        [JsonProperty("totals")]
+        public SchemasCommerceSubscriptionItemNextPaymentTotals? Totals { get; set; } = null;
     }
 }

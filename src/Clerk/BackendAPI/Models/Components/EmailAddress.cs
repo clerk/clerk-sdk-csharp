@@ -60,14 +60,19 @@ namespace Clerk.BackendAPI.Models.Components
             return Verification != null ? Verification.Ticket : null;
         }
 
-        public Saml? GetVerificationVerificationSaml()
+        public VerificationSAMLVerificationEmailAddressSAML? GetVerificationVerificationSaml()
         {
-            return Verification != null ? Verification.Saml : null;
+            return Verification != null ? Verification.VerificationSAMLVerificationEmailAddressSAML : null;
         }
 
         public EmailLink? GetVerificationVerificationEmailLink()
         {
             return Verification != null ? Verification.EmailLink : null;
+        }
+
+        public VerificationSCIM? GetVerificationVerificationScim()
+        {
+            return Verification != null ? Verification.VerificationSCIM : null;
         }
 
         [JsonProperty("linked_to")]
