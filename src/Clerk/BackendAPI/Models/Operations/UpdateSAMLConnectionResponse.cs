@@ -21,6 +21,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// A SAML Connection.
         /// </summary>
-        public SchemasSAMLConnection? SchemasSAMLConnection { get; set; }
+        public SAMLConnection? SAMLConnection { get; set; }
     }
 }

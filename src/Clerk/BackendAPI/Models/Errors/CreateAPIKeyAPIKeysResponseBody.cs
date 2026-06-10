@@ -20,7 +20,7 @@ namespace Clerk.BackendAPI.Models.Errors
     public class CreateAPIKeyAPIKeysResponseBodyPayload
     {
         [JsonProperty("errors")]
-        public List<CreateApiKeyErrors> Errors { get; set; } = default!;
+        public List<CreateAPIKeyAPIKeysErrors> Errors { get; set; } = default!;
 
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
@@ -37,7 +37,7 @@ namespace Clerk.BackendAPI.Models.Errors
         public CreateAPIKeyAPIKeysResponseBodyPayload Payload { get; }
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use CreateAPIKeyAPIKeysResponseBody.Payload.Errors instead.")]
-        public List<CreateApiKeyErrors> Errors { get; set; } = default!;
+        public List<CreateAPIKeyAPIKeysErrors> Errors { get; set; } = default!;
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use CreateAPIKeyAPIKeysResponseBody.Payload.HttpMeta instead.")]
         public HTTPMetadata HttpMeta { get; set; } = default!;

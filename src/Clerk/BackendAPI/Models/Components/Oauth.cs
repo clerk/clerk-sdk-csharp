@@ -9,38 +9,21 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
-    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
 
+    /// <summary>
+    /// OAuth-specific metadata, present for OIDC connections.
+    /// </summary>
     public class Oauth
     {
-        [JsonProperty("object")]
-        public VerificationOauthVerificationObject? Object { get; set; }
+        [JsonProperty("id_token")]
+        public string? IdToken { get; set; }
 
-        [JsonProperty("status")]
-        public VerificationOauthVerificationStatus Status { get; set; } = default!;
+        [JsonProperty("access_token")]
+        public string? AccessToken { get; set; }
 
-        [JsonProperty("strategy")]
-        public string Strategy { get; set; } = default!;
-
-        [JsonProperty("external_verification_redirect_url")]
-        public string? ExternalVerificationRedirectUrl { get; set; }
-
-        [JsonProperty("error", NullValueHandling = NullValueHandling.Include)]
-        public VerificationOauthVerificationError? Error { get; set; } = null;
-
-        [JsonProperty("expire_at")]
-        public long ExpireAt { get; set; } = default!;
-
-        [JsonProperty("attempts", NullValueHandling = NullValueHandling.Include)]
-        public long? Attempts { get; set; }
-
-        [JsonProperty("verified_at_client")]
-        public string? VerifiedAtClient { get; set; } = null;
+        [JsonProperty("user_info")]
+        public string? UserInfo { get; set; }
     }
 }

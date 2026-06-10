@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
 
     /// <summary>
     /// An organization domain.
@@ -55,8 +56,21 @@ namespace Clerk.BackendAPI.Models.Components
         public string? AffiliationEmailAddress { get; set; }
 
         /// <summary>
-        /// Verification details for the domain.
+        /// Verification details for the user-facing affiliation between the domain and the organization (e.g. affiliation_email_code).
         /// </summary>
+        [JsonProperty("affiliation_verification", NullValueHandling = NullValueHandling.Include)]
+        public AffiliationVerification? AffiliationVerification { get; set; }
+
+        /// <summary>
+        /// Verification details for the underlying DNS domain ownership proof (TXT challenge or dashboard override). Null until ownership has been attempted.
+        /// </summary>
+        [JsonProperty("ownership_verification", NullValueHandling = NullValueHandling.Include)]
+        public OwnershipVerification? OwnershipVerification { get; set; }
+
+        /// <summary>
+        /// Deprecated alias for `affiliation_verification`. Kept for backward compatibility on the current API version; will be removed in the next API version. Prefer `affiliation_verification`.
+        /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("verification", NullValueHandling = NullValueHandling.Include)]
         public OrganizationDomainVerification? Verification { get; set; }
 

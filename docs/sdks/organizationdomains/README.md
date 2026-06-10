@@ -8,6 +8,7 @@
 * [List](#list) - Get a list of all domains of an organization.
 * [Update](#update) - Update an organization domain.
 * [Delete](#delete) - Remove a domain from an organization.
+* [VerifyOwnership](#verifyownership) - Mark an organization domain's ownership as verified
 * [ListAll](#listall) - List all organization domains
 
 ## Create
@@ -171,6 +172,52 @@ var res = await sdk.OrganizationDomains.DeleteAsync(
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## VerifyOwnership
+
+Flips the organization domain's ownership state to verified via the
+manual override path, bypassing the self-serve TXT DNS challenge. The
+domain row records strategy=`manual_override` and an
+`organization_domain.ownership_verified` audit event is emitted with the
+same strategy.
+
+Idempotent: re-calling on an already-verified domain returns the current
+ownership state without re-emitting the audit event.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="VerifyOrganizationDomainOwnership" method="post" path="/organizations/{organization_id}/domains/{domain_id}/verify_ownership" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.OrganizationDomains.VerifyOwnershipAsync(
+    organizationId: "<id>",
+    domainId: "<id>"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                              | Type                                                   | Required                                               | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `OrganizationId`                                       | *string*                                               | :heavy_check_mark:                                     | The ID of the organization to which the domain belongs |
+| `DomainId`                                             | *string*                                               | :heavy_check_mark:                                     | The ID of the domain                                   |
+
+### Response
+
+**[VerifyOrganizationDomainOwnershipResponse](../../Models/Operations/VerifyOrganizationDomainOwnershipResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 403, 404                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## ListAll

@@ -66,6 +66,6 @@ namespace Clerk.BackendAPI.Models.Components
         }
 
         [JsonProperty("saml_connection", NullValueHandling = NullValueHandling.Include)]
-        public SamlConnection? SamlConnection { get; set; } = null;
+        public SAMLAccountSAMLConnection? SamlConnection { get; set; } = null;
     }
 }

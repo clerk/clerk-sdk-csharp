@@ -1,0 +1,9 @@
+# UploadOAuthApplicationLogoRequest
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `OauthApplicationId`                                                                                      | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The ID of the OAuth application for which to upload a logo                                                |
+| `RequestBody`                                                                                             | [UploadOAuthApplicationLogoRequestBody](../../Models/Operations/UploadOAuthApplicationLogoRequestBody.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |

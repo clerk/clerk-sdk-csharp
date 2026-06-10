@@ -17,7 +17,7 @@ namespace Clerk.BackendAPI.Models.Components
     public class CommercePerUnitTotal
     {
         /// <summary>
-        /// Name of the billable unit (for example, seats).
+        /// Name of the billable unit (for example, `seats`).
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;

@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
@@ -57,5 +58,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("url_based_session_syncing")]
         public bool? UrlBasedSessionSyncing { get; set; } = null;
+
+        /// <summary>
+        /// When password is required at the instance level, sets the preferred sign-in strategy surfaced to Clerk components. Has no effect when password is not required. Defaults to `password`. Set to an empty string to clear the override.
+        /// </summary>
+        [JsonProperty("preferred_sign_in_strategy_when_password_required")]
+        public PreferredSignInStrategyWhenPasswordRequired? PreferredSignInStrategyWhenPasswordRequired { get; set; } = null;
     }
 }

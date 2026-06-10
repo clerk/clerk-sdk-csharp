@@ -19,6 +19,7 @@
 * [SetProfileImage](#setprofileimage) - Set user profile image
 * [DeleteProfileImage](#deleteprofileimage) - Delete user profile image
 * [UpdateMetadata](#updatemetadata) - Merge and update a user's metadata
+* [ReplaceMetadata](#replacemetadata) - Replace a user's metadata
 * [GetBillingSubscription](#getbillingsubscription) - Retrieve a user's billing subscription
 * [GetBillingCreditBalance](#getbillingcreditbalance) - Retrieve a user's credit balance
 * [AdjustBillingCreditBalance](#adjustbillingcreditbalance) - Adjust a user's credit balance
@@ -113,7 +114,7 @@ var res = await sdk.Users.ListAsync(req);
 
 Creates a new user. Your user management settings determine how you should setup your user model.
 
-Any email address and phone number created using this method will be marked as verified.
+By default, any email address and phone number created using this method is marked as verified. Use the `email_address_identification_status` and `phone_number_identification_status` arrays to instead create some or all of them as reserved (unverified but usable for sign-in and locked so no other user can claim them).
 
 Note: If you are performing a migration, check out our guide on [zero downtime migrations](https://clerk.com/docs/deployments/migrate-overview).
 
@@ -186,7 +187,7 @@ var res = await sdk.Users.CreateAsync(req);
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 402, 403, 422                    | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Count
@@ -751,6 +752,50 @@ var res = await sdk.Users.UpdateMetadataAsync(userId: "user_123456789");
 ### Response
 
 **[UpdateUserMetadataResponse](../../Models/Operations/UpdateUserMetadataResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ReplaceMetadata
+
+Replace a user's metadata attributes with the provided values.
+
+Unlike `PATCH /v1/users/{user_id}/metadata` (merge semantics), this endpoint
+replaces the supplied metadata columns entirely — the prior contents of each
+supplied column are discarded. Columns omitted from the request body are
+left unchanged.
+
+Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you
+explicitly intend to overwrite a metadata column wholesale.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="ReplaceUserMetadata" method="put" path="/users/{user_id}/metadata" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.ReplaceMetadataAsync(userId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `UserId`                                                                                    | *string*                                                                                    | :heavy_check_mark:                                                                          | The ID of the user whose metadata will be replaced                                          |
+| `RequestBody`                                                                               | [ReplaceUserMetadataRequestBody](../../Models/Operations/ReplaceUserMetadataRequestBody.md) | :heavy_minus_sign:                                                                          | N/A                                                                                         |
+
+### Response
+
+**[ReplaceUserMetadataResponse](../../Models/Operations/ReplaceUserMetadataResponse.md)**
 
 ### Errors
 

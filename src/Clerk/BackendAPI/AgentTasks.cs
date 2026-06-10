@@ -30,7 +30,7 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Create an agent task on behalf of a user.<br/>
         /// The response contains a URL that, when visited, creates a session for the user.<br/>
-        /// The agent_id is stable per agent_name within an instance. The task_id is unique per call.
+        /// The agent_id is stable per agent_name within an instance. The agent_task_id is unique per call.
         /// </remarks>
         /// <param name="request">A <see cref="CreateAgentTaskRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -80,7 +80,7 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Create an agent task on behalf of a user.<br/>
         /// The response contains a URL that, when visited, creates a session for the user.<br/>
-        /// The agent_id is stable per agent_name within an instance. The task_id is unique per call.
+        /// The agent_id is stable per agent_name within an instance. The agent_task_id is unique per call.
         /// </remarks>
         /// <param name="request">A <see cref="CreateAgentTaskRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>

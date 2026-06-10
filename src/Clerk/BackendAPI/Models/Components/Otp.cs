@@ -34,6 +34,12 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("expire_at", NullValueHandling = NullValueHandling.Include)]
         public long? ExpireAt { get; set; }
 
+        /// <summary>
+        /// The delivery channel of the code (phone codes only).
+        /// </summary>
+        [JsonProperty("channel")]
+        public string? Channel { get; set; } = null;
+
         [JsonProperty("verified_at_client")]
         public string? VerifiedAtClient { get; set; } = null;
     }

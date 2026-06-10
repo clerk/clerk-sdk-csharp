@@ -1,0 +1,9 @@
+# CreateEnterpriseConnectionTestRunResponse
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                            | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                               | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `EnterpriseConnectionTestRunResponse`                                                                 | [EnterpriseConnectionTestRunResponse](../../Models/Components/EnterpriseConnectionTestRunResponse.md) | :heavy_minus_sign:                                                                                    | A URL to initiate an enterprise connection test run                                                   |

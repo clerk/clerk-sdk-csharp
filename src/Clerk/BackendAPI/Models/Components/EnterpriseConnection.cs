@@ -12,155 +12,92 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using System;
     using System.Collections.Generic;
-    using System.Numerics;
-    using System.Reflection;
 
-    public class EnterpriseConnectionType
-    {
-        private EnterpriseConnectionType(string value) { Value = value; }
-
-        public string Value { get; private set; }
-
-        public static EnterpriseConnectionType EnterpriseConnectionEnterpriseConnection { get { return new EnterpriseConnectionType("enterprise_connection_EnterpriseConnection"); } }
-
-        public static EnterpriseConnectionType Null { get { return new EnterpriseConnectionType("null"); } }
-
-        public override string ToString() { return Value; }
-        public static implicit operator String(EnterpriseConnectionType v) { return v.Value; }
-        public static EnterpriseConnectionType FromString(string v) {
-            switch(v) {
-                case "enterprise_connection_EnterpriseConnection": return EnterpriseConnectionEnterpriseConnection;
-                case "null": return Null;
-                default: throw new ArgumentException("Invalid value for EnterpriseConnectionType");
-            }
-        }
-        public override bool Equals(object? obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-            {
-                return false;
-            }
-            return Value.Equals(((EnterpriseConnectionType)obj).Value);
-        }
-
-        public override int GetHashCode()
-        {
-            return Value.GetHashCode();
-        }
-    }
-
-    [JsonConverter(typeof(EnterpriseConnection.EnterpriseConnectionConverter))]
     public class EnterpriseConnection
     {
-        public EnterpriseConnection(EnterpriseConnectionType type)
-        {
-            Type = type;
-        }
+        /// <summary>
+        /// The enterprise connection ID.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; } = default!;
 
-        [SpeakeasyMetadata("form:explode=true")]
-        public EnterpriseConnectionEnterpriseConnection? EnterpriseConnectionEnterpriseConnection { get; set; }
+        /// <summary>
+        /// The display name of the connection.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; } = default!;
 
-        public EnterpriseConnectionType Type { get; set; }
-        public static EnterpriseConnection CreateEnterpriseConnectionEnterpriseConnection(EnterpriseConnectionEnterpriseConnection enterpriseConnectionEnterpriseConnection)
-        {
-            EnterpriseConnectionType typ = EnterpriseConnectionType.EnterpriseConnectionEnterpriseConnection;
+        [JsonProperty("provider")]
+        public string Provider { get; set; } = default!;
 
-            EnterpriseConnection res = new EnterpriseConnection(typ);
-            res.EnterpriseConnectionEnterpriseConnection = enterpriseConnectionEnterpriseConnection;
-            return res;
-        }
+        [JsonProperty("logo_public_url")]
+        public string? LogoPublicUrl { get; set; } = null;
 
-        public static EnterpriseConnection CreateNull()
-        {
-            EnterpriseConnectionType typ = EnterpriseConnectionType.Null;
-            return new EnterpriseConnection(typ);
-        }
+        /// <summary>
+        /// Whether the enterprise connection is active.
+        /// </summary>
+        [JsonProperty("active")]
+        public bool Active { get; set; } = default!;
 
-        public class EnterpriseConnectionConverter : JsonConverter
-        {
-            public override bool CanConvert(System.Type objectType) => objectType == typeof(EnterpriseConnection);
+        /// <summary>
+        /// Domains associated with the enterprise connection.
+        /// </summary>
+        [JsonProperty("domains")]
+        public List<string> Domains { get; set; } = default!;
 
-            public override bool CanRead => true;
+        /// <summary>
+        /// Organization ID when the connection is linked to an organization.
+        /// </summary>
+        [JsonProperty("organization_id")]
+        public string? OrganizationId { get; set; } = null;
 
-            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
-            {
-                if (reader.TokenType == JsonToken.Null)
-                {
-                    return null;
-                }
+        /// <summary>
+        /// Controls whether to update the user's attributes on each sign-in.
+        /// </summary>
+        [JsonProperty("sync_user_attributes")]
+        public bool? SyncUserAttributes { get; set; }
 
-                var json = JRaw.Create(reader).ToString();
-                var fallbackCandidates = new List<(System.Type, object, string)>();
+        /// <summary>
+        /// When true, users cannot add additional identifications when using this connection.
+        /// </summary>
+        [JsonProperty("disable_additional_identifications")]
+        public bool? DisableAdditionalIdentifications { get; set; }
 
-                try
-                {
-                    return new EnterpriseConnection(EnterpriseConnectionType.EnterpriseConnectionEnterpriseConnection)
-                    {
-                        EnterpriseConnectionEnterpriseConnection = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<EnterpriseConnectionEnterpriseConnection>(json)
-                    };
-                }
-                catch (ResponseBodyDeserializer.MissingMemberException)
-                {
-                    fallbackCandidates.Add((typeof(EnterpriseConnectionEnterpriseConnection), new EnterpriseConnection(EnterpriseConnectionType.EnterpriseConnectionEnterpriseConnection), "EnterpriseConnectionEnterpriseConnection"));
-                }
-                catch (ResponseBodyDeserializer.DeserializationException)
-                {
-                    // try next option
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+        /// <summary>
+        /// Whether this connection supports account linking via organization membership.
+        /// </summary>
+        [JsonProperty("allow_organization_account_linking")]
+        public bool? AllowOrganizationAccountLinking { get; set; }
 
-                if (fallbackCandidates.Count > 0)
-                {
-                    fallbackCandidates.Sort((a, b) => ResponseBodyDeserializer.CompareFallbackCandidates(a.Item1, b.Item1, json));
-                    foreach(var (deserializationType, returnObject, propertyName) in fallbackCandidates)
-                    {
-                        try
-                        {
-                            return ResponseBodyDeserializer.DeserializeUndiscriminatedUnionFallback(deserializationType, returnObject, propertyName, json);
-                        }
-                        catch (ResponseBodyDeserializer.DeserializationException)
-                        {
-                            // try next fallback option
-                        }
-                        catch (Exception)
-                        {
-                            throw;
-                        }
-                    }
-                }
+        /// <summary>
+        /// Custom attributes to map from the IdP to the user's profile via SSO or SCIM provisioning.
+        /// </summary>
+        [JsonProperty("custom_attributes")]
+        public List<Models.Components.CustomAttributes>? CustomAttributes { get; set; }
 
-                throw new InvalidOperationException("Could not deserialize into any supported types.");
-            }
+        /// <summary>
+        /// Present when the enterprise connection uses SAML.
+        /// </summary>
+        [JsonProperty("saml_connection")]
+        public EnterpriseConnectionSamlConnection? SamlConnection { get; set; } = null;
 
-            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
-            {
-                if (value == null)
-                {
-                    writer.WriteRawValue("null");
-                    return;
-                }
+        /// <summary>
+        /// Present when the enterprise connection uses OIDC or EASIE.
+        /// </summary>
+        [JsonProperty("oauth_config")]
+        public OauthConfig? OauthConfig { get; set; } = null;
 
-                EnterpriseConnection res = (EnterpriseConnection)value;
-                if (EnterpriseConnectionType.FromString(res.Type).Equals(EnterpriseConnectionType.Null))
-                {
-                    writer.WriteRawValue("null");
-                    return;
-                }
+        /// <summary>
+        /// Unix timestamp in milliseconds when the connection was created.
+        /// </summary>
+        [JsonProperty("created_at")]
+        public long CreatedAt { get; set; } = default!;
 
-                if (res.EnterpriseConnectionEnterpriseConnection != null)
-                {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.EnterpriseConnectionEnterpriseConnection));
-                    return;
-                }
-            }
-
-        }
-
+        /// <summary>
+        /// Unix timestamp in milliseconds when the connection was last updated.
+        /// </summary>
+        [JsonProperty("updated_at")]
+        public long UpdatedAt { get; set; } = default!;
     }
 }

@@ -93,9 +93,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("verification", NullValueHandling = NullValueHandling.Include)]
         public ExternalAccountWithVerificationVerification? Verification { get; set; }
 
-        public Oauth? GetVerificationVerificationOauth()
+        public VerificationOauthVerificationOauth? GetVerificationVerificationOauth()
         {
-            return Verification != null ? Verification.Oauth : null;
+            return Verification != null ? Verification.VerificationOauthVerificationOauth : null;
         }
 
         public GoogleOneTap? GetVerificationVerificationGoogleOneTap()

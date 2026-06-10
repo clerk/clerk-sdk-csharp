@@ -100,9 +100,10 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The hashing algorithm that was used to generate the password digest.<br/>
         /// <br/>
         /// The algorithms we support at the moment are <a href="https://en.wikipedia.org/wiki/Bcrypt">`bcrypt`</a>, <a href="https://docs.djangoproject.com/en/4.0/topics/auth/passwords/">`bcrypt_sha256_django`</a>, <a href="https://en.wikipedia.org/wiki/MD5">`md5`</a>, `pbkdf2_sha1`, `pbkdf2_sha256`, <a href="https://docs.djangoproject.com/en/4.0/topics/auth/passwords/">`pbkdf2_sha256_django`</a>,<br/>
-        /// <a href="https://www.openwall.com/phpass/">`phpass`</a>, `md5_phpass`, <a href="https://firebaseopensource.com/projects/firebase/scrypt/">`scrypt_firebase`</a>,<br/>
+        /// `pbkdf2_sha512`, <a href="https://www.openwall.com/phpass/">`phpass`</a>, `md5_phpass`, <a href="https://firebaseopensource.com/projects/firebase/scrypt/">`scrypt_firebase`</a>,<br/>
         /// <a href="https://werkzeug.palletsprojects.com/en/3.0.x/utils/#werkzeug.security.generate_password_hash">`scrypt_werkzeug`</a>, <a href="https://en.wikipedia.org/wiki/SHA-2">`sha256`</a>,<br/>
-        /// <a href="https://www.openldap.org/faq/data/cache/347.html">`ldap_ssha`</a>, the <a href="https://argon2.online/">`argon2`</a> variants: `argon2i` and `argon2id`, and `sha512_symfony`, the SHA-512 variant of the <a href="https://symfony.com/doc/current/security/passwords.html">Symfony</a> legacy hasher.<br/>
+        /// <a href="https://www.openldap.org/faq/data/cache/347.html">`ldap_ssha`</a>, the <a href="https://argon2.online/">`argon2`</a> variants: `argon2i` and `argon2id`, `sha512_symfony`, the SHA-512 variant of the <a href="https://symfony.com/doc/current/security/passwords.html">Symfony</a> legacy hasher,<br/>
+        /// and `pbkdf2_sha512_hex`, a variant of `pbkdf2_sha512` that accepts hex-encoded salt and hash.<br/>
         /// <br/>
         /// Each of the supported hashers expects the incoming digest to be in a particular format. See the <a href="https://clerk.com/docs/references/backend/user/create-user">Clerk docs</a> for more information.
         /// </summary>

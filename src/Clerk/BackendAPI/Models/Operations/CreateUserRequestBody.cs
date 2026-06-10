@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
@@ -43,18 +44,42 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// Email addresses to add to the user.<br/>
         /// Must be unique across your instance.<br/>
-        /// The first email address will be set as the user's primary email address.
+        /// The first email address will be set as the user's primary email address.<br/>
+        /// Created verified by default; see `email_address_identification_status` to create them reserved.
         /// </summary>
         [JsonProperty("email_address")]
         public List<string>? EmailAddress { get; set; }
 
         /// <summary>
+        /// Controls the status each email address is created with. Runs parallel to<br/>
+        /// `email_address`: when provided, it must contain exactly one item per email<br/>
+        /// address, applied by position. When omitted or empty, every email address is<br/>
+        /// created `verified`. Set an item to `reserved` to create the corresponding<br/>
+        /// email address reserved instead (unverified but usable for sign-in and locked<br/>
+        /// so no other user can claim it).
+        /// </summary>
+        [JsonProperty("email_address_identification_status")]
+        public List<EmailAddressIdentificationStatus>? EmailAddressIdentificationStatus { get; set; }
+
+        /// <summary>
         /// Phone numbers to add to the user.<br/>
         /// Must be unique across your instance.<br/>
-        /// The first phone number will be set as the user's primary phone number.
+        /// The first phone number will be set as the user's primary phone number.<br/>
+        /// Created verified by default; see `phone_number_identification_status` to create them reserved.
         /// </summary>
         [JsonProperty("phone_number")]
         public List<string>? PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Controls the status each phone number is created with. Runs parallel to<br/>
+        /// `phone_number`: when provided, it must contain exactly one item per phone<br/>
+        /// number, applied by position. When omitted or empty, every phone number is<br/>
+        /// created `verified`. Set an item to `reserved` to create the corresponding<br/>
+        /// phone number reserved instead (unverified but usable for sign-in and locked<br/>
+        /// so no other user can claim it).
+        /// </summary>
+        [JsonProperty("phone_number_identification_status")]
+        public List<PhoneNumberIdentificationStatus>? PhoneNumberIdentificationStatus { get; set; }
 
         /// <summary>
         /// Web3 wallets to add to the user.<br/>
@@ -90,9 +115,10 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The hashing algorithm that was used to generate the password digest.<br/>
         /// <br/>
         /// The algorithms we support at the moment are <a href="https://en.wikipedia.org/wiki/Bcrypt">`bcrypt`</a>, <a href="https://docs.djangoproject.com/en/4.0/topics/auth/passwords/">`bcrypt_sha256_django`</a>, <a href="https://en.wikipedia.org/wiki/MD5">`md5`</a>, `pbkdf2_sha1`, `pbkdf2_sha256`, <a href="https://docs.djangoproject.com/en/4.0/topics/auth/passwords/">`pbkdf2_sha256_django`</a>,<br/>
-        /// <a href="https://www.openwall.com/phpass/">`phpass`</a>, `md5_phpass`, <a href="https://firebaseopensource.com/projects/firebase/scrypt/">`scrypt_firebase`</a>,<br/>
+        /// `pbkdf2_sha512`, <a href="https://www.openwall.com/phpass/">`phpass`</a>, `md5_phpass`, <a href="https://firebaseopensource.com/projects/firebase/scrypt/">`scrypt_firebase`</a>,<br/>
         /// <a href="https://werkzeug.palletsprojects.com/en/3.0.x/utils/#werkzeug.security.generate_password_hash">`scrypt_werkzeug`</a>, <a href="https://en.wikipedia.org/wiki/SHA-2">`sha256`</a>,<br/>
-        /// <a href="https://www.openldap.org/faq/data/cache/347.html">`ldap_ssha`</a>, the <a href="https://argon2.online/">`argon2`</a> variants: `argon2i` and `argon2id`, and `sha512_symfony`, the SHA-512 variant of the <a href="https://symfony.com/doc/current/security/passwords.html">Symfony</a> legacy hasher.<br/>
+        /// <a href="https://www.openldap.org/faq/data/cache/347.html">`ldap_ssha`</a>, the <a href="https://argon2.online/">`argon2`</a> variants: `argon2i` and `argon2id`, `sha512_symfony`, the SHA-512 variant of the <a href="https://symfony.com/doc/current/security/passwords.html">Symfony</a> legacy hasher,<br/>
+        /// and `pbkdf2_sha512_hex`, a variant of `pbkdf2_sha512` that accepts hex-encoded salt and hash.<br/>
         /// <br/>
         /// Each of the supported hashers expects the incoming digest to be in a particular format. See the <a href="https://clerk.com/docs/references/backend/user/create-user">Clerk docs</a> for more information.
         /// </summary>
@@ -202,5 +228,19 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("bypass_client_trust")]
         public bool? BypassClientTrust { get; set; } = null;
+
+        /// <summary>
+        /// When set to `true`, the user is created already banned and cannot sign in.<br/>
+        /// Requires the same plan support as the ban user endpoint.
+        /// </summary>
+        [JsonProperty("banned")]
+        public bool? Banned { get; set; } = null;
+
+        /// <summary>
+        /// When set to `true`, the user is created already locked.<br/>
+        /// Requires the user lockout feature to be enabled on the instance.
+        /// </summary>
+        [JsonProperty("locked")]
+        public bool? Locked { get; set; } = null;
     }
 }

@@ -64,20 +64,20 @@ namespace Clerk.BackendAPI.Models.Components
         }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public Oauth? Oauth { get; set; }
+        public VerificationOauthVerificationOauth? VerificationOauthVerificationOauth { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public GoogleOneTap? GoogleOneTap { get; set; }
 
         public ExternalAccountWithVerificationVerificationType Type { get; set; }
 
-        public static ExternalAccountWithVerificationVerification CreateVerificationOauth(Oauth verificationOauth)
+        public static ExternalAccountWithVerificationVerification CreateVerificationOauth(VerificationOauthVerificationOauth verificationOauth)
         {
             ExternalAccountWithVerificationVerificationType typ = ExternalAccountWithVerificationVerificationType.VerificationOauth;
             string typStr = ExternalAccountWithVerificationVerificationType.VerificationOauth.ToString();
             verificationOauth.Object = VerificationOauthVerificationObjectExtension.ToEnum(ExternalAccountWithVerificationVerificationType.VerificationOauth.ToString());
             ExternalAccountWithVerificationVerification res = new ExternalAccountWithVerificationVerification(typ);
-            res.Oauth = verificationOauth;
+            res.VerificationOauthVerificationOauth = verificationOauth;
             return res;
         }
 
@@ -114,8 +114,8 @@ namespace Clerk.BackendAPI.Models.Components
                 string discriminator = jo.GetValue("object")?.ToString() ?? throw new ArgumentNullException("Could not find discriminator field.");
                 if (discriminator == ExternalAccountWithVerificationVerificationType.VerificationOauth.ToString())
                 {
-                    Oauth oauth = ResponseBodyDeserializer.DeserializeNotNull<Oauth>(jo.ToString());
-                    return CreateVerificationOauth(oauth);
+                    VerificationOauthVerificationOauth verificationOauthVerificationOauth = ResponseBodyDeserializer.DeserializeNotNull<VerificationOauthVerificationOauth>(jo.ToString());
+                    return CreateVerificationOauth(verificationOauthVerificationOauth);
                 }
                 if (discriminator == ExternalAccountWithVerificationVerificationType.VerificationGoogleOneTap.ToString())
                 {
@@ -141,9 +141,9 @@ namespace Clerk.BackendAPI.Models.Components
                     return;
                 }
 
-                if (res.Oauth != null)
+                if (res.VerificationOauthVerificationOauth != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.Oauth));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationOauthVerificationOauth));
                     return;
                 }
 

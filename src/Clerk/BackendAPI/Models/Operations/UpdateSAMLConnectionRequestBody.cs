@@ -109,6 +109,12 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? DisableAdditionalIdentifications { get; set; } = null;
 
         /// <summary>
+        /// Whether this connection supports account linking via organization membership.
+        /// </summary>
+        [JsonProperty("allow_organization_account_linking")]
+        public bool? AllowOrganizationAccountLinking { get; set; } = null;
+
+        /// <summary>
         /// Enable or deactivate ForceAuthn.
         /// </summary>
         [JsonProperty("force_authn")]

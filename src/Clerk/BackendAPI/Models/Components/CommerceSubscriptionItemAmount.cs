@@ -13,7 +13,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Amount for the next payment.
+    /// Base plan fee for the next payment. Does not include per-unit (e.g. seat) charges; see `totals.grand_total` for the full amount.
     /// </summary>
     public class CommerceSubscriptionItemAmount
     {

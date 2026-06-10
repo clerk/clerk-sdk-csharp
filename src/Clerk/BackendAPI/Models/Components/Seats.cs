@@ -9,8 +9,10 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Seat quantity for seat-based billing.
@@ -22,5 +24,11 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("quantity", NullValueHandling = NullValueHandling.Include)]
         public long? Quantity { get; set; }
+
+        /// <summary>
+        /// Per-unit cost breakdown by pricing tier.
+        /// </summary>
+        [JsonProperty("tiers")]
+        public List<SchemasCommercePerUnitTotalTier>? Tiers { get; set; }
     }
 }

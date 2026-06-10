@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
 
@@ -27,21 +28,27 @@ namespace Clerk.BackendAPI.Models.Components
         public string? Currency { get; set; } = "USD";
 
         /// <summary>
-        /// The amount in cents for the price. Must be at least $1 (100 cents).
+        /// The monthly amount in cents. Must be at least $1 (100 cents) if not null.
         /// </summary>
-        [JsonProperty("amount")]
-        public long Amount { get; set; } = default!;
+        [JsonProperty("amount", NullValueHandling = NullValueHandling.Include)]
+        public long? Amount { get; set; }
 
         /// <summary>
-        /// The monthly amount in cents when billed annually. Optional.
+        /// The monthly amount in cents when billed annually. Must be at least $1 (100 cents) if not null.
         /// </summary>
         [JsonProperty("annual_monthly_amount")]
-        public long? AnnualMonthlyAmount { get; set; }
+        public long? AnnualMonthlyAmount { get; set; } = null;
 
         /// <summary>
         /// An optional description for this custom price.
         /// </summary>
         [JsonProperty("description")]
         public string? Description { get; set; }
+
+        /// <summary>
+        /// Which billing periods this price supports. Inferred from amounts if omitted.
+        /// </summary>
+        [JsonProperty("supported_billing_periods")]
+        public CreateBillingPriceRequestSupportedBillingPeriods? SupportedBillingPeriods { get; set; }
     }
 }

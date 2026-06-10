@@ -24,7 +24,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// Marks the new domain as satellite. Only `true` is accepted at the moment.
         /// </summary>
         [JsonProperty("is_satellite")]
-        public bool IsSatellite { get; set; } = default!;
+        public bool IsSatellite { get; } = true;
 
         /// <summary>
         /// The full URL of the proxy which will forward requests to the Clerk Frontend API for this domain. Applicable only to production instances.

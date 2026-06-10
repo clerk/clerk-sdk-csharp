@@ -36,6 +36,8 @@ namespace Clerk.BackendAPI.Models.Components
 
         public static VerificationType VerificationEmailLink { get { return new VerificationType("verification_email_link"); } }
 
+        public static VerificationType VerificationScim { get { return new VerificationType("verification_scim"); } }
+
         public static VerificationType Null { get { return new VerificationType("null"); } }
 
         public override string ToString() { return Value; }
@@ -48,6 +50,7 @@ namespace Clerk.BackendAPI.Models.Components
                 case "verification_ticket": return VerificationTicket;
                 case "verification_saml": return VerificationSaml;
                 case "verification_email_link": return VerificationEmailLink;
+                case "verification_scim": return VerificationScim;
                 case "null": return Null;
                 default: throw new ArgumentException("Invalid value for VerificationType");
             }
@@ -88,10 +91,13 @@ namespace Clerk.BackendAPI.Models.Components
         public Ticket? Ticket { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
-        public Saml? Saml { get; set; }
+        public VerificationSAMLVerificationEmailAddressSAML? VerificationSAMLVerificationEmailAddressSAML { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public EmailLink? EmailLink { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public VerificationSCIM? VerificationSCIM { get; set; }
 
         public VerificationType Type { get; set; }
 
@@ -135,13 +141,13 @@ namespace Clerk.BackendAPI.Models.Components
             return res;
         }
 
-        public static Verification CreateVerificationSaml(Saml verificationSaml)
+        public static Verification CreateVerificationSaml(VerificationSAMLVerificationEmailAddressSAML verificationSaml)
         {
             VerificationType typ = VerificationType.VerificationSaml;
             string typStr = VerificationType.VerificationSaml.ToString();
             verificationSaml.Object = VerificationSamlVerificationObjectExtension.ToEnum(VerificationType.VerificationSaml.ToString());
             Verification res = new Verification(typ);
-            res.Saml = verificationSaml;
+            res.VerificationSAMLVerificationEmailAddressSAML = verificationSaml;
             return res;
         }
 
@@ -152,6 +158,16 @@ namespace Clerk.BackendAPI.Models.Components
             verificationEmailLink.Object = VerificationEmailLinkVerificationObjectExtension.ToEnum(VerificationType.VerificationEmailLink.ToString());
             Verification res = new Verification(typ);
             res.EmailLink = verificationEmailLink;
+            return res;
+        }
+
+        public static Verification CreateVerificationScim(VerificationSCIM verificationScim)
+        {
+            VerificationType typ = VerificationType.VerificationScim;
+            string typStr = VerificationType.VerificationScim.ToString();
+            verificationScim.Object = VerificationScimVerificationObjectExtension.ToEnum(VerificationType.VerificationScim.ToString());
+            Verification res = new Verification(typ);
+            res.VerificationSCIM = verificationScim;
             return res;
         }
 
@@ -198,13 +214,18 @@ namespace Clerk.BackendAPI.Models.Components
                 }
                 if (discriminator == VerificationType.VerificationSaml.ToString())
                 {
-                    Saml saml = ResponseBodyDeserializer.DeserializeNotNull<Saml>(jo.ToString());
-                    return CreateVerificationSaml(saml);
+                    VerificationSAMLVerificationEmailAddressSAML verificationSAMLVerificationEmailAddressSAML = ResponseBodyDeserializer.DeserializeNotNull<VerificationSAMLVerificationEmailAddressSAML>(jo.ToString());
+                    return CreateVerificationSaml(verificationSAMLVerificationEmailAddressSAML);
                 }
                 if (discriminator == VerificationType.VerificationEmailLink.ToString())
                 {
                     EmailLink emailLink = ResponseBodyDeserializer.DeserializeNotNull<EmailLink>(jo.ToString());
                     return CreateVerificationEmailLink(emailLink);
+                }
+                if (discriminator == VerificationType.VerificationScim.ToString())
+                {
+                    VerificationSCIM verificationSCIM = ResponseBodyDeserializer.DeserializeNotNull<VerificationSCIM>(jo.ToString());
+                    return CreateVerificationScim(verificationSCIM);
                 }
 
                 throw new InvalidOperationException("Could not deserialize into any supported types.");
@@ -249,15 +270,21 @@ namespace Clerk.BackendAPI.Models.Components
                     return;
                 }
 
-                if (res.Saml != null)
+                if (res.VerificationSAMLVerificationEmailAddressSAML != null)
                 {
-                    writer.WriteRawValue(Utilities.SerializeJSON(res.Saml));
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationSAMLVerificationEmailAddressSAML));
                     return;
                 }
 
                 if (res.EmailLink != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.EmailLink));
+                    return;
+                }
+
+                if (res.VerificationSCIM != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationSCIM));
                     return;
                 }
             }

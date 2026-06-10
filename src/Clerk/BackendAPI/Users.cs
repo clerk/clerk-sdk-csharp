@@ -46,7 +46,7 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Creates a new user. Your user management settings determine how you should setup your user model.<br/>
         /// <br/>
-        /// Any email address and phone number created using this method will be marked as verified.<br/>
+        /// By default, any email address and phone number created using this method is marked as verified. Use the `email_address_identification_status` and `phone_number_identification_status` arrays to instead create some or all of them as reserved (unverified but usable for sign-in and locked so no other user can claim them).<br/>
         /// <br/>
         /// Note: If you are performing a migration, check out our guide on <a href="https://clerk.com/docs/deployments/migrate-overview">zero downtime migrations</a>.<br/>
         /// <br/>
@@ -58,7 +58,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 403 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateUserResponse> CreateAsync(CreateUserRequestBody request, RetryConfig? retryConfig = null);
 
@@ -306,6 +306,35 @@ namespace Clerk.BackendAPI
         public  Task<UpdateUserMetadataResponse> UpdateMetadataAsync(
             string userId,
             UpdateUserMetadataRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        );
+
+        /// <summary>
+        /// Replace a user's metadata.
+        /// </summary>
+        /// <remarks>
+        /// Replace a user's metadata attributes with the provided values.<br/>
+        /// <br/>
+        /// Unlike `PATCH /v1/users/{user_id}/metadata` (merge semantics), this endpoint<br/>
+        /// replaces the supplied metadata columns entirely — the prior contents of each<br/>
+        /// supplied column are discarded. Columns omitted from the request body are<br/>
+        /// left unchanged.<br/>
+        /// <br/>
+        /// Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you<br/>
+        /// explicitly intend to overwrite a metadata column wholesale.
+        /// </remarks>
+        /// <param name="userId">The ID of the user whose metadata will be replaced.</param>
+        /// <param name="requestBody">A <see cref="ReplaceUserMetadataRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ReplaceUserMetadataResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ReplaceUserMetadataResponse> ReplaceMetadataAsync(
+            string userId,
+            ReplaceUserMetadataRequestBody? requestBody = null,
             RetryConfig? retryConfig = null
         );
 
@@ -871,7 +900,7 @@ namespace Clerk.BackendAPI
         /// <remarks>
         /// Creates a new user. Your user management settings determine how you should setup your user model.<br/>
         /// <br/>
-        /// Any email address and phone number created using this method will be marked as verified.<br/>
+        /// By default, any email address and phone number created using this method is marked as verified. Use the `email_address_identification_status` and `phone_number_identification_status` arrays to instead create some or all of them as reserved (unverified but usable for sign-in and locked so no other user can claim them).<br/>
         /// <br/>
         /// Note: If you are performing a migration, check out our guide on <a href="https://clerk.com/docs/deployments/migrate-overview">zero downtime migrations</a>.<br/>
         /// <br/>
@@ -883,7 +912,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="request"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 402, 403 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateUserResponse> CreateAsync(
             CreateUserRequestBody request,
@@ -1012,7 +1041,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 401, 403, 422}.Contains(responseStatusCode))
+            else if(new List<int>{400, 401, 402, 403, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
@@ -3269,6 +3298,196 @@ namespace Clerk.BackendAPI
                     }
 
                     var response = new UpdateUserMetadataResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.User = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{400, 401, 404, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Replace a user's metadata.
+        /// </summary>
+        /// <remarks>
+        /// Replace a user's metadata attributes with the provided values.<br/>
+        /// <br/>
+        /// Unlike `PATCH /v1/users/{user_id}/metadata` (merge semantics), this endpoint<br/>
+        /// replaces the supplied metadata columns entirely — the prior contents of each<br/>
+        /// supplied column are discarded. Columns omitted from the request body are<br/>
+        /// left unchanged.<br/>
+        /// <br/>
+        /// Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you<br/>
+        /// explicitly intend to overwrite a metadata column wholesale.
+        /// </remarks>
+        /// <param name="userId">The ID of the user whose metadata will be replaced.</param>
+        /// <param name="requestBody">A <see cref="ReplaceUserMetadataRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ReplaceUserMetadataResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="userId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ReplaceUserMetadataResponse> ReplaceMetadataAsync(
+            string userId,
+            ReplaceUserMetadataRequestBody? requestBody = null,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (userId == null) throw new ArgumentNullException(nameof(userId));
+
+            var request = new ReplaceUserMetadataRequest()
+            {
+                UserId = userId,
+                RequestBody = requestBody,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/users/{user_id}/metadata", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, true);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "ReplaceUserMetadata", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    User obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<User>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into User.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ReplaceUserMetadataResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
