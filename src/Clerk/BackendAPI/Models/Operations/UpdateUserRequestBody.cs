@@ -123,40 +123,16 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? SignOutOfOtherSessions { get; set; } = null;
 
         /// <summary>
-        /// In case TOTP is configured on the instance, you can provide the secret to enable it on the specific user without the need to reset it.<br/>
-        /// Please note that currently the supported options are:<br/>
-        /// * Period: 30 seconds<br/>
-        /// * Code length: 6 digits<br/>
-        /// * Algorithm: SHA1.
+        /// In case TOTP is configured on the instance, you can provide the secret to enable it on the specific user without the need to reset it.
         /// </summary>
         [JsonProperty("totp_secret")]
         public string? TotpSecret { get; set; } = null;
 
         /// <summary>
-        /// If Backup Codes are configured on the instance, you can provide them to enable it on the specific user without the need to reset them.<br/>
-        /// You must provide the backup codes in plain format or the corresponding bcrypt digest.
+        /// If Backup Codes are configured on the instance, you can provide them to enable it on the specific user without the need to reset them.
         /// </summary>
         [JsonProperty("backup_codes")]
         public List<string>? BackupCodes { get; set; }
-
-        /// <summary>
-        /// Metadata saved on the user, that is visible to both your Frontend and Backend APIs.
-        /// </summary>
-        [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; } = null;
-
-        /// <summary>
-        /// Metadata saved on the user, that is only visible to your Backend API.
-        /// </summary>
-        [JsonProperty("private_metadata")]
-        public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
-
-        /// <summary>
-        /// Metadata saved on the user, that can be updated from both the Frontend and Backend APIs.<br/>
-        /// Note: Since this data can be modified from the frontend, it is not guaranteed to be safe.
-        /// </summary>
-        [JsonProperty("unsafe_metadata")]
-        public Dictionary<string, object>? UnsafeMetadata { get; set; } = null;
 
         /// <summary>
         /// If true, the user can delete themselves with the Frontend API.
@@ -171,14 +147,13 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? CreateOrganizationEnabled { get; set; } = null;
 
         /// <summary>
-        /// A custom timestamp denoting _when_ the user accepted legal requirements, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
+        /// A custom timestamp denoting _when_ the user accepted legal requirements, specified in RFC3339 format.
         /// </summary>
         [JsonProperty("legal_accepted_at")]
         public string? LegalAcceptedAt { get; set; } = null;
 
         /// <summary>
-        /// When set to `true` all legal checks are skipped.<br/>
-        /// It is not recommended to skip legal checks unless you are migrating a user to Clerk.
+        /// When set to `true` all legal checks are skipped.
         /// </summary>
         [JsonProperty("skip_legal_checks")]
         public bool? SkipLegalChecks { get; set; } = null;
@@ -190,7 +165,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public long? CreateOrganizationsLimit { get; set; } = null;
 
         /// <summary>
-        /// A custom date/time denoting _when_ the user signed up to the application, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
+        /// A custom date/time denoting _when_ the user signed up to the application.
         /// </summary>
         [JsonProperty("created_at")]
         public string? CreatedAt { get; set; } = null;

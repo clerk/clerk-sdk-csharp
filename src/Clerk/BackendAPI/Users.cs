@@ -106,12 +106,9 @@ namespace Clerk.BackendAPI
         /// Both IDs should correspond to verified identifications that belong to the user.<br/>
         /// <br/>
         /// You can remove a user's username by setting the username attribute to null or the blank string "".<br/>
-        /// This is a destructive action; the identification will be deleted forever.<br/>
-        /// Usernames can be removed only if they are optional in your instance settings and there's at least one other identifier which can be used for authentication.<br/>
         /// <br/>
-        /// This endpoint allows changing a user's password. When passing the `password` parameter directly you have two further options.<br/>
-        /// You can ignore the password policy checks for your instance by setting the `skip_password_checks` parameter to `true`.<br/>
-        /// You can also choose to sign the user out of all their active sessions on any device once the password is updated. Just set `sign_out_of_other_sessions` to `true`.
+        /// As of API version 2026-05-12, this endpoint no longer accepts `public_metadata`, `private_metadata`, or `unsafe_metadata`.<br/>
+        /// Use `PATCH /v1/users/{user_id}/metadata` to merge updates into existing metadata, or `PUT /v1/users/{user_id}/metadata` to replace a metadata field entirely.
         /// </remarks>
         /// <param name="userId">The ID of the user to update.</param>
         /// <param name="requestBody">A <see cref="UpdateUserRequestBody"/> parameter.</param>
@@ -316,12 +313,12 @@ namespace Clerk.BackendAPI
         /// Replace a user's metadata attributes with the provided values.<br/>
         /// <br/>
         /// Unlike `PATCH /v1/users/{user_id}/metadata` (merge semantics), this endpoint<br/>
-        /// replaces the supplied metadata columns entirely — the prior contents of each<br/>
-        /// supplied column are discarded. Columns omitted from the request body are<br/>
+        /// replaces the supplied metadata fields entirely — the prior contents of each<br/>
+        /// supplied field are discarded. Fields omitted from the request body are<br/>
         /// left unchanged.<br/>
         /// <br/>
         /// Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you<br/>
-        /// explicitly intend to overwrite a metadata column wholesale.
+        /// explicitly intend to overwrite a metadata field wholesale.
         /// </remarks>
         /// <param name="userId">The ID of the user whose metadata will be replaced.</param>
         /// <param name="requestBody">A <see cref="ReplaceUserMetadataRequestBody"/> parameter.</param>
@@ -1419,12 +1416,9 @@ namespace Clerk.BackendAPI
         /// Both IDs should correspond to verified identifications that belong to the user.<br/>
         /// <br/>
         /// You can remove a user's username by setting the username attribute to null or the blank string "".<br/>
-        /// This is a destructive action; the identification will be deleted forever.<br/>
-        /// Usernames can be removed only if they are optional in your instance settings and there's at least one other identifier which can be used for authentication.<br/>
         /// <br/>
-        /// This endpoint allows changing a user's password. When passing the `password` parameter directly you have two further options.<br/>
-        /// You can ignore the password policy checks for your instance by setting the `skip_password_checks` parameter to `true`.<br/>
-        /// You can also choose to sign the user out of all their active sessions on any device once the password is updated. Just set `sign_out_of_other_sessions` to `true`.
+        /// As of API version 2026-05-12, this endpoint no longer accepts `public_metadata`, `private_metadata`, or `unsafe_metadata`.<br/>
+        /// Use `PATCH /v1/users/{user_id}/metadata` to merge updates into existing metadata, or `PUT /v1/users/{user_id}/metadata` to replace a metadata field entirely.
         /// </remarks>
         /// <param name="userId">The ID of the user to update.</param>
         /// <param name="requestBody">A <see cref="UpdateUserRequestBody"/> parameter.</param>
@@ -3351,12 +3345,12 @@ namespace Clerk.BackendAPI
         /// Replace a user's metadata attributes with the provided values.<br/>
         /// <br/>
         /// Unlike `PATCH /v1/users/{user_id}/metadata` (merge semantics), this endpoint<br/>
-        /// replaces the supplied metadata columns entirely — the prior contents of each<br/>
-        /// supplied column are discarded. Columns omitted from the request body are<br/>
+        /// replaces the supplied metadata fields entirely — the prior contents of each<br/>
+        /// supplied field are discarded. Fields omitted from the request body are<br/>
         /// left unchanged.<br/>
         /// <br/>
         /// Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you<br/>
-        /// explicitly intend to overwrite a metadata column wholesale.
+        /// explicitly intend to overwrite a metadata field wholesale.
         /// </remarks>
         /// <param name="userId">The ID of the user whose metadata will be replaced.</param>
         /// <param name="requestBody">A <see cref="ReplaceUserMetadataRequestBody"/> parameter.</param>

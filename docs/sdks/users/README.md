@@ -301,12 +301,9 @@ You can set the user's primary contact identifiers (email address and phone numb
 Both IDs should correspond to verified identifications that belong to the user.
 
 You can remove a user's username by setting the username attribute to null or the blank string "".
-This is a destructive action; the identification will be deleted forever.
-Usernames can be removed only if they are optional in your instance settings and there's at least one other identifier which can be used for authentication.
 
-This endpoint allows changing a user's password. When passing the `password` parameter directly you have two further options.
-You can ignore the password policy checks for your instance by setting the `skip_password_checks` parameter to `true`.
-You can also choose to sign the user out of all their active sessions on any device once the password is updated. Just set `sign_out_of_other_sessions` to `true`.
+As of API version 2026-05-12, this endpoint no longer accepts `public_metadata`, `private_metadata`, or `unsafe_metadata`.
+Use `PATCH /v1/users/{user_id}/metadata` to merge updates into existing metadata, or `PUT /v1/users/{user_id}/metadata` to replace a metadata field entirely.
 
 ### Example Usage
 
@@ -339,15 +336,6 @@ var res = await sdk.Users.UpdateAsync(
         BackupCodes = new List<string>() {
             "123456",
             "654321",
-        },
-        PublicMetadata = new Dictionary<string, object>() {
-            { "theme", "dark" },
-        },
-        PrivateMetadata = new Dictionary<string, object>() {
-            { "vip", true },
-        },
-        UnsafeMetadata = new Dictionary<string, object>() {
-            { "age", 30 },
         },
         DeleteSelfEnabled = true,
         CreateOrganizationEnabled = false,
@@ -765,12 +753,12 @@ var res = await sdk.Users.UpdateMetadataAsync(userId: "user_123456789");
 Replace a user's metadata attributes with the provided values.
 
 Unlike `PATCH /v1/users/{user_id}/metadata` (merge semantics), this endpoint
-replaces the supplied metadata columns entirely — the prior contents of each
-supplied column are discarded. Columns omitted from the request body are
+replaces the supplied metadata fields entirely — the prior contents of each
+supplied field are discarded. Fields omitted from the request body are
 left unchanged.
 
 Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you
-explicitly intend to overwrite a metadata column wholesale.
+explicitly intend to overwrite a metadata field wholesale.
 
 ### Example Usage
 

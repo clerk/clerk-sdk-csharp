@@ -22,17 +22,17 @@ namespace Clerk.BackendAPI.Utils
         /// <summary>
         /// The version of the SDK.
         /// </summary>
-        public const string SdkVersion = "1.0.0";
+        public const string SdkVersion = "2.0.0";
 
         /// <summary>
         /// The version of the SDK generator used to create this SDK.
         /// </summary>
-        public const string SdkGenVersion = "2.900.1";
+        public const string SdkGenVersion = "2.903.0";
 
         /// <summary>
         /// The version of the OpenAPI document used to generate this SDK.
         /// </summary>
-        public const string OpenApiDocVersion = "2025-11-10";
+        public const string OpenApiDocVersion = "2026-05-12";
     }
 }
 

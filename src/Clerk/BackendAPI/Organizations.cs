@@ -99,7 +99,10 @@ namespace Clerk.BackendAPI
         /// Update an organization.
         /// </summary>
         /// <remarks>
-        /// Updates an existing organization.
+        /// Updates an existing organization.<br/>
+        /// <br/>
+        /// As of API version 2026-05-12, this endpoint no longer accepts `public_metadata` or `private_metadata`.<br/>
+        /// Use `PATCH /v1/organizations/{organization_id}/metadata` to merge updates into existing metadata, or `PUT /v1/organizations/{organization_id}/metadata` to replace a metadata field entirely.
         /// </remarks>
         /// <param name="organizationId">The ID of the organization to update.</param>
         /// <param name="requestBody">A <see cref="UpdateOrganizationRequestBody"/> parameter.</param>
@@ -158,6 +161,32 @@ namespace Clerk.BackendAPI
         public  Task<MergeOrganizationMetadataResponse> MergeMetadataAsync(
             string organizationId,
             MergeOrganizationMetadataRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        );
+
+        /// <summary>
+        /// Replace metadata for an organization.
+        /// </summary>
+        /// <remarks>
+        /// Replace an organization's metadata attributes with the provided values.<br/>
+        /// Unlike `PATCH /v1/organizations/{organization_id}/metadata` (merge semantics), this<br/>
+        /// endpoint replaces the supplied metadata fields entirely — the prior contents of each<br/>
+        /// supplied field are discarded. Fields omitted from the request body are left unchanged.<br/>
+        /// Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you explicitly<br/>
+        /// intend to overwrite a metadata field wholesale.
+        /// </remarks>
+        /// <param name="organizationId">The ID of the organization whose metadata will be replaced.</param>
+        /// <param name="requestBody">A <see cref="ReplaceOrganizationMetadataRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ReplaceOrganizationMetadataResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ReplaceOrganizationMetadataResponse> ReplaceMetadataAsync(
+            string organizationId,
+            ReplaceOrganizationMetadataRequestBody requestBody,
             RetryConfig? retryConfig = null
         );
 
@@ -813,7 +842,10 @@ namespace Clerk.BackendAPI
         /// Update an organization.
         /// </summary>
         /// <remarks>
-        /// Updates an existing organization.
+        /// Updates an existing organization.<br/>
+        /// <br/>
+        /// As of API version 2026-05-12, this endpoint no longer accepts `public_metadata` or `private_metadata`.<br/>
+        /// Use `PATCH /v1/organizations/{organization_id}/metadata` to merge updates into existing metadata, or `PUT /v1/organizations/{organization_id}/metadata` to replace a metadata field entirely.
         /// </remarks>
         /// <param name="organizationId">The ID of the organization to update.</param>
         /// <param name="requestBody">A <see cref="UpdateOrganizationRequestBody"/> parameter.</param>
@@ -1310,6 +1342,194 @@ namespace Clerk.BackendAPI
                     }
 
                     var response = new MergeOrganizationMetadataResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.Organization = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{400, 401, 404, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Replace metadata for an organization.
+        /// </summary>
+        /// <remarks>
+        /// Replace an organization's metadata attributes with the provided values.<br/>
+        /// Unlike `PATCH /v1/organizations/{organization_id}/metadata` (merge semantics), this<br/>
+        /// endpoint replaces the supplied metadata fields entirely — the prior contents of each<br/>
+        /// supplied field are discarded. Fields omitted from the request body are left unchanged.<br/>
+        /// Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you explicitly<br/>
+        /// intend to overwrite a metadata field wholesale.
+        /// </remarks>
+        /// <param name="organizationId">The ID of the organization whose metadata will be replaced.</param>
+        /// <param name="requestBody">A <see cref="ReplaceOrganizationMetadataRequestBody"/> parameter.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ReplaceOrganizationMetadataResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="organizationId"/> or <paramref name="requestBody"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 404 or 422 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ReplaceOrganizationMetadataResponse> ReplaceMetadataAsync(
+            string organizationId,
+            ReplaceOrganizationMetadataRequestBody requestBody,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (organizationId == null) throw new ArgumentNullException(nameof(organizationId));
+            if (requestBody == null) throw new ArgumentNullException(nameof(requestBody));
+
+            var request = new ReplaceOrganizationMetadataRequest()
+            {
+                OrganizationId = organizationId,
+                RequestBody = requestBody,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/organizations/{organization_id}/metadata", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Put, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "RequestBody", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "ReplaceOrganizationMetadata", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    Organization obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<Organization>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into Organization.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ReplaceOrganizationMetadataResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {

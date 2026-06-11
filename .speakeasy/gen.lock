@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 248c4615-4118-44e3-9280-c0978ea11cf6
 management:
-  docChecksum: bce5b7d55cf8c0e46efad64ad931ea64
-  docVersion: "2025-11-10"
-  speakeasyVersion: 1.776.0
-  generationVersion: 2.900.1
-  releaseVersion: 1.0.0
-  configChecksum: 4f208a10b192f3798ccd961dca3f66b8
+  docChecksum: 3ed826801fa6b25ab0c011338eb5cb3b
+  docVersion: "2026-05-12"
+  speakeasyVersion: 1.777.0
+  generationVersion: 2.903.0
+  releaseVersion: 2.0.0
+  configChecksum: 7bc7b8253c1313af199498bcac329ea6
   repoURL: https://github.com/clerk/clerk-sdk-csharp.git
   installationURL: https://github.com/clerk/clerk-sdk-csharp
   published: true
 persistentEdits:
-  generation_id: 8f3e1e51-af0c-4fb5-a2c9-87b2b25efb9f
-  pristine_commit_hash: 913943cfe22ddc429de5fa9371cb2140b2b9aa36
-  pristine_tree_hash: bf5541f42592bfd154eaed70a20adf55a462ff2c
+  generation_id: dcb7ff69-e5cd-400f-a526-fa06c2d3bc4d
+  pristine_commit_hash: 0ba94d88a611658871ad87505b956a74744e61ae
+  pristine_tree_hash: 3a282da95c409856e095f6fddc277393aadc1999
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -48,8 +48,8 @@ trackedFiles:
     pristine_git_object: 42a8b313cbe1e12eb7dc11297fec3a8e411b8211
   NUGET.md:
     id: f4c8a442a6e5
-    last_write_checksum: sha1:c1ed8d18b94db5855722bf18631a0a75bbf20bd2
-    pristine_git_object: 1d8a05963be3e00f97a19e3cd50de8a2f69d1fad
+    last_write_checksum: sha1:b4fc362b1885d68b7a0adb713022e71d8787db61
+    pristine_git_object: a8708d7de19d0d6cf9f97279e92b4b76b531679f
   USAGE.md:
     id: 3aed33ce6e6f
     last_write_checksum: sha1:16a0f17db9a8610ca0cddb07a5013cb7de336587
@@ -3614,6 +3614,18 @@ trackedFiles:
     id: ca77ed35c55d
     last_write_checksum: sha1:200e50a8359af3ac2f55244abc52067cd5bce21a
     pristine_git_object: 3d3b939ca323860e6678e735316e807fe5a0676d
+  docs/Models/Operations/ReplaceOrganizationMetadataRequest.md:
+    id: 9957733fbdca
+    last_write_checksum: sha1:0224702c753ae658e656810f025b785c9b885ccc
+    pristine_git_object: d7e43d5cfc320db2263b79e360b677ed6ba9ed2f
+  docs/Models/Operations/ReplaceOrganizationMetadataRequestBody.md:
+    id: e80f5006e9f3
+    last_write_checksum: sha1:fa6a780b63409ff8602fa9d1412df97e6f38b7d4
+    pristine_git_object: 30904928b911aaae58ad826bb206144270419305
+  docs/Models/Operations/ReplaceOrganizationMetadataResponse.md:
+    id: a9ff52892764
+    last_write_checksum: sha1:9c289972b794a54567a2a9dfd9212d3a99281a11
+    pristine_git_object: ced6c1d8e983ef1246bbdec98b21ce8d790fe665
   docs/Models/Operations/ReplaceRoleInRoleSetRequest.md:
     id: 0edfd44cf890
     last_write_checksum: sha1:3434da2ba54eee1e238fbe968cda124a70376383
@@ -4160,8 +4172,8 @@ trackedFiles:
     pristine_git_object: 5f210952671859b9244ae71682fb83f2b780507d
   docs/Models/Operations/UpdateOrganizationRequestBody.md:
     id: f41735d11a86
-    last_write_checksum: sha1:bc64cf2419ef2235162bffd321a7b27f1f2bebfc
-    pristine_git_object: ebf0e9275d2c1b77bb519d57cc75c69627f7d250
+    last_write_checksum: sha1:bb32ddbe072bd08e2f04042779145e96f3ae6842
+    pristine_git_object: 06f279d64b9785e421aaa3ec8f57fa99a7b44c5b
   docs/Models/Operations/UpdateOrganizationResponse.md:
     id: ec965aeb0894
     last_write_checksum: sha1:ce9cc3ce41fa86dd5ee2e6fe61136f3434ad8a8b
@@ -4256,8 +4268,8 @@ trackedFiles:
     pristine_git_object: 926b531d07fbb5a5b9091d3e304a06ccc7c62118
   docs/Models/Operations/UpdateUserRequestBody.md:
     id: 4429bfefc479
-    last_write_checksum: sha1:74b689015e96fc248f18f688afa2e7d5313f0d6d
-    pristine_git_object: fe2802887ace95fdfb16ced771b46b9ffcde1b4b
+    last_write_checksum: sha1:06dde284755da72723bf62799689d08067860c13
+    pristine_git_object: c300a88112d22ffe5f6dca16d301be8318639a27
   docs/Models/Operations/UpdateUserResponse.md:
     id: a82e80e06c51
     last_write_checksum: sha1:e5d2780cefbb48c7675ff24e5650bacd02783a82
@@ -4576,8 +4588,8 @@ trackedFiles:
     pristine_git_object: a0ce6a518f348a2e4bff7a9ada167fd0785fa0ab
   docs/sdks/organizations/README.md:
     id: 3425667a2db5
-    last_write_checksum: sha1:4fb9e462caad009dfefc72b181dd4e068cf09364
-    pristine_git_object: 17519b6a362a8430870fa3eb6e60b08ab550e9cf
+    last_write_checksum: sha1:5c8e0d92d1512dc1f2b2c01bb5ffed4ba1bf6874
+    pristine_git_object: 69f5f6446a714b2ea8283b75a3047130ed038295
   docs/sdks/phonenumbers/README.md:
     id: bfed92f30c8c
     last_write_checksum: sha1:02403b1e883b86021489003eda12ef0add43681d
@@ -4620,8 +4632,8 @@ trackedFiles:
     pristine_git_object: f38067376b56a36ce364a6632253dd4d8456dab3
   docs/sdks/users/README.md:
     id: 5d80027045fe
-    last_write_checksum: sha1:e99574e3a6a9b24bf8c89e7b52b6b297b9aa3a19
-    pristine_git_object: 36068d59c1f227932d780735694b5e99a52dbc6f
+    last_write_checksum: sha1:2896f8c18e0517917c862c6ab391bc2a686441a5
+    pristine_git_object: cf2e4126cc85a9b843bb3b411c80a03d1bc65cd6
   docs/sdks/waitlistentries/README.md:
     id: a4b511c18a9a
     last_write_checksum: sha1:eb01c050a86b2cb38a99f576a2245ccab11b9c4d
@@ -4668,8 +4680,8 @@ trackedFiles:
     pristine_git_object: 50b5402ea7263da5840fbf8eac62a70a92df60ce
   src/Clerk/BackendAPI/Clerk.BackendAPI.csproj:
     id: ccf41f9f81a0
-    last_write_checksum: sha1:50fdbd2c4dbcd73d4b1cf6289b4e764c966d32c4
-    pristine_git_object: 75e5acf2d9dae82716626ed61750798416879ea0
+    last_write_checksum: sha1:c00375f68f020bbfa92924b144feefe956c3f3ad
+    pristine_git_object: 5b3237c56dba5130f5d9766885b836c785e5329e
   src/Clerk/BackendAPI/ClerkBackendApi.cs:
     id: 9270b4820dab
     last_write_checksum: sha1:79ed96fbe3232ee00f631b3d1cb8adeb212ccb93
@@ -8306,6 +8318,18 @@ trackedFiles:
     id: e81a1c034389
     last_write_checksum: sha1:c655798cadf89e64d6ce5c3bb749a25bddef1973
     pristine_git_object: 0d4d49c62a8e0bf99828e3390230f6fa399f0efd
+  src/Clerk/BackendAPI/Models/Operations/ReplaceOrganizationMetadataRequest.cs:
+    id: 59393dd1fad1
+    last_write_checksum: sha1:ce991a8ecc5dcc8ba4f19bd284ad70f845a0713c
+    pristine_git_object: 302e96568f0496df22e0920a7b979dd29a9e20d3
+  src/Clerk/BackendAPI/Models/Operations/ReplaceOrganizationMetadataRequestBody.cs:
+    id: 47ba32270e68
+    last_write_checksum: sha1:1b89eb5fc1cb4b2c2b2817a48388115cac9e6638
+    pristine_git_object: 72db4d05bbba1a3f2b708563677057d943de9674
+  src/Clerk/BackendAPI/Models/Operations/ReplaceOrganizationMetadataResponse.cs:
+    id: 65fba5307fea
+    last_write_checksum: sha1:a889382386c9211b1406695babf025875f3564a8
+    pristine_git_object: b442293e0c809fbf47e91d53456d6434dbeb6eec
   src/Clerk/BackendAPI/Models/Operations/ReplaceRoleInRoleSetRequest.cs:
     id: 9d195a2117d8
     last_write_checksum: sha1:54e05d9d9ec37966539f3866d39dc6b5ff9957a4
@@ -8852,8 +8876,8 @@ trackedFiles:
     pristine_git_object: 8d5c44f5885fa7176336b5818a4ddd49f9c42e76
   src/Clerk/BackendAPI/Models/Operations/UpdateOrganizationRequestBody.cs:
     id: 99abc3895569
-    last_write_checksum: sha1:673836f1db0fa6f9a37d375eedbdc2f826b69005
-    pristine_git_object: 5d6548a9d9ca416bcf055b874c345d54b15817f8
+    last_write_checksum: sha1:152c0274cd2be7b4c524a8e8763b43f10d3de44a
+    pristine_git_object: 3608e8601e4cd0c069840fcd1e1982191c8eea69
   src/Clerk/BackendAPI/Models/Operations/UpdateOrganizationResponse.cs:
     id: bfa5bb3813cc
     last_write_checksum: sha1:f8e6abe386cfd956970c65f2d7b53169c8a47d1b
@@ -8948,8 +8972,8 @@ trackedFiles:
     pristine_git_object: 17145ba6e8692e0ff05f7dd457571f04efb44eb4
   src/Clerk/BackendAPI/Models/Operations/UpdateUserRequestBody.cs:
     id: 90e1410fc84c
-    last_write_checksum: sha1:cc8831a8620ec6794bc500ae1bbbbfca2877d4eb
-    pristine_git_object: 08c821e7d1475c610626fc18adbb722bbfe6c521
+    last_write_checksum: sha1:f1b01a97d0d1100d3d7a6ab2b364674eb0e03d31
+    pristine_git_object: 86611debb8598cffdcebc379f431944a2bee63b3
   src/Clerk/BackendAPI/Models/Operations/UpdateUserResponse.cs:
     id: 65f153a57a96
     last_write_checksum: sha1:4d2eafc1bbac3e3fdb175011949d12f9abf76068
@@ -9184,8 +9208,8 @@ trackedFiles:
     pristine_git_object: cbea46334676a0234081ae6babfe1c7177ee9346
   src/Clerk/BackendAPI/Organizations.cs:
     id: b3cc85bc8639
-    last_write_checksum: sha1:b8c41c7b26298b2566e63a0add73d533fac94fb9
-    pristine_git_object: 7641170dd647ebb251b7d10ecd755917c9662410
+    last_write_checksum: sha1:f11d4e5f0b826092ad643d2e3da9325fe7278f14
+    pristine_git_object: 6751dc203a1abf6026b1140be52f9e78321b6f9a
   src/Clerk/BackendAPI/PhoneNumbers.cs:
     id: 87e8dc283ff6
     last_write_checksum: sha1:5f16ecfb27e62d1a0e24b12f4ecfb5c060dca0c4
@@ -9204,8 +9228,8 @@ trackedFiles:
     pristine_git_object: 1df0ebf4d0f6b3800b188acfa5fc24f3fdfa0d8f
   src/Clerk/BackendAPI/SDKConfig.cs:
     id: 2c8fac1123d6
-    last_write_checksum: sha1:905450f874c651dcf713151abf47f85d3780790e
-    pristine_git_object: 975e19640e9708c5ae408807c660f86050d30687
+    last_write_checksum: sha1:e135c381eaacb7f80b650adf8e025123bc50d564
+    pristine_git_object: 00b9229a99579d15614dd85c00ee83c762ad7672
   src/Clerk/BackendAPI/SamlConnections.cs:
     id: 547d61012934
     last_write_checksum: sha1:0a3126b0840ea8c3abe45cdbb82cb520ffdc0df8
@@ -9232,8 +9256,8 @@ trackedFiles:
     pristine_git_object: 73b984de07ba26c1c469e7a7fa7564f275b52707
   src/Clerk/BackendAPI/Users.cs:
     id: 8ede30d1a547
-    last_write_checksum: sha1:2853c21c96145de9570c6689b16e7c4955365dab
-    pristine_git_object: bf2e08b8093f9558bc0ea58c72d98fe7f8b398ff
+    last_write_checksum: sha1:eab3dc8ba2e25988d2bbba6a9afcf82d0cc0d376
+    pristine_git_object: aacec9337c79dbc78d2b654a7b7be108f31e5c02
   src/Clerk/BackendAPI/Utils/AnyDeserializer.cs:
     id: de2e9db9a176
     last_write_checksum: sha1:dd645dfbbf782ed6a17d0aa4c830a1d077d504bd
@@ -9244,8 +9268,8 @@ trackedFiles:
     pristine_git_object: 6f5e7c0679eaf01c8213e9e6d8b175615a82301a
   src/Clerk/BackendAPI/Utils/Constants.cs:
     id: cbaa176f33c6
-    last_write_checksum: sha1:465fa8e10bb8744bdb2700c01c6e8bac6d311854
-    pristine_git_object: 07731e792464178aacb5a93e7fe6a9d340b2df2c
+    last_write_checksum: sha1:88bdb7e858de22ab19eb22529093cd626b6e5721
+    pristine_git_object: 8a6c02ad60d24c74719c7178a72cce7c71d61b07
   src/Clerk/BackendAPI/Utils/DecimalStrConverter.cs:
     id: 2025c1d60dea
     last_write_checksum: sha1:5418f1eb375056aa7f1175271f6c48a7b536d947
@@ -9729,7 +9753,7 @@ examples:
         path:
           user_id: "usr_1"
       requestBody:
-        application/json: {"external_id": "ext_123", "first_name": "Jane", "last_name": "Doe", "primary_email_address_id": "eml_12345", "notify_primary_email_address_changed": true, "primary_phone_number_id": "phn_67890", "primary_web3_wallet_id": "wlt_123", "username": "janedoe", "profile_image_id": "img_789", "password": "secretPass123!", "password_digest": "$argon2i$v=19$m=4096,t=3,p=1$4t6CL3P7YiHBtwESXawI8Hm20zJj4cs7/4/G3c187e0$m7RQFczcKr5bIR0IIxbpO2P0tyrLjf3eUW3M3QSwnLc", "skip_password_checks": false, "sign_out_of_other_sessions": true, "totp_secret": "ABCD1234EFGH5678", "backup_codes": ["123456", "654321"], "public_metadata": {"theme": "dark"}, "private_metadata": {"vip": true}, "unsafe_metadata": {"age": 30}, "delete_self_enabled": true, "create_organization_enabled": false, "created_at": "2021-04-05T14:30:00.000Z"}
+        application/json: {"external_id": "ext_123", "first_name": "Jane", "last_name": "Doe", "primary_email_address_id": "eml_12345", "notify_primary_email_address_changed": true, "primary_phone_number_id": "phn_67890", "primary_web3_wallet_id": "wlt_123", "username": "janedoe", "profile_image_id": "img_789", "password": "secretPass123!", "password_digest": "$argon2i$v=19$m=4096,t=3,p=1$4t6CL3P7YiHBtwESXawI8Hm20zJj4cs7/4/G3c187e0$m7RQFczcKr5bIR0IIxbpO2P0tyrLjf3eUW3M3QSwnLc", "skip_password_checks": false, "sign_out_of_other_sessions": true, "totp_secret": "ABCD1234EFGH5678", "backup_codes": ["123456", "654321"], "delete_self_enabled": true, "create_organization_enabled": false, "created_at": "2021-04-05T14:30:00.000Z"}
       responses:
         "200":
           application/json: {"id": "user_id_123", "object": "user", "external_id": "external_user_id_123", "primary_email_address_id": "email_id_123", "primary_phone_number_id": "phone_id_123", "primary_web3_wallet_id": "wallet_id_123", "username": "john_doe", "first_name": "John", "last_name": "Doe", "image_url": "https://example.com/new-profile.jpg", "has_image": true, "public_metadata": {"role": "admin"}, "private_metadata": {"ssn": "123-45-6789"}, "unsafe_metadata": {"theme": "dark"}, "email_addresses": [{"id": "email_id_123", "object": "email_address", "email_address": "john.doe@example.com", "reserved": false, "verification": {"object": "verification_admin", "status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "linked_to": [{"type": "oauth_google", "id": "link_12345"}], "created_at": 1609459200, "updated_at": 1609459200}], "phone_numbers": [{"id": "phone_id_123", "object": "phone_number", "phone_number": "+12345678901", "reserved": false, "verification": {"object": "verification_admin", "status": "verified", "strategy": "admin", "attempts": 1, "expire_at": 1615462399}, "linked_to": [{"type": "oauth_google", "id": "link_id_123"}], "created_at": 1609459200, "updated_at": 1609459200}], "web3_wallets": [{"id": "wallet_id_123", "object": "web3_wallet", "web3_wallet": "0x123456789abcdef", "verification": {"object": "verification_admin", "status": "verified", "strategy": "admin", "attempts": 0, "expire_at": 1620000000}, "created_at": 1609459200, "updated_at": 1609459200}], "passkeys": [{"id": "passkey_id_123", "object": "passkey", "name": "My Passkey", "last_used_at": 1615852800, "verification": {"object": "verification_passkey", "status": "verified", "strategy": "passkey", "attempts": null, "expire_at": null}}], "password_enabled": true, "two_factor_enabled": true, "totp_enabled": true, "backup_code_enabled": true, "mfa_enabled_at": 1615852800, "mfa_disabled_at": null, "external_accounts": [{"object": "google_account", "id": "ext_account_id_123", "provider": "Facebook", "identification_id": "<id>", "provider_user_id": "<id>", "approved_scopes": "<value>", "email_address": "Retta_Johnson71@hotmail.com", "first_name": "Darius", "last_name": "Russel", "public_metadata": {"key": "<value>"}, "created_at": 580394, "updated_at": 356574, "verification": {"object": "verification_google_one_tap", "status": "verified", "strategy": "google_one_tap", "expire_at": 1615462399, "attempts": 1}, "user_id": "user_id_at_provider"}], "saml_accounts": [{"id": "saml_account_id_123", "object": "saml_account", "provider": "SAML Provider", "active": true, "email_address": "user@example.com", "public_metadata": {"department": "IT"}, "verification": {"object": "verification_ticket", "status": "verified", "strategy": "ticket", "attempts": null, "expire_at": null}}], "enterprise_accounts": [], "organization_memberships": [{"id": "org_mem_123", "object": "organization_membership", "role": "member", "permissions": ["read", "write"], "public_metadata": {}, "private_metadata": {}, "organization": {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}, "created_at": 1625078400, "updated_at": 1625164800}], "last_sign_in_at": 1622852400, "banned": false, "locked": false, "lockout_expires_in_seconds": null, "verification_attempts_remaining": 5, "updated_at": 1622852400, "created_at": 1609459200, "delete_self_enabled": true, "create_organization_enabled": true, "last_active_at": 1700690400000, "legal_accepted_at": 1700690400000, "bypass_client_trust": false}
@@ -10378,7 +10402,7 @@ examples:
         path:
           organization_id: "org_123_update"
       requestBody:
-        application/json: {"public_metadata": {}, "private_metadata": {}, "name": "New Organization Name", "slug": "new-org-slug", "max_allowed_memberships": 100, "admin_delete_enabled": true}
+        application/json: {"name": "New Organization Name", "slug": "new-org-slug", "max_allowed_memberships": 100, "admin_delete_enabled": true}
       responses:
         "200":
           application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": false, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
@@ -11926,9 +11950,25 @@ examples:
           application/json: {"errors": [{"message": "some details about the error", "long_message": "some details about the error", "code": "some_error_code"}]}
         "404":
           application/json: {"errors": []}
+  ReplaceOrganizationMetadata:
+    speakeasy-default-replace-organization-metadata:
+      parameters:
+        path:
+          organization_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"object": "organization", "id": "org_123", "name": "Acme Corp", "slug": "acme-corp", "has_image": true, "members_count": 150, "max_allowed_memberships": 300, "admin_delete_enabled": true, "public_metadata": {"public_info": "Info visible to everyone"}, "private_metadata": {"internal_use_only": "Sensitive data"}, "created_by": "user_123456", "created_at": 1625078400, "updated_at": 1625164800}
+        "400":
+          application/json: {"errors": [{"message": "Invalid input", "long_message": "The input provided does not meet the requirements.", "code": "400_bad_request"}], "meta": {}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Csharp SDK Changes:\n* `ClerkBackendApi.Users.Update()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Billing.CreatePriceTransition()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Billing.ExtendSubscriptionItemFreeTrial()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Billing.CancelSubscriptionItem()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Billing.ListSubscriptionItems()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Billing.CreatePrice()`: \n  *  `request` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Billing.ListPrices()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Billing.ListPlans()`:  `response.data[].Fee` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.OrganizationDomains.ListAll()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.OrganizationDomains.Update()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.OrganizationDomains.List()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.OrganizationDomains.Create()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Organizations.GetBillingSubscription()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.UnsetPasswordCompromised()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.SetPasswordCompromised()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.GetBillingSubscription()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.UpdateMetadata()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.DeleteProfileImage()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.SetProfileImage()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.Unlock()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.Lock()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.EmailAddresses.Create()`:  `response.verification` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.EmailAddresses.Get()`:  `response.verification` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.BulkUnban()`:  `response.[]` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.EmailAddresses.Update()`:  `response.verification` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.BulkBan()`:  `response.[]` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.Unban()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.Ban()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.List()`:  `response.[]` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.Users.Create()`: \n  *  `request` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[402]` **Added**\n* `ClerkBackendApi.Users.Get()`:  `response` **Changed** (Breaking ⚠️)\n* `ClerkBackendApi.AdminPortalLinkTokens.CreateAdminPortalLinkToken()`: **Added**\n* `ClerkBackendApi.InstanceSettings.GetOrganizationSettings()`: **Added**\n* `ClerkBackendApi.PhoneNumbers.Get()`:  `response.verification.union(verification_otp).Channel` **Added**\n* `ClerkBackendApi.PhoneNumbers.Create()`:  `response.verification.union(verification_otp).Channel` **Added**\n* `ClerkBackendApi.EmailAddresses.Delete()`:  `error.status[409]` **Added**\n* `ClerkBackendApi.AdminPortalLinkTokens.RevokeAdminPortalLinkToken()`: **Added**\n* `ClerkBackendApi.EmailAddresses.PrepareVerification()`: **Added**\n* `ClerkBackendApi.EnterpriseConnections.CreateTestRun()`: **Added**\n* `ClerkBackendApi.EnterpriseConnections.ListTestRuns()`: **Added**\n* `ClerkBackendApi.EnterpriseConnections.Delete()`: **Added**\n* `ClerkBackendApi.EnterpriseConnections.Update()`: **Added**\n* `ClerkBackendApi.Users.GetOrganizationMemberships()`:  `response.data[].PublicUserData.Banned` **Added**\n* `ClerkBackendApi.EnterpriseConnections.Get()`: **Added**\n* `ClerkBackendApi.EnterpriseConnections.Create()`: **Added**\n* `ClerkBackendApi.Users.GetInstanceOrganizationMemberships()`:  `response.data[].PublicUserData.Banned` **Added**\n* `ClerkBackendApi.InstanceSettings.Update()`: \n  *  `request.PreferredSignInStrategyWhenPasswordRequired` **Added**\n* `ClerkBackendApi.InstanceSettings.UpdateOrganizationSettings()`: \n  *  `response.maxAllowedDomains` **Added**\n  *  `error.status[403]` **Added**\n* `ClerkBackendApi.EnterpriseConnections.List()`: **Added**\n* `ClerkBackendApi.OrganizationMemberships.Create()`:  `response.publicUserData.Banned` **Added**\n* `ClerkBackendApi.OrganizationMemberships.List()`:  `response.data[].PublicUserData.Banned` **Added**\n* `ClerkBackendApi.OrganizationMemberships.Update()`:  `response.publicUserData.Banned` **Added**\n* `ClerkBackendApi.OrganizationMemberships.Delete()`:  `response.publicUserData.Banned` **Added**\n* `ClerkBackendApi.OrganizationMemberships.UpdateMetadata()`:  `response.publicUserData.Banned` **Added**\n* `ClerkBackendApi.OauthApplications.UploadLogo()`: **Added**\n* `ClerkBackendApi.OrganizationDomains.VerifyOwnership()`: **Added**\n* `ClerkBackendApi.PhoneNumbers.Update()`:  `response.verification.union(verification_otp).Channel` **Added**\n* `ClerkBackendApi.InstanceSettings.UpdateCommunication()`: **Added**\n* `ClerkBackendApi.SamlConnections.List()`: **Deprecated**\n* `ClerkBackendApi.SamlConnections.List()`:  `response.data[]` **Changed**\n* `ClerkBackendApi.SamlConnections.Create()`: **Deprecated**\n* `ClerkBackendApi.SamlConnections.Create()`: \n  *  `response` **Changed**\n  *  `error.status[409]` **Added**\n* `ClerkBackendApi.SamlConnections.Get()`: **Deprecated**\n* `ClerkBackendApi.SamlConnections.Get()`:  `response` **Changed**\n* `ClerkBackendApi.SamlConnections.Update()`: **Deprecated**\n* `ClerkBackendApi.SamlConnections.Update()`: \n  *  `requestBody.AllowOrganizationAccountLinking` **Added**\n  *  `response` **Changed**\n  *  `error.status[409]` **Added**\n* `ClerkBackendApi.SamlConnections.Delete()`: **Deprecated**\n* `ClerkBackendApi.AgentTasks.Create()`:  `response.agentTaskId` **Added**\n* `ClerkBackendApi.AgentTasks.Revoke()`:  `response.agentTaskId` **Added**\n* `ClerkBackendApi.InstanceSettings.GetCommunication()`: **Added**\n* `ClerkBackendApi.Users.ReplaceMetadata()`: **Added**\n* `ClerkBackendApi.PhoneNumbers.ReplaceForUser()`: **Added**\n* `ClerkBackendApi.PhoneNumbers.AttemptVerification()`: **Added**\n* `ClerkBackendApi.PhoneNumbers.PrepareVerification()`: **Added**\n* `ClerkBackendApi.EmailAddresses.ReplaceForUser()`: **Added**\n* `ClerkBackendApi.EmailAddresses.AttemptVerification()`: **Added**\n* `ClerkBackendApi.Billing.ListStatements()`:  `response.data[].Groups[].Items[].Totals.Discounts` **Added**\n* `ClerkBackendApi.Billing.GetStatement()`:  `response.groups[].Items[].Totals.Discounts` **Added**\n* `ClerkBackendApi.Billing.GetStatementPaymentAttempts()`:  `response.data[].Totals.Discounts` **Added**\n* `ClerkBackendApi.M2m.CreateToken()`: \n  *  `request.MinRemainingTtlSeconds` **Added**\n"
+releaseNotes: |
+  ## Csharp SDK Changes:
+  * `ClerkBackendApi.Users.Update()`:  `requestBody` **Changed** (Breaking ⚠️)
+  * `ClerkBackendApi.Organizations.Update()`:  `requestBody` **Changed** (Breaking ⚠️)
+  * `ClerkBackendApi.Organizations.ReplaceMetadata()`: **Added**
 generatedFiles:
   - .gitattributes
   - Clerk.BackendAPI.sln
