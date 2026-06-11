@@ -11,22 +11,9 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
 
     public class UpdateOrganizationRequestBody
     {
-        /// <summary>
-        /// Metadata saved on the organization, that is visible to both your frontend and backend.
-        /// </summary>
-        [JsonProperty("public_metadata")]
-        public Dictionary<string, object>? PublicMetadata { get; set; } = null;
-
-        /// <summary>
-        /// Metadata saved on the organization that is only visible to your backend.
-        /// </summary>
-        [JsonProperty("private_metadata")]
-        public Dictionary<string, object>? PrivateMetadata { get; set; } = null;
-
         /// <summary>
         /// The new name of the organization.<br/>
         /// May not contain URLs or HTML.<br/>

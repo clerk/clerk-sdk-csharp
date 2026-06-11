@@ -10,6 +10,7 @@
 * [Update](#update) - Update an organization
 * [Delete](#delete) - Delete an organization
 * [MergeMetadata](#mergemetadata) - Merge and update metadata for an organization
+* [ReplaceMetadata](#replacemetadata) - Replace metadata for an organization
 * [UploadLogo](#uploadlogo) - Upload a logo for the organization
 * [DeleteLogo](#deletelogo) - Delete the organization's logo.
 * [GetBillingSubscription](#getbillingsubscription) - Retrieve an organization's billing subscription
@@ -166,7 +167,10 @@ var res = await sdk.Organizations.GetAsync(organizationId: "org_123");
 
 ## Update
 
-Updates an existing organization
+Updates an existing organization.
+
+As of API version 2026-05-12, this endpoint no longer accepts `public_metadata` or `private_metadata`.
+Use `PATCH /v1/organizations/{organization_id}/metadata` to merge updates into existing metadata, or `PUT /v1/organizations/{organization_id}/metadata` to replace a metadata field entirely.
 
 ### Example Usage
 
@@ -175,19 +179,12 @@ Updates an existing organization
 using Clerk.BackendAPI;
 using Clerk.BackendAPI.Models.Components;
 using Clerk.BackendAPI.Models.Operations;
-using System.Collections.Generic;
 
 var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 var res = await sdk.Organizations.UpdateAsync(
     organizationId: "org_123_update",
     requestBody: new UpdateOrganizationRequestBody() {
-        PublicMetadata = new Dictionary<string, object>() {
-
-        },
-        PrivateMetadata = new Dictionary<string, object>() {
-
-        },
         Name = "New Organization Name",
         Slug = "new-org-slug",
         MaxAllowedMemberships = 100,
@@ -299,6 +296,51 @@ var res = await sdk.Organizations.MergeMetadataAsync(
 ### Response
 
 **[MergeOrganizationMetadataResponse](../../Models/Operations/MergeOrganizationMetadataResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ReplaceMetadata
+
+Replace an organization's metadata attributes with the provided values.
+Unlike `PATCH /v1/organizations/{organization_id}/metadata` (merge semantics), this
+endpoint replaces the supplied metadata fields entirely — the prior contents of each
+supplied field are discarded. Fields omitted from the request body are left unchanged.
+Prefer the `PATCH` endpoint for partial updates. Use `PUT` only when you explicitly
+intend to overwrite a metadata field wholesale.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="ReplaceOrganizationMetadata" method="put" path="/organizations/{organization_id}/metadata" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Organizations.ReplaceMetadataAsync(
+    organizationId: "<id>",
+    requestBody: new ReplaceOrganizationMetadataRequestBody() {}
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `OrganizationId`                                                                                            | *string*                                                                                                    | :heavy_check_mark:                                                                                          | The ID of the organization whose metadata will be replaced                                                  |
+| `RequestBody`                                                                                               | [ReplaceOrganizationMetadataRequestBody](../../Models/Operations/ReplaceOrganizationMetadataRequestBody.md) | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+
+### Response
+
+**[ReplaceOrganizationMetadataResponse](../../Models/Operations/ReplaceOrganizationMetadataResponse.md)**
 
 ### Errors
 
