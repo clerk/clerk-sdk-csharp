@@ -16,7 +16,7 @@ namespace Clerk.BackendAPI.Models.Components
     public class CommercePriceTransitionDetails
     {
         [JsonProperty("previous_plan")]
-        public SchemasCommercePlan PreviousPlan { get; set; } = default!;
+        public CommercePlan2 PreviousPlan { get; set; } = default!;
 
         [JsonProperty("previous_price")]
         public BillingPriceResponse PreviousPrice { get; set; } = default!;

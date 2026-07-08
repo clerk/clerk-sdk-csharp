@@ -29,6 +29,6 @@ namespace Clerk.BackendAPI.Models.Components
         /// Per-unit cost breakdown by pricing tier.
         /// </summary>
         [JsonProperty("tiers")]
-        public List<SchemasCommercePerUnitTotalTier>? Tiers { get; set; }
+        public List<CommercePerUnitTotalTier2>? Tiers { get; set; }
     }
 }

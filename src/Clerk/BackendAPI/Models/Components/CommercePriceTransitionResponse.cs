@@ -25,7 +25,7 @@ namespace Clerk.BackendAPI.Models.Components
         public CommercePriceTransitionResponseObject Object { get; set; } = default!;
 
         [JsonProperty("subscription_item")]
-        public SchemasCommerceSubscriptionItem SubscriptionItem { get; set; } = default!;
+        public CommerceSubscriptionItem2 SubscriptionItem { get; set; } = default!;
 
         [JsonProperty("transition")]
         public CommercePriceTransitionDetails Transition { get; set; } = default!;

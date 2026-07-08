@@ -21,6 +21,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// A commerce subscription item.
         /// </summary>
-        public SchemasCommerceSubscriptionItem? SchemasCommerceSubscriptionItem { get; set; }
+        public CommerceSubscriptionItem2? CommerceSubscriptionItem2 { get; set; }
     }
 }

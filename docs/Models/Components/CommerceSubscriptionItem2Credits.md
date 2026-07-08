@@ -1,0 +1,10 @@
+# CommerceSubscriptionItem2Credits
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `Proration`                                                                                         | [CommerceSubscriptionItem2Proration](../../Models/Components/CommerceSubscriptionItem2Proration.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `Payer`                                                                                             | [CommerceSubscriptionItem2Payer](../../Models/Components/CommerceSubscriptionItem2Payer.md)         | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `Total`                                                                                             | [CommerceMoneyResponse](../../Models/Components/CommerceMoneyResponse.md)                           | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
