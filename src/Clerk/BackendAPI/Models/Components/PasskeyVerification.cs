@@ -125,6 +125,10 @@ namespace Clerk.BackendAPI.Models.Components
                     writer.WriteRawValue(Utilities.SerializeJSON(res.VerificationPasskey));
                     return;
                 }
+
+                throw new InvalidOperationException(
+                    "Could not serialize union to JSON: no variant value was set. " +
+                    "Construct this union using one of the Create* factory methods.");
             }
 
         }

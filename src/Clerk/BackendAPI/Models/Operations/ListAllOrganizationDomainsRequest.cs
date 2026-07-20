@@ -28,7 +28,8 @@ namespace Clerk.BackendAPI.Models.Operations
         public Verified? Verified { get; set; }
 
         /// <summary>
-        /// Filter by enrollment mode.
+        /// Filter by enrollment mode. Prefix a value with `-` to exclude it instead<br/>
+        /// (e.g. `-enterprise_sso`). Include and exclude filters can be combined and compose as AND.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=false,name=enrollment_mode")]
         public List<Models.Operations.EnrollmentMode>? EnrollmentMode { get; set; }

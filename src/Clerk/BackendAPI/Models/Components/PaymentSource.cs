@@ -22,7 +22,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
-        public SchemasCommerceSubscriptionItemPaymentSourceObject Object { get; set; } = default!;
+        public CommerceSubscriptionItem2PaymentSourceObject Object { get; set; } = default!;
 
         /// <summary>
         /// Unique identifier for the payment source.
@@ -76,7 +76,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// Status of the payment source.
         /// </summary>
         [JsonProperty("status")]
-        public SchemasCommerceSubscriptionItemPaymentSourceStatus Status { get; set; } = default!;
+        public CommerceSubscriptionItem2PaymentSourceStatus Status { get; set; } = default!;
 
         /// <summary>
         /// Type of wallet (if applicable).

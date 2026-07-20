@@ -663,7 +663,9 @@ namespace Clerk.BackendAPI
         /// Unset a user's password as compromised.
         /// </summary>
         /// <remarks>
-        /// Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in.
+        /// Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in.<br/>
+        /// <br/>
+        /// If the user is in reserved-email password quarantine, the quarantine is preserved and the returned user will still have `requires_password_reset` set to `true`. Reserved-email password quarantine can only be cleared by completing a password reset or changing/removing the password.
         /// </remarks>
         /// <param name="userId">The ID of the user to unset the compromised status for.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -6384,7 +6386,9 @@ namespace Clerk.BackendAPI
         /// Unset a user's password as compromised.
         /// </summary>
         /// <remarks>
-        /// Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in.
+        /// Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in.<br/>
+        /// <br/>
+        /// If the user is in reserved-email password quarantine, the quarantine is preserved and the returned user will still have `requires_password_reset` set to `true`. Reserved-email password quarantine can only be cleared by completing a password reset or changing/removing the password.
         /// </remarks>
         /// <param name="userId">The ID of the user to unset the compromised status for.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>

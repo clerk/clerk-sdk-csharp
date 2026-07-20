@@ -1431,14 +1431,14 @@ namespace Clerk.BackendAPI
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    SchemasCommerceSubscriptionItem obj;
+                    CommerceSubscriptionItem2 obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<SchemasCommerceSubscriptionItem>(httpResponseBody, NullValueHandling.Ignore);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CommerceSubscriptionItem2>(httpResponseBody, NullValueHandling.Ignore);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into SchemasCommerceSubscriptionItem.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into CommerceSubscriptionItem2.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new ExtendBillingSubscriptionItemFreeTrialResponse()
@@ -1449,7 +1449,7 @@ namespace Clerk.BackendAPI
                             Request = httpRequest
                         }
                     };
-                    response.SchemasCommerceSubscriptionItem = obj;
+                    response.CommerceSubscriptionItem2 = obj;
                     return response;
                 }
 

@@ -29,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 csharp:
-  version: 2.0.0
+  version: 2.0.1
   additionalDependencies:
     - package: Microsoft.AspNetCore.Http
       version: 2.3.0
@@ -64,7 +64,10 @@ csharp:
   outputModelSuffix: output
   packageName: Clerk.BackendAPI
   packageTags: Clerk SDK
+  presenceAwareJsonSerialization: false
   respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
   sourceDirectory: src
+  targetFramework: dotnetVersion
+  unionStrategy: left-to-right
   useNodatime: true

@@ -10,7 +10,6 @@
 namespace Clerk.BackendAPI.Models.Errors
 {
     using Clerk.BackendAPI.Models.Components;
-    using Clerk.BackendAPI.Models.Errors;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
@@ -23,7 +22,7 @@ namespace Clerk.BackendAPI.Models.Errors
         public List<ClerkError> Errors { get; set; } = default!;
 
         [JsonProperty("meta")]
-        public Models.Errors.Meta? Meta { get; set; }
+        public Dictionary<string, object>? Meta { get; set; }
     }
 
     /// <summary>
@@ -40,7 +39,7 @@ namespace Clerk.BackendAPI.Models.Errors
         public List<ClerkError> Errors { get; set; } = default!;
 
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use ClerkErrors.Payload.Meta instead.")]
-        public Models.Errors.Meta? Meta { get; set; }
+        public Dictionary<string, object>? Meta { get; set; }
 
         public ClerkErrors(
             ClerkErrorsPayload payload,

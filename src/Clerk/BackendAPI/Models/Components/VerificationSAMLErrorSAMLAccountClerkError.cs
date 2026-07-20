@@ -9,9 +9,9 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
-    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public class VerificationSAMLErrorSAMLAccountClerkError
     {
@@ -25,6 +25,6 @@ namespace Clerk.BackendAPI.Models.Components
         public string Code { get; set; } = default!;
 
         [JsonProperty("meta")]
-        public ClerkErrorErrorSAMLAccountMeta? Meta { get; set; }
+        public Dictionary<string, object>? Meta { get; set; }
     }
 }

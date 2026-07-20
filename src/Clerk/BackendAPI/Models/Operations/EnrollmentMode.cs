@@ -21,6 +21,16 @@ namespace Clerk.BackendAPI.Models.Operations
         AutomaticInvitation,
         [JsonProperty("automatic_suggestion")]
         AutomaticSuggestion,
+        [JsonProperty("enterprise_sso")]
+        EnterpriseSso,
+        [JsonProperty("-manual_invitation")]
+        MinusManualInvitation,
+        [JsonProperty("-automatic_invitation")]
+        MinusAutomaticInvitation,
+        [JsonProperty("-automatic_suggestion")]
+        MinusAutomaticSuggestion,
+        [JsonProperty("-enterprise_sso")]
+        MinusEnterpriseSso,
     }
 
     public static class EnrollmentModeExtension
