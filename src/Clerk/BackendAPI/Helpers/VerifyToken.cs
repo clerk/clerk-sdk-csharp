@@ -133,11 +133,12 @@ public static class VerifyToken
     private static async Task<RSA> GetRemoteJwtKeyAsync(string token, VerifyTokenOptions options)
     {
         var kid = ParseKid(token);
+        var cacheKey = JwkCacheKey(options, kid);
 
         if (!options.SkipJwksCache)
         {
             // Check cache first
-            var cachedPem = _jwkCache.Get(kid);
+            var cachedPem = _jwkCache.Get(cacheKey);
             if (cachedPem != null)
             {
                 try
@@ -149,7 +150,7 @@ public static class VerifyToken
                 catch (Exception ex)
                 {
                     // Cached PEM is corrupted, remove it and fall through fetching from API
-                    _jwkCache.Remove(kid);
+                    _jwkCache.Remove(cacheKey);
                 }
             }
         }
@@ -175,7 +176,7 @@ public static class VerifyToken
 
                     // Convert to PEM format and cache
                     var pem = rsa.ExportRSAPublicKeyPem();
-                    _jwkCache.Set(kid, pem);
+                    _jwkCache.Set(cacheKey, pem);
 
                     return rsa;
                 }
@@ -188,6 +189,21 @@ public static class VerifyToken
         throw new TokenVerificationException(TokenVerificationErrorReason.JWK_KID_MISMATCH);
     }
 
+
+    /// <summary>
+    ///     Scopes a key identifier to the Clerk instance whose credentials fetched it.
+    ///     A Clerk kid is the instance id, so a cache keyed on the kid alone serves one
+    ///     instance's signing key to another instance's verification in the same process,
+    ///     letting a token minted by instance B authenticate against instance A.
+    /// </summary>
+    /// <param name="options">The options used for token verification.</param>
+    /// <param name="kid">The key identifier from the token header.</param>
+    /// <returns>An instance-scoped cache key. The secret key is hashed, never retained.</returns>
+    private static string JwkCacheKey(VerifyTokenOptions options, string kid)
+    {
+        var scope = SHA256.HashData(Encoding.UTF8.GetBytes($"{options.ApiUrl}\0{options.SecretKey}"));
+        return $"{Convert.ToHexString(scope)}:{kid}";
+    }
 
     /// <summary>
     ///     Decodes a base64url encoded string.
