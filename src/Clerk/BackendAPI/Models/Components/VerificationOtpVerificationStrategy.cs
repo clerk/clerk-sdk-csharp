@@ -17,7 +17,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class VerificationOtpVerificationStrategy : IEquatable<VerificationOtpVerificationStrategy>
+    public class VerificationOtpVerificationStrategy : IEquatable<VerificationOtpVerificationStrategy>, IOpenEnum<string>
     {
         public static readonly VerificationOtpVerificationStrategy PhoneCode = new VerificationOtpVerificationStrategy("phone_code");
         public static readonly VerificationOtpVerificationStrategy EmailCode = new VerificationOtpVerificationStrategy("email_code");
@@ -55,7 +55,7 @@ namespace Clerk.BackendAPI.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

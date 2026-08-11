@@ -17,7 +17,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class VerificationAdminVerificationWeb3WalletStrategy : IEquatable<VerificationAdminVerificationWeb3WalletStrategy>
+    public class VerificationAdminVerificationWeb3WalletStrategy : IEquatable<VerificationAdminVerificationWeb3WalletStrategy>, IOpenEnum<string>
     {
         public static readonly VerificationAdminVerificationWeb3WalletStrategy Admin = new VerificationAdminVerificationWeb3WalletStrategy("admin");
 
@@ -51,7 +51,7 @@ namespace Clerk.BackendAPI.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

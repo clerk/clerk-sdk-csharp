@@ -17,7 +17,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class Strategy : IEquatable<Strategy>
+    public class Strategy : IEquatable<Strategy>, IOpenEnum<string>
     {
         public static readonly Strategy PhoneCode = new Strategy("phone_code");
         public static readonly Strategy EmailCode = new Strategy("email_code");
@@ -55,7 +55,7 @@ namespace Clerk.BackendAPI.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

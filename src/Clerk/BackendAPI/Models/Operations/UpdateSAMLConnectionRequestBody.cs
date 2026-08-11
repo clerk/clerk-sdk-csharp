@@ -121,6 +121,12 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? ForceAuthn { get; set; }
 
         /// <summary>
+        /// Configuration for the login_hint sent to the IdP on SSO sign-in.
+        /// </summary>
+        [JsonProperty("login_hint")]
+        public Models.Operations.LoginHint? LoginHint { get; set; } = null;
+
+        /// <summary>
         /// When enabling the connection, controls behavior when verified domains used for enrollment modes like automatic invitation or automatic suggestion already exist for the same domain. If true, those verified domains are removed and the connection is enabled. If false or omitted, the request fails when any such verified domain exists.
         /// </summary>
         [JsonProperty("consent_verified_domains_deletion")]

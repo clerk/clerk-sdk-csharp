@@ -46,7 +46,7 @@ var res = await sdk.SignInTokens.CreateAsync(req);
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 404, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404, 422                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Revoke

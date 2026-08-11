@@ -29,7 +29,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// Per-unit total breakdown (for example, seats) for the next payment.
         /// </summary>
         [JsonProperty("per_unit_totals")]
-        public List<SchemasCommercePerUnitTotal>? PerUnitTotals { get; set; }
+        public List<CommercePerUnitTotal2>? PerUnitTotals { get; set; }
 
         /// <summary>
         /// Breakdown of the recurring amount that will be billed at renewal (base fee + per-unit charges). Tax and credits are not previewed.

@@ -22,6 +22,8 @@ namespace Clerk.BackendAPI.Models.Components
         Card,
         [JsonProperty("link")]
         Link,
+        [JsonProperty("payer-credits")]
+        PayerCredits,
     }
 
     public static class PaymentTypeExtension

@@ -15,7 +15,7 @@ namespace Clerk.BackendAPI.Models.Operations
     public class UpdateOrganizationDomainRequestBody
     {
         /// <summary>
-        /// The enrollment_mode for the new domain. This can be `automatic_invitation`, `automatic_suggestion` or `manual_invitation`
+        /// The enrollment_mode for the new domain. This can be `automatic_invitation`, `automatic_suggestion`, `manual_invitation` or `enterprise_sso`
         /// </summary>
         [JsonProperty("enrollment_mode")]
         public string? EnrollmentMode { get; set; } = null;

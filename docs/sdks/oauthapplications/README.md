@@ -11,6 +11,7 @@
 * [Delete](#delete) - Delete an OAuth application
 * [UploadLogo](#uploadlogo) - Upload a logo for the OAuth application
 * [RotateSecret](#rotatesecret) - Rotate the client secret of the given OAuth application
+* [RevokeToken](#revoketoken) - Revoke an OAuth application token
 
 ## List
 
@@ -288,4 +289,48 @@ var res = await sdk.OauthApplications.RotateSecretAsync(oauthApplicationId: "oau
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## RevokeToken
+
+Revoke both OAuth access token and refresh token for the associated grant for the given OAuth application.
+The request may specify either token.
+JWT access tokens cannot be revoked.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="RevokeOAuthApplicationToken" method="post" path="/oauth_applications/{oauth_application_id}/revoke_token" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.OauthApplications.RevokeTokenAsync(
+    oauthApplicationId: "<id>",
+    requestBody: new RevokeOAuthApplicationTokenRequestBody() {
+        Token = "<value>",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `OauthApplicationId`                                                                                        | *string*                                                                                                    | :heavy_check_mark:                                                                                          | The ID of the OAuth application for which to revoke the token                                               |
+| `RequestBody`                                                                                               | [RevokeOAuthApplicationTokenRequestBody](../../Models/Operations/RevokeOAuthApplicationTokenRequestBody.md) | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+
+### Response
+
+**[RevokeOAuthApplicationTokenResponse](../../Models/Operations/RevokeOAuthApplicationTokenResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |

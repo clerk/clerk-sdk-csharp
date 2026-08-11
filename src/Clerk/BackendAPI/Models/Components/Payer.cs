@@ -22,7 +22,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// String representing the object's type. Objects of the same type share the same value.
         /// </summary>
         [JsonProperty("object")]
-        public SchemasCommerceSubscriptionItemPayerObject Object { get; set; } = default!;
+        public CommerceSubscriptionItem2PayerObject Object { get; set; } = default!;
 
         /// <summary>
         /// Unique identifier for the payer.

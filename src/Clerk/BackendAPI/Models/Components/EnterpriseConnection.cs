@@ -16,6 +16,9 @@ namespace Clerk.BackendAPI.Models.Components
 
     public class EnterpriseConnection
     {
+        [JsonProperty("object")]
+        public EnterpriseConnectionObject Object { get; set; } = default!;
+
         /// <summary>
         /// The enterprise connection ID.
         /// </summary>

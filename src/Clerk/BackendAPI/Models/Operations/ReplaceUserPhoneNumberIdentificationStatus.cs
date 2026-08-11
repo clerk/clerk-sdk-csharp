@@ -15,8 +15,15 @@ namespace Clerk.BackendAPI.Models.Operations
 
     /// <summary>
     /// Controls the status of the replacement phone number. Defaults to `verified`. Set to<br/>
-    /// `reserved` to create it reserved (unverified but usable for sign-in and locked)<br/>
-    /// instead of verified.
+    /// `reserved` to create it reserved (unverified but usable for sign-in and locked so no<br/>
+    /// other user can claim it), or to `unverified` to create it neither usable for sign-in<br/>
+    /// nor locked.<br/>
+    /// <br/>
+    /// **Warning:** `unverified` can lock the user out of their account. An unverified phone<br/>
+    /// number cannot be used to sign in, so if the user has no other verified or reserved<br/>
+    /// identifier, they will be unable to authenticate and unable to verify this number.<br/>
+    /// Prefer `reserved` unless you specifically need the number left unclaimed — for<br/>
+    /// example so that another user can also hold it until one of them verifies it.
     /// </summary>
     public enum ReplaceUserPhoneNumberIdentificationStatus
     {
@@ -24,6 +31,8 @@ namespace Clerk.BackendAPI.Models.Operations
         Verified,
         [JsonProperty("reserved")]
         Reserved,
+        [JsonProperty("unverified")]
+        Unverified,
     }
 
     public static class ReplaceUserPhoneNumberIdentificationStatusExtension

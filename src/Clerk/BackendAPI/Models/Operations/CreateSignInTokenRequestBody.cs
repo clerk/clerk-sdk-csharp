@@ -21,6 +21,13 @@ namespace Clerk.BackendAPI.Models.Operations
         public string UserId { get; set; } = default!;
 
         /// <summary>
+        /// The ID of the organization to activate when the user signs in.<br/>
+        /// Organizations must be enabled for the instance, and the user must be a member of the organization.
+        /// </summary>
+        [JsonProperty("org_id")]
+        public string? OrgId { get; set; } = null;
+
+        /// <summary>
         /// Optional parameter to specify the life duration of the sign in token in seconds.<br/>
         /// By default, the duration is 30 days.
         /// </summary>

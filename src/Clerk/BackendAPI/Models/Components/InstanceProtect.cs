@@ -26,5 +26,11 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("specter_enabled")]
         public bool SpecterEnabled { get; set; } = default!;
+
+        /// <summary>
+        /// Whether the instance has opted out of the Protect prerequisite checks, asserting its setup already meets the requirements.
+        /// </summary>
+        [JsonProperty("checks_bypassed")]
+        public bool ChecksBypassed { get; set; } = default!;
     }
 }

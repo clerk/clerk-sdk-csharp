@@ -89,5 +89,11 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("force_authn")]
         public bool? ForceAuthn { get; set; }
+
+        /// <summary>
+        /// Configuration for the login_hint sent to the IdP on SSO sign-in.
+        /// </summary>
+        [JsonProperty("login_hint")]
+        public RequestBodyLoginHint? LoginHint { get; set; } = null;
     }
 }

@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
     using System;
@@ -36,17 +37,8 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("payer_id")]
         public string PayerId { get; set; } = default!;
 
-        /// <summary>
-        /// The signed credit amount. Positive for increases, negative for decreases.
-        /// </summary>
         [JsonProperty("amount")]
-        public long Amount { get; set; } = default!;
-
-        /// <summary>
-        /// The currency code of the credit adjustment.
-        /// </summary>
-        [JsonProperty("currency")]
-        public string Currency { get; set; } = default!;
+        public CommerceMoneyResponse Amount { get; set; } = default!;
 
         /// <summary>
         /// The type of source that originated the adjustment (e.g. "grant").

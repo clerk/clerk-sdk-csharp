@@ -1,0 +1,9 @@
+# RevokeOAuthApplicationTokenRequest
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `OauthApplicationId`                                                                                        | *string*                                                                                                    | :heavy_check_mark:                                                                                          | The ID of the OAuth application for which to revoke the token                                               |
+| `RequestBody`                                                                                               | [RevokeOAuthApplicationTokenRequestBody](../../Models/Operations/RevokeOAuthApplicationTokenRequestBody.md) | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
