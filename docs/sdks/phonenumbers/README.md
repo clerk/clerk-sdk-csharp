@@ -268,9 +268,16 @@ var res = await sdk.PhoneNumbers.AttemptVerificationAsync(
 Replaces all of the user's phone numbers with a single primary phone number.
 By default the new phone number is created verified, with the admin verification strategy.
 When `identification_status` is `reserved` it is created reserved instead: unverified but usable
-for sign-in and locked so no other user can claim it. The new phone number is never reserved for
+for sign-in and locked so no other user can claim it. When it is `unverified` the phone number is
+neither usable for sign-in nor locked. The new phone number is never reserved for
 second factor. Any existing phone numbers are deleted; replacing a phone number that is reserved
 for second factor disables the user's MFA.
+
+**Warning:** `identification_status: unverified` can lock the user out of their account. An
+unverified phone number cannot be used to sign in, so if the user has no other verified or
+reserved identifier, deleting their existing phone numbers leaves them unable to authenticate —
+and unable to verify the new number, since that requires signing in. Recovery then requires
+another admin API call.
 
 ### Example Usage
 

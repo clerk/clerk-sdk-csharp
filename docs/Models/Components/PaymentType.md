@@ -13,7 +13,8 @@ var value = PaymentType.Card;
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `Card` | card   |
-| `Link` | link   |
+| Name           | Value          |
+| -------------- | -------------- |
+| `Card`         | card           |
+| `Link`         | link           |
+| `PayerCredits` | payer-credits  |

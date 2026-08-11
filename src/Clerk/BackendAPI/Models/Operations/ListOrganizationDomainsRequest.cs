@@ -26,7 +26,8 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Verified { get; set; }
 
         /// <summary>
-        /// Filter domains by their enrollment mode.
+        /// Filter domains by their enrollment mode. Accepts `automatic_invitation`, `automatic_suggestion`, `manual_invitation` or `enterprise_sso`.<br/>
+        /// Prefix a value with `-` to exclude it instead (e.g. `-enterprise_sso`). Include and exclude filters can be combined and compose as AND.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=enrollment_mode")]
         public string? EnrollmentMode { get; set; }

@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
 
@@ -88,5 +89,11 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("force_authn")]
         public bool? ForceAuthn { get; set; }
+
+        /// <summary>
+        /// Configuration for the login_hint sent to the IdP on SSO sign-in.
+        /// </summary>
+        [JsonProperty("login_hint")]
+        public Models.Components.LoginHint? LoginHint { get; set; }
     }
 }

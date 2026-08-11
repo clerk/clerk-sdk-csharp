@@ -37,7 +37,7 @@ namespace Clerk.BackendAPI
         /// <returns>An awaitable task that returns a <see cref="CreateSignInTokenResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403, 404 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateSignInTokenResponse> CreateAsync(
             CreateSignInTokenRequestBody? request = null,
@@ -87,7 +87,7 @@ namespace Clerk.BackendAPI
         /// <returns>An awaitable task that returns a <see cref="CreateSignInTokenResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Resource not found. Thrown when the API returns a 404 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Authorization invalid. Thrown when the API returns a 403, 404 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateSignInTokenResponse> CreateAsync(
             CreateSignInTokenRequestBody? request = null,
@@ -214,7 +214,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{404, 422}.Contains(responseStatusCode))
+            else if(new List<int>{403, 404, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

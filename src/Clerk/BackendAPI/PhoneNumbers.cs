@@ -155,9 +155,16 @@ namespace Clerk.BackendAPI
         /// Replaces all of the user's phone numbers with a single primary phone number.<br/>
         /// By default the new phone number is created verified, with the admin verification strategy.<br/>
         /// When `identification_status` is `reserved` it is created reserved instead: unverified but usable<br/>
-        /// for sign-in and locked so no other user can claim it. The new phone number is never reserved for<br/>
+        /// for sign-in and locked so no other user can claim it. When it is `unverified` the phone number is<br/>
+        /// neither usable for sign-in nor locked. The new phone number is never reserved for<br/>
         /// second factor. Any existing phone numbers are deleted; replacing a phone number that is reserved<br/>
-        /// for second factor disables the user's MFA.
+        /// for second factor disables the user's MFA.<br/>
+        /// <br/>
+        /// **Warning:** `identification_status: unverified` can lock the user out of their account. An<br/>
+        /// unverified phone number cannot be used to sign in, so if the user has no other verified or<br/>
+        /// reserved identifier, deleting their existing phone numbers leaves them unable to authenticate —<br/>
+        /// and unable to verify the new number, since that requires signing in. Recovery then requires<br/>
+        /// another admin API call.
         /// </remarks>
         /// <param name="userId">The ID of the user whose phone number to replace.</param>
         /// <param name="requestBody">A <see cref="ReplaceUserPhoneNumberRequestBody"/> parameter.</param>
@@ -1297,9 +1304,16 @@ namespace Clerk.BackendAPI
         /// Replaces all of the user's phone numbers with a single primary phone number.<br/>
         /// By default the new phone number is created verified, with the admin verification strategy.<br/>
         /// When `identification_status` is `reserved` it is created reserved instead: unverified but usable<br/>
-        /// for sign-in and locked so no other user can claim it. The new phone number is never reserved for<br/>
+        /// for sign-in and locked so no other user can claim it. When it is `unverified` the phone number is<br/>
+        /// neither usable for sign-in nor locked. The new phone number is never reserved for<br/>
         /// second factor. Any existing phone numbers are deleted; replacing a phone number that is reserved<br/>
-        /// for second factor disables the user's MFA.
+        /// for second factor disables the user's MFA.<br/>
+        /// <br/>
+        /// **Warning:** `identification_status: unverified` can lock the user out of their account. An<br/>
+        /// unverified phone number cannot be used to sign in, so if the user has no other verified or<br/>
+        /// reserved identifier, deleting their existing phone numbers leaves them unable to authenticate —<br/>
+        /// and unable to verify the new number, since that requires signing in. Recovery then requires<br/>
+        /// another admin API call.
         /// </remarks>
         /// <param name="userId">The ID of the user whose phone number to replace.</param>
         /// <param name="requestBody">A <see cref="ReplaceUserPhoneNumberRequestBody"/> parameter.</param>

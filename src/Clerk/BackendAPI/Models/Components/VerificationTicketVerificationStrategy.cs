@@ -17,7 +17,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class VerificationTicketVerificationStrategy : IEquatable<VerificationTicketVerificationStrategy>
+    public class VerificationTicketVerificationStrategy : IEquatable<VerificationTicketVerificationStrategy>, IOpenEnum<string>
     {
         public static readonly VerificationTicketVerificationStrategy Ticket = new VerificationTicketVerificationStrategy("ticket");
 
@@ -51,7 +51,7 @@ namespace Clerk.BackendAPI.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

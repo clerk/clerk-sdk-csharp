@@ -15,7 +15,7 @@ namespace Clerk.BackendAPI.Utils
     {
         public override bool CanConvert(System.Type objectType)
         {
-            return objectType.GetMethod("Of") != null && objectType.GetMethod("ToString") != null;
+            return typeof(IOpenEnum).IsAssignableFrom(objectType);
         }
 
         public override object? ReadJson(
@@ -35,9 +35,40 @@ namespace Clerk.BackendAPI.Utils
             {
                 throw new Exception($"Unable to find Of method on {objectType}");
             }
+
+            object value = reader.Value;
+            var parameterType = OpenEnumType.GetUnderlyingType(objectType);
             try {
-                return method.Invoke(null, new[] { reader.Value });
+                if (!parameterType.IsInstanceOfType(value))
+                {
+                    if (parameterType == typeof(string))
+                    {
+                        value = value switch
+                        {
+                            bool b => b ? "true" : "false",
+                            // Date-looking JSON strings are already parsed into DateTime before this converter runs and the original
+                            // text is no longer available. Reconstruct a best-effort ISO 8601 string instead.
+                            DateTime dt => dt.ToString("yyyy-MM-dd'T'HH:mm:ss.FFFFFFFK", System.Globalization.CultureInfo.InvariantCulture),
+                            DateTimeOffset dto => dto.ToString("yyyy-MM-dd'T'HH:mm:ss.FFFFFFFK", System.Globalization.CultureInfo.InvariantCulture),
+                            _ => Convert.ToString(value, System.Globalization.CultureInfo.InvariantCulture) ?? "",
+                        };
+                    }
+                    else
+                    {
+                        if ((parameterType == typeof(long) || parameterType == typeof(int))
+                            && ((value is double d && d != Math.Truncate(d))
+                                || (value is decimal m && m != Math.Truncate(m))))
+                        {
+                            throw new Newtonsoft.Json.JsonSerializationException(
+                                $"Unable to convert fractional value {value} to open enum of type {parameterType}");
+                        }
+                        value = Convert.ChangeType(value, parameterType, System.Globalization.CultureInfo.InvariantCulture);
+                    }
+                }
+                return method.Invoke(null, new[] { value });
             } catch(System.Reflection.TargetInvocationException e) {
+                throw new Newtonsoft.Json.JsonSerializationException("Unable to convert value to open enum", e);
+            } catch(Exception e) when (e is InvalidCastException || e is FormatException || e is OverflowException || e is ArgumentException) {
                 throw new Newtonsoft.Json.JsonSerializationException("Unable to convert value to open enum", e);
             }
         }

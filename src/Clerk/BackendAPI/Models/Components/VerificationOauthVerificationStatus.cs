@@ -17,7 +17,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class VerificationOauthVerificationStatus : IEquatable<VerificationOauthVerificationStatus>
+    public class VerificationOauthVerificationStatus : IEquatable<VerificationOauthVerificationStatus>, IOpenEnum<string>
     {
         public static readonly VerificationOauthVerificationStatus Unverified = new VerificationOauthVerificationStatus("unverified");
         public static readonly VerificationOauthVerificationStatus Verified = new VerificationOauthVerificationStatus("verified");
@@ -59,7 +59,7 @@ namespace Clerk.BackendAPI.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

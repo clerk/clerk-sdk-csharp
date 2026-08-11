@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Success.
@@ -31,9 +32,33 @@ namespace Clerk.BackendAPI.Models.Components
         public bool DynamicOauthClientRegistration { get; set; } = default!;
 
         /// <summary>
+        /// Default scopes.
+        /// </summary>
+        [JsonProperty("default_scopes", NullValueHandling = NullValueHandling.Include)]
+        public List<string>? DefaultScopes { get; set; }
+
+        /// <summary>
         /// Whether OAuth JWT access tokens are enabled for the instance (disabled indicates opaque access tokens).
         /// </summary>
         [JsonProperty("oauth_jwt_access_tokens")]
         public bool OauthJwtAccessTokens { get; set; } = default!;
+
+        /// <summary>
+        /// Whether the instance advertises support for Client ID Metadata Documents in its OAuth authorization server metadata.
+        /// </summary>
+        [JsonProperty("client_id_metadata_documents_advertised")]
+        public bool ClientIdMetadataDocumentsAdvertised { get; set; } = default!;
+
+        /// <summary>
+        /// When true, new unknown CIMD clients are rejected. Previously auto-connected and pre-registered clients remain admitted; deleting a client makes it unknown again.
+        /// </summary>
+        [JsonProperty("client_id_metadata_documents_only_allow_pre_registered_clients")]
+        public bool ClientIdMetadataDocumentsOnlyAllowPreRegisteredClients { get; set; } = default!;
+
+        /// <summary>
+        /// When true, recorded implicitly allowed CIMD clients are rejected on future client lookups. Explicitly allowed clients remain accepted. This does not revoke previously issued access tokens.
+        /// </summary>
+        [JsonProperty("client_id_metadata_documents_block_implicitly_allowed_clients")]
+        public bool ClientIdMetadataDocumentsBlockImplicitlyAllowedClients { get; set; } = default!;
     }
 }

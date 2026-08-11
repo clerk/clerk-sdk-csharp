@@ -23,7 +23,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// Base plan fee for the next payment. Does not include per-unit (e.g. seat) charges; see `totals.grand_total` for the full amount.
         /// </summary>
         [JsonProperty("amount")]
-        public SchemasCommerceSubscriptionItemNextInvoiceAmount? Amount { get; set; } = null;
+        public CommerceSubscriptionItem2NextInvoiceAmount? Amount { get; set; } = null;
 
         /// <summary>
         /// Unix timestamp (in milliseconds) for the next payment date.
@@ -41,6 +41,6 @@ namespace Clerk.BackendAPI.Models.Components
         /// Breakdown of the recurring amount that will be billed at renewal (base fee + per-unit charges). Tax and credits are not previewed.
         /// </summary>
         [JsonProperty("totals")]
-        public SchemasCommerceSubscriptionItemTotals? Totals { get; set; } = null;
+        public CommerceSubscriptionItem2Totals? Totals { get; set; } = null;
     }
 }

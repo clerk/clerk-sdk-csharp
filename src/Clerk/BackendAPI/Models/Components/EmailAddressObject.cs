@@ -20,7 +20,7 @@ namespace Clerk.BackendAPI.Models.Components
     /// String representing the object's type. Objects of the same type share the same value.
     /// </summary>
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class EmailAddressObject : IEquatable<EmailAddressObject>
+    public class EmailAddressObject : IEquatable<EmailAddressObject>, IOpenEnum<string>
     {
         public static readonly EmailAddressObject EmailAddress = new EmailAddressObject("email_address");
 
@@ -54,7 +54,7 @@ namespace Clerk.BackendAPI.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

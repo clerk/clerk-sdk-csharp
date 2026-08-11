@@ -26,11 +26,14 @@
 * [GetOAuthAccessToken](#getoauthaccesstoken) - Retrieve the OAuth access token of a user
 * [GetOrganizationMemberships](#getorganizationmemberships) - Retrieve all memberships for a user
 * [GetOrganizationInvitations](#getorganizationinvitations) - Retrieve all invitations for a user
+* [RemovePassword](#removepassword) - Remove a user's password
 * [VerifyPassword](#verifypassword) - Verify the password of a user
 * [VerifyTotp](#verifytotp) - Verify a TOTP or backup code for a user
 * [DisableMfa](#disablemfa) - Disable a user's MFA methods
 * [DeleteBackupCodes](#deletebackupcodes) - Disable all user's Backup codes
 * [DeletePasskey](#deletepasskey) - Delete a user passkey
+* [ListTrustedDevices](#listtrusteddevices) - List a user's trusted devices
+* [RevokeTrustedDevice](#revoketrusteddevice) - Revoke a user's trusted device
 * [DeleteWeb3Wallet](#deleteweb3wallet) - Delete a user web3 wallet
 * [DeleteTOTP](#deletetotp) - Delete all the user's TOTPs
 * [DeleteExternalAccount](#deleteexternalaccount) - Delete External Account
@@ -1040,6 +1043,45 @@ var res = await sdk.Users.GetOrganizationInvitationsAsync(
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 403, 404                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
+## RemovePassword
+
+Removes the password credential from the given user. This is a privileged operation and does not require the user's current password. Password removal is allowed even when the user has no other sign-in method configured.
+
+If the user does not have a password, the user is returned unchanged and no password-deletion or user-update event is emitted. By default, existing sessions remain active. Set `sign_out_of_other_sessions` to `true` to revoke sessions active when the request is processed.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="RemoveUserPassword" method="post" path="/users/{user_id}/remove_password" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.RemovePasswordAsync(userId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `UserId`                                                                                  | *string*                                                                                  | :heavy_check_mark:                                                                        | The ID of the user whose password to remove                                               |
+| `RequestBody`                                                                             | [RemoveUserPasswordRequestBody](../../Models/Operations/RemoveUserPasswordRequestBody.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+
+### Response
+
+**[RemoveUserPasswordResponse](../../Models/Operations/RemoveUserPasswordResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 404                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
 ## VerifyPassword
 
 Check that the user's password matches the supplied input.
@@ -1240,6 +1282,82 @@ var res = await sdk.Users.DeletePasskeyAsync(
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
+## ListTrustedDevices
+
+Returns the active trusted devices enrolled by the user.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="ListUserTrustedDevices" method="get" path="/users/{user_id}/trusted_devices" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.ListTrustedDevicesAsync(userId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `UserId`                                              | *string*                                              | :heavy_check_mark:                                    | The ID of the user whose trusted devices are returned |
+
+### Response
+
+**[ListUserTrustedDevicesResponse](../../Models/Operations/ListUserTrustedDevicesResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## RevokeTrustedDevice
+
+Revokes an active trusted device enrolled by the user.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="RevokeUserTrustedDevice" method="delete" path="/users/{user_id}/trusted_devices/{trusted_device_id}" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.RevokeTrustedDeviceAsync(
+    userId: "<id>",
+    trustedDeviceId: "<id>"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                       | Type                                            | Required                                        | Description                                     |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `UserId`                                        | *string*                                        | :heavy_check_mark:                              | The ID of the user that owns the trusted device |
+| `TrustedDeviceId`                               | *string*                                        | :heavy_check_mark:                              | The ID of the trusted device to revoke          |
+
+### Response
+
+**[RevokeUserTrustedDeviceResponse](../../Models/Operations/RevokeUserTrustedDeviceResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
 ## DeleteWeb3Wallet
 
 Delete the web3 wallet identification for a given user.
@@ -1395,6 +1513,8 @@ var res = await sdk.Users.SetPasswordCompromisedAsync(userId: "<id>");
 ## UnsetPasswordCompromised
 
 Sets the given user's password as no longer compromised. The user will no longer be prompted to reset their password on their next sign-in.
+
+If the user is in reserved-email password quarantine, the quarantine is preserved and the returned user will still have `requires_password_reset` set to `true`. Reserved-email password quarantine can only be cleared by completing a password reset or changing/removing the password.
 
 ### Example Usage
 

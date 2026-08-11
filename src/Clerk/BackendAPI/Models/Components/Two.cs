@@ -42,6 +42,18 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("idp_certificate", NullValueHandling = NullValueHandling.Include)]
         public string? IdpCertificate { get; set; }
 
+        /// <summary>
+        /// Unix timestamp (milliseconds) of the start of the IdP certificate validity window (X.509 NotBefore). Null when no certificate is configured.
+        /// </summary>
+        [JsonProperty("idp_certificate_issued_at", NullValueHandling = NullValueHandling.Include)]
+        public long? IdpCertificateIssuedAt { get; set; }
+
+        /// <summary>
+        /// Unix timestamp (milliseconds) of the end of the IdP certificate validity window (X.509 NotAfter). Null when no certificate is configured.
+        /// </summary>
+        [JsonProperty("idp_certificate_expires_at", NullValueHandling = NullValueHandling.Include)]
+        public long? IdpCertificateExpiresAt { get; set; }
+
         [JsonProperty("idp_metadata_url")]
         public string? IdpMetadataUrl { get; set; } = null;
 
@@ -92,6 +104,12 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("force_authn")]
         public bool ForceAuthn { get; set; } = default!;
+
+        /// <summary>
+        /// Configuration for the login_hint sent to the IdP on SSO sign-in.
+        /// </summary>
+        [JsonProperty("login_hint")]
+        public SAMLConnectionLoginHint LoginHint { get; set; } = default!;
 
         [JsonProperty("enterprise_connection_id")]
         public string? EnterpriseConnectionId { get; set; } = null;

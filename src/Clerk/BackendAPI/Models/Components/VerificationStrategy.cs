@@ -17,7 +17,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Linq;
 
     [JsonConverter(typeof(OpenEnumConverter))]
-    public class VerificationStrategy : IEquatable<VerificationStrategy>
+    public class VerificationStrategy : IEquatable<VerificationStrategy>, IOpenEnum<string>
     {
         public static readonly VerificationStrategy Admin = new VerificationStrategy("admin");
 
@@ -51,7 +51,7 @@ namespace Clerk.BackendAPI.Models.Components
             return _values.Values.ToArray();
         }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
         public bool IsKnown()
         {

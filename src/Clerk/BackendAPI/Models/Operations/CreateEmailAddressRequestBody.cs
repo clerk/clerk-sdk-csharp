@@ -38,5 +38,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("primary")]
         public bool? Primary { get; set; } = null;
+
+        /// <summary>
+        /// If set to `true` and the email address is created as the user's new primary,<br/>
+        /// the previous primary email address is notified of the change.<br/>
+        /// By default, no notification is sent.
+        /// </summary>
+        [JsonProperty("notify_primary_email_address_changed")]
+        public bool? NotifyPrimaryEmailAddressChanged { get; set; } = false;
     }
 }

@@ -45,5 +45,8 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("banned")]
         public bool? Banned { get; set; }
+
+        [JsonProperty("deprovisioned")]
+        public bool? Deprovisioned { get; set; }
     }
 }

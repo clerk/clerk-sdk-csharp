@@ -18,3 +18,4 @@ var value = EnrollmentMode.ManualInvitation;
 | `ManualInvitation`    | manual_invitation     |
 | `AutomaticInvitation` | automatic_invitation  |
 | `AutomaticSuggestion` | automatic_suggestion  |
+| `EnterpriseSso`       | enterprise_sso        |

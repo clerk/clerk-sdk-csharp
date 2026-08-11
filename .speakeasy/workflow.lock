@@ -1,9 +1,9 @@
-speakeasyVersion: 1.777.0
+speakeasyVersion: 1.793.0
 sources:
     clerk-backend-api-OAS:
         sourceNamespace: clerk-openapi
-        sourceRevisionDigest: sha256:fefd98b1d5dee0e6d578ecf467fa1d002bf77bcca3d594b879e31bc5100185cd
-        sourceBlobDigest: sha256:b4c55cc6dc6b015230731e6083c7451770d6baf0978b9a76f5c71a77a6284b6f
+        sourceRevisionDigest: sha256:c1baa9f2b31a766241cdbce093f802552271fc9f086b6e3124e82d9e7d659981
+        sourceBlobDigest: sha256:327bd63927a65a001cec333215e863ca9c03fce712a0bb4dc3ff4d52d677c6bb
         tags:
             - latest
             - "2026-05-12"
@@ -11,10 +11,10 @@ targets:
     clerk-backend-api:
         source: clerk-backend-api-OAS
         sourceNamespace: clerk-openapi
-        sourceRevisionDigest: sha256:fefd98b1d5dee0e6d578ecf467fa1d002bf77bcca3d594b879e31bc5100185cd
-        sourceBlobDigest: sha256:b4c55cc6dc6b015230731e6083c7451770d6baf0978b9a76f5c71a77a6284b6f
+        sourceRevisionDigest: sha256:c1baa9f2b31a766241cdbce093f802552271fc9f086b6e3124e82d9e7d659981
+        sourceBlobDigest: sha256:327bd63927a65a001cec333215e863ca9c03fce712a0bb4dc3ff4d52d677c6bb
         codeSamplesNamespace: clerk-backend-api-oas-csharp-code-samples
-        codeSamplesRevisionDigest: sha256:569256cb27f2524baa360ea793a41dc6d0a29f89be3edf1827d6c457d9e97b98
+        codeSamplesRevisionDigest: sha256:f49988309080ae138a9921c52e2fa7f9017e8c71a352d36ce6a5ab1e7e5ce1f6
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
