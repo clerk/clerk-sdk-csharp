@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 
 
@@ -111,6 +112,54 @@ public static class AuthenticateRequest
     }
 
     /// <summary>
+    ///     Checks if the ASP.NET Core HTTP request is authenticated.
+    ///     First the session token is retrieved from either the __session cookie
+    ///     or the HTTP Authorization header.
+    ///     Then the session token is verified: networklessly if the options.jwtKey
+    ///     is provided, otherwise by fetching the JWKS from Clerk's Backend API.
+    /// </summary>
+    /// <param name="request">The ASP.NET Core HTTP request</param>
+    /// <param name="options">The request authentication options</param>
+    /// <returns>The request state</returns>
+    /// <remarks>WARNING: AuthenticateRequestAsync is applicable in the context of Backend APIs only.</remarks>
+    public static async Task<RequestState> AuthenticateRequestAsync(
+        HttpRequest request,
+        AuthenticateRequestOptions options)
+    {
+        var sessionToken = GetSessionToken(request);
+        if (sessionToken == null) return RequestState.SignedOut(AuthErrorReason.SESSION_TOKEN_MISSING);
+
+        VerifyTokenOptions verifyTokenOptions;
+
+        if (options.JwtKey != null)
+            verifyTokenOptions = new VerifyTokenOptions(
+                jwtKey: options.JwtKey,
+                audiences: options.Audiences,
+                authorizedParties: options.AuthorizedParties,
+                clockSkewInMs: options.ClockSkewInMs
+            );
+        else if (options.SecretKey != null)
+            verifyTokenOptions = new VerifyTokenOptions(
+                options.SecretKey,
+                audiences: options.Audiences,
+                authorizedParties: options.AuthorizedParties,
+                clockSkewInMs: options.ClockSkewInMs
+            );
+        else
+            return RequestState.SignedOut(AuthErrorReason.SECRET_KEY_MISSING);
+
+        try
+        {
+            var claims = await VerifyToken.VerifyTokenAsync(sessionToken, verifyTokenOptions);
+            return RequestState.SignedIn(sessionToken, claims);
+        }
+        catch (TokenVerificationException e)
+        {
+            return RequestState.SignedOut(e.Reason);
+        }
+    }
+
+    /// <summary>
     ///     Retrieve token from __session cookie or Authorization header.
     /// </summary>
     /// <param name="request">The HTTP request</param>
@@ -137,6 +186,32 @@ public static class AuthenticateRequest
                     if (cookie.Name.StartsWith(SESSION_COOKIE_PREFIX))
                         return cookie.Value;
             }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    ///     Retrieve token from __session cookie or Authorization header.
+    /// </summary>
+    /// <param name="request">The ASP.NET Core HTTP request</param>
+    /// <returns>The session token, if present</returns>
+    private static string? GetSessionToken(HttpRequest request)
+    {
+        // Check for Authorization header
+        if (request.Headers.TryGetValue("Authorization", out var authValues))
+        {
+            var authHeader = authValues.ToString();
+            if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+            {
+                return authHeader.Substring("Bearer ".Length).Trim();
+            }
+        }
+
+        // Check for __session cookie
+        if (request.Cookies.TryGetValue(SESSION_COOKIE_NAME, out var sessionCookie))
+        {
+            return sessionCookie;
         }
 
         return null;
