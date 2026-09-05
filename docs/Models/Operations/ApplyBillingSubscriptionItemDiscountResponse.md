@@ -1,0 +1,9 @@
+# ApplyBillingSubscriptionItemDiscountResponse
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `HttpMeta`                                                                                          | [HTTPMetadata](../../Models/Components/HTTPMetadata.md)                                             | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `CommerceDiscountRedemptionResponse`                                                                | [CommerceDiscountRedemptionResponse](../../Models/Components/CommerceDiscountRedemptionResponse.md) | :heavy_minus_sign:                                                                                  | A commerce discount redemption.                                                                     |

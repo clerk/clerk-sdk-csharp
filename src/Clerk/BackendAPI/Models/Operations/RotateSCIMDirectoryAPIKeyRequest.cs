@@ -14,7 +14,7 @@ namespace Clerk.BackendAPI.Models.Operations
     public class RotateSCIMDirectoryAPIKeyRequest
     {
         /// <summary>
-        /// The ID of the SCIM directory whose API key to rotate.
+        /// The ID of the directory whose API key to rotate.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=scim_directory_id")]
         public string ScimDirectoryId { get; set; } = default!;

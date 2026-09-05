@@ -33,5 +33,11 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("allowed_origins", NullValueHandling = NullValueHandling.Include)]
         public List<string>? AllowedOrigins { get; set; }
+
+        /// <summary>
+        /// The ID of the Clerk workspace that owns the instance's application. It is null when the application has no owner.
+        /// </summary>
+        [JsonProperty("workspace_id", NullValueHandling = NullValueHandling.Include)]
+        public string? WorkspaceId { get; set; }
     }
 }

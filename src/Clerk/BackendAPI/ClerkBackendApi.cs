@@ -113,6 +113,8 @@ namespace Clerk.BackendAPI
 
         public IScimDirectories ScimDirectories { get; }
 
+        public IDirectories Directories { get; }
+
         public IAdminPortalLinkTokens AdminPortalLinkTokens { get; }
 
         /// <summary>
@@ -299,6 +301,10 @@ namespace Clerk.BackendAPI
         /// </summary>
         public IScimDirectories ScimDirectories { get; private set; }
         /// <summary>
+        /// The Directories sub-SDK.
+        /// </summary>
+        public IDirectories Directories { get; private set; }
+        /// <summary>
         /// The AdminPortalLinkTokens sub-SDK.
         /// </summary>
         public IAdminPortalLinkTokens AdminPortalLinkTokens { get; private set; }
@@ -401,6 +407,8 @@ namespace Clerk.BackendAPI
             RoleSets = new RoleSets(SDKConfiguration);
 
             ScimDirectories = new ScimDirectories(SDKConfiguration);
+
+            Directories = new Directories(SDKConfiguration);
 
             AdminPortalLinkTokens = new AdminPortalLinkTokens(SDKConfiguration);
 
@@ -545,6 +553,8 @@ namespace Clerk.BackendAPI
             RoleSets = new RoleSets(SDKConfiguration);
 
             ScimDirectories = new ScimDirectories(SDKConfiguration);
+
+            Directories = new Directories(SDKConfiguration);
 
             AdminPortalLinkTokens = new AdminPortalLinkTokens(SDKConfiguration);
 

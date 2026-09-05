@@ -14,7 +14,7 @@ namespace Clerk.BackendAPI.Models.Operations
     public class GetSCIMDirectoryRequest
     {
         /// <summary>
-        /// The ID of the SCIM directory to retrieve.
+        /// The ID of the directory to retrieve.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=scim_directory_id")]
         public string ScimDirectoryId { get; set; } = default!;

@@ -28,13 +28,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string? Currency { get; set; } = "USD";
 
         /// <summary>
-        /// The monthly amount in cents. Must be at least $1 (100 cents) if not null.
+        /// The monthly amount in cents. Use `0` for a complimentary price. Positive amounts must be at least $1 (100 cents).
         /// </summary>
         [JsonProperty("amount", NullValueHandling = NullValueHandling.Include)]
         public long? Amount { get; set; }
 
         /// <summary>
-        /// The monthly amount in cents when billed annually. Must be at least $1 (100 cents) if not null.
+        /// The monthly amount in cents when billed annually. Use `0` for a complimentary price. Positive amounts must be at least $1 (100 cents).
         /// </summary>
         [JsonProperty("annual_monthly_amount")]
         public long? AnnualMonthlyAmount { get; set; } = null;
