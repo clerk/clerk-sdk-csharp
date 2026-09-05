@@ -29,7 +29,12 @@ namespace Clerk.BackendAPI
         /// </summary>
         /// <remarks>
         /// Returns a list of all users.<br/>
-        /// The users are returned sorted by creation date, with the newest users appearing first.
+        /// The users are returned sorted by creation date, with the newest users appearing first.<br/>
+        /// <br/>
+        /// To walk more than a few pages, paginate with `starting_after` rather than `offset`.<br/>
+        /// A cursor page costs the same no matter how far into the list it sits, while a large `offset`<br/>
+        /// has to walk and discard every row before it, so it gets progressively slower and eventually<br/>
+        /// times out. Cursor pagination requires the `created_at` ordering, which is the default.
         /// </remarks>
         /// <param name="request">A <see cref="GetUserListRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -795,7 +800,12 @@ namespace Clerk.BackendAPI
         /// </summary>
         /// <remarks>
         /// Returns a list of all users.<br/>
-        /// The users are returned sorted by creation date, with the newest users appearing first.
+        /// The users are returned sorted by creation date, with the newest users appearing first.<br/>
+        /// <br/>
+        /// To walk more than a few pages, paginate with `starting_after` rather than `offset`.<br/>
+        /// A cursor page costs the same no matter how far into the list it sits, while a large `offset`<br/>
+        /// has to walk and discard every row before it, so it gets progressively slower and eventually<br/>
+        /// times out. Cursor pagination requires the `created_at` ordering, which is the default.
         /// </remarks>
         /// <param name="request">A <see cref="GetUserListRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>

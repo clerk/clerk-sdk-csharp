@@ -50,7 +50,11 @@ namespace Clerk.BackendAPI
         /// If you don't use `+` or `-`, then `+` is implied. We only support one `order_by` parameter, and if multiple `order_by` parameters are provided, we will only keep the first one. For example,<br/>
         /// if you pass `order_by=name&amp;order_by=created_at`, we will consider only the first `order_by` parameter, which is `name`. The `created_at` parameter will be ignored in this case.
         /// </param>
-        /// <param name="nameQuery">Returns OAuth applications with names that match the given query, via case-insensitive partial match.</param>
+        /// <param name="nameQuery">
+        /// Returns OAuth applications with names that match the given query, via case-insensitive partial match.<br/>
+        /// Also returns the OAuth application whose `client_id` is exactly the given query, which is useful for<br/>
+        /// resolving a `client_id` to the OAuth application `id` required by the read, update and delete endpoints.
+        /// </param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="ListOAuthApplicationsResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
@@ -249,7 +253,11 @@ namespace Clerk.BackendAPI
         /// If you don't use `+` or `-`, then `+` is implied. We only support one `order_by` parameter, and if multiple `order_by` parameters are provided, we will only keep the first one. For example,<br/>
         /// if you pass `order_by=name&amp;order_by=created_at`, we will consider only the first `order_by` parameter, which is `name`. The `created_at` parameter will be ignored in this case.
         /// </param>
-        /// <param name="nameQuery">Returns OAuth applications with names that match the given query, via case-insensitive partial match.</param>
+        /// <param name="nameQuery">
+        /// Returns OAuth applications with names that match the given query, via case-insensitive partial match.<br/>
+        /// Also returns the OAuth application whose `client_id` is exactly the given query, which is useful for<br/>
+        /// resolving a `client_id` to the OAuth application `id` required by the read, update and delete endpoints.
+        /// </param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="ListOAuthApplicationsResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>

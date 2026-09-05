@@ -25,10 +25,10 @@ namespace Clerk.BackendAPI
     public interface IScimDirectories
     {
         /// <summary>
-        /// List all SCIM directories.
+        /// List all directories.
         /// </summary>
         /// <remarks>
-        /// Returns a list of all SCIM directories for the instance.
+        /// Returns a list of all directories for the instance.
         /// </remarks>
         /// <param name="limit">
         /// Applies a limit to the number of results returned.<br/>
@@ -52,10 +52,10 @@ namespace Clerk.BackendAPI
         );
 
         /// <summary>
-        /// Create a SCIM directory.
+        /// Create a directory.
         /// </summary>
         /// <remarks>
-        /// Create a new SCIM directory for the instance.
+        /// Create a new directory for the instance.
         /// </remarks>
         /// <param name="request">A <see cref="CreateSCIMDirectoryRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -70,12 +70,12 @@ namespace Clerk.BackendAPI
         );
 
         /// <summary>
-        /// Retrieve a SCIM directory.
+        /// Retrieve a directory.
         /// </summary>
         /// <remarks>
-        /// Returns the details of a SCIM directory.
+        /// Returns the details of a directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory to retrieve.</param>
+        /// <param name="scimDirectoryId">The ID of the directory to retrieve.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="GetSCIMDirectoryResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="scimDirectoryId"/> is null.</exception>
@@ -86,12 +86,12 @@ namespace Clerk.BackendAPI
         public  Task<GetSCIMDirectoryResponse> GetAsync(string scimDirectoryId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Update a SCIM directory.
+        /// Update a directory.
         /// </summary>
         /// <remarks>
-        /// Updates a SCIM directory.
+        /// Updates a directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory to update.</param>
+        /// <param name="scimDirectoryId">The ID of the directory to update.</param>
         /// <param name="requestBody">A <see cref="UpdateSCIMDirectoryRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateSCIMDirectoryResponse"/> response envelope when completed.</returns>
@@ -107,13 +107,13 @@ namespace Clerk.BackendAPI
         );
 
         /// <summary>
-        /// Delete a SCIM directory.
+        /// Delete a directory.
         /// </summary>
         /// <remarks>
-        /// Deletes a SCIM directory and stops provisioning for it. SCIM requests authenticated<br/>
+        /// Deletes a directory and stops provisioning for it. SCIM requests authenticated<br/>
         /// with the directory's API key are rejected afterwards.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory to delete.</param>
+        /// <param name="scimDirectoryId">The ID of the directory to delete.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="DeleteSCIMDirectoryResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="scimDirectoryId"/> is null.</exception>
@@ -124,15 +124,15 @@ namespace Clerk.BackendAPI
         public  Task<DeleteSCIMDirectoryResponse> DeleteAsync(string scimDirectoryId, RetryConfig? retryConfig = null);
 
         /// <summary>
-        /// Rotate a SCIM directory's API key.
+        /// Rotate a directory's API key.
         /// </summary>
         /// <remarks>
-        /// Generates a new API key for the SCIM directory and returns it in the `api_key` field.<br/>
+        /// Generates a new API key for the directory and returns it in the `api_key` field.<br/>
         /// This is the only way to obtain the key after creation, so make sure to update it in<br/>
         /// your identity provider. The previous key remains valid for a short grace period before<br/>
         /// it expires.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory whose API key to rotate.</param>
+        /// <param name="scimDirectoryId">The ID of the directory whose API key to rotate.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="RotateSCIMDirectoryAPIKeyResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="scimDirectoryId"/> is null.</exception>
@@ -149,9 +149,9 @@ namespace Clerk.BackendAPI
         /// List SCIM group role mappings.
         /// </summary>
         /// <remarks>
-        /// Returns the list of SCIM group to organization role mappings for a SCIM directory, ordered by precedence.
+        /// Returns the list of SCIM group to organization role mappings for a directory, ordered by precedence.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory.</param>
+        /// <param name="scimDirectoryId">The ID of the directory.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSCIMGroupRoleMappingsResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="scimDirectoryId"/> is null.</exception>
@@ -168,10 +168,10 @@ namespace Clerk.BackendAPI
         /// Create a SCIM group role mapping.
         /// </summary>
         /// <remarks>
-        /// Creates a new SCIM group to organization role mapping for a SCIM directory.<br/>
+        /// Creates a new SCIM group to organization role mapping for a directory.<br/>
         /// Group role mapping must be enabled on the directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory.</param>
+        /// <param name="scimDirectoryId">The ID of the directory.</param>
         /// <param name="requestBody">A <see cref="CreateSCIMGroupRoleMappingRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateSCIMGroupRoleMappingResponse"/> response envelope when completed.</returns>
@@ -195,7 +195,7 @@ namespace Clerk.BackendAPI
         /// precedence 1). Passing an empty array removes all mappings. Group role mapping must be<br/>
         /// enabled on the directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory.</param>
+        /// <param name="scimDirectoryId">The ID of the directory.</param>
         /// <param name="requestBody">A <see cref="ReplaceSCIMGroupRoleMappingsRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="ReplaceSCIMGroupRoleMappingsResponse"/> response envelope when completed.</returns>
@@ -217,7 +217,7 @@ namespace Clerk.BackendAPI
         /// Deletes a single SCIM group role mapping. Group role mapping must be enabled on the<br/>
         /// directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory.</param>
+        /// <param name="scimDirectoryId">The ID of the directory.</param>
         /// <param name="mappingId">The ID of the SCIM group role mapping to delete.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="DeleteSCIMGroupRoleMappingResponse"/> response envelope when completed.</returns>
@@ -247,10 +247,10 @@ namespace Clerk.BackendAPI
         }
 
         /// <summary>
-        /// List all SCIM directories.
+        /// List all directories.
         /// </summary>
         /// <remarks>
-        /// Returns a list of all SCIM directories for the instance.
+        /// Returns a list of all directories for the instance.
         /// </remarks>
         /// <param name="limit">
         /// Applies a limit to the number of results returned.<br/>
@@ -427,10 +427,10 @@ namespace Clerk.BackendAPI
 
 
         /// <summary>
-        /// Create a SCIM directory.
+        /// Create a directory.
         /// </summary>
         /// <remarks>
-        /// Create a new SCIM directory for the instance.
+        /// Create a new directory for the instance.
         /// </remarks>
         /// <param name="request">A <see cref="CreateSCIMDirectoryRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -598,12 +598,12 @@ namespace Clerk.BackendAPI
 
 
         /// <summary>
-        /// Retrieve a SCIM directory.
+        /// Retrieve a directory.
         /// </summary>
         /// <remarks>
-        /// Returns the details of a SCIM directory.
+        /// Returns the details of a directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory to retrieve.</param>
+        /// <param name="scimDirectoryId">The ID of the directory to retrieve.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="GetSCIMDirectoryResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="scimDirectoryId"/> is null.</exception>
@@ -768,12 +768,12 @@ namespace Clerk.BackendAPI
 
 
         /// <summary>
-        /// Update a SCIM directory.
+        /// Update a directory.
         /// </summary>
         /// <remarks>
-        /// Updates a SCIM directory.
+        /// Updates a directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory to update.</param>
+        /// <param name="scimDirectoryId">The ID of the directory to update.</param>
         /// <param name="requestBody">A <see cref="UpdateSCIMDirectoryRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="UpdateSCIMDirectoryResponse"/> response envelope when completed.</returns>
@@ -950,13 +950,13 @@ namespace Clerk.BackendAPI
 
 
         /// <summary>
-        /// Delete a SCIM directory.
+        /// Delete a directory.
         /// </summary>
         /// <remarks>
-        /// Deletes a SCIM directory and stops provisioning for it. SCIM requests authenticated<br/>
+        /// Deletes a directory and stops provisioning for it. SCIM requests authenticated<br/>
         /// with the directory's API key are rejected afterwards.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory to delete.</param>
+        /// <param name="scimDirectoryId">The ID of the directory to delete.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="DeleteSCIMDirectoryResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="scimDirectoryId"/> is null.</exception>
@@ -1124,15 +1124,15 @@ namespace Clerk.BackendAPI
 
 
         /// <summary>
-        /// Rotate a SCIM directory's API key.
+        /// Rotate a directory's API key.
         /// </summary>
         /// <remarks>
-        /// Generates a new API key for the SCIM directory and returns it in the `api_key` field.<br/>
+        /// Generates a new API key for the directory and returns it in the `api_key` field.<br/>
         /// This is the only way to obtain the key after creation, so make sure to update it in<br/>
         /// your identity provider. The previous key remains valid for a short grace period before<br/>
         /// it expires.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory whose API key to rotate.</param>
+        /// <param name="scimDirectoryId">The ID of the directory whose API key to rotate.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="RotateSCIMDirectoryAPIKeyResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="scimDirectoryId"/> is null.</exception>
@@ -1303,9 +1303,9 @@ namespace Clerk.BackendAPI
         /// List SCIM group role mappings.
         /// </summary>
         /// <remarks>
-        /// Returns the list of SCIM group to organization role mappings for a SCIM directory, ordered by precedence.
+        /// Returns the list of SCIM group to organization role mappings for a directory, ordered by precedence.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory.</param>
+        /// <param name="scimDirectoryId">The ID of the directory.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="ListSCIMGroupRoleMappingsResponse"/> response envelope when completed.</returns>
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="scimDirectoryId"/> is null.</exception>
@@ -1476,10 +1476,10 @@ namespace Clerk.BackendAPI
         /// Create a SCIM group role mapping.
         /// </summary>
         /// <remarks>
-        /// Creates a new SCIM group to organization role mapping for a SCIM directory.<br/>
+        /// Creates a new SCIM group to organization role mapping for a directory.<br/>
         /// Group role mapping must be enabled on the directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory.</param>
+        /// <param name="scimDirectoryId">The ID of the directory.</param>
         /// <param name="requestBody">A <see cref="CreateSCIMGroupRoleMappingRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="CreateSCIMGroupRoleMappingResponse"/> response envelope when completed.</returns>
@@ -1665,7 +1665,7 @@ namespace Clerk.BackendAPI
         /// precedence 1). Passing an empty array removes all mappings. Group role mapping must be<br/>
         /// enabled on the directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory.</param>
+        /// <param name="scimDirectoryId">The ID of the directory.</param>
         /// <param name="requestBody">A <see cref="ReplaceSCIMGroupRoleMappingsRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="ReplaceSCIMGroupRoleMappingsResponse"/> response envelope when completed.</returns>
@@ -1849,7 +1849,7 @@ namespace Clerk.BackendAPI
         /// Deletes a single SCIM group role mapping. Group role mapping must be enabled on the<br/>
         /// directory.
         /// </remarks>
-        /// <param name="scimDirectoryId">The ID of the SCIM directory.</param>
+        /// <param name="scimDirectoryId">The ID of the directory.</param>
         /// <param name="mappingId">The ID of the SCIM group role mapping to delete.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="DeleteSCIMGroupRoleMappingResponse"/> response envelope when completed.</returns>
