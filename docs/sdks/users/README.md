@@ -32,8 +32,10 @@
 * [DisableMfa](#disablemfa) - Disable a user's MFA methods
 * [DeleteBackupCodes](#deletebackupcodes) - Disable all user's Backup codes
 * [DeletePasskey](#deletepasskey) - Delete a user passkey
-* [ListTrustedDevices](#listtrusteddevices) - List a user's trusted devices
-* [RevokeTrustedDevice](#revoketrusteddevice) - Revoke a user's trusted device
+* [~~ListTrustedDevices~~](#listtrusteddevices) - List a user's trusted devices :warning: **Deprecated**
+* [~~RevokeTrustedDevice~~](#revoketrusteddevice) - Revoke a user's trusted device :warning: **Deprecated**
+* [ListBiometricCredentials](#listbiometriccredentials) - List a user's biometric credentials
+* [RevokeBiometricCredential](#revokebiometriccredential) - Revoke a user's biometric credential
 * [DeleteWeb3Wallet](#deleteweb3wallet) - Delete a user web3 wallet
 * [DeleteTOTP](#deletetotp) - Delete all the user's TOTPs
 * [DeleteExternalAccount](#deleteexternalaccount) - Delete External Account
@@ -45,6 +47,11 @@
 
 Returns a list of all users.
 The users are returned sorted by creation date, with the newest users appearing first.
+
+To walk more than a few pages, paginate with `starting_after` rather than `offset`.
+A cursor page costs the same no matter how far into the list it sits, while a large `offset`
+has to walk and discard every row before it, so it gets progressively slower and eventually
+times out. Cursor pagination requires the `created_at` ordering, which is the default.
 
 ### Example Usage
 
@@ -1282,9 +1289,11 @@ var res = await sdk.Users.DeletePasskeyAsync(
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## ListTrustedDevices
+## ~~ListTrustedDevices~~
 
 Returns the active trusted devices enrolled by the user.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1318,9 +1327,11 @@ var res = await sdk.Users.ListTrustedDevicesAsync(userId: "<id>");
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## RevokeTrustedDevice
+## ~~RevokeTrustedDevice~~
 
 Revokes an active trusted device enrolled by the user.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1349,6 +1360,82 @@ var res = await sdk.Users.RevokeTrustedDeviceAsync(
 ### Response
 
 **[RevokeUserTrustedDeviceResponse](../../Models/Operations/RevokeUserTrustedDeviceResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ListBiometricCredentials
+
+Returns the active biometric credentials enrolled by the user.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="ListUserBiometricCredentials" method="get" path="/users/{user_id}/biometric_credentials" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.ListBiometricCredentialsAsync(userId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `UserId`                                                    | *string*                                                    | :heavy_check_mark:                                          | The ID of the user whose biometric credentials are returned |
+
+### Response
+
+**[ListUserBiometricCredentialsResponse](../../Models/Operations/ListUserBiometricCredentialsResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## RevokeBiometricCredential
+
+Revokes an active biometric credential enrolled by the user.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="RevokeUserBiometricCredential" method="delete" path="/users/{user_id}/biometric_credentials/{biometric_credential_id}" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.RevokeBiometricCredentialAsync(
+    userId: "<id>",
+    biometricCredentialId: "<id>"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `UserId`                                              | *string*                                              | :heavy_check_mark:                                    | The ID of the user that owns the biometric credential |
+| `BiometricCredentialId`                               | *string*                                              | :heavy_check_mark:                                    | The ID of the biometric credential to revoke          |
+
+### Response
+
+**[RevokeUserBiometricCredentialResponse](../../Models/Operations/RevokeUserBiometricCredentialResponse.md)**
 
 ### Errors
 

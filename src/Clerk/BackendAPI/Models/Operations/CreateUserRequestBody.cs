@@ -142,6 +142,14 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? SkipPasswordRequirement { get; set; } = null;
 
         /// <summary>
+        /// When set to `true`, the instance's restrictions are not applied to this user.<br/>
+        /// Those settings are the allowlist, the blocklist, blocked disposable email domains and blocked email subaddresses, and they normally reject a matching identifier here just as they do at sign-up.<br/>
+        /// Use this when your backend is creating a user it already trusts, such as during a migration or from an admin tool.
+        /// </summary>
+        [JsonProperty("skip_restriction_checks")]
+        public bool? SkipRestrictionChecks { get; set; } = null;
+
+        /// <summary>
         /// In case TOTP is configured on the instance, you can provide the secret to enable it on the newly created user without the need to reset it.<br/>
         /// Please note that currently the supported options are:<br/>
         /// * Period: 30 seconds<br/>
@@ -224,7 +232,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? CreatedAt { get; set; } = null;
 
         /// <summary>
-        /// When set to `true`, the user will bypass client trust checks during sign-in.
+        /// When set to `true`, the user will bypass Device Trust checks during sign-in.
         /// </summary>
         [JsonProperty("bypass_client_trust")]
         public bool? BypassClientTrust { get; set; } = null;

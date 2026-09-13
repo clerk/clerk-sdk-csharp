@@ -14,6 +14,9 @@ namespace Clerk.BackendAPI.Models.Operations
 
     public class UpdateInstanceProtectRequestBody
     {
+        /// <summary>
+        /// Set true to enforce Protect rules on this instance. Set false to stop enforcing and return the instance to its default posture, where traffic is still evaluated in shadow but nothing is blocked. This does not remove the instance from Protect.
+        /// </summary>
         [JsonProperty("rules_enabled")]
         public bool? RulesEnabled { get; set; } = null;
 

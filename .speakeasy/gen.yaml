@@ -29,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 csharp:
-  version: 3.0.0
+  version: 3.0.1
   additionalDependencies:
     - package: Microsoft.AspNetCore.Http
       version: 2.3.0
@@ -69,6 +69,7 @@ csharp:
   presenceAwareJsonSerialization: false
   respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
+  schemaValidation: strict
   sourceDirectory: src
   targetFramework: dotnetVersion
   unionStrategy: left-to-right

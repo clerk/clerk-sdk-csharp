@@ -209,12 +209,26 @@ namespace Clerk.BackendAPI.Models.Operations
         public long? Offset { get; set; } = 0;
 
         /// <summary>
+        /// A cursor for pagination: the `id` of the last user on the previous page. Returns the users that follow it.<br/>
+        /// <br/>
+        /// **Requires ordering by `created_at`** — that is, `order_by` omitted, or set to `created_at`, `+created_at`<br/>
+        /// or `-created_at`. Any other `order_by` value is rejected with a 422: the other orderings sort by a value<br/>
+        /// that is neither unique per user nor immutable, so a cursor over them would skip or repeat users.<br/>
+        /// <br/>
+        /// Cannot be combined with a non-zero `offset`, which is also a 422. Keep every other parameter identical<br/>
+        /// across requests, and stop when a page returns fewer than `limit` users.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=starting_after")]
+        public string? StartingAfter { get; set; }
+
+        /// <summary>
         /// Allows to return users in a particular order.<br/>
         /// At the moment, you can order the returned users by their `created_at`,`updated_at`,`email_address`,`web3wallet`,`first_name`,`last_name`,`phone_number`,`username`,`last_active_at`,`last_sign_in_at`.<br/>
         /// In order to specify the direction, you can use the `+/-` symbols prepended in the property to order by.<br/>
         /// For example, if you want users to be returned in descending order according to their `created_at` property, you can use `-created_at`.<br/>
         /// If you don't use `+` or `-`, then `+` is implied. We only support one `order_by` parameter, and if multiple `order_by` parameters are provided, we will only keep the first one. For example,<br/>
-        /// if you pass `order_by=username&amp;order_by=created_at`, we will consider only the first `order_by` parameter, which is `username`. The `created_at` parameter will be ignored in this case.
+        /// if you pass `order_by=username&amp;order_by=created_at`, we will consider only the first `order_by` parameter, which is `username`. The `created_at` parameter will be ignored in this case.<br/>
+        /// Only the `created_at` orderings can be combined with `starting_after` cursor pagination; see that parameter.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=order_by")]
         public string? OrderBy { get; set; } = "-created_at";
