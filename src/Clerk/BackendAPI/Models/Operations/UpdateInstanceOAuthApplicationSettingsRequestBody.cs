@@ -22,7 +22,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? DynamicOauthClientRegistration { get; set; } = null;
 
         /// <summary>
-        /// Default scopes. Set to null to reset to Clerk-provided defaults.
+        /// Default scopes assigned when a dynamically registered or first-contact CIMD client omits `scope`. Accepts built-in keys and current custom catalog keys. `advertised` does not affect eligibility. Duplicate keys, unknown keys, and `offline_access` are rejected. An empty array or null resets to Clerk-provided defaults.
         /// </summary>
         [JsonProperty("default_scopes")]
         public List<string>? DefaultScopes { get; set; } = null;
@@ -32,6 +32,18 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("oauth_jwt_access_tokens")]
         public bool? OauthJwtAccessTokens { get; set; } = null;
+
+        /// <summary>
+        /// Whether OAuth access tokens can include an aud claim derived from the RFC 8707 resource parameter.
+        /// </summary>
+        [JsonProperty("aud_claim_enabled")]
+        public bool? AudClaimEnabled { get; set; } = null;
+
+        /// <summary>
+        /// Whether all new OAuth authorization-code requests must use PKCE with the S256 challenge method.
+        /// </summary>
+        [JsonProperty("pkce_required")]
+        public bool? PkceRequired { get; set; } = null;
 
         /// <summary>
         /// Whether the instance advertises support for Client ID Metadata Documents in its OAuth authorization server metadata.

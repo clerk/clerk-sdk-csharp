@@ -48,7 +48,7 @@ var res = await sdk.ActorTokens.CreateAsync(req);
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 402, 403, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Revoke

@@ -40,10 +40,24 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? DevelopmentOrigin { get; set; } = null;
 
         /// <summary>
-        /// For browser-like stacks such as browser extensions, Electron (not officially supported), or Capacitor.js (not officially supported), the instance allowed origins need to be updated with the request origin value. For Chrome extensions popup, background, or service worker pages, the origin is chrome-extension://extension_uuid. For Electron apps the default origin is http://localhost:3000. For Capacitor, the origin is capacitor://localhost.
+        /// For browser-like stacks such as browser extensions, Electron (not officially supported), or Capacitor.js (not officially supported), the instance allowed origins need to be updated with the request origin value. For Chrome extensions popup, background, or service worker pages, the origin is chrome-extension://extension_uuid. For Electron apps the default origin is http://localhost:3000. For Capacitor, the origin is capacitor://localhost.<br/>
+        /// Send an empty array to remove all allowed origins. A null value leaves the current list unchanged.
         /// </summary>
         [JsonProperty("allowed_origins")]
-        public List<string>? AllowedOrigins { get; set; }
+        public List<string>? AllowedOrigins { get; set; } = null;
+
+        /// <summary>
+        /// Subdomains of the instance's own domains that may originate requests while `subdomain_allowlist_enabled` is true. Each entry is either an exact host (`app.example.com`) or a wildcard anchored on a host beneath one of the instance's domains (`*.preview.example.com`), which covers every host under that anchor but not the anchor itself.<br/>
+        /// Entries are stored folded to lower case with any trailing dot removed, the form the origin check compares against, so entries differing only in those respects are one entry. Entries already stored are not validated again, so a list read back from the instance can always be written again unchanged. Send an empty array to remove all entries. A null value leaves the current list unchanged. Production instances only.
+        /// </summary>
+        [JsonProperty("allowed_subdomains")]
+        public List<string>? AllowedSubdomains { get; set; } = null;
+
+        /// <summary>
+        /// Whether requests from subdomains of the instance's own domains are restricted to `allowed_subdomains`. When false, every subdomain of the instance's domain is accepted. Production instances only.
+        /// </summary>
+        [JsonProperty("subdomain_allowlist_enabled")]
+        public bool? SubdomainAllowlistEnabled { get; set; } = null;
 
         /// <summary>
         /// Whether the instance should operate in cookieless development mode (i.e. without third-party cookies).<br/>

@@ -39,6 +39,12 @@ namespace Clerk.BackendAPI.Models.Components
         public string? ScimPath { get; set; }
 
         /// <summary>
+        /// GJSON path to extract the attribute value from directory sync user resources. Same value as `scim_path`.
+        /// </summary>
+        [JsonProperty("directory_path")]
+        public string? DirectoryPath { get; set; }
+
+        /// <summary>
         /// When true, the attribute supports multiple values; values from the IdP are written to public_metadata as an array. Defaults to false.
         /// </summary>
         [JsonProperty("multi_valued")]

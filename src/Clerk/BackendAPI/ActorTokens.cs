@@ -36,7 +36,7 @@ namespace Clerk.BackendAPI
         /// <returns>An awaitable task that returns a <see cref="CreateActorTokenResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 402 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 402, 403 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<CreateActorTokenResponse> CreateAsync(
             CreateActorTokenRequestBody? request = null,
@@ -85,7 +85,7 @@ namespace Clerk.BackendAPI
         /// <returns>An awaitable task that returns a <see cref="CreateActorTokenResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 402 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 402, 403 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<CreateActorTokenResponse> CreateAsync(
             CreateActorTokenRequestBody? request = null,
@@ -212,7 +212,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 402, 422}.Contains(responseStatusCode))
+            else if(new List<int>{400, 402, 403, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

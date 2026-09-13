@@ -1,0 +1,12 @@
+# DirectoryGroupRoleMappingDeleted
+
+A directory group role mapping was deleted.
+
+
+## Fields
+
+| Field                                                                                                       | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `Object`                                                                                                    | [DirectoryGroupRoleMappingDeletedObject](../../Models/Components/DirectoryGroupRoleMappingDeletedObject.md) | :heavy_check_mark:                                                                                          | String representing the object's type.                                                                      |
+| `Id`                                                                                                        | *string*                                                                                                    | :heavy_check_mark:                                                                                          | The ID of the deleted directory group role mapping.                                                         |
+| `Deleted`                                                                                                   | *bool*                                                                                                      | :heavy_check_mark:                                                                                          | Whether the directory group role mapping was successfully deleted.                                          |

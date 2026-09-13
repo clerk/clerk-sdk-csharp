@@ -4,12 +4,12 @@
 
 ### Available Operations
 
-* [List](#list) - List all SCIM directories
-* [Create](#create) - Create a SCIM directory
-* [Get](#get) - Retrieve a SCIM directory
-* [Update](#update) - Update a SCIM directory
-* [Delete](#delete) - Delete a SCIM directory
-* [RotateApiKey](#rotateapikey) - Rotate a SCIM directory's API key
+* [List](#list) - List all directories
+* [Create](#create) - Create a directory
+* [Get](#get) - Retrieve a directory
+* [Update](#update) - Update a directory
+* [Delete](#delete) - Delete a directory
+* [RotateApiKey](#rotateapikey) - Rotate a directory's API key
 * [ListGroupRoleMappings](#listgrouprolemappings) - List SCIM group role mappings
 * [CreateGroupRoleMapping](#creategrouprolemapping) - Create a SCIM group role mapping
 * [ReplaceGroupRoleMappings](#replacegrouprolemappings) - Replace SCIM group role mappings
@@ -17,7 +17,7 @@
 
 ## List
 
-Returns a list of all SCIM directories for the instance.
+Returns a list of all directories for the instance.
 
 ### Example Usage
 
@@ -56,7 +56,7 @@ var res = await sdk.ScimDirectories.ListAsync(
 
 ## Create
 
-Create a new SCIM directory for the instance.
+Create a new directory for the instance.
 
 ### Example Usage
 
@@ -94,7 +94,7 @@ var res = await sdk.ScimDirectories.CreateAsync(req);
 
 ## Get
 
-Returns the details of a SCIM directory.
+Returns the details of a directory.
 
 ### Example Usage
 
@@ -112,9 +112,9 @@ var res = await sdk.ScimDirectories.GetAsync(scimDirectoryId: "<id>");
 
 ### Parameters
 
-| Parameter                                | Type                                     | Required                                 | Description                              |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| `ScimDirectoryId`                        | *string*                                 | :heavy_check_mark:                       | The ID of the SCIM directory to retrieve |
+| Parameter                           | Type                                | Required                            | Description                         |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| `ScimDirectoryId`                   | *string*                            | :heavy_check_mark:                  | The ID of the directory to retrieve |
 
 ### Response
 
@@ -129,7 +129,7 @@ var res = await sdk.ScimDirectories.GetAsync(scimDirectoryId: "<id>");
 
 ## Update
 
-Updates a SCIM directory.
+Updates a directory.
 
 ### Example Usage
 
@@ -149,7 +149,7 @@ var res = await sdk.ScimDirectories.UpdateAsync(scimDirectoryId: "<id>");
 
 | Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
 | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `ScimDirectoryId`                                                                           | *string*                                                                                    | :heavy_check_mark:                                                                          | The ID of the SCIM directory to update                                                      |
+| `ScimDirectoryId`                                                                           | *string*                                                                                    | :heavy_check_mark:                                                                          | The ID of the directory to update                                                           |
 | `RequestBody`                                                                               | [UpdateSCIMDirectoryRequestBody](../../Models/Operations/UpdateSCIMDirectoryRequestBody.md) | :heavy_minus_sign:                                                                          | N/A                                                                                         |
 
 ### Response
@@ -165,7 +165,7 @@ var res = await sdk.ScimDirectories.UpdateAsync(scimDirectoryId: "<id>");
 
 ## Delete
 
-Deletes a SCIM directory and stops provisioning for it. SCIM requests authenticated
+Deletes a directory and stops provisioning for it. SCIM requests authenticated
 with the directory's API key are rejected afterwards.
 
 ### Example Usage
@@ -184,9 +184,9 @@ var res = await sdk.ScimDirectories.DeleteAsync(scimDirectoryId: "<id>");
 
 ### Parameters
 
-| Parameter                              | Type                                   | Required                               | Description                            |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| `ScimDirectoryId`                      | *string*                               | :heavy_check_mark:                     | The ID of the SCIM directory to delete |
+| Parameter                         | Type                              | Required                          | Description                       |
+| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
+| `ScimDirectoryId`                 | *string*                          | :heavy_check_mark:                | The ID of the directory to delete |
 
 ### Response
 
@@ -201,7 +201,7 @@ var res = await sdk.ScimDirectories.DeleteAsync(scimDirectoryId: "<id>");
 
 ## RotateApiKey
 
-Generates a new API key for the SCIM directory and returns it in the `api_key` field.
+Generates a new API key for the directory and returns it in the `api_key` field.
 This is the only way to obtain the key after creation, so make sure to update it in
 your identity provider. The previous key remains valid for a short grace period before
 it expires.
@@ -222,9 +222,9 @@ var res = await sdk.ScimDirectories.RotateApiKeyAsync(scimDirectoryId: "<id>");
 
 ### Parameters
 
-| Parameter                                            | Type                                                 | Required                                             | Description                                          |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| `ScimDirectoryId`                                    | *string*                                             | :heavy_check_mark:                                   | The ID of the SCIM directory whose API key to rotate |
+| Parameter                                       | Type                                            | Required                                        | Description                                     |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `ScimDirectoryId`                               | *string*                                        | :heavy_check_mark:                              | The ID of the directory whose API key to rotate |
 
 ### Response
 
@@ -234,12 +234,12 @@ var res = await sdk.ScimDirectories.RotateApiKeyAsync(scimDirectoryId: "<id>");
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 403, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 403, 404, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## ListGroupRoleMappings
 
-Returns the list of SCIM group to organization role mappings for a SCIM directory, ordered by precedence.
+Returns the list of SCIM group to organization role mappings for a directory, ordered by precedence.
 
 ### Example Usage
 
@@ -257,9 +257,9 @@ var res = await sdk.ScimDirectories.ListGroupRoleMappingsAsync(scimDirectoryId: 
 
 ### Parameters
 
-| Parameter                     | Type                          | Required                      | Description                   |
-| ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
-| `ScimDirectoryId`             | *string*                      | :heavy_check_mark:            | The ID of the SCIM directory. |
+| Parameter                | Type                     | Required                 | Description              |
+| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| `ScimDirectoryId`        | *string*                 | :heavy_check_mark:       | The ID of the directory. |
 
 ### Response
 
@@ -274,8 +274,9 @@ var res = await sdk.ScimDirectories.ListGroupRoleMappingsAsync(scimDirectoryId: 
 
 ## CreateGroupRoleMapping
 
-Creates a new SCIM group to organization role mapping for a SCIM directory.
-Group role mapping must be enabled on the directory.
+Creates a new SCIM group to organization role mapping for a directory.
+Mappings can be created while group role mapping is disabled on the
+directory, but they only take effect once it is enabled.
 
 ### Example Usage
 
@@ -302,7 +303,7 @@ var res = await sdk.ScimDirectories.CreateGroupRoleMappingAsync(
 
 | Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
 | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `ScimDirectoryId`                                                                                         | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The ID of the SCIM directory.                                                                             |
+| `ScimDirectoryId`                                                                                         | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The ID of the directory.                                                                                  |
 | `RequestBody`                                                                                             | [CreateSCIMGroupRoleMappingRequestBody](../../Models/Operations/CreateSCIMGroupRoleMappingRequestBody.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
 
 ### Response
@@ -320,8 +321,9 @@ var res = await sdk.ScimDirectories.CreateGroupRoleMappingAsync(
 
 Replaces the entire set of SCIM group role mappings for a directory. The position of
 each item in the `mappings` array determines its precedence (the first item gets
-precedence 1). Passing an empty array removes all mappings. Group role mapping must be
-enabled on the directory.
+precedence 1). Passing an empty array removes all mappings. Mappings can be replaced
+while group role mapping is disabled on the directory, but they only take effect once
+it is enabled.
 
 ### Example Usage
 
@@ -348,7 +350,7 @@ var res = await sdk.ScimDirectories.ReplaceGroupRoleMappingsAsync(
 
 | Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
 | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `ScimDirectoryId`                                                                                             | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the SCIM directory.                                                                                 |
+| `ScimDirectoryId`                                                                                             | *string*                                                                                                      | :heavy_check_mark:                                                                                            | The ID of the directory.                                                                                      |
 | `RequestBody`                                                                                                 | [ReplaceSCIMGroupRoleMappingsRequestBody](../../Models/Operations/ReplaceSCIMGroupRoleMappingsRequestBody.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
 
 ### Response
@@ -364,8 +366,9 @@ var res = await sdk.ScimDirectories.ReplaceGroupRoleMappingsAsync(
 
 ## DeleteGroupRoleMapping
 
-Deletes a single SCIM group role mapping. Group role mapping must be enabled on the
-directory.
+Deletes a single SCIM group role mapping. Mappings can be deleted while group role
+mapping is disabled on the directory, but the change only takes effect once it is
+enabled.
 
 ### Example Usage
 
@@ -388,7 +391,7 @@ var res = await sdk.ScimDirectories.DeleteGroupRoleMappingAsync(
 
 | Parameter                                        | Type                                             | Required                                         | Description                                      |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `ScimDirectoryId`                                | *string*                                         | :heavy_check_mark:                               | The ID of the SCIM directory.                    |
+| `ScimDirectoryId`                                | *string*                                         | :heavy_check_mark:                               | The ID of the directory.                         |
 | `MappingId`                                      | *string*                                         | :heavy_check_mark:                               | The ID of the SCIM group role mapping to delete. |
 
 ### Response

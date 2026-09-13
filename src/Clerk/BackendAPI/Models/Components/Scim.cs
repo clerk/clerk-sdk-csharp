@@ -13,24 +13,24 @@ namespace Clerk.BackendAPI.Models.Components
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Metadata describing a user's linkage to a SCIM directory. This object is only delivered on `user.created` and `user.updated` webhook events, and only when the user is provisioned through a SCIM directory. Its absence does not necessarily mean the user is not SCIM-managed.
+    /// Metadata describing a user's linkage to a directory. This object is only delivered on `user.created` and `user.updated` webhook events, and only when the user is provisioned through a directory. Its absence does not necessarily mean the user is not managed by a directory.
     /// </summary>
     public class Scim
     {
         /// <summary>
-        /// The ID of the SCIM directory the user is provisioned from.
+        /// The ID of the directory the user is provisioned from.
         /// </summary>
         [JsonProperty("directory_id")]
         public string DirectoryId { get; set; } = default!;
 
         /// <summary>
-        /// Whether the SCIM directory is currently enabled. Omitted when false.
+        /// Whether the directory is currently enabled. Omitted when false.
         /// </summary>
         [JsonProperty("directory_enabled")]
         public bool? DirectoryEnabled { get; set; }
 
         /// <summary>
-        /// The user's external ID as reported by the SCIM directory, if any.
+        /// The user's external ID as reported by the directory, if any.
         /// </summary>
         [JsonProperty("external_id", NullValueHandling = NullValueHandling.Include)]
         public string? ExternalId { get; set; }

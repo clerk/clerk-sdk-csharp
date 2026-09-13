@@ -41,6 +41,13 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? AdminDeleteEnabled { get; set; } = null;
 
         /// <summary>
+        /// Whether this organization can configure self-serve enterprise SSO.<br/>
+        /// Requires the instance to have the self-serve SSO entitlement enabled.
+        /// </summary>
+        [JsonProperty("self_serve_sso_enabled")]
+        public bool? SelfServeSsoEnabled { get; set; } = null;
+
+        /// <summary>
         /// A custom date/time denoting _when_ the organization was created, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
         /// </summary>
         [JsonProperty("created_at")]
