@@ -47,9 +47,15 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("pkce_required")]
         public bool PkceRequired { get; set; } = default!;
 
+        [JsonProperty("device_authorization_grant_enabled")]
+        public bool DeviceAuthorizationGrantEnabled { get; set; } = default!;
+
         [JsonProperty("public")]
         public bool Public { get; set; } = default!;
 
+        /// <summary>
+        /// The complete scope ceiling for the OAuth application, as a space-delimited list of built-in and assigned custom scope keys.
+        /// </summary>
         [JsonProperty("scopes")]
         public string Scopes { get; set; } = default!;
 

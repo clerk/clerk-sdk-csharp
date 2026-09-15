@@ -37,7 +37,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? CallbackUrl { get; set; } = null;
 
         /// <summary>
-        /// Define the allowed scopes for the new OAuth applications that dictate the user payload of the OAuth user info endpoint. Available scopes are `profile`, `email`, `public_metadata`, `private_metadata`. Provide the requested scopes as a string, separated by spaces.
+        /// Define the application's built-in and custom scope ceiling. Provide scope keys as a space-delimited string. Custom keys must exist in the instance OAuth scope catalog.
         /// </summary>
         [JsonProperty("scopes")]
         public string? Scopes { get; set; } = "profile email";
@@ -53,6 +53,12 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("pkce_required")]
         public bool? PkceRequired { get; set; } = false;
+
+        /// <summary>
+        /// True to enable the OAuth Device Authorization Grant for this application. Enabling requires the OAuth Device Authorization Grant feature to be enabled for the instance.
+        /// </summary>
+        [JsonProperty("device_authorization_grant_enabled")]
+        public bool? DeviceAuthorizationGrantEnabled { get; set; } = false;
 
         /// <summary>
         /// If true, this client is public and you can use the Proof Key of Code Exchange (PKCE) flow.

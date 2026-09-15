@@ -16,19 +16,19 @@ namespace Clerk.BackendAPI.Models.Operations
     public class UpdateSCIMDirectoryRequestBody
     {
         /// <summary>
-        /// A human-friendly name for the SCIM directory.
+        /// A human-friendly name for the directory.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// Whether the SCIM directory is enabled.
+        /// Whether the directory is enabled.
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
 
         /// <summary>
-        /// The identity provider for this SCIM directory.
+        /// The identity provider for this directory.
         /// </summary>
         [JsonProperty("provider")]
         public string? Provider { get; set; }
@@ -41,7 +41,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public Dictionary<string, string?>? AttributeMapping { get; set; }
 
         /// <summary>
-        /// Whether group-to-role mapping is enabled for this SCIM directory.
+        /// Whether group-to-role mapping is enabled for this directory.
         /// </summary>
         [JsonProperty("group_role_mapping_enabled")]
         public bool? GroupRoleMappingEnabled { get; set; }

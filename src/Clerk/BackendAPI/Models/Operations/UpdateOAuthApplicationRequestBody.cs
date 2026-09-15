@@ -37,10 +37,10 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? CallbackUrl { get; set; } = null;
 
         /// <summary>
-        /// Define the allowed scopes for the new OAuth applications that dictate the user payload of the OAuth user info endpoint. Available scopes are `profile`, `email`, `public_metadata`, `private_metadata`. Provide the requested scopes as a string, separated by spaces.
+        /// Replace the application's complete built-in and custom scope ceiling. Provide scope keys as a space-delimited string. Custom keys must exist in the instance OAuth scope catalog. Required built-in scopes, such as `offline_access`, must be included in the replacement set, otherwise the request is rejected. Omit this field to leave all scope assignments unchanged.
         /// </summary>
         [JsonProperty("scopes")]
-        public string? Scopes { get; set; } = "profile email";
+        public string? Scopes { get; set; } = null;
 
         /// <summary>
         /// True to enable a consent screen to display in the authentication flow. This cannot be disabled for dynamically registered OAuth Applications.
@@ -53,6 +53,12 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("pkce_required")]
         public bool? PkceRequired { get; set; } = null;
+
+        /// <summary>
+        /// True to enable the OAuth Device Authorization Grant for this application. Enabling requires the OAuth Device Authorization Grant feature to be enabled for the instance. Omit this field to leave the setting unchanged.
+        /// </summary>
+        [JsonProperty("device_authorization_grant_enabled")]
+        public bool? DeviceAuthorizationGrantEnabled { get; set; } = null;
 
         /// <summary>
         /// If true, this client is public and you can use the Proof Key of Code Exchange (PKCE) flow.
