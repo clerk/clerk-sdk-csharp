@@ -50,6 +50,12 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("admin_delete_enabled")]
         public bool AdminDeleteEnabled { get; set; } = default!;
 
+        /// <summary>
+        /// Whether this organization can configure self-serve enterprise SSO.
+        /// </summary>
+        [JsonProperty("self_serve_sso_enabled")]
+        public bool? SelfServeSsoEnabled { get; set; } = null;
+
         [JsonProperty("public_metadata")]
         public Dictionary<string, object> PublicMetadata { get; set; } = default!;
 

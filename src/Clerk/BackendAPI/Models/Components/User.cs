@@ -205,7 +205,7 @@ namespace Clerk.BackendAPI.Models.Components
         public long? LegalAcceptedAt { get; set; }
 
         /// <summary>
-        /// When set to `true`, the user will bypass client trust checks during sign-in.
+        /// When set to `true`, the user will bypass Device Trust checks during sign-in.
         /// </summary>
         [JsonProperty("bypass_client_trust")]
         public bool? BypassClientTrust { get; set; } = false;
