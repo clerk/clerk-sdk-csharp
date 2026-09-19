@@ -205,11 +205,28 @@ namespace Clerk.BackendAPI.Models.Components
         public long? LegalAcceptedAt { get; set; }
 
         /// <summary>
-        /// When set to `true`, the user will bypass client trust checks during sign-in.
+        /// When set to `true`, the user will bypass Device Trust checks during sign-in.
         /// </summary>
         [JsonProperty("bypass_client_trust")]
         public bool? BypassClientTrust { get; set; } = false;
 
+        /// <summary>
+        /// All loaded directory links. Omitted when links were not loaded; an empty array means the user has no directory links.
+        /// </summary>
+        [JsonProperty("directories")]
+        public List<SCIMUserMetadata>? Directories { get; set; }
+
+        /// <summary>
+        /// The most recently updated directory link. Use directories for all links.
+        /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
+        [JsonProperty("directory")]
+        public UserDirectory? Directory { get; set; }
+
+        /// <summary>
+        /// Alias of directory. Use directories for all links.
+        /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("scim")]
         public Scim? Scim { get; set; } = null;
     }

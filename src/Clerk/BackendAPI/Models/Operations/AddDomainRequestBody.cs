@@ -21,10 +21,10 @@ namespace Clerk.BackendAPI.Models.Operations
         public string Name { get; set; } = default!;
 
         /// <summary>
-        /// Marks the new domain as satellite. Only `true` is accepted at the moment.
+        /// Marks the new domain as satellite. Set to `false` only when migrating a production instance from an active provider domain to a custom domain.
         /// </summary>
         [JsonProperty("is_satellite")]
-        public bool IsSatellite { get; } = true;
+        public bool IsSatellite { get; set; } = default!;
 
         /// <summary>
         /// The full URL of the proxy which will forward requests to the Clerk Frontend API for this domain. Applicable only to production instances.

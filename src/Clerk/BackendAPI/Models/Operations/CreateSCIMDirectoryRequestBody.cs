@@ -17,19 +17,19 @@ namespace Clerk.BackendAPI.Models.Operations
     public class CreateSCIMDirectoryRequestBody
     {
         /// <summary>
-        /// The ID of the enterprise connection to associate with this SCIM directory.
+        /// The ID of the enterprise connection to associate with this directory.
         /// </summary>
         [JsonProperty("enterprise_connection_id")]
         public string EnterpriseConnectionId { get; set; } = default!;
 
         /// <summary>
-        /// A human-friendly name for the SCIM directory.
+        /// A human-friendly name for the directory.
         /// </summary>
         [JsonProperty("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// The identity provider for this SCIM directory.
+        /// The identity provider for this directory.
         /// </summary>
         [JsonProperty("provider")]
         public string Provider { get; set; } = default!;
