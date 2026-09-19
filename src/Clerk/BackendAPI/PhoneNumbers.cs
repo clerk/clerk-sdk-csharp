@@ -127,7 +127,15 @@ namespace Clerk.BackendAPI
         /// backend driving its own frontend can react on every attempt — an incorrect<br/>
         /// or expired code is reported through the status, not as an error. Resubmitting<br/>
         /// a verification whose code was already accepted is rejected with a<br/>
-        /// `verification_already_verified` error. If the code<br/>
+        /// `verification_already_verified` error. If the code for this verification<br/>
+        /// could not be sent (the SMS provider refused or failed the send after<br/>
+        /// prepare_verification had returned), the attempt is rejected with a<br/>
+        /// `verification_code_not_sent` error and no attempt is counted; call<br/>
+        /// prepare_verification again to send a new code. If too many codes have been<br/>
+        /// checked for this phone number recently, the attempt is rejected with a<br/>
+        /// `verification_code_too_many_attempts` error and no attempt is counted; the<br/>
+        /// limit is per phone number, so wait for the `Retry-After` period rather than<br/>
+        /// sending a new code. If the code<br/>
         /// is correct and the phone number is not already verified, it is also marked<br/>
         /// as verified as a side effect (just as it would be in a frontend verification<br/>
         /// flow); an already verified phone number is left unchanged. It never creates<br/>
@@ -140,7 +148,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ArgumentNullException">One of <paramref name="phoneNumberId"/> or <paramref name="requestBody"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 422, 429 or 500 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<AttemptPhoneNumberVerificationResponse> AttemptVerificationAsync(
             string phoneNumberId,
@@ -1094,7 +1102,15 @@ namespace Clerk.BackendAPI
         /// backend driving its own frontend can react on every attempt — an incorrect<br/>
         /// or expired code is reported through the status, not as an error. Resubmitting<br/>
         /// a verification whose code was already accepted is rejected with a<br/>
-        /// `verification_already_verified` error. If the code<br/>
+        /// `verification_already_verified` error. If the code for this verification<br/>
+        /// could not be sent (the SMS provider refused or failed the send after<br/>
+        /// prepare_verification had returned), the attempt is rejected with a<br/>
+        /// `verification_code_not_sent` error and no attempt is counted; call<br/>
+        /// prepare_verification again to send a new code. If too many codes have been<br/>
+        /// checked for this phone number recently, the attempt is rejected with a<br/>
+        /// `verification_code_too_many_attempts` error and no attempt is counted; the<br/>
+        /// limit is per phone number, so wait for the `Retry-After` period rather than<br/>
+        /// sending a new code. If the code<br/>
         /// is correct and the phone number is not already verified, it is also marked<br/>
         /// as verified as a side effect (just as it would be in a frontend verification<br/>
         /// flow); an already verified phone number is left unchanged. It never creates<br/>
@@ -1107,7 +1123,7 @@ namespace Clerk.BackendAPI
         /// <exception cref="ArgumentNullException">One of <paramref name="phoneNumberId"/> or <paramref name="requestBody"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404 or 500 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 422, 429 or 500 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<AttemptPhoneNumberVerificationResponse> AttemptVerificationAsync(
             string phoneNumberId,
@@ -1244,7 +1260,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 401, 403, 404}.Contains(responseStatusCode))
+            else if(new List<int>{400, 401, 403, 404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
