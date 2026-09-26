@@ -31,6 +31,12 @@ namespace Clerk.BackendAPI.Models.Operations
         [JsonProperty("scopes")]
         public List<string> Scopes { get; set; } = default!;
 
+        /// <summary>
+        /// The audiences of the access token. Omitted when no audience is set.
+        /// </summary>
+        [JsonProperty("aud")]
+        public List<string>? Aud { get; set; }
+
         [JsonProperty("revoked")]
         public bool Revoked { get; set; } = default!;
 
