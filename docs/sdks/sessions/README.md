@@ -8,6 +8,7 @@
 * [Create](#create) - Create a new active session
 * [Get](#get) - Retrieve a session
 * [Refresh](#refresh) - Refresh a session
+* [GetReverification](#getreverification) - Retrieve a reverification
 * [Revoke](#revoke) - Revoke a session
 * [CreateToken](#createtoken) - Create a session token
 * [CreateTokenFromTemplate](#createtokenfromtemplate) - Create a session token from a JWT template
@@ -173,6 +174,46 @@ var res = await sdk.Sessions.RefreshAsync(sessionId: "<id>");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## GetReverification
+
+Retrieve a reverification scoped to a session. A resource server can use this to validate a reverification id it received from its client: confirm it is real, scoped to the expected session, completed, and how fresh each factor is. Single-use / replay detection is the caller's responsibility (the id is stable, so the caller dedups consumed ids).
+
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="GetReverification" method="get" path="/sessions/{session_id}/reverifications/{reverification_id}" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Sessions.GetReverificationAsync(
+    sessionId: "<id>",
+    reverificationId: "<id>"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                           | Type                                                | Required                                            | Description                                         |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| `SessionId`                                         | *string*                                            | :heavy_check_mark:                                  | The ID of the session the reverification belongs to |
+| `ReverificationId`                                  | *string*                                            | :heavy_check_mark:                                  | The ID of the reverification                        |
+
+### Response
+
+**[GetReverificationResponse](../../Models/Operations/GetReverificationResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Revoke

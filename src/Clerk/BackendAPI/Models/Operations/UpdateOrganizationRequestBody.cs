@@ -11,6 +11,7 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public class UpdateOrganizationRequestBody
     {
@@ -41,6 +42,13 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? AdminDeleteEnabled { get; set; } = null;
 
         /// <summary>
+        /// Whether this organization can configure self-serve enterprise SSO.<br/>
+        /// Requires the instance to have the self-serve SSO entitlement enabled.
+        /// </summary>
+        [JsonProperty("self_serve_sso_enabled")]
+        public bool? SelfServeSsoEnabled { get; set; } = null;
+
+        /// <summary>
         /// A custom date/time denoting _when_ the organization was created, specified in RFC3339 format (e.g. `2012-10-20T07:15:20.902Z`).
         /// </summary>
         [JsonProperty("created_at")]
@@ -51,5 +59,14 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("role_set_key")]
         public string? RoleSetKey { get; set; } = null;
+
+        /// <summary>
+        /// Maps role keys in the organization's current role set to role keys in the new role set. Only applies when `role_set_key` changes the role set.<br/>
+        /// Every role that a member holds and that the new role set does not include must be mapped, otherwise the request fails with a 422.<br/>
+        /// Mapping a role that both role sets include moves its members to the destination role.<br/>
+        /// Memberships are reassigned asynchronously after the response.
+        /// </summary>
+        [JsonProperty("reassignment_mappings")]
+        public Dictionary<string, string>? ReassignmentMappings { get; set; } = null;
     }
 }

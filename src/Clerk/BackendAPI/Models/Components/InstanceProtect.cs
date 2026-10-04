@@ -21,6 +21,9 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("object")]
         public InstanceProtectObject Object { get; set; } = default!;
 
+        /// <summary>
+        /// Whether Protect rules are enforced on this instance. False does not mean the instance is outside Protect — by default it is still evaluated in shadow, where rules are scored and recorded but never block.
+        /// </summary>
         [JsonProperty("rules_enabled")]
         public bool RulesEnabled { get; set; } = default!;
 
@@ -32,5 +35,17 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("checks_bypassed")]
         public bool ChecksBypassed { get; set; } = default!;
+
+        /// <summary>
+        /// Whether the Protect system has verified the instance's prerequisite checks. Protect rules are gated on checks being verified, bypassed or exempt.
+        /// </summary>
+        [JsonProperty("checks_verified")]
+        public bool ChecksVerified { get; set; } = default!;
+
+        /// <summary>
+        /// Whether the instance was created into Protect and so was never subject to the prerequisite checks at all.
+        /// </summary>
+        [JsonProperty("checks_exempt")]
+        public bool ChecksExempt { get; set; } = default!;
     }
 }

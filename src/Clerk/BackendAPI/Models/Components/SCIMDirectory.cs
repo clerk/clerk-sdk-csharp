@@ -15,7 +15,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
 
     /// <summary>
-    /// A SCIM directory configuration for provisioning users via SCIM protocol.
+    /// A directory configuration for provisioning users via SCIM protocol.
     /// </summary>
     public class SCIMDirectory
     {
@@ -26,13 +26,13 @@ namespace Clerk.BackendAPI.Models.Components
         public SCIMDirectoryObject Object { get; set; } = default!;
 
         /// <summary>
-        /// Unique identifier for the SCIM directory.
+        /// Unique identifier for the directory.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// A human-friendly name for the SCIM directory.
+        /// A human-friendly name for the directory.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } = default!;
@@ -50,19 +50,19 @@ namespace Clerk.BackendAPI.Models.Components
         public string EndpointUrl { get; set; } = default!;
 
         /// <summary>
-        /// The identity provider for this SCIM directory.
+        /// The identity provider for this directory.
         /// </summary>
         [JsonProperty("provider")]
         public string Provider { get; set; } = default!;
 
         /// <summary>
-        /// Whether the SCIM directory is enabled.
+        /// Whether the directory is enabled.
         /// </summary>
         [JsonProperty("enabled")]
         public bool Enabled { get; set; } = default!;
 
         /// <summary>
-        /// Whether group-to-role mapping is enabled for this SCIM directory.
+        /// Whether group-to-role mapping is enabled for this directory.
         /// </summary>
         [JsonProperty("group_role_mapping_enabled")]
         public bool GroupRoleMappingEnabled { get; set; } = default!;
@@ -86,13 +86,13 @@ namespace Clerk.BackendAPI.Models.Components
         public string? ApiKey { get; set; } = null;
 
         /// <summary>
-        /// Unix timestamp when the SCIM directory was created.
+        /// Unix timestamp when the directory was created.
         /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; } = default!;
 
         /// <summary>
-        /// Unix timestamp when the SCIM directory was last updated.
+        /// Unix timestamp when the directory was last updated.
         /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; } = default!;
