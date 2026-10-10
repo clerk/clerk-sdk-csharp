@@ -40,7 +40,9 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? OrderBy { get; set; } = "+created_at";
 
         /// <summary>
-        /// Returns OAuth applications with names that match the given query, via case-insensitive partial match.
+        /// Returns OAuth applications with names that match the given query, via case-insensitive partial match.<br/>
+        /// Also returns the OAuth application whose `client_id` is exactly the given query, which is useful for<br/>
+        /// resolving a `client_id` to the OAuth application `id` required by the read, update and delete endpoints.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=name_query")]
         public string? NameQuery { get; set; }

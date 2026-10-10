@@ -43,7 +43,16 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("development_origin")]
         public string DevelopmentOrigin { get; set; } = default!;
 
+        /// <summary>
+        /// Legacy CNAME-only DNS targets. Prefer `dns_targets` when present.
+        /// </summary>
         [JsonProperty("cname_targets")]
         public List<CNameTarget>? CnameTargets { get; set; } = null;
+
+        /// <summary>
+        /// The complete typed DNS contract. Consumers should use this field instead of merging it with `cname_targets`.
+        /// </summary>
+        [JsonProperty("dns_targets")]
+        public List<DNSTarget>? DnsTargets { get; set; } = null;
     }
 }

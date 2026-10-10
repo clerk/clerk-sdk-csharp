@@ -19,7 +19,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// A SCIM directory.
+        /// A directory.
         /// </summary>
         public SCIMDirectory? SCIMDirectory { get; set; }
     }

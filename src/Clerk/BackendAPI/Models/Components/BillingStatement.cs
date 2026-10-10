@@ -59,6 +59,6 @@ namespace Clerk.BackendAPI.Models.Components
         /// Array of statement groups.
         /// </summary>
         [JsonProperty("groups")]
-        public List<Groups> Groups { get; set; } = default!;
+        public List<BillingStatementGroups> Groups { get; set; } = default!;
     }
 }

@@ -96,6 +96,12 @@ namespace Clerk.BackendAPI.Models.Components
         public long? LegalAcceptedAt { get; set; }
 
         /// <summary>
+        /// The IANA timezone associated with the sign-up attempt.
+        /// </summary>
+        [JsonProperty("timezone")]
+        public string? Timezone { get; set; } = null;
+
+        /// <summary>
         /// The user locale preference for the sign-up specified as a BCP-47 language tag.
         /// </summary>
         [JsonProperty("locale")]
