@@ -178,7 +178,6 @@ var res = await sdk.SamlConnections.UpdateAsync(
         Name = "Example SAML Connection",
         IdpEntityId = "entity_123",
         IdpSsoUrl = "https://idp.example.com/sso",
-        IdpCertificate = "MIIDBTCCAe2gAwIBAgIQ...",
         IdpMetadataUrl = "https://idp.example.com/metadata",
         IdpMetadata = "<EntityDescriptor>...</EntityDescriptor>",
         AttributeMapping = new AttributeMapping() {

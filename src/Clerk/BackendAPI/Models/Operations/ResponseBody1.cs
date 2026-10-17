@@ -31,6 +31,18 @@ namespace Clerk.BackendAPI.Models.Operations
         [JsonProperty("scopes")]
         public List<string> Scopes { get; set; } = default!;
 
+        /// <summary>
+        /// The audiences of the access token. Omitted when no audience is set.
+        /// </summary>
+        [JsonProperty("aud")]
+        public List<string>? Aud { get; set; }
+
+        /// <summary>
+        /// The actor chain of an access token issued by an OAuth 2.0 Token Exchange (RFC 8693 section 4.1). Omitted for other access tokens.
+        /// </summary>
+        [JsonProperty("act")]
+        public Act? Act { get; set; }
+
         [JsonProperty("revoked")]
         public bool Revoked { get; set; } = default!;
 
