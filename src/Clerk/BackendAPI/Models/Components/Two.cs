@@ -54,6 +54,12 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("idp_certificate_expires_at", NullValueHandling = NullValueHandling.Include)]
         public long? IdpCertificateExpiresAt { get; set; }
 
+        /// <summary>
+        /// Every IdP signing certificate the connection trusts, primary first. A SAML response verifies against any of them.
+        /// </summary>
+        [JsonProperty("idp_certificates")]
+        public List<SAMLConnectionIdpCertificates> IdpCertificates { get; set; } = default!;
+
         [JsonProperty("idp_metadata_url")]
         public string? IdpMetadataUrl { get; set; } = null;
 
