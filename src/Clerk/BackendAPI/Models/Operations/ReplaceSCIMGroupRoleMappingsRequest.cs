@@ -15,7 +15,7 @@ namespace Clerk.BackendAPI.Models.Operations
     public class ReplaceSCIMGroupRoleMappingsRequest
     {
         /// <summary>
-        /// The ID of the SCIM directory.
+        /// The ID of the directory.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=scim_directory_id")]
         public string ScimDirectoryId { get; set; } = default!;

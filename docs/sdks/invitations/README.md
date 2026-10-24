@@ -7,6 +7,7 @@
 * [Create](#create) - Create an invitation
 * [List](#list) - List all invitations
 * [BulkCreate](#bulkcreate) - Create multiple invitations
+* [Delete](#delete) - Delete an invitation
 * [Revoke](#revoke) - Revokes an invitation
 
 ## Create
@@ -139,6 +140,44 @@ var res = await sdk.Invitations.BulkCreateAsync(req);
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 422                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## Delete
+
+Permanently deletes the given invitation and the copies of the invitation email Clerk stored for its recipient.
+Unlike revoking, deleting removes the invitation record itself, which helps honor a data erasure request from someone who was invited but never signed up.
+Other records that contain the same email address, such as users or organization invitations, are not affected.
+Invitations of any status can be deleted.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="DeleteInvitation" method="delete" path="/invitations/{invitation_id}" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Invitations.DeleteAsync(invitationId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                          | Type                               | Required                           | Description                        |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| `InvitationId`                     | *string*                           | :heavy_check_mark:                 | The ID of the invitation to delete |
+
+### Response
+
+**[DeleteInvitationResponse](../../Models/Operations/DeleteInvitationResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 404                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Revoke

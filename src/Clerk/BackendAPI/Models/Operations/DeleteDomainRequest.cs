@@ -14,7 +14,7 @@ namespace Clerk.BackendAPI.Models.Operations
     public class DeleteDomainRequest
     {
         /// <summary>
-        /// The ID of the domain that will be deleted. Must be a satellite domain.
+        /// The ID of the domain that will be deleted.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=domain_id")]
         public string DomainId { get; set; } = default!;

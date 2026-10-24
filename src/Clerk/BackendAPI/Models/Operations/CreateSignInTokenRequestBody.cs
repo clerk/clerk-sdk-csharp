@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
 
@@ -29,9 +30,20 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// Optional parameter to specify the life duration of the sign in token in seconds.<br/>
-        /// By default, the duration is 30 days.
+        /// By default, the duration is 30 days, or 10 minutes when `second_factor_verification` is set.
         /// </summary>
         [JsonProperty("expires_in_seconds")]
-        public long? ExpiresInSeconds { get; set; } = 2592000;
+        public long? ExpiresInSeconds { get; set; } = null;
+
+        /// <summary>
+        /// Optional parameter that lets a user with a second factor enabled complete the sign in without being prompted for it.<br/>
+        /// When omitted, redeeming the token completes only the first factor, and the user must still complete their second factor.<br/>
+        /// `fresh`: the second factor is treated as verified at sign in. The session token's `fva` claim reports a second factor age of 0.<br/>
+        /// `stale`: the second factor is treated as unverified. The session token's `fva` claim reports the maximum second factor age of 99999, so any reverification that requires a second factor prompts the user to complete one.<br/>
+        /// Has no effect for users without a second factor enabled.<br/>
+        /// A token created with this parameter signs in a user with a second factor enabled without prompting for it, so `expires_in_seconds` defaults to 10 minutes. We recommend keeping it short.
+        /// </summary>
+        [JsonProperty("second_factor_verification")]
+        public SecondFactorVerification? SecondFactorVerification { get; set; } = null;
     }
 }
