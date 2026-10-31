@@ -37,7 +37,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? CallbackUrl { get; set; } = null;
 
         /// <summary>
-        /// Define the allowed scopes for the new OAuth applications that dictate the user payload of the OAuth user info endpoint. Available scopes are `profile`, `email`, `public_metadata`, `private_metadata`. Provide the requested scopes as a string, separated by spaces.
+        /// Define the application's built-in and custom scope ceiling. Provide scope keys as a space-delimited string. Custom keys must exist in the instance OAuth scope catalog.
         /// </summary>
         [JsonProperty("scopes")]
         public string? Scopes { get; set; } = "profile email";
@@ -53,6 +53,30 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("pkce_required")]
         public bool? PkceRequired { get; set; } = false;
+
+        /// <summary>
+        /// An absolute resource URI for a confidential application (RFC 8707 section 2). Registers a resource with no accepted scopes, or adopts an unowned resource with confirmation. Every claimed URI remains permanently reserved to this app, including retirement and deletion, and counts toward the instance resource quota. Changing it stops new exchanges from the old audience immediately. Already-issued tokens retain their lifetime. Clearing requires exchange disabled in an earlier update.
+        /// </summary>
+        [JsonProperty("audience_uri")]
+        public string? AudienceUri { get; set; } = null;
+
+        /// <summary>
+        /// Enable exchanges from the active audience. Requires an audience URI. Disabling preserves target configuration.
+        /// </summary>
+        [JsonProperty("token_exchange_enabled")]
+        public bool? TokenExchangeEnabled { get; set; }
+
+        /// <summary>
+        /// Confirm adoption of an existing unowned resource, preserving its accepted scopes and target references. Does not override another application's reservation.
+        /// </summary>
+        [JsonProperty("adopt_audience_resource")]
+        public bool? AdoptAudienceResource { get; set; }
+
+        /// <summary>
+        /// True to enable the OAuth Device Authorization Grant for this application. Enabling requires the new OAuth IdP and a reachable device verification page.
+        /// </summary>
+        [JsonProperty("device_authorization_grant_enabled")]
+        public bool? DeviceAuthorizationGrantEnabled { get; set; } = false;
 
         /// <summary>
         /// If true, this client is public and you can use the Proof Key of Code Exchange (PKCE) flow.

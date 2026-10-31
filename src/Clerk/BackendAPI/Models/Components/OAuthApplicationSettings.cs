@@ -32,7 +32,13 @@ namespace Clerk.BackendAPI.Models.Components
         public bool DynamicOauthClientRegistration { get; set; } = default!;
 
         /// <summary>
-        /// Default scopes.
+        /// Administrator-selected scope ceiling for dynamically registered and automatically admitted CIMD clients. Null preserves registered client limits; defaults must be a subset. Fresh user consent is required for expansion.
+        /// </summary>
+        [JsonProperty("dynamic_client_allowed_scopes")]
+        public List<string>? DynamicClientAllowedScopes { get; set; } = null;
+
+        /// <summary>
+        /// Default scopes assigned when a dynamically registered or first-contact CIMD client omits `scope`. Contains built-in keys and custom catalog keys. Null means Clerk-provided defaults. `advertised` does not affect eligibility. An empty input array is stored and returned as null.
         /// </summary>
         [JsonProperty("default_scopes", NullValueHandling = NullValueHandling.Include)]
         public List<string>? DefaultScopes { get; set; }
@@ -42,6 +48,24 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("oauth_jwt_access_tokens")]
         public bool OauthJwtAccessTokens { get; set; } = default!;
+
+        /// <summary>
+        /// Whether OAuth access tokens can include an aud claim derived from the RFC 8707 resource parameter.
+        /// </summary>
+        [JsonProperty("aud_claim_enabled")]
+        public bool AudClaimEnabled { get; set; } = default!;
+
+        /// <summary>
+        /// Whether refresh grants without a resource can adopt the requested resource when audience claims are enabled.
+        /// </summary>
+        [JsonProperty("aud_claim_refresh_backfill_enabled")]
+        public bool AudClaimRefreshBackfillEnabled { get; set; } = default!;
+
+        /// <summary>
+        /// Whether all new OAuth authorization-code requests must use PKCE with the S256 challenge method.
+        /// </summary>
+        [JsonProperty("pkce_required")]
+        public bool PkceRequired { get; set; } = default!;
 
         /// <summary>
         /// Whether the instance advertises support for Client ID Metadata Documents in its OAuth authorization server metadata.

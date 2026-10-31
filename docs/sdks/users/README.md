@@ -16,6 +16,7 @@
 * [BulkUnban](#bulkunban) - Unban multiple users
 * [Lock](#lock) - Lock a user
 * [Unlock](#unlock) - Unlock a user
+* [Merge](#merge) - Merge another user into this user
 * [SetProfileImage](#setprofileimage) - Set user profile image
 * [DeleteProfileImage](#deleteprofileimage) - Delete user profile image
 * [UpdateMetadata](#updatemetadata) - Merge and update a user's metadata
@@ -32,8 +33,10 @@
 * [DisableMfa](#disablemfa) - Disable a user's MFA methods
 * [DeleteBackupCodes](#deletebackupcodes) - Disable all user's Backup codes
 * [DeletePasskey](#deletepasskey) - Delete a user passkey
-* [ListTrustedDevices](#listtrusteddevices) - List a user's trusted devices
-* [RevokeTrustedDevice](#revoketrusteddevice) - Revoke a user's trusted device
+* [~~ListTrustedDevices~~](#listtrusteddevices) - List a user's trusted devices :warning: **Deprecated**
+* [~~RevokeTrustedDevice~~](#revoketrusteddevice) - Revoke a user's trusted device :warning: **Deprecated**
+* [ListBiometricCredentials](#listbiometriccredentials) - List a user's biometric credentials
+* [RevokeBiometricCredential](#revokebiometriccredential) - Revoke a user's biometric credential
 * [DeleteWeb3Wallet](#deleteweb3wallet) - Delete a user web3 wallet
 * [DeleteTOTP](#deletetotp) - Delete all the user's TOTPs
 * [DeleteExternalAccount](#deleteexternalaccount) - Delete External Account
@@ -45,6 +48,11 @@
 
 Returns a list of all users.
 The users are returned sorted by creation date, with the newest users appearing first.
+
+To walk more than a few pages, paginate with `starting_after` rather than `offset`.
+A cursor page costs the same no matter how far into the list it sits, while a large `offset`
+has to walk and discard every row before it, so it gets progressively slower and eventually
+times out. Cursor pagination requires the `created_at` ordering, which is the default.
 
 ### Example Usage
 
@@ -404,7 +412,7 @@ var res = await sdk.Users.DeleteAsync(userId: "usr_1");
 
 ## Ban
 
-Marks the given user as banned, which means that all their sessions are revoked and they are not allowed to sign in again.
+Marks the given user as banned, which means that all their sessions and OAuth grants are revoked and they are not allowed to sign in again. Revoked OAuth grants are not restored if the user is unbanned.
 
 ### Example Usage
 
@@ -631,6 +639,77 @@ var res = await sdk.Users.UnlockAsync(userId: "user_12345");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 403                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## Merge
+
+Moves the identifications, connected accounts, passkeys, TOTP, backup codes, organization
+memberships, membership requests, suggestions and metadata of the user in `from_user_id` onto the
+user in the path, then deletes the `from_user_id` user.
+Where both users have a value, the user in the path keeps its own. First and last name, profile
+image, `external_id`, and the password are taken from the `from_user_id` user only where the user in
+the path has none, so if it has no password, the `from_user_id` user's password signs in to it
+afterwards. When both users have the same
+identifier, the verified copy is kept. The `from_user_id` user's sessions are revoked.
+With `dry_run`, the merge is computed and returned but nothing is changed.
+
+A merge cannot be undone. The response's `deleted_user` is the `from_user_id` user as it was before
+the merge, so store it if you may need it. It does not include passwords, TOTP secrets, backup codes,
+passkeys or connected-account tokens, which cannot be restored. Use `dry_run` to preview a merge.
+
+The merge sends a `user.merged` webhook alongside `user.updated` and `user.deleted`. Webhooks are not
+delivered in order, so `user.updated` (the user now owning the `from_user_id` user's emails) can arrive
+before `user.deleted`; handle `user.merged` by moving the `from_user_id` user's data to the user rather
+than relying on that order. Moved organization memberships keep their ID, so their
+`organizationMembership.updated` webhook carries the same membership ID with a different user.
+
+Some users cannot be merged. The request then fails with a 409 `user_merge_not_allowed` error whose
+`meta.reasons` lists every reason that applies:
+- `user_banned`, `from_user_banned`: either user is banned.
+- `user_directory_managed`, `from_user_directory_managed`: either user is linked to a SCIM directory.
+- `from_user_enterprise_account`: the `from_user_id` user has a SAML or enterprise SSO account.
+- `from_user_billing_payer`: the `from_user_id` user is a billing payer.
+- `from_user_student_pack`: the `from_user_id` user has claimed a student pack.
+- `too_many_resources`: the users have too many identifications and organization memberships, requests
+  and suggestions combined to merge in one request. This reason is returned on its own.
+- `same_user`: `from_user_id` is the user in the path.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="MergeUser" method="post" path="/users/{user_id}/merge" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+using Clerk.BackendAPI.Models.Operations;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.MergeAsync(
+    userId: "<id>",
+    requestBody: new MergeUserRequestBody() {
+        FromUserId = "<id>",
+    }
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `UserId`                                                                | *string*                                                                | :heavy_check_mark:                                                      | The ID of the user that remains after the merge                         |
+| `RequestBody`                                                           | [MergeUserRequestBody](../../Models/Operations/MergeUserRequestBody.md) | :heavy_check_mark:                                                      | N/A                                                                     |
+
+### Response
+
+**[MergeUserResponse](../../Models/Operations/MergeUserResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 404, 409, 422                         | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## SetProfileImage
@@ -1244,7 +1323,7 @@ var res = await sdk.Users.DeleteBackupCodesAsync(userId: "<id>");
 
 ## DeletePasskey
 
-Delete the passkey identification for a given user and notify them through email.
+Delete the passkey identification for a given user. The user is notified through email or SMS unless the passkey registration was never completed.
 
 ### Example Usage
 
@@ -1282,9 +1361,11 @@ var res = await sdk.Users.DeletePasskeyAsync(
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## ListTrustedDevices
+## ~~ListTrustedDevices~~
 
 Returns the active trusted devices enrolled by the user.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1318,9 +1399,11 @@ var res = await sdk.Users.ListTrustedDevicesAsync(userId: "<id>");
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
-## RevokeTrustedDevice
+## ~~RevokeTrustedDevice~~
 
 Revokes an active trusted device enrolled by the user.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1349,6 +1432,82 @@ var res = await sdk.Users.RevokeTrustedDeviceAsync(
 ### Response
 
 **[RevokeUserTrustedDeviceResponse](../../Models/Operations/RevokeUserTrustedDeviceResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## ListBiometricCredentials
+
+Returns the active biometric credentials enrolled by the user.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="ListUserBiometricCredentials" method="get" path="/users/{user_id}/biometric_credentials" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.ListBiometricCredentialsAsync(userId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `UserId`                                                    | *string*                                                    | :heavy_check_mark:                                          | The ID of the user whose biometric credentials are returned |
+
+### Response
+
+**[ListUserBiometricCredentialsResponse](../../Models/Operations/ListUserBiometricCredentialsResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 403, 404                                   | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 500                                        | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## RevokeBiometricCredential
+
+Revokes an active biometric credential enrolled by the user.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="RevokeUserBiometricCredential" method="delete" path="/users/{user_id}/biometric_credentials/{biometric_credential_id}" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Users.RevokeBiometricCredentialAsync(
+    userId: "<id>",
+    biometricCredentialId: "<id>"
+);
+
+// handle response
+```
+
+### Parameters
+
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `UserId`                                              | *string*                                              | :heavy_check_mark:                                    | The ID of the user that owns the biometric credential |
+| `BiometricCredentialId`                               | *string*                                              | :heavy_check_mark:                                    | The ID of the biometric credential to revoke          |
+
+### Response
+
+**[RevokeUserBiometricCredentialResponse](../../Models/Operations/RevokeUserBiometricCredentialResponse.md)**
 
 ### Errors
 
