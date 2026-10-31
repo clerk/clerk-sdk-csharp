@@ -12,6 +12,8 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// SAML connection-specific properties. Only applied when the enterprise connection uses SAML (e.g. provider is saml_custom).<br/>
@@ -32,10 +34,17 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? IdpSsoUrl { get; set; } = null;
 
         /// <summary>
-        /// IdP certificate (PEM).
+        /// Deprecated, use idp_certificates. One X.509 certificate, PEM or bare base64, or several concatenated PEM certificates; replaces the connection's whole certificate set.
         /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("idp_certificate")]
         public string? IdpCertificate { get; set; } = null;
+
+        /// <summary>
+        /// The IdP X.509 signing certificates the connection trusts, one per entry, in PEM or bare base64. Replaces the connection's whole certificate set and takes precedence over idp_certificate.
+        /// </summary>
+        [JsonProperty("idp_certificates")]
+        public List<string>? IdpCertificates { get; set; }
 
         /// <summary>
         /// URL to IdP metadata.

@@ -47,9 +47,27 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("pkce_required")]
         public bool PkceRequired { get; set; } = default!;
 
+        /// <summary>
+        /// The active application audience URI, whose registry identity is permanently reserved to this application.
+        /// </summary>
+        [JsonProperty("audience_uri", NullValueHandling = NullValueHandling.Include)]
+        public string? AudienceUri { get; set; }
+
+        /// <summary>
+        /// Whether this confidential application accepts token exchanges from its active audience.
+        /// </summary>
+        [JsonProperty("token_exchange_enabled")]
+        public bool TokenExchangeEnabled { get; set; } = default!;
+
+        [JsonProperty("device_authorization_grant_enabled")]
+        public bool DeviceAuthorizationGrantEnabled { get; set; } = default!;
+
         [JsonProperty("public")]
         public bool Public { get; set; } = default!;
 
+        /// <summary>
+        /// The complete scope ceiling for the OAuth application, as a space-delimited list of built-in and assigned custom scope keys.
+        /// </summary>
         [JsonProperty("scopes")]
         public string Scopes { get; set; } = default!;
 
