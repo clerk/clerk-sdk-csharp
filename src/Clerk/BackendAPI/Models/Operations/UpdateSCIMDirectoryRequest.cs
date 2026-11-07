@@ -15,7 +15,7 @@ namespace Clerk.BackendAPI.Models.Operations
     public class UpdateSCIMDirectoryRequest
     {
         /// <summary>
-        /// The ID of the SCIM directory to update.
+        /// The ID of the directory to update.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=scim_directory_id")]
         public string ScimDirectoryId { get; set; } = default!;

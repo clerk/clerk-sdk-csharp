@@ -25,6 +25,7 @@ var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
 
 CreateSignInTokenRequestBody req = new CreateSignInTokenRequestBody() {
     UserId = "user_12345",
+    ExpiresInSeconds = 2592000,
 };
 
 var res = await sdk.SignInTokens.CreateAsync(req);

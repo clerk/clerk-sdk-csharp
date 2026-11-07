@@ -203,6 +203,52 @@ namespace Clerk.BackendAPI
         );
 
         /// <summary>
+        /// Apply a discount to a subscription item.
+        /// </summary>
+        /// <remarks>
+        /// Applies an existing discount to a subscription item.<br/>
+        /// Manual application is an override path: self-serve distribution rules are not enforced.<br/>
+        /// At most one active discount is allowed per subscription item; applying a different<br/>
+        /// discount replaces the currently active one. Re-applying the same active discount returns a conflict.
+        /// </remarks>
+        /// <param name="subscriptionItemId">The ID of the subscription item to apply the discount to.</param>
+        /// <param name="applyCommerceDiscountRequest">Parameters for applying the discount.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ApplyBillingSubscriptionItemDiscountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="subscriptionItemId"/> or <paramref name="applyCommerceDiscountRequest"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 409, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ApplyBillingSubscriptionItemDiscountResponse> ApplySubscriptionItemDiscountAsync(
+            string subscriptionItemId,
+            ApplyCommerceDiscountRequest applyCommerceDiscountRequest,
+            RetryConfig? retryConfig = null
+        );
+
+        /// <summary>
+        /// Remove a discount from a subscription item.
+        /// </summary>
+        /// <remarks>
+        /// Removes the active discount from a subscription item.<br/>
+        /// The discount_id must match the subscription item's currently active discount.
+        /// </remarks>
+        /// <param name="subscriptionItemId">The ID of the subscription item to remove the discount from.</param>
+        /// <param name="discountId">The ID of the discount to remove.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RemoveBillingSubscriptionItemDiscountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="subscriptionItemId"/> or <paramref name="discountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 409, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<RemoveBillingSubscriptionItemDiscountResponse> RemoveSubscriptionItemDiscountAsync(
+            string subscriptionItemId,
+            string discountId,
+            RetryConfig? retryConfig = null
+        );
+
+        /// <summary>
         /// List all billing statements.
         /// </summary>
         /// <remarks>
@@ -1654,6 +1700,410 @@ namespace Clerk.BackendAPI
                         }
                     };
                     response.CommercePriceTransitionResponse = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{400, 401, 403, 404, 409, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Apply a discount to a subscription item.
+        /// </summary>
+        /// <remarks>
+        /// Applies an existing discount to a subscription item.<br/>
+        /// Manual application is an override path: self-serve distribution rules are not enforced.<br/>
+        /// At most one active discount is allowed per subscription item; applying a different<br/>
+        /// discount replaces the currently active one. Re-applying the same active discount returns a conflict.
+        /// </remarks>
+        /// <param name="subscriptionItemId">The ID of the subscription item to apply the discount to.</param>
+        /// <param name="applyCommerceDiscountRequest">Parameters for applying the discount.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ApplyBillingSubscriptionItemDiscountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="subscriptionItemId"/> or <paramref name="applyCommerceDiscountRequest"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 409, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ApplyBillingSubscriptionItemDiscountResponse> ApplySubscriptionItemDiscountAsync(
+            string subscriptionItemId,
+            ApplyCommerceDiscountRequest applyCommerceDiscountRequest,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (subscriptionItemId == null) throw new ArgumentNullException(nameof(subscriptionItemId));
+            if (applyCommerceDiscountRequest == null) throw new ArgumentNullException(nameof(applyCommerceDiscountRequest));
+
+            var request = new ApplyBillingSubscriptionItemDiscountRequest()
+            {
+                SubscriptionItemId = subscriptionItemId,
+                ApplyCommerceDiscountRequest = applyCommerceDiscountRequest,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/billing/subscription_items/{subscription_item_id}/discounts", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "ApplyCommerceDiscountRequest", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "ApplyBillingSubscriptionItemDiscount", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CommerceDiscountRedemptionResponse obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CommerceDiscountRedemptionResponse>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CommerceDiscountRedemptionResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ApplyBillingSubscriptionItemDiscountResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.CommerceDiscountRedemptionResponse = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{400, 401, 403, 404, 409, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// Remove a discount from a subscription item.
+        /// </summary>
+        /// <remarks>
+        /// Removes the active discount from a subscription item.<br/>
+        /// The discount_id must match the subscription item's currently active discount.
+        /// </remarks>
+        /// <param name="subscriptionItemId">The ID of the subscription item to remove the discount from.</param>
+        /// <param name="discountId">The ID of the discount to remove.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="RemoveBillingSubscriptionItemDiscountResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">One of <paramref name="subscriptionItemId"/> or <paramref name="discountId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 404, 409, 422 or 500 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<RemoveBillingSubscriptionItemDiscountResponse> RemoveSubscriptionItemDiscountAsync(
+            string subscriptionItemId,
+            string discountId,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (subscriptionItemId == null) throw new ArgumentNullException(nameof(subscriptionItemId));
+            if (discountId == null) throw new ArgumentNullException(nameof(discountId));
+
+            var request = new RemoveBillingSubscriptionItemDiscountRequest()
+            {
+                SubscriptionItemId = subscriptionItemId,
+                DiscountId = discountId,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/billing/subscription_items/{subscription_item_id}/discounts/{discount_id}", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Delete, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "RemoveBillingSubscriptionItemDiscount", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    CommerceDiscountRedemptionResponse obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<CommerceDiscountRedemptionResponse>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into CommerceDiscountRedemptionResponse.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new RemoveBillingSubscriptionItemDiscountResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.CommerceDiscountRedemptionResponse = obj;
                     return response;
                 }
 

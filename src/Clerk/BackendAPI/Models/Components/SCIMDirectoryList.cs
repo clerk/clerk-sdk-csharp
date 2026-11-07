@@ -15,7 +15,7 @@ namespace Clerk.BackendAPI.Models.Components
     using System.Collections.Generic;
 
     /// <summary>
-    /// A list of SCIM directories.
+    /// A list of directories.
     /// </summary>
     public class SCIMDirectoryList
     {
@@ -23,7 +23,7 @@ namespace Clerk.BackendAPI.Models.Components
         public List<SCIMDirectory> Data { get; set; } = default!;
 
         /// <summary>
-        /// Total number of SCIM directories.
+        /// Total number of directories.
         /// </summary>
         [JsonProperty("total_count")]
         public long TotalCount { get; set; } = default!;

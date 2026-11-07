@@ -1,0 +1,15 @@
+# SSOBypassAllowlistUser
+
+A user who may verify an email code instead of reaching their identity provider when enterprise SSO is unreachable.
+
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `Object`                                                                                        | [SSOBypassAllowlistUserObject](../../Models/Components/SSOBypassAllowlistUserObject.md)         | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `UserId`                                                                                        | *string*                                                                                        | :heavy_check_mark:                                                                              | The allowlisted user, and the identifier the delete endpoint takes.                             |
+| `PublicUserData`                                                                                | [SSOBypassAllowlistPublicUserData](../../Models/Components/SSOBypassAllowlistPublicUserData.md) | :heavy_check_mark:                                                                              | The allowlisted user's public data.                                                             |
+| `CreatedAt`                                                                                     | *long*                                                                                          | :heavy_check_mark:                                                                              | Unix timestamp of creation.                                                                     |
+| `UpdatedAt`                                                                                     | *long*                                                                                          | :heavy_check_mark:                                                                              | Unix timestamp of last update.                                                                  |
