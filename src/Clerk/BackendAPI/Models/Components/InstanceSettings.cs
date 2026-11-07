@@ -38,7 +38,7 @@ namespace Clerk.BackendAPI.Models.Components
         public bool? ProgressiveSignUp { get; set; }
 
         /// <summary>
-        /// Deprecated. When enabled, production authentication emails for this instance are sent through Clerk's legacy managed email delivery path. This setting is being retired; use the instance's configured email sending domain instead.
+        /// Deprecated. This setting is retired and no longer affects email delivery; all email is sent through the instance's configured email sending domain. The field is preserved for API compatibility only and will be removed in a future version.
         /// </summary>
         [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [JsonProperty("enhanced_email_deliverability")]

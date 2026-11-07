@@ -1,0 +1,18 @@
+# SCIMUserMetadata
+
+Metadata describing a user's linkage to a directory. Included in user responses when directory data is requested, and in directory-triggered user webhooks. Its absence does not necessarily mean the user is not managed by a directory.
+
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Id`                                                                            | *string*                                                                        | :heavy_check_mark:                                                              | The user's resource ID in this directory.                                       |
+| `DirectoryName`                                                                 | *string*                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `Provider`                                                                      | *string*                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `EnterpriseConnectionId`                                                        | *string*                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `Groups`                                                                        | List<[Groups](../../Models/Components/Groups.md)>                               | :heavy_minus_sign:                                                              | Omitted when groups were not loaded; an empty array means no group memberships. |
+| `DirectoryId`                                                                   | *string*                                                                        | :heavy_check_mark:                                                              | The ID of the directory the user is provisioned from.<br/>                      |
+| `DirectoryEnabled`                                                              | *bool*                                                                          | :heavy_check_mark:                                                              | Whether the directory is currently enabled.<br/>                                |
+| `ExternalId`                                                                    | *string*                                                                        | :heavy_check_mark:                                                              | The user's external ID as reported by the directory, if any.<br/>               |

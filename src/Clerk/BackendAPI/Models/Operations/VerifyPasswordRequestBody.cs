@@ -19,5 +19,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("password")]
         public string Password { get; set; } = default!;
+
+        /// <summary>
+        /// When `true`, a wrong password counts toward the user's lockout, and a locked user is rejected with a `user_locked` error before the password is checked.<br/>
+        /// Has no effect on instances with user lockout disabled.<br/>
+        /// To enforce lockout across a password check and a sign-in token, set this parameter on both requests.
+        /// </summary>
+        [JsonProperty("honor_lockout")]
+        public bool? HonorLockout { get; set; } = false;
     }
 }
