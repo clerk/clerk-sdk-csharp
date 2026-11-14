@@ -44,7 +44,7 @@ namespace Clerk.BackendAPI.Models.Components
         /// Log entries captured during the test run.
         /// </summary>
         [JsonProperty("logs")]
-        public List<Logs>? Logs { get; set; }
+        public List<Models.Components.Logs>? Logs { get; set; }
 
         /// <summary>
         /// SAML-specific metadata, present for SAML connections.

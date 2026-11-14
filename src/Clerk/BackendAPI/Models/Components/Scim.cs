@@ -9,28 +9,53 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
+    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
-    /// Metadata describing a user's linkage to a SCIM directory. This object is only delivered on `user.created` and `user.updated` webhook events, and only when the user is provisioned through a SCIM directory. Its absence does not necessarily mean the user is not SCIM-managed.
+    /// Alias of directory. Use directories for all links.
     /// </summary>
+    [Obsolete("This will be removed in a future release, please migrate away from it as soon as possible")]
     public class Scim
     {
         /// <summary>
-        /// The ID of the SCIM directory the user is provisioned from.
+        /// The user's resource ID in this directory.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; } = default!;
+
+        [JsonProperty("directory_name")]
+        public string DirectoryName { get; set; } = default!;
+
+        [JsonProperty("provider")]
+        public string Provider { get; set; } = default!;
+
+        [JsonProperty("enterprise_connection_id", NullValueHandling = NullValueHandling.Include)]
+        public string? EnterpriseConnectionId { get; set; }
+
+        /// <summary>
+        /// Omitted when groups were not loaded; an empty array means no group memberships.
+        /// </summary>
+        [JsonProperty("groups")]
+        public List<UserScimGroups>? Groups { get; set; }
+
+        /// <summary>
+        /// The ID of the directory the user is provisioned from.
         /// </summary>
         [JsonProperty("directory_id")]
         public string DirectoryId { get; set; } = default!;
 
         /// <summary>
-        /// Whether the SCIM directory is currently enabled. Omitted when false.
+        /// Whether the directory is currently enabled.
         /// </summary>
         [JsonProperty("directory_enabled")]
-        public bool? DirectoryEnabled { get; set; }
+        public bool DirectoryEnabled { get; set; } = default!;
 
         /// <summary>
-        /// The user's external ID as reported by the SCIM directory, if any.
+        /// The user's external ID as reported by the directory, if any.
         /// </summary>
         [JsonProperty("external_id", NullValueHandling = NullValueHandling.Include)]
         public string? ExternalId { get; set; }

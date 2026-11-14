@@ -39,6 +39,12 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? ScimPath { get; set; }
 
         /// <summary>
+        /// The new name for `scim_path`. Send either one, or both with the same value; sending both with different values is rejected.
+        /// </summary>
+        [JsonProperty("directory_path")]
+        public string? DirectoryPath { get; set; }
+
+        /// <summary>
         /// When true, the attribute supports multiple values; values from the IdP are written to public_metadata as an array. Defaults to false.
         /// </summary>
         [JsonProperty("multi_valued")]
