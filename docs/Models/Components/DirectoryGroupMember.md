@@ -1,0 +1,12 @@
+# DirectoryGroupMember
+
+A member of a group reported by the identity provider for a directory.
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `Object`                                                                                                  | [DirectoryGroupMemberObject](../../Models/Components/DirectoryGroupMemberObject.md)                       | :heavy_check_mark:                                                                                        | String representing the object's type. Always "directory_group_member".                                   |
+| `Id`                                                                                                      | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The directory user ID of the member, as assigned by the directory.                                        |
+| `UserId`                                                                                                  | *string*                                                                                                  | :heavy_check_mark:                                                                                        | The ID of the Clerk user this member is linked to. Null until the member has been provisioned into Clerk. |

@@ -20,7 +20,7 @@ namespace Clerk.BackendAPI.Models.Operations
     public class GetApiKeysResponseBody
     {
         [JsonProperty("data")]
-        public List<Data> Data { get; set; } = default!;
+        public List<Models.Operations.Data> Data { get; set; } = default!;
 
         [JsonProperty("total_count")]
         public double TotalCount { get; set; } = default!;

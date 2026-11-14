@@ -12,6 +12,7 @@ namespace Clerk.BackendAPI.Models.Components
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Present when the enterprise connection uses SAML.
@@ -41,6 +42,30 @@ namespace Clerk.BackendAPI.Models.Components
         /// </summary>
         [JsonProperty("idp_sso_url")]
         public string? IdpSsoUrl { get; set; } = null;
+
+        /// <summary>
+        /// Primary IdP X.509 signing certificate (optional, when connection details are loaded).
+        /// </summary>
+        [JsonProperty("idp_certificate")]
+        public string? IdpCertificate { get; set; } = null;
+
+        /// <summary>
+        /// Unix timestamp (milliseconds) of the primary certificate's X.509 NotBefore.
+        /// </summary>
+        [JsonProperty("idp_certificate_issued_at")]
+        public long? IdpCertificateIssuedAt { get; set; } = null;
+
+        /// <summary>
+        /// Unix timestamp (milliseconds) of the primary certificate's X.509 NotAfter.
+        /// </summary>
+        [JsonProperty("idp_certificate_expires_at")]
+        public long? IdpCertificateExpiresAt { get; set; } = null;
+
+        /// <summary>
+        /// Every IdP signing certificate the connection trusts, primary first. A SAML response verifies against any of them.
+        /// </summary>
+        [JsonProperty("idp_certificates")]
+        public List<IdpCertificates>? IdpCertificates { get; set; }
 
         /// <summary>
         /// IdP metadata URL (optional, when connection details are loaded).

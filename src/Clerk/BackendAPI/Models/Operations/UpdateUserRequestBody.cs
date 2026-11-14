@@ -41,6 +41,12 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? Locale { get; set; } = null;
 
         /// <summary>
+        /// The IANA timezone to assign to the user (e.g., "America/New_York", "Europe/Paris"). Set to null to clear it and allow automatic capture on a later trusted sign-in.
+        /// </summary>
+        [JsonProperty("timezone")]
+        public string? Timezone { get; set; } = null;
+
+        /// <summary>
         /// The ID of the email address to set as primary.<br/>
         /// It must be verified, and present on the current user.
         /// </summary>
@@ -171,7 +177,7 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? CreatedAt { get; set; } = null;
 
         /// <summary>
-        /// When set to `true`, the user will bypass client trust checks during sign-in.
+        /// When set to `true`, the user will bypass Device Trust checks during sign-in.
         /// </summary>
         [JsonProperty("bypass_client_trust")]
         public bool? BypassClientTrust { get; set; } = null;

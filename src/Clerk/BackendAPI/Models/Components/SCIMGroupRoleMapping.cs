@@ -31,10 +31,16 @@ namespace Clerk.BackendAPI.Models.Components
         public string Id { get; set; } = default!;
 
         /// <summary>
-        /// The ID of the SCIM directory this mapping belongs to.
+        /// The ID of the directory this mapping belongs to.
         /// </summary>
         [JsonProperty("scim_directory_id")]
         public string ScimDirectoryId { get; set; } = default!;
+
+        /// <summary>
+        /// The ID of the directory this mapping belongs to. Same value as `scim_directory_id`.
+        /// </summary>
+        [JsonProperty("directory_id")]
+        public string DirectoryId { get; set; } = default!;
 
         /// <summary>
         /// The SCIM group ID from the identity provider.
@@ -43,10 +49,22 @@ namespace Clerk.BackendAPI.Models.Components
         public string ScimGroupId { get; set; } = default!;
 
         /// <summary>
+        /// The group ID from the identity provider. Same value as `scim_group_id`.
+        /// </summary>
+        [JsonProperty("directory_group_id")]
+        public string DirectoryGroupId { get; set; } = default!;
+
+        /// <summary>
         /// The display name of the SCIM group, as reported by the identity provider.
         /// </summary>
         [JsonProperty("scim_group_display_name")]
         public string ScimGroupDisplayName { get; set; } = default!;
+
+        /// <summary>
+        /// The display name of the group, as reported by the identity provider. Same value as `scim_group_display_name`.
+        /// </summary>
+        [JsonProperty("directory_group_display_name")]
+        public string DirectoryGroupDisplayName { get; set; } = default!;
 
         [JsonProperty("role")]
         public Role? Role { get; set; }
