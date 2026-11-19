@@ -151,14 +151,16 @@ namespace Clerk.BackendAPI
         /// <br/>
         /// Changing the domain requires updating the <a href="https://clerk.com/docs/deployments/overview#dns-records">DNS records</a> accordingly, deploying new <a href="https://clerk.com/docs/deployments/overview#deploy-certificates">SSL certificates</a>, updating your Social Connection's redirect URLs and setting the new keys in your code.<br/>
         /// <br/>
-        /// WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur.
+        /// WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur.<br/>
+        /// <br/>
+        /// Returns 403 `domain_managed_by_integration` for applications in a Vercel-managed workspace; change the domain from the Vercel integration instead.
         /// </remarks>
         /// <param name="request">A <see cref="ChangeProductionInstanceDomainRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="ChangeProductionInstanceDomainResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ChangeProductionInstanceDomainResponse> ChangeDomainAsync(
             ChangeProductionInstanceDomainRequestBody? request = null,
@@ -1340,14 +1342,16 @@ namespace Clerk.BackendAPI
         /// <br/>
         /// Changing the domain requires updating the <a href="https://clerk.com/docs/deployments/overview#dns-records">DNS records</a> accordingly, deploying new <a href="https://clerk.com/docs/deployments/overview#deploy-certificates">SSL certificates</a>, updating your Social Connection's redirect URLs and setting the new keys in your code.<br/>
         /// <br/>
-        /// WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur.
+        /// WARNING: Changing your domain will invalidate all current user sessions (i.e. users will be logged out). Also, while your application is being deployed, a small downtime is expected to occur.<br/>
+        /// <br/>
+        /// Returns 403 `domain_managed_by_integration` for applications in a Vercel-managed workspace; change the domain from the Vercel integration instead.
         /// </remarks>
         /// <param name="request">A <see cref="ChangeProductionInstanceDomainRequestBody"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="ChangeProductionInstanceDomainResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 403 or 422 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ChangeProductionInstanceDomainResponse> ChangeDomainAsync(
             ChangeProductionInstanceDomainRequestBody? request = null,
@@ -1456,7 +1460,7 @@ namespace Clerk.BackendAPI
                     }
                 };
             }
-            else if(new List<int>{400, 422}.Contains(responseStatusCode))
+            else if(new List<int>{400, 403, 422}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

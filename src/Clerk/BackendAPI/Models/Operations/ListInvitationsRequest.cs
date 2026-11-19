@@ -11,6 +11,7 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
+    using System.Collections.Generic;
 
     public class ListInvitationsRequest
     {
@@ -25,6 +26,13 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=query")]
         public string? Query { get; set; }
+
+        /// <summary>
+        /// Returns invitations with the specified email addresses.<br/>
+        /// Accepts up to 100 email addresses.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=email_address")]
+        public List<string>? EmailAddress { get; set; }
 
         /// <summary>
         /// Allows to return invitations in a particular order.<br/>

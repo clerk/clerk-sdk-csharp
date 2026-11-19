@@ -3,6 +3,7 @@
 
 ## Fields
 
-| Field                 | Type                  | Required              | Description           | Example               |
-| --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
-| `SessionId`           | *string*              | :heavy_check_mark:    | The ID of the session | sess_1234567890abcdef |
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `SessionId`                                                                     | *string*                                                                        | :heavy_check_mark:                                                              | The ID of the session                                                           | sess_1234567890abcdef                                                           |
+| `RequestBody`                                                                   | [RevokeSessionRequestBody](../../Models/Operations/RevokeSessionRequestBody.md) | :heavy_minus_sign:                                                              | N/A                                                                             |                                                                                 |

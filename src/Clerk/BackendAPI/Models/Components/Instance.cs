@@ -33,5 +33,29 @@ namespace Clerk.BackendAPI.Models.Components
 
         [JsonProperty("allowed_origins", NullValueHandling = NullValueHandling.Include)]
         public List<string>? AllowedOrigins { get; set; }
+
+        /// <summary>
+        /// Subdomains of the instance's own domains that may originate requests, when the subdomain allowlist is enabled. Production instances only; always empty on a development instance.
+        /// </summary>
+        [JsonProperty("allowed_subdomains")]
+        public List<string> AllowedSubdomains { get; set; } = default!;
+
+        /// <summary>
+        /// Whether requests from subdomains of the instance's own domains are restricted to `allowed_subdomains`. When false, every subdomain of the instance's domain is accepted. Production instances only; always false on a development instance.
+        /// </summary>
+        [JsonProperty("subdomain_allowlist_enabled")]
+        public bool SubdomainAllowlistEnabled { get; set; } = default!;
+
+        /// <summary>
+        /// The ID of the Clerk workspace that owns the instance's application. It is null when the application has no owner.
+        /// </summary>
+        [JsonProperty("workspace_id", NullValueHandling = NullValueHandling.Include)]
+        public string? WorkspaceId { get; set; }
+
+        /// <summary>
+        /// The maximum number of users the instance can hold. Creating a user fails with a `user_quota_exceeded` error once the instance's total user count, as returned by `GET /v1/users/count` without filters, reaches this value. It is null when the instance has no user limit.
+        /// </summary>
+        [JsonProperty("max_allowed_users", NullValueHandling = NullValueHandling.Include)]
+        public long? MaxAllowedUsers { get; set; }
     }
 }
