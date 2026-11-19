@@ -14,7 +14,7 @@ namespace Clerk.BackendAPI.Models.Operations
     public class DeleteSCIMDirectoryRequest
     {
         /// <summary>
-        /// The ID of the SCIM directory to delete.
+        /// The ID of the directory to delete.
         /// </summary>
         [SpeakeasyMetadata("pathParam:style=simple,explode=false,name=scim_directory_id")]
         public string ScimDirectoryId { get; set; } = default!;

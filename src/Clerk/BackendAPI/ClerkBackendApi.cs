@@ -99,6 +99,8 @@ namespace Clerk.BackendAPI
 
         public IEnterpriseConnections EnterpriseConnections { get; }
 
+        public ISsoBypassAllowlistUsers SsoBypassAllowlistUsers { get; }
+
         public ITestingTokens TestingTokens { get; }
 
         public IAgentTasks AgentTasks { get; }
@@ -111,7 +113,11 @@ namespace Clerk.BackendAPI
 
         public IRoleSets RoleSets { get; }
 
+        public ILogs Logs { get; }
+
         public IScimDirectories ScimDirectories { get; }
+
+        public IDirectories Directories { get; }
 
         public IAdminPortalLinkTokens AdminPortalLinkTokens { get; }
 
@@ -271,6 +277,10 @@ namespace Clerk.BackendAPI
         /// </summary>
         public IEnterpriseConnections EnterpriseConnections { get; private set; }
         /// <summary>
+        /// The SsoBypassAllowlistUsers sub-SDK.
+        /// </summary>
+        public ISsoBypassAllowlistUsers SsoBypassAllowlistUsers { get; private set; }
+        /// <summary>
         /// The TestingTokens sub-SDK.
         /// </summary>
         public ITestingTokens TestingTokens { get; private set; }
@@ -295,9 +305,17 @@ namespace Clerk.BackendAPI
         /// </summary>
         public IRoleSets RoleSets { get; private set; }
         /// <summary>
+        /// The Logs sub-SDK.
+        /// </summary>
+        public ILogs Logs { get; private set; }
+        /// <summary>
         /// The ScimDirectories sub-SDK.
         /// </summary>
         public IScimDirectories ScimDirectories { get; private set; }
+        /// <summary>
+        /// The Directories sub-SDK.
+        /// </summary>
+        public IDirectories Directories { get; private set; }
         /// <summary>
         /// The AdminPortalLinkTokens sub-SDK.
         /// </summary>
@@ -388,6 +406,8 @@ namespace Clerk.BackendAPI
 
             EnterpriseConnections = new EnterpriseConnections(SDKConfiguration);
 
+            SsoBypassAllowlistUsers = new SsoBypassAllowlistUsers(SDKConfiguration);
+
             TestingTokens = new TestingTokens(SDKConfiguration);
 
             AgentTasks = new AgentTasks(SDKConfiguration);
@@ -400,7 +420,11 @@ namespace Clerk.BackendAPI
 
             RoleSets = new RoleSets(SDKConfiguration);
 
+            Logs = new Logs(SDKConfiguration);
+
             ScimDirectories = new ScimDirectories(SDKConfiguration);
+
+            Directories = new Directories(SDKConfiguration);
 
             AdminPortalLinkTokens = new AdminPortalLinkTokens(SDKConfiguration);
 
@@ -532,6 +556,8 @@ namespace Clerk.BackendAPI
 
             EnterpriseConnections = new EnterpriseConnections(SDKConfiguration);
 
+            SsoBypassAllowlistUsers = new SsoBypassAllowlistUsers(SDKConfiguration);
+
             TestingTokens = new TestingTokens(SDKConfiguration);
 
             AgentTasks = new AgentTasks(SDKConfiguration);
@@ -544,7 +570,11 @@ namespace Clerk.BackendAPI
 
             RoleSets = new RoleSets(SDKConfiguration);
 
+            Logs = new Logs(SDKConfiguration);
+
             ScimDirectories = new ScimDirectories(SDKConfiguration);
+
+            Directories = new Directories(SDKConfiguration);
 
             AdminPortalLinkTokens = new AdminPortalLinkTokens(SDKConfiguration);
 

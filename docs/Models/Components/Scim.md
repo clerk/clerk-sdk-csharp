@@ -1,13 +1,19 @@
-# Scim
+# ~~Scim~~
 
-Metadata describing a user's linkage to a SCIM directory. This object is only delivered on `user.created` and `user.updated` webhook events, and only when the user is provisioned through a SCIM directory. Its absence does not necessarily mean the user is not SCIM-managed.
+Alias of directory. Use directories for all links.
 
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 
 ## Fields
 
-| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `DirectoryId`                                                         | *string*                                                              | :heavy_check_mark:                                                    | The ID of the SCIM directory the user is provisioned from.<br/>       |
-| `DirectoryEnabled`                                                    | *bool*                                                                | :heavy_minus_sign:                                                    | Whether the SCIM directory is currently enabled. Omitted when false.<br/> |
-| `ExternalId`                                                          | *string*                                                              | :heavy_check_mark:                                                    | The user's external ID as reported by the SCIM directory, if any.<br/> |
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `Id`                                                                            | *string*                                                                        | :heavy_check_mark:                                                              | The user's resource ID in this directory.                                       |
+| `DirectoryName`                                                                 | *string*                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `Provider`                                                                      | *string*                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `EnterpriseConnectionId`                                                        | *string*                                                                        | :heavy_check_mark:                                                              | N/A                                                                             |
+| `Groups`                                                                        | List<[UserScimGroups](../../Models/Components/UserScimGroups.md)>               | :heavy_minus_sign:                                                              | Omitted when groups were not loaded; an empty array means no group memberships. |
+| `DirectoryId`                                                                   | *string*                                                                        | :heavy_check_mark:                                                              | The ID of the directory the user is provisioned from.<br/>                      |
+| `DirectoryEnabled`                                                              | *bool*                                                                          | :heavy_check_mark:                                                              | Whether the directory is currently enabled.<br/>                                |
+| `ExternalId`                                                                    | *string*                                                                        | :heavy_check_mark:                                                              | The user's external ID as reported by the directory, if any.<br/>               |
