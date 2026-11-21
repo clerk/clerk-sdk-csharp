@@ -15,9 +15,6 @@ namespace Clerk.BackendAPI.Models.Components
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Success.
-    /// </summary>
     public class User
     {
         [JsonProperty("id")]

@@ -17,7 +17,7 @@ namespace Clerk.BackendAPI.Models.Operations
         /// The event type to describe: concrete (`sign_in.completed`),<br/>
         /// trailing-`*` wildcard (`sign_in.*`), or bare family name<br/>
         /// (`sign_in`). Unknown types return a 422. A bare `*` is not<br/>
-        /// accepted.
+        /// accepted; to list every event type, use `GET /logs/types`.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=type")]
         public string Type { get; set; } = default!;

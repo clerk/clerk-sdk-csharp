@@ -11,6 +11,7 @@ namespace Clerk.BackendAPI.Models.Operations
 {
     using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
+    using System;
     using System.Collections.Generic;
 
     public class ListLogsRequest
@@ -37,13 +38,17 @@ namespace Clerk.BackendAPI.Models.Operations
         public string? EndingBefore { get; set; }
 
         /// <summary>
-        /// Filter logs by subject.
+        /// Filter logs by subject: the ID of the resource the event is about,<br/>
+        /// such as a user, an organization, or the instance when nothing more<br/>
+        /// specific applies.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=subject")]
         public string? Subject { get; set; }
 
         /// <summary>
-        /// Filter logs by actor.
+        /// Filter logs by actor: the ID of whoever triggered the event, such as<br/>
+        /// a user, a Clerk Dashboard user, an instance key, or an API key. In<br/>
+        /// an impersonated session, the actor is the impersonated user.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=actor")]
         public string? Actor { get; set; }
@@ -174,9 +179,8 @@ namespace Clerk.BackendAPI.Models.Operations
         /// `ip_address`, and `payload_filter` entries<br/>
         /// are combined: `all` (default) requires every supplied filter to<br/>
         /// match; `any` returns events that match at least one of the<br/>
-        /// supplied filters. `event_time_after`, `event_time_before`, and<br/>
-        /// `end_user_facing_only` are always ANDed with the (possibly OR-ed)<br/>
-        /// string filter group.
+        /// supplied filters. `event_time_after` and `event_time_before` are<br/>
+        /// always ANDed with the (possibly OR-ed) string filter group.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=filter_match")]
         public FilterMatch? FilterMatch { get; set; } = Clerk.BackendAPI.Models.Operations.FilterMatch.All;
@@ -211,9 +215,9 @@ namespace Clerk.BackendAPI.Models.Operations
         public long? EventTimeBefore { get; set; }
 
         /// <summary>
-        /// When set to true, only returns events that are marked as end-user facing.<br/>
-        /// When set to false or omitted, returns all events.
+        /// Deprecated. This parameter has no effect.
         /// </summary>
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible")]
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=end_user_facing_only")]
         public bool? EndUserFacingOnly { get; set; }
 
@@ -252,9 +256,9 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// Not allowed with `view=flat`. Group statuses to keep, e.g. `failed`,<br/>
         /// repeated for several (`status=failed&amp;status=completed`). Keeps only<br/>
-        /// groups that concluded that way and drops the logs outside any<br/>
-        /// group. A status is a conclusion (`completed`, `failed`), so groups<br/>
-        /// that haven't concluded never match.
+        /// groups with one of those statuses and drops the logs outside any<br/>
+        /// group. A status is `completed`, `failed` or `abandoned`. A group<br/>
+        /// that is still going has no status and never matches.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=status")]
         public List<string>? Status { get; set; }

@@ -42,6 +42,18 @@ namespace Clerk.BackendAPI.Models.Components
         public string TaskId { get; set; } = default!;
 
         /// <summary>
+        /// Whether the agent task session is restricted. When true, the session can refresh only its own session token and read. Clerk's Frontend API refuses every other write from a browser client that holds the session, including touch, sign-out, profile and organization writes, sign-in and sign-up, and OAuth approval. It also refuses changing the session's workspace (its active organization).
+        /// </summary>
+        [JsonProperty("session_restricted")]
+        public bool SessionRestricted { get; set; } = default!;
+
+        /// <summary>
+        /// The organization the agent task session starts in, and the only one a restricted session can use. Null means the personal workspace.
+        /// </summary>
+        [JsonProperty("session_organization_id")]
+        public string? SessionOrganizationId { get; set; } = null;
+
+        /// <summary>
         /// The URL that, when visited, creates a session for the user. Only present in the response to a create request.
         /// </summary>
         [JsonProperty("url")]

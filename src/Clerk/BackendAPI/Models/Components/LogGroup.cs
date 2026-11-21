@@ -57,9 +57,10 @@ namespace Clerk.BackendAPI.Models.Components
         public long? MatchedEventCount { get; set; }
 
         /// <summary>
-        /// How the flow ended, `completed` or `failed`. Null while the flow<br/>
-        /// has not concluded: no status is recorded for a flow that is still<br/>
-        /// going or was given up.
+        /// How the flow ended: `completed`, `failed`, or `abandoned` when<br/>
+        /// nothing concluded it before its abandon deadline passed (a<br/>
+        /// sign-in or sign-up nobody finished). Null while the flow is still<br/>
+        /// going.
         /// </summary>
         [JsonProperty("status", NullValueHandling = NullValueHandling.Include)]
         public string? Status { get; set; }

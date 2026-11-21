@@ -31,6 +31,12 @@ namespace Clerk.BackendAPI.Models.Components
         [JsonProperty("id")]
         public string Id { get; set; } = default!;
 
+        /// <summary>
+        /// Unix timestamp in milliseconds when this client was revoked.
+        /// </summary>
+        [JsonProperty("revoked_at")]
+        public long? RevokedAt { get; set; } = null;
+
         [JsonProperty("session_ids")]
         public List<string> SessionIds { get; set; } = default!;
 
