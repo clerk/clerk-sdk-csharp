@@ -30,7 +30,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 csharp:
-  version: 3.0.1
+  version: 3.0.2
   additionalDependencies:
     - package: Microsoft.AspNetCore.Http
       version: 2.3.0
@@ -65,6 +65,7 @@ csharp:
   maxMethodParams: 4
   methodArguments: infer-optional-args
   multipartArrayFormat: legacy
+  optionalNullableScope: all
   outputModelSuffix: output
   packageName: Clerk.BackendAPI
   packageTags: Clerk SDK

@@ -146,6 +146,35 @@ namespace Clerk.BackendAPI
         );
 
         /// <summary>
+        /// List directory groups.
+        /// </summary>
+        /// <remarks>
+        /// Returns the groups available in a directory, as reported by the identity provider,<br/>
+        /// using cursor-based pagination.
+        /// </remarks>
+        /// <param name="directoryId">The ID of the directory.</param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `starting_after` or `ending_before`.
+        /// </param>
+        /// <param name="startingAfter">A cursor for pagination. Provide the `starting_after` cursor from a previous response to fetch the next page.</param>
+        /// <param name="endingBefore">A cursor for pagination. Provide the `ending_before` cursor from a previous response to fetch the previous page.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListDirectoryGroupsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="directoryId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListDirectoryGroupsResponse> ListGroupsAsync(
+            string directoryId,
+            long? limit = 10,
+            string? startingAfter = null,
+            string? endingBefore = null,
+            RetryConfig? retryConfig = null
+        );
+
+        /// <summary>
         /// Retrieve a directory group.
         /// </summary>
         /// <remarks>
@@ -1318,6 +1347,192 @@ namespace Clerk.BackendAPI
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
             else if(new List<int>{401, 403, 404, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
+        /// List directory groups.
+        /// </summary>
+        /// <remarks>
+        /// Returns the groups available in a directory, as reported by the identity provider,<br/>
+        /// using cursor-based pagination.
+        /// </remarks>
+        /// <param name="directoryId">The ID of the directory.</param>
+        /// <param name="limit">
+        /// Applies a limit to the number of results returned.<br/>
+        /// Can be used for paginating the results together with `starting_after` or `ending_before`.
+        /// </param>
+        /// <param name="startingAfter">A cursor for pagination. Provide the `starting_after` cursor from a previous response to fetch the next page.</param>
+        /// <param name="endingBefore">A cursor for pagination. Provide the `ending_before` cursor from a previous response to fetch the previous page.</param>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListDirectoryGroupsResponse"/> response envelope when completed.</returns>
+        /// <exception cref="ArgumentNullException">The required parameter <paramref name="directoryId"/> is null.</exception>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 404 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListDirectoryGroupsResponse> ListGroupsAsync(
+            string directoryId,
+            long? limit = 10,
+            string? startingAfter = null,
+            string? endingBefore = null,
+            RetryConfig? retryConfig = null
+        )
+        {
+            if (directoryId == null) throw new ArgumentNullException(nameof(directoryId));
+
+            var request = new ListDirectoryGroupsRequest()
+            {
+                DirectoryId = directoryId,
+                Limit = limit,
+                StartingAfter = startingAfter,
+                EndingBefore = endingBefore,
+            };
+
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = URLBuilder.Build(baseUrl, "/directories/{directory_id}/groups", request, null);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "ListDirectoryGroups", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    DirectoryGroupList obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<DirectoryGroupList>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into DirectoryGroupList.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ListDirectoryGroupsResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.DirectoryGroupList = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{401, 403, 404}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

@@ -118,7 +118,8 @@ var res = await sdk.Users.ListAsync(req);
 
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 422                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 403, 422                         | application/json                           |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 503                                        | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
 
 ## Create

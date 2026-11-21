@@ -25,6 +25,12 @@ namespace Clerk.BackendAPI.Models.Operations
         [JsonProperty("sub")]
         public string Sub { get; set; } = default!;
 
+        /// <summary>
+        /// Optional actor type. The value `agent` is reserved for agent task sessions and is rejected.
+        /// </summary>
+        [JsonProperty("type")]
+        public string? Type { get; set; }
+
         [JsonProperty("additionalProperties")]
         public Dictionary<string, object>? AdditionalProperties { get; set; }
     }

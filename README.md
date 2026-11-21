@@ -229,6 +229,7 @@ public class MachineAuthentication
 * [~~List~~](docs/sdks/clients/README.md#list) - List all clients :warning: **Deprecated**
 * [Verify](docs/sdks/clients/README.md#verify) - Verify a client
 * [Get](docs/sdks/clients/README.md#get) - Get a client
+* [Revoke](docs/sdks/clients/README.md#revoke) - Revoke a client
 
 ### [Directories](docs/sdks/directories/README.md)
 
@@ -238,6 +239,7 @@ public class MachineAuthentication
 * [Update](docs/sdks/directories/README.md#update) - Update a directory
 * [Delete](docs/sdks/directories/README.md#delete) - Delete a directory
 * [RotateApiKey](docs/sdks/directories/README.md#rotateapikey) - Rotate a directory's API key
+* [ListGroups](docs/sdks/directories/README.md#listgroups) - List directory groups
 * [GetGroup](docs/sdks/directories/README.md#getgroup) - Retrieve a directory group
 * [ListGroupMembers](docs/sdks/directories/README.md#listgroupmembers) - List directory group members
 * [ListGroupRoleMappings](docs/sdks/directories/README.md#listgrouprolemappings) - List directory group role mappings
@@ -322,6 +324,7 @@ public class MachineAuthentication
 
 * [List](docs/sdks/logs/README.md#list) - List all logs
 * [GetSchema](docs/sdks/logs/README.md#getschema) - Retrieve the payload schema of a log event type
+* [ListTypes](docs/sdks/logs/README.md#listtypes) - List all log event types
 * [ListGroupEvents](docs/sdks/logs/README.md#listgroupevents) - List an event group's logs
 * [Get](docs/sdks/logs/README.md#get) - Retrieve a single log
 
@@ -708,41 +711,41 @@ catch (System.Net.Http.HttpRequestException ex)
 * [`System.Net.Http.HttpRequestException`](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestexception): Network connectivity error. For more details about the underlying cause, inspect the `ex.InnerException`.
 
 * Inheriting from [`SDKBaseError`](./src/Clerk/BackendAPI/Models/Errors/SDKBaseError.cs):
-  * [`CreateAdminPortalLinkTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAdminPortalLinkTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`RevokeAdminPortalLinkTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAdminPortalLinkTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`CreateApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`GetApiKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeysResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`GetApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`UpdateApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/UpdateApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`DeleteApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/DeleteApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`GetApiKeySecretResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeySecretResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`RevokeApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`VerifyApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`CreateM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`GetM2MTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`RevokeM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`VerifyM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`VerifyOAuthAccessTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 264 methods.*
-  * [`CreateAdminPortalLinkTokenAdminPortalLinkTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAdminPortalLinkTokenAdminPortalLinkTokensResponseBody.cs): 401 Unauthorized. Status code `401`. Applicable to 1 of 264 methods.*
-  * [`RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponseBody.cs): 401 Unauthorized. Status code `401`. Applicable to 1 of 264 methods.*
-  * [`CreateAdminPortalLinkTokenAdminPortalLinkTokensResponseResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAdminPortalLinkTokenAdminPortalLinkTokensResponseResponseBody.cs): 403 Forbidden. Status code `403`. Applicable to 1 of 264 methods.*
-  * [`RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponseResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponseResponseBody.cs): 403 Forbidden. Status code `403`. Applicable to 1 of 264 methods.*
-  * [`GetM2MTokensM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseBody.cs): 403 Forbidden. Status code `403`. Applicable to 1 of 264 methods.*
-  * [`RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponse404ResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponse404ResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`GetAPIKeysAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeysAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`GetAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`UpdateAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/UpdateAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`DeleteAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/DeleteAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`GetAPIKeySecretAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeySecretAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`RevokeAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`VerifyAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`GetM2MTokensM2mResponseResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`RevokeM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`VerifyM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`VerifyOAuthAccessTokenOauthAccessTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 264 methods.*
-  * [`CreateAdminPortalLinkTokenAdminPortalLinkTokensResponse409ResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAdminPortalLinkTokenAdminPortalLinkTokensResponse409ResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 264 methods.*
-  * [`CreateAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAPIKeyAPIKeysResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 264 methods.*
-  * [`CreateM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenM2mResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 264 methods.*
+  * [`CreateAdminPortalLinkTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAdminPortalLinkTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`RevokeAdminPortalLinkTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAdminPortalLinkTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`CreateApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`GetApiKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeysResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`GetApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`UpdateApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/UpdateApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`DeleteApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/DeleteApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`GetApiKeySecretResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetApiKeySecretResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`RevokeApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`VerifyApiKeyResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyApiKeyResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`CreateM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`GetM2MTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`RevokeM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`VerifyM2MTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`VerifyOAuthAccessTokenResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenResponseBody.cs): 400 Bad Request. Status code `400`. Applicable to 1 of 267 methods.*
+  * [`CreateAdminPortalLinkTokenAdminPortalLinkTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAdminPortalLinkTokenAdminPortalLinkTokensResponseBody.cs): 401 Unauthorized. Status code `401`. Applicable to 1 of 267 methods.*
+  * [`RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponseBody.cs): 401 Unauthorized. Status code `401`. Applicable to 1 of 267 methods.*
+  * [`CreateAdminPortalLinkTokenAdminPortalLinkTokensResponseResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAdminPortalLinkTokenAdminPortalLinkTokensResponseResponseBody.cs): 403 Forbidden. Status code `403`. Applicable to 1 of 267 methods.*
+  * [`RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponseResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponseResponseBody.cs): 403 Forbidden. Status code `403`. Applicable to 1 of 267 methods.*
+  * [`GetM2MTokensM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseBody.cs): 403 Forbidden. Status code `403`. Applicable to 1 of 267 methods.*
+  * [`RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponse404ResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAdminPortalLinkTokenAdminPortalLinkTokensResponse404ResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`GetAPIKeysAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeysAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`GetAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`UpdateAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/UpdateAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`DeleteAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/DeleteAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`GetAPIKeySecretAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetAPIKeySecretAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`RevokeAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`VerifyAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyAPIKeyAPIKeysResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`GetM2MTokensM2mResponseResponseBody`](./src/Clerk/BackendAPI/Models/Errors/GetM2MTokensM2mResponseResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`RevokeM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/RevokeM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`VerifyM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyM2MTokenM2mResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`VerifyOAuthAccessTokenOauthAccessTokensResponseBody`](./src/Clerk/BackendAPI/Models/Errors/VerifyOAuthAccessTokenOauthAccessTokensResponseBody.cs): 404 Not Found. Status code `404`. Applicable to 1 of 267 methods.*
+  * [`CreateAdminPortalLinkTokenAdminPortalLinkTokensResponse409ResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAdminPortalLinkTokenAdminPortalLinkTokensResponse409ResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 267 methods.*
+  * [`CreateAPIKeyAPIKeysResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateAPIKeyAPIKeysResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 267 methods.*
+  * [`CreateM2MTokenM2mResponseBody`](./src/Clerk/BackendAPI/Models/Errors/CreateM2MTokenM2mResponseBody.cs): 409 Conflict. Status code `409`. Applicable to 1 of 267 methods.*
   * [`ResponseValidationError`](./src/Clerk/BackendAPI/Models/Errors/ResponseValidationError.cs): Thrown when the response data could not be deserialized into the expected type.
 </details>
 
