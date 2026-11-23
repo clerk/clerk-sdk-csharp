@@ -41,7 +41,7 @@ namespace Clerk.BackendAPI
         /// <returns>An awaitable task that returns a <see cref="GetUserListResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 422 or 503 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetUserListResponse> ListAsync(GetUserListRequest? request = null, RetryConfig? retryConfig = null);
 
@@ -905,7 +905,7 @@ namespace Clerk.BackendAPI
         /// <returns>An awaitable task that returns a <see cref="GetUserListResponse"/> response envelope when completed.</returns>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401 or 422 response.</exception>
+        /// <exception cref="ClerkErrors">Request was not successful. Thrown when the API returns a 400, 401, 403, 422 or 503 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<GetUserListResponse> ListAsync(
             GetUserListRequest? request = null,
@@ -1002,14 +1002,14 @@ namespace Clerk.BackendAPI
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {
                     var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
-                    List<User> obj;
+                    UserListOrCursorPage obj;
                     try
                     {
-                        obj = ResponseBodyDeserializer.DeserializeNotNull<List<User>>(httpResponseBody, NullValueHandling.Include);
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<UserListOrCursorPage>(httpResponseBody, NullValueHandling.Include);
                     }
                     catch (Exception ex)
                     {
-                        throw new ResponseValidationException("Failed to deserialize response body into List<User>.", httpRequest, httpResponse, httpResponseBody, ex);
+                        throw new ResponseValidationException("Failed to deserialize response body into UserListOrCursorPage.", httpRequest, httpResponse, httpResponseBody, ex);
                     }
 
                     var response = new GetUserListResponse()
@@ -1020,13 +1020,33 @@ namespace Clerk.BackendAPI
                             Request = httpRequest
                         }
                     };
-                    response.UserList = obj;
+                    response.UserListOrCursorPage = obj;
                     return response;
                 }
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{400, 401, 422}.Contains(responseStatusCode))
+            else if(new List<int>{400, 401, 403, 422}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Include);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode == 503)
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

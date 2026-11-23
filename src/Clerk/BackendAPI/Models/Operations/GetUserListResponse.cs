@@ -12,7 +12,6 @@ namespace Clerk.BackendAPI.Models.Operations
     using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
 
     public class GetUserListResponse
     {
@@ -22,6 +21,6 @@ namespace Clerk.BackendAPI.Models.Operations
         /// <summary>
         /// Success.
         /// </summary>
-        public List<User>? UserList { get; set; }
+        public UserListOrCursorPage? UserListOrCursorPage { get; set; }
     }
 }

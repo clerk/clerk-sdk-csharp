@@ -19,9 +19,8 @@ namespace Clerk.BackendAPI.Models.Operations
     /// `ip_address`, and `payload_filter` entries<br/>
     /// are combined: `all` (default) requires every supplied filter to<br/>
     /// match; `any` returns events that match at least one of the<br/>
-    /// supplied filters. `event_time_after`, `event_time_before`, and<br/>
-    /// `end_user_facing_only` are always ANDed with the (possibly OR-ed)<br/>
-    /// string filter group.
+    /// supplied filters. `event_time_after` and `event_time_before` are<br/>
+    /// always ANDed with the (possibly OR-ed) string filter group.
     /// </summary>
     public enum FilterMatch
     {

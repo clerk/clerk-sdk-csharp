@@ -76,15 +76,13 @@ namespace Clerk.BackendAPI
         /// echoes the normalized form). For wildcard lookups the fields are the<br/>
         /// intersection across every matching event type, and `matched_event_types`<br/>
         /// lists what the intersection was computed over; per-type metadata<br/>
-        /// (description, severity, docs_group) is present only for concrete types.<br/>
-        /// <br/>
-        /// The response is the same for every instance.
+        /// (description, severity, docs_group) is present only for concrete types.
         /// </remarks>
         /// <param name="type">
         /// The event type to describe: concrete (`sign_in.completed`),<br/>
         /// trailing-`*` wildcard (`sign_in.*`), or bare family name<br/>
         /// (`sign_in`). Unknown types return a 422. A bare `*` is not<br/>
-        /// accepted.
+        /// accepted; to list every event type, use `GET /logs/types`.
         /// </param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="GetLogSchemaResponse"/> response envelope when completed.</returns>
@@ -94,6 +92,27 @@ namespace Clerk.BackendAPI
         /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 422 or 429 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<GetLogSchemaResponse> GetSchemaAsync(string type, RetryConfig? retryConfig = null);
+
+        /// <summary>
+        /// List all log event types.
+        /// </summary>
+        /// <remarks>
+        /// Returns every event type the instance can see in its logs, each with<br/>
+        /// its payload schema, sorted by `event_type`. Each entry is the same as<br/>
+        /// the response of `GET /logs/schemas` for that type.<br/>
+        /// <br/>
+        /// Use it to discover the values that the `type` parameter of the list<br/>
+        /// endpoint accepts, and the payload fields each one carries. The list is<br/>
+        /// not paginated. Event types whose logs are enabled per instance (such as<br/>
+        /// `sms.*` and `email.*`) are listed only once enabled.
+        /// </remarks>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListLogTypesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 429 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public  Task<ListLogTypesResponse> ListTypesAsync(RetryConfig? retryConfig = null);
 
         /// <summary>
         /// List an event group's logs.
@@ -107,7 +126,9 @@ namespace Clerk.BackendAPI
         /// <param name="groupId">The ID of the event group, e.g. a sign-in ID.</param>
         /// <param name="startedAt">
         /// When the group started (Unix timestamp in milliseconds), the<br/>
-        /// `started_at` of the group item. It bounds the time range searched.
+        /// `started_at` of the group item. Optional: when omitted, it is<br/>
+        /// looked up from `group_id`, and a group that can't be found or is<br/>
+        /// past the retention window returns a 404.
         /// </param>
         /// <param name="limit">Applies a limit to the number of results returned.</param>
         /// <param name="startingAfter">
@@ -120,11 +141,11 @@ namespace Clerk.BackendAPI
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="groupId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 422, 429 or 503 response.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 404, 422, 429 or 503 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public  Task<ListLogGroupEventsResponse> ListGroupEventsAsync(
             string groupId,
-            long startedAt,
+            long? startedAt = null,
             long? limit = 10,
             string? startingAfter = null,
             RetryConfig? retryConfig = null
@@ -384,15 +405,13 @@ namespace Clerk.BackendAPI
         /// echoes the normalized form). For wildcard lookups the fields are the<br/>
         /// intersection across every matching event type, and `matched_event_types`<br/>
         /// lists what the intersection was computed over; per-type metadata<br/>
-        /// (description, severity, docs_group) is present only for concrete types.<br/>
-        /// <br/>
-        /// The response is the same for every instance.
+        /// (description, severity, docs_group) is present only for concrete types.
         /// </remarks>
         /// <param name="type">
         /// The event type to describe: concrete (`sign_in.completed`),<br/>
         /// trailing-`*` wildcard (`sign_in.*`), or bare family name<br/>
         /// (`sign_in`). Unknown types return a 422. A bare `*` is not<br/>
-        /// accepted.
+        /// accepted; to list every event type, use `GET /logs/types`.
         /// </param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
         /// <returns>An awaitable task that returns a <see cref="GetLogSchemaResponse"/> response envelope when completed.</returns>
@@ -558,6 +577,174 @@ namespace Clerk.BackendAPI
 
 
         /// <summary>
+        /// List all log event types.
+        /// </summary>
+        /// <remarks>
+        /// Returns every event type the instance can see in its logs, each with<br/>
+        /// its payload schema, sorted by `event_type`. Each entry is the same as<br/>
+        /// the response of `GET /logs/schemas` for that type.<br/>
+        /// <br/>
+        /// Use it to discover the values that the `type` parameter of the list<br/>
+        /// endpoint accepts, and the payload fields each one carries. The list is<br/>
+        /// not paginated. Event types whose logs are enabled per instance (such as<br/>
+        /// `sms.*` and `email.*`) are listed only once enabled.
+        /// </remarks>
+        /// <param name="retryConfig">The retry configuration to use for this operation.</param>
+        /// <returns>An awaitable task that returns a <see cref="ListLogTypesResponse"/> response envelope when completed.</returns>
+        /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
+        /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403 or 429 response.</exception>
+        /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
+        public async  Task<ListLogTypesResponse> ListTypesAsync(RetryConfig? retryConfig = null)
+        {
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+            var urlString = baseUrl + "/logs/types";
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+
+            if (!httpRequest.Headers.Contains("Accept"))
+            {
+                httpRequest.Headers.Add("Accept", "application/json");
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "ListLogTypes", null, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+            if (retryConfig == null)
+            {
+                if (this.SDKConfiguration.RetryConfig != null)
+                {
+                    retryConfig = this.SDKConfiguration.RetryConfig;
+                }
+                else
+                {
+                    var backoff = new BackoffStrategy(
+                        initialIntervalMs: 500L,
+                        maxIntervalMs: 60000L,
+                        maxElapsedTimeMs: 3600000L,
+                        exponent: 1.5
+                    );
+                    retryConfig = new RetryConfig(
+                        strategy: RetryConfig.RetryStrategy.BACKOFF,
+                        backoff: backoff,
+                        retryConnectionErrors: true
+                    );
+                }
+            }
+
+            List<string> statusCodes = new List<string>
+            {
+                "5XX",
+            };
+
+            Func<Task<HttpResponseMessage>> retrySend = async () =>
+            {
+                var _httpRequest = await SDKConfiguration.Client.CloneAsync(httpRequest);
+                return await SDKConfiguration.Client.SendAsync(_httpRequest);
+            };
+            var retries = new Clerk.BackendAPI.Utils.Retries.Retries(retrySend, retryConfig, statusCodes);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await retries.Run();
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode >= 400 && _statusCode < 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception _hookError)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, _hookError);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    LogSchemaList obj;
+                    try
+                    {
+                        obj = ResponseBodyDeserializer.DeserializeNotNull<LogSchemaList>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into LogSchemaList.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    var response = new ListLogTypesResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.LogSchemaList = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(new List<int>{401, 403, 429}.Contains(responseStatusCode))
+            {
+                if(Utilities.IsContentTypeMatch("application/json", contentType))
+                {
+                    var httpResponseBody = await httpResponse.Content.ReadAsStringAsync();
+                    ClerkErrorsPayload payload;
+                    try
+                    {
+                        payload = ResponseBodyDeserializer.DeserializeNotNull<ClerkErrorsPayload>(httpResponseBody, NullValueHandling.Ignore);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ResponseValidationException("Failed to deserialize response body into ClerkErrorsPayload.", httpRequest, httpResponse, httpResponseBody, ex);
+                    }
+
+                    throw new ClerkErrors(payload, httpRequest, httpResponse, httpResponseBody);
+                }
+
+                throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.SDKError("API error occurred", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+            }
+
+            throw new Models.Errors.SDKError("Unknown status code received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
+        }
+
+
+        /// <summary>
         /// List an event group's logs.
         /// </summary>
         /// <remarks>
@@ -569,7 +756,9 @@ namespace Clerk.BackendAPI
         /// <param name="groupId">The ID of the event group, e.g. a sign-in ID.</param>
         /// <param name="startedAt">
         /// When the group started (Unix timestamp in milliseconds), the<br/>
-        /// `started_at` of the group item. It bounds the time range searched.
+        /// `started_at` of the group item. Optional: when omitted, it is<br/>
+        /// looked up from `group_id`, and a group that can't be found or is<br/>
+        /// past the retention window returns a 404.
         /// </param>
         /// <param name="limit">Applies a limit to the number of results returned.</param>
         /// <param name="startingAfter">
@@ -582,11 +771,11 @@ namespace Clerk.BackendAPI
         /// <exception cref="ArgumentNullException">The required parameter <paramref name="groupId"/> is null.</exception>
         /// <exception cref="HttpRequestException">The HTTP request failed due to network issues.</exception>
         /// <exception cref="ResponseValidationException">The response body could not be deserialized.</exception>
-        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 422, 429 or 503 response.</exception>
+        /// <exception cref="ClerkErrors">Authentication invalid. Thrown when the API returns a 401, 403, 404, 422, 429 or 503 response.</exception>
         /// <exception cref="SDKError">Default API Exception. Thrown when the API returns a 4XX or 5XX response.</exception>
         public async  Task<ListLogGroupEventsResponse> ListGroupEventsAsync(
             string groupId,
-            long startedAt,
+            long? startedAt = null,
             long? limit = 10,
             string? startingAfter = null,
             RetryConfig? retryConfig = null
@@ -716,7 +905,7 @@ namespace Clerk.BackendAPI
 
                 throw new Models.Errors.SDKError("Unknown content type received", httpRequest, httpResponse, await httpResponse.Content.ReadAsStringAsync());
             }
-            else if(new List<int>{401, 403, 422, 429}.Contains(responseStatusCode))
+            else if(new List<int>{401, 403, 404, 422, 429}.Contains(responseStatusCode))
             {
                 if(Utilities.IsContentTypeMatch("application/json", contentType))
                 {

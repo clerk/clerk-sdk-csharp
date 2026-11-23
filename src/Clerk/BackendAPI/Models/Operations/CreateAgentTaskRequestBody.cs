@@ -58,5 +58,26 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [JsonProperty("session_max_duration_in_seconds")]
         public long? SessionMaxDurationInSeconds { get; set; } = 1800;
+
+        /// <summary>
+        /// When true, the session created by the agent task can refresh only its own session token and read.<br/>
+        /// Clerk's Frontend API refuses every other write from a browser client that holds the session,<br/>
+        /// including touch, sign-out through the API (the browser's cookie sign-out GET stays allowed), profile and organization writes, sign-in and sign-up, and OAuth approval.<br/>
+        /// It also refuses changing the session's workspace (its active organization).<br/>
+        /// Expect an app that relies on those calls, such as the clerk-js touch and sign-out, to receive 403 errors.<br/>
+        /// The session token's `agt` claim then carries `rst: true`; it omits `rst` for an unrestricted session.
+        /// </summary>
+        [JsonProperty("session_restricted")]
+        public bool? SessionRestricted { get; set; } = false;
+
+        /// <summary>
+        /// The organization the agent task session starts in. The user must be a member of it.<br/>
+        /// If omitted, the user's last active organization is used, or the personal workspace<br/>
+        /// when the user has none. When session_restricted is true, the session cannot use another<br/>
+        /// workspace and ends when this one is no longer available, and creation fails when<br/>
+        /// the result is the personal workspace but the user must choose an organization.
+        /// </summary>
+        [JsonProperty("session_organization_id")]
+        public string? SessionOrganizationId { get; set; }
     }
 }

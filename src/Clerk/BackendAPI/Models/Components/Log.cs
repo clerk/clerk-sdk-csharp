@@ -38,7 +38,11 @@ namespace Clerk.BackendAPI.Models.Components
         public long EventTime { get; set; } = default!;
 
         /// <summary>
-        /// The actor that performed the action (e.g., user ID).
+        /// The ID of whoever triggered the event. `actor_type` says what kind<br/>
+        /// of principal it is: an end user, a Clerk Dashboard user, an<br/>
+        /// instance key, an API key, an integration, or Clerk itself. In an<br/>
+        /// impersonated session, it is the impersonated user and<br/>
+        /// `impersonator` holds whoever started the impersonation.
         /// </summary>
         [JsonProperty("actor")]
         public string Actor { get; set; } = default!;
@@ -59,7 +63,14 @@ namespace Clerk.BackendAPI.Models.Components
         public Impersonator? Impersonator { get; set; } = null;
 
         /// <summary>
-        /// The subject of the event (e.g., user ID, resource ID).
+        /// The ID of the resource the event is about, such as a user or an<br/>
+        /// organization. A change to a child record, such as an email address<br/>
+        /// or a membership, uses the ID of its parent user or organization.<br/>
+        /// Events that affect several resources use their lowest common<br/>
+        /// parent, and side effects use the primary resource's subject. The<br/>
+        /// instance ID is used when nothing more specific applies.<br/>
+        /// Events in the same flow can have different subjects; use<br/>
+        /// `group_id` to follow a flow.
         /// </summary>
         [JsonProperty("subject")]
         public string Subject { get; set; } = default!;

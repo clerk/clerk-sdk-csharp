@@ -7,6 +7,7 @@
 * [~~List~~](#list) - List all clients :warning: **Deprecated**
 * [Verify](#verify) - Verify a client
 * [Get](#get) - Get a client
+* [Revoke](#revoke) - Revoke a client
 
 ## ~~List~~
 
@@ -125,4 +126,41 @@ var res = await sdk.Clients.GetAsync(clientId: "cli_123456789");
 | Error Type                                 | Status Code                                | Content Type                               |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | Clerk.BackendAPI.Models.Errors.ClerkErrors | 400, 401, 404                              | application/json                           |
+| Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
+
+## Revoke
+
+Permanently revokes a client in a development or production instance, including its active and pending sessions and its linked development browser tokens. Other clients are unaffected. Repeating the request is safe.
+Returns the client with a non-null revoked_at timestamp and no current sessions. Revoked development browser tokens receive dev_browser_unauthenticated on authenticated Frontend API routes. Previously issued session JWTs remain valid until their expiration.
+To sign in again, the browser must initialize a new client. Unlike Frontend API DELETE /client, this operation requires a backend credential and the target client ID, not the affected browser's cookies.
+
+### Example Usage
+
+<!-- UsageSnippet language="csharp" operationID="RevokeClient" method="post" path="/clients/{client_id}/revoke" -->
+```csharp
+using Clerk.BackendAPI;
+using Clerk.BackendAPI.Models.Components;
+
+var sdk = new ClerkBackendApi(bearerAuth: "<YOUR_BEARER_TOKEN_HERE>");
+
+var res = await sdk.Clients.RevokeAsync(clientId: "<id>");
+
+// handle response
+```
+
+### Parameters
+
+| Parameter          | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `ClientId`         | *string*           | :heavy_check_mark: | N/A                |
+
+### Response
+
+**[RevokeClientResponse](../../Models/Operations/RevokeClientResponse.md)**
+
+### Errors
+
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| Clerk.BackendAPI.Models.Errors.ClerkErrors | 401, 404                                   | application/json                           |
 | Clerk.BackendAPI.Models.Errors.SDKError    | 4XX, 5XX                                   | \*/\*                                      |
