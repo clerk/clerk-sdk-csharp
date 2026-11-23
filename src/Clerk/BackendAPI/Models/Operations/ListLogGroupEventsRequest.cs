@@ -21,10 +21,12 @@ namespace Clerk.BackendAPI.Models.Operations
 
         /// <summary>
         /// When the group started (Unix timestamp in milliseconds), the<br/>
-        /// `started_at` of the group item. It bounds the time range searched.
+        /// `started_at` of the group item. Optional: when omitted, it is<br/>
+        /// looked up from `group_id`, and a group that can't be found or is<br/>
+        /// past the retention window returns a 404.
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=started_at")]
-        public long StartedAt { get; set; } = default!;
+        public long? StartedAt { get; set; }
 
         /// <summary>
         /// Applies a limit to the number of results returned.
