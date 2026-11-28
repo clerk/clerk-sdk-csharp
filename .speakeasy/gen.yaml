@@ -30,7 +30,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 csharp:
-  version: 3.0.2
+  version: 3.0.3
   additionalDependencies:
     - package: Microsoft.AspNetCore.Http
       version: 2.3.0
@@ -46,6 +46,8 @@ csharp:
   enableCancellationToken: false
   enableFormatting: false
   enableSourceLink: true
+  fixFlags:
+    spreadAdditionalProperties: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   forwardCompatibleEnumsByDefault: false

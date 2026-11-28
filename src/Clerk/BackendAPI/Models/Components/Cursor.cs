@@ -9,7 +9,6 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Components
 {
-    using Clerk.BackendAPI.Models.Components;
     using Clerk.BackendAPI.Utils;
     using Newtonsoft.Json;
 
@@ -19,65 +18,33 @@ namespace Clerk.BackendAPI.Models.Components
     public class Cursor
     {
         /// <summary>
-        /// Cursor to fetch the next page of results.
+        /// Cursor to fetch the next page of results. Pass it back as `starting_after` on the next request. Null on the last page.
         /// </summary>
-        [JsonProperty("starting_after")]
-        public string? StartingAfter { get; set; } = null;
+        [JsonProperty("starting_after", NullValueHandling = NullValueHandling.Include)]
+        public string? StartingAfter { get; set; }
 
         /// <summary>
-        /// Cursor to fetch the previous page of results.
+        /// Cursor to fetch the previous page of results. Pass it back as `ending_before` on the next request. Null on the first page.
         /// </summary>
-        [JsonProperty("ending_before")]
-        public string? EndingBefore { get; set; } = null;
+        [JsonProperty("ending_before", NullValueHandling = NullValueHandling.Include)]
+        public string? EndingBefore { get; set; }
 
         /// <summary>
-        /// Deprecated: use next_page_status instead. If true, more results may be fetched using the starting_after cursor. True when next_page_status is "true", or when it is "unknown" and the page returned data.
+        /// Whether more results can be fetched using the `starting_after` cursor.
         /// </summary>
         [JsonProperty("has_next_page")]
-        public bool? HasNextPage { get; set; }
+        public bool HasNextPage { get; set; } = default!;
 
         /// <summary>
-        /// Pagination status. "true" means more results exist, "false" means no more results, "unknown" means the query was time-windowed and more results may exist beyond the window.
+        /// The number of users from the start of this page onward, this page included. Present when `remaining_count` was `exact`, or was a number and there are fewer users than it.
         /// </summary>
-        [JsonProperty("next_page_status")]
-        public NextPageStatus? NextPageStatus { get; set; }
+        [JsonProperty("remaining_count_exact")]
+        public long? RemainingCountExact { get; set; }
 
         /// <summary>
-        /// When true, next_page_status is "false" because event_time_after was clamped to the plan's retention floor. Extending event_time_after further back will not yield additional results.
+        /// A lower bound on the number of users from the start of this page onward, this page included. Present when `remaining_count` was a number and the count stopped at it.
         /// </summary>
-        [JsonProperty("retention_limit_reached")]
-        public bool? RetentionLimitReached { get; set; }
-
-        /// <summary>
-        /// The plan's log retention window, in days. Events older than this are not kept and cannot be returned at any page size.
-        /// </summary>
-        [JsonProperty("retention_days")]
-        public long? RetentionDays { get; set; }
-
-        /// <summary>
-        /// The oldest timestamp this plan can return, in Unix milliseconds: `retention_days` before the time the request was served. `searched_from` is never earlier than this, whatever `event_time_after` asked for.<br/>
-        /// <br/>
-        /// Compare your own `event_time_after` against it to tell whether part of the range you asked for is unavailable.
-        /// </summary>
-        [JsonProperty("retention_floor")]
-        public long? RetentionFloor { get; set; }
-
-        /// <summary>
-        /// Lower bound of the time range this page was actually read from, in Unix milliseconds.<br/>
-        /// <br/>
-        /// A request is not served by scanning the whole range you ask for. The endpoint picks a sub-window of it per request and pages through your range one sub-window at a time, which is why `next_page_status` can be `"unknown"` on a page that looks short. `searched_from` and `searched_to` are that sub-window, so you can tell where in your requested range a page sits without decoding the cursor.<br/>
-        /// <br/>
-        /// Never earlier than `event_time_after`, or than the plan's retention floor when that is later.
-        /// </summary>
-        [JsonProperty("searched_from")]
-        public long? SearchedFrom { get; set; }
-
-        /// <summary>
-        /// Upper bound of the time range this page was actually read from, in Unix milliseconds. See `searched_from`.<br/>
-        /// <br/>
-        /// On a first page with no `event_time_before`, this sits a few minutes ahead of the current time on purpose: events can arrive with timestamps marginally ahead of the service clock, and this is the bound the query ran with.
-        /// </summary>
-        [JsonProperty("searched_to")]
-        public long? SearchedTo { get; set; }
+        [JsonProperty("remaining_count_at_least")]
+        public long? RemainingCountAtLeast { get; set; }
     }
 }

@@ -803,7 +803,9 @@ namespace Clerk.BackendAPI
         /// Set a user's password as compromised.
         /// </summary>
         /// <remarks>
-        /// Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.
+        /// Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.<br/>
+        /// When the password was not already compromised, or when `revoke_all_sessions` is `true`, it also marks all of the user's devices as untrusted. On instances with Device Trust enabled, the next password sign-in on any of those devices can require a Device Trust challenge.<br/>
+        /// Calling it again on a password that is already compromised, without `revoke_all_sessions`, changes nothing.
         /// </remarks>
         /// <param name="userId">The ID of the user to set the password as compromised.</param>
         /// <param name="requestBody">A <see cref="SetUserPasswordCompromisedRequestBody"/> parameter.</param>
@@ -7589,7 +7591,9 @@ namespace Clerk.BackendAPI
         /// Set a user's password as compromised.
         /// </summary>
         /// <remarks>
-        /// Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.
+        /// Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.<br/>
+        /// When the password was not already compromised, or when `revoke_all_sessions` is `true`, it also marks all of the user's devices as untrusted. On instances with Device Trust enabled, the next password sign-in on any of those devices can require a Device Trust challenge.<br/>
+        /// Calling it again on a password that is already compromised, without `revoke_all_sessions`, changes nothing.
         /// </remarks>
         /// <param name="userId">The ID of the user to set the password as compromised.</param>
         /// <param name="requestBody">A <see cref="SetUserPasswordCompromisedRequestBody"/> parameter.</param>

@@ -32,6 +32,6 @@ namespace Clerk.BackendAPI.Models.Components
         /// Cursor information for pagination.
         /// </summary>
         [JsonProperty("cursor")]
-        public Cursor? Cursor { get; set; }
+        public LogListCursor? Cursor { get; set; }
     }
 }

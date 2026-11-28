@@ -129,6 +129,14 @@ namespace Clerk.BackendAPI.Models.Operations
         public bool? SignOutOfOtherSessions { get; set; } = null;
 
         /// <summary>
+        /// When set to `true`, also clears Device Trust for the user on every client, whether or not the instance has Device Trust enabled.<br/>
+        /// The next sign-in by this user on any client counts as a new device: it can require a Device Trust challenge and trigger the new device email.<br/>
+        /// This parameter can only be used when providing a `password` and setting `sign_out_of_other_sessions` to `true`, otherwise a 422 is returned and the user is not updated.
+        /// </summary>
+        [JsonProperty("reset_client_trust")]
+        public bool? ResetClientTrust { get; set; } = null;
+
+        /// <summary>
         /// In case TOTP is configured on the instance, you can provide the secret to enable it on the specific user without the need to reset it.
         /// </summary>
         [JsonProperty("totp_secret")]
