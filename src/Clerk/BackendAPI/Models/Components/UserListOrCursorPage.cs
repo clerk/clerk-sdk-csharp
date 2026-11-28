@@ -26,11 +26,14 @@ namespace Clerk.BackendAPI.Models.Components
 
         public static UserListOrCursorPageType ArrayOfUser { get { return new UserListOrCursorPageType("arrayOfUser"); } }
 
+        public static UserListOrCursorPageType UserCursorPage { get { return new UserListOrCursorPageType("UserCursorPage"); } }
+
         public override string ToString() { return Value; }
         public static implicit operator String(UserListOrCursorPageType v) { return v.Value; }
         public static UserListOrCursorPageType FromString(string v) {
             switch(v) {
                 case "arrayOfUser": return ArrayOfUser;
+                case "UserCursorPage": return UserCursorPage;
                 default: throw new ArgumentException("Invalid value for UserListOrCursorPageType");
             }
         }
@@ -63,6 +66,9 @@ namespace Clerk.BackendAPI.Models.Components
         [SpeakeasyMetadata("form:explode=true")]
         public List<User>? ArrayOfUser { get; set; }
 
+        [SpeakeasyMetadata("form:explode=true")]
+        public UserCursorPage? UserCursorPage { get; set; }
+
         public UserListOrCursorPageType Type { get; set; }
         public static UserListOrCursorPage CreateArrayOfUser(List<User> arrayOfUser)
         {
@@ -70,6 +76,14 @@ namespace Clerk.BackendAPI.Models.Components
 
             UserListOrCursorPage res = new UserListOrCursorPage(typ);
             res.ArrayOfUser = arrayOfUser;
+            return res;
+        }
+        public static UserListOrCursorPage CreateUserCursorPage(UserCursorPage userCursorPage)
+        {
+            UserListOrCursorPageType typ = UserListOrCursorPageType.UserCursorPage;
+
+            UserListOrCursorPage res = new UserListOrCursorPage(typ);
+            res.UserCursorPage = userCursorPage;
             return res;
         }
 
@@ -88,6 +102,26 @@ namespace Clerk.BackendAPI.Models.Components
 
                 var json = JRaw.Create(reader).ToString();
                 var fallbackCandidates = new List<(System.Type, object, string)>();
+
+                try
+                {
+                    return new UserListOrCursorPage(UserListOrCursorPageType.UserCursorPage)
+                    {
+                        UserCursorPage = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<UserCursorPage>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(UserCursorPage), new UserListOrCursorPage(UserListOrCursorPageType.UserCursorPage), "UserCursorPage"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
                 try
                 {
@@ -144,6 +178,12 @@ namespace Clerk.BackendAPI.Models.Components
                 if (res.ArrayOfUser != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ArrayOfUser));
+                    return;
+                }
+
+                if (res.UserCursorPage != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.UserCursorPage));
                     return;
                 }
 

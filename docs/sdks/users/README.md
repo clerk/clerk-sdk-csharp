@@ -1638,6 +1638,8 @@ var res = await sdk.Users.DeleteExternalAccountAsync(
 ## SetPasswordCompromised
 
 Sets the given user's password as compromised. The user will be prompted to reset their password on their next sign-in.
+When the password was not already compromised, or when `revoke_all_sessions` is `true`, it also marks all of the user's devices as untrusted. On instances with Device Trust enabled, the next password sign-in on any of those devices can require a Device Trust challenge.
+Calling it again on a password that is already compromised, without `revoke_all_sessions`, changes nothing.
 
 ### Example Usage
 

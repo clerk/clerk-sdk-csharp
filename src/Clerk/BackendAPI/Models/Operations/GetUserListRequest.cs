@@ -9,6 +9,7 @@
 #nullable enable
 namespace Clerk.BackendAPI.Models.Operations
 {
+    using Clerk.BackendAPI.Models.Operations;
     using Clerk.BackendAPI.Utils;
     using System;
     using System.Collections.Generic;
@@ -194,6 +195,31 @@ namespace Clerk.BackendAPI.Models.Operations
         public List<string>? ProviderUserId { get; set; }
 
         /// <summary>
+        /// Returns users matching every one of the given metadata filters. Repeat it once per filter; each value<br/>
+        /// is a JSON object with these fields:<br/>
+        /// <br/>
+        /// - `scope` (required): `public`, `private` or `unsafe`, the metadata to match against.<br/>
+        /// - `key` (required): a dot-separated path into the metadata, e.g. `settings.theme`. Escape a<br/>
+        ///   literal dot in a key as `\.`.<br/>
+        /// - `match` (required): `exists` matches users holding the key, whether it holds a value or nested<br/>
+        ///   keys. `equals` matches the whole value, case-insensitively.<br/>
+        /// - `value`: required for `equals`; not allowed for `exists`.<br/>
+        /// - `negate`: `true` inverts the filter. With `exists` it returns the users who do not hold the<br/>
+        ///   key. With `equals` it returns the users who hold the key with a different value.<br/>
+        /// <br/>
+        /// Other fields are rejected.<br/>
+        /// <br/>
+        /// With `metadata`, `offset` plus `limit` cannot exceed 1000, and `starting_after` is not accepted.<br/>
+        /// `GET /v1/users/count` does not accept `metadata`.<br/>
+        /// <br/>
+        /// Results are eventually consistent. A user created, updated or deleted a short time ago may not<br/>
+        /// yet be reflected in which users are returned or in their order. To read a user right after<br/>
+        /// writing it, fetch it by ID.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=metadata")]
+        public List<string>? Metadata { get; set; }
+
+        /// <summary>
         /// Applies a limit to the number of results returned.<br/>
         /// Can be used for paginating the results together with `offset`.
         /// </summary>
@@ -220,6 +246,55 @@ namespace Clerk.BackendAPI.Models.Operations
         /// </summary>
         [SpeakeasyMetadata("queryParam:style=form,explode=true,name=starting_after")]
         public string? StartingAfter { get; set; }
+
+        /// <summary>
+        /// `cursor` pages by cursor, with any `order_by` and any filter, including `metadata`. The response is<br/>
+        /// then an object in place of the array of users: `data` holds the users, and `cursor` is<br/>
+        /// `{"starting_after": &lt;string or null&gt;, "ending_before": &lt;string or null&gt;, "has_next_page": &lt;boolean&gt;}`.<br/>
+        /// Pass its `starting_after` back as `starting_after` for the next page, or its `ending_before` back<br/>
+        /// as `ending_before` for the previous one, keeping every other parameter identical. Stop when<br/>
+        /// `has_next_page` is `false`; `ending_before` is null on the first page. In this mode<br/>
+        /// `starting_after` is that cursor, not a user ID; a cursor from a different `order_by` is rejected<br/>
+        /// with a 422, as is a non-zero `offset`.<br/>
+        /// <br/>
+        /// Results in this mode are eventually consistent. A user created, updated or deleted a short time<br/>
+        /// ago may not yet be reflected in which users are returned, in their order, or in any count. To<br/>
+        /// read a user right after writing it, fetch it by ID.<br/>
+        /// <br/>
+        /// Without this parameter the list pages by offset, and `starting_after` takes a user ID.<br/>
+        /// `offset` pages the same way, except that it does not accept `starting_after`.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=pagination")]
+        public Pagination? Pagination { get; set; }
+
+        /// <summary>
+        /// With `pagination=cursor`, the `cursor.ending_before` of a previous response. Returns the page<br/>
+        /// before it, in the same order. Cannot be combined with `starting_after`, and a cursor from a<br/>
+        /// different `order_by` is rejected with a 422. A previous page can hold fewer than `limit` users<br/>
+        /// even when more precede it.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=ending_before")]
+        public string? EndingBefore { get; set; }
+
+        /// <summary>
+        /// With `pagination=cursor`, also counts the users from the start of this page onward, this page<br/>
+        /// included. On the first page that is every user the request matches.<br/>
+        /// <br/>
+        /// A number counts up to that many. The response's `cursor` then carries one of two<br/>
+        /// fields: `remaining_count_exact` when there are fewer users than the number given, and otherwise<br/>
+        /// `remaining_count_at_least`, set to that number. Larger numbers make the request slower.<br/>
+        /// <br/>
+        /// `exact` counts them all, with no ceiling, and the `cursor` carries `remaining_count_exact`. The<br/>
+        /// count takes longer the more users match, and a request whose count does not finish in time is<br/>
+        /// rejected with a 422 `users_exact_count_timed_out`; retry it with a number, or without this<br/>
+        /// parameter.<br/>
+        /// <br/>
+        /// The count is computed separately from the page and is subject to the same delay. Treat it as a<br/>
+        /// close estimate: it can differ slightly from the number of users that paging through the results<br/>
+        /// returns.
+        /// </summary>
+        [SpeakeasyMetadata("queryParam:style=form,explode=true,name=remaining_count")]
+        public RemainingCount? RemainingCount { get; set; }
 
         /// <summary>
         /// Allows to return users in a particular order.<br/>

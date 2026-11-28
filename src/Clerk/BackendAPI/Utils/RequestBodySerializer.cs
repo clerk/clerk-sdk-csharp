@@ -15,6 +15,7 @@ namespace Clerk.BackendAPI.Utils
     using System.Net.Http;
     using System.Reflection;
     using System.Text;
+    using Newtonsoft.Json.Linq;
 
 
     internal class RequestBodySerializer
@@ -203,7 +204,7 @@ namespace Clerk.BackendAPI.Utils
                         form.Add(key, new List<string>());
                     }
 
-                    form[key].Add(Utilities.ValueToString(((IDictionary)request)[key]));
+                    form[key].Add(Utilities.ValueToString(UnwrapUnion(((IDictionary)request)[key])));
                 }
             }
             else if (Utilities.IsList(request))
@@ -215,7 +216,7 @@ namespace Clerk.BackendAPI.Utils
                         form.Add(requestFieldName, new List<string>());
                     }
 
-                    form[requestFieldName].Add(Utilities.ValueToString(item));
+                    form[requestFieldName].Add(Utilities.ValueToString(UnwrapUnion(item)));
                 }
             }
             else
@@ -311,26 +312,35 @@ namespace Clerk.BackendAPI.Utils
                         metadata.Name ?? prop.Name
                     );
                 }
-                else if (Utilities.IsList(value))
-                {
-                    var values = new List<string>();
-
-                    foreach (var item in (IList)value)
-                    {
-                        values.Add(Utilities.ValueToString(item));
-                    }
-
-                    foreach (var val in values)
-                    {
-                        formData.Add(new StringContent(val), metadata.Name ?? prop.Name);
-                    }
-                }
                 else
                 {
-                    formData.Add(
-                        new StringContent(Utilities.ValueToString(value)),
-                        metadata.Name ?? prop.Name
-                    );
+                    var formValue = UnwrapUnion(value);
+                    if (formValue == null)
+                    {
+                        continue;
+                    }
+
+                    if (Utilities.IsList(formValue))
+                    {
+                        var values = new List<string>();
+
+                        foreach (var item in (IList)formValue)
+                        {
+                            values.Add(Utilities.ValueToString(UnwrapUnion(item)));
+                        }
+
+                        foreach (var val in values)
+                        {
+                            formData.Add(new StringContent(val), metadata.Name ?? prop.Name);
+                        }
+                    }
+                    else
+                    {
+                        formData.Add(
+                            new StringContent(Utilities.ValueToString(formValue)),
+                            metadata.Name ?? prop.Name
+                        );
+                    }
                 }
             }
 
@@ -356,7 +366,15 @@ namespace Clerk.BackendAPI.Utils
             ref Dictionary<string, List<string>> form
         )
         {
-            if (Utilities.IsClass(value))
+            if (Utilities.IsUnionWrapper(value.GetType()))
+            {
+                var variant = UnwrapUnion(value);
+                if (variant != null)
+                {
+                    SerializeFormValue(fieldName, explode, variant, ref form);
+                }
+            }
+            else if (Utilities.IsClass(value))
             {
                 if (Utilities.IsDate(value))
                 {
@@ -375,14 +393,40 @@ namespace Clerk.BackendAPI.Utils
 
                     foreach (var prop in props)
                     {
-                        var val = prop.GetValue(value);
-                        if (val == null)
+                        var propValue = prop.GetValue(value);
+                        if (propValue == null)
                         {
                             continue;
                         }
 
                         var metadata = prop.GetCustomAttribute<SpeakeasyMetadata>()?.GetFormMetadata();
                         if (metadata == null || metadata.Name == null)
+                        {
+                            continue;
+                        }
+
+                        if (metadata.Json)
+                        {
+                            var json = Utilities.SerializeJSON(propValue);
+                            if (explode)
+                            {
+                                if (!form.ContainsKey(metadata.Name))
+                                {
+                                    form[metadata.Name] = new List<string>();
+                                }
+
+                                form[metadata.Name].Add(json);
+                            }
+                            else
+                            {
+                                items.Add($"{metadata.Name},{json}");
+                            }
+
+                            continue;
+                        }
+
+                        var val = UnwrapUnion(propValue);
+                        if (val == null)
                         {
                             continue;
                         }
@@ -398,7 +442,7 @@ namespace Clerk.BackendAPI.Utils
                             {
                                 foreach(var item in (IEnumerable)val)
                                 {
-                                    form[metadata.Name].Add(Utilities.ValueToString(item));
+                                    form[metadata.Name].Add(Utilities.ValueToString(UnwrapUnion(item)));
                                 }
                             }
                             else
@@ -412,7 +456,7 @@ namespace Clerk.BackendAPI.Utils
                             {
                                 foreach(var item in (IEnumerable)val)
                                 {
-                                    items.Add($"{metadata.Name},{Utilities.ValueToString(item)}");
+                                    items.Add($"{metadata.Name},{Utilities.ValueToString(UnwrapUnion(item))}");
                                 }
                             }
                             else
@@ -454,12 +498,12 @@ namespace Clerk.BackendAPI.Utils
                         }
 
                         form[key].Add(
-                            Utilities.ValueToString(((IDictionary)value)[key])
+                            Utilities.ValueToString(UnwrapUnion(((IDictionary)value)[key]))
                         );
                     }
                     else
                     {
-                        items.Add($"{key},{Utilities.ValueToString(((IDictionary)value)[key])}");
+                        items.Add($"{key},{Utilities.ValueToString(UnwrapUnion(((IDictionary)value)[key]))}");
                     }
                 }
 
@@ -482,11 +526,11 @@ namespace Clerk.BackendAPI.Utils
                 {
                     if (explode)
                     {
-                        values.Add(Utilities.ValueToString(item));
+                        values.Add(Utilities.ValueToString(UnwrapUnion(item)));
                     }
                     else
                     {
-                        items.Add(Utilities.ValueToString(item));
+                        items.Add(Utilities.ValueToString(UnwrapUnion(item)));
                     }
                 }
 
@@ -514,6 +558,48 @@ namespace Clerk.BackendAPI.Utils
 
                 form[fieldName].Add(Utilities.ValueToString(value));
             }
+        }
+
+        private static object? UnwrapUnion(object? value)
+        {
+            while (value != null && Utilities.IsUnionWrapper(value.GetType()))
+            {
+                value = GetUnionVariantValue(value);
+            }
+
+            return value;
+        }
+
+        private static object? GetUnionVariantValue(object union)
+        {
+            object? unknownValue = null;
+
+            foreach (var prop in union.GetType().GetProperties())
+            {
+                var metadata = prop.GetCustomAttribute<SpeakeasyMetadata>()?.GetFormMetadata();
+                if (metadata == null)
+                {
+                    if (prop.PropertyType == typeof(JToken) && prop.GetValue(union) is JValue raw)
+                    {
+                        unknownValue = raw.Value;
+                    }
+
+                    continue;
+                }
+
+                if (metadata.Name != "")
+                {
+                    continue;
+                }
+
+                var val = prop.GetValue(union);
+                if (val != null)
+                {
+                    return val;
+                }
+            }
+
+            return unknownValue;
         }
 
         private static (string fileName, byte[] content) ExtractFileProperties(PropertyInfo[] fileProps, object fileObject)
